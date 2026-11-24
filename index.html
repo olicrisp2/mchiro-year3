@@ -1,0 +1,1616 @@
+<!DOCTYPE html>
+<html lang="en" class="scroll-smooth">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>MChiro Year 3 Revision Hub</title>
+
+  <!-- Google Font: Inter -->
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap" rel="stylesheet" />
+
+  <!-- Tailwind CSS CDN -->
+  <script src="https://cdn.tailwindcss.com"></script>
+  <script>
+    tailwind.config = {
+      darkMode: 'class',
+      theme: {
+        extend: {
+          fontFamily: {
+            sans: ['Inter', 'system-ui', '-apple-system', 'sans-serif'],
+          },
+        },
+      },
+    };
+  </script>
+</head>
+<body class="bg-slate-50 text-slate-900 dark:bg-slate-950 dark:text-slate-100 font-sans antialiased transition-colors duration-200 selection:bg-teal-200 dark:selection:bg-teal-800">
+
+  <!-- Toast Notification Container (Replaces alert/confirm) -->
+  <div id="toast-container" class="fixed bottom-5 right-5 z-50 flex flex-col gap-2 pointer-events-none"></div>
+
+  <!-- Mobile Top Header -->
+  <header class="lg:hidden sticky top-0 z-30 flex items-center justify-between px-4 py-3 bg-white/90 dark:bg-slate-900/90 backdrop-blur border-b border-slate-200 dark:border-slate-800">
+    <div class="flex items-center gap-3">
+      <button
+        id="mobile-menu-btn"
+        type="button"
+        aria-label="Toggle Navigation Menu"
+        class="p-2.5 rounded-xl bg-slate-100 dark:bg-slate-800 text-slate-700 dark:text-slate-200 hover:bg-slate-200 dark:hover:bg-slate-700 transition"
+      >
+        <svg class="w-5 h-5" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24">
+          <path stroke-linecap="round" stroke-linejoin="round" d="M4 6h16M4 12h16M4 18h16" />
+        </svg>
+      </button>
+      <div>
+        <h1 class="text-sm font-bold tracking-tight text-slate-900 dark:text-white leading-tight">MChiro Year 3</h1>
+        <p class="text-xs text-teal-600 dark:text-teal-400 font-medium">Revision Hub</p>
+      </div>
+    </div>
+
+    <button
+      type="button"
+      onclick="toggleTheme()"
+      aria-label="Toggle Light or Dark Mode"
+      class="theme-toggle-btn p-2.5 rounded-xl bg-slate-100 dark:bg-slate-800 text-slate-700 dark:text-amber-300 hover:bg-slate-200 dark:hover:bg-slate-700 transition"
+    >
+      <!-- Icon injected by JS -->
+    </button>
+  </header>
+
+  <!-- Mobile Drawer Overlay -->
+  <div id="mobile-overlay" class="fixed inset-0 z-40 bg-slate-900/50 backdrop-blur-xs hidden lg:hidden" onclick="closeMobileMenu()"></div>
+
+  <!-- App Layout Wrapper -->
+  <div class="min-h-screen flex flex-col lg:flex-row">
+
+    <!-- Sidebar Navigation (Desktop fixed, Mobile slide-over) -->
+    <aside
+      id="sidebar"
+      class="fixed inset-y-0 left-0 z-50 w-72 transform -translate-x-full lg:translate-x-0 lg:static lg:inset-auto bg-white dark:bg-slate-900 border-r border-slate-200 dark:border-slate-800 flex flex-col transition-transform duration-200 ease-out"
+    >
+      <!-- Sidebar Brand -->
+      <div class="p-5 border-b border-slate-200 dark:border-slate-800 flex items-center justify-between">
+        <div class="flex items-center gap-3">
+          <div class="w-10 h-10 rounded-xl bg-gradient-to-br from-teal-500 to-cyan-600 text-white flex items-center justify-center shadow-sm font-bold text-lg">
+            Y3
+          </div>
+          <div>
+            <h1 class="text-base font-extrabold tracking-tight text-slate-900 dark:text-white leading-tight">MChiro Year 3</h1>
+            <p class="text-xs text-slate-500 dark:text-slate-400 font-medium">Clinical Revision Hub</p>
+          </div>
+        </div>
+        <button
+          type="button"
+          onclick="closeMobileMenu()"
+          aria-label="Close Menu"
+          class="lg:hidden p-2 rounded-xl text-slate-500 hover:bg-slate-100 dark:hover:bg-slate-800"
+        >
+          <svg class="w-5 h-5" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24">
+            <path stroke-linecap="round" stroke-linejoin="round" d="M6 18L18 6M6 6l12 12" />
+          </svg>
+        </button>
+      </div>
+
+      <!-- Module Navigation List -->
+      <nav class="flex-1 overflow-y-auto p-4 space-y-1.5" aria-label="Year 3 Modules">
+        <p class="px-3 pt-1 pb-2 text-[11px] font-bold uppercase tracking-wider text-slate-400 dark:text-slate-500">
+          Active Revision Modules
+        </p>
+        <div id="nav-active-modules" class="space-y-1.5"></div>
+
+        <p class="px-3 pt-5 pb-2 text-[11px] font-bold uppercase tracking-wider text-slate-400 dark:text-slate-500">
+          Upcoming Year 3 Modules
+        </p>
+        <div id="nav-upcoming-modules" class="space-y-1.5"></div>
+      </nav>
+
+      <!-- Sidebar Footer: Theme Toggle & Status -->
+      <div class="p-4 border-t border-slate-200 dark:border-slate-800 space-y-3">
+        <button
+          type="button"
+          onclick="toggleTheme()"
+          class="w-full flex items-center justify-between px-3.5 py-2.5 rounded-xl bg-slate-100 dark:bg-slate-800 hover:bg-slate-200 dark:hover:bg-slate-700 text-sm font-medium text-slate-700 dark:text-slate-200 transition"
+        >
+          <span class="flex items-center gap-2.5">
+            <span class="theme-toggle-btn text-amber-500 dark:text-amber-300"></span>
+            <span id="theme-label">Switch to Dark Mode</span>
+          </span>
+          <span class="text-xs px-2 py-0.5 rounded-lg bg-white dark:bg-slate-900 text-slate-500 dark:text-slate-400 border border-slate-200 dark:border-slate-700">
+            Auto-saved
+          </span>
+        </button>
+        <div class="px-2 text-[11px] text-slate-400 dark:text-slate-500 flex items-center justify-between">
+          <span>Pre-Term Bridge v1.0</span>
+          <span class="inline-flex items-center gap-1 text-teal-600 dark:text-teal-400 font-medium">
+            <span class="w-2 h-2 rounded-full bg-teal-500"></span> Ready
+          </span>
+        </div>
+      </div>
+    </aside>
+
+    <!-- Main Content Area -->
+    <main class="flex-1 min-w-0 p-4 sm:p-6 lg:p-8 max-w-6xl mx-auto w-full">
+      <!-- Dynamic Module View Container -->
+      <div id="app-content"></div>
+    </main>
+  </div>
+
+  <!-- Application Logic & Data -->
+  <script>
+    // =========================================================================
+    // 1. MODULE METADATA (ALL 7 YEAR 3 MODULES)
+    // =========================================================================
+    const MODULES = [
+      {
+        id: 'neuro',
+        name: 'Clinical Neurology',
+        short: 'Neuro',
+        active: true,
+        badge: 'Active',
+        accent: 'teal',
+        subtitle: 'Year 3 Testing Overview: Bedside Drills, 8-Section Mock Checklist & Grading Scales',
+        icon: `<svg class="w-5 h-5" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" d="M9.75 3.104v5.714a2.25 2.25 0 01-.659 1.591L5 14.5M9.75 3.104c-.251.023-.501.05-.75.082m.75-.082a24.301 24.301 0 014.5 0m0 0v5.714c0 .597.237 1.17.659 1.591L19.8 15.3M14.25 3.104c.251.023.501.05.75.082M19.8 15.3l-1.57.393A9.065 9.065 0 0112 15a9.065 9.065 0 00-6.23-.693L5 14.5m14.8.8l1.402 1.402c1.232 1.232.65 3.318-1.067 3.611A48.309 48.309 0 0112 21c-2.773 0-5.491-.235-8.135-.687-1.718-.293-2.3-2.379-1.067-3.61L5 14.5" /></svg>`,
+      },
+      {
+        id: 'msk',
+        name: 'Musculoskeletal Medicine',
+        short: 'MSK Med',
+        active: true,
+        badge: 'Active',
+        accent: 'indigo',
+        subtitle: 'Differential Diagnosis Boards: OA vs RA, Metabolic Bone & Renal Red Flags',
+        icon: `<svg class="w-5 h-5" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" d="M21 8.25c0-2.485-2.099-4.5-4.688-4.5-1.935 0-3.597 1.126-4.312 2.733-.715-1.607-2.377-2.733-4.313-2.733C5.1 3.75 3 5.765 3 8.25c0 7.22 9 12 9 12s9-4.78 9-12z" /></svg>`,
+      },
+      {
+        id: 'behavioural',
+        name: 'Behavioural Sciences',
+        short: 'Behavioural',
+        active: false,
+        badge: 'Shell',
+        accent: 'slate',
+        subtitle: 'Psychology of pain, biopsychosocial model, patient communication, adherence, and health behaviour.',
+        topics: ['Psychology of pain', 'Biopsychosocial model', 'Patient communication', 'Adherence & behaviour change', 'Health behaviour models'],
+        icon: `<svg class="w-5 h-5" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" d="M15.182 15.182a4.5 4.5 0 01-6.364 0M21 12a9 9 0 11-18 0 9 9 0 0118 0zM9.75 9.75c0 .414-.168.75-.375.75S9 10.164 9 9.75 9.168 9 9.375 9s.375.336.375.75zm-.375 0h.008v.015h-.008V9.75zm5.625 0c0 .414-.168.75-.375.75s-.375-.336-.375-.75.168-.75.375-.75.375.336.375.75zm-.375 0h.008v.015h-.008V9.75z" /></svg>`,
+      },
+      {
+        id: 'research2',
+        name: 'Research 2',
+        short: 'Research 2',
+        active: false,
+        badge: 'Shell',
+        accent: 'slate',
+        subtitle: 'Research methodology, critical appraisal, study design, biostatistics, and dissertation preparation.',
+        topics: ['Research methodology', 'Critical appraisal frameworks', 'Study design critique', 'Biostatistics fundamentals', 'Final-year dissertation prep'],
+        icon: `<svg class="w-5 h-5" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" d="M3 13.125C3 12.504 3.504 12 4.125 12h2.25c.621 0 1.125.504 1.125 1.125v6.75C7.5 20.496 6.996 21 6.375 21h-2.25A1.125 1.125 0 013 19.875v-6.75zM9.75 8.625c0-.621.504-1.125 1.125-1.125h2.25c.621 0 1.125.504 1.125 1.125v11.25c0 .621-.504 1.125-1.125 1.125h-2.25a1.125 1.125 0 01-1.125-1.125V8.625zM16.5 4.125c0-.621.504-1.125 1.125-1.125h2.25C20.496 3 21 3.504 21 4.125v15.75c0 .621-.504 1.125-1.125 1.125h-2.25a1.125 1.125 0 01-1.125-1.125V4.125z" /></svg>`,
+      },
+      {
+        id: 'philosophy3',
+        name: 'Philosophy 3',
+        short: 'Philosophy 3',
+        active: false,
+        badge: 'Shell',
+        accent: 'slate',
+        subtitle: 'Contemporary chiropractic philosophy, evidence-informed practice, scope of practice, and ethical reasoning.',
+        topics: ['Contemporary chiropractic philosophy', 'Evidence-informed practice', 'Scope of practice', 'Ethical reasoning & clinical dilemmas'],
+        icon: `<svg class="w-5 h-5" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" d="M12 6.042A8.967 8.967 0 006 3.75c-1.052 0-2.062.18-3 .512v14.25A8.987 8.987 0 016 18c2.305 0 4.408.867 6 2.292m0-14.25a8.966 8.966 0 016-2.292c1.052 0 2.062.18 3 .512v14.25A8.987 8.987 0 0018 18a8.967 8.967 0 00-6 2.292m0-14.25v14.25" /></svg>`,
+      },
+      {
+        id: 'chiro3',
+        name: 'Chiropractic Studies 3',
+        short: 'Chiro 3',
+        active: false,
+        badge: 'Shell',
+        accent: 'slate',
+        subtitle: 'Advanced McTimoney & diversified techniques, clinical reasoning, and biomechanics integration.',
+        topics: ['Advanced McTimoney technique', 'Diversified techniques', 'Clinical reasoning', 'Biomechanics integration'],
+        icon: `<svg class="w-5 h-5" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" d="M15.75 6a3.75 3.75 0 11-7.5 0 3.75 3.75 0 017.5 0zM4.501 20.118a7.5 7.5 0 0114.998 0A17.933 17.933 0 0112 21.75c-2.676 0-5.216-.584-7.499-1.632z" /></svg>`,
+      },
+      {
+        id: 'clinic3',
+        name: 'Clinic Studies 3',
+        short: 'Clinic 3',
+        active: false,
+        badge: 'Shell',
+        accent: 'slate',
+        subtitle: 'Case history taking, physical/orthopaedic/neuro exam flow, clinical documentation, and OSCE readiness.',
+        topics: ['Case history taking', 'Physical / ortho / neuro exam flow', 'Clinical documentation', 'OSCE & pre-clinic readiness'],
+        icon: `<svg class="w-5 h-5" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" d="M9 12h3.75M9 15h3.75M9 18h3.75m3 .75H18a2.25 2.25 0 002.25-2.25V6.108c0-1.135-.845-2.098-1.976-2.192a48.424 48.424 0 00-1.123-.08m-5.801 0c-.065.21-.1.433-.1.664 0 .414.336.75.75.75h4.5a.75.75 0 00.75-.75 2.25 2.25 0 00-.1-.664m-5.8 0A2.251 2.251 0 0113.5 2.25H15c1.012 0 1.867.668 2.15 1.586m-5.8 0c-.376.023-.75.05-1.124.08C9.095 4.01 8.25 4.973 8.25 6.108V8.25m0 0H4.875c-.621 0-1.125.504-1.125 1.125v11.25c0 .621.504 1.125 1.125 1.125h9.75c.621 0 1.125-.504 1.125-1.125V9.375c0-.621-.504-1.125-1.125-1.125H8.25z" /></svg>`,
+      },
+    ];
+
+    // =========================================================================
+    // 2. CLINICAL NEUROLOGY DATA (YEAR 3 TESTING OVERVIEW)
+    // =========================================================================
+    const NEURO_SECTIONS = [
+      { id: 'all', label: 'All 8 Sections' },
+      { id: '1', label: '1. Cerebral Function' },
+      { id: '2', label: '2. Stance, Gait & Cerebellar' },
+      { id: '3', label: '3. Cranial Nerves (I–XII)' },
+      { id: '4', label: '4. General Motor' },
+      { id: '5', label: '5. General Somatosensory' },
+      { id: '6', label: '6. Upper Limb Neuro' },
+      { id: '7', label: '7. Lower Limb Neuro' },
+      { id: '8', label: '8. Special Tests' },
+    ];
+
+    const NEURO_FLASHCARDS = [
+      // Section 1: Cerebral Function
+      {
+        id: 'fc-1-1',
+        section: '1',
+        category: '1. Cerebral Function',
+        front: 'What are the 3 core components of the Cerebral Function exam?',
+        back: '1) Orientation & mental status (date/place, behaviour, appearance, mood, speech; GCS in trauma). 2) Mini-Mental State screen (register & recall 3 objects, naming, 3-stage verbal commands; awareness of MMSI / MoCA). 3) Primitive reflexes / frontal release signs (Pout, Grasp, Glabellar).',
+        tip: 'Note speech accuracy, fluency, and articulation during registration and naming.',
+      },
+      {
+        id: 'fc-1-2',
+        section: '1',
+        category: '1. Cerebral Function',
+        front: 'Name the 3 primitive reflexes (frontal release signs) tested for cognitive change.',
+        back: '1) Pout reflex (tapping lips produces pouting). 2) Grasp reflex (stroking palm causes involuntary grasping). 3) Glabellar reflex (persistent blinking on repeated taps between eyebrows).',
+        tip: 'Positive frontal release signs suggest frontal lobe disinhibition or diffuse cortical/cognitive decline.',
+      },
+
+      // Section 2: Observation, Stance, Gait & Cerebellar
+      {
+        id: 'fc-2-1',
+        section: '2',
+        category: '2. Stance, Gait & Cerebellar',
+        front: 'List the 4 classic gait abnormalities to screen during Free Walk, plus Heel vs. Toe walking nerve associations.',
+        back: 'Free walk patterns: Antalgic, Steppage, Ataxic, Shuffling. Heel walk tests L4 / peroneal (tibialis anterior dorsiflexion). Toe walk tests S1 / tibial (gastrocnemius & soleus plantarflexion).',
+        tip: 'Also observe wide-based stance, Romberg’s test (dorsal column proprioception), and tandem (heel-to-toe) walk.',
+      },
+      {
+        id: 'fc-2-2',
+        section: '2',
+        category: '2. Stance, Gait & Cerebellar',
+        front: 'What are the 4 bedside Cerebellar Function tests & tremor types to observe?',
+        back: 'Tests: 1) Finger-to-nose, 2) Rapid alternating hand pronation/supination (dysdiadochokinesia), 3) Heel-down-shin, 4) Rebound test. Tremors to note: resting, intention, dysmetria, pill-rolling, end-point, against gravity.',
+        tip: 'Intention tremor & dysmetria (past-pointing) point to cerebellar lesions; pill-rolling resting tremor points to basal ganglia.',
+      },
+
+      // Section 3: Cranial Nerves (I–XII)
+      {
+        id: 'fc-3-1',
+        section: '3',
+        category: '3. Cranial Nerves (I–XII)',
+        front: 'CN I & CN II: What must you check and when do you refer for ophthalmoscopy?',
+        back: 'CN I (Olfactory): History of anosmia. CN II (Optic): Visual acuity (Snellen/print), visual fields (confrontation), visual neglect, and refer out for ophthalmoscopy to check for papilloedema (suggestive of weeks of raised ICP).',
+        tip: 'CN II is the afferent limb of the pupillary light reflex; CN III is the efferent limb.',
+      },
+      {
+        id: 'fc-3-2',
+        section: '3',
+        category: '3. Cranial Nerves (I–XII)',
+        front: 'CN III, IV, VI & Oculomotor Systems: What 4 eye movement tests + pupil checks are required?',
+        back: 'Pupil & Lid (CN III): Ptosis, pupil size (meiosis, mydriasis, anisocoria), border regularity, direct/consensual light reactions, accommodation. Oculomotor tests (III, IV, VI): 1) Saccades (up, down, L, R), 2) Convergence, 3) Smooth pursuit ("H" test), 4) Vestibulo-ocular reflex (VOR).',
+        tip: 'Remember: Lateral rectus = CN VI (abduction); Superior oblique = CN IV (down & in).',
+      },
+      {
+        id: 'fc-3-3',
+        section: '3',
+        category: '3. Cranial Nerves (I–XII)',
+        front: 'CN V (Trigeminal): Detail both the Motor and Sensory examination.',
+        back: 'Motor: Palpate temporalis and masseter (clench jaw), test pterygoid strength (jaw deviation), and perform jaw jerk reflex (UMN vs LMN). Sensory: Light touch & pain across V1 (ophthalmic), V2 (maxillary), and V3 (mandibular).',
+        tip: 'Brisk jaw jerk suggests an UMN lesion above the pons.',
+      },
+      {
+        id: 'fc-3-4',
+        section: '3',
+        category: '3. Cranial Nerves (I–XII)',
+        front: 'CN VII (Facial): What 5 elements must be assessed or explained?',
+        back: '1) Facial symmetry (UMN spares forehead vs LMN affects full ipsilateral face). 2) Facial expression muscles (NAME specific muscles: frontalis, orbicularis oculi, orbicularis oris, buccinator, zygomaticus). 3) Taste (anterior 2/3 — sweet/salty). 4) Lacrimation/salivation. 5) Hearing sensitivity (hyperacusis — stapedius).',
+        tip: 'ASSESSOR REMINDER: Name the specific facial muscles, not just the expressions!',
+      },
+      {
+        id: 'fc-3-5',
+        section: '3',
+        category: '3. Cranial Nerves (I–XII)',
+        front: 'CN VIII, IX, X, XI & XII: Quick-fire bedside tests for the lower cranial nerves.',
+        back: 'CN VIII: Whisper screen, Weber’s, Rinne’s, balance in stance/gait. CN IX & X: Swallowing, symmetrical uvula elevation, speech (dysphonia), autonomic effects. CN XI: SCM & trapezius strength (UMN vs LMN). CN XII: Observe tongue (fasciculation, wasting, deviation) & test resisted tongue strength.',
+        tip: 'LMN CN XII lesion: tongue deviates TOWARDS the side of the lesion ("licks the lesion").',
+      },
+
+      // Section 4: General Motor Function
+      {
+        id: 'fc-4-1',
+        section: '4',
+        category: '4. General Motor',
+        front: 'General Motor Function: What tone abnormalities, joint play patterns, and UMN signs must you test?',
+        back: 'Observe/palpate: Flaccid, spastic, atrophy, hypertrophy/pseudohypertrophy, fasciculations. Joint play (elbow/knee first, then wrist/ankle): Cogwheel (Parkinsonism), Clasp-knife (spasticity/UMN), Lead-pipe (rigidity). UMN signs: Ankle clonus, Babinski & Chaddock signs, Hoffmann’s sign. Plus abdominal strength (half sit-up).',
+        tip: 'Also identify weakness patterns: glove-stocking, ascending, full limb, or bilateral/symmetrical.',
+      },
+
+      // Section 5: General Somatosensory Function
+      {
+        id: 'fc-5-1',
+        section: '5',
+        category: '5. General Somatosensory',
+        front: 'List the 5 assessments in General Somatosensory Function & the tuning fork frequency.',
+        back: '1) Pattern paraesthesia/loss (glove-stocking, full limb, bilateral/symmetrical). 2) Vibration sense using a 128Hz tuning fork. 3) Proprioception (toes, fingers). 4) Touch localisation / sensory inattention (neglect). 5) Cortical sensory: Stereognosis & Graphaesthesia.',
+        tip: '128Hz for vibration (DCML tract); 512Hz is for Weber/Rinne hearing tests (CN VIII).',
+      },
+
+      // Section 6: Upper Limb Neuro Exam
+      {
+        id: 'fc-6-1',
+        section: '6',
+        category: '6. Upper Limb Neuro',
+        front: 'Upper Limb Myotomes (C5–T1) & Reflexes: Name the specific muscles and reflexes!',
+        back: 'Myotomes (Grade 1–5): C5 = Biceps & Deltoid; C6 = Wrist extensors (ECRL/ECRB); C7 = Triceps (also wrist flexion, finger extension); C8 = Flexor digitorum profundus / distal phalanx 3rd finger flexion (also finger ext/adduction); T1 = 5th finger abduction (interossei / abductor digiti minimi). Reflexes (0–4): C5 Biceps, C6 Brachioradialis, C7 Triceps.',
+        tip: 'ASSESSOR REMINDER: Name specific muscles, not just actions! Keep C6 wrist EXTENSORS clearly separate from C7 wrist flexors.',
+      },
+      {
+        id: 'fc-6-2',
+        section: '6',
+        category: '6. Upper Limb Neuro',
+        front: 'Upper Limb Peripheral Nerves: Radial vs. Median vs. Ulnar (Motor & Sensory).',
+        back: 'Radial: Elbow/wrist EXTENSORS (triceps, wrist extensors); posterior upper arm, middle posterior forearm, dorsum of hand. Median: Most wrist FLEXORS & lateral palm (thumb opposition / thenar); palmar lateral 2/3 hand. Ulnar: Flexor carpi ulnaris, intrinsic hand muscles (finger flex/abd/add, ulnar deviation); medial half hand/fingers.',
+        tip: 'HIGH-YIELD WARNING: Watch Radial EXTENSORS vs. Median/Ulnar FLEXORS under exam pressure!',
+      },
+      {
+        id: 'fc-6-3',
+        section: '6',
+        category: '6. Upper Limb Neuro',
+        front: 'Axillary Nerve & Medial/Lateral Cutaneous Nerves of the Arm: Motor & Sensory?',
+        back: 'Axillary nerve: Motor = Deltoid & Teres minor. Sensory = "Military patch" (regimental badge area) over lateral deltoid. Medial & Lateral Cutaneous of Arm: Sensory = skin over medial and lateral aspects of forearm respectively.',
+        tip: 'Remember to define paraesthesia (tingling/pins & needles), allodynia (pain from non-painful stimulus), and hypersensitivity.',
+      },
+
+      // Section 7: Lower Limb Neuro Exam
+      {
+        id: 'fc-7-1',
+        section: '7',
+        category: '7. Lower Limb Neuro',
+        front: 'Lower Limb Myotomes (L2–S1) & Reflexes: Name the specific muscles!',
+        back: 'L2: Hip flexion (iliopsoas, sartorius, pectineus). L3: Knee extension (quadriceps). L4: Ankle dorsiflexion (tibialis anterior — supine or heel walk) + Patellar reflex. L5: Hallux extension (extensor hallucis longus). S1: Ankle plantarflexion (gastrocnemius, soleus — supine or toe walk) + Achilles reflex.',
+        tip: 'ASSESSOR REMINDER: State the muscle names (e.g., Tibialis Anterior, EHL, Gastrocnemius/Soleus) aloud as you test!',
+      },
+      {
+        id: 'fc-7-2',
+        section: '7',
+        category: '7. Lower Limb Neuro',
+        front: 'Lower Limb Peripheral Nerves: Femoral, Obturator, Lateral Cutaneous, Sciatic, Tibial & Fibular.',
+        back: 'Femoral: Hip flexors, knee extensors (quads); anterior thigh & medial leg/foot. Lateral cutaneous: Lateral thigh (sensory only). Obturator: Hip adductors; medial thigh. Sciatic: Hamstrings; posterior thigh (splits into tibial & common fibular). Tibial: Gastrocnemius/soleus & deep foot flexors; sole of foot. Fibular/Peroneal: Tibialis anterior & toe extensors; lateral lower leg & dorsum of foot.',
+        tip: 'Common fibular (peroneal) compression at the fibular head causes foot drop (steppage gait).',
+      },
+
+      // Section 8: Special Tests
+      {
+        id: 'fc-8-1',
+        section: '8',
+        category: '8. Special Tests',
+        front: 'Name all 7 Year 3 Neuro Special Tests and what each evaluates.',
+        back: '1) Cervical Arterial Dysfunction (CAD) — carotid/vertebral arteries. 2) Hutchinson pupil — cerebral compression (stages & indications). 3) Dix-Hallpike — BPPV. 4) Fitz-Ritson’s — cervicogenic dizziness. 5) Pronator drift — proximal weakness / subtle UMN lesion. 6) Open/close hands & heel lifts — fatigable muscle testing (e.g., myasthenia gravis). 7) Beighton Scale — joint hypermobility.',
+        tip: 'Be ready to talk through Hutchinson pupil stages (ipsilateral constriction -> ipsilateral fixed dilation -> bilateral fixed dilation).',
+      },
+    ];
+
+    const NEURO_CHECKLIST = [
+      {
+        sectionNum: 1,
+        title: '1. Cerebral Function',
+        color: 'teal',
+        items: [
+          'Orientation: Date and place orientation',
+          'Observation: Behaviour, appearance, mood, speech during case history',
+          'Trauma awareness: Understand use of Glasgow Coma Scale (GCS)',
+          'Mini-Mental State: Register 3 objects (speech accuracy, fluency, articulation)',
+          'Mini-Mental State: Recall 3 objects (memory test)',
+          'Mini-Mental State: Naming (speech accuracy, fluency, articulation)',
+          'Mini-Mental State: 3-stage verbal commands (cognition & memory)',
+          'Deeper screen awareness: Understand MMSI or Montreal Cognitive Assessment (MoCA)',
+          'Primitive reflexes / frontal release signs: Pout reflex, Grasp reflex, Glabellar reflex',
+        ],
+      },
+      {
+        sectionNum: 2,
+        title: '2. Observation, Stance, Gait & Cerebellar',
+        color: 'cyan',
+        items: [
+          'Observation: Ataxic movements',
+          'Observation: Tremor types (resting, intention, dysmetria, pill-rolling, end-point, against gravity)',
+          'Stance: Wide-based stance & Romberg’s test',
+          'Gait: Free walk (antalgic, steppage, ataxic, shuffling)',
+          'Gait: Tandem walk (heel-to-toe)',
+          'Gait: Heel walking (L4/peroneal) & Toe walking (S1/tibial)',
+          'Cerebellar: Finger-to-nose test',
+          'Cerebellar: Rapid alternating hand pronation/supination',
+          'Cerebellar: Heel-down-shin test',
+          'Cerebellar: Rebound test',
+        ],
+      },
+      {
+        sectionNum: 3,
+        title: '3. Cranial Nerves (I–XII)',
+        color: 'sky',
+        items: [
+          'CN I (Olfactory): History of anosmia',
+          'CN II (Optic): Visual acuity (Snellen/print), visual fields (confrontation), visual neglect',
+          'CN II (Ophthalmoscopy): Refer out — papilloedema suggestive of weeks of raised ICP',
+          'CN II & III: Pupillary light reactions (direct & consensual)',
+          'CN III: Ptosis & pupil size (meiosis/mydriasis/anisocoria, border regularity), accommodation',
+          'CN III, IV, VI & Oculomotor: Saccades (up, down, L, R), convergence, smooth pursuit ("H"), VOR',
+          'CN V (Motor): Temporalis & masseter palpation, pterygoid jaw deviation strength, jaw reflex',
+          'CN V (Sensory): Light touch & pain across V1, V2, V3',
+          'CN VII (Facial): Symmetry (UMN vs LMN), expression muscles (NAME specific muscles), taste (sweet/salty), lacrimation/salivation, hyperacusis',
+          'CN VIII (Vestibulocochlear): Whisper screen, Weber’s, Rinne’s, balance in stance/gait',
+          'CN IX & X: Swallowing, symmetrical uvula movement, speech (dysphonia), autonomic effects',
+          'CN XI (Accessory): SCM & trapezius strength (UMN vs LMN)',
+          'CN XII (Hypoglossal): Observe tongue (fasciculation, wasting, deviation) & test tongue strength',
+        ],
+      },
+      {
+        sectionNum: 4,
+        title: '4. General Motor Function',
+        color: 'blue',
+        items: [
+          'Observe & palpate tone: Flaccid, spastic, atrophy, hypertrophy/pseudohypertrophy',
+          'Observe: Fasciculations',
+          'Strength pattern weakness: Glove-stocking, ascending, full limb, bilateral/symmetrical',
+          'Joint play fluidity (elbow/knee first, then wrist/ankle): Cogwheel, clasp-knife, lead-pipe',
+          'Ankle clonus',
+          'Babinski & Chaddock signs',
+          'Hoffmann’s sign',
+          'Abdominal muscle strength (half sit-up)',
+        ],
+      },
+      {
+        sectionNum: 5,
+        title: '5. General Somatosensory Function',
+        color: 'indigo',
+        items: [
+          'Pattern paraesthesia/loss: Glove-stocking, full limb, bilateral/symmetrical',
+          'Vibration sense (128Hz tuning fork)',
+          'Proprioception (toes, fingers)',
+          'Touch localisation / sensory inattention (sensory neglect testing)',
+          'Stereognosis / Graphaesthesia',
+        ],
+      },
+      {
+        sectionNum: 6,
+        title: '6. Upper Limb Neurological Examination',
+        color: 'violet',
+        items: [
+          'Myotomes (Grade 1–5 — NAME MUSCLES): C5 Biceps & Deltoid; C6 Wrist extensors; C7 Triceps (also wrist flex, finger ext); C8 Distal phalanx 3rd finger flexion / FDP (also finger ext/add); T1 5th finger abduction (interossei)',
+          'Reflexes (Grade 0–4): C5 Biceps, C6 Brachioradialis, C7 Triceps',
+          'Dermatomes (C5–T1): Light touch & pinprick; define paraesthesia, allodynia, hypersensitivity',
+          'Peripheral — Axillary: "Military patch" over deltoid; deltoid & teres minor',
+          'Peripheral — Medial & Lateral Cutaneous of Arm: Medial & lateral aspects of forearm',
+          'Peripheral — Radial: Posterior upper arm, middle posterior forearm, dorsum of hand; elbow/wrist EXTENSORS (do not confuse with flexors!)',
+          'Peripheral — Median: Most wrist flexors, lateral palm (thumb opposition); palmar lateral 2/3 hand',
+          'Peripheral — Ulnar: Flexor carpi ulnaris, intrinsic hand muscles, ulnar deviation; medial half hand/fingers',
+        ],
+      },
+      {
+        sectionNum: 7,
+        title: '7. Lower Limb Neurological Examination',
+        color: 'purple',
+        items: [
+          'Myotomes (Grade 1–5 — NAME MUSCLES): L2 Hip flexion (iliopsoas, sartorius, pectineus); L3 Knee extension (quadriceps); L4 Ankle dorsiflexion (tibialis anterior — supine/heel walk); L5 Hallux extension (EHL); S1 Ankle plantarflexion (gastrocnemius, soleus — supine/toe walk)',
+          'Reflexes (Grade 1+ to 4+): L4 Patellar, S1 Achilles',
+          'Dermatomes (L2–S1): Light touch & pain bilaterally (Grade 0–2)',
+          'Peripheral — Femoral: Hip flexors, knee extensors; anterior thigh & medial leg/foot',
+          'Peripheral — Lateral Cutaneous: Lateral thigh',
+          'Peripheral — Obturator: Hip adductors; medial thigh',
+          'Peripheral — Sciatic: Hamstrings; posterior thigh (splits into tibial & common fibular)',
+          'Peripheral — Tibial: Gastrocnemius/soleus plantarflexion, deep foot flexors; sole of foot',
+          'Peripheral — Fibular/Peroneal: Lateral lower leg & dorsum of foot; tibialis anterior dorsiflexion, toe extensors',
+        ],
+      },
+      {
+        sectionNum: 8,
+        title: '8. Special Tests',
+        color: 'rose',
+        items: [
+          'Cervical Arterial Dysfunction Test (CAD) — carotid or vertebral arteries',
+          'Hutchinson pupil — cerebral compression (talk through stages & indications)',
+          'Dix-Hallpike — BPPV',
+          'Fitz-Ritson’s — cervicogenic dizziness',
+          'Pronator drift — proximal muscle weakness / subtle UMN sign',
+          'Open/close hands & heel lifts — fatigable muscle testing',
+          'Beighton Scale — joint hypermobility',
+        ],
+      },
+    ];
+
+    // =========================================================================
+    // 3. APPLICATION STATE & STORAGE HELPERS
+    // =========================================================================
+    const state = {
+      activeModule: 'neuro',
+      neuroTab: 'flashcards', // 'flashcards' | 'checklist' | 'scales'
+      mskTab: 'oara',         // 'oara' | 'metabolic' | 'renal'
+      mskBlurMode: false,
+
+      // Flashcards state
+      fcFilter: 'all',
+      fcDeck: [...NEURO_FLASHCARDS],
+      fcIndex: 0,
+      fcFlipped: false,
+      fcStatus: {}, // { cardId: 'got' | 'review' }
+
+      // Checklist state
+      checkedItems: {}, // { 's1-i0': true }
+    };
+
+    function safeGetStorage(key, fallback) {
+      try {
+        const raw = localStorage.getItem(key);
+        return raw ? JSON.parse(raw) : fallback;
+      } catch (e) {
+        return fallback;
+      }
+    }
+
+    function safeSetStorage(key, value) {
+      try {
+        localStorage.setItem(key, JSON.stringify(value));
+      } catch (e) {
+        // Ignore storage quota/privacy mode errors gracefully
+      }
+    }
+
+    // Load saved state on init
+    state.fcStatus = safeGetStorage('mchiro_y3_fc_status', {});
+    state.checkedItems = safeGetStorage('mchiro_y3_checklist', {});
+
+    // =========================================================================
+    // 4. THEME MANAGEMENT (LIGHT / DARK MODE)
+    // =========================================================================
+    function initTheme() {
+      let saved = null;
+      try {
+        saved = localStorage.getItem('mchiro_y3_theme');
+      } catch (e) {}
+
+      const prefersDark = window.matchMedia && window.matchMedia('(prefers-color-scheme: dark)').matches;
+      const isDark = saved ? saved === 'dark' : prefersDark;
+      applyTheme(isDark);
+    }
+
+    function applyTheme(isDark) {
+      document.documentElement.classList.toggle('dark', isDark);
+      try {
+        localStorage.setItem('mchiro_y3_theme', isDark ? 'dark' : 'light');
+      } catch (e) {}
+
+      const sunIcon = `<svg class="w-5 h-5" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" d="M12 3v2.25m6.364.386l-1.591 1.591M21 12h-2.25m-.386 6.364l-1.591-1.591M12 18.75V21m-4.773-4.227l-1.591 1.591M5.25 12H3m4.227-4.773L5.636 5.636M15.75 12a3.75 3.75 0 11-7.5 0 3.75 3.75 0 017.5 0z" /></svg>`;
+      const moonIcon = `<svg class="w-5 h-5" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" d="M21.752 15.002A9.718 9.718 0 0118 15.75c-5.385 0-9.75-4.365-9.75-9.75 0-1.33.266-2.597.748-3.752A9.753 9.753 0 003 11.25C3 16.635 7.365 21 12.75 21a9.753 9.753 0 009.002-5.998z" /></svg>`;
+
+      document.querySelectorAll('.theme-toggle-btn').forEach((el) => {
+        el.innerHTML = isDark ? sunIcon : moonIcon;
+      });
+      const label = document.getElementById('theme-label');
+      if (label) {
+        label.textContent = isDark ? 'Switch to Light Mode' : 'Switch to Dark Mode';
+      }
+    }
+
+    function toggleTheme() {
+      const isDark = document.documentElement.classList.contains('dark');
+      applyTheme(!isDark);
+    }
+
+    // =========================================================================
+    // 5. TOAST NOTIFICATIONS & MOBILE DRAWER
+    // =========================================================================
+    function showToast(message, type = 'info') {
+      const container = document.getElementById('toast-container');
+      const colors = {
+        info: 'bg-slate-900 dark:bg-slate-100 text-white dark:text-slate-900',
+        success: 'bg-emerald-600 text-white',
+        warn: 'bg-amber-600 text-white',
+      };
+      const toast = document.createElement('div');
+      toast.className = `pointer-events-auto px-4 py-2.5 rounded-xl shadow-lg text-sm font-medium flex items-center gap-2 transition-all duration-300 ${colors[type] || colors.info}`;
+      toast.textContent = message;
+      container.appendChild(toast);
+      setTimeout(() => {
+        toast.classList.add('opacity-0', 'translate-y-2');
+        setTimeout(() => toast.remove(), 300);
+      }, 2400);
+    }
+
+    function openMobileMenu() {
+      document.getElementById('sidebar').classList.remove('-translate-x-full');
+      document.getElementById('mobile-overlay').classList.remove('hidden');
+    }
+
+    function closeMobileMenu() {
+      document.getElementById('sidebar').classList.add('-translate-x-full');
+      document.getElementById('mobile-overlay').classList.add('hidden');
+    }
+
+    document.getElementById('mobile-menu-btn').addEventListener('click', openMobileMenu);
+
+    // =========================================================================
+    // 6. SIDEBAR RENDERING
+    // =========================================================================
+    function renderSidebar() {
+      const activeContainer = document.getElementById('nav-active-modules');
+      const upcomingContainer = document.getElementById('nav-upcoming-modules');
+
+      const buildItem = (mod) => {
+        const isSelected = state.activeModule === mod.id;
+        const activeClasses = isSelected
+          ? 'bg-teal-50 dark:bg-teal-950/60 text-teal-700 dark:text-teal-300 border-teal-200 dark:border-teal-800/80 shadow-xs'
+          : 'text-slate-600 dark:text-slate-300 border-transparent hover:bg-slate-100 dark:hover:bg-slate-800/70';
+
+        const badgeClasses = mod.active
+          ? 'bg-teal-100 dark:bg-teal-900/70 text-teal-700 dark:text-teal-300'
+          : 'bg-slate-100 dark:bg-slate-800 text-slate-500 dark:text-slate-400';
+
+        return `
+          <button
+            type="button"
+            onclick="selectModule('${mod.id}')"
+            class="w-full flex items-center justify-between gap-2 px-3 py-2.5 rounded-xl border text-left transition ${activeClasses}"
+          >
+            <span class="flex items-center gap-3 min-w-0">
+              <span class="shrink-0 ${isSelected ? 'text-teal-600 dark:text-teal-400' : 'text-slate-400 dark:text-slate-500'}">${mod.icon}</span>
+              <span class="text-sm font-semibold truncate">${mod.name}</span>
+            </span>
+            <span class="shrink-0 text-[10px] font-bold uppercase tracking-wide px-2 py-0.5 rounded-lg ${badgeClasses}">
+              ${mod.badge}
+            </span>
+          </button>
+        `;
+      };
+
+      activeContainer.innerHTML = MODULES.filter((m) => m.active).map(buildItem).join('');
+      upcomingContainer.innerHTML = MODULES.filter((m) => !m.active).map(buildItem).join('');
+    }
+
+    function selectModule(moduleId) {
+      state.activeModule = moduleId;
+      closeMobileMenu();
+      renderSidebar();
+      renderMainContent();
+      window.scrollTo({ top: 0, behavior: 'smooth' });
+    }
+
+    // =========================================================================
+    // 7. MAIN VIEW ROUTER
+    // =========================================================================
+    function renderMainContent() {
+      const container = document.getElementById('app-content');
+      const mod = MODULES.find((m) => m.id === state.activeModule);
+
+      if (mod.id === 'neuro') {
+        container.innerHTML = renderNeuroModule(mod);
+      } else if (mod.id === 'msk') {
+        container.innerHTML = renderMskModule(mod);
+      } else {
+        container.innerHTML = renderPlaceholderModule(mod);
+      }
+    }
+
+    // =========================================================================
+    // 8. MODULE 1: CLINICAL NEUROLOGY
+    // =========================================================================
+    function renderNeuroModule(mod) {
+      const tabs = [
+        { id: 'flashcards', label: 'Flashcard Drills' },
+        { id: 'checklist', label: 'Practical Exam Checklist' },
+        { id: 'scales', label: 'Grading Scales Quick-Ref' },
+      ];
+
+      let tabBody = '';
+      if (state.neuroTab === 'flashcards') tabBody = renderNeuroFlashcards();
+      else if (state.neuroTab === 'checklist') tabBody = renderNeuroChecklist();
+      else tabBody = renderNeuroScales();
+
+      return `
+        <!-- Module Header -->
+        <div class="mb-6">
+          <div class="flex flex-wrap items-center gap-2 mb-2">
+            <span class="px-2.5 py-1 rounded-lg text-xs font-bold uppercase tracking-wider bg-teal-100 dark:bg-teal-900/60 text-teal-800 dark:text-teal-300">
+              Module 1 &bull; Active
+            </span>
+            <span class="px-2.5 py-1 rounded-lg text-xs font-semibold bg-amber-100 dark:bg-amber-900/40 text-amber-800 dark:text-amber-300">
+              Year 3 Testing Overview
+            </span>
+          </div>
+          <h2 class="text-2xl sm:text-3xl font-extrabold tracking-tight text-slate-900 dark:text-white">${mod.name}</h2>
+          <p class="mt-1 text-sm sm:text-base text-slate-600 dark:text-slate-400">${mod.subtitle}</p>
+        </div>
+
+        <!-- Assessor High-Yield Callout Banner -->
+        <div class="mb-6 p-4 rounded-2xl bg-amber-50 dark:bg-amber-950/30 border border-amber-200 dark:border-amber-800/60 flex flex-col sm:flex-row gap-3 sm:items-center">
+          <div class="shrink-0 w-9 h-9 rounded-xl bg-amber-100 dark:bg-amber-900/60 text-amber-700 dark:text-amber-300 flex items-center justify-center font-bold">
+            !
+          </div>
+          <div class="text-xs sm:text-sm text-amber-900 dark:text-amber-200 space-y-1">
+            <p class="font-bold">High-Yield Practical Exam Reminders:</p>
+            <p>&bull; <strong>Myotomes &amp; CN VII:</strong> Name the <em>specific muscles</em>, not just the actions. &nbsp;&bull; <strong>Upper Limb Nerves:</strong> Keep <em>Radial extensors</em> clearly distinct from <em>Median/Ulnar flexors</em>.</p>
+          </div>
+        </div>
+
+        <!-- Sub-tabs -->
+        <div class="flex flex-wrap gap-2 mb-6 p-1.5 rounded-2xl bg-slate-200/70 dark:bg-slate-900 border border-slate-200 dark:border-slate-800">
+          ${tabs.map((t) => {
+            const active = state.neuroTab === t.id;
+            return `
+              <button
+                type="button"
+                onclick="setNeuroTab('${t.id}')"
+                class="flex-1 min-w-[140px] px-4 py-2.5 rounded-xl text-sm font-semibold transition ${
+                  active
+                    ? 'bg-white dark:bg-slate-800 text-teal-700 dark:text-teal-300 shadow-sm'
+                    : 'text-slate-600 dark:text-slate-400 hover:text-slate-900 dark:hover:text-white'
+                }"
+              >
+                ${t.label}
+              </button>
+            `;
+          }).join('')}
+        </div>
+
+        ${tabBody}
+      `;
+    }
+
+    function setNeuroTab(tabId) {
+      state.neuroTab = tabId;
+      renderMainContent();
+    }
+
+    // --- 8A: FLASHCARD DRILLS ---
+    function getFilteredDeck() {
+      return state.fcDeck.filter((c) => state.fcFilter === 'all' || c.section === state.fcFilter);
+    }
+
+    function renderNeuroFlashcards() {
+      const deck = getFilteredDeck();
+      if (state.fcIndex >= deck.length) state.fcIndex = 0;
+      const card = deck[state.fcIndex];
+
+      const gotCount = Object.values(state.fcStatus).filter((v) => v === 'got').length;
+      const reviewCount = Object.values(state.fcStatus).filter((v) => v === 'review').length;
+      const cardStatus = card ? state.fcStatus[card.id] : null;
+
+      return `
+        <!-- Controls Bar -->
+        <div class="bg-white dark:bg-slate-900 rounded-2xl border border-slate-200 dark:border-slate-800 p-4 mb-5 space-y-4">
+          <div class="flex flex-col sm:flex-row sm:items-center justify-between gap-3">
+            <!-- Section Filter -->
+            <div class="flex items-center gap-2 flex-1">
+              <label for="fc-filter-select" class="text-xs font-bold uppercase tracking-wider text-slate-500 dark:text-slate-400 shrink-0">Section:</label>
+              <select
+                id="fc-filter-select"
+                onchange="filterFlashcards(this.value)"
+                class="w-full sm:w-auto flex-1 max-w-xs px-3 py-2 rounded-xl bg-slate-50 dark:bg-slate-800 border border-slate-200 dark:border-slate-700 text-sm font-medium text-slate-800 dark:text-slate-100 focus:outline-none focus:ring-2 focus:ring-teal-500"
+              >
+                ${NEURO_SECTIONS.map((s) => `<option value="${s.id}" ${state.fcFilter === s.id ? 'selected' : ''}>${s.label}</option>`).join('')}
+              </select>
+            </div>
+
+            <!-- Shuffle & Reset -->
+            <div class="flex items-center gap-2">
+              <button
+                type="button"
+                onclick="shuffleFlashcards()"
+                class="px-3.5 py-2 rounded-xl bg-slate-100 dark:bg-slate-800 hover:bg-slate-200 dark:hover:bg-slate-700 text-xs sm:text-sm font-semibold text-slate-700 dark:text-slate-200 transition"
+              >
+                Shuffle Deck
+              </button>
+              <button
+                type="button"
+                onclick="resetFlashcardStats()"
+                class="px-3.5 py-2 rounded-xl bg-slate-100 dark:bg-slate-800 hover:bg-rose-100 dark:hover:bg-rose-950/60 text-xs sm:text-sm font-semibold text-slate-600 dark:text-slate-300 hover:text-rose-700 dark:hover:text-rose-300 transition"
+              >
+                Reset Status
+              </button>
+            </div>
+          </div>
+
+          <!-- Status Counters -->
+          <div class="flex flex-wrap items-center justify-between gap-3 pt-3 border-t border-slate-100 dark:border-slate-800 text-xs sm:text-sm">
+            <span class="font-semibold text-slate-500 dark:text-slate-400">
+              Card <strong class="text-slate-900 dark:text-white">${deck.length ? state.fcIndex + 1 : 0}</strong> of ${deck.length}
+            </span>
+            <div class="flex items-center gap-2">
+              <span class="px-2.5 py-1 rounded-lg bg-emerald-50 dark:bg-emerald-950/50 text-emerald-700 dark:text-emerald-300 font-semibold border border-emerald-200 dark:border-emerald-800/60">
+                Got it: ${gotCount}
+              </span>
+              <span class="px-2.5 py-1 rounded-lg bg-amber-50 dark:bg-amber-950/50 text-amber-700 dark:text-amber-300 font-semibold border border-amber-200 dark:border-amber-800/60">
+                Review Again: ${reviewCount}
+              </span>
+            </div>
+          </div>
+        </div>
+
+        <!-- Interactive Flashcard -->
+        ${card ? `
+          <div
+            onclick="flipFlashcard()"
+            role="button"
+            tabindex="0"
+            onkeydown="if(event.key==='Enter'||event.key===' '){event.preventDefault();flipFlashcard();}"
+            class="cursor-pointer select-none min-h-[280px] sm:min-h-[300px] p-6 sm:p-8 rounded-3xl border-2 transition-all duration-200 flex flex-col justify-between shadow-sm hover:shadow-md ${
+              state.fcFlipped
+                ? 'bg-teal-50/70 dark:bg-teal-950/30 border-teal-400 dark:border-teal-600'
+                : 'bg-white dark:bg-slate-900 border-slate-200 dark:border-slate-800 hover:border-teal-300 dark:hover:border-teal-700'
+            }"
+          >
+            <div class="flex items-center justify-between gap-2">
+              <span class="px-3 py-1 rounded-xl text-xs font-bold bg-slate-100 dark:bg-slate-800 text-slate-700 dark:text-slate-300">
+                ${card.category}
+              </span>
+              <div class="flex items-center gap-2">
+                ${cardStatus === 'got' ? '<span class="px-2.5 py-1 rounded-lg text-xs font-bold bg-emerald-100 dark:bg-emerald-900/60 text-emerald-700 dark:text-emerald-300">Got it</span>' : ''}
+                ${cardStatus === 'review' ? '<span class="px-2.5 py-1 rounded-lg text-xs font-bold bg-amber-100 dark:bg-amber-900/60 text-amber-700 dark:text-amber-300">Review Again</span>' : ''}
+                <span class="px-2.5 py-1 rounded-lg text-xs font-bold uppercase tracking-wider ${
+                  state.fcFlipped
+                    ? 'bg-teal-600 text-white'
+                    : 'bg-slate-200 dark:bg-slate-700 text-slate-700 dark:text-slate-200'
+                }">
+                  ${state.fcFlipped ? 'Answer' : 'Prompt'}
+                </span>
+              </div>
+            </div>
+
+            <div class="my-6">
+              ${
+                state.fcFlipped
+                  ? `<p class="text-base sm:text-lg font-medium leading-relaxed text-slate-900 dark:text-slate-100">${card.back}</p>
+                     <div class="mt-4 p-3 rounded-xl bg-white/80 dark:bg-slate-900/80 border border-teal-200 dark:border-teal-800/60 text-xs sm:text-sm text-teal-900 dark:text-teal-200">
+                       <strong class="font-bold">Clinical Pearl:</strong> ${card.tip}
+                     </div>`
+                  : `<p class="text-lg sm:text-2xl font-bold leading-snug text-slate-900 dark:text-white">${card.front}</p>`
+              }
+            </div>
+
+            <div class="text-center text-xs font-medium text-slate-400 dark:text-slate-500">
+              Tap anywhere on card to ${state.fcFlipped ? 'show prompt' : 'reveal answer'}
+            </div>
+          </div>
+
+          <!-- Card Action Controls -->
+          <div class="mt-5 grid grid-cols-2 sm:grid-cols-4 gap-3">
+            <button
+              type="button"
+              onclick="prevFlashcard()"
+              class="px-4 py-3 rounded-xl bg-white dark:bg-slate-900 border border-slate-200 dark:border-slate-800 hover:bg-slate-50 dark:hover:bg-slate-800 text-sm font-semibold text-slate-700 dark:text-slate-200 transition"
+            >
+              &larr; Previous
+            </button>
+            <button
+              type="button"
+              onclick="markFlashcard('${card.id}', 'review')"
+              class="px-4 py-3 rounded-xl bg-amber-100 dark:bg-amber-900/40 hover:bg-amber-200 dark:hover:bg-amber-900/70 text-sm font-bold text-amber-800 dark:text-amber-300 border border-amber-200 dark:border-amber-800/60 transition"
+            >
+              Review Again
+            </button>
+            <button
+              type="button"
+              onclick="markFlashcard('${card.id}', 'got')"
+              class="px-4 py-3 rounded-xl bg-emerald-100 dark:bg-emerald-900/40 hover:bg-emerald-200 dark:hover:bg-emerald-900/70 text-sm font-bold text-emerald-800 dark:text-emerald-300 border border-emerald-200 dark:border-emerald-800/60 transition"
+            >
+              Got it &#10003;
+            </button>
+            <button
+              type="button"
+              onclick="nextFlashcard()"
+              class="px-4 py-3 rounded-xl bg-teal-600 hover:bg-teal-700 text-sm font-semibold text-white shadow-xs transition"
+            >
+              Next &rarr;
+            </button>
+          </div>
+        ` : `<p class="text-center py-10 text-slate-500">No flashcards found in this section.</p>`}
+      `;
+    }
+
+    function filterFlashcards(sectionId) {
+      state.fcFilter = sectionId;
+      state.fcIndex = 0;
+      state.fcFlipped = false;
+      renderMainContent();
+    }
+
+    function flipFlashcard() {
+      state.fcFlipped = !state.fcFlipped;
+      renderMainContent();
+    }
+
+    function nextFlashcard() {
+      const deck = getFilteredDeck();
+      if (!deck.length) return;
+      state.fcIndex = (state.fcIndex + 1) % deck.length;
+      state.fcFlipped = false;
+      renderMainContent();
+    }
+
+    function prevFlashcard() {
+      const deck = getFilteredDeck();
+      if (!deck.length) return;
+      state.fcIndex = (state.fcIndex - 1 + deck.length) % deck.length;
+      state.fcFlipped = false;
+      renderMainContent();
+    }
+
+    function shuffleFlashcards() {
+      for (let i = state.fcDeck.length - 1; i > 0; i--) {
+        const j = Math.floor(Math.random() * (i + 1));
+        [state.fcDeck[i], state.fcDeck[j]] = [state.fcDeck[j], state.fcDeck[i]];
+      }
+      state.fcIndex = 0;
+      state.fcFlipped = false;
+      showToast('Flashcard deck shuffled', 'info');
+      renderMainContent();
+    }
+
+    function markFlashcard(cardId, status) {
+      state.fcStatus[cardId] = status;
+      safeSetStorage('mchiro_y3_fc_status', state.fcStatus);
+      nextFlashcard();
+    }
+
+    function resetFlashcardStats() {
+      state.fcStatus = {};
+      safeSetStorage('mchiro_y3_fc_status', {});
+      showToast('Flashcard progress reset', 'warn');
+      renderMainContent();
+    }
+
+    // --- 8B: PRACTICAL EXAM CHECKLIST ---
+    function renderNeuroChecklist() {
+      const totalItems = NEURO_CHECKLIST.reduce((sum, sec) => sum + sec.items.length, 0);
+      const completedItems = Object.values(state.checkedItems).filter(Boolean).length;
+      const pct = totalItems ? Math.round((completedItems / totalItems) * 100) : 0;
+
+      const colorMap = {
+        teal: 'border-l-teal-500 bg-teal-50/50 dark:bg-teal-950/20',
+        cyan: 'border-l-cyan-500 bg-cyan-50/50 dark:bg-cyan-950/20',
+        sky: 'border-l-sky-500 bg-sky-50/50 dark:bg-sky-950/20',
+        blue: 'border-l-blue-500 bg-blue-50/50 dark:bg-blue-950/20',
+        indigo: 'border-l-indigo-500 bg-indigo-50/50 dark:bg-indigo-950/20',
+        violet: 'border-l-violet-500 bg-violet-50/50 dark:bg-violet-950/20',
+        purple: 'border-l-purple-500 bg-purple-50/50 dark:bg-purple-950/20',
+        rose: 'border-l-rose-500 bg-rose-50/50 dark:bg-rose-950/20',
+      };
+
+      return `
+        <!-- Sticky Progress Header -->
+        <div class="sticky top-14 lg:top-4 z-20 mb-6 p-4 rounded-2xl bg-white/95 dark:bg-slate-900/95 backdrop-blur border border-slate-200 dark:border-slate-800 shadow-sm">
+          <div class="flex flex-wrap items-center justify-between gap-3 mb-2">
+            <div>
+              <h3 class="text-sm font-bold text-slate-900 dark:text-white">Mock Practical Run-Through Progress</h3>
+              <p class="text-xs text-slate-500 dark:text-slate-400">${completedItems} of ${totalItems} exam stations checked (${pct}%)</p>
+            </div>
+            <button
+              type="button"
+              onclick="resetChecklist()"
+              class="px-3.5 py-2 rounded-xl bg-slate-100 dark:bg-slate-800 hover:bg-rose-100 dark:hover:bg-rose-950/60 text-xs font-semibold text-slate-700 dark:text-slate-200 hover:text-rose-700 dark:hover:text-rose-300 transition"
+            >
+              Reset Checklist
+            </button>
+          </div>
+          <div class="w-full h-2.5 rounded-full bg-slate-200 dark:bg-slate-800 overflow-hidden">
+            <div class="h-full rounded-full bg-gradient-to-r from-teal-500 to-emerald-500 transition-all duration-300" style="width: ${pct}%"></div>
+          </div>
+        </div>
+
+        <!-- 8 Exam Sections -->
+        <div class="space-y-5">
+          ${NEURO_CHECKLIST.map((sec) => {
+            const secDone = sec.items.filter((_, idx) => state.checkedItems[`s${sec.sectionNum}-i${idx}`]).length;
+            return `
+              <section class="rounded-2xl bg-white dark:bg-slate-900 border border-slate-200 dark:border-slate-800 overflow-hidden shadow-xs">
+                <div class="px-5 py-3.5 border-b border-slate-200 dark:border-slate-800 border-l-4 ${colorMap[sec.color]} flex items-center justify-between gap-2">
+                  <h4 class="text-sm sm:text-base font-bold text-slate-900 dark:text-white">${sec.title}</h4>
+                  <span class="text-xs font-bold px-2.5 py-1 rounded-lg bg-white dark:bg-slate-900 text-slate-600 dark:text-slate-300 border border-slate-200 dark:border-slate-700">
+                    ${secDone}/${sec.items.length}
+                  </span>
+                </div>
+                <div class="divide-y divide-slate-100 dark:divide-slate-800/80">
+                  ${sec.items.map((item, idx) => {
+                    const key = `s${sec.sectionNum}-i${idx}`;
+                    const checked = !!state.checkedItems[key];
+                    return `
+                      <label class="flex items-start gap-3.5 px-5 py-3.5 cursor-pointer hover:bg-slate-50 dark:hover:bg-slate-800/40 transition">
+                        <input
+                          type="checkbox"
+                          ${checked ? 'checked' : ''}
+                          onchange="toggleChecklistItem('${key}')"
+                          class="mt-0.5 w-5 h-5 rounded-md border-slate-300 dark:border-slate-600 text-teal-600 focus:ring-teal-500 shrink-0 cursor-pointer accent-teal-600"
+                        />
+                        <span class="text-sm leading-relaxed ${checked ? 'line-through text-slate-400 dark:text-slate-500' : 'text-slate-700 dark:text-slate-200'}">
+                          ${item}
+                        </span>
+                      </label>
+                    `;
+                  }).join('')}
+                </div>
+              </section>
+            `;
+          }).join('')}
+        </div>
+      `;
+    }
+
+    function toggleChecklistItem(key) {
+      state.checkedItems[key] = !state.checkedItems[key];
+      safeSetStorage('mchiro_y3_checklist', state.checkedItems);
+      renderMainContent();
+    }
+
+    function resetChecklist() {
+      state.checkedItems = {};
+      safeSetStorage('mchiro_y3_checklist', {});
+      showToast('Practical checklist reset for a fresh run-through', 'info');
+      renderMainContent();
+    }
+
+    // --- 8C: GRADING SCALES QUICK-REF ---
+    function renderNeuroScales() {
+      const mrcGrades = [
+        { g: '0', desc: 'No muscle contraction visible or palpable' },
+        { g: '1', desc: 'Flicker or trace of contraction, no joint movement' },
+        { g: '2', desc: 'Active movement with gravity eliminated' },
+        { g: '3', desc: 'Active movement against gravity only (no resistance)' },
+        { g: '4', desc: 'Active movement against gravity and some resistance' },
+        { g: '5', desc: 'Normal power against full resistance' },
+      ];
+
+      const reflexGrades = [
+        { g: '0', badge: 'Absent', color: 'rose', desc: 'Areflexia — absent even with reinforcement (LMN / peripheral neuropathy)' },
+        { g: '1+', badge: 'Diminished', color: 'amber', desc: 'Hyporeflexia — sluggish or present only with reinforcement (Jendrassik)' },
+        { g: '2+', badge: 'Normal', color: 'emerald', desc: 'Brisk, normal physiological response' },
+        { g: '3+', badge: 'Increased', color: 'amber', desc: 'Very brisk / hyperreflexic (may be normal if symmetrical, or early UMN)' },
+        { g: '4+', badge: 'Clonus', color: 'rose', desc: 'Hyperactive with sustained clonus (strongly indicative of UMN lesion)' },
+      ];
+
+      const sensoryGrades = [
+        { g: '0', badge: 'Absent', desc: 'Complete loss of sensation (anaesthesia / analgesia)' },
+        { g: '1', badge: 'Impaired', desc: 'Diminished, altered, or hypersensitive (hypo/hyperaesthesia, paraesthesia, allodynia)' },
+        { g: '2', badge: 'Normal', desc: 'Intact and symmetrical bilaterally' },
+      ];
+
+      return `
+        <div class="grid grid-cols-1 lg:grid-cols-3 gap-5">
+          <!-- MRC Power Scale -->
+          <div class="rounded-2xl bg-white dark:bg-slate-900 border border-slate-200 dark:border-slate-800 overflow-hidden shadow-xs flex flex-col">
+            <div class="p-4 bg-teal-50 dark:bg-teal-950/40 border-b border-teal-100 dark:border-teal-900/60">
+              <span class="text-[11px] font-bold uppercase tracking-wider text-teal-700 dark:text-teal-300">Myotomes</span>
+              <h3 class="text-lg font-extrabold text-slate-900 dark:text-white">MRC Power Scale (0–5)</h3>
+            </div>
+            <div class="p-4 space-y-2.5 flex-1">
+              ${mrcGrades.map((row) => `
+                <div class="flex items-start gap-3 p-2.5 rounded-xl bg-slate-50 dark:bg-slate-800/60">
+                  <span class="shrink-0 w-8 h-8 rounded-lg bg-teal-600 text-white font-extrabold text-sm flex items-center justify-center">${row.g}</span>
+                  <p class="text-xs sm:text-sm text-slate-700 dark:text-slate-200 leading-snug pt-0.5">${row.desc}</p>
+                </div>
+              `).join('')}
+            </div>
+          </div>
+
+          <!-- Deep Tendon Reflexes -->
+          <div class="rounded-2xl bg-white dark:bg-slate-900 border border-slate-200 dark:border-slate-800 overflow-hidden shadow-xs flex flex-col">
+            <div class="p-4 bg-indigo-50 dark:bg-indigo-950/40 border-b border-indigo-100 dark:border-indigo-900/60">
+              <span class="text-[11px] font-bold uppercase tracking-wider text-indigo-700 dark:text-indigo-300">DTRs</span>
+              <h3 class="text-lg font-extrabold text-slate-900 dark:text-white">Deep Tendon Reflexes (0–4+)</h3>
+            </div>
+            <div class="p-4 space-y-2.5 flex-1">
+              ${reflexGrades.map((row) => `
+                <div class="flex items-start gap-3 p-2.5 rounded-xl bg-slate-50 dark:bg-slate-800/60">
+                  <span class="shrink-0 w-9 h-8 rounded-lg bg-indigo-600 text-white font-extrabold text-sm flex items-center justify-center">${row.g}</span>
+                  <div>
+                    <span class="text-xs font-bold uppercase tracking-wide text-${row.color}-600 dark:text-${row.color}-400">${row.badge}</span>
+                    <p class="text-xs sm:text-sm text-slate-700 dark:text-slate-200 leading-snug">${row.desc}</p>
+                  </div>
+                </div>
+              `).join('')}
+            </div>
+          </div>
+
+          <!-- Sensory Grading + Key Terms -->
+          <div class="space-y-5 flex flex-col">
+            <div class="rounded-2xl bg-white dark:bg-slate-900 border border-slate-200 dark:border-slate-800 overflow-hidden shadow-xs">
+              <div class="p-4 bg-violet-50 dark:bg-violet-950/40 border-b border-violet-100 dark:border-violet-900/60">
+                <span class="text-[11px] font-bold uppercase tracking-wider text-violet-700 dark:text-violet-300">Dermatomes</span>
+                <h3 class="text-lg font-extrabold text-slate-900 dark:text-white">Sensory Grading (0–2)</h3>
+              </div>
+              <div class="p-4 space-y-2.5">
+                ${sensoryGrades.map((row) => `
+                  <div class="flex items-start gap-3 p-2.5 rounded-xl bg-slate-50 dark:bg-slate-800/60">
+                    <span class="shrink-0 w-8 h-8 rounded-lg bg-violet-600 text-white font-extrabold text-sm flex items-center justify-center">${row.g}</span>
+                    <div>
+                      <span class="text-xs font-bold uppercase tracking-wide text-violet-700 dark:text-violet-300">${row.badge}</span>
+                      <p class="text-xs sm:text-sm text-slate-700 dark:text-slate-200 leading-snug">${row.desc}</p>
+                    </div>
+                  </div>
+                `).join('')}
+              </div>
+            </div>
+
+            <div class="rounded-2xl bg-slate-100 dark:bg-slate-900 border border-slate-200 dark:border-slate-800 p-4 space-y-2">
+              <h4 class="text-xs font-bold uppercase tracking-wider text-slate-500 dark:text-slate-400">Sensory Exam Definitions</h4>
+              <p class="text-xs sm:text-sm text-slate-700 dark:text-slate-300"><strong>Paraesthesia:</strong> Abnormal spontaneous tingling or pins-and-needles sensation.</p>
+              <p class="text-xs sm:text-sm text-slate-700 dark:text-slate-300"><strong>Allodynia:</strong> Pain provoked by a normally non-painful stimulus (e.g., light cotton touch).</p>
+              <p class="text-xs sm:text-sm text-slate-700 dark:text-slate-300"><strong>Hypersensitivity:</strong> Exaggerated sensory perception to a normal stimulus.</p>
+            </div>
+          </div>
+        </div>
+      `;
+    }
+
+    // =========================================================================
+    // 9. MODULE 2: MUSCULOSKELETAL MEDICINE (DIFFERENTIAL DIAGNOSIS BOARDS)
+    // =========================================================================
+    function renderMskModule(mod) {
+      const tabs = [
+        { id: 'oara', label: 'OA vs. RA' },
+        { id: 'metabolic', label: 'Metabolic Bone & Crystal' },
+        { id: 'renal', label: 'Systemic & Renal Red Flags' },
+      ];
+
+      let tabBody = '';
+      if (state.mskTab === 'oara') tabBody = renderMskOaRa();
+      else if (state.mskTab === 'metabolic') tabBody = renderMskMetabolic();
+      else tabBody = renderMskRenal();
+
+      return `
+        <!-- Module Header -->
+        <div class="mb-6 flex flex-col md:flex-row md:items-end justify-between gap-4">
+          <div>
+            <div class="flex flex-wrap items-center gap-2 mb-2">
+              <span class="px-2.5 py-1 rounded-lg text-xs font-bold uppercase tracking-wider bg-indigo-100 dark:bg-indigo-900/60 text-indigo-800 dark:text-indigo-300">
+                Module 2 &bull; Active
+              </span>
+              <span class="px-2.5 py-1 rounded-lg text-xs font-semibold bg-rose-100 dark:bg-rose-900/40 text-rose-800 dark:text-rose-300">
+                Priority Bridging Board
+              </span>
+            </div>
+            <h2 class="text-2xl sm:text-3xl font-extrabold tracking-tight text-slate-900 dark:text-white">${mod.name}</h2>
+            <p class="mt-1 text-sm sm:text-base text-slate-600 dark:text-slate-400">${mod.subtitle}</p>
+          </div>
+
+          <!-- Active Recall Mode Toggle -->
+          <button
+            type="button"
+            onclick="toggleMskBlur()"
+            class="shrink-0 inline-flex items-center justify-center gap-2.5 px-4 py-2.5 rounded-xl font-semibold text-sm border transition ${
+              state.mskBlurMode
+                ? 'bg-indigo-600 text-white border-indigo-600 shadow-sm'
+                : 'bg-white dark:bg-slate-900 text-slate-700 dark:text-slate-200 border-slate-300 dark:border-slate-700 hover:border-indigo-400'
+            }"
+          >
+            <span class="w-2.5 h-2.5 rounded-full ${state.mskBlurMode ? 'bg-amber-300 animate-pulse' : 'bg-slate-400'}"></span>
+            Active Recall Mode (Blur Answers): ${state.mskBlurMode ? 'ON' : 'OFF'}
+          </button>
+        </div>
+
+        ${state.mskBlurMode ? `
+          <div class="mb-5 px-4 py-3 rounded-xl bg-indigo-50 dark:bg-indigo-950/40 border border-indigo-200 dark:border-indigo-800/60 text-xs sm:text-sm text-indigo-900 dark:text-indigo-200 flex items-center justify-between gap-3">
+            <span><strong>Active Recall Active:</strong> Tap any blurred cell or flowchart box to reveal it individually.</span>
+            <button type="button" onclick="revealAllBlurred()" class="shrink-0 underline font-bold hover:text-indigo-600 dark:hover:text-indigo-300">Reveal All</button>
+          </div>
+        ` : ''}
+
+        <!-- Sub-tabs -->
+        <div class="flex flex-wrap gap-2 mb-6 p-1.5 rounded-2xl bg-slate-200/70 dark:bg-slate-900 border border-slate-200 dark:border-slate-800">
+          ${tabs.map((t) => {
+            const active = state.mskTab === t.id;
+            return `
+              <button
+                type="button"
+                onclick="setMskTab('${t.id}')"
+                class="flex-1 min-w-[140px] px-4 py-2.5 rounded-xl text-sm font-semibold transition ${
+                  active
+                    ? 'bg-white dark:bg-slate-800 text-indigo-700 dark:text-indigo-300 shadow-sm'
+                    : 'text-slate-600 dark:text-slate-400 hover:text-slate-900 dark:hover:text-white'
+                }"
+              >
+                ${t.label}
+              </button>
+            `;
+          }).join('')}
+        </div>
+
+        ${tabBody}
+      `;
+    }
+
+    function setMskTab(tabId) {
+      state.mskTab = tabId;
+      renderMainContent();
+    }
+
+    function toggleMskBlur() {
+      state.mskBlurMode = !state.mskBlurMode;
+      showToast(
+        state.mskBlurMode ? 'Active Recall Mode ON — tap cells to reveal' : 'Active Recall Mode OFF',
+        'info'
+      );
+      renderMainContent();
+    }
+
+    function toggleCellReveal(el) {
+      if (!state.mskBlurMode) return;
+      el.classList.toggle('blur-sm');
+      el.classList.toggle('opacity-70');
+    }
+
+    function revealAllBlurred() {
+      document.querySelectorAll('.recall-cell').forEach((el) => {
+        el.classList.remove('blur-sm', 'opacity-70');
+      });
+    }
+
+    function recallCellAttr() {
+      return state.mskBlurMode
+        ? `onclick="toggleCellReveal(this)" title="Tap to reveal" class="recall-cell cursor-pointer blur-sm opacity-70 transition duration-200 select-none"`
+        : `class="recall-cell transition duration-200"`;
+    }
+
+    // --- 9A: OA vs. RA ---
+    function renderMskOaRa() {
+      const rows = [
+        {
+          feature: 'Pathophysiology',
+          oa: 'Degenerative articular cartilage wear & breakdown, subchondral sclerosis, bone cysts, and marginal <strong>osteophytes</strong>.',
+          ra: 'Autoimmune, immune-mediated chronic <strong>synovitis</strong> forming invasive <strong>pannus</strong> that erodes cartilage and bone.',
+        },
+        {
+          feature: 'Key Mediators',
+          oa: 'Mechanical load / wear-and-tear with local chondrocyte matrix metalloproteinases (MMPs); minimal systemic inflammation.',
+          ra: 'Pro-inflammatory cytokines: <strong>TNF-&alpha;, IL-1, IL-6</strong>; autoantibodies (Rheumatoid Factor, Anti-CCP).',
+        },
+        {
+          feature: 'Joint Distribution',
+          oa: '<strong>Asymmetric</strong> weight-bearing joints (knees, hips, spine), plus <strong>DIP</strong> (Heberden’s), <strong>PIP</strong> (Bouchard’s), and <strong>1st CMC</strong>.',
+          ra: '<strong>Symmetric</strong> small joints: <strong>MCP, PIP, wrists</strong>, and MTPs. Classically <strong>spares DIP joints</strong>.',
+        },
+        {
+          feature: 'Morning Stiffness',
+          oa: 'Brief (<strong>&lt; 30 minutes</strong>); gelling after rest; pain worsens with prolonged weight-bearing/use and improves with rest.',
+          ra: 'Prolonged (<strong>&gt; 30–60 minutes</strong>); stiffness and pain characteristically <strong>improve with gentle movement</strong>.',
+        },
+        {
+          feature: 'Systemic Features',
+          oa: '<strong>Absent</strong> (localised joint disease; normal ESR/CRP).',
+          ra: '<strong>Present:</strong> Fatigue, low-grade fever, weight loss, anaemia of chronic disease, extra-articular signs (rheumatoid nodules, vasculitis, pulmonary/ocular).',
+        },
+        {
+          feature: 'Management Rationale',
+          oa: 'Symptom & function focused: Load management, targeted exercise/rehab, weight optimisation, analgesia (paracetamol/topical NSAIDs), arthroplasty if end-stage.',
+          ra: '<strong>Early DMARDs</strong> (e.g., methotrexate) &amp; <strong>biologics</strong> (anti-TNF) to suppress cytokine cascade and <strong>halt irreversible joint destruction</strong>.',
+        },
+      ];
+
+      return `
+        <div class="rounded-2xl bg-white dark:bg-slate-900 border border-slate-200 dark:border-slate-800 overflow-hidden shadow-xs">
+          <div class="overflow-x-auto">
+            <table class="w-full text-left border-collapse min-w-[640px]">
+              <thead>
+                <tr class="border-b border-slate-200 dark:border-slate-800">
+                  <th class="p-4 w-1/5 bg-slate-50 dark:bg-slate-800/70 text-xs font-bold uppercase tracking-wider text-slate-500 dark:text-slate-400">
+                    Clinical Feature
+                  </th>
+                  <th class="p-4 w-2/5 bg-sky-50 dark:bg-sky-950/40 text-sm font-extrabold text-sky-900 dark:text-sky-200">
+                    Osteoarthritis (OA)
+                    <span class="block text-[11px] font-semibold text-sky-600 dark:text-sky-400">Degenerative / Mechanical</span>
+                  </th>
+                  <th class="p-4 w-2/5 bg-rose-50 dark:bg-rose-950/40 text-sm font-extrabold text-rose-900 dark:text-rose-200">
+                    Rheumatoid Arthritis (RA)
+                    <span class="block text-[11px] font-semibold text-rose-600 dark:text-rose-400">Autoimmune / Inflammatory</span>
+                  </th>
+                </tr>
+              </thead>
+              <tbody class="divide-y divide-slate-200 dark:divide-slate-800 text-sm">
+                ${rows.map((r) => `
+                  <tr class="hover:bg-slate-50/70 dark:hover:bg-slate-800/30 transition">
+                    <td class="p-4 font-bold text-slate-800 dark:text-slate-200 bg-slate-50/40 dark:bg-slate-900/40 align-top">
+                      ${r.feature}
+                    </td>
+                    <td class="p-4 align-top text-slate-700 dark:text-slate-300 leading-relaxed">
+                      <div ${recallCellAttr()}>${r.oa}</div>
+                    </td>
+                    <td class="p-4 align-top text-slate-700 dark:text-slate-300 leading-relaxed">
+                      <div ${recallCellAttr()}>${r.ra}</div>
+                    </td>
+                  </tr>
+                `).join('')}
+              </tbody>
+            </table>
+          </div>
+        </div>
+      `;
+    }
+
+    // --- 9B: METABOLIC BONE & CRYSTAL DISEASE ---
+    function renderMskMetabolic() {
+      const metabolicRows = [
+        {
+          name: 'Osteoporosis',
+          badge: 'T-score ≤ -2.5',
+          color: 'amber',
+          mech: 'Imbalanced remodelling (osteoclast resorption &gt; osteoblast formation) causing reduced bone mass &amp; microarchitectural deterioration.',
+          density: '<strong>Reduced bone mass/density</strong>, but <strong>normal mineralisation</strong> (ratio of mineral to matrix is normal).',
+          hallmarks: 'DEXA T-score &le; -2.5; fragility fractures (NOF, vertebral wedge, Colles). Serum Ca<sup>2+</sup>, PO<sub>4</sub>, ALP usually <strong>normal</strong>.',
+        },
+        {
+          name: 'Osteopenia',
+          badge: 'T-score -1.0 to -2.5',
+          color: 'sky',
+          mech: 'Precursor stage of reduced bone mineral density before meeting the diagnostic threshold for osteoporosis.',
+          density: 'Moderately reduced bone mass; normal mineralisation.',
+          hallmarks: 'DEXA T-score between -1.0 and -2.5. Managed with weight-bearing exercise, Ca/Vit D, and fracture risk monitoring (FRAX).',
+        },
+        {
+          name: 'Osteomalacia',
+          badge: 'Soft Bones (Vit D)',
+          color: 'violet',
+          mech: 'Defective mineralisation of newly formed osteoid matrix due to <strong>Vitamin D deficiency</strong>, malabsorption, or renal phosphate loss (Rickets in children).',
+          density: '<strong>Impaired mineralisation</strong> (excess unmineralised osteoid); bone becomes soft and deformable.',
+          hallmarks: 'Low/normal Ca<sup>2+</sup>, low PO<sub>4</sub>, <strong>high ALP</strong>, high PTH. X-ray: <strong>Looser zones</strong> (pseudofractures), diffuse bone pain, proximal myopathy.',
+        },
+        {
+          name: 'Paget’s Disease',
+          badge: 'Disordered Remodelling',
+          color: 'indigo',
+          mech: 'Focal, excessive osteoclast resorption followed by rapid, chaotic, mosaic osteoblast bone formation.',
+          density: 'Thickened, enlarged, vascular, structurally <strong>weak &amp; brittle</strong> bone.',
+          hallmarks: '<strong>Markedly elevated ALP</strong> with normal Ca<sup>2+</sup> &amp; PO<sub>4</sub>. X-ray: "Cotton-wool" skull, blade-of-grass lytic lesions, bowing of tibia/femur; deafness (CN VIII compression).',
+        },
+      ];
+
+      return `
+        <div class="space-y-6">
+          <!-- Metabolic Bone Table -->
+          <div class="rounded-2xl bg-white dark:bg-slate-900 border border-slate-200 dark:border-slate-800 overflow-hidden shadow-xs">
+            <div class="px-5 py-3.5 bg-slate-50 dark:bg-slate-800/60 border-b border-slate-200 dark:border-slate-800">
+              <h3 class="text-sm sm:text-base font-extrabold text-slate-900 dark:text-white">Metabolic Bone Diseases Comparison</h3>
+            </div>
+            <div class="overflow-x-auto">
+              <table class="w-full text-left border-collapse min-w-[700px]">
+                <thead>
+                  <tr class="border-b border-slate-200 dark:border-slate-800 text-xs font-bold uppercase tracking-wider text-slate-500 dark:text-slate-400 bg-slate-50/50 dark:bg-slate-900">
+                    <th class="p-4 w-1/5">Condition</th>
+                    <th class="p-4 w-1/4">Mechanism</th>
+                    <th class="p-4 w-1/4">Density vs. Mineralisation</th>
+                    <th class="p-4 w-1/3">Lab &amp; Imaging Hallmarks</th>
+                  </tr>
+                </thead>
+                <tbody class="divide-y divide-slate-200 dark:divide-slate-800 text-sm">
+                  ${metabolicRows.map((r) => `
+                    <tr class="hover:bg-slate-50/60 dark:hover:bg-slate-800/30">
+                      <td class="p-4 align-top">
+                        <span class="block font-extrabold text-slate-900 dark:text-white">${r.name}</span>
+                        <span class="mt-1 inline-block text-[11px] font-bold px-2 py-0.5 rounded-md bg-${r.color}-100 dark:bg-${r.color}-950/60 text-${r.color}-800 dark:text-${r.color}-300">
+                          ${r.badge}
+                        </span>
+                      </td>
+                      <td class="p-4 align-top text-slate-700 dark:text-slate-300 leading-relaxed">
+                        <div ${recallCellAttr()}>${r.mech}</div>
+                      </td>
+                      <td class="p-4 align-top text-slate-700 dark:text-slate-300 leading-relaxed">
+                        <div ${recallCellAttr()}>${r.density}</div>
+                      </td>
+                      <td class="p-4 align-top text-slate-700 dark:text-slate-300 leading-relaxed">
+                        <div ${recallCellAttr()}>${r.hallmarks}</div>
+                      </td>
+                    </tr>
+                  `).join('')}
+                </tbody>
+              </table>
+            </div>
+          </div>
+
+          <!-- Red Flag Highlight: Gout vs Septic Arthritis -->
+          <div class="rounded-2xl border-2 border-rose-300 dark:border-rose-800/80 bg-rose-50/60 dark:bg-rose-950/20 overflow-hidden shadow-xs">
+            <div class="px-5 py-3.5 bg-rose-600 text-white flex flex-wrap items-center justify-between gap-2">
+              <h3 class="text-sm sm:text-base font-extrabold">Acute Hot Swollen Joint Red Flag: Gout vs. Septic Arthritis</h3>
+              <span class="text-xs font-bold uppercase tracking-wider px-2.5 py-1 rounded-lg bg-white/20">Urgent Medical Referral</span>
+            </div>
+            <div class="grid grid-cols-1 md:grid-cols-2 divide-y md:divide-y-0 md:divide-x divide-rose-200 dark:divide-rose-800/60">
+              <div class="p-5 space-y-2.5">
+                <h4 class="text-base font-extrabold text-amber-800 dark:text-amber-300">Gout (Crystal Arthropathy)</h4>
+                <div ${recallCellAttr()}>
+                  <ul class="space-y-1.5 text-sm text-slate-700 dark:text-slate-300 list-disc pl-4">
+                    <li><strong>Cause:</strong> Monosodium urate (MSU) crystal deposition (negatively birefringent needle-shaped crystals).</li>
+                    <li><strong>Classic Site:</strong> 1st MTP joint (podagra), rapid onset peaking within 12–24 hrs, intensely red/hot/tender.</li>
+                    <li><strong>Systemic:</strong> Usually afebrile or mild fever; history of purine-rich diet, alcohol, diuretics, or CKD.</li>
+                    <li><strong>Action:</strong> Refer to GP for confirmation/NSAIDs/colchicine; <strong>never manipulate an acutely inflamed joint</strong>.</li>
+                  </ul>
+                </div>
+              </div>
+              <div class="p-5 space-y-2.5">
+                <h4 class="text-base font-extrabold text-rose-700 dark:text-rose-400">Septic Arthritis (Orthopaedic Emergency)</h4>
+                <div ${recallCellAttr()}>
+                  <ul class="space-y-1.5 text-sm text-slate-700 dark:text-slate-300 list-disc pl-4">
+                    <li><strong>Cause:</strong> Bacterial joint invasion (most commonly <em>Staph. aureus</em>) — destroys cartilage within 24–48 hrs.</li>
+                    <li><strong>Classic Site:</strong> Large monoarthritis (knee/hip), severe pain on <strong>any passive or active ROM</strong>, inability to weight-bear.</li>
+                    <li><strong>Systemic:</strong> High fever, rigors, malaise, tachycardia; elevated WCC, CRP, ESR.</li>
+                    <li><strong>Action:</strong> <strong>SAME-DAY A&amp;E REFERRAL</strong> for joint aspiration (Gram stain/culture) &amp; IV antibiotics. Treat every acute hot swollen joint as septic until proven otherwise!</li>
+                  </ul>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      `;
+    }
+
+    // --- 9C: SYSTEMIC & RENAL RED FLAGS ---
+    function renderMskRenal() {
+      const steps = [
+        {
+          step: 'Step 1',
+          title: 'Chronic Kidney Disease (CKD)',
+          detail: 'Progressive loss of functional nephrons leads to reduced renal clearance and endocrine failure.',
+          color: 'slate',
+        },
+        {
+          step: 'Step 2',
+          title: 'Decreased GFR & 1-&alpha;-Hydroxylase',
+          detail: 'Impaired filtration reduces phosphate excretion, while damaged tubules fail to activate Vitamin D.',
+          color: 'sky',
+        },
+        {
+          step: 'Step 3',
+          title: 'Phosphate Retention + Low Active Vitamin D (Calcitriol)',
+          detail: 'Hyperphosphataemia binds serum calcium directly; low calcitriol decreases gut Ca<sup>2+</sup> absorption.',
+          color: 'indigo',
+        },
+        {
+          step: 'Step 4',
+          title: 'Hypocalcaemia',
+          detail: 'Low ionised serum calcium triggers calcium-sensing receptors on the parathyroid glands.',
+          color: 'violet',
+        },
+        {
+          step: 'Step 5',
+          title: 'Secondary Hyperparathyroidism (High PTH)',
+          detail: 'Persistent parathyroid hyperplasia drives chronically elevated PTH to restore serum calcium.',
+          color: 'amber',
+        },
+        {
+          step: 'Step 6',
+          title: 'Increased Osteoclastic Bone Resorption',
+          detail: 'Excess PTH mobilises calcium from bone matrix, accelerating cortical thinning and marrow fibrosis.',
+          color: 'orange',
+        },
+        {
+          step: 'Step 7',
+          title: 'Renal Osteodystrophy &amp; Pathological Fracture Risk',
+          detail: 'Weakened, demineralised bone presenting with deep bone pain, proximal myopathy, and high fracture risk — <strong>contraindication to high-velocity manipulation!</strong>',
+          color: 'rose',
+        },
+      ];
+
+      return `
+        <div class="grid grid-cols-1 lg:grid-cols-3 gap-6">
+          <!-- Visual Flowchart Cascade -->
+          <div class="lg:col-span-2 rounded-2xl bg-white dark:bg-slate-900 border border-slate-200 dark:border-slate-800 p-5 sm:p-6 shadow-xs">
+            <div class="mb-5">
+              <span class="text-xs font-bold uppercase tracking-wider text-indigo-600 dark:text-indigo-400">Pathophysiology Flowchart</span>
+              <h3 class="text-lg sm:text-xl font-extrabold text-slate-900 dark:text-white">CKD &rarr; Renal Osteodystrophy Cascade</h3>
+              <p class="text-xs sm:text-sm text-slate-500 dark:text-slate-400 mt-0.5">Visualise each link in sequence to bridge Renal BMS directly into MSK clinical safety.</p>
+            </div>
+
+            <div class="space-y-2">
+              ${steps.map((s, idx) => `
+                <div class="flex flex-col items-center">
+                  <div class="w-full p-4 rounded-2xl border-l-4 border-${s.color}-500 bg-${s.color}-50/60 dark:bg-${s.color}-950/30 border border-slate-200/80 dark:border-slate-800">
+                    <div class="flex items-center justify-between gap-2 mb-1">
+                      <span class="text-[11px] font-extrabold uppercase tracking-wider text-${s.color}-700 dark:text-${s.color}-300">${s.step}</span>
+                    </div>
+                    <h4 class="text-sm sm:text-base font-extrabold text-slate-900 dark:text-white">${s.title}</h4>
+                    <div ${recallCellAttr()}>
+                      <p class="mt-1 text-xs sm:text-sm text-slate-700 dark:text-slate-300 leading-relaxed">${s.detail}</p>
+                    </div>
+                  </div>
+                  ${idx < steps.length - 1 ? `
+                    <div class="py-1 text-slate-400 dark:text-slate-600">
+                      <svg class="w-5 h-5" fill="none" stroke="currentColor" stroke-width="2.5" viewBox="0 0 24 24">
+                        <path stroke-linecap="round" stroke-linejoin="round" d="M19.5 13.5L12 21m0 0l-7.5-7.5M12 21V3" />
+                      </svg>
+                    </div>
+                  ` : ''}
+                </div>
+              `).join('')}
+            </div>
+          </div>
+
+          <!-- Red Flag Referral Box -->
+          <div class="space-y-5">
+            <div class="rounded-2xl border-2 border-rose-300 dark:border-rose-800 bg-rose-50 dark:bg-rose-950/30 p-5 shadow-xs">
+              <div class="flex items-center gap-2.5 mb-3">
+                <span class="w-8 h-8 rounded-xl bg-rose-600 text-white flex items-center justify-center font-extrabold text-sm">!</span>
+                <h3 class="text-base font-extrabold text-rose-900 dark:text-rose-200">Quick-Ref Red Flag Referrals</h3>
+              </div>
+              <ul class="space-y-3 text-xs sm:text-sm text-rose-950 dark:text-rose-100">
+                <li class="p-3 rounded-xl bg-white/80 dark:bg-slate-900/70 border border-rose-200 dark:border-rose-900">
+                  <strong class="block text-rose-700 dark:text-rose-400">Renal / Systemic Bone Pain</strong>
+                  Known CKD + new atraumatic axial/rib/hip pain, unexplained fatigue, oedema, or oliguria &rarr; <strong>Refer GP / Nephrology</strong> (assess fracture risk before manual therapy).
+                </li>
+                <li class="p-3 rounded-xl bg-white/80 dark:bg-slate-900/70 border border-rose-200 dark:border-rose-900">
+                  <strong class="block text-rose-700 dark:text-rose-400">Suspected Septic Arthritis</strong>
+                  Acute hot, swollen, severely painful single joint + fever/malaise &rarr; <strong>Immediate A&amp;E Referral</strong>.
+                </li>
+                <li class="p-3 rounded-xl bg-white/80 dark:bg-slate-900/70 border border-rose-200 dark:border-rose-900">
+                  <strong class="block text-rose-700 dark:text-rose-400">Cauda Equina / Cord Compression</strong>
+                  Saddle anaesthesia, bladder/bowel dysfunction, bilateral progressive leg weakness &rarr; <strong>Emergency A&amp;E</strong>.
+                </li>
+                <li class="p-3 rounded-xl bg-white/80 dark:bg-slate-900/70 border border-rose-200 dark:border-rose-900">
+                  <strong class="block text-rose-700 dark:text-rose-400">Malignancy / Pathological Fracture</strong>
+                  History of cancer, unexplained weight loss, constant night pain unrelieved by rest &rarr; <strong>Urgent GP / 2-Week Wait</strong>.
+                </li>
+              </ul>
+            </div>
+
+            <div class="rounded-2xl bg-white dark:bg-slate-900 border border-slate-200 dark:border-slate-800 p-5">
+              <h4 class="text-xs font-bold uppercase tracking-wider text-slate-500 dark:text-slate-400 mb-2">Clinical Pearl</h4>
+              <p class="text-xs sm:text-sm text-slate-700 dark:text-slate-300 leading-relaxed">
+                In chiropractic practice, systemic metabolic bone disease (osteoporosis, osteomalacia, Paget’s, renal osteodystrophy) increases fragility fracture risk. Always screen medical history and modify or withhold thrust techniques accordingly.
+              </p>
+            </div>
+          </div>
+        </div>
+      `;
+    }
+
+    // =========================================================================
+    // 10. PLACEHOLDER MODULES (MODULES 3–7)
+    // =========================================================================
+    function renderPlaceholderModule(mod) {
+      return `
+        <div class="max-w-3xl mx-auto mt-4">
+          <div class="rounded-3xl bg-white dark:bg-slate-900 border border-slate-200 dark:border-slate-800 p-6 sm:p-10 shadow-xs">
+            <div class="inline-flex items-center gap-2 px-3 py-1 rounded-xl bg-slate-100 dark:bg-slate-800 text-slate-600 dark:text-slate-300 text-xs font-bold uppercase tracking-wider mb-4">
+              Module Shell &bull; Ready for Year 3
+            </div>
+            <h2 class="text-2xl sm:text-3xl font-extrabold text-slate-900 dark:text-white mb-2">${mod.name}</h2>
+            <p class="text-sm sm:text-base text-slate-600 dark:text-slate-400 leading-relaxed mb-6">
+              ${mod.subtitle}
+            </p>
+
+            <div class="p-5 rounded-2xl bg-slate-50 dark:bg-slate-800/60 border border-dashed border-slate-300 dark:border-slate-700 mb-6">
+              <p class="text-sm font-bold text-slate-800 dark:text-slate-200 mb-3">
+                Ready for Year 3 handbooks &amp; notes
+              </p>
+              <div class="flex flex-wrap gap-2">
+                ${(mod.topics || []).map((t) => `
+                  <span class="px-3 py-1.5 rounded-xl bg-white dark:bg-slate-900 border border-slate-200 dark:border-slate-700 text-xs font-medium text-slate-700 dark:text-slate-300">
+                    ${t}
+                  </span>
+                `).join('')}
+              </div>
+            </div>
+
+            <div class="flex flex-wrap gap-3">
+              <button
+                type="button"
+                onclick="selectModule('neuro')"
+                class="px-4 py-2.5 rounded-xl bg-teal-600 hover:bg-teal-700 text-white text-sm font-semibold transition"
+              >
+                Go to Clinical Neurology
+              </button>
+              <button
+                type="button"
+                onclick="selectModule('msk')"
+                class="px-4 py-2.5 rounded-xl bg-indigo-600 hover:bg-indigo-700 text-white text-sm font-semibold transition"
+              >
+                Go to Musculoskeletal Medicine
+              </button>
+            </div>
+          </div>
+        </div>
+      `;
+    }
+
+    // =========================================================================
+    // 11. BOOTSTRAP APP
+    // =========================================================================
+    initTheme();
+    renderSidebar();
+    renderMainContent();
+  </script>
+</body>
+</html>
