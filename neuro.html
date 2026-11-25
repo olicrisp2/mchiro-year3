@@ -10,9 +10,6 @@
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
   <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&family=JetBrains+Mono:wght@500;600;700&family=Plus+Jakarta+Sans:wght@600;700;800&display=swap" rel="stylesheet" />
 
-  <!-- Shared Stylesheet (for GitHub Pages multi-file architecture) -->
-  <link rel="stylesheet" href="styles.css" />
-
   <!-- Tailwind CSS -->
   <script src="https://cdn.tailwindcss.com"></script>
   <script>
@@ -21,7 +18,8 @@
       theme: {
         extend: {
           fontFamily: {
-            sans: ['-apple-system', 'BlinkMacSystemFont', '"Plus Jakarta Sans"', '"Inter"', 'sans-serif'],
+            display: ['"Plus Jakarta Sans"', '-apple-system', 'BlinkMacSystemFont', 'sans-serif'],
+            sans: ['"Inter"', '-apple-system', 'BlinkMacSystemFont', 'sans-serif'],
             mono: ['"JetBrains Mono"', 'ui-monospace', 'SFMono-Regular', 'monospace'],
           },
         },
@@ -29,59 +27,66 @@
     };
   </script>
 
-  <!-- Inline Apple Health Minimalist (Theme B) Fallback & Cognitive Learning Tokens -->
   <style>
+    /* =========================================================================
+       APPLE HEALTH MINIMALIST (THEME B) × DUOLINGO TACTILE 3D TOKENS
+       ========================================================================= */
     :root {
-      --ah-bg: #F2F2F7;
-      --ah-card: #FFFFFF;
-      --ah-card-alt: #F9F9FB;
-      --ah-text: #1C1C1E;
+      --ah-bg: #f2f2f7;
+      --ah-card: #ffffff;
+      --ah-card-alt: #f8f9fb;
+      --ah-text: #1c1c1e;
       --ah-secondary: #636366;
       --ah-border: rgba(60, 60, 67, 0.12);
-      --ah-glass: rgba(242, 242, 247, 0.82);
+      --ah-glass: rgba(242, 242, 247, 0.85);
       --ah-seg-bg: rgba(118, 118, 128, 0.12);
-      --ah-shadow: 0 2px 12px rgba(0, 0, 0, 0.04), 0 1px 2px rgba(0, 0, 0, 0.03);
+      --ah-shadow: 0 2px 12px rgba(0, 0, 0, 0.045), 0 1px 2px rgba(0, 0, 0, 0.03);
 
-      /* Strict Semantic Cognitive Colours (Von Restorff / Signaling) */
-      --sem-blue: #007AFF;
-      --sem-green: #34C759;
-      --sem-purple: #AF52DE;
-      --sem-red: #FF3B30;
-      --sem-amber: #FF9500;
+      /* Semantic Cognitive Colour-Coding */
+      --sem-blue: #007aff;
+      --sem-emerald: #10b981;
+      --sem-purple: #8b5cf6;
+      --sem-red: #ef4444;
+      --sem-amber: #f59e0b;
 
       /* SVG Tokens */
-      --svg-bg: #F9F9FB;
-      --svg-surface: #FFFFFF;
+      --svg-bg: #f8f9fb;
+      --svg-surface: #ffffff;
       --svg-stroke: #636366;
-      --svg-cord-white: #E5E5EA;
-      --svg-cord-grey: #AEAEB2;
-      --svg-iris: #007AFF;
+      --svg-cord-white: #e5e7eb;
+      --svg-cord-grey: #9ca3af;
+      --svg-iris: #007aff;
     }
 
     .dark {
       --ah-bg: #000000;
-      --ah-card: #1C1C1E;
-      --ah-card-alt: #2C2C2E;
-      --ah-text: #F2F2F7;
-      --ah-secondary: #AEAEB2;
+      --ah-card: #1c1c1e;
+      --ah-card-alt: #2c2c2e;
+      --ah-text: #f2f2f7;
+      --ah-secondary: #aeaeb2;
       --ah-border: rgba(255, 255, 255, 0.11);
-      --ah-glass: rgba(28, 28, 30, 0.82);
+      --ah-glass: rgba(28, 28, 30, 0.86);
       --ah-seg-bg: rgba(118, 118, 128, 0.24);
       --ah-shadow: 0 4px 16px rgba(0, 0, 0, 0.45);
 
       --svg-bg: #141416;
-      --svg-surface: #2C2C2E;
-      --svg-stroke: #AEAEB2;
-      --svg-cord-white: #2C2C2E;
-      --svg-cord-grey: #48484A;
-      --svg-iris: #0A84FF;
+      --svg-surface: #2c2c2e;
+      --svg-stroke: #aeaeb2;
+      --svg-cord-white: #2c2c2e;
+      --svg-cord-grey: #48484a;
+      --svg-iris: #0a84ff;
     }
 
     body {
       background-color: var(--ah-bg);
       color: var(--ah-text);
-      font-family: -apple-system, BlinkMacSystemFont, "Plus Jakarta Sans", "Inter", sans-serif;
+      font-family: 'Inter', -apple-system, BlinkMacSystemFont, sans-serif;
       -webkit-font-smoothing: antialiased;
+      -webkit-tap-highlight-color: transparent;
+    }
+
+    h1, h2, h3, h4, .font-display {
+      font-family: 'Plus Jakarta Sans', -apple-system, BlinkMacSystemFont, sans-serif;
     }
 
     .ah-glass {
@@ -120,20 +125,54 @@
     }
 
     .dark .ah-seg-active {
-      background-color: #3A3A3C;
-      color: #F2F2F7;
+      background-color: #3a3a3c;
+      color: #f2f2f7;
     }
 
     .mono-badge {
-      font-family: "JetBrains Mono", ui-monospace, SFMono-Regular, monospace;
+      font-family: 'JetBrains Mono', ui-monospace, SFMono-Regular, monospace;
       letter-spacing: -0.02em;
     }
 
-    /* Hide scrollbars on horizontal pill bars */
+    /* Duolingo-Style Tactile 3D Launch Buttons */
+    .btn-3d {
+      border-radius: 16px;
+      font-family: 'Plus Jakarta Sans', system-ui, sans-serif;
+      font-weight: 800;
+      transition: transform 0.08s ease, border-bottom-width 0.08s ease, background-color 0.15s ease;
+      cursor: pointer;
+      user-select: none;
+    }
+    .btn-3d:active {
+      transform: translateY(2px);
+      border-bottom-width: 2px !important;
+    }
+
+    .btn-3d-ul {
+      background: linear-gradient(135deg, #007aff 0%, #0ea5e9 55%, #10b981 100%);
+      color: #ffffff;
+      border: 2px solid #0284c7;
+      border-bottom: 4px solid #0369a1;
+    }
+    .btn-3d-ul:hover {
+      filter: brightness(1.04);
+    }
+
+    .btn-3d-ll {
+      background-color: #10b981;
+      color: #ffffff;
+      border: 2px solid #10b981;
+      border-bottom: 4px solid #047857;
+    }
+    .btn-3d-ll:hover {
+      background-color: #059669;
+    }
+
+    /* Hide Scrollbars on Horizontal Pill Bars */
     .no-scrollbar::-webkit-scrollbar { display: none; }
     .no-scrollbar { -ms-overflow-style: none; scrollbar-width: none; }
 
-    /* Active Recall Blur Mode (Retrieval Practice) */
+    /* Active Recall Blur Mode */
     .recall-blur {
       filter: blur(7px);
       opacity: 0.55;
@@ -142,10 +181,10 @@
       transition: filter 0.18s ease, opacity 0.18s ease;
     }
     .recall-blur:hover {
-      opacity: 0.8;
+      opacity: 0.82;
     }
 
-    /* SVG Interactive Hotspots */
+    /* Interactive SVG Hotspots */
     .svg-hit {
       cursor: pointer;
       transition: opacity 0.16s ease, filter 0.16s ease;
@@ -179,21 +218,23 @@
   <!-- Toast Notification Container (No alert() or confirm() used) -->
   <div id="toast-container" class="fixed bottom-24 md:bottom-6 right-4 z-50 flex flex-col gap-2 pointer-events-none"></div>
 
-  <!-- Frosted-Glass Sticky Header -->
+  <!-- =========================================================================
+       STICKY FROSTED-GLASS TOP HEADER
+       ========================================================================= -->
   <header class="sticky top-0 z-40 ah-glass border-b">
     <div class="max-w-5xl mx-auto px-3 sm:px-5 py-2.5 flex items-center justify-between gap-2">
       <!-- Left: Back to Hub + Title -->
       <div class="flex items-center gap-2.5 min-w-0">
         <a
           href="index.html"
-          class="px-3 py-2 rounded-xl bg-black/5 dark:bg-white/10 hover:bg-black/10 dark:hover:bg-white/15 text-xs font-bold ah-text transition shrink-0 flex items-center gap-1"
+          class="px-3 py-2 rounded-xl bg-black/5 dark:bg-white/10 hover:bg-black/10 dark:hover:bg-white/15 text-xs font-display font-bold ah-text transition shrink-0 flex items-center gap-1"
           aria-label="Back to MChiro Year 3 Hub"
         >
           <span>&larr;</span>
           <span>Hub</span>
         </a>
         <div class="min-w-0">
-          <h1 class="text-base sm:text-lg font-extrabold tracking-tight ah-text truncate">
+          <h1 class="text-base sm:text-lg font-display font-extrabold tracking-tight ah-text truncate">
             Clinical Neurology
           </h1>
           <p class="text-[11px] font-medium ah-secondary truncate hidden sm:block">
@@ -202,17 +243,17 @@
         </div>
       </div>
 
-      <!-- Right: Active Recall Blur Toggle + Light/Dark Theme Toggle -->
+      <!-- Right: 1-Tap Blur Answers Toggle + Light/Dark Theme Toggle -->
       <div class="flex items-center gap-2 shrink-0">
         <button
           type="button"
           id="blur-toggle-btn"
           onclick="toggleBlurMode()"
-          class="px-3 py-2 rounded-xl text-xs font-bold border transition flex items-center gap-1.5"
+          class="px-3 py-2 rounded-xl text-xs font-display font-bold border transition flex items-center gap-1.5"
           title="Blur answers to test active recall (tap any blurred box to reveal)"
         >
           <span id="blur-icon">👁️</span>
-          <span id="blur-label" class="hidden xs:inline sm:inline">Blur Answers</span>
+          <span id="blur-label">Blur Answers</span>
         </button>
 
         <button
@@ -226,32 +267,99 @@
         </button>
       </div>
     </div>
-
-    <!-- 5 Clean Segmented Tabs -->
-    <div class="max-w-5xl mx-auto px-3 sm:px-5 pb-2.5 overflow-x-auto no-scrollbar">
-      <div id="segmented-tabs" class="ah-seg-track flex sm:grid sm:grid-cols-5 items-center gap-1 min-w-max sm:min-w-0" role="tablist" aria-label="Clinical Neurology Sections"></div>
-    </div>
   </header>
 
-  <!-- Main Content Area -->
-  <main class="max-w-5xl mx-auto px-3 sm:px-5 py-5 pb-28 md:pb-14">
-    <!-- Active Recall Mode Indicator Banner -->
-    <div id="blur-banner" class="hidden mb-4 px-4 py-2.5 rounded-2xl bg-[#007AFF]/10 border border-[#007AFF]/30 text-xs sm:text-sm font-semibold text-[#007AFF] flex items-center justify-between gap-2">
-      <span><strong>Active Recall ON:</strong> Key answers are blurred. Say them aloud first, then tap any blurred text to reveal.</span>
+  <!-- =========================================================================
+       MAIN CONTENT CONTAINER
+       ========================================================================= -->
+  <main class="max-w-5xl mx-auto px-3 sm:px-5 pt-4 pb-28 md:pb-14 space-y-4">
+
+    <!-- TOP FEATURED INTERACTIVE VISUAL LESSONS BANNER (MATCHING INDEX.HTML) -->
+    <section
+      aria-label="Interactive Visual Lessons"
+      class="rounded-3xl p-4 sm:p-5 border border-[#007aff]/20 dark:border-[#10b981]/25 bg-gradient-to-br from-[#007aff]/10 via-white to-[#10b981]/10 dark:from-[#007aff]/15 dark:via-[#1c1c1e] dark:to-[#10b981]/15 shadow-xs space-y-3.5"
+    >
+      <div class="flex flex-wrap items-center justify-between gap-2">
+        <div>
+          <div class="flex items-center gap-2">
+            <span class="px-2.5 py-0.5 rounded-lg text-[10px] font-display font-extrabold uppercase tracking-wider bg-[#10b981]/15 text-[#059669] dark:text-[#34d399]">
+              Guided Visual Practice
+            </span>
+            <span class="text-[11px] font-semibold ah-secondary hidden sm:inline">Teach &rarr; Tap the Limb &rarr; Mistake Replay</span>
+          </div>
+          <h2 class="text-base sm:text-lg font-display font-extrabold ah-text mt-1">
+            Interactive Visual Lessons
+          </h2>
+        </div>
+      </div>
+
+      <!-- Two Tactile 3D Launch Buttons Side-by-Side (Stacking on Narrow Mobile) -->
+      <div class="grid grid-cols-1 sm:grid-cols-2 gap-3">
+        <!-- Lesson 1: Upper Limb -->
+        <a
+          href="lesson-ul.html"
+          class="btn-3d btn-3d-ul px-4 py-3.5 flex items-center justify-between gap-3 text-left"
+        >
+          <div class="min-w-0">
+            <span class="inline-block px-2 py-0.5 rounded-lg text-[10px] font-extrabold uppercase tracking-wide bg-white/20 text-white mb-1">
+              Live &bull; 12 Steps
+            </span>
+            <span class="block text-sm sm:text-[15px] font-extrabold leading-snug">
+              Lesson 1: Upper Limb SMR (C5–T1)
+            </span>
+          </div>
+          <span class="text-lg shrink-0" aria-hidden="true">&rarr;</span>
+        </a>
+
+        <!-- Lesson 2: Lower Limb -->
+        <a
+          href="lesson-ll.html"
+          class="btn-3d btn-3d-ll px-4 py-3.5 flex items-center justify-between gap-3 text-left"
+        >
+          <div class="min-w-0">
+            <span class="inline-block px-2 py-0.5 rounded-lg text-[10px] font-extrabold uppercase tracking-wide bg-white/20 text-white mb-1">
+              New &bull; 12 Steps
+            </span>
+            <span class="block text-sm sm:text-[15px] font-extrabold leading-snug">
+              Lesson 2: Lower Limb SMR (L2–S1)
+            </span>
+          </div>
+          <span class="text-lg shrink-0" aria-hidden="true">&rarr;</span>
+        </a>
+      </div>
+    </section>
+
+    <!-- 5 SEGMENTED TABS (HORIZONTALLY SCROLLABLE PILL SWITCHER ON MOBILE) -->
+    <div class="overflow-x-auto no-scrollbar -mx-1 px-1">
+      <div
+        id="segmented-tabs"
+        class="ah-seg-track flex sm:grid sm:grid-cols-5 items-center gap-1 min-w-max sm:min-w-0"
+        role="tablist"
+        aria-label="Clinical Neurology Tabs"
+      ></div>
+    </div>
+
+    <!-- ACTIVE RECALL BLUR INDICATOR BANNER -->
+    <div
+      id="blur-banner"
+      class="hidden px-4 py-2.5 rounded-2xl bg-[#007aff]/10 border border-[#007aff]/30 text-xs sm:text-sm font-semibold text-[#007aff] flex items-center justify-between gap-2"
+    >
+      <span><strong>Blur Answers ON:</strong> Say the answer aloud first, then tap any blurred text to reveal it.</span>
       <button type="button" onclick="toggleBlurMode()" class="underline font-bold shrink-0">Turn Off</button>
     </div>
 
+    <!-- DYNAMIC TAB CONTENT ROOT -->
     <div id="app-root"></div>
   </main>
 
-  <!-- Mobile Fixed Bottom Navigation Bar (< 768px) -->
+  <!-- MOBILE FIXED BOTTOM NAVIGATION BAR (< 768px) -->
   <nav class="md:hidden fixed bottom-0 inset-x-0 z-40 ah-glass border-t px-2 py-1.5" aria-label="Mobile Quick Navigation">
     <div id="mobile-bottom-nav" class="grid grid-cols-4 gap-1 max-w-md mx-auto"></div>
   </nav>
 
   <script>
     // =========================================================================
-    // 1. PERSISTENCE: THEME ('mchiro_theme'), SRS ('mchiro_srs_v4') & CHECKLIST
+    // 1. PERSISTENCE: THEME ('mchiro_theme'), LEITNER SRS ('mchiro_srs_v4')
     // =========================================================================
     const DAY_MS = 86400000;
 
@@ -268,7 +376,7 @@
       try {
         localStorage.setItem(key, JSON.stringify(val));
       } catch (e) {
-        // Safely ignore quota or private browsing errors
+        // Ignore private browsing or quota errors safely
       }
     }
 
@@ -294,13 +402,13 @@
     function showToast(msg, tone = 'default') {
       const container = document.getElementById('toast-container');
       const tones = {
-        default: 'bg-[#1C1C1E] dark:bg-[#F2F2F7] text-[#F2F2F7] dark:text-[#1C1C1E]',
-        green: 'bg-[#34C759] text-white',
-        amber: 'bg-[#FF9500] text-white',
-        red: 'bg-[#FF3B30] text-white',
+        default: 'bg-[#1c1c1e] dark:bg-[#f2f2f7] text-[#f2f2f7] dark:text-[#1c1c1e]',
+        emerald: 'bg-[#10b981] text-white',
+        amber: 'bg-[#f59e0b] text-white',
+        red: 'bg-[#ef4444] text-white',
       };
       const el = document.createElement('div');
-      el.className = `pointer-events-auto px-4 py-2.5 rounded-2xl shadow-lg text-xs sm:text-sm font-bold transition-all duration-300 ${tones[tone] || tones.default}`;
+      el.className = `pointer-events-auto px-4 py-2.5 rounded-2xl shadow-lg text-xs sm:text-sm font-display font-bold transition-all duration-300 ${tones[tone] || tones.default}`;
       el.textContent = msg;
       container.appendChild(el);
       setTimeout(() => {
@@ -310,100 +418,93 @@
     }
 
     // =========================================================================
-    // 2. CLINICAL DATA (EXACTLY MATCHING YEAR 2/3 MARK SHEETS & OVERVIEW)
+    // 2. CLINICAL DATA (EXACTLY MATCHING MCTIMONEY MARK SHEET & Y3 OVERVIEW)
     // =========================================================================
 
-    // --- TAB 1: SMR SCREENING (C5–T1 & L2–S1) ---
+    // --- TAB 1: SMR SCREENING DATA (C5–T1 & L2–S1) ---
     const SMR_ROOTS = {
+      // Upper Limb (C5–T1)
       C5: {
-        root: 'C5', limb: 'Upper Limb',
-        sensation: 'Lateral aspect of upper arm',
+        root: 'C5', limb: 'upper', limbLabel: 'Upper Limb',
+        sensation: 'Lateral upper arm',
         action: 'Elbow flexion & shoulder abduction',
         muscles: 'Biceps, Deltoid',
-        extra: '',
-        reflex: 'Biceps reflex (C5)',
-        reflexNote: 'Strike thumb placed over biceps tendon in cubital fossa.',
+        reflex: 'Biceps',
+        reflexNote: 'Grade 0–4. Strike thumb over biceps tendon in cubital fossa.',
       },
       C6: {
-        root: 'C6', limb: 'Upper Limb',
-        sensation: 'Lateral forearm, thumb and 1st (index) finger',
+        root: 'C6', limb: 'upper', limbLabel: 'Upper Limb',
+        sensation: 'Lateral forearm, thumb & 1st finger',
         action: 'Wrist extension & elbow flexion',
         muscles: 'Wrist extensors, Biceps',
-        extra: '',
-        reflex: 'Brachioradialis reflex (C6)',
-        reflexNote: 'Strike radial styloid / distal radius 2–3 cm proximal to wrist.',
+        reflex: 'Brachioradialis',
+        reflexNote: 'Grade 0–4. Strike distal radius 2–3 cm proximal to wrist.',
       },
       C7: {
-        root: 'C7', limb: 'Upper Limb',
+        root: 'C7', limb: 'upper', limbLabel: 'Upper Limb',
         sensation: 'Middle finger',
-        action: 'Elbow extension & wrist flexion',
+        action: 'Elbow extension & wrist flexion (also finger extension)',
         muscles: 'Triceps, Wrist flexors',
-        extra: 'Also finger extension',
-        reflex: 'Triceps reflex (C7)',
-        reflexNote: 'Support relaxed forearm at 90° and strike triceps tendon above olecranon.',
+        reflex: 'Triceps',
+        reflexNote: 'Grade 0–4. Support forearm at 90° and strike triceps tendon above olecranon.',
       },
       C8: {
-        root: 'C8', limb: 'Upper Limb',
-        sensation: 'Ring (4th) finger and little (5th) finger',
-        action: 'Distal phalanx 3rd finger flexion',
-        muscles: 'Flexor digitorum profundus',
-        extra: 'Also finger extension, finger adduction',
-        reflex: '(Finger flexors)',
+        root: 'C8', limb: 'upper', limbLabel: 'Upper Limb',
+        sensation: 'Ring (4th) & little (5th) finger',
+        action: 'Distal phalanx 3rd finger flexion (DIP joint)',
+        muscles: 'Flexor digitorum profundus (DIP joint)',
+        reflex: 'Finger flexors',
         reflexNote: 'Not a primary routine DTR; screen via finger flexor reflex if indicated.',
       },
       T1: {
-        root: 'T1', limb: 'Upper Limb',
-        sensation: 'Medial wrist to medial aspect of elbow',
+        root: 'T1', limb: 'upper', limbLabel: 'Upper Limb',
+        sensation: 'Medial wrist to medial elbow',
         action: '5th finger abduction',
-        muscles: 'Interossei / Abductor digiti minimi',
-        extra: '',
-        reflex: 'No routine reflex',
-        reflexNote: 'No standard deep tendon reflex for T1.',
+        muscles: 'Interossei',
+        reflex: 'None',
+        reflexNote: 'No routine deep tendon reflex for T1.',
       },
+
+      // Lower Limb (L2–S1)
       L2: {
-        root: 'L2', limb: 'Lower Limb',
+        root: 'L2', limb: 'lower', limbLabel: 'Lower Limb',
         sensation: 'Lateral to medial anterior upper thigh',
         action: 'Hip flexion',
         muscles: 'Iliopsoas, Sartorius, Pectineus',
-        extra: '',
-        reflex: 'No reflex',
+        reflex: 'None',
         reflexNote: 'No routine deep tendon reflex for L2.',
       },
       L3: {
-        root: 'L3', limb: 'Lower Limb',
+        root: 'L3', limb: 'lower', limbLabel: 'Lower Limb',
         sensation: 'Lateral to medial anterior lower thigh',
         action: 'Knee extension',
         muscles: 'Quadriceps',
-        extra: '',
-        reflex: '(Patellar)',
-        reflexNote: 'Patellar reflex is primarily L4 with L3 contribution.',
+        reflex: 'Patellar (secondary)',
+        reflexNote: 'Patellar reflex is primarily L4 with L3 contribution (Grade 1+–4+).',
       },
       L4: {
-        root: 'L4', limb: 'Lower Limb',
-        sensation: 'Medial aspect of lower leg and ankle',
-        action: 'Ankle dorsiflexion',
+        root: 'L4', limb: 'lower', limbLabel: 'Lower Limb',
+        sensation: 'Medial lower leg & ankle',
+        action: 'Ankle dorsiflexion (supine or heel walking)',
         muscles: 'Tibialis anterior',
-        extra: 'Test supine or via heel walking',
-        reflex: 'Patellar reflex (L4)',
-        reflexNote: 'Strike patellar tendon below patella with knee flexed & relaxed (Grade 1+–4+).',
+        reflex: 'Patellar',
+        reflexNote: 'Grade 1+–4+. Strike patellar tendon with knee flexed and relaxed.',
       },
       L5: {
-        root: 'L5', limb: 'Lower Limb',
-        sensation: 'Lateral aspect of lower leg and dorsum (top) of foot',
+        root: 'L5', limb: 'lower', limbLabel: 'Lower Limb',
+        sensation: 'Lateral lower leg, dorsum of foot',
         action: 'Hallux extension',
         muscles: 'Extensor hallucis longus',
-        extra: '',
-        reflex: 'No reflex',
-        reflexNote: 'No standard deep tendon reflex for L5.',
+        reflex: 'None',
+        reflexNote: 'No routine deep tendon reflex for L5.',
       },
       S1: {
-        root: 'S1', limb: 'Lower Limb',
-        sensation: 'Lateral aspect of foot and posterior calf',
-        action: 'Ankle plantarflexion',
+        root: 'S1', limb: 'lower', limbLabel: 'Lower Limb',
+        sensation: 'Lateral foot & posterior calf',
+        action: 'Ankle plantarflexion (supine or toe walking)',
         muscles: 'Gastrocnemius & Soleus',
-        extra: 'Test supine or via toe walking',
-        reflex: 'Achilles reflex (S1)',
-        reflexNote: 'Slightly dorsiflex ankle and strike Achilles tendon (Grade 1+–4+).',
+        reflex: 'Achilles',
+        reflexNote: 'Grade 1+–4+. Gently dorsiflex ankle and strike Achilles tendon.',
       },
     };
 
@@ -413,37 +514,36 @@
         name: 'Axillary Nerve',
         roots: 'C5–C6',
         sensory: 'Skin over deltoid ("military patch") and superior/posterior arm.',
-        motor: 'Deltoid, Teres minor',
-        actions: 'Shoulder abduction (beyond 15°) & external rotation.',
+        muscles: 'Deltoid, Teres minor',
+        actions: 'Shoulder abduction & lateral rotation.',
       },
       {
         name: 'Medial & Lateral Cutaneous of Arm',
         roots: 'C5–T1',
-        sensory: 'Skin over medial and lateral aspects of forearm/arm respectively.',
-        motor: 'Purely sensory in forearm (Lateral cutaneous is continuation of musculocutaneous → Biceps).',
+        sensory: 'Skin over medial and lateral aspects of arm/forearm respectively.',
+        muscles: 'Purely sensory cutaneous nerves',
         actions: 'Cutaneous sensory testing only.',
       },
       {
         name: 'Radial Nerve',
         roots: 'C5–T1',
-        sensory: 'Skin of posterior upper arm, middle posterior forearm, and lateral 2/3 DORSUM of hand.',
-        motor: 'Triceps, Brachioradialis, Wrist & Finger EXTENSORS',
-        actions: 'Elbow extension, wrist extension, finger extension (lesion = wrist drop).',
-        trap: 'Extensor vs Flexor check: Radial = elbow/wrist EXTENSORS; Median = most wrist FLEXORS & thumb opposition.',
+        sensory: 'Skin of posterior arm/forearm and posterior lateral 2/3 of hand (dorsum).',
+        muscles: 'Triceps, Brachioradialis, Elbow & Wrist EXTENSORS',
+        actions: 'Elbow extension & wrist extension (lesion = wrist drop).',
+        trap: 'Extensors NOT flexors! Never demo wrist/elbow flexion for Radial nerve.',
       },
       {
         name: 'Median Nerve',
         roots: 'C6–T1',
-        sensory: 'Skin of PALMAR surface of lateral 2/3 of hand (thumb, index, middle, lateral ring).',
-        motor: 'Most Wrist FLEXORS + Lateral Palm / Thenar muscles',
+        sensory: 'Skin of palmar surface lateral 2/3 of hand (thumb, index, middle, radial ½ ring).',
+        muscles: 'Most Wrist FLEXORS + Lateral Palm (Thenar) muscles',
         actions: 'Wrist flexion & thumb opposition.',
-        trap: 'Extensor vs Flexor check: Radial = elbow/wrist EXTENSORS; Median = most wrist FLEXORS & thumb opposition.',
       },
       {
         name: 'Ulnar Nerve',
         roots: 'C8–T1',
-        sensory: 'Skin over medial half of hand and medial 1.5 digits (little & medial ring finger).',
-        motor: 'Flexor carpi ulnaris & majority of intrinsic hand muscles (Interossei)',
+        sensory: 'Skin over medial half of hand and medial 1.5 fingers (ring & little).',
+        muscles: 'Flexor carpi ulnaris + majority of intrinsic hand muscles',
         actions: 'Weak wrist flexion, ulnar deviation, finger flexion / abduction / adduction.',
       },
     ];
@@ -452,164 +552,143 @@
       {
         name: 'Femoral Nerve',
         roots: 'L2–L4',
-        sensory: 'Skin over anterior/medial thigh and medial side of lower leg/ankle (saphenous branch).',
-        motor: 'Iliopsoas (hip flexors), Quadriceps femoris',
+        sensory: 'Skin over anterior/medial aspect of thigh and medial side of lower leg/ankle (saphenous branch).',
+        muscles: 'Iliopsoas (hip flexors), Quadriceps (knee extensors)',
         actions: 'Hip flexion & knee extension (Patellar reflex).',
       },
       {
         name: 'Lateral Cutaneous Nerve of Thigh',
         roots: 'L2–L3',
-        sensory: 'Skin over lateral aspect of thigh.',
-        motor: 'Purely sensory (no motor supply).',
-        actions: 'Entrapment at inguinal ligament = meralgia paraesthetica.',
+        sensory: 'Skin over lateral, anterior, and posterior aspects of thigh (note: mark sheet specifies lateral/ant/post thigh).',
+        muscles: 'Purely sensory (no motor supply)',
+        actions: 'Entrapment at inguinal ligament causes meralgia paraesthetica.',
       },
       {
         name: 'Obturator Nerve',
         roots: 'L2–L4',
         sensory: 'Skin over medial aspect of thigh.',
-        motor: 'Hip Adductors (Adductor longus, brevis, magnus, Gracilis)',
+        muscles: 'Adductor muscles of hip (Adductor longus, brevis, magnus, Gracilis)',
         actions: 'Hip adduction.',
       },
       {
         name: 'Sciatic Nerve',
         roots: 'L4–S3',
-        sensory: 'Skin of posterior thigh; splits into Tibial & Common Fibular (Peroneal) nerves.',
-        motor: 'Hamstrings (Biceps femoris, Semitendinosus, Semimembranosus)',
+        sensory: 'Skin of posterior thigh; splits into Tibial and Common Fibular (Peroneal) nerves.',
+        muscles: 'Hamstrings (Biceps femoris, Semitendinosus, Semimembranosus)',
         actions: 'Knee flexion & hip extension.',
       },
       {
         name: 'Tibial Nerve',
         roots: 'L4–S3',
         sensory: 'Skin of sole (plantar surface) of foot.',
-        motor: 'Gastrocnemius, Soleus & deep foot flexors',
+        muscles: 'Gastrocnemius, Soleus & deep flexor muscles of foot',
         actions: 'Ankle plantarflexion (toe walk) & metatarsal/toe flexion (Achilles reflex).',
       },
       {
         name: 'Fibular (Peroneal) Nerve',
         roots: 'L4–S2',
         sensory: 'Skin over distal lateral lower leg and dorsum of foot.',
-        motor: 'Tibialis anterior & toe extensors (EHL, EDL)',
-        actions: 'Ankle dorsiflexion (heel walk) & toe extension (lesion = foot drop / steppage gait).',
+        muscles: 'Tibialis anterior & extensor muscles of foot (EHL, EDL)',
+        actions: 'Ankle dorsiflexion (heel walk) & toe extension (lesion = foot drop).',
       },
     ];
 
     const CRANIAL_NERVES = [
-      { id: 'I', name: 'Olfactory', type: 'Sensory', motor: 'None', sensory: 'Smell (olfaction)', tests: 'History of anosmia / hyposmia (not routinely tested at bedside).', abnormal: 'Anosmia — rule out nasal obstruction, cribriform plate trauma, or frontal lobe lesion.' },
-      { id: 'II', name: 'Optic', type: 'Sensory', motor: 'None', sensory: 'Vision & afferent pupillary light reflex', tests: 'Visual acuity (Snellen/small print), visual fields (4-quadrant confrontation), visual neglect (PPC), afferent light reflex, refer out for ophthalmoscopy.', abnormal: 'Field defects (hemianopia/quadrantanopia), visual neglect, papilloedema (weeks of raised ICP).' },
-      { id: 'III', name: 'Oculomotor', type: 'Motor + Para', motor: 'SR, IR, MR, IO, Levator palpebrae + pupil constriction (parasympathetic)', sensory: 'None', tests: 'Ptosis, pupil size (meiosis/mydriasis/anisocoria) & border, direct/consensual light, accommodation, saccades, convergence, smooth pursuit ("H"), VOR.', abnormal: 'Ptosis, "down & out" eye, fixed dilated pupil (check Hutchinson pupil stages!).' },
-      { id: 'IV', name: 'Trochlear', type: 'Motor', motor: 'Superior Oblique', sensory: 'None', tests: 'Smooth pursuit ("H" test — looking down & in), intorsion, convergence.', abnormal: 'Vertical diplopia worse walking downstairs or reading; compensatory head tilt away from lesion.' },
-      { id: 'V', name: 'Trigeminal', type: 'Mixed', motor: 'Muscles of mastication (Temporalis, Masseter, Pterygoids)', sensory: 'Facial light touch & pain across V1 (Ophthalmic), V2 (Maxillary), V3 (Mandibular)', tests: 'Palpate temporalis & masseter clenching, pterygoid jaw deviation strength, jaw jerk reflex (UMN vs LMN), bilateral V1/V2/V3 touch & pain.', abnormal: 'Brisk jaw jerk = UMN lesion above pons. Jaw deviates TOWARDS weak pterygoid.' },
-      { id: 'VI', name: 'Abducens', type: 'Motor', motor: 'Lateral Rectus', sensory: 'None', tests: 'Smooth pursuit ("H" test — lateral eye abduction), saccades, VOR.', abnormal: 'Horizontal diplopia worse looking to affected side; classic false localising sign in raised ICP.' },
-      { id: 'VII', name: 'Facial', type: 'Mixed', motor: 'Facial expression muscles (Frontalis, Orbicularis oculi, Orbicularis oris, Buccinator)', sensory: 'Taste anterior 2/3 tongue (sweet/salty), postromedial outer ear; + lacrimation/salivation & stapedius', tests: 'Observe symmetry (UMN vs LMN), NAME facial muscles, ask about taste, dry eye/mouth, hyperacusis.', abnormal: 'UMN spares forehead (bilateral upper face). LMN (Bell’s palsy) paralyses entire ipsilateral face.' },
-      { id: 'VIII', name: 'Vestibulocochlear', type: 'Sensory', motor: 'None', sensory: 'Hearing (cochlear) & balance/equilibrium (vestibular)', tests: 'Whisper screen, 512Hz Weber’s & Rinne’s tests, balance in stance & gait.', abnormal: 'Conductive (Weber to affected, Rinne BC>AC) vs. Sensorineural (Weber to healthy, Rinne AC>BC), vertigo/nystagmus.' },
-      { id: 'IX', name: 'Glossopharyngeal', type: 'Mixed', motor: 'Stylopharyngeus (swallowing)', sensory: 'Posterior 1/3 tongue taste/sensation, afferent gag reflex', tests: 'Tested with CN X: swallowing (dysphagia), symmetrical palatal lift, gag reflex (if indicated).', abnormal: 'Loss of afferent gag reflex, dysphagia, glossopharyngeal neuralgia.' },
-      { id: 'X', name: 'Vagus', type: 'Mixed', motor: 'Soft palate, pharynx, larynx + thoracic/abdominal parasympathetics', sensory: 'Pharynx/larynx & autonomic viscera', tests: 'Swallowing, uvula & palatal lift ("Ahhh"), speech quality (dysphonia), gag (efferent), autonomic effects.', abnormal: 'Uvula deviates AWAY from side of lesion; hoarse voice (dysphonia), dysphagia.' },
-      { id: 'XI', name: 'Accessory', type: 'Motor', motor: 'Sternocleidomastoid (SCM) & Upper Trapezius', sensory: 'None', tests: 'Resisted head turn (SCM) and resisted shoulder shrug (Trapezius) — UMN vs LMN pattern.', abnormal: 'Right SCM turns chin to LEFT; weakness/wasting of shoulder shrug or head rotation.' },
-      { id: 'XII', name: 'Hypoglossal', type: 'Motor', motor: 'Intrinsic & extrinsic tongue muscles', sensory: 'None', tests: 'Inspect tongue at rest (wasting, fasciculations, deviation), protrude tongue, resisted tongue push in cheek.', abnormal: 'LMN lesion: tongue deviates TOWARDS the lesion side ("licks the lesion") with wasting/fasciculations.' },
+      { id: 'I', name: 'Olfactory', type: 'Sensory', motor: 'None', sensory: 'Smell (olfaction)', tests: 'History of anosmia (explain only; not routinely tested).', abnormal: 'Anosmia — rule out nasal obstruction, cribriform plate trauma, or frontal lesion.' },
+      { id: 'II', name: 'Optic', type: 'Sensory', motor: 'None', sensory: 'Vision & afferent pupillary light reflex', tests: 'Visual acuity (Snellen/small print), 4-quadrant visual fields, visual neglect (PPC), afferent light reflex, refer out for ophthalmoscopy.', abnormal: 'Field defects, visual neglect, papilloedema (weeks of raised ICP).' },
+      { id: 'III', name: 'Oculomotor', type: 'Motor + Para', motor: 'SR, IR, MR, IO, Levator palpebrae + pupil constriction', sensory: 'None', tests: 'Ptosis, pupil size/border, direct & consensual light reflex, accommodation, saccades, convergence, smooth pursuit ("H"), VOR.', abnormal: 'Ptosis, "down & out" eye, fixed dilated pupil (check Hutchinson stages!).' },
+      { id: 'IV', name: 'Trochlear', type: 'Motor', motor: 'Superior Oblique', sensory: 'None', tests: 'Smooth pursuit ("H" test — down & in), intorsion, convergence.', abnormal: 'Vertical diplopia worse walking downstairs or reading.' },
+      { id: 'V', name: 'Trigeminal', type: 'Mixed', motor: 'Temporalis, Masseter, Pterygoids', sensory: 'Facial light touch & pain across V1, V2, V3', tests: 'Temporalis & masseter palpation, pterygoid jaw deviation strength, jaw jerk reflex (UMN vs LMN), V1/V2/V3 touch & pain.', abnormal: 'Brisk jaw jerk = UMN lesion above pons. Jaw deviates TOWARDS weak pterygoid.' },
+      { id: 'VI', name: 'Abducens', type: 'Motor', motor: 'Lateral Rectus', sensory: 'None', tests: 'Smooth pursuit ("H" test — lateral abduction), saccades, VOR.', abnormal: 'Horizontal diplopia worse looking to affected side; false localising sign in raised ICP.' },
+      { id: 'VII', name: 'Facial', type: 'Mixed', motor: 'Facial expression muscles (Frontalis, Orbicularis oculi/oris, Buccinator)', sensory: 'Taste ant 2/3 tongue, postromedial outer ear; lacrimation/salivation, stapedius', tests: 'Symmetry (UMN vs LMN), NAME facial muscles, ask about taste, dry eye/mouth, hyperacusis.', abnormal: 'UMN spares forehead. LMN (Bell’s palsy) paralyses entire ipsilateral hemiface.' },
+      { id: 'VIII', name: 'Vestibulocochlear', type: 'Sensory', motor: 'None', sensory: 'Hearing & vestibular balance', tests: 'Whisper screen, 512Hz Weber’s & Rinne’s tests, balance in stance & gait.', abnormal: 'Conductive (Weber affected, Rinne BC>AC) vs Sensorineural (Weber healthy, Rinne AC>BC).' },
+      { id: 'IX', name: 'Glossopharyngeal', type: 'Mixed', motor: 'Stylopharyngeus (swallowing)', sensory: 'Post 1/3 tongue taste/sensation, afferent gag', tests: 'Tested with CN X: swallowing (dysphagia), symmetrical palatal lift, gag reflex if indicated.', abnormal: 'Loss of afferent gag reflex, dysphagia.' },
+      { id: 'X', name: 'Vagus', type: 'Mixed', motor: 'Soft palate, pharynx, larynx + autonomic viscera', sensory: 'Pharynx, larynx & viscera', tests: 'Swallowing, uvula & palatal lift, speech (dysphonia), gag (efferent), autonomic effects.', abnormal: 'Uvula deviates AWAY from lesion side; hoarse voice (dysphonia).' },
+      { id: 'XI', name: 'Accessory', type: 'Motor', motor: 'Sternocleidomastoid (SCM) & Upper Trapezius', sensory: 'None', tests: 'Resisted head turn (SCM) & shoulder shrug (Trapezius) — UMN vs LMN pattern.', abnormal: 'Right SCM turns chin to LEFT; weakness/wasting of shrug or head turn.' },
+      { id: 'XII', name: 'Hypoglossal', type: 'Motor', motor: 'Intrinsic & extrinsic tongue muscles', sensory: 'None', tests: 'Observe tongue at rest (wasting, fasciculations, deviation), protrude tongue, resisted cheek push.', abnormal: 'LMN lesion: tongue deviates TOWARDS the lesion side ("licks the lesion").' },
     ];
 
-    // --- TAB 3: WEBER/RINNE, HUTCHINSON, BEIGHTON, GCS ---
+    // --- TAB 3: SIMULATORS & SCALES ---
     const WEBER_MODES = {
       normal: {
-        label: 'Normal',
-        dir: 'mid',
+        label: 'Normal', dir: 'mid',
         weber: 'Heard equally in BOTH ears (Midline)',
         leftRinne: { code: 'AC > BC', status: 'Positive (Normal)', ok: true },
         rightRinne: { code: 'AC > BC', status: 'Positive (Normal)', ok: true },
-        note: 'Normal middle ear conduction and intact bilateral cochleae / CN VIII. Air conduction is ~2× longer than bone conduction.',
+        note: 'Normal middle ear conduction and intact bilateral cochleae / CN VIII. Air conduction lasts ~2× longer than bone conduction.',
       },
       left_cond: {
-        label: 'Left Conductive',
-        dir: 'left',
+        label: 'Left Conductive', dir: 'left',
         weber: 'Lateralises to LEFT (Affected) Ear',
         leftRinne: { code: 'BC > AC', status: 'Negative (Abnormal)', ok: false },
         rightRinne: { code: 'AC > BC', status: 'Positive (Normal)', ok: true },
-        note: 'Left conductive block reduces ambient room noise masking → Weber louder in LEFT ear. Bone conduction bypasses outer/middle ear block (BC > AC).',
+        note: 'Left conductive block reduces room-noise masking → Weber louder in LEFT ear. Bone conduction bypasses middle ear block (BC > AC).',
       },
       right_cond: {
-        label: 'Right Conductive',
-        dir: 'right',
+        label: 'Right Conductive', dir: 'right',
         weber: 'Lateralises to RIGHT (Affected) Ear',
         leftRinne: { code: 'AC > BC', status: 'Positive (Normal)', ok: true },
         rightRinne: { code: 'BC > AC', status: 'Negative (Abnormal)', ok: false },
-        note: 'Right conductive pathology (e.g. cerumen, otitis media, otosclerosis) → Weber louder in RIGHT ear; Right Rinne negative (BC > AC).',
+        note: 'Right conductive pathology (wax, otitis media, otosclerosis) → Weber louder in RIGHT ear; Right Rinne negative (BC > AC).',
       },
       left_sn: {
-        label: 'Left Sensorineural',
-        dir: 'right',
+        label: 'Left Sensorineural', dir: 'right',
         weber: 'Lateralises to RIGHT (Healthy) Ear',
-        leftRinne: { code: 'AC > BC', status: 'Positive (Reduced both)', ok: true },
+        leftRinne: { code: 'AC > BC', status: 'Positive (Both reduced)', ok: true },
         rightRinne: { code: 'AC > BC', status: 'Positive (Normal)', ok: true },
-        note: 'Left cochlea / CN VIII damage cannot transduce well → Weber lateralises to healthy RIGHT ear. Both AC & BC reduced on left, but AC still > BC.',
+        note: 'Left cochlea / CN VIII damage → Weber lateralises away to healthy RIGHT ear. Both AC & BC reduced on left, but AC still > BC.',
       },
       right_sn: {
-        label: 'Right Sensorineural',
-        dir: 'left',
+        label: 'Right Sensorineural', dir: 'left',
         weber: 'Lateralises to LEFT (Healthy) Ear',
         leftRinne: { code: 'AC > BC', status: 'Positive (Normal)', ok: true },
-        rightRinne: { code: 'AC > BC', status: 'Positive (Reduced both)', ok: true },
+        rightRinne: { code: 'AC > BC', status: 'Positive (Both reduced)', ok: true },
         note: 'Right cochlear / CN VIII lesion → Weber lateralises away to healthy LEFT ear. Rinne stays positive (AC > BC) bilaterally.',
       },
     };
 
     const HUTCHINSON_STAGES = [
       {
-        stage: 1,
-        short: 'Stage 1',
-        title: 'Stage 1: Unilateral Constriction (Ipsilateral Miosis)',
-        ipsiR: 6,
-        contraR: 12,
-        ipsiText: 'Constricted (Irritated)',
-        contraText: 'Normal (3–4 mm)',
-        urgency: 'Early Raised ICP — Urgent Assessment',
-        tone: 'amber',
+        stage: 1, short: 'Stage 1',
+        title: 'Stage 1: Ipsilateral Constriction (Miosis)',
+        ipsiR: 6, contraR: 12,
+        ipsiText: 'Constricted (Reactive)', contraText: 'Normal (Reactive)',
+        urgency: 'Early Raised ICP — Urgent Review', tone: 'amber',
         points: [
-          'Early expanding intracranial mass/haematoma irritates superficial parasympathetic fibres on the ipsilateral CN III.',
-          'Produces transient unilateral pupil constriction (miosis) on the side of the lesion.',
+          'Early expanding intracranial mass irritates superficial parasympathetic fibres on ipsilateral CN III.',
+          'Transient unilateral pupil constriction (miosis) on the side of the lesion; light reflex still present.',
         ],
       },
       {
-        stage: 2,
-        short: 'Stage 2',
-        title: 'Stage 2: Unilateral Dilation (CN III Compression)',
-        ipsiR: 22,
-        contraR: 12,
-        ipsiText: 'Fixed & Dilated ("Blown")',
-        contraText: 'Normal',
-        urgency: 'EMERGENCY — Immediate 999 / A&E',
-        tone: 'red',
+        stage: 2, short: 'Stage 2',
+        title: 'Stage 2: Ipsilateral Fixed Dilation ("Blown Pupil")',
+        ipsiR: 22, contraR: 12,
+        ipsiText: 'Fixed & Dilated (No Light Rx)', contraText: 'Normal (Reactive)',
+        urgency: 'EMERGENCY — Immediate 999 / A&E', tone: 'red',
         points: [
           'Uncal herniation compresses ipsilateral CN III parasympathetic fibres against the tentorium cerebelli.',
-          'Unopposed sympathetic tone produces a classic ipsilateral fixed, dilated ("blown") pupil unresponsive to light.',
+          'Unopposed sympathetic tone produces an ipsilateral fixed, dilated pupil unresponsive to light.',
         ],
       },
       {
-        stage: 3,
-        short: 'Stage 3',
+        stage: 3, short: 'Stage 3',
         title: 'Stage 3: Contralateral Constriction (Midbrain Shift)',
-        ipsiR: 23,
-        contraR: 6,
-        ipsiText: 'Fixed & Dilated',
-        contraText: 'Constricted (Irritated)',
-        urgency: 'CRITICAL EMERGENCY — Midline Shift',
-        tone: 'red',
+        ipsiR: 23, contraR: 6,
+        ipsiText: 'Fixed & Dilated', contraText: 'Constricted (Irritated)',
+        urgency: 'CRITICAL — Midline Brainstem Shift', tone: 'red',
         points: [
-          'Continued rising ICP shifts the midbrain across the midline, beginning to irritate the contralateral CN III.',
-          'Ipsilateral pupil remains fixed and dilated while the contralateral pupil constricts.',
+          'Continued rising ICP shifts the midbrain across the midline, irritating the contralateral CN III.',
+          'Ipsilateral pupil stays fixed & dilated while contralateral pupil constricts.',
         ],
       },
       {
-        stage: 4,
-        short: 'Stage 4',
+        stage: 4, short: 'Stage 4',
         title: 'Stage 4: Bilateral Fixed & Dilated Pupils',
-        ipsiR: 25,
-        contraR: 25,
-        ipsiText: 'Fixed & Dilated',
-        contraText: 'Fixed & Dilated',
-        urgency: 'LIFE-THREATENING — Brainstem Compression',
-        tone: 'red',
+        ipsiR: 25, contraR: 25,
+        ipsiText: 'Fixed & Dilated (No Rx)', contraText: 'Fixed & Dilated (No Rx)',
+        urgency: 'LIFE-THREATENING — Brainstem Compression', tone: 'red',
         points: [
-          'Severe bilateral CN III paralysis and brainstem herniation from critical intracranial compression.',
+          'Severe bilateral CN III paralysis and brainstem herniation from critical cerebral compression.',
           'Both pupils are widely dilated and completely unreactive to direct or consensual light.',
         ],
       },
@@ -637,15 +716,15 @@
     const CORD_TRACTS = {
       dcml: {
         name: 'DCML (Dorsal Columns)',
-        color: '#007AFF',
+        color: '#007aff',
         badge: 'Ascending Sensory',
-        role: 'Vibration sense, conscious proprioception (joint position sense), fine discriminative touch.',
+        role: 'Vibration sense, conscious proprioception (joint position), fine discriminative touch.',
         decussation: 'Medulla (ipsilateral loss below a spinal cord lesion).',
         tests: '128Hz tuning fork vibration, Proprioception (hold SIDES of toe/finger), Romberg’s test, Stereognosis & Graphaesthesia.',
       },
       stt: {
         name: 'Spinothalamic Tract (STT)',
-        color: '#FF9500',
+        color: '#f59e0b',
         badge: 'Ascending Sensory',
         role: 'Pain (nociception), temperature, and crude touch.',
         decussation: 'Spinal cord within 1–2 levels (contralateral loss below cord lesion).',
@@ -653,71 +732,71 @@
       },
       cst: {
         name: 'Lateral Corticospinal Tract (UMN)',
-        color: '#FF3B30',
+        color: '#ef4444',
         badge: 'Descending Motor',
         role: 'Voluntary skilled motor control of contralateral limbs.',
         decussation: 'Pyramidal decussation in lower medulla (ipsilateral UMN signs below cord lesion).',
-        tests: 'Babinski & Chaddock signs, Hoffmann’s sign, Ankle clonus, Clasp-knife spasticity (joint play elbow/knee then wrist/ankle), Pronator drift.',
+        tests: 'Babinski & Chaddock signs, Hoffmann’s sign, Ankle clonus, Clasp-knife spasticity (elbow/knee then wrist/ankle), Pronator drift.',
       },
     };
 
     const BRAIN_LESIONS = [
       {
-        id: 'bl_agraphesthesia',
-        term: 'Agraphesthesia',
-        region: 'Parietal Lobe',
-        site: 'Contralateral Parietal Lobe (Somatosensory Association Cortex)',
-        def: 'Inability to recognise numbers or letters traced on the palm with eyes closed, despite intact primary light touch.',
-        test: 'Graphaesthesia (confirm intact primary touch first).',
+        id: 'bl_broca',
+        term: "Broca's Aphasia (Expressive)",
+        region: 'Frontal Lobe',
+        site: 'Dominant (Left) Inferior Frontal Gyrus (BA 44/45)',
+        def: 'Non-fluent, halting, effortful telegraphic speech with INTACT comprehension (patient is aware and frustrated).',
+        test: 'Spontaneous speech fluency, naming, sentence production.',
       },
       {
-        id: 'bl_astereognosis',
-        term: 'Astereognosis',
-        region: 'Parietal Lobe',
-        site: 'Contralateral Parietal Lobe (Somatosensory Association Cortex)',
-        def: 'Inability to identify a familiar object (coin, key) by touch alone despite intact primary sensation and proprioception.',
-        test: 'Stereognosis (object in palm, eyes closed).',
+        id: 'bl_wernicke',
+        term: "Wernicke's Aphasia (Receptive)",
+        region: 'Temporal Lobe',
+        site: 'Dominant (Left) Superior Temporal Gyrus (BA 22)',
+        def: 'Fluent but nonsensical speech ("word salad" / paraphasias) with POOR comprehension.',
+        test: '3-stage verbal commands, comprehension questions, speech content.',
+      },
+      {
+        id: 'bl_arcuate',
+        term: 'Arcuate Fasciculus (Conduction Aphasia)',
+        region: 'White Matter Tract',
+        site: 'Arcuate Fasciculus connecting Wernicke’s & Broca’s areas',
+        def: 'Fluent speech and intact comprehension, but specifically IMPAIRED repetition of spoken phrases.',
+        test: 'Ask patient to repeat a short phrase verbatim.',
       },
       {
         id: 'bl_neglect',
-        term: 'Sensory Inattention / Left Hemispatial Neglect',
+        term: 'Right Parietal → Left Hemispatial Neglect',
         region: 'Right Parietal',
         site: 'Right Posterior Parietal Cortex (PPC)',
-        def: 'Ignores stimuli on the left side during bilateral simultaneous stimulation (extinction) or neglects the entire left hemispace.',
+        def: 'Ignores or extinguishes stimuli on the LEFT side of space/body during bilateral simultaneous stimulation.',
         test: 'Double simultaneous visual (CN II confrontation) & tactile stimulation.',
         trap: 'Right Parietal Lesion = LEFT Hemispatial Neglect!',
       },
       {
-        id: 'bl_language',
-        term: "Broca's vs. Wernicke's vs. Arcuate Fasciculus",
-        region: 'Language Network',
-        site: 'Dominant (Left) Inf. Frontal (Broca), Sup. Temporal (Wernicke), Arcuate Fasciculus (Conduction)',
-        def: 'Broca’s = non-fluent halting speech, intact comprehension. Wernicke’s = fluent nonsensical speech ("word salad"), poor comprehension. Arcuate Fasciculus = impaired repetition with intact fluency & comprehension.',
-        test: 'Spontaneous speech fluency, naming, 3-stage commands, phrase repetition.',
+        id: 'bl_fusiform',
+        term: 'Fusiform Gyrus (Prosopagnosia)',
+        region: 'Ventral Temporal',
+        site: 'Fusiform Face Area (Occipitotemporal / Ventral "What" Stream)',
+        def: 'Inability to recognise familiar faces (prosopagnosia) despite intact visual acuity and object recognition.',
+        test: 'Face recognition / visual naming screen.',
       },
       {
-        id: 'bl_cerebellar',
-        term: 'Cerebellar Lesion (DANISH)',
-        region: 'Cerebellum',
-        site: 'Ipsilateral Cerebellar Hemisphere (limbs) or Vermis (truncal)',
-        def: 'Dysdiadochokinesia, Ataxia (wide-based gait), Nystagmus, Intention tremor, Slurred/staccato speech, Hypotonia + Dysmetria (past-pointing) & positive Rebound.',
-        test: 'Finger-to-nose, rapid alternating pronation/supination, heel-down-shin, rebound test, tandem walk.',
-      },
-      {
-        id: 'bl_bg',
-        term: 'Basal Ganglia Lesion',
-        region: 'Extrapyramidal',
-        site: 'Substantia Nigra / Striatum',
-        def: 'Pill-rolling resting tremor, velocity-independent rigidity (cogwheel / lead-pipe), bradykinesia, and shuffling gait.',
-        test: 'Observe resting tremor, passive joint play fluidity (elbow/knee then wrist/ankle), free walk.',
-      },
-      {
-        id: 'bl_frontal',
-        term: 'Frontal Release / Primitive Reflexes',
+        id: 'bl_prefrontal',
+        term: 'Prefrontal Cortex (Executive & Primitive Reflexes)',
         region: 'Prefrontal Cortex',
-        site: 'Prefrontal Cortex / Diffuse Cognitive Change',
-        def: 'Re-emergence of infantile reflexes caused by loss of frontal cortical inhibition.',
-        test: 'Pout reflex, Grasp reflex, and Glabellar tap (persistent blink).',
+        site: 'Prefrontal Cortex (anterior to premotor/motor cortex)',
+        def: 'Disinhibition, personality/mood change, impaired executive planning, and re-emergence of frontal release primitive reflexes.',
+        test: 'Pout reflex, Grasp reflex, Glabellar tap + behaviour/mood observation.',
+      },
+      {
+        id: 'bl_cortical_sens',
+        term: 'Agraphesthesia & Astereognosis',
+        region: 'Parietal Lobe',
+        site: 'Contralateral Parietal Lobe (Somatosensory Association Cortex)',
+        def: 'Inability to identify traced numbers (agraphesthesia) or familiar objects (astereognosis) in the palm with eyes closed despite intact primary touch.',
+        test: 'Graphaesthesia & Stereognosis (verify intact primary touch first).',
       },
     ];
 
@@ -726,7 +805,7 @@
       {
         sec: '1. Cerebral Function',
         prompt: 'Screen Cerebral Function: orientation, MMSE elements, GCS awareness & primitive reflexes.',
-        trap: 'State that Pout, Grasp & Glabellar reflexes are frontal release signs of cognitive/frontal change.',
+        trap: 'State that Pout, Grasp & Glabellar reflexes are frontal release signs of cognitive/prefrontal change.',
         points: [
           'Check date & place orientation; observe behaviour, appearance, mood & speech',
           'Explain Glasgow Coma Scale (GCS 3–15) use in trauma + MMSI/MoCA awareness',
@@ -736,7 +815,7 @@
       },
       {
         sec: '2. Balance & Coordination',
-        prompt: 'Demonstrate stance, gait & cerebellar testing with patient safety guarding.',
+        prompt: 'Demonstrate stance, gait & cerebellar testing with safe patient guarding.',
         trap: 'Stand close to guard patient during Romberg’s (eyes closed) and tandem walk.',
         points: [
           'Observe ataxia & tremors (resting, intention, dysmetria, pill-rolling, end-point, against gravity)',
@@ -770,12 +849,12 @@
       {
         sec: '6. Upper Limb Exam',
         prompt: 'Demonstrate C6 SMR and differentiate Radial vs. Median peripheral nerves.',
-        trap: 'NAME SPECIFIC MUSCLES! Radial = EXTENSORS (wrist drop), Median = FLEXORS + thumb opposition.',
+        trap: 'NAME SPECIFIC MUSCLES! Radial = EXTENSORS (NOT flexors), Median = FLEXORS + thumb opposition.',
         points: [
-          'Sensory sequence (Soft R/L compare → Sharp R/L compare): C6 lateral forearm, thumb & index finger (Grade 0–2)',
+          'Sensory sequence (Soft R/L compare → Sharp R/L compare): C6 lateral forearm, thumb & 1st finger (Grade 0–2)',
           'C6 Myotome & Reflex: NAME Wrist extensors & Biceps (MRC 1–5); Brachioradialis reflex (0–4)',
-          'Radial nerve: Posterior arm/forearm & lateral 2/3 DORSUM hand; elbow/wrist EXTENSORS',
-          'Median nerve: PALMAR lateral 2/3 hand; most wrist FLEXORS & thumb opposition',
+          'Radial nerve: Posterior arm/forearm & dorsal lateral 2/3 hand; elbow/wrist EXTENSORS',
+          'Median nerve: Palmar lateral 2/3 hand; most wrist FLEXORS & thumb opposition',
         ],
       },
       {
@@ -794,10 +873,10 @@
         prompt: 'Talk through Hutchinson pupil stages, Dix-Hallpike vs. Fitz-Ritson’s, CAD & Beighton Scale.',
         trap: 'Know Hutchinson 4-stage progression and CAD 5Ds/3Ns cold!',
         points: [
-          'Hutchinson pupil: Unilateral constriction → unilateral fixed dilation → contralateral constriction → bilateral fixed dilation',
+          'Hutchinson pupil: Ipsilateral constriction → ipsilateral fixed dilation → contralateral constriction → bilateral fixed dilation',
           'Dix-Hallpike (BPPV) vs. Fitz-Ritson’s (cervicogenic dizziness — fixed head, rotated trunk)',
           'CAD screening (carotid/vertebral): 5Ds & 3Ns red flags prior to cervical HVT',
-          'Pronator drift, fatigueable testing (open/close hands, heel lifts), Beighton Scale (0–9)',
+          'Pronator drift, fatiguable testing (open/close hands, heel lifts), Beighton Scale (0–9)',
         ],
       },
     ];
@@ -808,7 +887,7 @@
       { id: 3, title: '3. Cranial Nerves (I–XII)', items: ['CN I (anosmia) & CN II (acuity, confrontation fields, visual neglect, ophthalmoscopy referral)', 'CN II & III: Direct/consensual light, ptosis, pupil size/border, accommodation', 'CN III, IV, VI: Saccades (U/D/L/R), convergence, smooth pursuit ("H"), VOR', 'CN V: Temporalis/masseter, pterygoids, jaw jerk + V1/V2/V3 touch & pain', 'CN VII: UMN vs LMN, NAME muscles, taste ant 2/3, lacrimation/salivation, hyperacusis', 'CN VIII (whisper, Weber, Rinne, balance), IX & X (swallow, uvula, dysphonia), XI (SCM/traps), XII (tongue)'] },
       { id: 4, title: '4. General Motor Function', items: ['Observe/palpate tone (flaccid, spastic, atrophy, hypertrophy/pseudohypertrophy) & fasciculations', 'Strength pattern screen (glove-stocking, ascending, full limb, bilateral/symmetrical)', 'Joint play fluidity (elbow/knee first, then wrist/ankle): Cogwheel, Clasp-knife, Lead-pipe', 'Ankle clonus, Babinski & Chaddock signs, Hoffmann’s sign, Abdominal strength (half sit-up)'] },
       { id: 5, title: '5. General Somatosensory', items: ['Sensory pattern screen (glove-stocking, full limb, bilateral/symmetrical)', 'Vibration sense (128Hz tuning fork) & Proprioception (toes & fingers)', 'Touch localisation / Sensory inattention (neglect)', 'Cortical tests: Stereognosis & Graphaesthesia'] },
-      { id: 6, title: '6. Upper Limb Exam', items: ['Myotomes (MRC 1–5 — NAME muscles): C5 Biceps/Deltoid, C6 Wrist ext, C7 Triceps, C8 FDP, T1 Interossei', 'Reflexes (0–4): C5 Biceps, C6 Brachioradialis, C7 Triceps', 'Dermatomes C5–T1 (light touch & pin-prick; define paraesthesia, allodynia, hypersensitivity)', 'Peripheral nerves: Axillary, Med/Lat cutaneous, Radial (EXTENSORS!), Median (FLEXORS!), Ulnar'] },
+      { id: 6, title: '6. Upper Limb Exam', items: ['Myotomes (MRC 1–5 — NAME muscles): C5 Biceps/Deltoid, C6 Wrist ext/Biceps, C7 Triceps/Wrist flex, C8 FDP, T1 Interossei', 'Reflexes (0–4): C5 Biceps, C6 Brachioradialis, C7 Triceps', 'Dermatomes C5–T1 (light touch & pin-prick; define paraesthesia, allodynia, hypersensitivity)', 'Peripheral nerves: Axillary, Med/Lat cutaneous, Radial (EXTENSORS!), Median (FLEXORS!), Ulnar'] },
       { id: 7, title: '7. Lower Limb Exam', items: ['Myotomes (MRC 1–5 — NAME muscles): L2 Iliopsoas/Sartorius/Pectineus, L3 Quads, L4 Tib ant, L5 EHL, S1 Gastroc/Soleus', 'Reflexes (1+–4+): L4 Patellar, S1 Achilles', 'Dermatomes L2–S1 (light touch & pain bilaterally, Grade 0–2)', 'Peripheral nerves: Femoral, Lateral cutaneous, Obturator, Sciatic, Tibial, Fibular/Peroneal'] },
       { id: 8, title: '8. Special Tests', items: ['Cervical Arterial Dysfunction (CAD) — carotid & vertebral arteries', 'Hutchinson pupil — cerebral compression (talk through 4 stages & indications)', 'Dix-Hallpike (BPPV) & Fitz-Ritson’s (cervicogenic dizziness)', 'Pronator drift, Fatiguable muscle testing (open/close hands, heel lifts), Beighton Scale (0–9)'] },
     ];
@@ -821,18 +900,19 @@
       blurMode: false,
 
       // Tab 1: SMR
+      smrLimb: 'upper', // 'upper' | 'lower'
       selectedRoot: 'C6',
       showGradingDrawer: false,
 
       // Tab 2: Peripheral & Cranial Nerves
       nerveSub: 'upper', // 'upper' | 'lower' | 'cn'
       selectedCN: 'V',
-      showCn7Compare: false,
+      showCn7Compare: true,
       showVZones: false,
 
       // Tab 3: Simulators & Scales
       weberMode: 'normal',
-      hutchStage: 1, // 1..4
+      hutchStage: 1,
       beighton: {},
       gcs: { e: 4, v: 5, m: 6 },
 
@@ -867,11 +947,11 @@
       state.srs[id] = { box, dueAt: Date.now() + offset };
       saveStore('mchiro_srs_v4', state.srs);
       const msgs = { again: 'Queued for Today', shaky: 'Scheduled in 2 Days', solid: 'Scheduled in 7 Days' };
-      showToast(msgs[box], box === 'solid' ? 'green' : box === 'shaky' ? 'amber' : 'red');
+      showToast(msgs[box], box === 'solid' ? 'emerald' : box === 'shaky' ? 'amber' : 'red');
       renderApp();
     }
 
-    // --- Active Recall Blur Mode ---
+    // --- Blur Answers Active Recall ---
     function toggleBlurMode() {
       state.blurMode = !state.blurMode;
       updateBlurUI();
@@ -886,12 +966,12 @@
       if (!btn) return;
 
       if (state.blurMode) {
-        btn.className = 'px-3 py-2 rounded-xl text-xs font-bold border transition flex items-center gap-1.5 bg-[#007AFF] text-white border-[#007AFF] shadow-xs';
+        btn.className = 'px-3 py-2 rounded-xl text-xs font-display font-bold border transition flex items-center gap-1.5 bg-[#007aff] text-white border-[#007aff] shadow-xs';
         icon.textContent = '🧠';
         lbl.textContent = 'Recall: ON';
         banner.classList.remove('hidden');
       } else {
-        btn.className = 'px-3 py-2 rounded-xl text-xs font-bold border transition flex items-center gap-1.5 bg-black/5 dark:bg-white/10 ah-text border-transparent hover:border-[#007AFF]/40';
+        btn.className = 'px-3 py-2 rounded-xl text-xs font-display font-bold border transition flex items-center gap-1.5 bg-black/5 dark:bg-white/10 ah-text border-transparent hover:border-[#007aff]/40';
         icon.textContent = '👁️';
         lbl.textContent = 'Blur Answers';
         banner.classList.add('hidden');
@@ -903,7 +983,7 @@
     }
 
     // =========================================================================
-    // 4. NAVIGATION (5 SEGMENTED TABS + MOBILE BOTTOM NAV)
+    // 4. NAVIGATION (5 SEGMENTED TABS + MOBILE BOTTOM BAR)
     // =========================================================================
     const MAIN_TABS = [
       { id: 'smr', label: 'SMR Screening' },
@@ -917,11 +997,9 @@
       state.activeTab = id;
       renderNavigation();
       renderApp();
-      window.scrollTo({ top: 0, behavior: 'smooth' });
     }
 
     function renderNavigation() {
-      // Desktop / Top 5-Segmented Tabs
       document.getElementById('segmented-tabs').innerHTML = MAIN_TABS.map((t) => {
         const active = state.activeTab === t.id;
         return `
@@ -930,29 +1008,27 @@
             role="tab"
             aria-selected="${active}"
             onclick="setTab('${t.id}')"
-            class="px-3.5 py-2 rounded-[10px] text-xs sm:text-sm font-bold transition whitespace-nowrap text-center ${
+            class="px-3.5 py-2 rounded-[10px] text-xs sm:text-sm font-display font-bold transition whitespace-nowrap text-center ${
               active ? 'ah-seg-active' : 'ah-secondary hover:opacity-80'
             }"
           >${t.label}</button>
         `;
       }).join('');
 
-      // Mobile Bottom Nav: Home -> index.html, SMR, Simulators, OSCE
-      const bNav = document.getElementById('mobile-bottom-nav');
-      bNav.innerHTML = `
-        <a href="index.html" class="py-1.5 px-1 rounded-xl flex flex-col items-center justify-center gap-0.5 ah-secondary font-semibold">
+      document.getElementById('mobile-bottom-nav').innerHTML = `
+        <a href="index.html" class="py-1.5 px-1 rounded-xl flex flex-col items-center justify-center gap-0.5 ah-secondary font-display font-semibold">
           <span class="text-base leading-none">🏠</span>
           <span class="text-[10px]">Home</span>
         </a>
-        <button type="button" onclick="setTab('smr')" class="py-1.5 px-1 rounded-xl flex flex-col items-center justify-center gap-0.5 transition ${state.activeTab==='smr' ? 'text-[#007AFF] font-extrabold' : 'ah-secondary font-semibold'}">
+        <button type="button" onclick="setTab('smr'); window.scrollTo({top:0,behavior:'smooth'});" class="py-1.5 px-1 rounded-xl flex flex-col items-center justify-center gap-0.5 transition ${state.activeTab==='smr' ? 'text-[#007aff] font-display font-extrabold' : 'ah-secondary font-display font-semibold'}">
           <span class="text-base leading-none">⚡</span>
           <span class="text-[10px]">SMR</span>
         </button>
-        <button type="button" onclick="setTab('simulators')" class="py-1.5 px-1 rounded-xl flex flex-col items-center justify-center gap-0.5 transition ${state.activeTab==='simulators' ? 'text-[#007AFF] font-extrabold' : 'ah-secondary font-semibold'}">
+        <button type="button" onclick="setTab('simulators'); window.scrollTo({top:0,behavior:'smooth'});" class="py-1.5 px-1 rounded-xl flex flex-col items-center justify-center gap-0.5 transition ${state.activeTab==='simulators' ? 'text-[#007aff] font-display font-extrabold' : 'ah-secondary font-display font-semibold'}">
           <span class="text-base leading-none">🩺</span>
           <span class="text-[10px]">Simulators</span>
         </button>
-        <button type="button" onclick="setTab('osce')" class="py-1.5 px-1 rounded-xl flex flex-col items-center justify-center gap-0.5 transition ${state.activeTab==='osce' ? 'text-[#007AFF] font-extrabold' : 'ah-secondary font-semibold'}">
+        <button type="button" onclick="setTab('osce'); window.scrollTo({top:0,behavior:'smooth'});" class="py-1.5 px-1 rounded-xl flex flex-col items-center justify-center gap-0.5 transition ${state.activeTab==='osce' ? 'text-[#007aff] font-display font-extrabold' : 'ah-secondary font-display font-semibold'}">
           <span class="text-base leading-none">⏱️</span>
           <span class="text-[10px]">OSCE</span>
         </button>
@@ -969,143 +1045,156 @@
     }
 
     // =========================================================================
-    // 5. TAB 1: SMR SCREENING (DEDICATED & FRONT-AND-CENTRE)
+    // 5. TAB 1: SMR SCREENING
     // =========================================================================
+    function setSmrLimb(limb) {
+      state.smrLimb = limb;
+      state.selectedRoot = limb === 'upper' ? 'C6' : 'L4';
+      renderApp();
+    }
+
     function randomRootDrill() {
       const keys = Object.keys(SMR_ROOTS).filter((k) => k !== state.selectedRoot);
-      state.selectedRoot = keys[Math.floor(Math.random() * keys.length)];
+      const pick = keys[Math.floor(Math.random() * keys.length)];
+      state.selectedRoot = pick;
+      state.smrLimb = SMR_ROOTS[pick].limb;
       if (!state.blurMode) {
         state.blurMode = true;
         updateBlurUI();
       }
-      showToast(`Drill: ${state.selectedRoot} — Say S, M (muscles!) & R aloud`, 'default');
+      showToast(`Drill: ${pick} — Say S, M (exact muscles!) & R aloud`, 'default');
       renderApp();
     }
 
     function renderSmrTab() {
       const r = SMR_ROOTS[state.selectedRoot] || SMR_ROOTS.C6;
-      const ul = ['C5', 'C6', 'C7', 'C8', 'T1'];
-      const ll = ['L2', 'L3', 'L4', 'L5', 'S1'];
+      const roots = state.smrLimb === 'upper' ? ['C5', 'C6', 'C7', 'C8', 'T1'] : ['L2', 'L3', 'L4', 'L5', 'S1'];
       const bCls = blurClass();
 
-      const pillBtn = (code) => {
-        const active = state.selectedRoot === code;
-        return `
-          <button
-            type="button"
-            onclick="state.selectedRoot='${code}'; renderApp();"
-            class="mono-badge min-h-[44px] flex-1 rounded-2xl text-sm font-bold transition border ${
-              active
-                ? 'bg-[#007AFF] text-white border-[#007AFF] shadow-sm'
-                : 'ah-card-alt ah-text hover:border-[#007AFF]/50'
-            }"
-          >${code}</button>
-        `;
-      };
-
       return `
-        <div class="space-y-5">
-          <!-- Root Selector Card -->
+        <div class="space-y-4">
+          <!-- Limb Toggle + Root Selector Card -->
           <section class="ah-card p-4 sm:p-5 space-y-4">
-            <div class="flex flex-wrap items-center justify-between gap-2">
-              <div>
-                <span class="mono-badge text-[11px] font-bold uppercase tracking-wider text-[#007AFF]">SMR Screening</span>
-                <h2 class="text-lg sm:text-xl font-extrabold ah-text">Dermatomes, Myotomes &amp; Reflexes</h2>
+            <div class="flex flex-wrap items-center justify-between gap-2.5">
+              <!-- Upper / Lower Limb Pill Toggle -->
+              <div class="ah-seg-track grid grid-cols-2 gap-1 w-full sm:w-auto sm:min-w-[260px]">
+                <button
+                  type="button"
+                  onclick="setSmrLimb('upper')"
+                  class="px-3.5 py-2 rounded-[10px] text-xs font-display font-extrabold transition ${
+                    state.smrLimb === 'upper' ? 'ah-seg-active' : 'ah-secondary'
+                  }"
+                >Upper Limb (C5–T1)</button>
+                <button
+                  type="button"
+                  onclick="setSmrLimb('lower')"
+                  class="px-3.5 py-2 rounded-[10px] text-xs font-display font-extrabold transition ${
+                    state.smrLimb === 'lower' ? 'ah-seg-active' : 'ah-secondary'
+                  }"
+                >Lower Limb (L2–S1)</button>
               </div>
+
+              <!-- Random Root Drill Button -->
               <button
                 type="button"
                 onclick="randomRootDrill()"
-                class="px-4 py-2.5 rounded-2xl bg-[#1C1C1E] dark:bg-[#F2F2F7] text-[#F2F2F7] dark:text-[#1C1C1E] text-xs font-extrabold hover:opacity-90 transition shadow-xs"
+                class="w-full sm:w-auto px-4 py-2.5 rounded-2xl bg-[#1c1c1e] dark:bg-[#f2f2f7] text-[#f2f2f7] dark:text-[#1c1c1e] text-xs font-display font-extrabold hover:opacity-90 transition shadow-xs"
               >
                 🎲 Random Root Drill
               </button>
             </div>
 
-            <!-- Upper Limb Row -->
-            <div class="space-y-1.5">
-              <span class="text-[11px] font-bold uppercase tracking-wider ah-secondary">Upper Limb (Cervical)</span>
-              <div class="grid grid-cols-5 gap-2">
-                ${ul.map(pillBtn).join('')}
-              </div>
-            </div>
-
-            <!-- Lower Limb Row -->
-            <div class="space-y-1.5">
-              <span class="text-[11px] font-bold uppercase tracking-wider ah-secondary">Lower Limb (Lumbar / Sacral)</span>
-              <div class="grid grid-cols-5 gap-2">
-                ${ll.map(pillBtn).join('')}
-              </div>
+            <!-- 5 Nerve Root Pill Buttons -->
+            <div class="grid grid-cols-5 gap-2">
+              ${roots.map((code) => {
+                const active = state.selectedRoot === code;
+                return `
+                  <button
+                    type="button"
+                    onclick="state.selectedRoot='${code}'; renderApp();"
+                    class="mono-badge min-h-[46px] rounded-2xl text-sm font-bold transition border ${
+                      active
+                        ? 'bg-[#007aff] text-white border-[#007aff] shadow-sm'
+                        : 'ah-card-alt ah-text hover:border-[#007aff]/50'
+                    }"
+                  >${code}</button>
+                `;
+              }).join('')}
             </div>
           </section>
 
-          <!-- Selected Root Header -->
+          <!-- Selected Root Label -->
           <div class="flex items-center justify-between px-1">
             <div class="flex items-center gap-2.5">
-              <span class="mono-badge px-3 py-1 rounded-xl bg-[#007AFF] text-white text-base font-extrabold">${r.root}</span>
-              <span class="text-sm font-bold ah-secondary">${r.limb} Nerve Root</span>
+              <span class="mono-badge px-3 py-1 rounded-xl bg-[#007aff] text-white text-base font-extrabold">${r.root}</span>
+              <span class="text-sm font-display font-bold ah-secondary">${r.limbLabel} Nerve Root</span>
             </div>
-            <span class="text-xs font-semibold ah-secondary">3-Chunk Signaled Layout</span>
+            <a
+              href="${r.limb === 'upper' ? 'lesson-ul.html' : 'lesson-ll.html'}"
+              class="text-xs font-display font-extrabold text-[#10b981] hover:underline"
+            >Practice in Visual Lesson &rarr;</a>
           </div>
 
-          <!-- 3 Strict Semantic Colour-Coded Chunk Cards -->
+          <!-- 3 Semantic Colour-Coded Cards: Sensation (Blue), Myotome (Emerald), Reflex (Purple) -->
           <div class="grid grid-cols-1 md:grid-cols-3 gap-4">
-            <!-- 1. SENSATION (BLUE #007AFF) -->
-            <article class="ah-card p-5 border-t-4 border-t-[#007AFF] flex flex-col justify-between gap-3">
+            <!-- 1. SENSATION (#007aff) -->
+            <article class="ah-card p-5 border-t-4 border-t-[#007aff] flex flex-col justify-between gap-3">
               <div class="space-y-2">
                 <div class="flex items-center justify-between">
-                  <span class="px-2.5 py-1 rounded-xl text-[11px] font-extrabold bg-[#007AFF]/12 text-[#007AFF]">S &bull; SENSATION</span>
-                  <span class="mono-badge text-xs font-bold ah-secondary">Grade 0–2</span>
+                  <span class="px-2.5 py-1 rounded-xl text-[11px] font-display font-extrabold bg-[#007aff]/12 text-[#007aff]">S &bull; SENSATION</span>
+                  <span class="mono-badge text-xs font-bold text-[#f59e0b]">Grade 0–2</span>
                 </div>
                 <h3 class="text-xs font-bold uppercase tracking-wider ah-secondary">Dermatome Territory</h3>
-                <p onclick="this.classList.remove('recall-blur')" class="text-base sm:text-lg font-extrabold ah-text leading-snug ${bCls}">
+                <p onclick="this.classList.remove('recall-blur')" class="text-base sm:text-lg font-display font-extrabold ah-text leading-snug ${bCls}">
                   ${r.sensation}
                 </p>
               </div>
               <p class="text-xs ah-secondary pt-2 border-t border-black/5 dark:border-white/10">
-                Test light touch &amp; pin-prick bilaterally.
+                Light touch &amp; pin-prick bilaterally.
               </p>
             </article>
 
-            <!-- 2. MYOTOME (EMERALD #34C759 + CORAL RED TRAP #FF3B30) -->
-            <article class="ah-card p-5 border-t-4 border-t-[#34C759] flex flex-col justify-between gap-3">
+            <!-- 2. MYOTOME (#10b981 + Red Assessor Trap #ef4444) -->
+            <article class="ah-card p-5 border-t-4 border-t-[#10b981] flex flex-col justify-between gap-3">
               <div class="space-y-2">
                 <div class="flex items-center justify-between">
-                  <span class="px-2.5 py-1 rounded-xl text-[11px] font-extrabold bg-[#34C759]/15 text-[#248A3D] dark:text-[#34C759]">M &bull; MYOTOME</span>
-                  <span class="mono-badge text-xs font-bold ah-secondary">MRC 1–5</span>
+                  <span class="px-2.5 py-1 rounded-xl text-[11px] font-display font-extrabold bg-[#10b981]/15 text-[#059669] dark:text-[#10b981]">M &bull; MYOTOME</span>
+                  <span class="mono-badge text-xs font-bold text-[#f59e0b]">MRC 1–5</span>
                 </div>
                 <div onclick="this.classList.remove('recall-blur')" class="space-y-1.5 ${bCls}">
-                  <p class="text-xs font-bold uppercase tracking-wider ah-secondary">Action: <span class="ah-text normal-case font-semibold">${r.action}</span></p>
-                  <p class="text-base sm:text-lg font-extrabold text-[#248A3D] dark:text-[#34C759] leading-snug">
+                  <p class="text-xs font-bold uppercase tracking-wider ah-secondary">
+                    Action: <span class="ah-text normal-case font-semibold">${r.action}</span>
+                  </p>
+                  <p class="text-base sm:text-lg font-display font-extrabold text-[#059669] dark:text-[#34d399] leading-snug">
                     ${r.muscles}
                   </p>
-                  ${r.extra ? `<p class="text-xs font-semibold ah-secondary">${r.extra}</p>` : ''}
                 </div>
               </div>
-              <div class="px-3 py-2 rounded-xl bg-[#FF3B30]/10 border border-[#FF3B30]/30 text-[11px] font-extrabold text-[#FF3B30]">
-                ⚠ Assessor Trap: Name muscles, not just actions!
+              <div class="px-3 py-2 rounded-xl bg-[#ef4444]/10 border border-[#ef4444]/30 text-[11px] font-display font-extrabold text-[#ef4444]">
+                ⚠ Assessor Feedback: Name muscles, not just actions!
               </div>
             </article>
 
-            <!-- 3. REFLEX (PURPLE #AF52DE) -->
-            <article class="ah-card p-5 border-t-4 border-t-[#AF52DE] flex flex-col justify-between gap-3">
+            <!-- 3. REFLEX (#8b5cf6) -->
+            <article class="ah-card p-5 border-t-4 border-t-[#8b5cf6] flex flex-col justify-between gap-3">
               <div class="space-y-2">
                 <div class="flex items-center justify-between">
-                  <span class="px-2.5 py-1 rounded-xl text-[11px] font-extrabold bg-[#AF52DE]/15 text-[#AF52DE]">R &bull; REFLEX</span>
-                  <span class="mono-badge text-xs font-bold ah-secondary">${r.limb === 'Upper Limb' ? '0–4' : '1+–4+'}</span>
+                  <span class="px-2.5 py-1 rounded-xl text-[11px] font-display font-extrabold bg-[#8b5cf6]/15 text-[#8b5cf6]">R &bull; REFLEX</span>
+                  <span class="mono-badge text-xs font-bold text-[#f59e0b]">${r.limb === 'upper' ? '0–4' : '1+–4+'}</span>
                 </div>
                 <h3 class="text-xs font-bold uppercase tracking-wider ah-secondary">Deep Tendon Reflex</h3>
                 <div onclick="this.classList.remove('recall-blur')" class="space-y-1 ${bCls}">
-                  <p class="text-base sm:text-lg font-extrabold ah-text leading-snug">${r.reflex}</p>
+                  <p class="text-base sm:text-lg font-display font-extrabold ah-text leading-snug">${r.reflex}</p>
                   <p class="text-xs ah-secondary leading-relaxed">${r.reflexNote}</p>
                 </div>
               </div>
               <p class="text-xs ah-secondary pt-2 border-t border-black/5 dark:border-white/10">
-                Compare side-to-side; use Jendrassik reinforcement if diminished.
+                Compare bilaterally; use Jendrassik reinforcement if reduced.
               </p>
             </article>
           </div>
 
-          <!-- Collapsible Sensory Sequence & Grading Scales (Explain Aloud) -->
+          <!-- Collapsible Sensory Sequence & Grading Scales Drawer -->
           <section class="ah-card overflow-hidden">
             <button
               type="button"
@@ -1113,8 +1202,8 @@
               class="w-full px-5 py-4 flex items-center justify-between gap-3 text-left"
             >
               <div class="flex items-center gap-2.5 min-w-0">
-                <span class="px-2.5 py-1 rounded-xl text-[11px] font-extrabold bg-[#FF9500]/15 text-[#FF9500] shrink-0">EXPLAIN ALOUD</span>
-                <span class="text-sm sm:text-base font-extrabold ah-text truncate">Sensory Sequence, Grading Scales &amp; Definitions</span>
+                <span class="px-2.5 py-1 rounded-xl text-[11px] font-display font-extrabold bg-[#f59e0b]/15 text-[#d97706] dark:text-[#f59e0b] shrink-0">GRADING</span>
+                <span class="text-sm sm:text-base font-display font-extrabold ah-text truncate">Sensory Sequence &amp; Grading Scales</span>
               </div>
               <span class="text-xs font-bold ah-secondary shrink-0">${state.showGradingDrawer ? '▲' : '▼'}</span>
             </button>
@@ -1122,17 +1211,17 @@
             ${state.showGradingDrawer ? `
               <div class="px-5 pb-5 pt-2 border-t border-black/5 dark:border-white/10 space-y-4">
                 <!-- Sensory Sequence -->
-                <div class="p-3.5 rounded-2xl bg-[#007AFF]/10 border border-[#007AFF]/25">
-                  <span class="block text-[10px] font-extrabold uppercase tracking-wider text-[#007AFF]">Official Sensory Testing Sequence</span>
-                  <p class="text-xs sm:text-sm font-extrabold ah-text mt-1">
-                    Soft: R, L, compare &rarr; Sharp: R, L, compare &rarr; Discriminate as required
+                <div class="p-3.5 rounded-2xl bg-[#007aff]/10 border border-[#007aff]/25">
+                  <span class="block text-[10px] font-display font-extrabold uppercase tracking-wider text-[#007aff]">Official Sensory Testing Sequence</span>
+                  <p class="text-xs sm:text-sm font-display font-extrabold ah-text mt-1">
+                    Soft (R, L, compare) &rarr; Sharp (R, L, compare) &rarr; Discriminate
                   </p>
                 </div>
 
                 <!-- 4 Grading Scales -->
                 <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-3 text-xs">
                   <div class="ah-card-alt p-3.5 space-y-1">
-                    <span class="mono-badge font-extrabold text-[#248A3D] dark:text-[#34C759] block">Myotomes (MRC 1–5)</span>
+                    <span class="mono-badge font-extrabold text-[#10b981] block">Myotomes (1–5)</span>
                     <p><strong>5:</strong> Normal full power</p>
                     <p><strong>4:</strong> Active vs resistance (reduced)</p>
                     <p><strong>3:</strong> Active vs gravity only</p>
@@ -1140,23 +1229,23 @@
                     <p><strong>1:</strong> Flicker / trace (0 = none)</p>
                   </div>
                   <div class="ah-card-alt p-3.5 space-y-1">
-                    <span class="mono-badge font-extrabold text-[#AF52DE] block">UL Reflexes (0–4)</span>
+                    <span class="mono-badge font-extrabold text-[#8b5cf6] block">UL Reflexes (0–4)</span>
                     <p><strong>0:</strong> Absent (areflexia)</p>
-                    <p><strong>1:</strong> Diminished (hyporeflexia)</p>
+                    <p><strong>1:</strong> Diminished</p>
                     <p><strong>2:</strong> Normal</p>
                     <p><strong>3:</strong> Brisker than average</p>
                     <p><strong>4:</strong> Hyperreflexia + clonus</p>
                   </div>
                   <div class="ah-card-alt p-3.5 space-y-1">
-                    <span class="mono-badge font-extrabold text-[#AF52DE] block">LL Reflexes (1+–4+)</span>
+                    <span class="mono-badge font-extrabold text-[#8b5cf6] block">LL Reflexes (1+–4+)</span>
                     <p><strong>0:</strong> Absent</p>
                     <p><strong>1+:</strong> Diminished / low normal</p>
-                    <p><strong>2+:</strong> Normal / brisk</p>
+                    <p><strong>2+:</strong> Normal</p>
                     <p><strong>3+:</strong> Brisker than average</p>
                     <p><strong>4+:</strong> Hyperreflexia + clonus</p>
                   </div>
                   <div class="ah-card-alt p-3.5 space-y-1">
-                    <span class="mono-badge font-extrabold text-[#FF9500] block">Sensation (0–2)</span>
+                    <span class="mono-badge font-extrabold text-[#f59e0b] block">Sensation (0–2)</span>
                     <p><strong>2:</strong> Normal intact</p>
                     <p><strong>1:</strong> Altered / impaired (hypo or hyper)</p>
                     <p><strong>0:</strong> Absent (anaesthesia)</p>
@@ -1165,16 +1254,16 @@
 
                 <!-- Sensory Definitions -->
                 <div class="grid grid-cols-1 sm:grid-cols-3 gap-2.5 text-xs">
-                  <div class="p-3 rounded-2xl bg-[#FF9500]/10 border border-[#FF9500]/25">
-                    <strong class="text-[#FF9500] block">Paraesthesia</strong>
-                    <span class="ah-text">Abnormal spontaneous sensation (pins &amp; needles, tingling, prickling) without an external stimulus.</span>
+                  <div class="p-3 rounded-2xl bg-[#f59e0b]/10 border border-[#f59e0b]/25">
+                    <strong class="text-[#d97706] dark:text-[#f59e0b] block">Paraesthesia</strong>
+                    <span class="ah-text">Abnormal spontaneous sensation (pins &amp; needles, tingling) without an external stimulus.</span>
                   </div>
-                  <div class="p-3 rounded-2xl bg-[#FF9500]/10 border border-[#FF9500]/25">
-                    <strong class="text-[#FF9500] block">Allodynia</strong>
-                    <span class="ah-text">Pain provoked by a normally non-painful stimulus (e.g. light cotton wool touch feels painful).</span>
+                  <div class="p-3 rounded-2xl bg-[#f59e0b]/10 border border-[#f59e0b]/25">
+                    <strong class="text-[#d97706] dark:text-[#f59e0b] block">Allodynia</strong>
+                    <span class="ah-text">Pain provoked by a normally non-painful stimulus (e.g. light cotton touch feels painful).</span>
                   </div>
-                  <div class="p-3 rounded-2xl bg-[#FF9500]/10 border border-[#FF9500]/25">
-                    <strong class="text-[#FF9500] block">Hypersensitivity</strong>
+                  <div class="p-3 rounded-2xl bg-[#f59e0b]/10 border border-[#f59e0b]/25">
+                    <strong class="text-[#d97706] dark:text-[#f59e0b] block">Hypersensitivity</strong>
                     <span class="ah-text">Exaggerated or heightened sensory response to a normal stimulus (hyperaesthesia / hyperalgesia).</span>
                   </div>
                 </div>
@@ -1186,15 +1275,15 @@
     }
 
     // =========================================================================
-    // 6. TAB 2: PERIPHERAL NERVES & CRANIAL NERVES
+    // 6. TAB 2: PERIPHERAL & CRANIAL NERVES
     // =========================================================================
     function renderNervesTab() {
       const bCls = blurClass();
       const cn = CRANIAL_NERVES.find((c) => c.id === state.selectedCN) || CRANIAL_NERVES[4];
 
       return `
-        <div class="space-y-5">
-          <!-- Sub-Toggle: Upper Limb | Lower Limb | Cranial Nerves (I–XII) -->
+        <div class="space-y-4">
+          <!-- Sub-Toggle: Upper Limb Peripheral | Lower Limb Peripheral | Cranial Nerves -->
           <div class="max-w-lg mx-auto ah-seg-track grid grid-cols-3 gap-1">
             ${[
               { id: 'upper', label: 'Upper Limb' },
@@ -1204,7 +1293,7 @@
               <button
                 type="button"
                 onclick="state.nerveSub='${s.id}'; renderApp();"
-                class="py-2 px-2 rounded-[10px] text-xs sm:text-sm font-bold transition ${state.nerveSub === s.id ? 'ah-seg-active' : 'ah-secondary'}"
+                class="py-2 px-2 rounded-[10px] text-xs sm:text-sm font-display font-bold transition ${state.nerveSub === s.id ? 'ah-seg-active' : 'ah-secondary'}"
               >${s.label}</button>
             `).join('')}
           </div>
@@ -1223,26 +1312,26 @@
 
           ${state.nerveSub === 'cn' ? `
             <div class="space-y-4">
-              <!-- CN I–XII Interactive Pill Selector -->
+              <!-- CN I–XII Interactive Selector -->
               <section class="ah-card p-4 sm:p-5 space-y-4">
                 <div class="flex flex-wrap items-center justify-between gap-2">
                   <div>
-                    <span class="mono-badge text-[11px] font-bold uppercase text-[#007AFF]">Cranial Nerves I–XII</span>
-                    <h2 class="text-lg font-extrabold ah-text">Tap Any Cranial Nerve</h2>
+                    <span class="mono-badge text-[11px] font-bold uppercase text-[#007aff]">Cranial Nerves I–XII</span>
+                    <h2 class="text-lg font-display font-extrabold ah-text">Tap Any Cranial Nerve</h2>
                   </div>
                   <div class="flex flex-wrap gap-1.5">
                     <button
                       type="button"
                       onclick="state.showCn7Compare=!state.showCn7Compare; renderApp();"
-                      class="px-3 py-1.5 rounded-xl text-xs font-bold border transition ${
-                        state.showCn7Compare ? 'bg-[#FF9500] text-white border-[#FF9500]' : 'ah-card-alt ah-text'
+                      class="px-3 py-1.5 rounded-xl text-xs font-display font-bold border transition ${
+                        state.showCn7Compare ? 'bg-[#f59e0b] text-white border-[#f59e0b]' : 'ah-card-alt ah-text'
                       }"
                     >CN VII: UMN vs LMN</button>
                     <button
                       type="button"
                       onclick="state.showVZones=!state.showVZones; renderApp();"
-                      class="px-3 py-1.5 rounded-xl text-xs font-bold border transition ${
-                        state.showVZones ? 'bg-[#007AFF] text-white border-[#007AFF]' : 'ah-card-alt ah-text'
+                      class="px-3 py-1.5 rounded-xl text-xs font-display font-bold border transition ${
+                        state.showVZones ? 'bg-[#007aff] text-white border-[#007aff]' : 'ah-card-alt ah-text'
                       }"
                     >CN V: V1 / V2 / V3</button>
                   </div>
@@ -1255,8 +1344,8 @@
                       onclick="state.selectedCN='${c.id}'; renderApp();"
                       class="mono-badge min-h-[42px] rounded-xl text-xs sm:text-sm font-bold border transition ${
                         state.selectedCN === c.id
-                          ? 'bg-[#007AFF] text-white border-[#007AFF] shadow-xs'
-                          : 'ah-card-alt ah-text hover:border-[#007AFF]/50'
+                          ? 'bg-[#007aff] text-white border-[#007aff] shadow-xs'
+                          : 'ah-card-alt ah-text hover:border-[#007aff]/50'
                       }"
                     >CN ${c.id}</button>
                   `).join('')}
@@ -1265,73 +1354,73 @@
                 <!-- Selected CN Detail Card -->
                 <div class="ah-card-alt p-4 sm:p-5 space-y-3">
                   <div class="flex flex-wrap items-center justify-between gap-2">
-                    <h3 class="text-base sm:text-lg font-extrabold ah-text">
-                      <span class="mono-badge text-[#007AFF] mr-1">CN ${cn.id}</span> ${cn.name}
+                    <h3 class="text-base sm:text-lg font-display font-extrabold ah-text">
+                      <span class="mono-badge text-[#007aff] mr-1">CN ${cn.id}</span> ${cn.name}
                     </h3>
-                    <span class="px-2.5 py-1 rounded-xl text-[11px] font-bold bg-[#AF52DE]/15 text-[#AF52DE]">${cn.type}</span>
+                    <span class="px-2.5 py-1 rounded-xl text-[11px] font-display font-bold bg-[#8b5cf6]/15 text-[#8b5cf6]">${cn.type}</span>
                   </div>
 
                   <div class="grid grid-cols-1 sm:grid-cols-2 gap-3 text-xs sm:text-sm">
-                    <div class="p-3 rounded-2xl bg-[#34C759]/10 border border-[#34C759]/25">
-                      <span class="block text-[10px] font-extrabold uppercase text-[#248A3D] dark:text-[#34C759]">Motor</span>
+                    <div class="p-3 rounded-2xl bg-[#10b981]/10 border border-[#10b981]/25">
+                      <span class="block text-[10px] font-display font-extrabold uppercase text-[#059669] dark:text-[#10b981]">Motor</span>
                       <p onclick="this.classList.remove('recall-blur')" class="font-bold ah-text mt-0.5 ${bCls}">${cn.motor}</p>
                     </div>
-                    <div class="p-3 rounded-2xl bg-[#007AFF]/10 border border-[#007AFF]/25">
-                      <span class="block text-[10px] font-extrabold uppercase text-[#007AFF]">Sensory</span>
+                    <div class="p-3 rounded-2xl bg-[#007aff]/10 border border-[#007aff]/25">
+                      <span class="block text-[10px] font-display font-extrabold uppercase text-[#007aff]">Sensory</span>
                       <p onclick="this.classList.remove('recall-blur')" class="font-bold ah-text mt-0.5 ${bCls}">${cn.sensory}</p>
                     </div>
                   </div>
 
                   <div class="space-y-2 text-xs sm:text-sm">
                     <p><strong class="ah-secondary uppercase text-[10px] block">Key Bedside Tests</strong><span onclick="this.classList.remove('recall-blur')" class="ah-text ${bCls}">${cn.tests}</span></p>
-                    <div class="p-3 rounded-2xl bg-[#FF9500]/10 border border-[#FF9500]/25">
-                      <strong class="text-[#FF9500] uppercase text-[10px] block">Abnormal Findings / Clinical Pearl</strong>
+                    <div class="p-3 rounded-2xl bg-[#f59e0b]/10 border border-[#f59e0b]/25">
+                      <strong class="text-[#d97706] dark:text-[#f59e0b] uppercase text-[10px] block">Abnormal Findings / Clinical Pearl</strong>
                       <span onclick="this.classList.remove('recall-blur')" class="font-semibold ah-text ${bCls}">${cn.abnormal}</span>
                     </div>
                   </div>
                 </div>
               </section>
 
-              <!-- Toggleable CN VII UMN vs LMN Comparison Card -->
+              <!-- Interactive CN VII UMN vs LMN Comparison Card -->
               ${state.showCn7Compare ? `
-                <section class="ah-card p-5 space-y-3 border-l-4 border-l-[#FF9500]">
+                <section class="ah-card p-5 space-y-3 border-l-4 border-l-[#f59e0b]">
                   <div class="flex items-center justify-between">
-                    <h3 class="text-sm sm:text-base font-extrabold ah-text">CN VII Facial Nerve: UMN vs. LMN Comparison</h3>
+                    <h3 class="text-sm sm:text-base font-display font-extrabold ah-text">CN VII Facial Nerve: UMN vs. LMN Comparison</h3>
                     <button type="button" onclick="state.showCn7Compare=false; renderApp();" class="text-xs font-bold ah-secondary">Hide</button>
                   </div>
                   <div class="grid grid-cols-1 sm:grid-cols-2 gap-3 text-xs sm:text-sm">
-                    <div class="p-4 rounded-2xl bg-[#007AFF]/10 border border-[#007AFF]/25 space-y-1">
-                      <span class="text-[10px] font-extrabold uppercase text-[#007AFF]">UMN Lesion (e.g. Stroke)</span>
-                      <p class="font-extrabold ah-text">Forehead SPARED ✓</p>
+                    <div class="p-4 rounded-2xl bg-[#007aff]/10 border border-[#007aff]/25 space-y-1">
+                      <span class="text-[10px] font-display font-extrabold uppercase text-[#007aff]">UMN Lesion (e.g. Stroke)</span>
+                      <p class="font-display font-extrabold ah-text">Forehead SPARED ✓</p>
                       <p class="ah-secondary">Upper face (frontalis) receives bilateral cortical innervation — only contralateral lower face droops.</p>
                     </div>
-                    <div class="p-4 rounded-2xl bg-[#FF3B30]/10 border border-[#FF3B30]/25 space-y-1">
-                      <span class="text-[10px] font-extrabold uppercase text-[#FF3B30]">LMN Lesion (Bell’s Palsy)</span>
-                      <p class="font-extrabold ah-text">ENTIRE Ipsilateral Hemiface Affected</p>
-                      <p class="ah-secondary">Loss of forehead wrinkling, inability to close eye (orbicularis oculi), and drooping mouth on the same side.</p>
+                    <div class="p-4 rounded-2xl bg-[#ef4444]/10 border border-[#ef4444]/25 space-y-1">
+                      <span class="text-[10px] font-display font-extrabold uppercase text-[#ef4444]">LMN Lesion (Bell’s Palsy)</span>
+                      <p class="font-display font-extrabold ah-text">Entire Half Face Affected</p>
+                      <p class="ah-secondary">Ipsilateral loss of forehead wrinkling, inability to close eye (orbicularis oculi), and drooping mouth.</p>
                     </div>
                   </div>
                 </section>
               ` : ''}
 
-              <!-- Toggleable CN V (V1/V2/V3) Summary Card -->
+              <!-- Interactive CN V (V1/V2/V3) Quick Card -->
               ${state.showVZones ? `
-                <section class="ah-card p-5 space-y-3 border-l-4 border-l-[#007AFF]">
+                <section class="ah-card p-5 space-y-3 border-l-4 border-l-[#007aff]">
                   <div class="flex items-center justify-between">
-                    <h3 class="text-sm sm:text-base font-extrabold ah-text">CN V Trigeminal Sensory Divisions (V1 / V2 / V3)</h3>
+                    <h3 class="text-sm sm:text-base font-display font-extrabold ah-text">CN V Trigeminal Divisions (V1 / V2 / V3)</h3>
                     <button type="button" onclick="state.showVZones=false; renderApp();" class="text-xs font-bold ah-secondary">Hide</button>
                   </div>
                   <div class="grid grid-cols-1 sm:grid-cols-3 gap-3 text-xs">
                     <div class="ah-card-alt p-3.5 space-y-1">
-                      <span class="mono-badge font-extrabold text-[#007AFF]">V1 • Ophthalmic</span>
-                      <p class="ah-text">Forehead, scalp to vertex, upper eyelid, cornea (corneal reflex afferent), bridge &amp; tip of nose.</p>
+                      <span class="mono-badge font-extrabold text-[#007aff]">V1 • Ophthalmic</span>
+                      <p class="ah-text">Forehead, scalp to vertex, upper eyelid, cornea, bridge &amp; tip of nose.</p>
                     </div>
                     <div class="ah-card-alt p-3.5 space-y-1">
-                      <span class="mono-badge font-extrabold text-[#34C759]">V2 • Maxillary</span>
+                      <span class="mono-badge font-extrabold text-[#10b981]">V2 • Maxillary</span>
                       <p class="ah-text">Lower eyelid, cheek (malar region), side of nose, upper lip &amp; maxillary teeth.</p>
                     </div>
                     <div class="ah-card-alt p-3.5 space-y-1">
-                      <span class="mono-badge font-extrabold text-[#AF52DE]">V3 • Mandibular</span>
+                      <span class="mono-badge font-extrabold text-[#8b5cf6]">V3 • Mandibular</span>
                       <p class="ah-text">Lower lip, chin, anterior ear/temple &amp; jaw (<strong>spares angle of jaw — C2/C3</strong>). Carries CN V motor!</p>
                     </div>
                   </div>
@@ -1345,28 +1434,28 @@
 
     function renderPeriphCard(n, bCls) {
       return `
-        <article class="ah-card p-4 sm:p-5 flex flex-col justify-between gap-3 ${n.trap ? 'ring-1 ring-[#FF3B30]/40' : ''}">
+        <article class="ah-card p-4 sm:p-5 flex flex-col justify-between gap-3 ${n.trap ? 'ring-1 ring-[#ef4444]/40' : ''}">
           <div class="space-y-2.5">
             <div class="flex items-center justify-between gap-2">
-              <h3 class="text-base font-extrabold ah-text">${n.name}</h3>
+              <h3 class="text-base font-display font-extrabold ah-text">${n.name}</h3>
               <span class="mono-badge px-2.5 py-0.5 rounded-lg text-[11px] font-bold bg-black/5 dark:bg-white/10 ah-secondary">${n.roots}</span>
             </div>
 
-            <div class="p-3 rounded-2xl bg-[#007AFF]/10 border border-[#007AFF]/20 text-xs sm:text-sm">
-              <span class="block text-[10px] font-extrabold uppercase text-[#007AFF]">Sensation (Skin Area)</span>
+            <div class="p-3 rounded-2xl bg-[#007aff]/10 border border-[#007aff]/20 text-xs sm:text-sm">
+              <span class="block text-[10px] font-display font-extrabold uppercase text-[#007aff]">Sensation (Skin Area)</span>
               <p onclick="this.classList.remove('recall-blur')" class="ah-text mt-0.5 ${bCls}">${n.sensory}</p>
             </div>
 
-            <div class="p-3 rounded-2xl bg-[#34C759]/10 border border-[#34C759]/20 text-xs sm:text-sm space-y-0.5">
-              <span class="block text-[10px] font-extrabold uppercase text-[#248A3D] dark:text-[#34C759]">Muscles &amp; Actions</span>
-              <p onclick="this.classList.remove('recall-blur')" class="font-extrabold text-[#248A3D] dark:text-[#34C759] ${bCls}">${n.motor}</p>
+            <div class="p-3 rounded-2xl bg-[#10b981]/10 border border-[#10b981]/20 text-xs sm:text-sm space-y-0.5">
+              <span class="block text-[10px] font-display font-extrabold uppercase text-[#059669] dark:text-[#10b981]">Muscles &amp; Actions</span>
+              <p onclick="this.classList.remove('recall-blur')" class="font-display font-extrabold text-[#059669] dark:text-[#34d399] ${bCls}">${n.muscles}</p>
               <p onclick="this.classList.remove('recall-blur')" class="text-xs ah-secondary ${bCls}">${n.actions}</p>
             </div>
           </div>
 
           ${n.trap ? `
-            <div class="px-3 py-2 rounded-xl bg-[#FF3B30]/10 border border-[#FF3B30]/30 text-xs font-extrabold text-[#FF3B30]">
-              ⚠ ${n.trap}
+            <div class="px-3 py-2 rounded-xl bg-[#ef4444]/10 border border-[#ef4444]/30 text-xs font-display font-extrabold text-[#ef4444]">
+              ⚠ Assessor Trap: ${n.trap}
             </div>
           ` : ''}
         </article>
@@ -1382,23 +1471,22 @@
       const beightonScore = BEIGHTON_ITEMS.filter((i) => state.beighton[i.id]).length;
       const gcsTotal = state.gcs.e + state.gcs.v + state.gcs.m;
       const gcsBand = gcsTotal >= 13
-        ? { label: 'Mild (13–15)', color: '#34C759' }
+        ? { label: 'Mild (13–15)', color: '#10b981' }
         : gcsTotal >= 9
-          ? { label: 'Moderate (9–12)', color: '#FF9500' }
-          : { label: 'Severe (≤8) — Emergency', color: '#FF3B30' };
+          ? { label: 'Moderate (9–12)', color: '#f59e0b' }
+          : { label: 'Severe (≤8) — Emergency', color: '#ef4444' };
 
-      // Patient Right = Viewer Left; Patient Left = Viewer Right
       const toPtRight = w.dir === 'right';
       const toPtLeft = w.dir === 'left';
       const isMid = w.dir === 'mid';
 
       return `
         <div class="space-y-5">
-          <!-- 1. WEBER'S & RINNE'S SIMULATOR -->
+          <!-- 1. WEBER'S & RINNE'S HEARING SIMULATOR -->
           <section class="ah-card p-4 sm:p-6 space-y-4">
             <div>
-              <span class="mono-badge text-[11px] font-bold uppercase text-[#007AFF]">CN VIII &bull; 512 Hz Tuning Fork</span>
-              <h2 class="text-lg font-extrabold ah-text">Weber’s &amp; Rinne’s Simulator</h2>
+              <span class="mono-badge text-[11px] font-bold uppercase text-[#007aff]">CN VIII &bull; 512 Hz Tuning Fork</span>
+              <h2 class="text-lg font-display font-extrabold ah-text">Weber’s &amp; Rinne’s Hearing Simulator</h2>
             </div>
 
             <div class="flex flex-wrap gap-1.5">
@@ -1406,10 +1494,10 @@
                 <button
                   type="button"
                   onclick="state.weberMode='${k}'; renderApp();"
-                  class="px-3 py-2 rounded-xl text-xs font-bold border transition ${
+                  class="px-3 py-2 rounded-xl text-xs font-display font-bold border transition ${
                     state.weberMode === k
-                      ? 'bg-[#007AFF] text-white border-[#007AFF]'
-                      : 'ah-card-alt ah-text hover:border-[#007AFF]/50'
+                      ? 'bg-[#007aff] text-white border-[#007aff]'
+                      : 'ah-card-alt ah-text hover:border-[#007aff]/50'
                   }"
                 >${obj.label}</button>
               `).join('')}
@@ -1422,56 +1510,53 @@
                   <text x="58" y="22" text-anchor="middle" fill="var(--ah-secondary)" font-size="9.5" font-weight="800">PATIENT R</text>
                   <text x="302" y="22" text-anchor="middle" fill="var(--ah-secondary)" font-size="9.5" font-weight="800">PATIENT L</text>
 
-                  <!-- Ears -->
-                  <ellipse cx="106" cy="120" rx="13" ry="24" fill="${toPtRight ? '#FF9500' : 'var(--svg-surface)'}" fill-opacity="${toPtRight ? '0.4' : '1'}" stroke="${toPtRight ? '#FF9500' : 'var(--svg-stroke)'}" stroke-width="2" />
-                  <ellipse cx="254" cy="120" rx="13" ry="24" fill="${toPtLeft ? '#FF9500' : 'var(--svg-surface)'}" fill-opacity="${toPtLeft ? '0.4' : '1'}" stroke="${toPtLeft ? '#FF9500' : 'var(--svg-stroke)'}" stroke-width="2" />
+                  <ellipse cx="106" cy="120" rx="13" ry="24" fill="${toPtRight ? '#f59e0b' : 'var(--svg-surface)'}" fill-opacity="${toPtRight ? '0.4' : '1'}" stroke="${toPtRight ? '#f59e0b' : 'var(--svg-stroke)'}" stroke-width="2" />
+                  <ellipse cx="254" cy="120" rx="13" ry="24" fill="${toPtLeft ? '#f59e0b' : 'var(--svg-surface)'}" fill-opacity="${toPtLeft ? '0.4' : '1'}" stroke="${toPtLeft ? '#f59e0b' : 'var(--svg-stroke)'}" stroke-width="2" />
 
-                  <!-- Head -->
                   <path d="M 112,112 C 112,52 142,36 180,36 C 218,36 248,52 248,112 C 248,156 226,188 180,192 C 134,188 112,156 112,112 Z" fill="var(--svg-surface)" stroke="var(--svg-stroke)" stroke-width="2" />
                   <circle cx="154" cy="110" r="3.8" fill="var(--svg-stroke)" />
                   <circle cx="206" cy="110" r="3.8" fill="var(--svg-stroke)" />
                   <path d="M 164,158 Q 180,166 196,158" fill="none" stroke="var(--svg-stroke)" stroke-width="1.8" stroke-linecap="round" />
 
-                  <!-- Tuning Fork -->
-                  <circle cx="180" cy="66" r="13" fill="#007AFF" fill-opacity="0.2" class="fork-wave" />
-                  <line x1="180" y1="66" x2="180" y2="30" stroke="#007AFF" stroke-width="3.2" stroke-linecap="round" />
-                  <path d="M 173,12 L 173,28 C 173,34 187,34 187,28 L 187,12" fill="none" stroke="#007AFF" stroke-width="2.8" stroke-linecap="round" />
-                  <circle cx="180" cy="66" r="4" fill="#007AFF" />
+                  <circle cx="180" cy="66" r="13" fill="#007aff" fill-opacity="0.2" class="fork-wave" />
+                  <line x1="180" y1="66" x2="180" y2="30" stroke="#007aff" stroke-width="3.2" stroke-linecap="round" />
+                  <path d="M 173,12 L 173,28 C 173,34 187,34 187,28 L 187,12" fill="none" stroke="#007aff" stroke-width="2.8" stroke-linecap="round" />
+                  <circle cx="180" cy="66" r="4" fill="#007aff" />
 
                   ${isMid ? `
-                    <line x1="164" y1="68" x2="128" y2="94" stroke="#34C759" stroke-width="3" stroke-linecap="round" />
-                    <polygon points="122,98 132,96 128,88" fill="#34C759" />
-                    <line x1="196" y1="68" x2="232" y2="94" stroke="#34C759" stroke-width="3" stroke-linecap="round" />
-                    <polygon points="238,98 232,88 228,96" fill="#34C759" />
+                    <line x1="164" y1="68" x2="128" y2="94" stroke="#10b981" stroke-width="3" stroke-linecap="round" />
+                    <polygon points="122,98 132,96 128,88" fill="#10b981" />
+                    <line x1="196" y1="68" x2="232" y2="94" stroke="#10b981" stroke-width="3" stroke-linecap="round" />
+                    <polygon points="238,98 232,88 228,96" fill="#10b981" />
                   ` : ''}
                   ${toPtRight ? `
-                    <line x1="164" y1="68" x2="120" y2="100" stroke="#FF9500" stroke-width="4" stroke-linecap="round" />
-                    <polygon points="112,106 126,103 119,93" fill="#FF9500" />
-                    <text x="58" y="124" text-anchor="middle" fill="#FF9500" font-size="11" font-weight="800">LOUDER</text>
+                    <line x1="164" y1="68" x2="120" y2="100" stroke="#f59e0b" stroke-width="4" stroke-linecap="round" />
+                    <polygon points="112,106 126,103 119,93" fill="#f59e0b" />
+                    <text x="58" y="124" text-anchor="middle" fill="#f59e0b" font-size="11" font-weight="800">LOUDER</text>
                   ` : ''}
                   ${toPtLeft ? `
-                    <line x1="196" y1="68" x2="240" y2="100" stroke="#FF9500" stroke-width="4" stroke-linecap="round" />
-                    <polygon points="248,106 241,93 234,103" fill="#FF9500" />
-                    <text x="302" y="124" text-anchor="middle" fill="#FF9500" font-size="11" font-weight="800">LOUDER</text>
+                    <line x1="196" y1="68" x2="240" y2="100" stroke="#f59e0b" stroke-width="4" stroke-linecap="round" />
+                    <polygon points="248,106 241,93 234,103" fill="#f59e0b" />
+                    <text x="302" y="124" text-anchor="middle" fill="#f59e0b" font-size="11" font-weight="800">LOUDER</text>
                   ` : ''}
                 </svg>
               </div>
 
               <div class="md:col-span-6 space-y-3">
-                <div class="p-3.5 rounded-2xl bg-[#007AFF]/10 border border-[#007AFF]/25">
-                  <span class="block text-[10px] font-extrabold uppercase text-[#007AFF]">Weber’s Lateralisation</span>
-                  <p class="text-sm sm:text-base font-extrabold ah-text mt-0.5">${w.weber}</p>
+                <div class="p-3.5 rounded-2xl bg-[#007aff]/10 border border-[#007aff]/25">
+                  <span class="block text-[10px] font-display font-extrabold uppercase text-[#007aff]">Weber’s Lateralisation</span>
+                  <p class="text-sm sm:text-base font-display font-extrabold ah-text mt-0.5">${w.weber}</p>
                 </div>
 
                 <div class="grid grid-cols-2 gap-2.5">
-                  <div class="p-3 rounded-2xl border ${w.rightRinne.ok ? 'bg-[#34C759]/10 border-[#34C759]/30' : 'bg-[#FF3B30]/10 border-[#FF3B30]/35'}">
+                  <div class="p-3 rounded-2xl border ${w.rightRinne.ok ? 'bg-[#10b981]/10 border-[#10b981]/30' : 'bg-[#ef4444]/10 border-[#ef4444]/35'}">
                     <span class="block text-[10px] font-bold uppercase ah-secondary">Right Rinne’s</span>
-                    <span class="mono-badge text-base font-extrabold ${w.rightRinne.ok ? 'text-[#248A3D] dark:text-[#34C759]' : 'text-[#FF3B30]'}">${w.rightRinne.code}</span>
+                    <span class="mono-badge text-base font-extrabold ${w.rightRinne.ok ? 'text-[#059669] dark:text-[#10b981]' : 'text-[#ef4444]'}">${w.rightRinne.code}</span>
                     <span class="block text-[11px] font-semibold ah-secondary">${w.rightRinne.status}</span>
                   </div>
-                  <div class="p-3 rounded-2xl border ${w.leftRinne.ok ? 'bg-[#34C759]/10 border-[#34C759]/30' : 'bg-[#FF3B30]/10 border-[#FF3B30]/35'}">
+                  <div class="p-3 rounded-2xl border ${w.leftRinne.ok ? 'bg-[#10b981]/10 border-[#10b981]/30' : 'bg-[#ef4444]/10 border-[#ef4444]/35'}">
                     <span class="block text-[10px] font-bold uppercase ah-secondary">Left Rinne’s</span>
-                    <span class="mono-badge text-base font-extrabold ${w.leftRinne.ok ? 'text-[#248A3D] dark:text-[#34C759]' : 'text-[#FF3B30]'}">${w.leftRinne.code}</span>
+                    <span class="mono-badge text-base font-extrabold ${w.leftRinne.ok ? 'text-[#059669] dark:text-[#10b981]' : 'text-[#ef4444]'}">${w.leftRinne.code}</span>
                     <span class="block text-[11px] font-semibold ah-secondary">${w.leftRinne.status}</span>
                   </div>
                 </div>
@@ -1485,10 +1570,10 @@
           <section class="ah-card p-4 sm:p-6 space-y-4">
             <div class="flex flex-wrap items-start justify-between gap-2">
               <div>
-                <span class="mono-badge text-[11px] font-bold uppercase text-[#FF3B30]">Cerebral Compression &bull; Talk-Through</span>
-                <h2 class="text-lg font-extrabold ah-text">Hutchinson Pupil Stage Stepper</h2>
+                <span class="mono-badge text-[11px] font-bold uppercase text-[#ef4444]">Cerebral Compression &bull; Talk-Through</span>
+                <h2 class="text-lg font-display font-extrabold ah-text">Hutchinson Pupil 4-Stage Stepper</h2>
               </div>
-              <span class="px-3 py-1 rounded-xl text-xs font-extrabold ${h.tone === 'red' ? 'bg-[#FF3B30] text-white' : 'bg-[#FF9500]/15 text-[#FF9500]'}">${h.urgency}</span>
+              <span class="px-3 py-1 rounded-xl text-xs font-display font-extrabold ${h.tone === 'red' ? 'bg-[#ef4444] text-white' : 'bg-[#f59e0b]/15 text-[#d97706] dark:text-[#f59e0b]'}">${h.urgency}</span>
             </div>
 
             <div class="grid grid-cols-4 gap-2">
@@ -1496,10 +1581,10 @@
                 <button
                   type="button"
                   onclick="state.hutchStage=${st.stage}; renderApp();"
-                  class="py-2.5 px-2 rounded-xl text-xs font-extrabold border transition ${
+                  class="py-2.5 px-2 rounded-xl text-xs font-display font-extrabold border transition ${
                     state.hutchStage === st.stage
-                      ? 'bg-[#FF3B30] text-white border-[#FF3B30]'
-                      : 'ah-card-alt ah-text hover:border-[#FF3B30]/50'
+                      ? 'bg-[#ef4444] text-white border-[#ef4444]'
+                      : 'ah-card-alt ah-text hover:border-[#ef4444]/50'
                   }"
                 >${st.short}</button>
               `).join('')}
@@ -1511,23 +1596,23 @@
                   <rect x="0" y="0" width="360" height="145" rx="16" fill="var(--svg-bg)" />
 
                   <text x="95" y="22" text-anchor="middle" fill="var(--ah-secondary)" font-size="9.5" font-weight="800">IPSILATERAL (LESION)</text>
-                  <path d="M 32,74 Q 95,28 158,74 Q 95,120 32,74 Z" fill="#FFFFFF" stroke="var(--svg-stroke)" stroke-width="2" />
+                  <path d="M 32,74 Q 95,28 158,74 Q 95,120 32,74 Z" fill="#ffffff" stroke="var(--svg-stroke)" stroke-width="2" />
                   <circle cx="95" cy="74" r="28" fill="var(--svg-iris)" fill-opacity="0.85" />
                   <circle cx="95" cy="74" r="${h.ipsiR}" fill="#000000" class="pupil-circle" />
-                  <circle cx="88" cy="67" r="2.8" fill="#FFFFFF" fill-opacity="0.8" />
-                  <text x="95" y="132" text-anchor="middle" fill="var(--ah-text)" font-size="10" font-weight="700">${h.ipsiText}</text>
+                  <circle cx="88" cy="67" r="2.8" fill="#ffffff" fill-opacity="0.8" />
+                  <text x="95" y="132" text-anchor="middle" fill="var(--ah-text)" font-size="9.5" font-weight="700">${h.ipsiText}</text>
 
                   <text x="265" y="22" text-anchor="middle" fill="var(--ah-secondary)" font-size="9.5" font-weight="800">CONTRALATERAL</text>
-                  <path d="M 202,74 Q 265,28 328,74 Q 265,120 202,74 Z" fill="#FFFFFF" stroke="var(--svg-stroke)" stroke-width="2" />
+                  <path d="M 202,74 Q 265,28 328,74 Q 265,120 202,74 Z" fill="#ffffff" stroke="var(--svg-stroke)" stroke-width="2" />
                   <circle cx="265" cy="74" r="28" fill="var(--svg-iris)" fill-opacity="0.85" />
                   <circle cx="265" cy="74" r="${h.contraR}" fill="#000000" class="pupil-circle" />
-                  <circle cx="258" cy="67" r="2.8" fill="#FFFFFF" fill-opacity="0.8" />
-                  <text x="265" y="132" text-anchor="middle" fill="var(--ah-text)" font-size="10" font-weight="700">${h.contraText}</text>
+                  <circle cx="258" cy="67" r="2.8" fill="#ffffff" fill-opacity="0.8" />
+                  <text x="265" y="132" text-anchor="middle" fill="var(--ah-text)" font-size="9.5" font-weight="700">${h.contraText}</text>
                 </svg>
               </div>
 
               <div class="md:col-span-6 ah-card-alt p-4 space-y-2">
-                <h3 class="text-sm sm:text-base font-extrabold ah-text">${h.title}</h3>
+                <h3 class="text-sm sm:text-base font-display font-extrabold ah-text">${h.title}</h3>
                 <ul class="list-disc pl-5 space-y-1.5 text-xs sm:text-sm ah-text">
                   ${h.points.map((pt) => `<li>${pt}</li>`).join('')}
                 </ul>
@@ -1542,11 +1627,11 @@
               <div class="space-y-3">
                 <div class="flex items-center justify-between gap-2">
                   <div>
-                    <span class="mono-badge text-[10px] font-bold uppercase text-[#AF52DE]">Hypermobility</span>
-                    <h3 class="text-base font-extrabold ah-text">Beighton Scale (0–9)</h3>
+                    <span class="mono-badge text-[10px] font-bold uppercase text-[#8b5cf6]">Hypermobility</span>
+                    <h3 class="text-base font-display font-extrabold ah-text">Beighton Scale (0–9)</h3>
                   </div>
                   <div class="flex items-center gap-2">
-                    <span class="mono-badge px-3 py-1 rounded-xl bg-[#AF52DE] text-white text-sm font-extrabold">${beightonScore}/9</span>
+                    <span class="mono-badge px-3 py-1 rounded-xl bg-[#8b5cf6] text-white text-sm font-extrabold">${beightonScore}/9</span>
                     <button type="button" onclick="state.beighton={}; renderApp();" class="text-xs font-bold ah-secondary underline">Reset</button>
                   </div>
                 </div>
@@ -1555,10 +1640,10 @@
                     const on = !!state.beighton[item.id];
                     return `
                       <label class="flex items-center justify-between gap-2 px-3 py-2 rounded-xl border cursor-pointer transition ${
-                        on ? 'bg-[#AF52DE]/12 border-[#AF52DE]/50' : 'ah-card-alt'
+                        on ? 'bg-[#8b5cf6]/12 border-[#8b5cf6]/50' : 'ah-card-alt'
                       }">
                         <div class="flex items-center gap-2.5 min-w-0">
-                          <input type="checkbox" ${on ? 'checked' : ''} onchange="state.beighton['${item.id}']=!state.beighton['${item.id}']; renderApp();" class="w-4 h-4 accent-[#AF52DE] rounded shrink-0" />
+                          <input type="checkbox" ${on ? 'checked' : ''} onchange="state.beighton['${item.id}']=!state.beighton['${item.id}']; renderApp();" class="w-4 h-4 accent-[#8b5cf6] rounded shrink-0" />
                           <span class="text-xs font-semibold ah-text">${item.label}</span>
                         </div>
                         <span class="mono-badge text-[11px] font-bold ah-secondary">+1</span>
@@ -1567,7 +1652,7 @@
                   }).join('')}
                 </div>
               </div>
-              <div class="px-3 py-2 rounded-xl text-xs font-bold ${beightonScore >= 5 ? 'bg-[#FF9500]/15 text-[#FF9500]' : 'bg-[#34C759]/15 text-[#248A3D] dark:text-[#34C759]'}">
+              <div class="px-3 py-2 rounded-xl text-xs font-display font-bold ${beightonScore >= 5 ? 'bg-[#f59e0b]/15 text-[#d97706] dark:text-[#f59e0b]' : 'bg-[#10b981]/15 text-[#059669] dark:text-[#10b981]'}">
                 ${beightonScore >= 5 ? 'Positive Generalised Hypermobility Screen (≥5/9 adults <50; ≥4/9 if >50)' : 'Within Normal Range (<5/9 in adults <50)'}
               </div>
             </section>
@@ -1577,10 +1662,10 @@
               <div class="space-y-3">
                 <div class="flex items-center justify-between gap-2">
                   <div>
-                    <span class="mono-badge text-[10px] font-bold uppercase text-[#007AFF]">Trauma Screen</span>
-                    <h3 class="text-base font-extrabold ah-text">Glasgow Coma Scale</h3>
+                    <span class="mono-badge text-[10px] font-bold uppercase text-[#007aff]">Trauma Screen</span>
+                    <h3 class="text-base font-display font-extrabold ah-text">Glasgow Coma Scale</h3>
                   </div>
-                  <span class="mono-badge px-3 py-1 rounded-xl bg-[#1C1C1E] dark:bg-[#F2F2F7] text-[#F2F2F7] dark:text-[#1C1C1E] text-xs sm:text-sm font-extrabold">
+                  <span class="mono-badge px-3 py-1 rounded-xl bg-[#1c1c1e] dark:bg-[#f2f2f7] text-[#f2f2f7] dark:text-[#1c1c1e] text-xs sm:text-sm font-extrabold">
                     E${state.gcs.e} V${state.gcs.v} M${state.gcs.m} = ${gcsTotal}/15
                   </span>
                 </div>
@@ -1592,14 +1677,14 @@
                     { k: 'm', title: 'Motor (1–6)', opts: GCS_OPTS.m },
                   ].map((col) => `
                     <div class="space-y-1">
-                      <span class="block text-[10px] font-extrabold uppercase ah-secondary px-1">${col.title}</span>
+                      <span class="block text-[10px] font-display font-extrabold uppercase ah-secondary px-1">${col.title}</span>
                       ${col.opts.map((o) => `
                         <button
                           type="button"
                           onclick="state.gcs.${col.k}=${o.v}; renderApp();"
                           class="w-full text-left px-2.5 py-1.5 rounded-xl text-[11px] font-bold border transition ${
                             state.gcs[col.k] === o.v
-                              ? 'bg-[#007AFF] text-white border-[#007AFF]'
+                              ? 'bg-[#007aff] text-white border-[#007aff]'
                               : 'ah-card-alt ah-text'
                           }"
                         >${o.t}</button>
@@ -1609,45 +1694,39 @@
                 </div>
               </div>
 
-              <div class="px-3 py-2 rounded-xl text-xs font-extrabold flex items-center justify-between" style="background:${gcsBand.color}20; color:${gcsBand.color};">
+              <div class="px-3 py-2 rounded-xl text-xs font-display font-extrabold flex items-center justify-between" style="background:${gcsBand.color}20; color:${gcsBand.color};">
                 <span>Severity: ${gcsBand.label}</span>
                 <button type="button" onclick="state.gcs={e:4,v:5,m:6}; renderApp();" class="underline">Reset 15</button>
               </div>
             </section>
           </div>
 
-          <!-- 4. DIZZINESS & SPECIAL TESTS COMPACT COMPARISON -->
+          <!-- 4. DIZZINESS & SPECIAL TESTS QUICK SPLIT -->
           <section class="space-y-3">
-            <h2 class="text-xs font-extrabold uppercase tracking-wider ah-secondary px-1">Dizziness &amp; Special Tests Quick-Reference</h2>
-            <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-3.5">
-              <article class="ah-card p-4 border-t-4 border-t-[#007AFF] space-y-1.5">
-                <span class="text-[10px] font-extrabold uppercase text-[#007AFF]">BPPV (Peripheral Vestibular)</span>
-                <h3 class="text-sm font-extrabold ah-text">Dix-Hallpike Test</h3>
+            <h2 class="text-xs font-display font-extrabold uppercase tracking-wider ah-secondary px-1">Dizziness &amp; Special Tests Quick Split</h2>
+            <div class="grid grid-cols-1 sm:grid-cols-2 gap-3.5">
+              <article class="ah-card p-4 border-t-4 border-t-[#007aff] space-y-1.5">
+                <span class="text-[10px] font-display font-extrabold uppercase text-[#007aff]">BPPV (Peripheral Vestibular)</span>
+                <h3 class="text-sm font-display font-extrabold ah-text">Dix-Hallpike Test</h3>
                 <p class="text-xs ah-secondary leading-relaxed">Rapid supine recline with head turned 45° &amp; extended 20°. Positive: brief latency (2–5s), rotary nystagmus &amp; vertigo that fatigues on repeat.</p>
               </article>
 
-              <article class="ah-card p-4 border-t-4 border-t-[#34C759] space-y-1.5">
-                <span class="text-[10px] font-extrabold uppercase text-[#248A3D] dark:text-[#34C759]">Cervicogenic Dizziness</span>
-                <h3 class="text-sm font-extrabold ah-text">Fitz-Ritson’s Test</h3>
-                <p class="text-xs ah-secondary leading-relaxed">Stabilise patient’s head still (isolates vestibular system) while seated patient rotates trunk side-to-side. Dizziness points to cervical proprioceptive origin.</p>
+              <article class="ah-card p-4 border-t-4 border-t-[#10b981] space-y-1.5">
+                <span class="text-[10px] font-display font-extrabold uppercase text-[#10b981]">Cervicogenic Dizziness</span>
+                <h3 class="text-sm font-display font-extrabold ah-text">Fitz-Ritson’s Test</h3>
+                <p class="text-xs ah-secondary leading-relaxed">Stabilise patient’s head still (isolating vestibular apparatus) while seated patient rotates trunk side-to-side. Dizziness points to cervical proprioception.</p>
               </article>
 
-              <article class="ah-card p-4 border-t-4 border-t-[#FF3B30] space-y-1.5">
-                <span class="text-[10px] font-extrabold uppercase text-[#FF3B30]">Vascular Red Flag</span>
-                <h3 class="text-sm font-extrabold ah-text">CAD (Carotid / Vertebral)</h3>
+              <article class="ah-card p-4 border-t-4 border-t-[#ef4444] space-y-1.5">
+                <span class="text-[10px] font-display font-extrabold uppercase text-[#ef4444]">Vascular Red Flag</span>
+                <h3 class="text-sm font-display font-extrabold ah-text">CAD Screening (Carotid &amp; Vertebral)</h3>
                 <p class="text-xs ah-secondary leading-relaxed"><strong>5 Ds:</strong> Dizziness, Diplopia, Dysarthria, Dysphagia, Drop attacks. <strong>3 Ns + A:</strong> Nausea, Numbness, Nystagmus + Ataxia. Stop &amp; refer urgently.</p>
               </article>
 
-              <article class="ah-card p-4 border-t-4 border-t-[#AF52DE] space-y-1.5">
-                <span class="text-[10px] font-extrabold uppercase text-[#AF52DE]">Subtle UMN / Proximal</span>
-                <h3 class="text-sm font-extrabold ah-text">Pronator Drift</h3>
-                <p class="text-xs ah-secondary leading-relaxed">Arms held forward, palms up, eyes closed (20–30s). Downward drift + forearm pronation signals subtle contralateral UMN / proximal muscle weakness.</p>
-              </article>
-
-              <article class="ah-card p-4 border-t-4 border-t-[#FF9500] space-y-1.5 sm:col-span-2">
-                <span class="text-[10px] font-extrabold uppercase text-[#FF9500]">Neuromuscular Junction (MG)</span>
-                <h3 class="text-sm font-extrabold ah-text">Fatiguable Muscle Testing</h3>
-                <p class="text-xs ah-secondary leading-relaxed">Repeated rapid opening/closing of hands or repeated heel lifts. Progressive weakness with repetition screens for Myasthenia Gravis.</p>
+              <article class="ah-card p-4 border-t-4 border-t-[#8b5cf6] space-y-1.5">
+                <span class="text-[10px] font-display font-extrabold uppercase text-[#8b5cf6]">Subtle UMN / Proximal Weakness</span>
+                <h3 class="text-sm font-display font-extrabold ah-text">Pronator Drift</h3>
+                <p class="text-xs ah-secondary leading-relaxed">Arms held forward, palms up, eyes closed (20–30s). Downward drift + forearm pronation signals subtle contralateral UMN or proximal weakness.</p>
               </article>
             </div>
           </section>
@@ -1671,15 +1750,15 @@
           <section class="ah-card p-4 sm:p-6 space-y-4">
             <div class="flex flex-wrap items-center justify-between gap-2">
               <div>
-                <span class="mono-badge text-[11px] font-bold uppercase text-[#007AFF]">Tap Tract &rarr; Bedside Tests</span>
-                <h2 class="text-lg font-extrabold ah-text">Spinal Cord Cross-Section</h2>
+                <span class="mono-badge text-[11px] font-bold uppercase text-[#007aff]">Tap Tract &rarr; Bedside Tests</span>
+                <h2 class="text-lg font-display font-extrabold ah-text">Spinal Cord Cross-Section</h2>
               </div>
               <div class="flex flex-wrap gap-1.5">
                 ${Object.entries(CORD_TRACTS).map(([id, obj]) => `
                   <button
                     type="button"
                     onclick="state.selectedTract='${id}'; renderApp();"
-                    class="px-3 py-1.5 rounded-xl text-xs font-bold border transition ${
+                    class="px-3 py-1.5 rounded-xl text-xs font-display font-bold border transition ${
                       state.selectedTract === id ? 'text-white border-transparent' : 'ah-card-alt ah-text'
                     }"
                     style="${state.selectedTract === id ? `background:${obj.color};` : ''}"
@@ -1702,29 +1781,29 @@
                 <path d="M 164,68 C 154,66 144,78 146,98 C 148,118 142,132 128,148 C 114,164 116,190 136,196 C 158,202 172,182 176,158 C 184,148 216,148 224,158 C 228,182 242,202 264,196 C 284,190 286,164 272,148 C 258,132 252,118 254,98 C 256,78 246,66 236,68 C 224,70 220,104 216,118 C 208,124 192,124 184,118 C 180,104 176,70 164,68 Z" fill="var(--svg-cord-grey)" fill-opacity="0.6" stroke="var(--svg-stroke)" stroke-width="1.5" />
                 <circle cx="200" cy="136" r="3.8" fill="var(--svg-bg)" stroke="var(--svg-stroke)" stroke-width="1.3" />
 
-                <!-- DCML (Blue #007AFF) -->
-                <path onclick="state.selectedTract='dcml'; renderApp();" class="${tCls('dcml')}" d="M 166,40 C 184,36 216,36 234,40 L 222,112 C 210,116 190,116 178,112 Z" fill="#007AFF" fill-opacity="0.86" stroke="#0056B3" stroke-width="1.4" />
-                <text x="200" y="74" text-anchor="middle" fill="#FFFFFF" font-size="11" font-weight="800" pointer-events="none">DCML</text>
+                <!-- DCML (#007aff) -->
+                <path onclick="state.selectedTract='dcml'; renderApp();" class="${tCls('dcml')}" d="M 166,40 C 184,36 216,36 234,40 L 222,112 C 210,116 190,116 178,112 Z" fill="#007aff" fill-opacity="0.86" stroke="#0056b3" stroke-width="1.4" />
+                <text x="200" y="74" text-anchor="middle" fill="#ffffff" font-size="11" font-weight="800" pointer-events="none">DCML</text>
 
-                <!-- Lateral Corticospinal Tract (Coral Red #FF3B30) -->
-                <ellipse onclick="state.selectedTract='cst'; renderApp();" class="${tCls('cst')}" cx="112" cy="118" rx="24" ry="19" fill="#FF3B30" fill-opacity="0.88" stroke="#B71C1C" stroke-width="1.4" />
-                <ellipse onclick="state.selectedTract='cst'; renderApp();" class="${tCls('cst')}" cx="288" cy="118" rx="24" ry="19" fill="#FF3B30" fill-opacity="0.88" stroke="#B71C1C" stroke-width="1.4" />
-                <text x="112" y="122" text-anchor="middle" fill="#FFFFFF" font-size="10" font-weight="800" pointer-events="none">CST (UMN)</text>
-                <text x="288" y="122" text-anchor="middle" fill="#FFFFFF" font-size="10" font-weight="800" pointer-events="none">CST (UMN)</text>
+                <!-- Lateral Corticospinal Tract (#ef4444) -->
+                <ellipse onclick="state.selectedTract='cst'; renderApp();" class="${tCls('cst')}" cx="112" cy="118" rx="24" ry="19" fill="#ef4444" fill-opacity="0.88" stroke="#b91c1c" stroke-width="1.4" />
+                <ellipse onclick="state.selectedTract='cst'; renderApp();" class="${tCls('cst')}" cx="288" cy="118" rx="24" ry="19" fill="#ef4444" fill-opacity="0.88" stroke="#b91c1c" stroke-width="1.4" />
+                <text x="112" y="122" text-anchor="middle" fill="#ffffff" font-size="10" font-weight="800" pointer-events="none">CST (UMN)</text>
+                <text x="288" y="122" text-anchor="middle" fill="#ffffff" font-size="10" font-weight="800" pointer-events="none">CST (UMN)</text>
 
-                <!-- Spinothalamic Tract (Amber #FF9500) -->
-                <path onclick="state.selectedTract='stt'; renderApp();" class="${tCls('stt')}" d="M 74,154 C 90,154 106,166 116,188 C 124,204 114,216 98,210 C 78,200 66,176 74,154 Z" fill="#FF9500" fill-opacity="0.9" stroke="#C66900" stroke-width="1.4" />
-                <path onclick="state.selectedTract='stt'; renderApp();" class="${tCls('stt')}" d="M 326,154 C 310,154 294,166 284,188 C 276,204 286,216 302,210 C 322,200 334,176 326,154 Z" fill="#FF9500" fill-opacity="0.9" stroke="#C66900" stroke-width="1.4" />
-                <text x="92" y="188" text-anchor="middle" fill="#FFFFFF" font-size="10" font-weight="800" pointer-events="none">STT</text>
-                <text x="308" y="188" text-anchor="middle" fill="#FFFFFF" font-size="10" font-weight="800" pointer-events="none">STT</text>
+                <!-- Spinothalamic Tract (#f59e0b) -->
+                <path onclick="state.selectedTract='stt'; renderApp();" class="${tCls('stt')}" d="M 74,154 C 90,154 106,166 116,188 C 124,204 114,216 98,210 C 78,200 66,176 74,154 Z" fill="#f59e0b" fill-opacity="0.9" stroke="#b45309" stroke-width="1.4" />
+                <path onclick="state.selectedTract='stt'; renderApp();" class="${tCls('stt')}" d="M 326,154 C 310,154 294,166 284,188 C 276,204 286,216 302,210 C 322,200 334,176 326,154 Z" fill="#f59e0b" fill-opacity="0.9" stroke="#b45309" stroke-width="1.4" />
+                <text x="92" y="188" text-anchor="middle" fill="#ffffff" font-size="10" font-weight="800" pointer-events="none">STT</text>
+                <text x="308" y="188" text-anchor="middle" fill="#ffffff" font-size="10" font-weight="800" pointer-events="none">STT</text>
               </svg>
             </div>
 
-            <!-- Pinned Clinical Card Directly Underneath -->
+            <!-- Pinned Clinical Info Card -->
             <div class="ah-card-alt p-4 space-y-2.5 border-l-4" style="border-left-color:${tr.color};">
               <div class="flex flex-wrap items-center justify-between gap-2">
-                <h3 class="text-base font-extrabold ah-text">${tr.name}</h3>
-                <span class="px-2.5 py-0.5 rounded-lg text-[11px] font-extrabold text-white" style="background:${tr.color};">${tr.badge}</span>
+                <h3 class="text-base font-display font-extrabold ah-text">${tr.name}</h3>
+                <span class="px-2.5 py-0.5 rounded-lg text-[11px] font-display font-extrabold text-white" style="background:${tr.color};">${tr.badge}</span>
               </div>
               <div class="grid grid-cols-1 sm:grid-cols-2 gap-2.5 text-xs sm:text-sm">
                 <div><strong class="ah-secondary uppercase text-[10px] block">Function</strong><span class="ah-text">${tr.role}</span></div>
@@ -1737,18 +1816,18 @@
             </div>
           </section>
 
-          <!-- 2. BRAIN LESIONS & CORTICAL LOCALISATION DECK (mchiro_srs_v4) -->
+          <!-- 2. BRAIN LESIONS & CORTICAL LOCALISATION FLASHCARDS (mchiro_srs_v4) -->
           <section class="space-y-3.5">
             <div class="flex flex-wrap items-center justify-between gap-2 px-1">
               <div>
-                <h2 class="text-lg font-extrabold ah-text">Brain Lesions &amp; Cortical Localisation</h2>
+                <h2 class="text-lg font-display font-extrabold ah-text">Brain Lesions &amp; Cortical Localisation</h2>
                 <p class="text-xs ah-secondary">Leitner Spaced Repetition synced to <span class="mono-badge">mchiro_srs_v4</span></p>
               </div>
               <button
                 type="button"
                 onclick="state.dueOnly=!state.dueOnly; renderApp();"
-                class="px-3.5 py-2 rounded-xl text-xs font-extrabold border transition ${
-                  state.dueOnly ? 'bg-[#FF9500] text-white border-[#FF9500]' : 'ah-card ah-text'
+                class="px-3.5 py-2 rounded-xl text-xs font-display font-extrabold border transition ${
+                  state.dueOnly ? 'bg-[#f59e0b] text-white border-[#f59e0b]' : 'ah-card ah-text'
                 }"
               >
                 ${state.dueOnly ? `Due Today Only (${dueCount}) ✓` : `Filter Due Today (${dueCount})`}
@@ -1764,8 +1843,8 @@
                     <article class="ah-card p-4 sm:p-5 flex flex-col justify-between gap-3">
                       <div class="space-y-2">
                         <div class="flex items-start justify-between gap-2">
-                          <h3 class="text-sm sm:text-base font-extrabold ah-text">${item.term}</h3>
-                          <span class="px-2 py-0.5 rounded-lg text-[10px] font-extrabold bg-[#AF52DE]/15 text-[#AF52DE] shrink-0">${item.region}</span>
+                          <h3 class="text-sm sm:text-base font-display font-extrabold ah-text">${item.term}</h3>
+                          <span class="px-2 py-0.5 rounded-lg text-[10px] font-display font-extrabold bg-[#8b5cf6]/15 text-[#8b5cf6] shrink-0">${item.region}</span>
                         </div>
 
                         <div onclick="this.classList.remove('recall-blur')" class="space-y-1.5 text-xs sm:text-sm ${bCls}">
@@ -1775,17 +1854,17 @@
                         </div>
 
                         ${item.trap ? `
-                          <div class="px-3 py-1.5 rounded-xl bg-[#FF3B30]/10 border border-[#FF3B30]/30 text-xs font-extrabold text-[#FF3B30]">
+                          <div class="px-3 py-1.5 rounded-xl bg-[#ef4444]/10 border border-[#ef4444]/30 text-xs font-display font-extrabold text-[#ef4444]">
                             ⚠ ${item.trap}
                           </div>
                         ` : ''}
                       </div>
 
-                      <!-- Leitner Buttons: Again / Shaky 2d / Solid 7d -->
+                      <!-- Leitner SRS Buttons: Again / Shaky (2d) / Solid (7d) -->
                       <div class="grid grid-cols-3 gap-1.5 pt-2 border-t border-black/5 dark:border-white/10">
-                        <button type="button" onclick="rateSrs('${item.id}','again')" class="py-2 rounded-xl text-[11px] font-bold border transition ${box==='again' ? 'bg-[#FF3B30] text-white border-[#FF3B30]' : 'bg-[#FF3B30]/10 text-[#FF3B30] border-[#FF3B30]/25'}">Again</button>
-                        <button type="button" onclick="rateSrs('${item.id}','shaky')" class="py-2 rounded-xl text-[11px] font-bold border transition ${box==='shaky' ? 'bg-[#FF9500] text-white border-[#FF9500]' : 'bg-[#FF9500]/10 text-[#FF9500] border-[#FF9500]/25'}">Shaky (2d)</button>
-                        <button type="button" onclick="rateSrs('${item.id}','solid')" class="py-2 rounded-xl text-[11px] font-bold border transition ${box==='solid' ? 'bg-[#34C759] text-white border-[#34C759]' : 'bg-[#34C759]/12 text-[#248A3D] dark:text-[#34C759] border-[#34C759]/25'}">Solid (7d)</button>
+                        <button type="button" onclick="rateSrs('${item.id}','again')" class="py-2 rounded-xl text-[11px] font-display font-bold border transition ${box==='again' ? 'bg-[#ef4444] text-white border-[#ef4444]' : 'bg-[#ef4444]/10 text-[#ef4444] border-[#ef4444]/25'}">Again</button>
+                        <button type="button" onclick="rateSrs('${item.id}','shaky')" class="py-2 rounded-xl text-[11px] font-display font-bold border transition ${box==='shaky' ? 'bg-[#f59e0b] text-white border-[#f59e0b]' : 'bg-[#f59e0b]/10 text-[#d97706] dark:text-[#f59e0b] border-[#f59e0b]/25'}">Shaky (2d)</button>
+                        <button type="button" onclick="rateSrs('${item.id}','solid')" class="py-2 rounded-xl text-[11px] font-display font-bold border transition ${box==='solid' ? 'bg-[#10b981] text-white border-[#10b981]' : 'bg-[#10b981]/12 text-[#059669] dark:text-[#10b981] border-[#10b981]/25'}">Solid (7d)</button>
                       </div>
                     </article>
                   `;
@@ -1793,8 +1872,8 @@
               </div>
             ` : `
               <div class="ah-card p-8 text-center space-y-1">
-                <p class="text-base font-extrabold text-[#34C759]">All Caught Up!</p>
-                <p class="text-xs ah-secondary">No brain lesion cards are due today. Tap the filter button above to view all 7 cards.</p>
+                <p class="text-base font-display font-extrabold text-[#10b981]">All Caught Up!</p>
+                <p class="text-xs ah-secondary">No brain lesion cards are due today. Tap the filter button above to view all cards.</p>
               </div>
             `}
           </section>
@@ -1859,74 +1938,74 @@
 
       return `
         <div class="max-w-3xl mx-auto space-y-6">
-          <!-- 1. COUNTDOWN TIMER CARD -->
+          <!-- 1. 15-MIN COUNTDOWN TIMER -->
           <section class="ah-card p-5 flex flex-wrap items-center justify-between gap-4">
             <div>
-              <span class="mono-badge text-[10px] font-bold uppercase text-[#007AFF]">OSCE Practical Timer</span>
+              <span class="mono-badge text-[10px] font-bold uppercase text-[#007aff]">OSCE Practical Timer</span>
               <div id="osce-clock" class="mono-badge text-4xl font-extrabold ah-text mt-0.5">${formatClock(state.osceRemaining)}</div>
               <div class="mt-2.5 flex gap-2">
-                <button type="button" onclick="setOscePreset(900)" class="px-3 py-1.5 rounded-xl text-xs font-bold transition ${state.osceDuration === 900 ? 'bg-[#007AFF] text-white' : 'ah-card-alt ah-text'}">15:00 Full Exam</button>
-                <button type="button" onclick="setOscePreset(60)" class="px-3 py-1.5 rounded-xl text-xs font-bold transition ${state.osceDuration === 60 ? 'bg-[#AF52DE] text-white' : 'ah-card-alt ah-text'}">01:00 Rapid</button>
+                <button type="button" onclick="setOscePreset(900)" class="px-3 py-1.5 rounded-xl text-xs font-display font-bold transition ${state.osceDuration === 900 ? 'bg-[#007aff] text-white' : 'ah-card-alt ah-text'}">15:00 Full Exam</button>
+                <button type="button" onclick="setOscePreset(60)" class="px-3 py-1.5 rounded-xl text-xs font-display font-bold transition ${state.osceDuration === 60 ? 'bg-[#8b5cf6] text-white' : 'ah-card-alt ah-text'}">01:00 Rapid</button>
               </div>
             </div>
 
             <div class="flex flex-col items-start sm:items-end gap-2">
               <div class="flex gap-2">
-                <button type="button" onclick="toggleOsceTimer()" class="px-5 py-2.5 rounded-xl text-xs font-extrabold text-white transition ${state.osceRunning ? 'bg-[#FF9500]' : 'bg-[#34C759]'}">
+                <button type="button" onclick="toggleOsceTimer()" class="px-5 py-2.5 rounded-xl text-xs font-display font-extrabold text-white transition ${state.osceRunning ? 'bg-[#f59e0b]' : 'bg-[#10b981]'}">
                   ${state.osceRunning ? 'Pause' : 'Start'}
                 </button>
-                <button type="button" onclick="setOscePreset(state.osceDuration)" class="px-4 py-2.5 rounded-xl text-xs font-bold ah-card-alt ah-text">
+                <button type="button" onclick="setOscePreset(state.osceDuration)" class="px-4 py-2.5 rounded-xl text-xs font-display font-bold ah-card-alt ah-text">
                   Reset
                 </button>
               </div>
               <span class="text-xs font-bold ah-secondary">
-                Session: <span class="text-[#34C759]">${state.oscePass} Pass</span> &bull; <span class="text-[#FF3B30]">${state.osceDrill} Drill</span>
+                Session: <span class="text-[#10b981]">${state.oscePass} Pass</span> &bull; <span class="text-[#ef4444]">${state.osceDrill} Drill</span>
               </span>
             </div>
           </section>
 
-          <!-- 2. RANDOM EXAMINER PROMPT ("SAY IT ALOUD") -->
+          <!-- 2. "SAY IT ALOUD" PROMPT GENERATOR -->
           <section class="ah-card p-5 space-y-4">
             <div class="flex flex-wrap items-center justify-between gap-2">
-              <span class="px-2.5 py-1 rounded-xl text-[11px] font-extrabold bg-[#007AFF]/12 text-[#007AFF]">${p.sec}</span>
+              <span class="px-2.5 py-1 rounded-xl text-[11px] font-display font-extrabold bg-[#007aff]/12 text-[#007aff]">${p.sec}</span>
               <div class="flex items-center gap-2">
-                <span class="mono-badge text-xs font-extrabold text-[#34C759]">Score: ${ticked}/${p.points.length}</span>
-                <button type="button" onclick="nextRandomPrompt()" class="px-3.5 py-1.5 rounded-xl bg-[#1C1C1E] dark:bg-[#F2F2F7] text-[#F2F2F7] dark:text-[#1C1C1E] text-xs font-extrabold">🎲 Random Prompt</button>
+                <span class="mono-badge text-xs font-extrabold text-[#10b981]">Score: ${ticked}/${p.points.length}</span>
+                <button type="button" onclick="nextRandomPrompt()" class="px-3.5 py-1.5 rounded-xl bg-[#1c1c1e] dark:bg-[#f2f2f7] text-[#f2f2f7] dark:text-[#1c1c1e] text-xs font-display font-extrabold">🎲 Random Prompt</button>
               </div>
             </div>
 
-            <h3 class="text-base sm:text-lg font-extrabold ah-text leading-snug">
+            <h3 class="text-base sm:text-lg font-display font-extrabold ah-text leading-snug">
               Examiner: “${p.prompt}”
             </h3>
 
-            <div class="px-3.5 py-2.5 rounded-2xl bg-[#FF3B30]/10 border border-[#FF3B30]/30 text-xs font-extrabold text-[#FF3B30]">
+            <div class="px-3.5 py-2.5 rounded-2xl bg-[#ef4444]/10 border border-[#ef4444]/30 text-xs font-display font-extrabold text-[#ef4444]">
               ⚠ Assessor Trap: ${p.trap}
             </div>
 
             <div class="ah-card-alt divide-y divide-black/5 dark:divide-white/10 overflow-hidden">
               ${p.points.map((pt, idx) => `
                 <label class="flex items-start gap-3 p-3.5 cursor-pointer">
-                  <input type="checkbox" ${state.osceTicked[idx] ? 'checked' : ''} onchange="state.osceTicked[${idx}]=!state.osceTicked[${idx}]; renderApp();" class="mt-0.5 w-4 h-4 accent-[#34C759] rounded shrink-0" />
+                  <input type="checkbox" ${state.osceTicked[idx] ? 'checked' : ''} onchange="state.osceTicked[${idx}]=!state.osceTicked[${idx}]; renderApp();" class="mt-0.5 w-4 h-4 accent-[#10b981] rounded shrink-0" />
                   <span class="text-xs sm:text-sm ${state.osceTicked[idx] ? 'line-through ah-secondary' : 'ah-text font-medium'}">${pt}</span>
                 </label>
               `).join('')}
             </div>
 
             <div class="grid grid-cols-2 gap-3">
-              <button type="button" onclick="state.oscePass++; nextRandomPrompt(); showToast('Marked Pass ✓','green');" class="py-3 rounded-2xl bg-[#34C759] text-white text-xs font-extrabold">✓ Pass &amp; Next</button>
-              <button type="button" onclick="state.osceDrill++; nextRandomPrompt(); showToast('Flagged to Drill ↺','red');" class="py-3 rounded-2xl bg-[#FF3B30] text-white text-xs font-extrabold">↺ Drill &amp; Next</button>
+              <button type="button" onclick="state.oscePass++; nextRandomPrompt(); showToast('Marked Pass ✓','emerald');" class="py-3 rounded-2xl bg-[#10b981] text-white text-xs font-display font-extrabold">✓ Pass &amp; Next</button>
+              <button type="button" onclick="state.osceDrill++; nextRandomPrompt(); showToast('Flagged to Drill ↺','red');" class="py-3 rounded-2xl bg-[#ef4444] text-white text-xs font-display font-extrabold">↺ Drill &amp; Next</button>
             </div>
           </section>
 
-          <!-- 3. COLLAPSIBLE 8-SECTION YEAR 3 TESTING OVERVIEW -->
+          <!-- 3. 8-SECTION YEAR 3 CLINICAL NEUROLOGY TESTING OVERVIEW -->
           <section class="space-y-2.5">
             <div class="ah-card p-4 space-y-2">
               <div class="flex items-center justify-between">
-                <h2 class="text-sm sm:text-base font-extrabold ah-text">Year 3 Testing Overview (${checkedItems}/${totalItems} — ${pct}%)</h2>
+                <h2 class="text-sm sm:text-base font-display font-extrabold ah-text">Year 3 Testing Overview (${checkedItems}/${totalItems} — ${pct}%)</h2>
                 <button type="button" onclick="state.checkedOverview={}; saveStore('mchiro_neuro_overview_v4',{}); showToast('Checklist reset'); renderApp();" class="text-xs font-bold ah-secondary underline">Reset</button>
               </div>
               <div class="w-full h-2 rounded-full bg-black/10 dark:bg-white/10 overflow-hidden">
-                <div class="h-full bg-[#007AFF] transition-all duration-300" style="width:${pct}%"></div>
+                <div class="h-full bg-[#007aff] transition-all duration-300" style="width:${pct}%"></div>
               </div>
             </div>
 
@@ -1936,7 +2015,7 @@
               return `
                 <div class="ah-card overflow-hidden">
                   <button type="button" onclick="state.openOverview[${sec.id}]=!state.openOverview[${sec.id}]; renderApp();" class="w-full px-4 py-3.5 flex items-center justify-between gap-2 text-left">
-                    <span class="text-xs sm:text-sm font-extrabold ah-text">${sec.title}</span>
+                    <span class="text-xs sm:text-sm font-display font-extrabold ah-text">${sec.title}</span>
                     <span class="mono-badge text-xs font-bold ah-secondary shrink-0">${done}/${sec.items.length} ${isOpen ? '▲' : '▼'}</span>
                   </button>
                   ${isOpen ? `
@@ -1946,7 +2025,7 @@
                         const chk = !!state.checkedOverview[key];
                         return `
                           <label class="flex items-start gap-3 px-4 py-3 cursor-pointer">
-                            <input type="checkbox" ${chk ? 'checked' : ''} onchange="state.checkedOverview['${key}']=!state.checkedOverview['${key}']; saveStore('mchiro_neuro_overview_v4', state.checkedOverview); renderApp();" class="mt-0.5 w-4 h-4 accent-[#007AFF] rounded shrink-0" />
+                            <input type="checkbox" ${chk ? 'checked' : ''} onchange="state.checkedOverview['${key}']=!state.checkedOverview['${key}']; saveStore('mchiro_neuro_overview_v4', state.checkedOverview); renderApp();" class="mt-0.5 w-4 h-4 accent-[#007aff] rounded shrink-0" />
                             <span class="text-xs sm:text-sm ${chk ? 'line-through ah-secondary' : 'ah-text'}">${txt}</span>
                           </label>
                         `;
