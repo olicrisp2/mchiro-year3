@@ -3,12 +3,12 @@
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>MChiro Year 3 Revision Hub</title>
+  <title>MChiro Year 3 – Revision Hub</title>
 
-  <!-- Google Font: Inter -->
+  <!-- Google Fonts: Plus Jakarta Sans (Display/Buttons) & Inter (Clean Body) -->
   <link rel="preconnect" href="https://fonts.googleapis.com" />
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
-  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap" rel="stylesheet" />
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&family=Plus+Jakarta+Sans:wght@600;700;800&display=swap" rel="stylesheet" />
 
   <!-- Tailwind CSS -->
   <script src="https://cdn.tailwindcss.com"></script>
@@ -18,7 +18,8 @@
       theme: {
         extend: {
           fontFamily: {
-            sans: ['Inter', 'system-ui', '-apple-system', 'sans-serif'],
+            display: ['"Plus Jakarta Sans"', 'system-ui', '-apple-system', 'sans-serif'],
+            sans: ['"Inter"', 'system-ui', '-apple-system', 'sans-serif'],
           },
         },
       },
@@ -26,82 +27,257 @@
   </script>
 
   <style>
+    /* =========================================================================
+       APPLE HEALTH CARDS × DUOLINGO TACTILE 3D BUTTONS DESIGN TOKENS
+       ========================================================================= */
+    :root {
+      --ah-bg: #F2F2F7;
+      --ah-card: #FFFFFF;
+      --ah-card-alt: #F9F9FB;
+      --ah-text: #1C1C1E;
+      --ah-muted: #636366;
+      --ah-border: rgba(60, 60, 67, 0.12);
+      --ah-glass: rgba(242, 242, 247, 0.84);
+      --ah-shadow: 0 2px 14px rgba(0, 0, 0, 0.045), 0 1px 2px rgba(0, 0, 0, 0.03);
+    }
+
+    .dark {
+      --ah-bg: #000000;
+      --ah-card: #1C1C1E;
+      --ah-card-alt: #2C2C2E;
+      --ah-text: #F2F2F7;
+      --ah-muted: #AEAEB2;
+      --ah-border: rgba(255, 255, 255, 0.11);
+      --ah-glass: rgba(28, 28, 30, 0.84);
+      --ah-shadow: 0 4px 18px rgba(0, 0, 0, 0.45);
+    }
+
+    body {
+      background-color: var(--ah-bg);
+      color: var(--ah-text);
+      font-family: 'Inter', system-ui, -apple-system, sans-serif;
+      -webkit-font-smoothing: antialiased;
+      -webkit-tap-highlight-color: transparent;
+    }
+
+    h1, h2, h3, h4, .font-display {
+      font-family: 'Plus Jakarta Sans', system-ui, -apple-system, sans-serif;
+    }
+
+    /* Frosted Glass Sticky Bars */
+    .ah-glass {
+      background-color: var(--ah-glass);
+      backdrop-filter: blur(20px);
+      -webkit-backdrop-filter: blur(20px);
+      border-color: var(--ah-border);
+    }
+
+    /* Apple Health Minimalist Cards */
+    .ah-card {
+      background-color: var(--ah-card);
+      border: 1px solid var(--ah-border);
+      border-radius: 20px;
+      box-shadow: var(--ah-shadow);
+    }
+
+    .ah-card-alt {
+      background-color: var(--ah-card-alt);
+      border: 1px solid var(--ah-border);
+      border-radius: 16px;
+    }
+
+    .ah-text { color: var(--ah-text); }
+    .ah-muted { color: var(--ah-muted); }
+
+    /* Chunky Tactile 3D Duolingo-Style Buttons */
+    .btn-3d {
+      border-radius: 16px;
+      font-family: 'Plus Jakarta Sans', system-ui, sans-serif;
+      font-weight: 800;
+      transition: transform 0.08s ease, border-bottom-width 0.08s ease, background-color 0.15s ease, opacity 0.15s ease;
+      cursor: pointer;
+      user-select: none;
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      gap: 0.4rem;
+    }
+    .btn-3d:active:not(:disabled) {
+      transform: translateY(2px);
+      border-bottom-width: 2px !important;
+    }
+    .btn-3d:disabled {
+      opacity: 0.45;
+      cursor: not-allowed;
+    }
+
+    .btn-emerald {
+      background-color: #10b981;
+      color: #ffffff;
+      border: 2px solid #10b981;
+      border-bottom: 4px solid #047857;
+    }
+    .btn-emerald:hover:not(:disabled) { background-color: #059669; }
+
+    .btn-indigo {
+      background-color: #4f46e5;
+      color: #ffffff;
+      border: 2px solid #4f46e5;
+      border-bottom: 4px solid #3730a3;
+    }
+    .btn-indigo:hover:not(:disabled) { background-color: #4338ca; }
+
+    .btn-sky {
+      background-color: #0ea5e9;
+      color: #ffffff;
+      border: 2px solid #0ea5e9;
+      border-bottom: 4px solid #0369a1;
+    }
+    .btn-sky:hover:not(:disabled) { background-color: #0284c7; }
+
+    .btn-rose {
+      background-color: #f43f5e;
+      color: #ffffff;
+      border: 2px solid #f43f5e;
+      border-bottom: 4px solid #be123c;
+    }
+    .btn-rose:hover:not(:disabled) { background-color: #e11d48; }
+
+    .btn-neutral {
+      background-color: var(--ah-card-alt);
+      color: var(--ah-text);
+      border: 2px solid var(--ah-border);
+      border-bottom: 4px solid var(--ah-border);
+    }
+
+    /* Hide Scrollbars Cleanly */
     .no-scrollbar::-webkit-scrollbar { display: none; }
     .no-scrollbar { -ms-overflow-style: none; scrollbar-width: none; }
+
+    /* Feedback Slide-Up Animation */
+    @keyframes popIn {
+      from { opacity: 0; transform: translateY(8px); }
+      to { opacity: 1; transform: translateY(0); }
+    }
+    .pop-in {
+      animation: popIn 0.2s ease-out forwards;
+    }
   </style>
 </head>
-<body class="bg-slate-50 text-slate-900 dark:bg-slate-950 dark:text-slate-100 font-sans antialiased transition-colors duration-200 overflow-x-hidden selection:bg-teal-200 dark:selection:bg-teal-800">
+<body class="min-h-screen overflow-x-hidden transition-colors duration-200">
 
   <!-- Toast Notification Container (No alert() or confirm() used) -->
-  <div id="toast-container" class="fixed bottom-20 md:bottom-5 right-4 z-50 flex flex-col gap-2 pointer-events-none"></div>
+  <div id="toast-container" class="fixed bottom-24 md:bottom-6 right-4 z-50 flex flex-col gap-2 pointer-events-none"></div>
 
-  <!-- Sticky Top Header -->
-  <header class="sticky top-0 z-40 bg-white/95 dark:bg-slate-900/95 backdrop-blur border-b border-slate-200 dark:border-slate-800">
-    <div class="max-w-5xl mx-auto px-3 sm:px-4 py-2.5 flex items-center justify-between gap-2">
-      <!-- Brand / Title -->
+  <!-- =========================================================================
+       STICKY FROSTED-GLASS HEADER
+       ========================================================================= -->
+  <header class="sticky top-0 z-40 ah-glass border-b">
+    <div class="max-w-5xl mx-auto px-3.5 sm:px-5 py-2.5 flex items-center justify-between gap-2">
+      <!-- Brand & Title -->
       <a href="#top" class="flex items-center gap-2.5 min-w-0">
-        <div class="w-9 h-9 rounded-xl bg-gradient-to-br from-teal-500 to-indigo-600 text-white font-extrabold text-sm flex items-center justify-center shadow-xs shrink-0">
+        <div class="w-9 h-9 rounded-2xl bg-gradient-to-br from-emerald-500 to-teal-600 text-white font-display font-extrabold text-sm flex items-center justify-center shadow-xs shrink-0">
           Y3
         </div>
         <div class="min-w-0">
-          <h1 class="text-sm sm:text-base font-extrabold tracking-tight text-slate-900 dark:text-white truncate">
-            MChiro Year 3 Hub
+          <h1 class="text-base sm:text-lg font-display font-extrabold tracking-tight ah-text truncate">
+            MChiro Year 3
           </h1>
-          <p id="countdown-pill" class="text-[11px] font-semibold text-teal-600 dark:text-teal-400 truncate">
-            Year 3 Start: Late Jan 2027
+          <p class="text-[11px] font-medium ah-muted truncate hidden sm:block">
+            Revision Hub &bull; Visual Lessons &bull; Clinical OSCE Prep
           </p>
         </div>
       </a>
 
-      <!-- Desktop Quick Nav + Action Controls -->
-      <div class="flex items-center gap-1.5 sm:gap-2 shrink-0">
-        <nav class="hidden lg:flex items-center gap-1 mr-1" aria-label="Quick Module Links">
-          <a href="neuro.html" class="px-2.5 py-1.5 rounded-xl text-xs font-bold text-slate-600 dark:text-slate-300 hover:bg-slate-100 dark:hover:bg-slate-800 transition">Neuro</a>
-          <a href="msk.html" class="px-2.5 py-1.5 rounded-xl text-xs font-bold text-slate-600 dark:text-slate-300 hover:bg-slate-100 dark:hover:bg-slate-800 transition">MSK</a>
-          <a href="chiro.html" class="px-2.5 py-1.5 rounded-xl text-xs font-bold text-slate-600 dark:text-slate-300 hover:bg-slate-100 dark:hover:bg-slate-800 transition">Chiro 3</a>
-          <a href="written.html" class="px-2.5 py-1.5 rounded-xl text-xs font-bold text-slate-600 dark:text-slate-300 hover:bg-slate-100 dark:hover:bg-slate-800 transition">Written</a>
+      <!-- Right Controls: Desktop Quick Links + Sync + Light/Dark Toggle -->
+      <div class="flex items-center gap-2 shrink-0">
+        <nav class="hidden lg:flex items-center gap-1 mr-1" aria-label="Quick Module Navigation">
+          <a href="lesson-ul.html" class="px-2.5 py-1.5 rounded-xl text-xs font-display font-bold text-emerald-600 dark:text-emerald-400 hover:bg-emerald-500/10 transition">Lessons</a>
+          <a href="neuro.html" class="px-2.5 py-1.5 rounded-xl text-xs font-display font-bold ah-muted hover:ah-text hover:bg-black/5 dark:hover:bg-white/10 transition">Neuro</a>
+          <a href="msk.html" class="px-2.5 py-1.5 rounded-xl text-xs font-display font-bold ah-muted hover:ah-text hover:bg-black/5 dark:hover:bg-white/10 transition">MSK</a>
+          <a href="chiro.html" class="px-2.5 py-1.5 rounded-xl text-xs font-display font-bold ah-muted hover:ah-text hover:bg-black/5 dark:hover:bg-white/10 transition">Chiro 3</a>
+          <a href="written.html" class="px-2.5 py-1.5 rounded-xl text-xs font-display font-bold ah-muted hover:ah-text hover:bg-black/5 dark:hover:bg-white/10 transition">Written</a>
         </nav>
 
-        <!-- 5-Min Mix Trigger -->
-        <button
-          type="button"
-          onclick="openMixModal()"
-          class="hidden sm:inline-flex items-center gap-1 px-3 py-2 rounded-xl text-xs font-extrabold bg-gradient-to-r from-indigo-600 to-teal-600 hover:opacity-95 text-white shadow-xs transition"
-        >
-          <span>⚡</span>
-          <span>5-Min Mix</span>
-        </button>
-
-        <!-- Sync Trigger -->
+        <!-- Sync Button -->
         <button
           type="button"
           onclick="openSyncModal()"
-          class="px-2.5 sm:px-3 py-2 rounded-xl text-xs font-bold bg-slate-100 dark:bg-slate-800 hover:bg-slate-200 dark:hover:bg-slate-700 text-slate-700 dark:text-slate-200 transition flex items-center gap-1"
+          class="px-3 py-2 rounded-xl bg-black/5 dark:bg-white/10 hover:bg-black/10 dark:hover:bg-white/15 ah-text text-xs font-display font-bold transition flex items-center gap-1.5"
           title="Sync progress between Phone and Laptop"
         >
           <span>🔄</span>
-          <span class="hidden sm:inline">Sync</span>
+          <span>Sync</span>
         </button>
 
-        <!-- Light/Dark Theme Toggle -->
+        <!-- Light/Dark Mode Toggle -->
         <button
           type="button"
           id="theme-toggle-btn"
           onclick="toggleTheme()"
           aria-label="Toggle Light or Dark Mode"
-          class="p-2.5 rounded-xl bg-slate-100 dark:bg-slate-800 text-slate-700 dark:text-amber-300 hover:bg-slate-200 dark:hover:bg-slate-700 transition"
-        ></button>
+          class="w-10 h-10 rounded-xl bg-black/5 dark:bg-white/10 hover:bg-black/10 dark:hover:bg-white/15 flex items-center justify-center text-base transition"
+        >
+          🌙
+        </button>
       </div>
     </div>
   </header>
 
-  <!-- Main Content -->
-  <main id="top" class="max-w-5xl mx-auto px-3 sm:px-4 py-5 pb-24 md:pb-14 space-y-6">
+  <!-- =========================================================================
+       MAIN DASHBOARD CONTENT
+       ========================================================================= -->
+  <main id="top" class="max-w-5xl mx-auto px-3.5 sm:px-5 py-5 pb-28 md:pb-14 space-y-6">
 
-    <!-- 1. GLOBAL INSTANT SEARCH BAR -->
-    <section id="search-section" class="space-y-3">
+    <!-- 1. TOP STATUS STRIP (REVISION PULSE) -->
+    <section class="ah-card p-4 sm:p-5 space-y-4">
+      <div class="flex flex-wrap items-center justify-between gap-3">
+        <div class="space-y-0.5">
+          <div class="flex flex-wrap items-center gap-2">
+            <span class="px-2.5 py-0.5 rounded-lg text-[10px] font-display font-extrabold uppercase tracking-wider bg-teal-500/15 text-teal-700 dark:text-teal-300">
+              Revision Pulse
+            </span>
+            <span id="countdown-pill" class="px-2.5 py-0.5 rounded-lg text-[11px] font-display font-extrabold bg-indigo-500/12 text-indigo-700 dark:text-indigo-300">
+              Year 3 Start: Jan 25, 2027
+            </span>
+          </div>
+          <h2 class="text-lg sm:text-xl font-display font-extrabold ah-text">
+            Spaced Repetition &amp; Daily Warm-Up
+          </h2>
+        </div>
+
+        <!-- Tactile 3D CTA: Quick 5-Min Mix -->
+        <button
+          type="button"
+          onclick="openMixModal()"
+          class="btn-3d btn-indigo w-full sm:w-auto px-5 py-3 text-xs sm:text-sm tracking-wide shadow-xs"
+        >
+          <span>⚡</span>
+          <span>Quick 5-Min Mix</span>
+        </button>
+      </div>
+
+      <!-- Live Leitner Stats from localStorage ('mchiro_srs_v4') -->
+      <div class="grid grid-cols-3 gap-2.5 text-center">
+        <div class="p-3 rounded-2xl bg-rose-500/10 border border-rose-500/20">
+          <span id="stat-due" class="block text-xl sm:text-2xl font-display font-extrabold text-rose-600 dark:text-rose-400 tabular-nums">0</span>
+          <span class="text-[11px] font-display font-bold text-rose-800 dark:text-rose-300">Due Today</span>
+        </div>
+        <div class="p-3 rounded-2xl bg-amber-500/10 border border-amber-500/20">
+          <span id="stat-shaky" class="block text-xl sm:text-2xl font-display font-extrabold text-amber-600 dark:text-amber-400 tabular-nums">0</span>
+          <span class="text-[11px] font-display font-bold text-amber-800 dark:text-amber-300">Shaky (2d)</span>
+        </div>
+        <div class="p-3 rounded-2xl bg-emerald-500/10 border border-emerald-500/20">
+          <span id="stat-solid" class="block text-xl sm:text-2xl font-display font-extrabold text-emerald-600 dark:text-emerald-400 tabular-nums">0</span>
+          <span class="text-[11px] font-display font-bold text-emerald-800 dark:text-emerald-300">Solid (7d)</span>
+        </div>
+      </div>
+    </section>
+
+    <!-- 2. GLOBAL INSTANT SEARCH BAR -->
+    <section id="search-section" class="space-y-2.5">
       <div class="relative">
-        <span class="absolute inset-y-0 left-3.5 flex items-center text-slate-400 pointer-events-none">
+        <span class="absolute inset-y-0 left-4 flex items-center ah-muted pointer-events-none">
           <svg class="w-4 h-4" fill="none" stroke="currentColor" stroke-width="2.4" viewBox="0 0 24 24">
             <path stroke-linecap="round" stroke-linejoin="round" d="M21 21l-4.35-4.35M17 11A6 6 0 115 11a6 6 0 0112 0z" />
           </svg>
@@ -110,138 +286,289 @@
           id="global-search-input"
           type="search"
           oninput="handleSearch(this.value)"
-          placeholder="Search all 7 modules (e.g. C6, Radial, Agraphesthesia, CKD, OA vs RA, 1st Rib, PICO, Yellow Flags)..."
-          aria-label="Global Instant Search"
-          class="w-full pl-10 pr-20 py-3.5 rounded-2xl bg-white dark:bg-slate-900 border-2 border-slate-200 dark:border-slate-800 focus:border-teal-500 dark:focus:border-teal-500 text-xs sm:text-sm font-medium text-slate-900 dark:text-white shadow-xs focus:outline-none transition"
+          placeholder="Search 45+ Year 3 topics (e.g. C6, Radial, Hutchinson, CKD, OA vs RA, Atlas, PICO)..."
+          aria-label="Global Instant Search across Year 3 topics"
+          class="w-full pl-11 pr-20 py-3.5 rounded-2xl ah-card text-xs sm:text-sm font-medium ah-text placeholder:text-slate-400 focus:outline-none focus:ring-2 focus:ring-emerald-500 transition"
         />
         <button
           id="search-clear-btn"
           type="button"
           onclick="clearSearch()"
-          class="hidden absolute inset-y-2 right-2 px-3 rounded-xl bg-slate-100 dark:bg-slate-800 text-xs font-bold text-slate-500 hover:text-slate-800 dark:hover:text-white"
+          class="hidden absolute inset-y-2 right-2 px-3 rounded-xl bg-black/5 dark:bg-white/10 text-xs font-display font-bold ah-muted hover:ah-text"
         >Clear</button>
       </div>
 
-      <!-- Instant Search Results Container -->
-      <div id="search-results" class="hidden space-y-2"></div>
+      <!-- Instant Search Results Dropdown -->
+      <div id="search-results" class="hidden"></div>
     </section>
 
-    <!-- 2. HERO ROW: LIVE LEITNER STATS + QUICK 5-MINUTE MIX -->
-    <section class="grid grid-cols-1 md:grid-cols-12 gap-4">
-      <!-- Live Leitner Spaced Repetition Summary -->
-      <div class="md:col-span-7 rounded-3xl bg-white dark:bg-slate-900 border border-slate-200 dark:border-slate-800 p-5 flex flex-col justify-between gap-4">
-        <div class="flex items-start justify-between gap-3">
-          <div>
-            <span class="px-2.5 py-0.5 rounded-lg text-[10px] font-extrabold uppercase tracking-wider bg-teal-100 dark:bg-teal-950/70 text-teal-800 dark:text-teal-300">
-              Spaced Repetition Overview
-            </span>
-            <h2 class="text-lg sm:text-xl font-extrabold text-slate-900 dark:text-white mt-1.5">
-              Your Live Revision Pulse
-            </h2>
-            <p class="text-xs text-slate-500 dark:text-slate-400 mt-0.5">
-              Synced automatically across Neuro, MSK, Chiro 3 &amp; Written modules.
+    <!-- 3. FEATURED INTERACTIVE VISUAL LESSONS SECTION -->
+    <section id="lessons-section" class="space-y-3">
+      <div class="flex items-center justify-between gap-2 px-1">
+        <div class="flex items-center gap-2">
+          <h2 class="text-base sm:text-lg font-display font-extrabold ah-text">
+            Interactive Visual Lessons
+          </h2>
+          <span class="px-2.5 py-0.5 rounded-lg text-[10px] font-display font-extrabold uppercase tracking-wider bg-emerald-500/15 text-emerald-700 dark:text-emerald-300">
+            Guided Practice
+          </span>
+        </div>
+        <span class="text-xs font-semibold ah-muted hidden sm:inline">Teach &rarr; Tap &rarr; Replay</span>
+      </div>
+
+      <div class="grid grid-cols-1 md:grid-cols-12 gap-4">
+        <!-- Lesson 1: Prominent Tactile Featured Card -->
+        <article class="md:col-span-7 ah-card p-5 border-2 border-emerald-500/40 dark:border-emerald-500/35 flex flex-col justify-between gap-4 relative overflow-hidden">
+          <div class="space-y-2.5">
+            <div class="flex items-center justify-between gap-2">
+              <span class="px-2.5 py-1 rounded-xl text-[11px] font-display font-extrabold uppercase bg-emerald-500 text-white">
+                New &bull; Lesson 1
+              </span>
+              <span class="text-xs font-display font-bold text-emerald-600 dark:text-emerald-400">
+                ~4 min &bull; Visual SVG
+              </span>
+            </div>
+
+            <h3 class="text-lg sm:text-xl font-display font-extrabold ah-text leading-snug">
+              Lesson 1: Upper Limb SMR &amp; Peripheral Nerves
+            </h3>
+            <p class="text-xs sm:text-sm ah-muted leading-relaxed">
+              Interactive Arm SVG &bull; C5–T1 &bull; Radial, Median, Ulnar &bull; Mistake Replay Loop
             </p>
           </div>
-          <span id="countdown-badge" class="px-2.5 py-1 rounded-xl text-[11px] font-extrabold bg-indigo-50 dark:bg-indigo-950/60 text-indigo-700 dark:text-indigo-300 border border-indigo-200 dark:border-indigo-800/60 shrink-0">
-            Jan 2027
-          </span>
-        </div>
 
-        <!-- 3 Stat Tiles -->
-        <div class="grid grid-cols-3 gap-2.5 text-center">
-          <div class="p-3 rounded-2xl bg-slate-50 dark:bg-slate-800/60 border border-slate-200 dark:border-slate-800">
-            <span id="stat-reviewed" class="block text-xl sm:text-2xl font-extrabold text-slate-900 dark:text-white">0</span>
-            <span class="text-[11px] font-bold text-slate-500 dark:text-slate-400">Reviewed</span>
-          </div>
-          <div class="p-3 rounded-2xl bg-emerald-50 dark:bg-emerald-950/30 border border-emerald-200 dark:border-emerald-900/60">
-            <span id="stat-solid" class="block text-xl sm:text-2xl font-extrabold text-emerald-600 dark:text-emerald-400">0</span>
-            <span class="text-[11px] font-bold text-emerald-800 dark:text-emerald-300">Solid (7d)</span>
-          </div>
-          <div class="p-3 rounded-2xl bg-amber-50 dark:bg-amber-950/30 border border-amber-200 dark:border-amber-900/60">
-            <span id="stat-due" class="block text-xl sm:text-2xl font-extrabold text-amber-600 dark:text-amber-400">0</span>
-            <span class="text-[11px] font-bold text-amber-800 dark:text-amber-300">Due Today</span>
-          </div>
-        </div>
-      </div>
+          <a
+            href="lesson-ul.html"
+            class="btn-3d btn-emerald w-full py-3.5 text-sm sm:text-base tracking-wide text-center"
+          >
+            <span>Start Lesson</span>
+            <span>&rarr;</span>
+          </a>
+        </article>
 
-      <!-- Quick 5-Minute Mix Card -->
-      <div class="md:col-span-5 rounded-3xl bg-gradient-to-br from-indigo-600 to-teal-600 text-white p-5 flex flex-col justify-between gap-4 shadow-sm">
-        <div>
-          <span class="inline-block px-2.5 py-0.5 rounded-lg text-[10px] font-extrabold uppercase tracking-wider bg-white/20">
-            Interleaved Warm-Up
-          </span>
-          <h2 class="text-lg sm:text-xl font-extrabold mt-1.5">Quick 5-Minute Mix</h2>
-          <p class="text-xs sm:text-sm text-white/90 mt-1 leading-relaxed">
-            5 rapid-fire questions mixed across <strong>Neuro</strong>, <strong>MSK</strong>, <strong>Chiro 3</strong>, and <strong>Red Flags</strong> to sharpen real-clinic switching.
-          </p>
-        </div>
-        <button
-          type="button"
-          onclick="openMixModal()"
-          class="w-full py-3 rounded-2xl bg-white text-indigo-700 hover:bg-slate-100 text-sm font-extrabold shadow-xs transition"
-        >
-          ⚡ Start 5-Min Mix
-        </button>
+        <!-- Lesson 2: Muted Coming Next Preview Card -->
+        <article class="md:col-span-5 ah-card-alt p-5 border-2 border-dashed border-slate-300 dark:border-slate-700 flex flex-col justify-between gap-4 opacity-80">
+          <div class="space-y-2">
+            <div class="flex items-center justify-between gap-2">
+              <span class="px-2.5 py-1 rounded-xl text-[10px] font-display font-extrabold uppercase bg-black/10 dark:bg-white/10 ah-muted">
+                Coming Next
+              </span>
+              <span class="text-xs font-semibold ah-muted">Lesson 2</span>
+            </div>
+            <h3 class="text-base font-display font-extrabold ah-text leading-snug">
+              Lesson 2: Lower Limb SMR &amp; Peripheral Nerves (L2–S1)
+            </h3>
+            <p class="text-xs ah-muted leading-relaxed">
+              Interactive Leg SVG &bull; L2–S1 Dermatomes &amp; Myotomes &bull; Femoral, Sciatic, Tibial &amp; Peroneal Drills.
+            </p>
+          </div>
+          <div class="px-3.5 py-2.5 rounded-xl bg-black/5 dark:bg-white/5 text-center text-xs font-display font-bold ah-muted">
+            Queued for Next Build
+          </div>
+        </article>
       </div>
     </section>
 
-    <!-- 3. 7-MODULE YEAR 3 HUB GRID -->
+    <!-- 4. YEAR 3 MODULE HUB (4 CLEAN MODULE CARDS) -->
     <section class="space-y-3">
       <div class="flex items-center justify-between px-1">
-        <h2 class="text-xs font-extrabold uppercase tracking-wider text-slate-400">
-          All 7 Year 3 Modules
+        <h2 class="text-base sm:text-lg font-display font-extrabold ah-text">
+          Year 3 Module Hub
         </h2>
-        <span class="text-[11px] font-semibold text-slate-400">Tap any card to launch</span>
+        <span class="text-xs font-semibold ah-muted">4 Dedicated Workspaces</span>
       </div>
 
-      <div id="module-grid" class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-3.5"></div>
+      <div class="grid grid-cols-1 md:grid-cols-2 gap-4">
+        <!-- Card 1: Clinical Neurology -->
+        <article class="ah-card p-5 flex flex-col justify-between gap-4 border-t-4 border-t-sky-500">
+          <div class="space-y-2.5">
+            <div class="flex items-center justify-between gap-2">
+              <span class="px-2.5 py-0.5 rounded-lg text-[10px] font-display font-extrabold uppercase bg-sky-500/15 text-sky-700 dark:text-sky-300">
+                Clinical Neurology
+              </span>
+              <span class="text-lg" aria-hidden="true">🧠</span>
+            </div>
+            <h3 class="text-lg font-display font-extrabold ah-text">
+              <a href="neuro.html" class="hover:text-sky-600 dark:hover:text-sky-400 transition">Clinical Neurology</a>
+            </h3>
+            <p class="text-xs sm:text-sm ah-muted leading-relaxed">
+              SMR Screening, Cranial Nerves, Weber/Rinne, Hutchinson Pupil, Beighton, GCS, Spinal Cord, Brain Lesions &amp; 15-Min OSCE.
+            </p>
+          </div>
+
+          <div class="flex flex-wrap items-center justify-between gap-2 pt-3 border-t border-black/5 dark:border-white/10">
+            <!-- Compact Inline Quick-Link Pill to Upper Limb Visual Lesson -->
+            <a
+              href="lesson-ul.html"
+              class="px-3 py-1.5 rounded-xl bg-emerald-500/12 hover:bg-emerald-500/20 border border-emerald-500/30 text-emerald-700 dark:text-emerald-300 text-[11px] font-display font-extrabold transition flex items-center gap-1"
+            >
+              <span>✨</span>
+              <span>Upper Limb Visual Lesson</span>
+            </a>
+            <a
+              href="neuro.html"
+              class="btn-3d btn-sky px-4 py-2 text-xs"
+            >
+              Open Module &rarr;
+            </a>
+          </div>
+        </article>
+
+        <!-- Card 2: Musculoskeletal Medicine -->
+        <article class="ah-card p-5 flex flex-col justify-between gap-4 border-t-4 border-t-indigo-500">
+          <div class="space-y-2.5">
+            <div class="flex items-center justify-between gap-2">
+              <span class="px-2.5 py-0.5 rounded-lg text-[10px] font-display font-extrabold uppercase bg-indigo-500/15 text-indigo-700 dark:text-indigo-300">
+                Musculoskeletal Medicine
+              </span>
+              <span class="text-lg" aria-hidden="true">🦴</span>
+            </div>
+            <h3 class="text-lg font-display font-extrabold ah-text">
+              <a href="msk.html" class="hover:text-indigo-600 dark:hover:text-indigo-400 transition">Musculoskeletal Medicine</a>
+            </h3>
+            <p class="text-xs sm:text-sm ah-muted leading-relaxed">
+              OA vs RA Joint Cross-Sections, CKD &rarr; Renal Osteodystrophy Domino, Metabolic Bone, Systemic Red Flags &amp; SAQ/LAQ Self-Marking.
+            </p>
+          </div>
+
+          <div class="flex items-center justify-between gap-2 pt-3 border-t border-black/5 dark:border-white/10">
+            <span class="text-[11px] font-semibold ah-muted">Pathology &bull; Red Flags</span>
+            <a
+              href="msk.html"
+              class="btn-3d btn-indigo px-4 py-2 text-xs"
+            >
+              Open Module &rarr;
+            </a>
+          </div>
+        </article>
+
+        <!-- Card 3: Chiropractic Studies 3 -->
+        <article class="ah-card p-5 flex flex-col justify-between gap-4 border-t-4 border-t-emerald-500">
+          <div class="space-y-2.5">
+            <div class="flex items-center justify-between gap-2">
+              <span class="px-2.5 py-0.5 rounded-lg text-[10px] font-display font-extrabold uppercase bg-emerald-500/15 text-emerald-700 dark:text-emerald-300">
+                Chiropractic Studies 3
+              </span>
+              <span class="text-lg" aria-hidden="true">🙌</span>
+            </div>
+            <h3 class="text-lg font-display font-extrabold ah-text">
+              <a href="chiro.html" class="hover:text-emerald-600 dark:hover:text-emerald-400 transition">Chiropractic Studies 3</a>
+            </h3>
+            <p class="text-xs sm:text-sm ah-muted leading-relaxed">
+              Full Body Check 4-colour routine, Year 2 practical mechanics cues, 40-min exam simulator &amp; Year 3 technique slots.
+            </p>
+          </div>
+
+          <div class="flex items-center justify-between gap-2 pt-3 border-t border-black/5 dark:border-white/10">
+            <span class="text-[11px] font-semibold ah-muted">54 Steps &bull; 40-Min Sim</span>
+            <a
+              href="chiro.html"
+              class="btn-3d btn-emerald px-4 py-2 text-xs"
+            >
+              Open Module &rarr;
+            </a>
+          </div>
+        </article>
+
+        <!-- Card 4: Written & Foundation Modules -->
+        <article class="ah-card p-5 flex flex-col justify-between gap-4 border-t-4 border-t-purple-500">
+          <div class="space-y-2.5">
+            <div class="flex items-center justify-between gap-2">
+              <span class="px-2.5 py-0.5 rounded-lg text-[10px] font-display font-extrabold uppercase bg-purple-500/15 text-purple-700 dark:text-purple-300">
+                Written &amp; Foundation
+              </span>
+              <span class="text-lg" aria-hidden="true">📝</span>
+            </div>
+            <h3 class="text-lg font-display font-extrabold ah-text">
+              <a href="written.html" class="hover:text-purple-600 dark:hover:text-purple-400 transition">Written &amp; Foundation Modules</a>
+            </h3>
+            <p class="text-xs sm:text-sm ah-muted leading-relaxed">
+              Clinic Studies 3, Philosophy 3, Research 2, Behavioural Sciences, Pre-Flight Essay Scanner &amp; Weighted Rubric Auditor.
+            </p>
+          </div>
+
+          <div class="flex items-center justify-between gap-2 pt-3 border-t border-black/5 dark:border-white/10">
+            <span class="text-[11px] font-semibold ah-muted">Essay Scanner &bull; PICO &bull; BPS</span>
+            <a
+              href="written.html"
+              class="btn-3d btn-neutral px-4 py-2 text-xs"
+            >
+              Open Module &rarr;
+            </a>
+          </div>
+        </article>
+      </div>
     </section>
   </main>
 
-  <!-- Mobile Fixed Thumb-Zone Bottom Navigation Bar (< 768px) -->
-  <nav class="md:hidden fixed bottom-0 inset-x-0 z-40 bg-white/95 dark:bg-slate-900/95 backdrop-blur border-t border-slate-200 dark:border-slate-800 px-2 py-1.5" aria-label="Mobile Quick Navigation">
+  <!-- =========================================================================
+       MOBILE THUMB-ZONE BOTTOM NAVIGATION BAR (< 768px)
+       ========================================================================= -->
+  <nav class="md:hidden fixed bottom-0 inset-x-0 z-40 ah-glass border-t px-2 py-1.5" aria-label="Mobile Navigation">
     <div class="grid grid-cols-4 gap-1 max-w-md mx-auto">
-      <button type="button" onclick="window.scrollTo({top:0,behavior:'smooth'});" class="py-1.5 px-1 rounded-xl flex flex-col items-center justify-center gap-0.5 text-teal-700 dark:text-teal-300 bg-teal-50 dark:bg-teal-950/60 font-extrabold">
+      <button
+        type="button"
+        onclick="window.scrollTo({top:0,behavior:'smooth'});"
+        class="py-1.5 px-1 rounded-xl flex flex-col items-center justify-center gap-0.5 text-emerald-600 dark:text-emerald-400 font-display font-extrabold"
+      >
         <span class="text-base leading-none">🏠</span>
         <span class="text-[10px]">Home</span>
       </button>
-      <button type="button" onclick="focusSearch()" class="py-1.5 px-1 rounded-xl flex flex-col items-center justify-center gap-0.5 text-slate-600 dark:text-slate-300 font-semibold hover:bg-slate-100 dark:hover:bg-slate-800">
+
+      <button
+        type="button"
+        onclick="focusSearch()"
+        class="py-1.5 px-1 rounded-xl flex flex-col items-center justify-center gap-0.5 ah-muted font-display font-bold hover:ah-text"
+      >
         <span class="text-base leading-none">🔍</span>
         <span class="text-[10px]">Search</span>
       </button>
-      <button type="button" onclick="openMixModal()" class="py-1.5 px-1 rounded-xl flex flex-col items-center justify-center gap-0.5 text-indigo-600 dark:text-indigo-400 font-bold hover:bg-slate-100 dark:hover:bg-slate-800">
+
+      <button
+        type="button"
+        onclick="openMixModal()"
+        class="py-1.5 px-1 rounded-xl flex flex-col items-center justify-center gap-0.5 text-indigo-600 dark:text-indigo-400 font-display font-bold"
+      >
         <span class="text-base leading-none">⚡</span>
         <span class="text-[10px]">5-Min Mix</span>
       </button>
-      <button type="button" onclick="openSyncModal()" class="py-1.5 px-1 rounded-xl flex flex-col items-center justify-center gap-0.5 text-slate-600 dark:text-slate-300 font-semibold hover:bg-slate-100 dark:hover:bg-slate-800">
-        <span class="text-base leading-none">🔄</span>
-        <span class="text-[10px]">Sync</span>
-      </button>
+
+      <a
+        href="lesson-ul.html"
+        class="py-1.5 px-1 rounded-xl flex flex-col items-center justify-center gap-0.5 ah-muted font-display font-bold hover:text-emerald-600"
+      >
+        <span class="text-base leading-none">🎯</span>
+        <span class="text-[10px]">Lessons</span>
+      </a>
     </div>
   </nav>
 
-  <!-- QUICK 5-MINUTE MIX MODAL -->
-  <div id="mix-modal" class="hidden fixed inset-0 z-50 bg-slate-950/70 backdrop-blur-xs flex items-center justify-center p-3 sm:p-4" role="dialog" aria-modal="true" aria-label="Quick 5-Minute Mix">
-    <div id="mix-modal-body" class="w-full max-w-lg rounded-3xl bg-white dark:bg-slate-900 border border-slate-200 dark:border-slate-800 shadow-2xl overflow-hidden max-h-[90vh] flex flex-col"></div>
+  <!-- =========================================================================
+       QUICK 5-MINUTE MIX MODAL (INTERLEAVED 5-QUESTION WARM-UP)
+       ========================================================================= -->
+  <div id="mix-modal" class="hidden fixed inset-0 z-50 bg-black/65 backdrop-blur-xs flex items-center justify-center p-3.5" role="dialog" aria-modal="true" aria-label="Quick 5-Min Mix">
+    <div id="mix-modal-content" class="w-full max-w-lg ah-card overflow-hidden max-h-[90vh] flex flex-col pop-in"></div>
   </div>
 
-  <!-- PHONE <-> LAPTOP PROGRESS SYNC MODAL -->
-  <div id="sync-modal" class="hidden fixed inset-0 z-50 bg-slate-950/70 backdrop-blur-xs flex items-center justify-center p-3 sm:p-4" role="dialog" aria-modal="true" aria-label="Progress Sync">
-    <div class="w-full max-w-lg rounded-3xl bg-white dark:bg-slate-900 border border-slate-200 dark:border-slate-800 shadow-2xl overflow-hidden max-h-[90vh] flex flex-col">
-      <div class="px-5 py-4 border-b border-slate-200 dark:border-slate-800 flex items-center justify-between">
+  <!-- =========================================================================
+       PHONE <-> LAPTOP PROGRESS SYNC MODAL
+       ========================================================================= -->
+  <div id="sync-modal" class="hidden fixed inset-0 z-50 bg-black/65 backdrop-blur-xs flex items-center justify-center p-3.5" role="dialog" aria-modal="true" aria-label="Progress Sync">
+    <div class="w-full max-w-lg ah-card overflow-hidden max-h-[90vh] flex flex-col pop-in">
+      <div class="px-5 py-4 border-b border-black/10 dark:border-white/10 flex items-center justify-between">
         <div>
-          <h3 class="text-base font-extrabold text-slate-900 dark:text-white">🔄 Phone ↔ Laptop Progress Sync</h3>
-          <p class="text-[11px] text-slate-500 dark:text-slate-400">Transfer your Spaced Repetition &amp; checklists privately via code.</p>
+          <h3 class="text-base font-display font-extrabold ah-text">🔄 Phone &harr; Laptop Progress Sync</h3>
+          <p class="text-[11px] ah-muted">Private local sync for <code class="font-mono">mchiro_srs_v4</code> &amp; theme.</p>
         </div>
-        <button type="button" onclick="closeSyncModal()" class="text-slate-400 hover:text-slate-700 dark:hover:text-white text-xl font-extrabold leading-none">&times;</button>
+        <button type="button" onclick="closeSyncModal()" class="w-8 h-8 rounded-xl bg-black/5 dark:bg-white/10 ah-muted hover:ah-text font-extrabold text-lg leading-none">&times;</button>
       </div>
 
       <div class="p-5 overflow-y-auto space-y-5">
-        <!-- Export Section -->
-        <div class="space-y-2">
-          <div class="flex items-center justify-between">
-            <span class="text-xs font-extrabold uppercase tracking-wider text-teal-600 dark:text-teal-400">1. Export From This Device</span>
-            <button type="button" onclick="copySyncCode()" class="px-3.5 py-1.5 rounded-xl bg-teal-600 hover:bg-teal-700 text-white text-xs font-extrabold transition">
+        <!-- Export -->
+        <div class="space-y-2.5">
+          <div class="flex items-center justify-between gap-2">
+            <span class="text-xs font-display font-extrabold uppercase tracking-wider text-emerald-600 dark:text-emerald-400">1. Export From This Device</span>
+            <button type="button" onclick="copySyncCode()" class="btn-3d btn-emerald px-3.5 py-2 text-xs">
               📋 Copy Sync Code
             </button>
           </div>
@@ -249,21 +576,21 @@
             id="sync-export-box"
             rows="3"
             readonly
-            class="w-full p-3 rounded-2xl bg-slate-50 dark:bg-slate-800 border border-slate-200 dark:border-slate-700 text-[11px] font-mono text-slate-700 dark:text-slate-200 break-all"
+            class="w-full p-3 rounded-2xl ah-card-alt text-[11px] font-mono ah-text break-all focus:outline-none"
           ></textarea>
         </div>
 
-        <!-- Import Section -->
-        <div class="space-y-2 pt-3 border-t border-slate-100 dark:border-slate-800">
-          <span class="block text-xs font-extrabold uppercase tracking-wider text-indigo-600 dark:text-indigo-400">2. Import From Another Device</span>
+        <!-- Import -->
+        <div class="space-y-2.5 pt-4 border-t border-black/10 dark:border-white/10">
+          <span class="block text-xs font-display font-extrabold uppercase tracking-wider text-indigo-600 dark:text-indigo-400">2. Restore On This Device</span>
           <textarea
             id="sync-import-box"
             rows="3"
-            placeholder="Paste your sync code here..."
-            class="w-full p-3 rounded-2xl bg-slate-50 dark:bg-slate-800 border border-slate-200 dark:border-slate-700 text-[11px] font-mono text-slate-900 dark:text-white focus:outline-none focus:ring-2 focus:ring-indigo-500"
+            placeholder="Paste sync code copied from your other device..."
+            class="w-full p-3 rounded-2xl ah-card-alt text-[11px] font-mono ah-text focus:outline-none focus:ring-2 focus:ring-indigo-500"
           ></textarea>
           <div class="flex justify-end">
-            <button type="button" onclick="restoreSyncCode()" class="px-4 py-2.5 rounded-xl bg-indigo-600 hover:bg-indigo-700 text-white text-xs font-extrabold transition">
+            <button type="button" onclick="restoreSyncCode()" class="btn-3d btn-indigo px-5 py-2.5 text-xs">
               Restore Progress
             </button>
           </div>
@@ -274,7 +601,7 @@
 
   <script>
     // =========================================================================
-    // 1. THEME SYNC ('mchiro_theme'), TOASTS & SAFE CLIPBOARD
+    // 1. PERSISTENT LIGHT / DARK MODE ('mchiro_theme') & TOASTS
     // =========================================================================
     function initTheme() {
       let saved = null;
@@ -288,32 +615,29 @@
       document.documentElement.classList.toggle('dark', isDark);
       try { localStorage.setItem('mchiro_theme', isDark ? 'dark' : 'light'); } catch (e) {}
       const btn = document.getElementById('theme-toggle-btn');
-      if (btn) {
-        btn.innerHTML = isDark
-          ? `<svg class="w-4 h-4" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" d="M12 3v2.25m6.364.386l-1.591 1.591M21 12h-2.25m-.386 6.364l-1.591-1.591M12 18.75V21m-4.773-4.227l-1.591 1.591M5.25 12H3m4.227-4.773L5.636 5.636M15.75 12a3.75 3.75 0 11-7.5 0 3.75 3.75 0 017.5 0z"/></svg>`
-          : `<svg class="w-4 h-4" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" d="M21.752 15.002A9.718 9.718 0 0118 15.75c-5.385 0-9.75-4.365-9.75-9.75 0-1.33.266-2.597.748-3.752A9.753 9.753 0 003 11.25C3 16.635 7.365 21 12.75 21a9.753 9.753 0 009.002-5.998z"/></svg>`;
-      }
+      if (btn) btn.textContent = isDark ? '☀️' : '🌙';
     }
 
     function toggleTheme() {
       applyTheme(!document.documentElement.classList.contains('dark'));
     }
 
-    function showToast(msg, type = 'info') {
+    function showToast(msg, tone = 'default') {
       const container = document.getElementById('toast-container');
-      const styles = {
-        info: 'bg-slate-900 dark:bg-slate-100 text-white dark:text-slate-900',
-        success: 'bg-emerald-600 text-white',
-        warn: 'bg-amber-600 text-white',
+      const tones = {
+        default: 'bg-[#1C1C1E] dark:bg-[#F2F2F7] text-[#F2F2F7] dark:text-[#1C1C1E]',
+        emerald: 'bg-emerald-600 text-white',
+        rose: 'bg-rose-600 text-white',
+        amber: 'bg-amber-500 text-white',
       };
       const el = document.createElement('div');
-      el.className = `pointer-events-auto px-4 py-2.5 rounded-xl shadow-lg text-xs sm:text-sm font-semibold transition-all duration-300 ${styles[type] || styles.info}`;
+      el.className = `pointer-events-auto px-4 py-2.5 rounded-2xl shadow-lg text-xs sm:text-sm font-display font-bold transition-all duration-300 ${tones[tone] || tones.default}`;
       el.textContent = msg;
       container.appendChild(el);
       setTimeout(() => {
         el.classList.add('opacity-0', 'translate-y-2');
         setTimeout(() => el.remove(), 300);
-      }, 2200);
+      }, 2300);
     }
 
     function copyTextSafe(text, successMsg) {
@@ -327,215 +651,124 @@
         ta.select();
         document.execCommand('copy');
         document.body.removeChild(ta);
-        showToast(successMsg || 'Copied!', 'success');
+        showToast(successMsg || 'Copied!', 'emerald');
       } catch (e) {
-        showToast('Could not copy automatically — please copy manually.', 'warn');
+        showToast('Could not copy automatically — please select and copy manually.', 'amber');
       }
     }
 
     // =========================================================================
-    // 2. COUNTDOWN & LIVE LEITNER SRS STATS ACROSS ALL MODULE KEYS
+    // 2. LIVE COUNTDOWN (JAN 25, 2027) & LEITNER STATS ('mchiro_srs_v4')
     // =========================================================================
     function updateCountdown() {
-      const targetDate = new Date('2027-01-25T09:00:00Z');
+      const target = new Date('2027-01-25T09:00:00Z');
       const now = new Date();
-      const diffDays = Math.max(0, Math.ceil((targetDate - now) / 86400000));
+      const days = Math.max(0, Math.ceil((target - now) / 86400000));
       const pill = document.getElementById('countdown-pill');
-      const badge = document.getElementById('countdown-badge');
-      if (diffDays > 0) {
-        if (pill) pill.textContent = `${diffDays} days until Year 3 (Late Jan 2027)`;
-        if (badge) badge.textContent = `${diffDays}d to Y3`;
-      } else {
-        if (pill) pill.textContent = 'Year 3 Term Active';
-        if (badge) badge.textContent = 'Y3 Active';
-      }
+      if (!pill) return;
+      pill.textContent = days > 0 ? `${days} days to Year 3 (Jan 25, 2027)` : 'Year 3 Term Active';
     }
 
-    function computeLiveStats() {
-      const keys = ['mchiro_srs', 'mchiro_srs_v1', 'mchiro_chiro_srs', 'mchiro_v4_sr'];
-      const merged = {};
+    function updateLeitnerStats() {
+      let due = 0;
+      let shaky = 0;
+      let solid = 0;
       const now = Date.now();
 
-      keys.forEach((k) => {
-        try {
-          const raw = localStorage.getItem(k);
-          if (!raw) return;
-          const obj = JSON.parse(raw);
-          if (obj && typeof obj === 'object') {
-            Object.entries(obj).forEach(([id, rec]) => {
-              if (rec && typeof rec === 'object') merged[id] = rec;
+      try {
+        const raw = localStorage.getItem('mchiro_srs_v4');
+        if (raw) {
+          const data = JSON.parse(raw);
+          if (data && typeof data === 'object') {
+            Object.values(data).forEach((rec) => {
+              if (!rec || typeof rec !== 'object') return;
+              const dueTime = rec.dueAt !== undefined ? rec.dueAt : (rec.nextDue !== undefined ? rec.nextDue : 0);
+              const box = rec.box || (rec.level === 2 ? 'solid' : rec.level === 1 ? 'shaky' : 'again');
+              if (now >= dueTime || box === 'again') {
+                due++;
+              } else if (box === 'shaky') {
+                shaky++;
+              } else if (box === 'solid') {
+                solid++;
+              }
             });
           }
-        } catch (e) {}
-      });
+        }
+      } catch (e) {
+        // Safely fallback to zeros if storage is unavailable
+      }
 
-      const entries = Object.values(merged);
-      const reviewed = entries.length;
-      let solid = 0;
-      let due = 0;
-
-      entries.forEach((rec) => {
-        const dueTime = rec.dueAt !== undefined ? rec.dueAt : (rec.nextDue !== undefined ? rec.nextDue : 0);
-        const isSolid = rec.box === 'solid' || rec.level === 2;
-        if (now >= dueTime) due++;
-        else if (isSolid) solid++;
-      });
-
-      document.getElementById('stat-reviewed').textContent = String(reviewed);
-      document.getElementById('stat-solid').textContent = String(solid);
       document.getElementById('stat-due').textContent = String(due);
+      document.getElementById('stat-shaky').textContent = String(shaky);
+      document.getElementById('stat-solid').textContent = String(solid);
     }
 
     // =========================================================================
-    // 3. 7-MODULE HUB GRID DATA
-    // =========================================================================
-    const MODULE_CARDS = [
-      {
-        name: 'Clinical Neurology',
-        href: 'neuro.html',
-        status: 'Active',
-        accent: 'teal',
-        desc: 'Simulators (Weber/Rinne, Hutchinson, Beighton, GCS), Spinal Cord & Brain Lesions, CN/Limb Maps, 15-Min OSCE.',
-        tags: ['Simulators', 'Cord & Brain', 'CN & SMR', '15-Min OSCE'],
-      },
-      {
-        name: 'Musculoskeletal Medicine',
-        href: 'msk.html',
-        status: 'Active',
-        accent: 'indigo',
-        desc: 'Interactive OA vs RA joint cross-sections, CKD → Renal Osteodystrophy domino, Systemic Red Flags & SAQ/LAQ.',
-        tags: ['OA vs RA', 'CKD Domino', 'Red Flags', 'SAQ/LAQ'],
-      },
-      {
-        name: 'Chiropractic Studies 3',
-        href: 'chiro.html',
-        status: 'Active',
-        accent: 'emerald',
-        desc: '54-Step Full Body Check with 4-colour key, Y2 Practical Mechanics Cues (SRS), 40-Min Simulator & Y3 slots.',
-        tags: ['54-Step Check', 'Y2 Cues', '40-Min Sim', 'Y3 Slots'],
-      },
-      {
-        name: 'Clinic Studies 3',
-        href: 'written.html',
-        status: 'Auditor',
-        accent: 'purple',
-        desc: 'Pre-Flight Essay Scanner, 64% → 70%+ Critical Evaluation upgrades (Borton’s), and weighted rubric auditor.',
-        tags: ['Essay Scanner', '70%+ Eval', 'Rubric'],
-      },
-      {
-        name: 'Research 2',
-        href: 'written.html',
-        status: 'Toolkit',
-        accent: 'sky',
-        desc: 'Interactive PICO Question Builder, Study Design & Bias appraisal matrix, and Biostatistics/Paradigm SRS.',
-        tags: ['PICO Builder', 'Study Design', 'Biostats SRS'],
-      },
-      {
-        name: 'Philosophy 3',
-        href: 'written.html',
-        status: 'Auditor',
-        accent: 'amber',
-        desc: 'Weighted 60% Main Body essay auditor plus active-recall cards for Vitalism, Holism, Popper & 4 Ethical Pillars.',
-        tags: ['Essay Auditor', 'Ethics', 'Concept SRS'],
-      },
-      {
-        name: 'Behavioural Sciences',
-        href: 'written.html',
-        status: 'Toolkit',
-        accent: 'rose',
-        desc: 'Interactive Biopsychosocial (BPS) SVG triangle, Yellow Flags (ABCDEFW), Fear-Avoidance & Motivational Interviewing.',
-        tags: ['BPS SVG', 'Yellow Flags', 'Pain Psych'],
-      },
-    ];
-
-    function renderModuleGrid() {
-      const grid = document.getElementById('module-grid');
-      grid.innerHTML = MODULE_CARDS.map((m) => `
-        <a
-          href="${m.href}"
-          class="group rounded-3xl bg-white dark:bg-slate-900 border border-slate-200 dark:border-slate-800 hover:border-${m.accent}-400 dark:hover:border-${m.accent}-600 p-4 sm:p-5 flex flex-col justify-between gap-3.5 shadow-xs hover:shadow-md transition"
-        >
-          <div class="space-y-2">
-            <div class="flex items-center justify-between gap-2">
-              <span class="px-2.5 py-0.5 rounded-lg text-[10px] font-extrabold uppercase bg-${m.accent}-100 dark:bg-${m.accent}-950/70 text-${m.accent}-800 dark:text-${m.accent}-300">${m.status}</span>
-              <span class="text-xs font-extrabold text-slate-400 group-hover:text-${m.accent}-600 dark:group-hover:text-${m.accent}-400 transition">&rarr;</span>
-            </div>
-            <h3 class="text-base font-extrabold text-slate-900 dark:text-white group-hover:text-${m.accent}-700 dark:group-hover:text-${m.accent}-300 transition">${m.name}</h3>
-            <p class="text-xs text-slate-500 dark:text-slate-400 leading-relaxed">${m.desc}</p>
-          </div>
-          <div class="flex flex-wrap gap-1.5 pt-2 border-t border-slate-100 dark:border-slate-800/80">
-            ${m.tags.map((t) => `<span class="px-2 py-0.5 rounded-lg text-[10px] font-bold bg-slate-100 dark:bg-slate-800 text-slate-600 dark:text-slate-300">${t}</span>`).join('')}
-          </div>
-        </a>
-      `).join('');
-    }
-
-    // =========================================================================
-    // 4. GLOBAL INSTANT SEARCH INDEX (48 HIGH-YIELD CLINICAL TERMS)
+    // 3. GLOBAL INSTANT SEARCH INDEX (46 HIGH-YIELD YEAR 3 TERMS)
     // =========================================================================
     const SEARCH_INDEX = [
-      // Clinical Neurology (16)
-      { title: 'C6 Dermatome, Myotome & Reflex', mod: 'Clinical Neurology', href: 'neuro.html', color: 'teal', keys: 'c6 lateral forearm thumb index wrist extensors biceps brachioradialis smr' },
-      { title: 'Radial vs. Median Nerve (Extensor/Flexor)', mod: 'Clinical Neurology', href: 'neuro.html', color: 'teal', keys: 'radial median ulnar wrist drop extensors flexors dorsum palmar thumb opposition' },
-      { title: 'L4, L5 & S1 Nerve Roots (SMR)', mod: 'Clinical Neurology', href: 'neuro.html', color: 'teal', keys: 'l4 l5 s1 tibialis anterior extensor hallucis longus gastrocnemius soleus patellar achilles heel toe walk' },
-      { title: 'Weber’s & Rinne’s Tuning Fork Simulator', mod: 'Clinical Neurology', href: 'neuro.html', color: 'teal', keys: 'weber rinne 512hz cn viii conductive sensorineural hearing lateralise ac bc' },
-      { title: 'Hutchinson Pupil Stage Stepper', mod: 'Clinical Neurology', href: 'neuro.html', color: 'teal', keys: 'hutchinson pupil cerebral compression raised icp cn iii miosis mydriasis blown' },
-      { title: 'Dix-Hallpike Test (BPPV)', mod: 'Clinical Neurology', href: 'neuro.html', color: 'teal', keys: 'dix hallpike bppv vertigo nystagmus semicircular canal dizziness' },
-      { title: 'Fitz-Ritson’s Test (Cervicogenic Dizziness)', mod: 'Clinical Neurology', href: 'neuro.html', color: 'teal', keys: 'fitz ritson cervicogenic dizziness trunk rotation neck' },
-      { title: 'CAD Screening (Carotid / Vertebral 5Ds & 3Ns)', mod: 'Clinical Neurology', href: 'neuro.html', color: 'teal', keys: 'cad cervical arterial dysfunction 5ds 3ns diplopia dysarthria dysphagia drop attacks' },
-      { title: 'Beighton Scale (Hypermobility 0–9)', mod: 'Clinical Neurology', href: 'neuro.html', color: 'teal', keys: 'beighton scale hypermobility calculator 0 9 elbow knee thumb' },
-      { title: 'Glasgow Coma Scale (GCS 3–15)', mod: 'Clinical Neurology', href: 'neuro.html', color: 'teal', keys: 'gcs glasgow coma scale eye verbal motor trauma consciousness' },
-      { title: 'Agraphesthesia & Astereognosis', mod: 'Clinical Neurology', href: 'neuro.html', color: 'teal', keys: 'agraphesthesia astereognosis parietal lobe cortical sensory palm coin' },
-      { title: 'Left Hemispatial Neglect (Right Parietal)', mod: 'Clinical Neurology', href: 'neuro.html', color: 'teal', keys: 'neglect sensory inattention extinction right parietal ppc' },
-      { title: "Broca's, Wernicke's & Conduction Aphasia", mod: 'Clinical Neurology', href: 'neuro.html', color: 'teal', keys: 'broca wernicke conduction aphasia arcuate fasciculus frontal temporal speech' },
-      { title: 'DCML & Spinothalamic Tracts (Spinal Cord)', mod: 'Clinical Neurology', href: 'neuro.html', color: 'teal', keys: 'dcml dorsal column spinothalamic stt vibration 128hz proprioception pinprick romberg' },
-      { title: 'UMN Signs: Hoffmann’s, Babinski, Chaddock & Clonus', mod: 'Clinical Neurology', href: 'neuro.html', color: 'teal', keys: 'umn lmn hoffmann babinski chaddock ankle clonus pronator drift spasticity' },
-      { title: 'CN V (V1/V2/V3) & CN VII (UMN vs LMN)', mod: 'Clinical Neurology', href: 'neuro.html', color: 'teal', keys: 'cranial nerves trigeminal facial bells palsy forehead spared jaw jerk h test' },
+      // Interactive Upper Limb Visual Lesson (lesson-ul.html)
+      { title: 'Lesson 1: Upper Limb SMR & Peripheral Nerves (Interactive SVG)', mod: 'Visual Lesson', href: 'lesson-ul.html', color: 'emerald', keys: 'lesson upper limb visual svg arm c5 c6 c7 c8 t1 radial median ulnar axillary' },
+      { title: 'C5 Dermatome, Myotome (Biceps/Deltoid) & Biceps Reflex', mod: 'Visual Lesson', href: 'lesson-ul.html', color: 'emerald', keys: 'c5 lateral upper arm biceps deltoid shoulder abduction elbow flexion reflex' },
+      { title: 'C6 Dermatome (Thumb & Index), Wrist Extensors & Brachioradialis', mod: 'Visual Lesson', href: 'lesson-ul.html', color: 'emerald', keys: 'c6 lateral forearm thumb index 1st finger wrist extensors biceps brachioradialis' },
+      { title: 'C7 Dermatome (Middle Finger), Triceps & Wrist Flexors', mod: 'Visual Lesson', href: 'lesson-ul.html', color: 'emerald', keys: 'c7 middle finger triceps wrist flexors elbow extension reflex' },
+      { title: 'C8 Dermatome (Ring & Little) & Flexor Digitorum Profundus', mod: 'Visual Lesson', href: 'lesson-ul.html', color: 'emerald', keys: 'c8 ring 4th little 5th finger flexor digitorum profundus fdp dip joint' },
+      { title: 'T1 Dermatome (Medial Forearm) & Interossei (5th Abduction)', mod: 'Visual Lesson', href: 'lesson-ul.html', color: 'emerald', keys: 't1 medial wrist medial elbow forearm interossei 5th finger abduction' },
+      { title: 'Radial Nerve (Posterior Arm/Dorsum & EXTENSORS)', mod: 'Visual Lesson', href: 'lesson-ul.html', color: 'emerald', keys: 'radial nerve wrist drop extensors posterior arm forearm dorsum lateral 2/3' },
+      { title: 'Median Nerve (Palmar Lateral 2/3 & FLEXORS / Opposition)', mod: 'Visual Lesson', href: 'lesson-ul.html', color: 'emerald', keys: 'median nerve palmar lateral 2/3 wrist flexors thumb opposition thenar carpal tunnel' },
+      { title: 'Ulnar & Axillary Nerves (FCU / Military Patch)', mod: 'Visual Lesson', href: 'lesson-ul.html', color: 'emerald', keys: 'ulnar axillary nerve fcu flexor carpi ulnaris medial hand military patch deltoid teres minor' },
 
-      // Musculoskeletal Medicine (11)
-      { title: 'OA vs. RA Joint Cross-Section & Comparison', mod: 'Musculoskeletal Medicine', href: 'msk.html', color: 'indigo', keys: 'oa ra osteoarthritis rheumatoid arthritis cartilage osteophyte pannus synovitis loss' },
-      { title: 'RA Cytokines (TNF-α, IL-1, IL-6) & DMARDs', mod: 'Musculoskeletal Medicine', href: 'msk.html', color: 'indigo', keys: 'tnf alpha il1 il6 cytokines dmards methotrexate biologic erosion' },
-      { title: 'CKD → Renal Osteodystrophy Domino', mod: 'Musculoskeletal Medicine', href: 'msk.html', color: 'indigo', keys: 'ckd renal osteodystrophy phosphate vitamin d calcitriol hypocalcaemia secondary hyperparathyroidism pth' },
-      { title: 'Gout vs. Septic Arthritis Triage Tree', mod: 'Musculoskeletal Medicine', href: 'msk.html', color: 'indigo', keys: 'gout pseudogout cppd septic arthritis hot swollen joint podagra msu crystals fever' },
-      { title: 'Osteoporosis, Osteopenia, Osteomalacia & Paget’s', mod: 'Musculoskeletal Medicine', href: 'msk.html', color: 'indigo', keys: 'osteoporosis osteopenia osteomalacia pagets dexa t score alp looser zones' },
-      { title: 'Cauda Equina Syndrome (CES) Red Flags', mod: 'Musculoskeletal Medicine', href: 'msk.html', color: 'indigo', keys: 'cauda equina ces saddle anaesthesia bladder bowel bilateral sciatica emergency' },
-      { title: 'ACS Spectrum: Stable/Unstable Angina, NSTEMI & STEMI', mod: 'Musculoskeletal Medicine', href: 'msk.html', color: 'indigo', keys: 'acs angina nstemi stemi troponin nitric oxide plaque rupture chest pain 999' },
-      { title: 'Hypertension Urgent-Referral Thresholds', mod: 'Musculoskeletal Medicine', href: 'msk.html', color: 'indigo', keys: 'hypertension bp 180 120 accelerated papilloedema hypertensive emergency' },
-      { title: 'Addisonian (Adrenal) Crisis', mod: 'Musculoskeletal Medicine', href: 'msk.html', color: 'indigo', keys: 'addisonian adrenal crisis cortisol hypotension hyponatraemia hyperkalaemia hypoglycaemia hydrocortisone' },
-      { title: 'Tumour Grading vs. Staging (TNM) & Spinal Mets', mod: 'Musculoskeletal Medicine', href: 'msk.html', color: 'indigo', keys: 'tumour grading staging tnm metastases cancer night pain weight loss' },
-      { title: "Crohn's Disease vs. Ulcerative Colitis (IBD)", mod: 'Musculoskeletal Medicine', href: 'msk.html', color: 'indigo', keys: 'crohns ulcerative colitis ibd skip lesions transmural mucosal bloody diarrhoea' },
+      // Clinical Neurology (neuro.html)
+      { title: 'L2–S1 Lower Limb SMR (Dermatomes, Myotomes & Reflexes)', mod: 'Clinical Neurology', href: 'neuro.html', color: 'sky', keys: 'l2 l3 l4 l5 s1 lower limb iliopsoas quadriceps tibialis anterior ehl extensor hallucis longus gastrocnemius soleus patellar achilles' },
+      { title: 'Lower Limb Peripheral Nerves (Femoral, Sciatic, Tibial, Fibular)', mod: 'Clinical Neurology', href: 'neuro.html', color: 'sky', keys: 'femoral lateral cutaneous obturator sciatic tibial fibular peroneal foot drop' },
+      { title: 'Cranial Nerves I–XII (CN V V1/V2/V3 & CN VII UMN vs LMN)', mod: 'Clinical Neurology', href: 'neuro.html', color: 'sky', keys: 'cranial nerves cn i ii iii iv v vi vii viii ix x xi xii trigeminal facial bells palsy forehead spared h test jaw jerk' },
+      { title: 'Weber’s & Rinne’s Tuning Fork Simulator (512 Hz)', mod: 'Clinical Neurology', href: 'neuro.html', color: 'sky', keys: 'weber rinne 512hz conductive sensorineural hearing lateralise ac bc' },
+      { title: 'Hutchinson Pupil 4-Stage Stepper (Cerebral Compression)', mod: 'Clinical Neurology', href: 'neuro.html', color: 'sky', keys: 'hutchinson pupil raised icp cn iii miosis mydriasis blown uncal herniation' },
+      { title: 'Beighton Scale (Hypermobility 0–9 Calculator)', mod: 'Clinical Neurology', href: 'neuro.html', color: 'sky', keys: 'beighton scale hypermobility 0 9 elbow knee thumb little finger' },
+      { title: 'Glasgow Coma Scale (GCS 3–15 Calculator)', mod: 'Clinical Neurology', href: 'neuro.html', color: 'sky', keys: 'gcs glasgow coma scale eye verbal motor trauma consciousness' },
+      { title: 'Dix-Hallpike (BPPV) vs. Fitz-Ritson’s (Cervicogenic Dizziness)', mod: 'Clinical Neurology', href: 'neuro.html', color: 'sky', keys: 'dix hallpike bppv vertigo nystagmus fitz ritson cervicogenic dizziness' },
+      { title: 'CAD Screening (Carotid & Vertebral 5Ds & 3Ns)', mod: 'Clinical Neurology', href: 'neuro.html', color: 'sky', keys: 'cad cervical arterial dysfunction 5ds 3ns diplopia dysarthria dysphagia drop attacks' },
+      { title: 'Agraphesthesia & Astereognosis (Parietal Lobe)', mod: 'Clinical Neurology', href: 'neuro.html', color: 'sky', keys: 'agraphesthesia astereognosis parietal lobe cortical sensory palm coin' },
+      { title: 'Left Hemispatial Neglect / Sensory Inattention (Right Parietal)', mod: 'Clinical Neurology', href: 'neuro.html', color: 'sky', keys: 'hemispatial neglect sensory inattention extinction right parietal ppc' },
+      { title: "Broca's, Wernicke's & Conduction Aphasia", mod: 'Clinical Neurology', href: 'neuro.html', color: 'sky', keys: 'broca wernicke conduction aphasia arcuate fasciculus speech' },
+      { title: 'Spinal Cord Cross-Section (DCML, Spinothalamic & CST)', mod: 'Clinical Neurology', href: 'neuro.html', color: 'sky', keys: 'spinal cord dcml dorsal column spinothalamic stt corticospinal cst umn lmn vibration 128hz proprioception babinski hoffmann' },
+      { title: '15-Minute Neuro OSCE Simulator & 8-Section Checklist', mod: 'Clinical Neurology', href: 'neuro.html', color: 'sky', keys: 'osce 15 minute timer cerebral balance coordination cerebellar romberg grading scales' },
 
-      // Chiropractic Studies 3 (9)
-      { title: '54-Step Full Body Check (4-Colour Key)', mod: 'Chiropractic Studies 3', href: 'chiro.html', color: 'emerald', keys: 'full body check routine blue red green pink bench patient practitioner action' },
-      { title: 'Atlas Palpation & Adjustment (Elbow Cue)', mod: 'Chiropractic Studies 3', href: 'chiro.html', color: 'emerald', keys: 'atlas adjustment ttr horse stance elbow accuracy mastoid jaw' },
-      { title: 'Cervical Spine Palpation & Strikes (Nail 2)', mod: 'Chiropractic Studies 3', href: 'chiro.html', color: 'emerald', keys: 'cervical strikes caterpillar nail 2 outer foot anterior head' },
-      { title: 'Pelvic Rotation, Tilt & Torsion I & II', mod: 'Chiropractic Studies 3', href: 'chiro.html', color: 'emerald', keys: 'pelvic rotation posterior tilt chin tuck sternum torsion 1 2 male female nail 3' },
-      { title: '1st Rib & Posterior Rib Adjustments (Top Priority)', mod: 'Chiropractic Studies 3', href: 'chiro.html', color: 'emerald', keys: '1st rib posterior ribs superman follow through curled nail hand rugby ball' },
-      { title: 'Prone Spinal Palpation in Threes & Double Transfer', mod: 'Chiropractic Studies 3', href: 'chiro.html', color: 'emerald', keys: 'spinal palpation threes even fingers roll on off double transfer fencing stance' },
-      { title: 'SIJ / PSIS & Clavicle Adjustments', mod: 'Chiropractic Studies 3', href: 'chiro.html', color: 'emerald', keys: 'sij psis clavicle block thrust slack sternum' },
-      { title: 'Foot & Upper Limb Mobilisations', mod: 'Chiropractic Studies 3', href: 'chiro.html', color: 'emerald', keys: 'foot mobs scissors washing machine kitkat shoulder elbow radial head wrist' },
-      { title: 'Prone Massage Sequence (1–5) & 40-Min Simulator', mod: 'Chiropractic Studies 3', href: 'chiro.html', color: 'emerald', keys: 'massage heel circles scrubs herring bone spinal strokes 40 min practical simulator' },
+      // Musculoskeletal Medicine (msk.html)
+      { title: 'OA vs. RA Joint Cross-Section, Cytokines & DMARDs', mod: 'MSK Medicine', href: 'msk.html', color: 'indigo', keys: 'oa ra osteoarthritis rheumatoid arthritis cartilage osteophyte pannus synovitis loss tnf il1 il6 dmards' },
+      { title: 'CKD → Renal Osteodystrophy 5-Step Domino', mod: 'MSK Medicine', href: 'msk.html', color: 'indigo', keys: 'ckd renal osteodystrophy phosphate vitamin d calcitriol hypocalcaemia secondary hyperparathyroidism pth' },
+      { title: 'Hot Swollen Joint: Gout vs. Septic Arthritis Triage', mod: 'MSK Medicine', href: 'msk.html', color: 'indigo', keys: 'gout pseudogout cppd septic arthritis hot swollen joint podagra msu crystals fever emergency' },
+      { title: "Metabolic Bone: Osteoporosis, Osteopenia, Osteomalacia & Paget's", mod: 'MSK Medicine', href: 'msk.html', color: 'indigo', keys: 'osteoporosis osteopenia osteomalacia pagets dexa t score alp looser zones' },
+      { title: 'Cauda Equina Syndrome (CES) Urgent Red Flags', mod: 'MSK Medicine', href: 'msk.html', color: 'indigo', keys: 'cauda equina ces saddle anaesthesia bladder bowel bilateral sciatica emergency mri' },
+      { title: 'ACS Spectrum: Stable/Unstable Angina, NSTEMI & STEMI', mod: 'MSK Medicine', href: 'msk.html', color: 'indigo', keys: 'acs angina nstemi stemi troponin nitric oxide plaque rupture chest pain 999' },
+      { title: 'Hypertension Urgent-Referral Thresholds (≥180/120)', mod: 'MSK Medicine', href: 'msk.html', color: 'indigo', keys: 'hypertension bp 180 120 accelerated papilloedema emergency' },
+      { title: 'Addisonian (Adrenal) Crisis & Electrolyte Triad', mod: 'MSK Medicine', href: 'msk.html', color: 'indigo', keys: 'addisonian adrenal crisis cortisol hypotension hyponatraemia hyperkalaemia hypoglycaemia hydrocortisone' },
+      { title: 'Tumour Grading vs. Staging (TNM) & Spinal Metastases', mod: 'MSK Medicine', href: 'msk.html', color: 'indigo', keys: 'tumour grading staging tnm metastases cancer night pain weight loss' },
+      { title: "Crohn's Disease vs. Ulcerative Colitis (IBD)", mod: 'MSK Medicine', href: 'msk.html', color: 'indigo', keys: 'crohns ulcerative colitis ibd skip lesions transmural mucosal bloody diarrhoea' },
+      { title: 'SAQ / LAQ Active-Recall Self-Marking Practice', mod: 'MSK Medicine', href: 'msk.html', color: 'indigo', keys: 'saq laq short long answer self marking practice exam' },
 
-      // Written & Foundation Modules (12)
-      { title: 'Pre-Flight Essay Scanner (100% Local)', mod: 'Clinic / Phil / Research', href: 'written.html', color: 'purple', keys: 'essay scanner word count 10 percent first person voice direct quotes citation density' },
-      { title: 'Harvard Referencing & Strict Marking Prompt', mod: 'Clinic / Phil / Research', href: 'written.html', color: 'purple', keys: 'harvard referencing reference list bibliography page numbers p pp strict marking prompt' },
-      { title: "Borton's Framework & 70%+ Critical Evaluation", mod: 'Clinic Studies 3', href: 'written.html', color: 'purple', keys: 'borton what so what now what critical evaluation description 64 70 clinic studies' },
-      { title: 'Interactive PICO Question Builder', mod: 'Research 2', href: 'written.html', color: 'sky', keys: 'pico population intervention comparison outcome research question' },
-      { title: 'Study Design & Bias Matrix (RCT, Cohort, Case-Control)', mod: 'Research 2', href: 'written.html', color: 'sky', keys: 'rct systematic review cohort case control cross sectional qualitative bias appraisal' },
-      { title: 'Biostatistics: SnNout, SpPin, p-value, 95% CI & NNT', mod: 'Research 2', href: 'written.html', color: 'sky', keys: 'sensitivity specificity snnout sppin p value confidence interval nnt biostatistics' },
-      { title: 'Research Paradigms (Ontology, Epistemology, Pragmatism)', mod: 'Research 2', href: 'written.html', color: 'sky', keys: 'ontology epistemology methodology positivism interpretivism pragmatism mixed methods' },
-      { title: 'Interactive Biopsychosocial (BPS) Triangle', mod: 'Behavioural Sciences', href: 'written.html', color: 'rose', keys: 'biopsychosocial bps biological psychological social pain model' },
-      { title: 'Yellow Flags (ABCDEFW) & Red/Orange/Blue/Black Flags', mod: 'Behavioural Sciences', href: 'written.html', color: 'rose', keys: 'yellow flags abcdefw orange blue black flags psychosocial' },
-      { title: 'Fear-Avoidance, Self-Efficacy & Motivational Interviewing', mod: 'Behavioural Sciences', href: 'written.html', color: 'rose', keys: 'fear avoidance kinesiophobia self efficacy bandura motivational interviewing oars adherence' },
-      { title: 'Vitalism vs. Materialism & Holism vs. Reductionism', mod: 'Philosophy 3', href: 'written.html', color: 'amber', keys: 'vitalism materialism holism reductionism philosophy innate intelligence' },
-      { title: 'Popper Falsifiability, EIP Triad & 4 Ethical Pillars', mod: 'Philosophy 3', href: 'written.html', color: 'amber', keys: 'popper falsifiability evidence informed practice eip autonomy beneficence non maleficence justice gcc' },
+      // Chiropractic Studies 3 (chiro.html)
+      { title: '54-Step Full Body Check (4-Colour Key Routine)', mod: 'Chiro Studies 3', href: 'chiro.html', color: 'teal', keys: 'full body check routine 54 steps blue red green pink bench patient practitioner action' },
+      { title: 'Atlas Palpation & Adjustment (Elbow Stability Cue)', mod: 'Chiro Studies 3', href: 'chiro.html', color: 'teal', keys: 'atlas adjustment ttr horse stance elbow accuracy mastoid jaw' },
+      { title: 'Cervical Spine Palpation & Strikes (Nail 2)', mod: 'Chiro Studies 3', href: 'chiro.html', color: 'teal', keys: 'cervical strikes caterpillar nail 2 outer foot anterior head' },
+      { title: 'Pelvic Screening & Adjustments: Rotation, Tilt & Torsion I/II', mod: 'Chiro Studies 3', href: 'chiro.html', color: 'teal', keys: 'pelvic rotation posterior tilt chin tuck sternum torsion 1 2 male female nail 3' },
+      { title: '1st Rib & Posterior Rib Adjustments (Top Priority Cue)', mod: 'Chiro Studies 3', href: 'chiro.html', color: 'teal', keys: '1st rib posterior ribs superman follow through curled nail hand rugby ball' },
+      { title: 'Prone Spine Palpation in Threes, Double Transfer & SIJ/PSIS', mod: 'Chiro Studies 3', href: 'chiro.html', color: 'teal', keys: 'prone spine palpation threes even fingers roll on off double transfer sij psis clavicle' },
+      { title: '40-Minute Chiropractic Practical Exam Simulator', mod: 'Chiro Studies 3', href: 'chiro.html', color: 'teal', keys: '40 min practical exam simulator timer random technique drill' },
+
+      // Written & Foundation Modules (written.html)
+      { title: 'Pre-Flight Essay Scanner & Strict Marking Prompt', mod: 'Written & Found.', href: 'written.html', color: 'purple', keys: 'pre flight essay scanner word count 10 percent first person voice direct quotes citation density' },
+      { title: 'Harvard Referencing & Weighted Rubric Auditor', mod: 'Written & Found.', href: 'written.html', color: 'purple', keys: 'harvard referencing reference list bibliography page numbers p pp rubric auditor clinic studies philosophy research' },
+      { title: "Clinic Studies 3: Borton's Framework & 70%+ Critical Evaluation", mod: 'Written & Found.', href: 'written.html', color: 'purple', keys: 'clinic studies borton what so what now what critical evaluation description 70' },
+      { title: 'Research 2: PICO Builder, Study Design & Biostats SRS', mod: 'Written & Found.', href: 'written.html', color: 'purple', keys: 'research 2 pico population intervention comparison outcome rct cohort case control bias snnout sppin nnt' },
+      { title: 'Behavioural Sciences: BPS Model, Yellow Flags (ABCDEFW) & MI', mod: 'Written & Found.', href: 'written.html', color: 'purple', keys: 'behavioural sciences biopsychosocial bps yellow flags abcdefw fear avoidance self efficacy motivational interviewing' },
     ];
 
     function focusSearch() {
       const inp = document.getElementById('global-search-input');
       if (inp) {
         inp.scrollIntoView({ behavior: 'smooth', block: 'center' });
-        setTimeout(() => inp.focus(), 200);
+        setTimeout(() => inp.focus(), 180);
       }
     }
 
@@ -569,22 +802,22 @@
 
       if (!matches.length) {
         box.innerHTML = `
-          <div class="p-4 rounded-2xl bg-white dark:bg-slate-900 border border-slate-200 dark:border-slate-800 text-xs sm:text-sm text-slate-500 text-center">
-            No topics matched "<strong>${q.replace(/</g, '&lt;')}</strong>". Try terms like <em>C6</em>, <em>CKD</em>, <em>1st Rib</em>, or <em>PICO</em>.
+          <div class="ah-card p-4 text-center text-xs sm:text-sm ah-muted">
+            No topics matched "<strong>${q.replace(/</g, '&lt;')}</strong>". Try <em>C6</em>, <em>Radial</em>, <em>CKD</em>, <em>Atlas</em>, or <em>PICO</em>.
           </div>
         `;
         return;
       }
 
       box.innerHTML = `
-        <div class="rounded-2xl bg-white dark:bg-slate-900 border border-slate-200 dark:border-slate-800 divide-y divide-slate-100 dark:divide-slate-800 overflow-hidden shadow-sm">
+        <div class="ah-card divide-y divide-black/5 dark:divide-white/10 overflow-hidden">
           ${matches.map((m) => `
-            <a href="${m.href}" class="flex items-center justify-between gap-3 px-4 py-3 hover:bg-slate-50 dark:hover:bg-slate-800/60 transition">
+            <a href="${m.href}" class="flex items-center justify-between gap-3 px-4 py-3 hover:bg-black/5 dark:hover:bg-white/5 transition">
               <div class="min-w-0">
-                <p class="text-xs sm:text-sm font-extrabold text-slate-900 dark:text-white truncate">${m.title}</p>
-                <span class="inline-block mt-0.5 px-2 py-0.5 rounded-md text-[10px] font-bold bg-${m.color}-100 dark:bg-${m.color}-950/70 text-${m.color}-800 dark:text-${m.color}-300">${m.mod}</span>
+                <p class="text-xs sm:text-sm font-display font-extrabold ah-text truncate">${m.title}</p>
+                <span class="inline-block mt-0.5 px-2 py-0.5 rounded-md text-[10px] font-display font-bold bg-${m.color}-500/15 text-${m.color}-700 dark:text-${m.color}-300">${m.mod}</span>
               </div>
-              <span class="text-xs font-extrabold text-teal-600 dark:text-teal-400 shrink-0">Open &rarr;</span>
+              <span class="text-xs font-display font-extrabold text-emerald-600 dark:text-emerald-400 shrink-0">Open &rarr;</span>
             </a>
           `).join('')}
         </div>
@@ -592,47 +825,49 @@
     }
 
     // =========================================================================
-    // 5. QUICK 5-MINUTE MIX (20-QUESTION INTERLEAVED BANK)
+    // 4. QUICK 5-MIN MIX (20-QUESTION INTERLEAVED BANK + GREEN/RED BANNERS)
     // =========================================================================
     const MIX_BANK = [
-      { cat: 'Clinical Neuro', q: 'Name the specific muscles, dermatome, and reflex for the C6 nerve root.', a: 'Sensory: Lateral forearm, thumb & index finger. Specific Muscles: Wrist extensors (ECRL/ECRB) & Biceps. Reflex: Brachioradialis.' },
-      { cat: 'Clinical Neuro', q: 'Radial vs. Median Nerve Trap: Which supplies elbow/wrist EXTENSORS and which supplies wrist FLEXORS?', a: 'Radial = Elbow & wrist EXTENSORS (dorsum lateral 2/3 hand; wrist drop). Median = Most wrist FLEXORS + thumb opposition (palmar lateral 2/3 hand).' },
-      { cat: 'Clinical Neuro', q: 'Name the exact myotome muscle for L5 and S1, plus how gait screens L4 vs. S1.', a: 'L5 = Extensor hallucis longus (hallux extension, no reflex). S1 = Gastrocnemius & Soleus (Achilles reflex). Heel walk = L4 (Tibialis anterior); Toe walk = S1.' },
-      { cat: 'Clinical Neuro', q: 'A patient has intact light touch but cannot identify a number traced on their palm (eyes closed). Name the sign and lesion site.', a: 'Agraphesthesia — Contralateral Parietal Lobe (somatosensory association cortex).' },
-      { cat: 'Clinical Neuro', q: 'Which hemisphere and lobe cause Left Hemispatial Neglect / sensory extinction?', a: 'Right Posterior Parietal Cortex (Right Parietal = Left Neglect).' },
-      { cat: 'Clinical Neuro', q: 'In Left Conductive hearing loss, where does Weber’s lateralise and what is Rinne’s on the left?', a: 'Weber’s lateralises to the LEFT (affected) ear; Left Rinne’s is NEGATIVE (BC > AC).' },
-      { cat: 'Clinical Neuro', q: 'Walk through the progression of Hutchinson pupil in rising intracranial pressure (ICP).', a: 'Stage 1: Ipsilateral constriction -> Stage 2: Ipsilateral fixed dilation (emergency!) -> Stage 3/4: Contralateral involvement -> Bilateral fixed dilated pupils.' },
-      { cat: 'Clinical Neuro', q: 'How do you distinguish an UMN vs. LMN lesion of CN VII (Facial nerve)?', a: 'UMN spares the forehead (bilateral upper-face innervation). LMN (Bell’s palsy) paralyses the ENTIRE ipsilateral face including forehead.' },
+      { cat: 'Clinical Neuro', q: 'Name the specific muscles, dermatome, and reflex for the C6 nerve root.', a: 'Dermatome: Lateral forearm, thumb & 1st (index) finger. Specific Muscles: Wrist extensors & Biceps. Reflex: Brachioradialis (0–4).' },
+      { cat: 'Clinical Neuro', q: 'Radial vs. Median Nerve Trap: Which innervates elbow/wrist EXTENSORS and which innervates most wrist FLEXORS?', a: 'Radial = Elbow & wrist EXTENSORS (dorsum lateral 2/3 hand; lesion = wrist drop). Median = Most wrist FLEXORS & thumb opposition (palmar lateral 2/3 hand).' },
+      { cat: 'Clinical Neuro', q: 'Which specific muscle must you name for the C8 myotome (not just the action)?', a: 'Flexor digitorum profundus (flexing the distal phalanx / DIP joint of the 3rd finger).' },
+      { cat: 'Clinical Neuro', q: 'Name the exact myotome muscles for L4, L5, and S1 plus the reflexes.', a: 'L4 = Tibialis anterior (Patellar reflex, heel walk). L5 = Extensor hallucis longus (no reflex). S1 = Gastrocnemius & Soleus (Achilles reflex, toe walk).' },
+      { cat: 'Clinical Neuro', q: 'A patient has intact light touch but cannot recognise a number traced on their palm (eyes closed). Name the sign & lesion site.', a: 'Agraphesthesia — Contralateral Parietal Lobe (somatosensory association cortex).' },
+      { cat: 'Clinical Neuro', q: 'Which hemisphere and cortical region cause Left Hemispatial Neglect (sensory extinction)?', a: 'Right Posterior Parietal Cortex (Right Parietal = Left Neglect).' },
+      { cat: 'Clinical Neuro', q: 'In Left Conductive hearing loss, where does Weber’s lateralise and what is Left Rinne’s?', a: 'Weber’s lateralises to the LEFT (affected) ear; Left Rinne’s is NEGATIVE (BC > AC).' },
+      { cat: 'Clinical Neuro', q: 'State the 4-stage progression of Hutchinson pupil in rising intracranial pressure (ICP).', a: '1) Ipsilateral constriction -> 2) Ipsilateral fixed dilation (999 emergency!) -> 3) Contralateral constriction -> 4) Bilateral fixed dilated pupils.' },
       { cat: 'MSK Medicine', q: 'Recite the 5-step domino linking Chronic Kidney Disease (CKD) to Renal Osteodystrophy.', a: 'CKD (↓ GFR) → Phosphate retention (↑ PO₄) + ↓ active Vitamin D (calcitriol) → Hypocalcaemia (↓ Ca²⁺) → Secondary Hyperparathyroidism (↑ PTH) → Osteoclast bone resorption (Renal Osteodystrophy).' },
-      { cat: 'MSK Medicine', q: 'Name the 3 key pro-inflammatory cytokines in RA and why DMARDs are started early.', a: 'TNF-α, IL-1, and IL-6. Early DMARDs (e.g. methotrexate) suppress the immune cascade to prevent irreversible pannus-driven bone erosion (NSAIDs only mask symptoms).' },
+      { cat: 'MSK Medicine', q: 'Name the 3 key pro-inflammatory cytokines in RA and why DMARDs are started early.', a: 'TNF-α, IL-1, and IL-6. Early DMARDs (e.g. methotrexate) halt pannus-mediated irreversible bone erosion, whereas NSAIDs only mask symptoms.' },
       { cat: 'MSK Medicine', q: 'Differentiate Osteoporosis, Osteomalacia, and Paget’s Disease on routine bloods (Ca²⁺, PO₄, ALP).', a: 'Osteoporosis: All NORMAL (DEXA T ≤ -2.5). Osteomalacia: ↓/N Ca²⁺, ↓ PO₄, ↑ ALP, ↑ PTH. Paget’s: Markedly isolated ↑↑ ALP with normal Ca²⁺ & PO₄.' },
-      { cat: 'Red Flags', q: 'A patient has a hot, acutely swollen knee with fever (38.5°C) and severe pain on ANY passive ROM. Immediate action?', a: 'URGENT same-day A&E referral to exclude Septic Arthritis (joint aspiration before IV antibiotics). Never assume gout!' },
+      { cat: 'MSK Medicine', q: 'How do Gout and Pseudogout crystals differ under polarised light microscopy?', a: 'Gout = Monosodium urate (MSU): NEEDLE-shaped, NEGATIVELY birefringent. Pseudogout (CPPD) = RHOMBOID-shaped, POSITIVELY birefringent.' },
+      { cat: 'Red Flags', q: 'A patient presents with a hot, acutely swollen knee, fever (38.5°C), and severe pain on ANY passive ROM. Immediate action?', a: 'Urgent SAME-DAY A&E referral to rule out Septic Arthritis (joint aspiration before IV antibiotics). Never assume gout!' },
       { cat: 'Red Flags', q: 'State the classic triad of Cauda Equina Syndrome (CES) demanding immediate A&E referral.', a: 'Saddle anaesthesia (S2–S4), new bladder/bowel dysfunction (retention/incontinence), and bilateral sciatica / progressive lower limb motor weakness.' },
-      { cat: 'Red Flags', q: 'Differentiate Unstable Angina, NSTEMI, and STEMI by troponin and ECG.', a: 'Unstable Angina: Normal troponin. NSTEMI: ↑ Troponin + ST depression / T-inversion (partial occlusion). STEMI: ↑↑ Troponin + ST elevation (complete occlusion — 999!).' },
-      { cat: 'Red Flags', q: 'What is the classic electrolyte triad of an Addisonian (Adrenal) Crisis?', a: 'Hyponatraemia (↓ Na⁺), Hyperkalaemia (↑ K⁺), and Hypoglycaemia (↓ glucose) + severe hypotension/shock → 999 IV hydrocortisone.' },
-      { cat: 'Chiro Studies 3', q: 'What is the Year 2 practical feedback cue for the Atlas adjustment (Step 7)?', a: 'Do NOT adjust or shift your elbows after hand placement—lock your angle first so accuracy stays sharp alongside good speed.' },
-      { cat: 'Chiro Studies 3', q: 'What are the two key cues for the Inferior Pelvic Tilt adjustment (Step 17)?', a: '1) Ask the patient to TUCK THEIR CHIN. 2) Drop lower into the adjustment so your sternum is aligned with—not superior to—the ischium.' },
-      { cat: 'Chiro Studies 3', q: 'What was the top-priority practical cue for the 1st Rib & Posterior Rib adjustments (Steps 49–50)?', a: 'Keep the nail hand crisp and flat on 1st rib (avoid curling before adjustment); keep posterior rib palpations slightly more medial along the rugby-ball curve.' },
-      { cat: 'Chiro Studies 3', q: 'What are the two key cues for Prone Spinal Palpation & Double Transfers (Steps 46–47)?', a: 'Keep palpating fingers strictly EVEN on SPs, and ROLL on/off double transfers—never come off! Stay in fencing stance (don’t slip into horse stance).' },
-      { cat: 'Written & Found.', q: 'What are the 7 letters of the Yellow Flags psychosocial mnemonic (ABCDEFW)?', a: 'Attitudes & beliefs, Behaviours, Compensation, Diagnosis & treatment, Emotions, Family, Work.' },
+      { cat: 'Red Flags', q: 'Differentiate Unstable Angina, NSTEMI, and STEMI by troponin and ECG.', a: 'Unstable Angina: Normal troponin. NSTEMI: ↑ Troponin + ST depression / T-inversion. STEMI: ↑↑ Troponin + ST elevation (complete occlusion — 999 emergency!).' },
+      { cat: 'Red Flags', q: 'What is the classic metabolic triad of an Addisonian (Adrenal) Crisis?', a: 'Hyponatraemia (↓ Na⁺), Hyperkalaemia (↑ K⁺), and Hypoglycaemia (↓ glucose) with severe hypotension/shock → immediate 999 IV hydrocortisone.' },
+      { cat: 'Chiro 3', q: 'What is the key Year 2 practical cue for the Atlas adjustment?', a: 'Do NOT adjust or shift your elbows after hand placement — lock your angle first so accuracy stays sharp alongside good speed.' },
+      { cat: 'Chiro 3', q: 'What are the two key cues for the Inferior Pelvic Tilt adjustment?', a: '1) Ask the patient to TUCK THEIR CHIN. 2) Drop lower into the adjustment so your sternum aligns with (not superior to) the ischium.' },
+      { cat: 'Chiro 3', q: 'What is the top-priority practical cue for the 1st Rib & Posterior Rib adjustments?', a: 'Keep the nail hand crisp and flat on 1st rib (avoid curling before adjustment); keep posterior rib palpations slightly more medial along the rugby-ball curve.' },
+      { cat: 'Chiro 3', q: 'What are the two key cues for Prone Spinal Palpation & Double Transfers?', a: 'Keep palpating fingers strictly EVEN on SPs, and ROLL on/off double transfers (never come off) while maintaining fencing stance.' },
     ];
 
-    const mixState = {
+    const mix = {
       deck: [],
       idx: 0,
       revealed: false,
+      feedback: null, // null | 'correct' | 'wrong'
       gotIt: 0,
       drillAgain: 0,
       done: false,
     };
 
     function openMixModal() {
-      mixState.deck = [...MIX_BANK].sort(() => Math.random() - 0.5).slice(0, 5);
-      mixState.idx = 0;
-      mixState.revealed = false;
-      mixState.gotIt = 0;
-      mixState.drillAgain = 0;
-      mixState.done = false;
+      mix.deck = [...MIX_BANK].sort(() => Math.random() - 0.5).slice(0, 5);
+      mix.idx = 0;
+      mix.revealed = false;
+      mix.feedback = null;
+      mix.gotIt = 0;
+      mix.drillAgain = 0;
+      mix.done = false;
       document.getElementById('mix-modal').classList.remove('hidden');
       renderMixModal();
     }
@@ -641,87 +876,127 @@
       document.getElementById('mix-modal').classList.add('hidden');
     }
 
-    function gradeMix(isGotIt) {
-      if (isGotIt) mixState.gotIt++;
-      else mixState.drillAgain++;
+    function markMixResult(isCorrect) {
+      if (mix.feedback) return;
+      mix.feedback = isCorrect ? 'correct' : 'wrong';
+      if (isCorrect) mix.gotIt++;
+      else mix.drillAgain++;
+      renderMixModal();
+    }
 
-      if (mixState.idx + 1 >= mixState.deck.length) {
-        mixState.done = true;
+    function nextMixQuestion() {
+      if (mix.idx + 1 >= mix.deck.length) {
+        mix.done = true;
       } else {
-        mixState.idx++;
-        mixState.revealed = false;
+        mix.idx++;
+        mix.revealed = false;
+        mix.feedback = null;
       }
       renderMixModal();
     }
 
     function renderMixModal() {
-      const body = document.getElementById('mix-modal-body');
+      const container = document.getElementById('mix-modal-content');
 
-      if (mixState.done) {
-        const pct = Math.round((mixState.gotIt / mixState.deck.length) * 100);
-        body.innerHTML = `
+      if (mix.done) {
+        const pct = Math.round((mix.gotIt / mix.deck.length) * 100);
+        container.innerHTML = `
           <div class="p-6 text-center space-y-4">
-            <span class="inline-block px-3 py-1 rounded-xl text-xs font-extrabold uppercase bg-teal-100 dark:bg-teal-950 text-teal-700 dark:text-teal-300">5-Minute Mix Complete</span>
-            <h3 class="text-3xl font-extrabold text-slate-900 dark:text-white">${mixState.gotIt} / 5 (${pct}%)</h3>
-            <p class="text-xs sm:text-sm text-slate-500 dark:text-slate-400">
-              ${mixState.gotIt >= 4 ? 'Sharp clinical recall across modules!' : 'Great warm-up — jump into the module cards for any items you flagged to drill.'}
+            <div class="w-14 h-14 mx-auto rounded-2xl bg-emerald-500 text-white text-2xl flex items-center justify-center shadow-sm">⚡</div>
+            <span class="inline-block px-3 py-1 rounded-xl text-[11px] font-display font-extrabold uppercase bg-emerald-500/15 text-emerald-700 dark:text-emerald-300">
+              5-Min Mix Complete
+            </span>
+            <h3 class="text-3xl font-display font-extrabold ah-text">${mix.gotIt} / 5 (${pct}%)</h3>
+            <p class="text-xs sm:text-sm ah-muted">
+              ${mix.gotIt >= 4 ? 'Sharp cross-module recall — ready for clinic!' : 'Solid warm-up — jump into the visual lesson or module deck for any missed topics.'}
             </p>
-            <div class="flex justify-center gap-2 pt-2">
-              <button type="button" onclick="openMixModal()" class="px-5 py-2.5 rounded-xl bg-indigo-600 hover:bg-indigo-700 text-white text-xs font-extrabold">Play Another 5</button>
-              <button type="button" onclick="closeMixModal()" class="px-5 py-2.5 rounded-xl bg-slate-100 dark:bg-slate-800 text-slate-700 dark:text-slate-200 text-xs font-bold">Done</button>
+            <div class="flex flex-col sm:flex-row justify-center gap-2.5 pt-2">
+              <button type="button" onclick="openMixModal()" class="btn-3d btn-indigo px-5 py-3 text-xs">Play Another 5</button>
+              <button type="button" onclick="closeMixModal()" class="btn-3d btn-neutral px-5 py-3 text-xs">Done</button>
             </div>
           </div>
         `;
         return;
       }
 
-      const item = mixState.deck[mixState.idx];
-      body.innerHTML = `
-        <div class="px-5 py-4 border-b border-slate-200 dark:border-slate-800 flex items-center justify-between">
-          <div class="flex items-center gap-2">
-            <span class="px-2.5 py-0.5 rounded-lg text-[11px] font-extrabold bg-indigo-100 dark:bg-indigo-950 text-indigo-700 dark:text-indigo-300">${item.cat}</span>
-            <span class="text-xs font-bold text-slate-400">Question ${mixState.idx + 1} / 5</span>
+      const item = mix.deck[mix.idx];
+      const progressPct = Math.round(((mix.idx + (mix.feedback ? 1 : 0)) / mix.deck.length) * 100);
+
+      container.innerHTML = `
+        <!-- Modal Header + Progress Bar -->
+        <div class="px-5 py-4 border-b border-black/10 dark:border-white/10 space-y-2.5">
+          <div class="flex items-center justify-between gap-2">
+            <div class="flex items-center gap-2">
+              <span class="px-2.5 py-0.5 rounded-lg text-[11px] font-display font-extrabold bg-indigo-500/15 text-indigo-700 dark:text-indigo-300">${item.cat}</span>
+              <span class="text-xs font-display font-bold ah-muted">Q${mix.idx + 1} / 5</span>
+            </div>
+            <button type="button" onclick="closeMixModal()" class="w-8 h-8 rounded-xl bg-black/5 dark:bg-white/10 ah-muted hover:ah-text font-extrabold text-lg leading-none">&times;</button>
           </div>
-          <button type="button" onclick="closeMixModal()" class="text-slate-400 hover:text-slate-700 dark:hover:text-white text-xl font-extrabold leading-none">&times;</button>
+          <div class="w-full h-2.5 rounded-full bg-black/10 dark:bg-white/10 overflow-hidden">
+            <div class="h-full rounded-full bg-emerald-500 transition-all duration-300" style="width:${Math.max(10, progressPct)}%"></div>
+          </div>
         </div>
 
+        <!-- Question Body -->
         <div class="p-5 overflow-y-auto space-y-4">
-          <p class="text-sm sm:text-base font-extrabold text-slate-900 dark:text-white leading-snug">${item.q}</p>
+          <p class="text-base font-display font-extrabold ah-text leading-snug">${item.q}</p>
 
-          ${!mixState.revealed ? `
+          ${!mix.revealed ? `
             <button
               type="button"
-              onclick="mixState.revealed=true; renderMixModal();"
-              class="w-full py-3.5 rounded-2xl bg-teal-600 hover:bg-teal-700 text-white text-sm font-extrabold shadow-xs transition"
-            >Reveal Answer</button>
+              onclick="mix.revealed=true; renderMixModal();"
+              class="btn-3d btn-sky w-full py-3.5 text-sm"
+            >Reveal Model Answer</button>
           ` : `
-            <div class="p-4 rounded-2xl bg-teal-50/70 dark:bg-teal-950/35 border border-teal-200 dark:border-teal-800 text-xs sm:text-sm text-slate-800 dark:text-slate-100 leading-relaxed">
-              <strong class="block text-[10px] uppercase tracking-wider text-teal-700 dark:text-teal-400 mb-1">Model Answer</strong>
-              ${item.a}
+            <div class="p-4 rounded-2xl ah-card-alt text-xs sm:text-sm ah-text leading-relaxed space-y-1">
+              <span class="block text-[10px] font-display font-extrabold uppercase tracking-wider text-sky-600 dark:text-sky-400">Model Answer</span>
+              <p>${item.a}</p>
             </div>
-            <div class="grid grid-cols-2 gap-3">
-              <button type="button" onclick="gradeMix(false)" class="py-3 rounded-xl bg-rose-600 hover:bg-rose-700 text-white text-xs font-extrabold transition">↺ Drill Again</button>
-              <button type="button" onclick="gradeMix(true)" class="py-3 rounded-xl bg-emerald-600 hover:bg-emerald-700 text-white text-xs font-extrabold transition">✓ Got It</button>
-            </div>
+
+            ${!mix.feedback ? `
+              <div class="grid grid-cols-2 gap-3">
+                <button type="button" onclick="markMixResult(false)" class="btn-3d btn-rose py-3 text-xs">↺ Missed It</button>
+                <button type="button" onclick="markMixResult(true)" class="btn-3d btn-emerald py-3 text-xs">✓ Nailed It</button>
+              </div>
+            ` : ''}
           `}
         </div>
+
+        <!-- Instant Green / Red Feedback Banner -->
+        ${mix.feedback === 'correct' ? `
+          <div class="pop-in px-5 py-4 bg-emerald-50 dark:bg-[#092920] border-t-2 border-emerald-400 dark:border-emerald-700 flex items-center justify-between gap-3">
+            <div class="flex items-center gap-2.5">
+              <span class="w-7 h-7 rounded-full bg-emerald-500 text-white font-extrabold flex items-center justify-center shrink-0 text-sm">✓</span>
+              <span class="text-sm font-display font-extrabold text-emerald-800 dark:text-emerald-300">Spot on! Great recall.</span>
+            </div>
+            <button type="button" onclick="nextMixQuestion()" class="btn-3d btn-emerald px-4 py-2 text-xs shrink-0">Continue &rarr;</button>
+          </div>
+        ` : ''}
+
+        ${mix.feedback === 'wrong' ? `
+          <div class="pop-in px-5 py-4 bg-rose-50 dark:bg-[#2b0f18] border-t-2 border-rose-400 dark:border-rose-700 flex items-center justify-between gap-3">
+            <div class="flex items-center gap-2.5">
+              <span class="w-7 h-7 rounded-full bg-rose-500 text-white font-extrabold flex items-center justify-center shrink-0 text-sm">!</span>
+              <span class="text-sm font-display font-extrabold text-rose-800 dark:text-rose-300">Flagged — revisit this card today.</span>
+            </div>
+            <button type="button" onclick="nextMixQuestion()" class="btn-3d btn-rose px-4 py-2 text-xs shrink-0">Continue &rarr;</button>
+          </div>
+        ` : ''}
       `;
     }
 
     // =========================================================================
-    // 6. PHONE <-> LAPTOP PROGRESS SYNC (BASE64 EXPORT / IMPORT)
+    // 5. PHONE <-> LAPTOP PROGRESS SYNC (BASE64: mchiro_srs_v4 & mchiro_theme)
     // =========================================================================
     function generateSyncCode() {
-      const payload = {};
       try {
-        for (let i = 0; i < localStorage.length; i++) {
-          const k = localStorage.key(i);
-          if (k && k.startsWith('mchiro_')) {
-            payload[k] = localStorage.getItem(k);
-          }
-        }
-        const json = JSON.stringify(payload);
-        return btoa(unescape(encodeURIComponent(json)));
+        const payload = {};
+        const targetKeys = ['mchiro_srs_v4', 'mchiro_theme'];
+        targetKeys.forEach((k) => {
+          const val = localStorage.getItem(k);
+          if (val !== null) payload[k] = val;
+        });
+        return btoa(unescape(encodeURIComponent(JSON.stringify(payload))));
       } catch (e) {
         return '';
       }
@@ -740,7 +1015,7 @@
     function copySyncCode() {
       const code = document.getElementById('sync-export-box').value;
       if (!code) {
-        showToast('No saved progress found yet.', 'warn');
+        showToast('No saved progress found to export yet.', 'amber');
         return;
       }
       copyTextSafe(code, 'Sync code copied! Paste it on your other device.');
@@ -749,38 +1024,37 @@
     function restoreSyncCode() {
       const raw = (document.getElementById('sync-import-box').value || '').trim();
       if (!raw) {
-        showToast('Paste a sync code first.', 'warn');
+        showToast('Paste a sync code first.', 'amber');
         return;
       }
       try {
-        const json = decodeURIComponent(escape(atob(raw)));
-        const parsed = JSON.parse(json);
-        if (!parsed || typeof parsed !== 'object') throw new Error('Invalid');
+        const parsed = JSON.parse(decodeURIComponent(escape(atob(raw))));
+        if (!parsed || typeof parsed !== 'object') throw new Error('Invalid sync format');
 
-        let count = 0;
-        Object.entries(parsed).forEach(([k, v]) => {
-          if (k.startsWith('mchiro_') && typeof v === 'string') {
-            localStorage.setItem(k, v);
-            count++;
+        const allowed = ['mchiro_srs_v4', 'mchiro_theme'];
+        let restored = 0;
+        allowed.forEach((k) => {
+          if (typeof parsed[k] === 'string') {
+            localStorage.setItem(k, parsed[k]);
+            restored++;
           }
         });
 
         initTheme();
-        computeLiveStats();
+        updateLeitnerStats();
         closeSyncModal();
-        showToast(`Progress restored (${count} saved items synced)!`, 'success');
+        showToast(`Progress restored (${restored} key${restored === 1 ? '' : 's'} synced)!`, 'emerald');
       } catch (e) {
-        showToast('Invalid sync code — please check you copied the full text.', 'warn');
+        showToast('Invalid sync code — please check you copied the full text.', 'rose');
       }
     }
 
     // =========================================================================
-    // 7. INITIALISE HOME DASHBOARD
+    // 6. INITIALISE HOME DASHBOARD
     // =========================================================================
     initTheme();
     updateCountdown();
-    computeLiveStats();
-    renderModuleGrid();
+    updateLeitnerStats();
   </script>
 </body>
 </html>
