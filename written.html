@@ -1,0 +1,1566 @@
+<!DOCTYPE html>
+<html lang="en" class="scroll-smooth">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Written &amp; Foundation – MChiro Year 3 Hub</title>
+
+  <!-- Google Font: Inter -->
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap" rel="stylesheet" />
+
+  <!-- Tailwind CSS -->
+  <script src="https://cdn.tailwindcss.com"></script>
+  <script>
+    tailwind.config = {
+      darkMode: 'class',
+      theme: {
+        extend: {
+          fontFamily: {
+            sans: ['Inter', 'system-ui', '-apple-system', 'sans-serif'],
+          },
+        },
+      },
+    };
+  </script>
+
+  <style>
+    /* Clinical Light & Dark Mode Tokens for Interactive SVGs */
+    :root {
+      --svg-bg: #f8fafc;
+      --svg-surface: #ffffff;
+      --svg-stroke: #475569;
+      --svg-line: #cbd5e1;
+      --svg-text: #0f172a;
+      --svg-muted: #64748b;
+    }
+
+    .dark {
+      --svg-bg: #0f172a;
+      --svg-surface: #1e293b;
+      --svg-stroke: #94a3b8;
+      --svg-line: #334155;
+      --svg-text: #f8fafc;
+      --svg-muted: #94a3b8;
+    }
+
+    .no-scrollbar::-webkit-scrollbar { display: none; }
+    .no-scrollbar { -ms-overflow-style: none; scrollbar-width: none; }
+
+    .svg-node {
+      cursor: pointer;
+      transition: transform 0.16s ease, filter 0.16s ease, opacity 0.16s ease;
+      transform-box: fill-box;
+      transform-origin: center;
+    }
+    .svg-node:hover {
+      filter: brightness(1.08);
+    }
+    .svg-node-active {
+      stroke: var(--svg-text) !important;
+      stroke-width: 3px !important;
+      filter: drop-shadow(0 0 10px rgba(13, 148, 136, 0.55));
+    }
+  </style>
+</head>
+<body class="bg-slate-50 text-slate-900 dark:bg-slate-950 dark:text-slate-100 font-sans antialiased transition-colors duration-200 overflow-x-hidden selection:bg-teal-200 dark:selection:bg-teal-800">
+
+  <!-- Toast Notification Container (no alert/confirm used) -->
+  <div id="toast-container" class="fixed bottom-4 right-4 z-50 flex flex-col gap-2 pointer-events-none"></div>
+
+  <!-- Sticky Top Header & Tab Bar -->
+  <header class="sticky top-0 z-40 bg-white/95 dark:bg-slate-900/95 backdrop-blur border-b border-slate-200 dark:border-slate-800">
+    <!-- Row 1: Home Link, Title, Quick Module Nav Pills, Theme Toggle -->
+    <div class="max-w-5xl mx-auto px-3 sm:px-4 py-2.5 flex items-center justify-between gap-2">
+      <div class="flex items-center gap-2.5 min-w-0">
+        <a
+          href="index.html"
+          class="px-3 py-2 rounded-xl bg-slate-100 dark:bg-slate-800 hover:bg-slate-200 dark:hover:bg-slate-700 text-slate-700 dark:text-slate-200 text-xs font-extrabold transition shrink-0 flex items-center gap-1"
+          aria-label="Return to Home Dashboard"
+        >
+          <span>&larr;</span>
+          <span>Home</span>
+        </a>
+        <div class="min-w-0">
+          <h1 class="text-sm sm:text-base font-extrabold tracking-tight text-slate-900 dark:text-white truncate">
+            Written &amp; Foundation
+          </h1>
+          <p class="text-[11px] font-semibold text-slate-500 dark:text-slate-400 truncate">
+            Essay Auditor &bull; Clinic 3 &bull; Research 2 &bull; Phil &amp; Behav
+          </p>
+        </div>
+      </div>
+
+      <!-- Right Controls: Quick Module Pills (Desktop) + Due Pill + Theme Toggle -->
+      <div class="flex items-center gap-1.5 sm:gap-2 shrink-0">
+        <div class="hidden md:flex items-center gap-1 mr-1">
+          <a href="chiro.html" class="px-2.5 py-1.5 rounded-xl text-xs font-bold text-slate-600 dark:text-slate-300 hover:bg-slate-100 dark:hover:bg-slate-800 transition">Chiro 3</a>
+          <a href="neuro.html" class="px-2.5 py-1.5 rounded-xl text-xs font-bold text-slate-600 dark:text-slate-300 hover:bg-slate-100 dark:hover:bg-slate-800 transition">Neuro</a>
+          <a href="msk.html" class="px-2.5 py-1.5 rounded-xl text-xs font-bold text-slate-600 dark:text-slate-300 hover:bg-slate-100 dark:hover:bg-slate-800 transition">MSK</a>
+        </div>
+
+        <button
+          type="button"
+          id="due-toggle-btn"
+          onclick="toggleDueOnly()"
+          class="px-2.5 py-1.5 rounded-xl text-[11px] font-bold border transition flex items-center gap-1.5"
+          title="Filter Leitner flashcards to show only cards Due Today"
+        >
+          <span id="due-dot" class="w-2 h-2 rounded-full"></span>
+          <span>Due:</span>
+          <span id="due-count" class="font-extrabold">0</span>
+        </button>
+
+        <button
+          type="button"
+          id="theme-toggle-btn"
+          onclick="toggleTheme()"
+          aria-label="Toggle Light or Dark Mode"
+          class="p-2 rounded-xl bg-slate-100 dark:bg-slate-800 text-slate-700 dark:text-amber-300 hover:bg-slate-200 dark:hover:bg-slate-700 transition"
+        ></button>
+      </div>
+    </div>
+
+    <!-- Mobile Quick Module Strip -->
+    <div class="md:hidden max-w-5xl mx-auto px-3 pb-2 overflow-x-auto no-scrollbar">
+      <div class="flex items-center gap-1.5 min-w-max">
+        <a href="chiro.html" class="px-2.5 py-1 rounded-lg text-[11px] font-bold bg-slate-100 dark:bg-slate-800 text-slate-700 dark:text-slate-300">Chiro 3</a>
+        <a href="neuro.html" class="px-2.5 py-1 rounded-lg text-[11px] font-bold bg-slate-100 dark:bg-slate-800 text-slate-700 dark:text-slate-300">Neuro</a>
+        <a href="msk.html" class="px-2.5 py-1 rounded-lg text-[11px] font-bold bg-slate-100 dark:bg-slate-800 text-slate-700 dark:text-slate-300">MSK</a>
+        <span class="px-2.5 py-1 rounded-lg text-[11px] font-bold bg-teal-600 text-white">Written &amp; Found.</span>
+      </div>
+    </div>
+
+    <!-- Sticky 4-Tab Bar (Mobile-Friendly Horizontal Scroll / Grid) -->
+    <nav class="max-w-5xl mx-auto px-3 sm:px-4 pb-2.5 overflow-x-auto no-scrollbar" aria-label="Written and Foundation Sections">
+      <div id="main-tabs" class="flex sm:grid sm:grid-cols-4 items-center gap-1.5 min-w-max sm:min-w-0"></div>
+    </nav>
+  </header>
+
+  <!-- Main App Root -->
+  <main class="max-w-5xl mx-auto px-3 sm:px-4 py-5 pb-16">
+    <!-- Due-Only Filter Banner -->
+    <div id="due-banner" class="hidden mb-4 px-4 py-2.5 rounded-2xl bg-amber-50 dark:bg-amber-950/50 border border-amber-300 dark:border-amber-800/70 text-xs sm:text-sm text-amber-900 dark:text-amber-200 flex items-center justify-between gap-3">
+      <span><strong>Due Today Only ON:</strong> Showing only Research 2 &amp; Philosophy 3 cards due for review today.</span>
+      <button type="button" onclick="toggleDueOnly()" class="shrink-0 font-bold underline">Show All</button>
+    </div>
+
+    <div id="app-root"></div>
+  </main>
+
+  <script>
+    // =========================================================================
+    // 1. SAFE STORAGE, THEME SYNC ('mchiro_theme') & SHARED SRS ('mchiro_srs')
+    // =========================================================================
+    const DAY_MS = 86400000;
+
+    function loadStore(key, fallback) {
+      try {
+        const raw = localStorage.getItem(key);
+        return raw ? JSON.parse(raw) : fallback;
+      } catch (e) {
+        return fallback;
+      }
+    }
+
+    function saveStore(key, val) {
+      try {
+        localStorage.setItem(key, JSON.stringify(val));
+      } catch (e) {}
+    }
+
+    function initTheme() {
+      let saved = null;
+      try { saved = localStorage.getItem('mchiro_theme'); } catch (e) {}
+      const prefersDark = window.matchMedia && window.matchMedia('(prefers-color-scheme: dark)').matches;
+      const isDark = saved ? (saved === 'dark' || saved === '"dark"') : prefersDark;
+      applyTheme(isDark);
+    }
+
+    function applyTheme(isDark) {
+      document.documentElement.classList.toggle('dark', isDark);
+      try { localStorage.setItem('mchiro_theme', isDark ? 'dark' : 'light'); } catch (e) {}
+      const btn = document.getElementById('theme-toggle-btn');
+      if (btn) {
+        btn.innerHTML = isDark
+          ? `<svg class="w-4 h-4" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" d="M12 3v2.25m6.364.386l-1.591 1.591M21 12h-2.25m-.386 6.364l-1.591-1.591M12 18.75V21m-4.773-4.227l-1.591 1.591M5.25 12H3m4.227-4.773L5.636 5.636M15.75 12a3.75 3.75 0 11-7.5 0 3.75 3.75 0 017.5 0z"/></svg>`
+          : `<svg class="w-4 h-4" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" d="M21.752 15.002A9.718 9.718 0 0118 15.75c-5.385 0-9.75-4.365-9.75-9.75 0-1.33.266-2.597.748-3.752A9.753 9.753 0 003 11.25C3 16.635 7.365 21 12.75 21a9.753 9.753 0 009.002-5.998z"/></svg>`;
+      }
+    }
+
+    function toggleTheme() {
+      applyTheme(!document.documentElement.classList.contains('dark'));
+    }
+
+    function showToast(msg, type = 'info') {
+      const container = document.getElementById('toast-container');
+      const styles = {
+        info: 'bg-slate-900 dark:bg-slate-100 text-white dark:text-slate-900',
+        success: 'bg-emerald-600 text-white',
+        warn: 'bg-amber-600 text-white',
+      };
+      const el = document.createElement('div');
+      el.className = `pointer-events-auto px-4 py-2.5 rounded-xl shadow-lg text-xs sm:text-sm font-semibold transition-all duration-300 ${styles[type] || styles.info}`;
+      el.textContent = msg;
+      container.appendChild(el);
+      setTimeout(() => {
+        el.classList.add('opacity-0', 'translate-y-2');
+        setTimeout(() => el.remove(), 300);
+      }, 2200);
+    }
+
+    function copyTextSafe(text, successMsg = 'Copied!') {
+      try {
+        const ta = document.createElement('textarea');
+        ta.value = text;
+        ta.style.position = 'fixed';
+        ta.style.opacity = '0';
+        document.body.appendChild(ta);
+        ta.focus();
+        ta.select();
+        document.execCommand('copy');
+        document.body.removeChild(ta);
+        showToast(successMsg, 'success');
+      } catch (e) {
+        showToast('Could not copy automatically — please copy manually.', 'warn');
+      }
+    }
+
+    function escapeHtml(str) {
+      return String(str)
+        .replace(/&/g, '&amp;')
+        .replace(/</g, '&lt;')
+        .replace(/>/g, '&gt;')
+        .replace(/"/g, '&quot;');
+    }
+
+    // =========================================================================
+    // 2. DATA: RUBRICS, CLINIC STUDIES, RESEARCH 2, BEHAVIOURAL & PHILOSOPHY
+    // =========================================================================
+
+    // --- TAB 1: MODULE RUBRICS ---
+    const MODULE_RUBRICS = {
+      clinic3: {
+        id: 'clinic3',
+        name: 'Clinic Studies 3',
+        subtitle: 'Reflective Portfolio / Clinical Writing (Target: 70%+ First)',
+        criteria: [
+          { id: 'c1', weight: 20, area: 'Identification of Learning Opportunities', good: 'Clear strategies for achievement of objectives with detailed evaluation of learning.', excellent: 'Clear strategies for achievement of objectives with comprehensive evaluation of learning.' },
+          { id: 'c2', weight: 20, area: 'Description of Experience, Thoughts & Feelings', good: 'Able to see self as part of situation and from different perspectives.', excellent: 'Arrives at novel perspective of self and takes personal responsibility.' },
+          { id: 'c3', weight: 20, area: 'Personal Understanding & Analysis', good: 'Reflection and analysis. Evaluates context & implications; communicates ethical issues.', excellent: 'Comprehensive evaluation of context, ideologies, and ethics.' },
+          { id: 'c4', weight: 20, area: 'Use of Theory & Literature', good: 'Literature integrated well. Good range and depth.', excellent: 'Thorough evaluation. Integrated well. Extensive range of peer-reviewed literature.' },
+          { id: 'c5', weight: 10, area: 'Evidence of Learning & Relevance', good: 'Evidence of continuing openness to change and awareness of nature of knowledge.', excellent: 'Proactive in behaviour change from structured and comprehensive evaluation.' },
+          { id: 'c6', weight: 10, area: 'Presentation, Structure & Clarity', good: 'Clear and fluent with explicit reflective framework.', excellent: 'Articulate and fluent. Explicit framework consistently used throughout.' },
+        ],
+      },
+      philosophy3: {
+        id: 'philosophy3',
+        name: 'Philosophy 3',
+        subtitle: 'Contemporary Chiropractic Philosophy & Ethics Essay',
+        criteria: [
+          { id: 'p1', weight: 10, area: 'Introduction', good: 'Focuses mostly on title; shows insight into key issues.', excellent: 'Very clear focus on title; key issues introduced in an explicit framework.' },
+          { id: 'p2', weight: 60, area: 'Main Body (Analysis & Evaluation)', good: 'Explicit links to wider field; questions assumptions; compares & contrasts evidence.', excellent: 'Sustained, fully substantiated analysis including contrary perspectives & emerging thought.' },
+          { id: 'p3', weight: 10, area: 'Conclusion', good: 'Complexity of debate summarised thoughtfully; logical conclusion drawn.', excellent: 'Concise appraisal with a creative concluding summary of key findings (zero new content).' },
+          { id: 'p4', weight: 10, area: 'Presentation, Structure & Language', good: 'Clear, consistent structure; precise language for complex argument.', excellent: 'Excellent structure throughout; articulately and persuasively expressed.' },
+          { id: 'p5', weight: 10, area: 'Use of Research-Informed Literature', good: 'Literature integrated well; accurate Harvard; wide range and depth.', excellent: 'Critical appraisal of literature; extensive range; consistent, flawless Harvard.' },
+        ],
+      },
+      research2: {
+        id: 'research2',
+        name: 'Research 2',
+        subtitle: 'Critical Appraisal, Methodology & Study Design Assignment',
+        criteria: [
+          { id: 'r1', weight: 10, area: 'Introduction', good: 'Clear structure, insight into why appraisal/comparison matters, clear roadmap.', excellent: 'Strong conceptual framing with explicit and coherent argument trajectory.' },
+          { id: 'r2', weight: 50, area: 'Main Body (Critical Appraisal & Design)', good: 'Strong methodological depth, critical comparison & evaluation across contexts.', excellent: 'Sophisticated analysis synthesising competing perspectives with nuanced methodological critique.' },
+          { id: 'r3', weight: 10, area: 'Conclusion', good: 'Concise synthesis & reasoned closing position; avoids simplistic claims.', excellent: 'Insightful closure linking methodology and evidence to fit-for-purpose research design.' },
+          { id: 'r4', weight: 30, area: 'Presentation & Academic Skills', good: 'Fluent academic writing, wide scholarly sources, accurate Harvard with minimal errors.', excellent: 'Polished persuasive presentation, extensive critical source engagement, flawless Harvard.' },
+        ],
+      },
+    };
+
+    const CORE_FEED_FORWARD = [
+      { id: 'ff1', text: 'Third-person academic voice maintained (no "I/me/my/we/our" unless brief explicitly permits)' },
+      { id: 'ff2', text: 'Critical evaluation over description — evaluates clinical significance, limitations & ethics' },
+      { id: 'ff3', text: 'High peer-reviewed citation density — supports individual claims broadly (no blogs/clinic sites)' },
+      { id: 'ff4', text: 'Harvard accuracy manually verified + page numbers (p./pp.) on EVERY direct quote + "Reference List" heading' },
+      { id: 'ff5', text: 'Conclusion synthesises core arguments cleanly and introduces ZERO new ideas or references' },
+    ];
+
+    // --- TAB 2: CLINIC STUDIES 3 (DESCRIPTION VS CRITICAL EVALUATION) ---
+    const CRIT_UPGRADES = [
+      {
+        id: 'cu1',
+        stage: 'What? → So What?',
+        title: 'Patient Expectations & Chronic LBP',
+        desc64: 'The patient arrived expecting an immediate fix for chronic low back pain. I listened to their history and explained that recovery takes time. They seemed happier after we talked.',
+        eval70: 'The patient’s initial expectation of a single-session resolution illustrates a biomedical pain model that can undermine adherence if left unaddressed (Main et al., 2010). Reframing expectations through shared decision-making aligns with GCC ethical standards on informed consent and shifts the therapeutic alliance toward self-efficacy (NICE, 2020).',
+        whyBetter: 'Replaces first-person narrative with third-person analysis, names the underlying model (biomedical vs. shared decision-making), cites peer-reviewed guidance, and links to clinical ethics.',
+      },
+      {
+        id: 'cu2',
+        stage: 'So What? (Ethics & Context)',
+        title: 'Consent & Communication Under Time Pressure',
+        desc64: 'During the clinic observation, time was running short so consent was explained quickly before the examination. Next time I will manage my time better so I do not rush.',
+        eval70: 'Rushing consent under time constraints risks reducing informed consent to a procedural tick-box rather than a valid ethical dialogue, potentially compromising patient autonomy (Beauchamp & Childress, 2019). Structuring the consultation around a pre-agreed agenda preserves safety and ethical validity even in busy clinical environments.',
+        whyBetter: 'Evaluates ethical implications (autonomy vs. procedural compliance), cites core biomedical ethics literature, and proposes a concrete structural solution.',
+      },
+      {
+        id: 'cu3',
+        stage: 'Now What? (Practitioner Development)',
+        title: 'Turning Feedback into Proactive Behaviour Change',
+        desc64: 'The tutor gave helpful feedback on my examination flow. I realised I need to practise more before Year 3 clinic starts so I feel more confident with patients.',
+        eval70: 'Analysing the examination sequence via Borton’s "Now What?" stage reveals that hesitation stemmed from cognitive overload during neurological screening rather than gaps in anatomy. Implementing timed, criterion-referenced OSCE rehearsals directly targets procedural fluency and reduces diagnostic omission risk in pre-clinic practice (Epstein, 2007).',
+        whyBetter: 'Identifies the root cognitive mechanism behind the gap, explicitly applies Borton’s framework, and defines a measurable, evidence-backed development strategy.',
+      },
+    ];
+
+    // --- TAB 3: RESEARCH 2 (STUDY DESIGN & BIAS MATRIX) ---
+    const STUDY_DESIGNS = [
+      {
+        id: 'sd_sr',
+        name: 'Systematic Review & Meta-Analysis',
+        level: 'Level 1a (Top of Hierarchy)',
+        badgeColor: 'emerald',
+        bestFor: 'Synthesising all available RCTs/studies to estimate overall treatment effect size & precision.',
+        biases: 'Publication bias (positive studies published more often), heterogeneity across included trials, garbage-in/garbage-out if low-quality trials pooled.',
+        appraisal: 'Was the search comprehensive (multiple databases + grey literature)? Were inclusion criteria & risk-of-bias tools (e.g. Cochrane RoB 2) explicit? Was heterogeneity (I²) assessed?',
+      },
+      {
+        id: 'sd_rct',
+        name: 'Randomised Controlled Trial (RCT)',
+        level: 'Level 1b (Gold Standard Intervention)',
+        badgeColor: 'teal',
+        bestFor: 'Testing causal effectiveness of an intervention (e.g. spinal manipulation vs. exercise/sham).',
+        biases: 'Allocation bias (if unconcealed), performance/detection bias (difficult to blind practitioners in manual therapy), attrition bias (dropouts).',
+        appraisal: 'Was randomisation concealed? Were outcome assessors blinded? Was Intention-to-Treat (ITT) analysis used? Were baseline groups comparable?',
+      },
+      {
+        id: 'sd_cohort',
+        name: 'Cohort Study (Prospective / Retrospective)',
+        level: 'Level 2b (Observational)',
+        badgeColor: 'sky',
+        bestFor: 'Studying prognosis, natural history, incidence, and risk factors when randomisation is unethical (e.g. smoking).',
+        biases: 'Confounding variables, loss to follow-up (attrition bias), selection bias, healthy-worker effect.',
+        appraisal: 'Were exposed & unexposed groups similar at baseline? Was follow-up long enough & complete (>80%)? Were key confounders adjusted for statistically?',
+      },
+      {
+        id: 'sd_cc',
+        name: 'Case-Control Study',
+        level: 'Level 3b (Observational – Retrospective)',
+        badgeColor: 'indigo',
+        bestFor: 'Investigating rare diseases or rare adverse events (e.g. cervical artery dissection) quickly & cheaply. Yields Odds Ratio (OR).',
+        biases: 'Recall bias (cases remember exposures differently), selection bias in choosing controls, cannot establish true incidence or temporality.',
+        appraisal: 'Were cases clearly defined? Were controls drawn from the exact same source population? Was exposure measured identically for both groups?',
+      },
+      {
+        id: 'sd_cs',
+        name: 'Cross-Sectional Study',
+        level: 'Level 4 (Snapshot Survey)',
+        badgeColor: 'amber',
+        bestFor: 'Measuring prevalence of a condition (e.g. chronic LBP in office workers) at a single point in time.',
+        biases: 'Reverse causality (cannot tell if exposure preceded outcome), non-response bias, prevalence-incidence (Neyman) bias.',
+        appraisal: 'Was the sample representative of the target population? Was the response rate adequate? Are causal claims appropriately avoided?',
+      },
+      {
+        id: 'sd_qual',
+        name: 'Qualitative Study (Phenomenology / Grounded Theory)',
+        level: 'Interpretivist / Experience Focus',
+        badgeColor: 'purple',
+        bestFor: 'Exploring lived patient experiences, beliefs, barriers to adherence, and clinical communication.',
+        biases: 'Researcher subjectivity / confirmation bias, social desirability bias in interviews, non-generalisable small samples (aims for transferability).',
+        appraisal: 'Is reflexivity addressed (researcher’s own role)? Was data saturation reached? Were themes audited/triangulated (credibility & trustworthiness)?',
+      },
+    ];
+
+    // --- TAB 3: RESEARCH 2 FLASHCARDS (SHARED LEITNER SRS) ---
+    const RESEARCH_CARDS = [
+      {
+        id: 'wr_res_ont',
+        front: 'Ontology vs. Epistemology vs. Methodology',
+        tag: 'Paradigms',
+        back: [
+          'Ontology: Nature of reality ("What exists?" — single objective truth vs. multiple constructed realities).',
+          'Epistemology: Nature of knowledge ("How can we know it?" — objective measurement vs. subjective meaning).',
+          'Methodology: Overall research strategy linking assumptions to specific methods (e.g. RCT vs. phenomenology).',
+        ],
+      },
+      {
+        id: 'wr_res_para',
+        front: 'Positivism vs. Interpretivism vs. Pragmatism',
+        tag: 'Paradigms',
+        back: [
+          'Positivism: Single objective reality; deductive hypothesis testing; quantitative measurement.',
+          'Interpretivism: Socially constructed meanings; inductive; qualitative exploration of lived experience.',
+          'Pragmatism: Focuses on "what works" to answer the research question; underpins Mixed Methods.',
+        ],
+      },
+      {
+        id: 'wr_res_val',
+        front: 'Internal vs. External Validity',
+        tag: 'Appraisal',
+        back: [
+          'Internal Validity: Confidence that the observed effect is truly caused by the intervention (minimising bias & confounding).',
+          'External Validity: Generalisability of findings to real-world patients and everyday clinical practice.',
+        ],
+      },
+      {
+        id: 'wr_res_sens',
+        front: 'Sensitivity (SnNout) vs. Specificity (SpPin)',
+        tag: 'Biostats',
+        back: [
+          'Sensitivity (SnNout): True positive rate. High sensitivity -> a Negative test rules OUT the condition (good for screening).',
+          'Specificity (SpPin): True negative rate. High specificity -> a Positive test rules IN the condition (good for confirmation).',
+        ],
+      },
+      {
+        id: 'wr_res_pval',
+        front: 'p-value vs. 95% Confidence Interval (CI)',
+        tag: 'Biostats',
+        back: [
+          'p-value (<0.05): Probability of seeing results at least this extreme by chance if null hypothesis is true. Does NOT show clinical size!',
+          '95% CI: Range of plausible true effect sizes (shows magnitude & precision). Narrow CI = high precision. If CI crosses 0 (diff) or 1 (ratio) -> not statistically significant.',
+        ],
+      },
+      {
+        id: 'wr_res_nnt',
+        front: 'Number Needed to Treat (NNT)',
+        tag: 'Biostats',
+        back: [
+          'Formula: NNT = 1 / Absolute Risk Reduction (ARR).',
+          'Meaning: How many patients must receive the treatment for 1 extra patient to achieve a good outcome (lower NNT = stronger clinical effect).',
+        ],
+      },
+    ];
+
+    // --- TAB 4: BEHAVIOURAL SCIENCES DATA ---
+    const BPS_NODES = {
+      bio: {
+        title: 'Biological Domain',
+        color: 'teal',
+        badge: 'Tissue & Physiology',
+        factors: [
+          'Nociception, peripheral tissue irritation, joint/disc mechanics & inflammation',
+          'Central sensitisation, descending pain modulation, neuroplasticity',
+          'Sleep quality, physical deconditioning, systemic comorbidities, genetics & medication',
+        ],
+        chiro: 'Perform accurate orthopaedic/neurological triage, rule out Red Flags, use targeted manual therapy & graded physical loading to restore movement confidence.',
+      },
+      psycho: {
+        title: 'Psychological Domain',
+        color: 'indigo',
+        badge: 'Beliefs & Emotions',
+        factors: [
+          'Pain catastrophising ("my spine is crumbling"), hypervigilance & kinesiophobia (fear of movement)',
+          'Low self-efficacy, passive coping strategies, unrealistic recovery expectations',
+          'Anxiety, depression, distress, past traumatic healthcare or pain experiences',
+        ],
+        chiro: 'Avoid nocebic/iatrogenic language ("bone-on-bone", "slipped disc"); deliver reassuring pain neuroscience education, build self-efficacy, and screen for Orange Flags.',
+      },
+      social: {
+        title: 'Social Domain',
+        color: 'amber',
+        badge: 'Environment & Context',
+        factors: [
+          'Work demands, low job satisfaction, fear of re-injury at work (Blue Flags)',
+          'Family dynamics (overprotective or unsupportive relatives), social isolation',
+          'Socioeconomic stress, compensation/litigation claims, cultural beliefs about pain & healthcare access (Black Flags)',
+        ],
+        chiro: 'Explore occupational ergonomics and return-to-work goals early, engage supportive social networks, and collaborate with GP/occupational health when systemic barriers exist.',
+      },
+    };
+
+    const YELLOW_FLAGS_ABCDEFW = [
+      { letter: 'A', name: 'Attitudes & Beliefs', detail: 'Belief that pain equals severe harm/damage, or that passive treatment is the only solution.' },
+      { letter: 'B', name: 'Behaviours', detail: 'Fear-avoidance, extended rest, guarding, withdrawing from normal activity & exercise.' },
+      { letter: 'C', name: 'Compensation Issues', detail: 'Ongoing litigation, injury claims, or financial disincentives tied to remaining symptomatic.' },
+      { letter: 'D', name: 'Diagnosis & Treatment', detail: 'Conflicting diagnoses or scary iatrogenic/nocebic labels ("degenerating spine", "wear & tear").' },
+      { letter: 'E', name: 'Emotions', detail: 'Elevated stress, anxiety, low mood, irritability, or feeling overwhelmed by symptoms.' },
+      { letter: 'F', name: 'Family', detail: 'Overprotective partner reinforcing sick role, or lack of emotional/practical support at home.' },
+      { letter: 'W', name: 'Work', detail: 'Heavy physical job demands, poor job satisfaction, belief that work is inherently harmful.' },
+    ];
+
+    const PAIN_PSYCH_ACCORDIONS = [
+      {
+        id: 'pp_fam',
+        title: 'Fear-Avoidance Model (Vlaeyen & Linton)',
+        summary: 'How pain catastrophising drives chronic disability vs. confrontation & recovery.',
+        points: [
+          'Pain Experience → Catastrophising → Pain-Related Fear (Kinesiophobia) → Avoidance & Hypervigilance → Disuse, Deconditioning & Depression → More Pain.',
+          'Recovery Pathway: Pain Experience → Low Fear / Accurate Reassurance → Graded Confrontation with Movement → Recovery.',
+          'Clinical Lever: Break the cycle early with reassuring explanations + graded exposure to feared movements.',
+        ],
+      },
+      {
+        id: 'pp_se',
+        title: 'Self-Efficacy (Bandura) & Adherence',
+        summary: 'A patient’s belief in their own capacity to manage symptoms and perform rehab.',
+        points: [
+          'High pain self-efficacy is one of the strongest predictors of lower disability and better long-term LBP outcomes.',
+          'Built via 4 sources: Mastery experiences (achievable home exercises), vicarious modelling, verbal persuasion (reassurance), and reframing physiological arousal.',
+          'Adherence boosters: Co-create 2–3 realistic exercises, tie them to meaningful personal goals, and review barriers at follow-up.',
+        ],
+      },
+      {
+        id: 'pp_mi',
+        title: 'Motivational Interviewing (MI) Basics — OARS',
+        summary: 'Collaborative, patient-centred communication to resolve ambivalence about lifestyle/rehab change.',
+        points: [
+          'O — Open-ended questions ("What matters most to you about getting back to walking?").',
+          'A — Affirmations (recognise effort, resilience, and small wins genuinely).',
+          'R — Reflective listening (mirror back feelings & meaning to build rapport and clarify ambivalence).',
+          'S — Summarising (pull together the patient’s own "change talk" to agree on the next step).',
+        ],
+      },
+    ];
+
+    // --- TAB 4: PHILOSOPHY 3 ACTIVE-RECALL CARDS (SHARED LEITNER SRS) ---
+    const PHIL_CARDS = [
+      {
+        id: 'wr_phil_vit',
+        front: 'Vitalism vs. Materialism',
+        tag: 'Foundations',
+        back: [
+          'Vitalism: Living organisms possess a non-physical vital force ("Innate Intelligence") beyond purely physical/chemical laws.',
+          'Materialism: All biological phenomena—including health and healing—are fully explainable via physical, chemical, and physiological mechanisms.',
+          'Year 3 Exam Angle: Critique how traditional vitalistic rhetoric clashes with modern scientific testability while acknowledging holistic self-regulation.',
+        ],
+      },
+      {
+        id: 'wr_phil_hol',
+        front: 'Holism vs. Reductionism',
+        tag: 'Paradigms',
+        back: [
+          'Holism: The whole person (mind, body, environment) is greater than the sum of isolated parts — aligns closely with the Biopsychosocial model.',
+          'Reductionism: Breaks complex disease down to cellular/molecular mechanisms (powerful for biomedical diagnosis, but risks missing psychosocial context).',
+          'Synthesis: Contemporary chiropractic integrates reductionist pathology screening (Red Flags) with holistic patient-centred care.',
+        ],
+      },
+      {
+        id: 'wr_phil_pop',
+        front: 'Critical Rationalism & Falsifiability (Popper)',
+        tag: 'Epistemology',
+        back: [
+          'Popper argued science progresses not by proving theories true, but by attempting to FALSIFY bold hypotheses through rigorous testing.',
+          'A claim that cannot be tested or refuted (e.g. untestable metaphysical subluxation dogma) is pseudoscientific.',
+          'Application: Evidence-informed chiropractors welcome clinical trials and update models when hypotheses are refuted.',
+        ],
+      },
+      {
+        id: 'wr_phil_eip',
+        front: 'Evidence-Informed Practice (EIP) vs. Dogma',
+        tag: 'Modern Practice',
+        back: [
+          'EIP Triad (Sackett): Integrates (1) Best available research evidence + (2) Clinical expertise + (3) Patient values & preferences.',
+          'Dogma: Unquestioning adherence to historical authority or unverified theories despite contradicting evidence.',
+          'Balance: Research informs—rather than blindly dictates—individualised patient care.',
+        ],
+      },
+      {
+        id: 'wr_phil_eth',
+        front: 'Scope of Practice & Ethical Reasoning (4 Pillars)',
+        tag: 'Clinical Ethics',
+        back: [
+          'Beauchamp & Childress 4 Pillars: Autonomy (informed consent), Beneficence (act in best interest), Non-maleficence (first do no harm / Red Flag safety), Justice (fairness).',
+          'UK Scope (GCC Code): Practise strictly within musculoskeletal/evidence-informed competence, make transparent claims, and refer promptly when outside scope.',
+        ],
+      },
+    ];
+
+    const ALL_SRS_IDS = [
+      ...RESEARCH_CARDS.map((c) => c.id),
+      ...PHIL_CARDS.map((c) => c.id),
+    ];
+
+    // =========================================================================
+    // 3. STATE MANAGEMENT
+    // =========================================================================
+    const state = {
+      activeTab: 'scanner', // 'scanner' | 'clinic3' | 'research2' | 'phil_behav'
+      dueOnly: false,
+      srs: loadStore('mchiro_srs', {}),
+
+      // Tab 1: Essay Scanner & Auditor
+      auditMod: 'clinic3', // 'clinic3' | 'philosophy3' | 'research2'
+      wordTargets: loadStore('mchiro_written_targets', { clinic3: 2000, philosophy3: 2000, research2: 2000 }),
+      drafts: { clinic3: '', philosophy3: '', research2: '' },
+      scanResults: {},
+      rubricChecks: loadStore('mchiro_written_checks', {}),
+
+      // Tab 2: Clinic Studies 3
+      flippedCrit: {},
+      openClinicRubric: { c1: true },
+
+      // Tab 3: Research 2
+      pico: { p: '', i: '', c: '', o: '' },
+      openStudyDesign: { sd_rct: true },
+      flippedResCard: {},
+
+      // Tab 4: Phil 3 & Behav Sci
+      tab4Sub: 'behav', // 'behav' | 'phil'
+      selectedBps: 'psycho', // 'bio' | 'psycho' | 'social'
+      selectedFlagPill: 'red', // 'red' | 'orange' | 'blue' | 'black'
+      openPainAcc: { pp_fam: true },
+      flippedPhilCard: {},
+    };
+
+    // --- Shared Leitner SRS Helpers ('mchiro_srs') ---
+    function isDue(id) {
+      const rec = state.srs[id];
+      if (!rec) return true;
+      return Date.now() >= rec.dueAt;
+    }
+
+    function setLeitner(id, box) {
+      const offset = box === 'again' ? 0 : box === 'shaky' ? 2 * DAY_MS : 7 * DAY_MS;
+      state.srs[id] = { box, dueAt: Date.now() + offset };
+      saveStore('mchiro_srs', state.srs);
+      updateDueUI();
+      const labels = { again: 'Queued for Today', shaky: 'Scheduled in 2 Days', solid: 'Scheduled in 7 Days' };
+      showToast(labels[box], box === 'solid' ? 'success' : box === 'shaky' ? 'info' : 'warn');
+      renderApp();
+    }
+
+    function updateDueUI() {
+      const due = ALL_SRS_IDS.filter((id) => isDue(id)).length;
+      const btn = document.getElementById('due-toggle-btn');
+      const dot = document.getElementById('due-dot');
+      const cnt = document.getElementById('due-count');
+      const banner = document.getElementById('due-banner');
+      if (cnt) cnt.textContent = String(due);
+      if (btn && dot && banner) {
+        if (state.dueOnly) {
+          btn.className = 'px-2.5 py-1.5 rounded-xl text-[11px] font-bold border transition flex items-center gap-1.5 bg-amber-500 text-white border-amber-500 shadow-xs';
+          dot.className = 'w-2 h-2 rounded-full bg-white animate-pulse';
+          banner.classList.remove('hidden');
+        } else {
+          btn.className = 'px-2.5 py-1.5 rounded-xl text-[11px] font-bold border transition flex items-center gap-1.5 bg-slate-100 dark:bg-slate-800 text-slate-700 dark:text-slate-200 border-slate-200 dark:border-slate-700 hover:border-amber-400';
+          dot.className = due > 0 ? 'w-2 h-2 rounded-full bg-amber-500' : 'w-2 h-2 rounded-full bg-emerald-500';
+          banner.classList.add('hidden');
+        }
+      }
+    }
+
+    function toggleDueOnly() {
+      state.dueOnly = !state.dueOnly;
+      updateDueUI();
+      renderApp();
+    }
+
+    function renderSrsControls(id) {
+      const rec = state.srs[id];
+      const box = rec ? rec.box : null;
+      return `
+        <div class="flex items-center gap-1.5 pt-2 border-t border-slate-100 dark:border-slate-800">
+          <button type="button" onclick="event.stopPropagation(); setLeitner('${id}','again')" class="flex-1 py-1.5 rounded-xl text-[11px] font-bold border transition ${box === 'again' ? 'bg-rose-600 text-white border-rose-600' : 'bg-rose-50/70 dark:bg-rose-950/30 text-rose-700 dark:text-rose-300 border-rose-200 dark:border-rose-800/60 hover:bg-rose-100'}">Again (Today)</button>
+          <button type="button" onclick="event.stopPropagation(); setLeitner('${id}','shaky')" class="flex-1 py-1.5 rounded-xl text-[11px] font-bold border transition ${box === 'shaky' ? 'bg-amber-500 text-white border-amber-500' : 'bg-amber-50/70 dark:bg-amber-950/30 text-amber-800 dark:text-amber-300 border-amber-200 dark:border-amber-800/60 hover:bg-amber-100'}">Shaky (2d)</button>
+          <button type="button" onclick="event.stopPropagation(); setLeitner('${id}','solid')" class="flex-1 py-1.5 rounded-xl text-[11px] font-bold border transition ${box === 'solid' ? 'bg-emerald-600 text-white border-emerald-600' : 'bg-emerald-50/70 dark:bg-emerald-950/30 text-emerald-700 dark:text-emerald-300 border-emerald-200 dark:border-emerald-800/60 hover:bg-emerald-100'}">Solid (7d)</button>
+        </div>
+      `;
+    }
+
+    // =========================================================================
+    // 4. TOP TAB BAR & ROUTER
+    // =========================================================================
+    const MAIN_TABS = [
+      { id: 'scanner', label: '1. Essay Scanner' },
+      { id: 'clinic3', label: '2. Clinic Studies 3' },
+      { id: 'research2', label: '3. Research 2' },
+      { id: 'phil_behav', label: '4. Phil 3 & Behav Sci' },
+    ];
+
+    function setActiveTab(tabId) {
+      state.activeTab = tabId;
+      renderTabBar();
+      renderApp();
+      window.scrollTo({ top: 0, behavior: 'smooth' });
+    }
+
+    function renderTabBar() {
+      document.getElementById('main-tabs').innerHTML = MAIN_TABS.map((t) => {
+        const active = state.activeTab === t.id;
+        return `
+          <button
+            type="button"
+            onclick="setActiveTab('${t.id}')"
+            class="px-3.5 py-2 rounded-xl text-xs sm:text-sm font-bold transition whitespace-nowrap text-center ${
+              active
+                ? 'bg-teal-600 text-white shadow-xs'
+                : 'bg-slate-100 dark:bg-slate-800 text-slate-700 dark:text-slate-300 hover:bg-slate-200 dark:hover:bg-slate-700'
+            }"
+          >${t.label}</button>
+        `;
+      }).join('');
+    }
+
+    function renderApp() {
+      const root = document.getElementById('app-root');
+      if (state.activeTab === 'scanner') root.innerHTML = renderScannerTab();
+      else if (state.activeTab === 'clinic3') root.innerHTML = renderClinic3Tab();
+      else if (state.activeTab === 'research2') root.innerHTML = renderResearch2Tab();
+      else root.innerHTML = renderPhilBehavTab();
+    }
+
+    // =========================================================================
+    // 5. TAB 1: PRE-FLIGHT ESSAY SCANNER & WEIGHTED RUBRIC AUDITOR
+    // =========================================================================
+    function countWords(text) {
+      const trimmed = (text || '').trim();
+      return trimmed ? trimmed.split(/\s+/).filter(Boolean).length : 0;
+    }
+
+    function handleDraftInput(val) {
+      state.drafts[state.auditMod] = val;
+      const wc = countWords(val);
+      const badge = document.getElementById('live-wc-badge');
+      if (badge) badge.textContent = `${wc.toLocaleString()} words`;
+    }
+
+    function handleTargetInput(val) {
+      const parsed = Math.max(100, parseInt(val, 10) || 2000);
+      state.wordTargets[state.auditMod] = parsed;
+      saveStore('mchiro_written_targets', state.wordTargets);
+      const win = document.getElementById('live-window-label');
+      if (win) {
+        win.textContent = `±10% Window: ${Math.round(parsed * 0.9).toLocaleString()}–${Math.round(parsed * 1.1).toLocaleString()} words`;
+      }
+    }
+
+    function analyseDraft() {
+      const mod = state.auditMod;
+      const text = (state.drafts[mod] || '').trim();
+      if (!text) {
+        showToast('Paste your essay draft first to run the scan.', 'warn');
+        return;
+      }
+
+      const target = state.wordTargets[mod] || 2000;
+      const minW = Math.round(target * 0.9);
+      const maxW = Math.round(target * 1.1);
+      const wordCount = countWords(text);
+      const wcStatus = wordCount < minW ? 'Under' : wordCount > maxW ? 'Over' : 'Within Limit';
+
+      // 1. First-person voice detector with snippet previews
+      const fpRegex = /\b(I|me|my|mine|myself|we|us|our|ours)\b/gi;
+      const fpSnippets = [];
+      let fpCount = 0;
+      let match;
+      while ((match = fpRegex.exec(text)) !== null) {
+        fpCount++;
+        if (fpSnippets.length < 5) {
+          const start = Math.max(0, match.index - 28);
+          const end = Math.min(text.length, match.index + match[0].length + 28);
+          const before = escapeHtml(text.slice(start, match.index));
+          const hit = escapeHtml(match[0]);
+          const after = escapeHtml(text.slice(match.index + match[0].length, end));
+          fpSnippets.push(`${start > 0 ? '…' : ''}${before}<mark class="px-1 rounded bg-amber-300 dark:bg-amber-600 text-slate-950 dark:text-white font-extrabold">${hit}</mark>${after}${end < text.length ? '…' : ''}`);
+        }
+      }
+
+      // 2. Direct quote page-number check ("..." or “...”)
+      const quoteRegex = /["“]([^"”]{10,})["”]([^.?!\n]{0,55})/g;
+      let totalQuotes = 0;
+      const missingPageQuotes = [];
+      while ((match = quoteRegex.exec(text)) !== null) {
+        totalQuotes++;
+        const afterQuote = match[2] || '';
+        const insideQuoteContext = text.slice(Math.max(0, match.index - 35), match.index);
+        const hasPage = /\bp\.?\s*\d+|\bpp\.?\s*\d+/i.test(afterQuote) || /\bp\.?\s*\d+|\bpp\.?\s*\d+/i.test(insideQuoteContext);
+        if (!hasPage) {
+          const excerpt = match[1].trim();
+          missingPageQuotes.push(excerpt.length > 65 ? excerpt.slice(0, 65) + '…' : excerpt);
+        }
+      }
+
+      // 3. Harvard in-text citation density: (Name, Year) or (Name et al., Year) or Name (Year)
+      const harvardRegex = /\([A-Z][A-Za-z\-&.,\s']+?\d{4}[a-z]?(?:,\s*p{1,2}\.?\s*\d+(?:[-–]\d+)?)?\)|\b[A-Z][A-Za-z\-]+(?:\s+et\s+al\.?|\s+(?:&|and)\s+[A-Z][A-Za-z\-]+)?\s*\(\d{4}[a-z]?(?:,\s*p{1,2}\.?\s*\d+(?:[-–]\d+)?)?\)/g;
+      const citeMatches = text.match(harvardRegex) || [];
+      const citeCount = citeMatches.length;
+      const densityNum = wordCount > 0 ? (citeCount / wordCount) * 250 : 0;
+      const densityStr = densityNum.toFixed(1);
+      const lowDensity = densityNum < 1.5;
+
+      // 4. Quick Hygiene Alerts
+      const hasBibliography = /\bbibliography\b/i.test(text);
+      const informalWebMatches = text.match(/(https?:\/\/\S+|\bwww\.\S+|\bblog\b|\bwordpress\b|\bmedium\.com\b|\bchiropractic\s+clinic\b|\bpractice\s+website\b)/gi) || [];
+
+      state.scanResults[mod] = {
+        wordCount,
+        minW,
+        maxW,
+        wcStatus,
+        fpCount,
+        fpSnippets,
+        totalQuotes,
+        missingPageQuotes,
+        citeCount,
+        densityStr,
+        lowDensity,
+        hasBibliography,
+        informalWebCount: informalWebMatches.length,
+        informalWebSamples: [...new Set(informalWebMatches.map((x) => x.slice(0, 40)))].slice(0, 4),
+      };
+
+      showToast('Pre-flight draft analysis complete!', 'success');
+      renderApp();
+    }
+
+    function toggleRubricCheck(mod, itemId) {
+      if (!state.rubricChecks[mod]) state.rubricChecks[mod] = {};
+      state.rubricChecks[mod][itemId] = !state.rubricChecks[mod][itemId];
+      saveStore('mchiro_written_checks', state.rubricChecks);
+      renderApp();
+    }
+
+    function resetRubricChecks(mod) {
+      state.rubricChecks[mod] = {};
+      saveStore('mchiro_written_checks', state.rubricChecks);
+      showToast('Checklist reset', 'info');
+      renderApp();
+    }
+
+    function copyStrictMarkingPrompt() {
+      const rub = MODULE_RUBRICS[state.auditMod];
+      const target = state.wordTargets[state.auditMod] || 2000;
+      const weightsBlock = rub.criteria
+        .map((c) => `- ${c.area} (${c.weight}%): 60–69% = "${c.good}" | 70%+ First = "${c.excellent}"`)
+        .join('\n');
+
+      const prompt = [
+        `Act as a strict McTimoney College of Chiropractic MChiro Year 3 assessor.`,
+        `Mark my ${rub.name} draft (Target: ${target} words, ±10% window) strictly against the official weighted rubric below.`,
+        ``,
+        `ANTI-GRADE-INFLATION RULES (CRITICAL):`,
+        `1. Do NOT overestimate or inflate the grade. Be candid and conservative—in previous years, generic AI marking overestimated grades by 16–19%.`,
+        `2. Scrutinise critical evaluation vs. mere description—penalise narrative summary that lacks analytical depth, ethical context, or literature synthesis.`,
+        `3. Flag ANY first-person voice (I, me, my, we, our) unless explicitly permitted.`,
+        `4. Audit Harvard referencing strictly: check citation density, peer-reviewed source quality (no blogs/clinic sites), page numbers (p./pp.) on every direct quote, and ensure "Reference List" is used rather than "Bibliography".`,
+        `5. Confirm the conclusion synthesises core arguments without introducing new ideas or references.`,
+        ``,
+        `OFFICIAL WEIGHTED RUBRIC (${rub.name}):`,
+        weightsBlock,
+        ``,
+        `OUTPUT REQUIRED:`,
+        `- Band-by-band realistic percentage estimate for each criterion and an overall weighted mark.`,
+        `- Exact, prioritised bullet-point fixes required to move every section into the 70%+ First band.`,
+        ``,
+        `[PASTE ESSAY DRAFT BELOW]`,
+      ].join('\n');
+
+      copyTextSafe(prompt, `Copied strict ${rub.name} marking prompt!`);
+    }
+
+    function renderScannerTab() {
+      const mod = state.auditMod;
+      const rub = MODULE_RUBRICS[mod];
+      const target = state.wordTargets[mod] || 2000;
+      const minW = Math.round(target * 0.9);
+      const maxW = Math.round(target * 1.1);
+      const draft = state.drafts[mod] || '';
+      const liveWc = countWords(draft);
+      const res = state.scanResults[mod];
+      const checks = state.rubricChecks[mod] || {};
+
+      // Progress calculation across weighted criteria + 5 feed-forward checks
+      const totalItems = rub.criteria.length + CORE_FEED_FORWARD.length;
+      const doneItems =
+        rub.criteria.filter((c) => checks[c.id]).length +
+        CORE_FEED_FORWARD.filter((f) => checks[f.id]).length;
+      const pct = totalItems ? Math.round((doneItems / totalItems) * 100) : 0;
+
+      return `
+        <div class="space-y-5">
+          <!-- Module Selector + Strict Prompt Copier -->
+          <section class="rounded-3xl bg-white dark:bg-slate-900 border border-slate-200 dark:border-slate-800 p-4 sm:p-5 space-y-4">
+            <div class="flex flex-wrap items-center justify-between gap-3">
+              <div>
+                <span class="px-2.5 py-0.5 rounded-lg text-[10px] font-extrabold uppercase bg-indigo-100 dark:bg-indigo-950 text-indigo-800 dark:text-indigo-300">100% Client-Side &bull; Zero External Calls</span>
+                <h2 class="text-lg sm:text-xl font-extrabold text-slate-900 dark:text-white mt-1">Pre-Flight Essay Scanner &amp; Rubric Auditor</h2>
+              </div>
+              <button
+                type="button"
+                onclick="copyStrictMarkingPrompt()"
+                class="px-4 py-2.5 rounded-xl bg-indigo-600 hover:bg-indigo-700 text-white text-xs font-extrabold shadow-xs transition flex items-center gap-1.5"
+              >
+                <span>📋</span>
+                <span>Copy Strict Marking Prompt</span>
+              </button>
+            </div>
+
+            <!-- Module Selector Pills -->
+            <div class="grid grid-cols-3 gap-1.5 p-1 rounded-2xl bg-slate-100 dark:bg-slate-800">
+              ${Object.values(MODULE_RUBRICS).map((m) => `
+                <button
+                  type="button"
+                  onclick="state.auditMod='${m.id}'; renderApp();"
+                  class="py-2 px-2 rounded-xl text-xs font-extrabold transition ${
+                    mod === m.id
+                      ? 'bg-white dark:bg-slate-900 text-teal-700 dark:text-teal-300 shadow-xs'
+                      : 'text-slate-600 dark:text-slate-400 hover:text-slate-900 dark:hover:text-white'
+                  }"
+                >${m.name}</button>
+              `).join('')}
+            </div>
+
+            <!-- Target Word Count & Live ±10% Window -->
+            <div class="flex flex-wrap items-center justify-between gap-3 p-3 rounded-2xl bg-slate-50 dark:bg-slate-800/60 border border-slate-200 dark:border-slate-700">
+              <div class="flex items-center gap-2.5">
+                <label for="target-wc-input" class="text-xs font-extrabold text-slate-700 dark:text-slate-200">Target Word Count:</label>
+                <input
+                  id="target-wc-input"
+                  type="number"
+                  min="100"
+                  step="100"
+                  value="${target}"
+                  oninput="handleTargetInput(this.value)"
+                  class="w-24 px-2.5 py-1.5 rounded-xl bg-white dark:bg-slate-900 border border-slate-300 dark:border-slate-700 text-xs sm:text-sm font-extrabold text-slate-900 dark:text-white"
+                />
+              </div>
+              <div class="flex flex-wrap items-center gap-2 text-xs font-bold">
+                <span id="live-window-label" class="px-2.5 py-1 rounded-lg bg-teal-50 dark:bg-teal-950/60 text-teal-800 dark:text-teal-300">±10% Window: ${minW.toLocaleString()}–${maxW.toLocaleString()} words</span>
+                <span id="live-wc-badge" class="px-2.5 py-1 rounded-lg bg-slate-200 dark:bg-slate-700 text-slate-800 dark:text-slate-100">${liveWc.toLocaleString()} words</span>
+              </div>
+            </div>
+
+            <!-- Draft Textarea -->
+            <textarea
+              rows="6"
+              placeholder="Paste your ${rub.name} draft here... Your text stays 100% private inside your browser."
+              oninput="handleDraftInput(this.value)"
+              class="w-full p-3.5 rounded-2xl bg-slate-50 dark:bg-slate-800/70 border border-slate-200 dark:border-slate-700 text-xs sm:text-sm text-slate-900 dark:text-white focus:outline-none focus:ring-2 focus:ring-teal-500"
+            >${escapeHtml(draft)}</textarea>
+
+            <div class="flex flex-wrap items-center justify-between gap-2">
+              <button
+                type="button"
+                onclick="state.drafts['${mod}']=''; state.scanResults['${mod}']=null; renderApp();"
+                class="px-3.5 py-2 rounded-xl bg-slate-100 dark:bg-slate-800 text-xs font-bold text-slate-600 dark:text-slate-300 hover:bg-slate-200 dark:hover:bg-slate-700"
+              >Clear Draft</button>
+              <button
+                type="button"
+                onclick="analyseDraft()"
+                class="px-5 py-2.5 rounded-xl bg-teal-600 hover:bg-teal-700 text-white text-xs sm:text-sm font-extrabold shadow-xs transition"
+              >🔍 Analyse Draft</button>
+            </div>
+
+            <!-- Scanner Output Dashboard -->
+            ${res ? `
+              <div class="pt-3 border-t border-slate-200 dark:border-slate-800 space-y-3.5">
+                <!-- 4 Core Metric Tiles -->
+                <div class="grid grid-cols-2 lg:grid-cols-4 gap-2.5">
+                  <div class="p-3 rounded-2xl border ${res.wcStatus === 'Within Limit' ? 'bg-emerald-50 dark:bg-emerald-950/30 border-emerald-300 dark:border-emerald-800' : 'bg-rose-50 dark:bg-rose-950/30 border-rose-300 dark:border-rose-800'}">
+                    <span class="block text-[10px] font-extrabold uppercase text-slate-500">Word Count</span>
+                    <span class="text-lg font-extrabold ${res.wcStatus === 'Within Limit' ? 'text-emerald-700 dark:text-emerald-300' : 'text-rose-700 dark:text-rose-300'}">${res.wordCount.toLocaleString()}</span>
+                    <span class="block text-[11px] font-bold ${res.wcStatus === 'Within Limit' ? 'text-emerald-700 dark:text-emerald-400' : 'text-rose-700 dark:text-rose-400'}">${res.wcStatus} (${res.minW.toLocaleString()}–${res.maxW.toLocaleString()})</span>
+                  </div>
+
+                  <div class="p-3 rounded-2xl border ${res.fpCount === 0 ? 'bg-emerald-50 dark:bg-emerald-950/30 border-emerald-300 dark:border-emerald-800' : 'bg-amber-50 dark:bg-amber-950/30 border-amber-300 dark:border-amber-800'}">
+                    <span class="block text-[10px] font-extrabold uppercase text-slate-500">1st-Person Voice</span>
+                    <span class="text-lg font-extrabold ${res.fpCount === 0 ? 'text-emerald-700 dark:text-emerald-300' : 'text-amber-700 dark:text-amber-300'}">${res.fpCount} found</span>
+                    <span class="block text-[10px] font-semibold text-slate-500">${res.fpCount === 0 ? 'Clean third-person ✓' : 'Avoid unless brief permits'}</span>
+                  </div>
+
+                  <div class="p-3 rounded-2xl border ${res.missingPageQuotes.length === 0 ? 'bg-emerald-50 dark:bg-emerald-950/30 border-emerald-300 dark:border-emerald-800' : 'bg-rose-50 dark:bg-rose-950/30 border-rose-300 dark:border-rose-800'}">
+                    <span class="block text-[10px] font-extrabold uppercase text-slate-500">Quotes Missing p./pp.</span>
+                    <span class="text-lg font-extrabold ${res.missingPageQuotes.length === 0 ? 'text-emerald-700 dark:text-emerald-300' : 'text-rose-700 dark:text-rose-300'}">${res.missingPageQuotes.length} / ${res.totalQuotes}</span>
+                    <span class="block text-[10px] font-semibold text-slate-500">${res.missingPageQuotes.length === 0 ? 'Quote pages ok ✓' : 'Add page numbers!'}</span>
+                  </div>
+
+                  <div class="p-3 rounded-2xl border ${!res.lowDensity ? 'bg-emerald-50 dark:bg-emerald-950/30 border-emerald-300 dark:border-emerald-800' : 'bg-amber-50 dark:bg-amber-950/30 border-amber-300 dark:border-amber-800'}">
+                    <span class="block text-[10px] font-extrabold uppercase text-slate-500">Harvard Density</span>
+                    <span class="text-lg font-extrabold ${!res.lowDensity ? 'text-emerald-700 dark:text-emerald-300' : 'text-amber-700 dark:text-amber-300'}">${res.densityStr} / 250w</span>
+                    <span class="block text-[10px] font-semibold text-slate-500">${res.citeCount} cites ${res.lowDensity ? '(Aim ≥ 1.5/250w)' : '(Strong density ✓)'}</span>
+                  </div>
+                </div>
+
+                <!-- First-Person Snippet Previews -->
+                ${res.fpSnippets.length ? `
+                  <div class="p-3.5 rounded-2xl bg-amber-50/80 dark:bg-amber-950/30 border border-amber-300 dark:border-amber-800 space-y-1.5 text-xs">
+                    <p class="font-extrabold text-amber-900 dark:text-amber-200">⚠ First-Person Occurrences (Avoid first-person unless brief explicitly permits):</p>
+                    <ul class="space-y-1 text-slate-700 dark:text-slate-200">
+                      ${res.fpSnippets.map((s) => `<li class="font-mono text-[11px] bg-white/70 dark:bg-slate-900/60 px-2.5 py-1 rounded-lg">${s}</li>`).join('')}
+                    </ul>
+                  </div>
+                ` : ''}
+
+                <!-- Direct Quotes Missing Page Numbers -->
+                ${res.missingPageQuotes.length ? `
+                  <div class="p-3.5 rounded-2xl bg-rose-50/80 dark:bg-rose-950/30 border border-rose-300 dark:border-rose-800 space-y-1.5 text-xs">
+                    <p class="font-extrabold text-rose-800 dark:text-rose-200">⚠ Direct Quotes Flagged Without Nearby p. / pp.:</p>
+                    ${res.missingPageQuotes.slice(0, 4).map((q) => `<p class="italic text-rose-900 dark:text-rose-200">“${escapeHtml(q)}”</p>`).join('')}
+                  </div>
+                ` : ''}
+
+                <!-- Quick Hygiene Alerts -->
+                ${(res.hasBibliography || res.informalWebCount > 0) ? `
+                  <div class="p-3.5 rounded-2xl bg-rose-50/80 dark:bg-rose-950/30 border border-rose-300 dark:border-rose-800 space-y-1 text-xs font-bold text-rose-800 dark:text-rose-200">
+                    ${res.hasBibliography ? `<p>🚨 Heading Alert: Word "Bibliography" detected — McTimoney requires "Reference List", not Bibliography.</p>` : ''}
+                    ${res.informalWebCount > 0 ? `<p>🚨 Source Quality Alert: Informal web/URL terms detected (${res.informalWebSamples.map(escapeHtml).join(', ')}) — stick to peer-reviewed journals &amp; authoritative guidelines.</p>` : ''}
+                  </div>
+                ` : `
+                  <div class="px-3.5 py-2 rounded-xl bg-emerald-50 dark:bg-emerald-950/30 border border-emerald-200 dark:border-emerald-800 text-xs font-bold text-emerald-800 dark:text-emerald-300">
+                    ✓ Hygiene Check Passed: No "Bibliography" heading error or informal blog/URL flags detected.
+                  </div>
+                `}
+              </div>
+            ` : ''}
+          </section>
+
+          <!-- Interactive Weighted Rubric Readiness Checklist -->
+          <section class="rounded-3xl bg-white dark:bg-slate-900 border border-slate-200 dark:border-slate-800 p-4 sm:p-5 space-y-4">
+            <div class="flex flex-wrap items-center justify-between gap-2">
+              <div>
+                <h3 class="text-base font-extrabold text-slate-900 dark:text-white">${rub.name} — Weighted Rubric Checklist</h3>
+                <p class="text-xs text-slate-500 dark:text-slate-400">${rub.subtitle}</p>
+              </div>
+              <div class="flex items-center gap-2">
+                <span class="px-3 py-1 rounded-xl text-xs font-extrabold bg-teal-100 dark:bg-teal-950 text-teal-800 dark:text-teal-300">${doneItems}/${totalItems} (${pct}%)</span>
+                <button type="button" onclick="resetRubricChecks('${mod}')" class="px-2.5 py-1 rounded-xl text-xs font-bold bg-slate-100 dark:bg-slate-800 text-slate-600 dark:text-slate-300">Reset</button>
+              </div>
+            </div>
+
+            <div class="w-full h-2.5 rounded-full bg-slate-200 dark:bg-slate-800 overflow-hidden">
+              <div class="h-full bg-gradient-to-r from-teal-500 to-indigo-500 transition-all duration-300" style="width:${pct}%"></div>
+            </div>
+
+            <!-- Weighted Criteria -->
+            <div class="space-y-2">
+              <span class="block text-[10px] font-extrabold uppercase tracking-wider text-slate-400">Official Weighted Criteria (100%)</span>
+              <div class="rounded-2xl border border-slate-200 dark:border-slate-800 divide-y divide-slate-100 dark:divide-slate-800">
+                ${rub.criteria.map((c) => {
+                  const chk = !!checks[c.id];
+                  return `
+                    <label class="flex items-start gap-3 p-3 cursor-pointer hover:bg-slate-50 dark:hover:bg-slate-800/40">
+                      <input type="checkbox" ${chk ? 'checked' : ''} onchange="toggleRubricCheck('${mod}','${c.id}')" class="mt-0.5 w-4 h-4 accent-teal-600 rounded shrink-0" />
+                      <div class="flex-1 min-w-0 text-xs sm:text-sm">
+                        <div class="flex flex-wrap items-center gap-2">
+                          <span class="px-2 py-0.5 rounded-md text-[10px] font-extrabold bg-indigo-100 dark:bg-indigo-950 text-indigo-800 dark:text-indigo-300">${c.weight}%</span>
+                          <span class="font-extrabold ${chk ? 'line-through text-slate-400' : 'text-slate-900 dark:text-white'}">${c.area}</span>
+                        </div>
+                        <p class="text-xs text-slate-500 dark:text-slate-400 mt-0.5"><strong>70%+ Target:</strong> ${c.excellent}</p>
+                      </div>
+                    </label>
+                  `;
+                }).join('')}
+              </div>
+            </div>
+
+            <!-- 5 Core Tutor Feed-Forward Checkboxes -->
+            <div class="space-y-2">
+              <span class="block text-[10px] font-extrabold uppercase tracking-wider text-amber-600 dark:text-amber-400">5 Core Tutor Feed-Forward Checks</span>
+              <div class="rounded-2xl border border-amber-200 dark:border-amber-900/60 bg-amber-50/40 dark:bg-amber-950/20 divide-y divide-amber-100 dark:divide-amber-900/40">
+                ${CORE_FEED_FORWARD.map((f) => {
+                  const chk = !!checks[f.id];
+                  return `
+                    <label class="flex items-start gap-3 p-3 cursor-pointer">
+                      <input type="checkbox" ${chk ? 'checked' : ''} onchange="toggleRubricCheck('${mod}','${f.id}')" class="mt-0.5 w-4 h-4 accent-amber-600 rounded shrink-0" />
+                      <span class="text-xs sm:text-sm ${chk ? 'line-through text-slate-400' : 'text-slate-800 dark:text-slate-200 font-medium'}">${f.text}</span>
+                    </label>
+                  `;
+                }).join('')}
+              </div>
+            </div>
+          </section>
+        </div>
+      `;
+    }
+
+    // =========================================================================
+    // 6. TAB 2: CLINIC STUDIES 3 (LIFTING 64% -> 70%+)
+    // =========================================================================
+    function renderClinic3Tab() {
+      const clinicRubric = MODULE_RUBRICS.clinic3.criteria;
+      return `
+        <div class="space-y-6">
+          <!-- Hero Focus Banner -->
+          <section class="rounded-3xl bg-gradient-to-br from-teal-600 to-indigo-600 text-white p-5 space-y-1.5 shadow-sm">
+            <span class="inline-block px-2.5 py-0.5 rounded-lg text-[10px] font-extrabold uppercase tracking-wider bg-white/20">Target Upgrade: 64% &rarr; 70%+ First</span>
+            <h2 class="text-lg sm:text-xl font-extrabold">Upgrading Reflection: Description &rarr; Critical Evaluation</h2>
+            <p class="text-xs sm:text-sm text-white/90">
+              Use Borton’s framework (<strong>What? &rarr; So What? &rarr; Now What?</strong>) in crisp third-person voice, linking clinical events to ethics, wider context, and peer-reviewed evidence.
+            </p>
+          </section>
+
+          <!-- Interactive Description vs Critical Evaluation Cards -->
+          <section class="space-y-3.5">
+            <h3 class="text-xs font-extrabold uppercase tracking-wider text-slate-400 px-1">Tap Any Card to Compare 64% Narrative vs. 70%+ Evaluation</h3>
+            <div class="space-y-3">
+              ${CRIT_UPGRADES.map((u) => {
+                const showEval = !!state.flippedCrit[u.id];
+                return `
+                  <article
+                    onclick="state.flippedCrit['${u.id}']=!state.flippedCrit['${u.id}']; renderApp();"
+                    role="button"
+                    tabindex="0"
+                    class="cursor-pointer rounded-3xl bg-white dark:bg-slate-900 border-2 ${showEval ? 'border-emerald-400 dark:border-emerald-700' : 'border-slate-200 dark:border-slate-800'} p-4 sm:p-5 space-y-3 transition"
+                  >
+                    <div class="flex flex-wrap items-center justify-between gap-2">
+                      <div class="flex items-center gap-2">
+                        <span class="px-2.5 py-0.5 rounded-lg text-[10px] font-extrabold uppercase bg-teal-100 dark:bg-teal-950 text-teal-800 dark:text-teal-300">${u.stage}</span>
+                        <h4 class="text-sm sm:text-base font-extrabold text-slate-900 dark:text-white">${u.title}</h4>
+                      </div>
+                      <span class="text-xs font-bold text-indigo-600 dark:text-indigo-400">${showEval ? 'Showing Both ▲' : 'Tap to Upgrade to 70%+ ▼'}</span>
+                    </div>
+
+                    <div class="grid grid-cols-1 md:grid-cols-2 gap-3">
+                      <div class="p-3.5 rounded-2xl bg-amber-50/70 dark:bg-amber-950/25 border border-amber-200 dark:border-amber-800/60 space-y-1">
+                        <span class="block text-[10px] font-extrabold uppercase text-amber-800 dark:text-amber-300">Descriptive (~60–64%)</span>
+                        <p class="text-xs sm:text-sm text-slate-700 dark:text-slate-200 italic">“${u.desc64}”</p>
+                      </div>
+
+                      <div class="p-3.5 rounded-2xl border transition ${showEval ? 'bg-emerald-50/70 dark:bg-emerald-950/30 border-emerald-300 dark:border-emerald-800' : 'bg-slate-100/80 dark:bg-slate-800/50 border-dashed border-slate-300 dark:border-slate-700 flex items-center justify-center'}">
+                        ${showEval ? `
+                          <div class="space-y-1">
+                            <span class="block text-[10px] font-extrabold uppercase text-emerald-700 dark:text-emerald-300">Critical Evaluation (70%+ First)</span>
+                            <p class="text-xs sm:text-sm text-slate-800 dark:text-slate-100 font-medium">“${u.eval70}”</p>
+                          </div>
+                        ` : `<span class="text-xs font-bold text-slate-400">Tap card to reveal 70%+ rewrite &rarr;</span>`}
+                      </div>
+                    </div>
+
+                    ${showEval ? `
+                      <p class="px-3 py-2 rounded-xl bg-indigo-50/70 dark:bg-indigo-950/30 text-xs font-semibold text-indigo-900 dark:text-indigo-200">
+                        <strong>Why it scores 70%+:</strong> ${u.whyBetter}
+                      </p>
+                    ` : ''}
+                  </article>
+                `;
+              }).join('')}
+            </div>
+          </section>
+
+          <!-- Compact Expandable 60-69% vs 70%+ Rubric Jump Guide -->
+          <section class="space-y-2.5">
+            <h3 class="text-xs font-extrabold uppercase tracking-wider text-slate-400 px-1">Clinic Studies Rubric Jump Guide (60–69% vs. 70%+)</h3>
+            ${clinicRubric.map((c) => {
+              const isOpen = !!state.openClinicRubric[c.id];
+              return `
+                <div class="rounded-2xl bg-white dark:bg-slate-900 border border-slate-200 dark:border-slate-800 overflow-hidden">
+                  <button
+                    type="button"
+                    onclick="state.openClinicRubric['${c.id}']=!state.openClinicRubric['${c.id}']; renderApp();"
+                    class="w-full px-4 py-3 flex items-center justify-between gap-2 text-left"
+                  >
+                    <div class="flex items-center gap-2 min-w-0">
+                      <span class="px-2 py-0.5 rounded-md text-[10px] font-extrabold bg-teal-100 dark:bg-teal-950 text-teal-800 dark:text-teal-300 shrink-0">${c.weight}%</span>
+                      <span class="text-xs sm:text-sm font-extrabold text-slate-900 dark:text-white truncate">${c.area}</span>
+                    </div>
+                    <span class="text-xs font-bold text-slate-400 shrink-0">${isOpen ? '▲' : '▼'}</span>
+                  </button>
+                  ${isOpen ? `
+                    <div class="px-4 pb-3.5 pt-1 border-t border-slate-100 dark:border-slate-800 grid grid-cols-1 sm:grid-cols-2 gap-2.5 text-xs">
+                      <div class="p-3 rounded-xl bg-sky-50/60 dark:bg-sky-950/25 border border-sky-200 dark:border-sky-800/60">
+                        <strong class="block text-sky-700 dark:text-sky-300 mb-0.5">60–69% (Very Good)</strong>
+                        <p class="text-slate-700 dark:text-slate-200">${c.good}</p>
+                      </div>
+                      <div class="p-3 rounded-xl bg-emerald-50/70 dark:bg-emerald-950/30 border border-emerald-200 dark:border-emerald-800/60">
+                        <strong class="block text-emerald-700 dark:text-emerald-300 mb-0.5">70%+ (Excellent / First)</strong>
+                        <p class="text-slate-800 dark:text-slate-100 font-medium">${c.excellent}</p>
+                      </div>
+                    </div>
+                  ` : ''}
+                </div>
+              `;
+            }).join('')}
+          </section>
+
+          <!-- Year 3 Pre-Clinic Ready Placeholders -->
+          <section class="space-y-2.5">
+            <h3 class="text-xs font-extrabold uppercase tracking-wider text-slate-400 px-1">Year 3 Pre-Clinic Slots (Ready for Jan '27)</h3>
+            <div class="grid grid-cols-1 sm:grid-cols-3 gap-3">
+              ${[
+                { title: 'Case History Taking', desc: 'SOCRATES, Red/Yellow flag screening, systems review & medication history templates.' },
+                { title: 'OSCE Examination Flow', desc: 'Integrated orthopaedic, neurological & systemic exam choreography under timed conditions.' },
+                { title: 'Clinical Documentation', desc: 'SOAP notes, consent recording, care plans & GCC record-keeping standards.' },
+              ].map((s) => `
+                <div class="p-4 rounded-2xl bg-white dark:bg-slate-900 border-2 border-dashed border-slate-300 dark:border-slate-700 space-y-1.5">
+                  <span class="text-[10px] font-extrabold uppercase text-slate-400">Ready for Handbook</span>
+                  <h4 class="text-sm font-extrabold text-slate-900 dark:text-white">${s.title}</h4>
+                  <p class="text-xs text-slate-500 dark:text-slate-400">${s.desc}</p>
+                </div>
+              `).join('')}
+            </div>
+          </section>
+        </div>
+      `;
+    }
+
+    // =========================================================================
+    // 7. TAB 3: RESEARCH 2 (PICO, STUDY DESIGN MATRIX & BIOSTATS/PARADIGM SRS)
+    // =========================================================================
+    function updatePicoPreview() {
+      const p = state.pico.p.trim() || '[Population / Patient]';
+      const i = state.pico.i.trim() || '[Intervention]';
+      const c = state.pico.c.trim() || '[Comparison]';
+      const o = state.pico.o.trim() || '[Outcome]';
+      const out = document.getElementById('pico-assembled');
+      if (out) {
+        out.textContent = `In ${p}, does ${i} compared to ${c} improve ${o}?`;
+      }
+    }
+
+    function copyPicoQuestion() {
+      const out = document.getElementById('pico-assembled');
+      if (out) copyTextSafe(out.textContent, 'Copied PICO question!');
+    }
+
+    function renderResearch2Tab() {
+      const resCards = RESEARCH_CARDS.filter((c) => !state.dueOnly || isDue(c.id));
+
+      return `
+        <div class="space-y-6">
+          <!-- 1. Interactive PICO Question Builder -->
+          <section class="rounded-3xl bg-white dark:bg-slate-900 border border-slate-200 dark:border-slate-800 p-4 sm:p-5 space-y-4">
+            <div class="flex flex-wrap items-center justify-between gap-2">
+              <div>
+                <span class="px-2.5 py-0.5 rounded-lg text-[10px] font-extrabold uppercase bg-teal-100 dark:bg-teal-950 text-teal-800 dark:text-teal-300">Clinical Question Builder</span>
+                <h2 class="text-lg font-extrabold text-slate-900 dark:text-white mt-1">Interactive PICO Builder</h2>
+              </div>
+              <button type="button" onclick="copyPicoQuestion()" class="px-3.5 py-2 rounded-xl bg-teal-600 hover:bg-teal-700 text-white text-xs font-extrabold">📋 Copy PICO</button>
+            </div>
+
+            <div class="grid grid-cols-1 sm:grid-cols-2 gap-3">
+              <div>
+                <label class="block text-[11px] font-extrabold uppercase text-teal-700 dark:text-teal-400 mb-1">P — Population / Patient</label>
+                <input type="text" value="${escapeHtml(state.pico.p)}" oninput="state.pico.p=this.value; updatePicoPreview();" placeholder="e.g. adults with chronic non-specific LBP" class="w-full px-3 py-2 rounded-xl bg-slate-50 dark:bg-slate-800 border border-slate-200 dark:border-slate-700 text-xs sm:text-sm" />
+              </div>
+              <div>
+                <label class="block text-[11px] font-extrabold uppercase text-indigo-700 dark:text-indigo-400 mb-1">I — Intervention</label>
+                <input type="text" value="${escapeHtml(state.pico.i)}" oninput="state.pico.i=this.value; updatePicoPreview();" placeholder="e.g. McTimoney chiropractic + graded exercise" class="w-full px-3 py-2 rounded-xl bg-slate-50 dark:bg-slate-800 border border-slate-200 dark:border-slate-700 text-xs sm:text-sm" />
+              </div>
+              <div>
+                <label class="block text-[11px] font-extrabold uppercase text-amber-700 dark:text-amber-400 mb-1">C — Comparison</label>
+                <input type="text" value="${escapeHtml(state.pico.c)}" oninput="state.pico.c=this.value; updatePicoPreview();" placeholder="e.g. usual GP care / exercise alone" class="w-full px-3 py-2 rounded-xl bg-slate-50 dark:bg-slate-800 border border-slate-200 dark:border-slate-700 text-xs sm:text-sm" />
+              </div>
+              <div>
+                <label class="block text-[11px] font-extrabold uppercase text-emerald-700 dark:text-emerald-400 mb-1">O — Outcome</label>
+                <input type="text" value="${escapeHtml(state.pico.o)}" oninput="state.pico.o=this.value; updatePicoPreview();" placeholder="e.g. pain intensity (VAS) &amp; disability (ODI) at 12 weeks" class="w-full px-3 py-2 rounded-xl bg-slate-50 dark:bg-slate-800 border border-slate-200 dark:border-slate-700 text-xs sm:text-sm" />
+              </div>
+            </div>
+
+            <div class="p-3.5 rounded-2xl bg-indigo-50/70 dark:bg-indigo-950/35 border border-indigo-200 dark:border-indigo-800/70">
+              <span class="block text-[10px] font-extrabold uppercase text-indigo-600 dark:text-indigo-400">Assembled Clinical Research Question</span>
+              <p id="pico-assembled" class="text-xs sm:text-sm font-extrabold text-slate-900 dark:text-white mt-1">
+                In ${escapeHtml(state.pico.p.trim() || '[Population / Patient]')}, does ${escapeHtml(state.pico.i.trim() || '[Intervention]')} compared to ${escapeHtml(state.pico.c.trim() || '[Comparison]')} improve ${escapeHtml(state.pico.o.trim() || '[Outcome]')}?
+              </p>
+            </div>
+          </section>
+
+          <!-- 2. Tap-to-Expand Study Design & Bias Matrix -->
+          <section class="space-y-2.5">
+            <h2 class="text-xs font-extrabold uppercase tracking-wider text-slate-400 px-1">Study Design &amp; Bias Appraisal Matrix (Tap to Expand)</h2>
+            ${STUDY_DESIGNS.map((sd) => {
+              const isOpen = !!state.openStudyDesign[sd.id];
+              return `
+                <article class="rounded-2xl bg-white dark:bg-slate-900 border border-slate-200 dark:border-slate-800 overflow-hidden">
+                  <button
+                    type="button"
+                    onclick="state.openStudyDesign['${sd.id}']=!state.openStudyDesign['${sd.id}']; renderApp();"
+                    class="w-full px-4 py-3.5 flex items-center justify-between gap-2 text-left hover:bg-slate-50 dark:hover:bg-slate-800/40"
+                  >
+                    <div class="flex flex-wrap items-center gap-2 min-w-0">
+                      <h3 class="text-sm sm:text-base font-extrabold text-slate-900 dark:text-white">${sd.name}</h3>
+                      <span class="px-2 py-0.5 rounded-lg text-[10px] font-extrabold bg-${sd.badgeColor}-100 dark:bg-${sd.badgeColor}-950/60 text-${sd.badgeColor}-800 dark:text-${sd.badgeColor}-300">${sd.level}</span>
+                    </div>
+                    <span class="text-xs font-bold text-slate-400 shrink-0">${isOpen ? '▲' : '▼'}</span>
+                  </button>
+                  ${isOpen ? `
+                    <div class="px-4 pb-4 pt-2 border-t border-slate-100 dark:border-slate-800 grid grid-cols-1 md:grid-cols-3 gap-2.5 text-xs sm:text-sm">
+                      <div class="p-3 rounded-xl bg-slate-50 dark:bg-slate-800/60">
+                        <strong class="block text-[10px] uppercase text-teal-600 dark:text-teal-400 mb-0.5">Best Used For</strong>
+                        <p class="text-slate-700 dark:text-slate-200">${sd.bestFor}</p>
+                      </div>
+                      <div class="p-3 rounded-xl bg-rose-50/60 dark:bg-rose-950/25">
+                        <strong class="block text-[10px] uppercase text-rose-600 dark:text-rose-400 mb-0.5">Key Biases to Watch</strong>
+                        <p class="text-slate-700 dark:text-slate-200">${sd.biases}</p>
+                      </div>
+                      <div class="p-3 rounded-xl bg-indigo-50/60 dark:bg-indigo-950/25">
+                        <strong class="block text-[10px] uppercase text-indigo-600 dark:text-indigo-400 mb-0.5">Critical Appraisal Questions</strong>
+                        <p class="text-slate-700 dark:text-slate-200">${sd.appraisal}</p>
+                      </div>
+                    </div>
+                  ` : ''}
+                </article>
+              `;
+            }).join('')}
+          </section>
+
+          <!-- 3. Biostatistics & Paradigm Bridge Flashcards (Leitner SRS) -->
+          <section class="space-y-3">
+            <div class="flex items-center justify-between px-1">
+              <h2 class="text-xs font-extrabold uppercase tracking-wider text-slate-400">Biostatistics &amp; Paradigm Bridge Flashcards (Tap to Flip)</h2>
+              <span class="text-[11px] font-bold text-slate-400">Synced with Leitner SRS</span>
+            </div>
+
+            ${resCards.length ? `
+              <div class="grid grid-cols-1 md:grid-cols-2 gap-3.5">
+                ${resCards.map((c) => renderFlipSrsCard(c, 'flippedResCard')).join('')}
+              </div>
+            ` : `
+              <div class="p-8 text-center rounded-3xl bg-white dark:bg-slate-900 border border-slate-200 dark:border-slate-800 text-sm text-slate-500">
+                All Research 2 flashcards are scheduled — none due today!
+              </div>
+            `}
+          </section>
+        </div>
+      `;
+    }
+
+    function renderFlipSrsCard(c, flipStateKey) {
+      const flipped = !!state[flipStateKey][c.id];
+      return `
+        <article
+          onclick="state.${flipStateKey}['${c.id}']=!state.${flipStateKey}['${c.id}']; renderApp();"
+          role="button"
+          tabindex="0"
+          class="cursor-pointer select-none rounded-2xl border-2 p-4 flex flex-col justify-between gap-3 transition ${
+            flipped
+              ? 'bg-teal-50/60 dark:bg-teal-950/25 border-teal-400 dark:border-teal-700'
+              : 'bg-white dark:bg-slate-900 border-slate-200 dark:border-slate-800 hover:border-teal-400'
+          }"
+        >
+          <div class="space-y-2">
+            <div class="flex items-center justify-between gap-2">
+              <span class="px-2 py-0.5 rounded-md text-[10px] font-extrabold uppercase bg-slate-100 dark:bg-slate-800 text-slate-600 dark:text-slate-300">${c.tag}</span>
+              <span class="text-[11px] font-bold text-teal-600 dark:text-teal-400">${flipped ? 'Answer Shown' : 'Tap to Flip'}</span>
+            </div>
+            <h3 class="text-sm sm:text-base font-extrabold text-slate-900 dark:text-white">${c.front}</h3>
+            ${flipped ? `
+              <ul class="list-disc pl-5 space-y-1.5 text-xs sm:text-sm text-slate-700 dark:text-slate-200 pt-1">
+                ${c.back.map((pt) => `<li>${pt}</li>`).join('')}
+              </ul>
+            ` : `<p class="text-xs text-slate-400 italic">Recall the key distinction aloud, then tap to check...</p>`}
+          </div>
+          ${renderSrsControls(c.id)}
+        </article>
+      `;
+    }
+
+    // =========================================================================
+    // 8. TAB 4: PHILOSOPHY 3 & BEHAVIOURAL SCIENCES
+    // =========================================================================
+    function renderPhilBehavTab() {
+      return `
+        <div class="space-y-5">
+          <!-- Sub-Toggle: Behavioural Sciences vs Philosophy 3 -->
+          <div class="max-w-md mx-auto grid grid-cols-2 gap-1.5 p-1.5 rounded-2xl bg-slate-200/70 dark:bg-slate-900 border border-slate-200 dark:border-slate-800">
+            <button
+              type="button"
+              onclick="state.tab4Sub='behav'; renderApp();"
+              class="py-2 px-3 rounded-xl text-xs sm:text-sm font-extrabold transition ${
+                state.tab4Sub === 'behav'
+                  ? 'bg-white dark:bg-slate-800 text-teal-700 dark:text-teal-300 shadow-xs'
+                  : 'text-slate-600 dark:text-slate-400'
+              }"
+            >Behavioural Sciences</button>
+            <button
+              type="button"
+              onclick="state.tab4Sub='phil'; renderApp();"
+              class="py-2 px-3 rounded-xl text-xs sm:text-sm font-extrabold transition ${
+                state.tab4Sub === 'phil'
+                  ? 'bg-white dark:bg-slate-800 text-indigo-700 dark:text-indigo-300 shadow-xs'
+                  : 'text-slate-600 dark:text-slate-400'
+              }"
+            >Philosophy 3</button>
+          </div>
+
+          ${state.tab4Sub === 'behav' ? renderBehaviouralView() : renderPhilosophyView()}
+        </div>
+      `;
+    }
+
+    function renderBehaviouralView() {
+      const bps = BPS_NODES[state.selectedBps] || BPS_NODES.psycho;
+      const nCls = (id) => `svg-node ${state.selectedBps === id ? 'svg-node-active' : ''}`;
+
+      const otherFlags = {
+        red: { label: 'Red Flags', bg: 'bg-rose-600 text-white', desc: 'Serious biomedical pathology (fracture, malignancy, infection, Cauda Equina, vascular/CAD) requiring urgent medical referral.' },
+        orange: { label: 'Orange Flags', bg: 'bg-orange-500 text-white', desc: 'Psychiatric / clinical mental health red flags (major depression, severe PTSD, psychosis, suicidal ideation) requiring specialist mental health referral.' },
+        blue: { label: 'Blue Flags', bg: 'bg-sky-600 text-white', desc: 'Perceived occupational/workplace barriers (high job stress, unsupportive management, belief that work causes re-injury).' },
+        black: { label: 'Black Flags', bg: 'bg-slate-800 dark:bg-slate-700 text-white', desc: 'Systemic, contextual, or organisational obstacles outside the patient’s direct control (insurance/benefit policies, rigid HR return-to-work rules).' },
+      };
+      const selFlag = otherFlags[state.selectedFlagPill];
+
+      return `
+        <div class="space-y-6">
+          <!-- 1. Interactive Biopsychosocial (BPS) SVG Triangle -->
+          <section class="rounded-3xl bg-white dark:bg-slate-900 border border-slate-200 dark:border-slate-800 p-4 sm:p-6 space-y-4">
+            <div class="flex flex-wrap items-center justify-between gap-2">
+              <div>
+                <span class="px-2.5 py-0.5 rounded-lg text-[10px] font-extrabold uppercase bg-teal-100 dark:bg-teal-950 text-teal-800 dark:text-teal-300">Tap Any Domain Node</span>
+                <h2 class="text-lg sm:text-xl font-extrabold text-slate-900 dark:text-white mt-1">Interactive Biopsychosocial (BPS) Model</h2>
+              </div>
+            </div>
+
+            <div class="grid grid-cols-1 md:grid-cols-12 gap-4 items-center">
+              <!-- BPS Triangle SVG -->
+              <div class="md:col-span-5">
+                <svg viewBox="0 0 340 270" class="w-full max-w-[320px] mx-auto h-auto" role="img" aria-label="Interactive Biopsychosocial Model Triangle">
+                  <rect x="0" y="0" width="340" height="270" rx="20" fill="var(--svg-bg)" />
+
+                  <!-- Connecting Triangle Lines -->
+                  <polygon points="170,64 78,204 262,204" fill="none" stroke="var(--svg-line)" stroke-width="3" stroke-dasharray="6 4" />
+
+                  <!-- Centre Patient Hub -->
+                  <circle cx="170" cy="154" r="34" fill="var(--svg-surface)" stroke="var(--svg-stroke)" stroke-width="2" />
+                  <text x="170" y="151" text-anchor="middle" fill="var(--svg-text)" font-size="9.5" font-weight="800">PATIENT</text>
+                  <text x="170" y="164" text-anchor="middle" fill="var(--svg-muted)" font-size="8.5" font-weight="700">PAIN &amp; HEALTH</text>
+
+                  <!-- Top Node: Biological -->
+                  <g onclick="state.selectedBps='bio'; renderApp();" class="${nCls('bio')}">
+                    <circle cx="170" cy="64" r="40" fill="#14b8a6" fill-opacity="0.9" stroke="#0f766e" stroke-width="2" />
+                    <text x="170" y="62" text-anchor="middle" fill="#ffffff" font-size="11" font-weight="800">BIOLOGICAL</text>
+                    <text x="170" y="75" text-anchor="middle" fill="#ccfbf1" font-size="8.5" font-weight="700">Tissue &amp; Neuro</text>
+                  </g>
+
+                  <!-- Bottom-Left Node: Psychological -->
+                  <g onclick="state.selectedBps='psycho'; renderApp();" class="${nCls('psycho')}">
+                    <circle cx="78" cy="204" r="44" fill="#6366f1" fill-opacity="0.92" stroke="#4338ca" stroke-width="2" />
+                    <text x="78" y="201" text-anchor="middle" fill="#ffffff" font-size="10" font-weight="800">PSYCHOLOGICAL</text>
+                    <text x="78" y="214" text-anchor="middle" fill="#e0e7ff" font-size="8.5" font-weight="700">Beliefs &amp; Mood</text>
+                  </g>
+
+                  <!-- Bottom-Right Node: Social -->
+                  <g onclick="state.selectedBps='social'; renderApp();" class="${nCls('social')}">
+                    <circle cx="262" cy="204" r="44" fill="#f59e0b" fill-opacity="0.92" stroke="#b45309" stroke-width="2" />
+                    <text x="262" y="201" text-anchor="middle" fill="#ffffff" font-size="11" font-weight="800">SOCIAL</text>
+                    <text x="262" y="214" text-anchor="middle" fill="#fef3c7" font-size="8.5" font-weight="700">Work &amp; Support</text>
+                  </g>
+                </svg>
+              </div>
+
+              <!-- Pinned BPS Detail Panel -->
+              <div class="md:col-span-7 rounded-2xl p-4 border-2 bg-${bps.color}-50/50 dark:bg-${bps.color}-950/25 border-${bps.color}-200 dark:border-${bps.color}-800/70 space-y-3">
+                <div class="flex items-center justify-between gap-2">
+                  <h3 class="text-base font-extrabold text-slate-900 dark:text-white">${bps.title}</h3>
+                  <span class="px-2.5 py-0.5 rounded-lg text-[10px] font-extrabold uppercase bg-${bps.color}-600 text-white">${bps.badge}</span>
+                </div>
+                <div>
+                  <span class="block text-[10px] font-extrabold uppercase text-slate-500 mb-1">Key Clinical Factors</span>
+                  <ul class="list-disc pl-5 space-y-1 text-xs sm:text-sm text-slate-700 dark:text-slate-200">
+                    ${bps.factors.map((f) => `<li>${f}</li>`).join('')}
+                  </ul>
+                </div>
+                <div class="p-3 rounded-xl bg-white/80 dark:bg-slate-900/80 border border-slate-200 dark:border-slate-800 text-xs sm:text-sm">
+                  <strong class="text-${bps.color}-700 dark:text-${bps.color}-300">Chiropractic Management:</strong> ${bps.chiro}
+                </div>
+              </div>
+            </div>
+          </section>
+
+          <!-- 2. Colour-Coded Psychosocial Flags Board (Yellow ABCDEFW + Red/Orange/Blue/Black) -->
+          <section class="rounded-3xl bg-white dark:bg-slate-900 border border-slate-200 dark:border-slate-800 p-4 sm:p-6 space-y-4">
+            <div>
+              <span class="px-2.5 py-0.5 rounded-lg text-[10px] font-extrabold uppercase bg-amber-100 dark:bg-amber-950 text-amber-800 dark:text-amber-300">Yellow Flags &bull; ABCDEFW</span>
+              <h2 class="text-lg font-extrabold text-slate-900 dark:text-white mt-1">Psychosocial Flags Board</h2>
+            </div>
+
+            <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-2.5">
+              ${YELLOW_FLAGS_ABCDEFW.map((yf) => `
+                <div class="p-3 rounded-2xl bg-amber-50/70 dark:bg-amber-950/25 border border-amber-200 dark:border-amber-800/60 flex items-start gap-2.5">
+                  <span class="w-7 h-7 rounded-xl bg-amber-400 text-slate-950 font-extrabold text-sm flex items-center justify-center shrink-0">${yf.letter}</span>
+                  <div class="min-w-0">
+                    <h4 class="text-xs font-extrabold text-slate-900 dark:text-white">${yf.name}</h4>
+                    <p class="text-[11px] text-slate-600 dark:text-slate-300 leading-snug mt-0.5">${yf.detail}</p>
+                  </div>
+                </div>
+              `).join('')}
+            </div>
+
+            <!-- Concise Red / Orange / Blue / Black Flag Pills -->
+            <div class="pt-3 border-t border-slate-100 dark:border-slate-800 space-y-2.5">
+              <span class="block text-[10px] font-extrabold uppercase tracking-wider text-slate-400">Other Clinical Flag Colours (Tap to View)</span>
+              <div class="flex flex-wrap gap-2">
+                ${Object.entries(otherFlags).map(([id, f]) => `
+                  <button
+                    type="button"
+                    onclick="state.selectedFlagPill='${id}'; renderApp();"
+                    class="px-3.5 py-2 rounded-xl text-xs font-extrabold transition ${
+                      state.selectedFlagPill === id ? `${f.bg} ring-2 ring-offset-2 ring-teal-500 dark:ring-offset-slate-900` : `${f.bg} opacity-75 hover:opacity-100`
+                    }"
+                  >${f.label}</button>
+                `).join('')}
+              </div>
+              <p class="p-3 rounded-xl bg-slate-50 dark:bg-slate-800/70 border border-slate-200 dark:border-slate-700 text-xs sm:text-sm text-slate-700 dark:text-slate-200">
+                <strong>${selFlag.label}:</strong> ${selFlag.desc}
+              </p>
+            </div>
+          </section>
+
+          <!-- 3. Pain Psychology & Adherence Accordions -->
+          <section class="space-y-2.5">
+            <h2 class="text-xs font-extrabold uppercase tracking-wider text-slate-400 px-1">Pain Psychology &amp; Adherence Quick-Reference</h2>
+            ${PAIN_PSYCH_ACCORDIONS.map((acc) => {
+              const isOpen = !!state.openPainAcc[acc.id];
+              return `
+                <article class="rounded-2xl bg-white dark:bg-slate-900 border border-slate-200 dark:border-slate-800 overflow-hidden">
+                  <button
+                    type="button"
+                    onclick="state.openPainAcc['${acc.id}']=!state.openPainAcc['${acc.id}']; renderApp();"
+                    class="w-full px-4 py-3.5 flex items-center justify-between gap-2 text-left"
+                  >
+                    <div class="min-w-0">
+                      <h3 class="text-sm sm:text-base font-extrabold text-slate-900 dark:text-white">${acc.title}</h3>
+                      <p class="text-xs text-slate-500 dark:text-slate-400 truncate">${acc.summary}</p>
+                    </div>
+                    <span class="text-xs font-bold text-slate-400 shrink-0">${isOpen ? '▲' : '▼'}</span>
+                  </button>
+                  ${isOpen ? `
+                    <div class="px-4 pb-4 pt-2 border-t border-slate-100 dark:border-slate-800">
+                      <ul class="list-disc pl-5 space-y-1.5 text-xs sm:text-sm text-slate-700 dark:text-slate-200">
+                        ${acc.points.map((pt) => `<li>${pt}</li>`).join('')}
+                      </ul>
+                    </div>
+                  ` : ''}
+                </article>
+              `;
+            }).join('')}
+          </section>
+        </div>
+      `;
+    }
+
+    function renderPhilosophyView() {
+      const philList = PHIL_CARDS.filter((c) => !state.dueOnly || isDue(c.id));
+
+      return `
+        <div class="space-y-5">
+          <div class="flex items-center justify-between px-1">
+            <div>
+              <h2 class="text-base sm:text-lg font-extrabold text-slate-900 dark:text-white">Philosophy 3 Active-Recall Concept Cards</h2>
+              <p class="text-xs text-slate-500 dark:text-slate-400">Tap any card to flip &amp; rate with Leitner Spaced Repetition.</p>
+            </div>
+          </div>
+
+          ${philList.length ? `
+            <div class="grid grid-cols-1 md:grid-cols-2 gap-3.5">
+              ${philList.map((c) => renderFlipSrsCard(c, 'flippedPhilCard')).join('')}
+            </div>
+          ` : `
+            <div class="p-8 text-center rounded-3xl bg-white dark:bg-slate-900 border border-slate-200 dark:border-slate-800 text-sm text-slate-500">
+              All Philosophy 3 cards are scheduled — none due today!
+            </div>
+          `}
+
+          <!-- Ready-to-Populate Year 3 Philosophy 3 Handbook Slot -->
+          <section class="rounded-3xl bg-white dark:bg-slate-900 border-2 border-dashed border-slate-300 dark:border-slate-700 p-5 space-y-2">
+            <span class="px-2.5 py-0.5 rounded-lg text-[10px] font-extrabold uppercase bg-slate-100 dark:bg-slate-800 text-slate-500">Year 3 Handbook Slot &bull; Late Jan 2027</span>
+            <h3 class="text-base font-extrabold text-slate-900 dark:text-white">Philosophy 3 Reading List &amp; Essay Briefs</h3>
+            <p class="text-xs sm:text-sm text-slate-500 dark:text-slate-400">
+              Once your Year 3 Philosophy 3 handbook and essay titles are released, drop them into chat and we will populate tailored argument maps, key thinkers, and counter-perspective prompts right here.
+            </p>
+          </section>
+        </div>
+      `;
+    }
+
+    // =========================================================================
+    // 9. INITIALISE APP
+    // =========================================================================
+    initTheme();
+    updateDueUI();
+    renderTabBar();
+    renderApp();
+  </script>
+</body>
+</html>
