@@ -1,0 +1,1777 @@
+<!DOCTYPE html>
+<html lang="en" class="scroll-smooth">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Clinical Neurology – MChiro Year 3 Hub</title>
+
+  <!-- Google Font: Inter -->
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap" rel="stylesheet" />
+
+  <!-- Tailwind CSS -->
+  <script src="https://cdn.tailwindcss.com"></script>
+  <script>
+    tailwind.config = {
+      darkMode: 'class',
+      theme: {
+        extend: {
+          fontFamily: {
+            sans: ['Inter', 'system-ui', '-apple-system', 'sans-serif'],
+          },
+        },
+      },
+    };
+  </script>
+
+  <style>
+    :root {
+      --svg-bg: #f8fafc;
+      --svg-skin: #f1f5f9;
+      --svg-stroke: #475569;
+      --svg-cord-white: #e2e8f0;
+      --svg-cord-grey: #94a3b8;
+      --svg-text: #0f172a;
+      --svg-muted: #64748b;
+      --svg-line: #cbd5e1;
+      --svg-iris: #0284c7;
+    }
+
+    .dark {
+      --svg-bg: #0f172a;
+      --svg-skin: #1e293b;
+      --svg-stroke: #94a3b8;
+      --svg-cord-white: #1e293b;
+      --svg-cord-grey: #475569;
+      --svg-text: #f8fafc;
+      --svg-muted: #94a3b8;
+      --svg-line: #334155;
+      --svg-iris: #38bdf8;
+    }
+
+    .no-scrollbar::-webkit-scrollbar { display: none; }
+    .no-scrollbar { -ms-overflow-style: none; scrollbar-width: none; }
+
+    .svg-hit {
+      cursor: pointer;
+      transition: opacity 0.16s ease, filter 0.16s ease, transform 0.16s ease;
+    }
+    .svg-hit:hover {
+      filter: brightness(1.12);
+    }
+    .svg-hit-active {
+      stroke: var(--svg-text) !important;
+      stroke-width: 2.6px !important;
+      filter: drop-shadow(0 0 7px rgba(13, 148, 136, 0.6));
+    }
+
+    @keyframes pulseRing {
+      0%, 100% { opacity: 0.95; transform: scale(1); }
+      50% { opacity: 0.45; transform: scale(1.06); }
+    }
+    .fork-wave {
+      transform-box: fill-box;
+      transform-origin: center;
+      animation: pulseRing 1.5s ease-in-out infinite;
+    }
+
+    .pupil-circle {
+      transition: r 0.28s cubic-bezier(0.22, 1, 0.36, 1);
+    }
+  </style>
+</head>
+<body class="bg-slate-50 text-slate-900 dark:bg-slate-950 dark:text-slate-100 font-sans antialiased transition-colors duration-200 overflow-x-hidden selection:bg-teal-200 dark:selection:bg-teal-800">
+
+  <!-- Toast Notification Container -->
+  <div id="toast-container" class="fixed bottom-20 md:bottom-5 right-4 z-50 flex flex-col gap-2 pointer-events-none"></div>
+
+  <!-- Sticky Top Header -->
+  <header class="sticky top-0 z-40 bg-white/95 dark:bg-slate-900/95 backdrop-blur border-b border-slate-200 dark:border-slate-800">
+    <!-- Row 1: Title & Theme Toggle -->
+    <div class="max-w-5xl mx-auto px-3 sm:px-4 py-2.5 flex items-center justify-between gap-2">
+      <div class="flex items-center gap-2.5 min-w-0">
+        <a href="index.html" class="w-9 h-9 rounded-xl bg-gradient-to-br from-teal-500 to-indigo-600 text-white font-extrabold text-xs flex items-center justify-center shadow-xs shrink-0" aria-label="Home">
+          CN
+        </a>
+        <div class="min-w-0">
+          <h1 class="text-sm sm:text-base font-extrabold tracking-tight text-slate-900 dark:text-white truncate">
+            Clinical Neurology
+          </h1>
+          <p class="text-[11px] font-semibold text-slate-500 dark:text-slate-400 truncate">
+            Simulators &bull; Tracts &amp; Lesions &bull; Nerves &bull; OSCE
+          </p>
+        </div>
+      </div>
+
+      <!-- Site-Wide Module Links (Desktop inline, Mobile scrollable below) + Theme Toggle -->
+      <div class="flex items-center gap-1.5 sm:gap-2 shrink-0">
+        <div class="hidden md:flex items-center gap-1 mr-1">
+          <a href="index.html" class="px-2.5 py-1.5 rounded-xl text-xs font-bold text-slate-600 dark:text-slate-300 hover:bg-slate-100 dark:hover:bg-slate-800 transition">Home</a>
+          <a href="chiro.html" class="px-2.5 py-1.5 rounded-xl text-xs font-bold text-slate-600 dark:text-slate-300 hover:bg-slate-100 dark:hover:bg-slate-800 transition">Chiro 3</a>
+          <a href="neuro.html" aria-current="page" class="px-2.5 py-1.5 rounded-xl text-xs font-bold bg-teal-600 text-white shadow-xs">Neuro</a>
+          <a href="msk.html" class="px-2.5 py-1.5 rounded-xl text-xs font-bold text-slate-600 dark:text-slate-300 hover:bg-slate-100 dark:hover:bg-slate-800 transition">MSK</a>
+          <a href="written.html" class="px-2.5 py-1.5 rounded-xl text-xs font-bold text-slate-600 dark:text-slate-300 hover:bg-slate-100 dark:hover:bg-slate-800 transition">Written</a>
+        </div>
+
+        <button
+          type="button"
+          id="header-due-pill"
+          onclick="setTab('cord')"
+          class="px-2.5 py-1.5 rounded-xl text-[11px] font-bold bg-amber-50 dark:bg-amber-950/50 border border-amber-200 dark:border-amber-800/70 text-amber-800 dark:text-amber-300 flex items-center gap-1.5"
+          title="Brain lesion cards due for review"
+        >
+          <span id="due-dot" class="w-2 h-2 rounded-full bg-amber-500"></span>
+          <span id="due-text">Due: 0</span>
+        </button>
+
+        <button
+          type="button"
+          id="theme-toggle-btn"
+          onclick="toggleTheme()"
+          aria-label="Toggle Light or Dark Mode"
+          class="p-2 rounded-xl bg-slate-100 dark:bg-slate-800 text-slate-700 dark:text-amber-300 hover:bg-slate-200 dark:hover:bg-slate-700 transition"
+        ></button>
+      </div>
+    </div>
+
+    <!-- Mobile Site-Wide Module Strip -->
+    <nav class="md:hidden max-w-5xl mx-auto px-3 pb-2 overflow-x-auto no-scrollbar" aria-label="Module Navigation">
+      <div class="flex items-center gap-1.5 min-w-max">
+        <a href="index.html" class="px-3 py-1.5 rounded-xl text-xs font-bold bg-slate-100 dark:bg-slate-800 text-slate-700 dark:text-slate-300">Home</a>
+        <a href="chiro.html" class="px-3 py-1.5 rounded-xl text-xs font-bold bg-slate-100 dark:bg-slate-800 text-slate-700 dark:text-slate-300">Chiro 3</a>
+        <a href="neuro.html" aria-current="page" class="px-3 py-1.5 rounded-xl text-xs font-bold bg-teal-600 text-white shadow-xs">Neuro</a>
+        <a href="msk.html" class="px-3 py-1.5 rounded-xl text-xs font-bold bg-slate-100 dark:bg-slate-800 text-slate-700 dark:text-slate-300">MSK</a>
+        <a href="written.html" class="px-3 py-1.5 rounded-xl text-xs font-bold bg-slate-100 dark:bg-slate-800 text-slate-700 dark:text-slate-300">Written</a>
+      </div>
+    </nav>
+
+    <!-- Desktop 4-Tab Bar -->
+    <div class="hidden md:block max-w-5xl mx-auto px-4 pb-2.5">
+      <div id="desktop-tabs" class="grid grid-cols-4 gap-1.5 p-1 rounded-2xl bg-slate-100 dark:bg-slate-800/80"></div>
+    </div>
+  </header>
+
+  <!-- Main Content -->
+  <main id="app-root" class="max-w-5xl mx-auto px-3 sm:px-4 py-5 pb-24 md:pb-14"></main>
+
+  <!-- Mobile Fixed Bottom Navigation Bar (Thumb Zone) -->
+  <nav class="md:hidden fixed bottom-0 inset-x-0 z-40 bg-white/95 dark:bg-slate-900/95 backdrop-blur border-t border-slate-200 dark:border-slate-800 px-2 py-1.5" aria-label="Clinical Neurology Tabs">
+    <div id="mobile-bottom-tabs" class="grid grid-cols-4 gap-1 max-w-md mx-auto"></div>
+  </nav>
+
+  <script>
+    // =========================================================================
+    // 1. STORAGE, THEME SYNC ('mchiro_theme') & SHARED SRS ('mchiro_srs')
+    // =========================================================================
+    function loadStore(key, fallback) {
+      try {
+        const raw = localStorage.getItem(key);
+        return raw ? JSON.parse(raw) : fallback;
+      } catch (e) {
+        return fallback;
+      }
+    }
+
+    function saveStore(key, val) {
+      try {
+        localStorage.setItem(key, JSON.stringify(val));
+      } catch (e) {}
+    }
+
+    function initTheme() {
+      let saved = null;
+      try { saved = localStorage.getItem('mchiro_theme'); } catch (e) {}
+      const prefersDark = window.matchMedia && window.matchMedia('(prefers-color-scheme: dark)').matches;
+      const isDark = saved ? (saved === 'dark' || saved === '"dark"') : prefersDark;
+      applyTheme(isDark);
+    }
+
+    function applyTheme(isDark) {
+      document.documentElement.classList.toggle('dark', isDark);
+      try { localStorage.setItem('mchiro_theme', isDark ? 'dark' : 'light'); } catch (e) {}
+      const btn = document.getElementById('theme-toggle-btn');
+      if (btn) {
+        btn.innerHTML = isDark
+          ? `<svg class="w-4 h-4" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" d="M12 3v2.25m6.364.386l-1.591 1.591M21 12h-2.25m-.386 6.364l-1.591-1.591M12 18.75V21m-4.773-4.227l-1.591 1.591M5.25 12H3m4.227-4.773L5.636 5.636M15.75 12a3.75 3.75 0 11-7.5 0 3.75 3.75 0 017.5 0z"/></svg>`
+          : `<svg class="w-4 h-4" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" d="M21.752 15.002A9.718 9.718 0 0118 15.75c-5.385 0-9.75-4.365-9.75-9.75 0-1.33.266-2.597.748-3.752A9.753 9.753 0 003 11.25C3 16.635 7.365 21 12.75 21a9.753 9.753 0 009.002-5.998z"/></svg>`;
+      }
+    }
+
+    function toggleTheme() {
+      applyTheme(!document.documentElement.classList.contains('dark'));
+    }
+
+    function showToast(msg, type = 'info') {
+      const container = document.getElementById('toast-container');
+      const styles = {
+        info: 'bg-slate-900 dark:bg-slate-100 text-white dark:text-slate-900',
+        success: 'bg-emerald-600 text-white',
+        warn: 'bg-amber-600 text-white',
+      };
+      const el = document.createElement('div');
+      el.className = `pointer-events-auto px-4 py-2.5 rounded-xl shadow-lg text-xs sm:text-sm font-semibold transition-all duration-300 ${styles[type] || styles.info}`;
+      el.textContent = msg;
+      container.appendChild(el);
+      setTimeout(() => {
+        el.classList.add('opacity-0', 'translate-y-2');
+        setTimeout(() => el.remove(), 300);
+      }, 2200);
+    }
+
+    // =========================================================================
+    // 2. CLINICAL DATA
+    // =========================================================================
+
+    // --- TAB 1: WEBER'S & RINNE'S SIMULATOR ---
+    const WEBER_MODES = {
+      normal: {
+        label: 'Normal',
+        dir: 'midline',
+        weberText: 'Heard equally in BOTH ears (Midline)',
+        leftRinne: { status: 'Positive (Normal)', formula: 'AC > BC', ok: true },
+        rightRinne: { status: 'Positive (Normal)', formula: 'AC > BC', ok: true },
+        explanation: 'Sound conducts evenly through both skulls with intact cochleae and middle ears. Air conduction is roughly 2× longer than bone conduction bilaterally.',
+        causes: 'Healthy auditory pathway (outer, middle, inner ear & CN VIII intact).',
+      },
+      left_cond: {
+        label: 'Left Conductive',
+        dir: 'left',
+        weberText: 'Lateralises to LEFT (Affected) Ear',
+        leftRinne: { status: 'Negative (Abnormal)', formula: 'BC > AC', ok: false },
+        rightRinne: { status: 'Positive (Normal)', formula: 'AC > BC', ok: true },
+        explanation: 'A conductive block in the left ear reduces ambient room noise masking, making bone-conducted vibration sound LOUDER in the affected left ear. On Rinne’s, bone conduction bypasses the outer/middle ear block (BC > AC).',
+        causes: 'Cerumen (ear wax) impaction, otitis media with effusion, tympanic membrane perforation, otosclerosis.',
+      },
+      right_cond: {
+        label: 'Right Conductive',
+        dir: 'right',
+        weberText: 'Lateralises to RIGHT (Affected) Ear',
+        leftRinne: { status: 'Positive (Normal)', formula: 'AC > BC', ok: true },
+        rightRinne: { status: 'Negative (Abnormal)', formula: 'BC > AC', ok: false },
+        explanation: 'Right conductive pathology blocks ambient masking so Weber’s lateralises to the affected right ear. Rinne’s is negative (BC > AC) on the right.',
+        causes: 'Cerumen impaction, otitis media / effusion, perforated eardrum, ossicular fixation.',
+      },
+      left_sn: {
+        label: 'Left Sensorineural',
+        dir: 'right',
+        weberText: 'Lateralises to RIGHT (Healthy) Ear',
+        leftRinne: { status: 'Positive (Reduced both)', formula: 'AC > BC', ok: true },
+        rightRinne: { status: 'Positive (Normal)', formula: 'AC > BC', ok: true },
+        explanation: 'The damaged left cochlea / CN VIII cannot transduce sound well, so Weber’s is heard louder in the healthy RIGHT ear. Both AC and BC are reduced on the left, but AC still remains greater than BC (Positive Rinne’s).',
+        causes: 'Presbycusis (age-related), noise-induced cochlear damage, CN VIII vestibular schwannoma (acoustic neuroma), Ménière’s disease, ototoxic drugs.',
+      },
+      right_sn: {
+        label: 'Right Sensorineural',
+        dir: 'left',
+        weberText: 'Lateralises to LEFT (Healthy) Ear',
+        leftRinne: { status: 'Positive (Normal)', formula: 'AC > BC', ok: true },
+        rightRinne: { status: 'Positive (Reduced both)', formula: 'AC > BC', ok: true },
+        explanation: 'Right cochlear or CN VIII dysfunction causes Weber’s to lateralise away to the healthy LEFT ear. Rinne’s stays positive (AC > BC) bilaterally, though overall duration is shortened on the right.',
+        causes: 'CN VIII lesion (acoustic neuroma), cochlear hair cell loss, labyrinthitis, vascular ischaemia.',
+      },
+    };
+
+    // --- TAB 1: HUTCHINSON PUPIL STAGES ---
+    const HUTCHINSON_STAGES = [
+      {
+        stage: 0,
+        short: 'Normal',
+        title: 'Baseline: Normal Symmetrical Pupils',
+        ipsiR: 12,
+        contraR: 12,
+        ipsiReflex: 'Brisk Direct & Consensual',
+        contraReflex: 'Brisk Direct & Consensual',
+        urgency: 'Normal Baseline',
+        urgencyColor: 'emerald',
+        talkThrough: [
+          'Both pupils equal, round, and reactive to light (3–4 mm).',
+          'Afferent pathway (CN II) and efferent parasympathetic pathway (CN III) intact bilaterally.',
+        ],
+      },
+      {
+        stage: 1,
+        short: 'Stage 1',
+        title: 'Stage 1: Ipsilateral Constriction (Miosis)',
+        ipsiR: 6,
+        contraR: 12,
+        ipsiReflex: 'Sluggish / Irritated',
+        contraReflex: 'Normal',
+        urgency: 'Early Compression — Monitor Closely / Refer',
+        urgencyColor: 'amber',
+        talkThrough: [
+          'Early rising intracranial pressure (ICP) irritates the superficial parasympathetic fibres on the outer aspect of the ipsilateral CN III.',
+          'Causes transient ipsilateral pupil constriction (miosis) on the side of the expanding mass/haematoma.',
+        ],
+      },
+      {
+        stage: 2,
+        short: 'Stage 2',
+        title: 'Stage 2: Ipsilateral Dilation (Mydriasis)',
+        ipsiR: 22,
+        contraR: 12,
+        ipsiReflex: 'Absent / Fixed (Unreactive)',
+        contraReflex: 'Normal (or early constriction)',
+        urgency: 'EMERGENCY — Immediate 999 / A&E Referral',
+        urgencyColor: 'rose',
+        talkThrough: [
+          'Uncal herniation compresses the outer parasympathetic fibres of ipsilateral CN III against the tentorium cerebelli.',
+          'Loss of parasympathetic tone leaves unopposed sympathetic dilation -> classic "blown" fixed ipsilateral pupil.',
+          'Contralateral pupil may begin early irritative constriction.',
+        ],
+      },
+      {
+        stage: 3,
+        short: 'Stage 3',
+        title: 'Stage 3: Contralateral Involvement / Bilateral Dilation',
+        ipsiR: 24,
+        contraR: 20,
+        ipsiReflex: 'Fixed & Dilated',
+        contraReflex: 'Sluggish -> Failing',
+        urgency: 'CRITICAL EMERGENCY — Midbrain Shift',
+        urgencyColor: 'rose',
+        talkThrough: [
+          'Expanding intracranial mass shifts the midbrain across the midline, compressing the contralateral CN III.',
+          'Ipsilateral pupil remains fixed and dilated while the contralateral pupil progresses from constriction to dilation.',
+        ],
+      },
+      {
+        stage: 4,
+        short: 'Stage 4',
+        title: 'Stage 4: Bilateral Fixed & Dilated Pupils',
+        ipsiR: 25,
+        contraR: 25,
+        ipsiReflex: 'Absent (Fixed)',
+        contraReflex: 'Absent (Fixed)',
+        urgency: 'LIFE-THREATENING — Severe Brainstem Compression',
+        urgencyColor: 'rose',
+        talkThrough: [
+          'Severe raised ICP with bilateral CN III paralysis and brainstem herniation.',
+          'Both pupils are widely dilated and completely unreactive to direct or consensual light. Immediate neurosurgical emergency.',
+        ],
+      },
+    ];
+
+    // --- TAB 1: BEIGHTON SCALE ITEMS ---
+    const BEIGHTON_ITEMS = [
+      { id: 'b1', label: 'Little finger passive dorsiflexion > 90° (Left)', side: 'L' },
+      { id: 'b2', label: 'Little finger passive dorsiflexion > 90° (Right)', side: 'R' },
+      { id: 'b3', label: 'Thumb apposition to flexor forearm (Left)', side: 'L' },
+      { id: 'b4', label: 'Thumb apposition to flexor forearm (Right)', side: 'R' },
+      { id: 'b5', label: 'Elbow hyperextension > 10° (Left)', side: 'L' },
+      { id: 'b6', label: 'Elbow hyperextension > 10° (Right)', side: 'R' },
+      { id: 'b7', label: 'Knee hyperextension > 10° (Left)', side: 'L' },
+      { id: 'b8', label: 'Knee hyperextension > 10° (Right)', side: 'R' },
+      { id: 'b9', label: 'Palms flat on floor with knees fully extended', side: 'Midline' },
+    ];
+
+    // --- TAB 1: GCS OPTIONS ---
+    const GCS_OPTIONS = {
+      eye: [
+        { v: 4, label: '4 – Spontaneous' },
+        { v: 3, label: '3 – To speech' },
+        { v: 2, label: '2 – To pain/pressure' },
+        { v: 1, label: '1 – None' },
+      ],
+      verbal: [
+        { v: 5, label: '5 – Oriented' },
+        { v: 4, label: '4 – Confused' },
+        { v: 3, label: '3 – Words only' },
+        { v: 2, label: '2 – Sounds only' },
+        { v: 1, label: '1 – None' },
+      ],
+      motor: [
+        { v: 6, label: '6 – Obeys commands' },
+        { v: 5, label: '5 – Localises pain' },
+        { v: 4, label: '4 – Normal flexion' },
+        { v: 3, label: '3 – Abnormal flexion' },
+        { v: 2, label: '2 – Extension' },
+        { v: 1, label: '1 – None' },
+      ],
+    };
+
+    // --- TAB 2: SPINAL CORD TRACTS ---
+    const CORD_TRACTS = {
+      dcml: {
+        name: 'DCML (Dorsal Columns – Gracilis & Cuneatus)',
+        badge: 'Ascending Sensory',
+        color: 'sky',
+        function: 'Fine discriminative touch, vibration sense, conscious proprioception (joint position sense), stereognosis & graphaesthesia.',
+        decussation: 'Medulla (internal arcuate fibres -> medial lemniscus). Cord lesion = IPSILATERAL loss below level.',
+        lesion: 'Sensory ataxia, positive Romberg’s sign (falls when eyes close), impaired vibration & joint position sense.',
+        tests: '128Hz tuning fork (vibration over bony prominences), Proprioception (hold SIDES of toe/finger), Romberg’s test, Stereognosis & Graphaesthesia.',
+      },
+      stt: {
+        name: 'Spinothalamic Tract (Anterolateral System)',
+        badge: 'Ascending Sensory',
+        color: 'amber',
+        function: 'Pain (nociception), temperature, and crude touch.',
+        decussation: 'Spinal cord within 1–2 segments via anterior white commissure. Cord lesion = CONTRALATERAL loss 1–2 levels below.',
+        lesion: 'Contralateral loss of pin-prick pain and temperature sensation below the lesion.',
+        tests: 'Sharp vs. dull pin-prick across dermatomes (C5–T1, L2–S1) & peripheral nerve zones; define paraesthesia, allodynia & hypersensitivity.',
+      },
+      cst: {
+        name: 'Lateral Corticospinal Tract (UMN)',
+        badge: 'Descending Motor',
+        color: 'rose',
+        function: 'Voluntary skilled motor control of contralateral limbs.',
+        decussation: 'Pyramidal decussation in lower medulla (~85–90%). Cord lesion = IPSILATERAL UMN signs below level.',
+        lesion: 'UMN pattern: Spasticity (clasp-knife), hyperreflexia, weakness (extensors in UL, flexors in LL), no severe early wasting, no fasciculations.',
+        tests: 'Muscle tone / joint play (elbow/knee then wrist/ankle), DTRs (0–4 / 1+–4+), Babinski & Chaddock signs, Hoffmann’s sign, Ankle clonus, Pronator drift.',
+      },
+      dsct: {
+        name: 'Dorsal Spinocerebellar Tract',
+        badge: 'Unconscious Proprioception',
+        color: 'teal',
+        function: 'Carries unconscious proprioceptive feedback from muscle spindles & Golgi tendon organs to the ipsilateral cerebellum.',
+        decussation: 'Uncrossed (enters ipsilateral cerebellum via inferior cerebellar peduncle). Lesion = IPSILATERAL ataxia.',
+        lesion: 'Ipsilateral limb ataxia, poor coordination, unsteady wide-based gait.',
+        tests: 'Finger-to-nose (dysmetria / intention tremor), Rapid alternating pronation/supination, Heel-to-shin, Rebound test, Wide-based stance & Tandem walk.',
+      },
+      vh: {
+        name: 'Ventral Horn (Lower Motor Neuron – LMN)',
+        badge: 'Final Common Pathway',
+        color: 'purple',
+        function: 'Alpha & gamma motor neuron cell bodies projecting via ventral root & peripheral nerve directly to skeletal muscle.',
+        decussation: 'Ipsilateral only (exits same side at that spinal segment).',
+        lesion: 'LMN pattern: Flaccid weakness/paralysis, marked muscle atrophy, visible fasciculations, hyporeflexia or areflexia (Grade 0–1).',
+        tests: 'Inspect muscle bulk (atrophy/fasciculations), MRC Myotome strength (Grade 1–5 — name specific muscles!), DTRs (diminished/absent), Peripheral nerve motor screens.',
+      },
+    };
+
+    // --- TAB 2: BRAIN LESIONS & CORTICAL LOCALISATION ---
+    const BRAIN_LESIONS = [
+      {
+        id: 'neuro_bl_agraphesthesia',
+        term: 'Agraphesthesia',
+        group: 'parietal',
+        badge: 'Parietal Cortex',
+        site: 'Contralateral Parietal Lobe (Somatosensory Association Cortex)',
+        desc: 'Inability to recognise letters or numbers traced onto the palm with eyes closed, despite intact primary light touch.',
+        test: 'Graphaesthesia: trace 0–9 on palm (eyes closed); confirm primary sensation first.',
+      },
+      {
+        id: 'neuro_bl_astereognosis',
+        term: 'Astereognosis (Tactile Agnosia)',
+        group: 'parietal',
+        badge: 'Parietal Cortex',
+        site: 'Contralateral Parietal Association Cortex',
+        desc: 'Inability to identify familiar objects (coin, key) by touch alone despite intact primary touch and proprioception.',
+        test: 'Stereognosis: place familiar object in hand with eyes closed.',
+      },
+      {
+        id: 'neuro_bl_neglect',
+        term: 'Sensory Inattention / Left Hemispatial Neglect',
+        group: 'parietal',
+        badge: 'Right Parietal',
+        site: 'Right Posterior Parietal Cortex (PPC)',
+        desc: 'Patient ignores stimuli on the left side during bilateral simultaneous stimulation (extinction) or neglects the entire left hemispace.',
+        test: 'Double simultaneous visual (CN II confrontation) & tactile stimulation.',
+        guardrail: 'TRAP GUARDRAIL: Right Parietal Lesion = LEFT Hemispatial Neglect!',
+      },
+      {
+        id: 'neuro_bl_broca',
+        term: "Broca's Aphasia (Expressive)",
+        group: 'frontal',
+        badge: 'Left Inferior Frontal',
+        site: 'Dominant (Left) Inferior Frontal Gyrus',
+        desc: 'Non-fluent, halting, telegraphic speech with intact comprehension; patient is aware of deficit and frustrated.',
+        test: 'Observe spontaneous speech fluency/articulation, naming & 3-stage commands.',
+      },
+      {
+        id: 'neuro_bl_wernicke',
+        term: "Wernicke's Aphasia (Receptive)",
+        group: 'temporal',
+        badge: 'Left Superior Temporal',
+        site: 'Dominant (Left) Superior Temporal Gyrus',
+        desc: 'Fluent, rapid speech that is nonsensical ("word salad" / paraphasias) with severely impaired verbal comprehension.',
+        test: 'Test verbal comprehension via 3-stage commands & naming.',
+      },
+      {
+        id: 'neuro_bl_conduction',
+        term: 'Conduction Aphasia',
+        group: 'temporal',
+        badge: 'Arcuate Fasciculus',
+        site: 'Arcuate Fasciculus (white-matter tract linking Wernicke’s & Broca’s)',
+        desc: 'Fluent speech and intact comprehension, but severely impaired repetition of spoken phrases.',
+        test: 'Ask patient to repeat a short phrase verbatim.',
+      },
+      {
+        id: 'neuro_bl_prosopagnosia',
+        term: 'Prosopagnosia',
+        group: 'temporal',
+        badge: 'Fusiform Gyrus',
+        site: 'Fusiform Gyrus (Ventral Occipitotemporal Cortex)',
+        desc: 'Inability to recognise familiar faces despite intact visual acuity and intact voice recognition.',
+        test: 'Face recognition screening without auditory cues.',
+      },
+      {
+        id: 'neuro_bl_frontal_release',
+        term: 'Frontal Release / Primitive Reflexes',
+        group: 'frontal',
+        badge: 'Prefrontal Cortex',
+        site: 'Prefrontal Cortex / Diffuse Cortical Cognitive Change',
+        desc: 'Re-emergence of infantile reflexes due to loss of frontal cortical inhibition, often paired with executive/behavioural change.',
+        test: 'Pout reflex, Grasp reflex, and Glabellar tap (persistent blinking).',
+      },
+      {
+        id: 'neuro_bl_bg',
+        term: 'Basal Ganglia Lesion',
+        group: 'cerebellum_bg',
+        badge: 'Basal Ganglia',
+        site: 'Substantia Nigra / Striatum (Extrapyramidal System)',
+        desc: 'Pill-rolling resting tremor, velocity-independent rigidity (cogwheel / lead-pipe), bradykinesia, and shuffling festinating gait.',
+        test: 'Observe resting tremor, passive joint play (elbow/knee then wrist/ankle), free walk.',
+      },
+      {
+        id: 'neuro_bl_cerebellum',
+        term: 'Cerebellar Lesion',
+        group: 'cerebellum_bg',
+        badge: 'Cerebellum',
+        site: 'Ipsilateral Cerebellar Hemisphere (limbs) or Vermis (truncal)',
+        desc: 'Intention tremor, dysmetria (past-pointing), dysdiadochokinesia, positive rebound, and wide-based ataxic gait.',
+        test: 'Finger-to-nose, rapid alternating pronation/supination, heel-shin, rebound, wide-based/tandem walk.',
+      },
+    ];
+
+    // --- TAB 3: CRANIAL NERVES (I–XII) ---
+    const CN_DATA = {
+      I: { id: 'I', name: 'Olfactory', type: 'Sensory', tests: 'History of anosmia / hyposmia (not routinely tested at bedside).', pearl: 'Rule out nasal obstruction vs. cribriform plate trauma or frontal mass.' },
+      II: { id: 'II', name: 'Optic', type: 'Sensory', tests: 'Visual acuity (Snellen or small print), visual fields (confrontation 4 quadrants), visual neglect (PPC lesion), afferent pupillary light reflex, refer out for ophthalmoscopy.', pearl: 'Papilloedema on ophthalmoscopy suggests weeks of raised intracranial pressure (ICP).' },
+      III: { id: 'III', name: 'Oculomotor', type: 'Motor + Para', tests: 'Ptosis, pupil size (meiosis/mydriasis/anisocoria) & border regularity, direct/consensual light reflexes, accommodation, saccades (U/D/L/R), convergence, smooth pursuit ("H"), VOR.', pearl: 'Complete CN III palsy: ptosis, "down & out" eye, dilated unreactive pupil (check Hutchinson stages!).' },
+      IV: { id: 'IV', name: 'Trochlear', type: 'Motor', tests: '"H" test looking down & in (Superior Oblique), intorsion, convergence.', pearl: 'Vertical diplopia worse walking down stairs or reading; patient tilts head away from affected eye.' },
+      V: { id: 'V', name: 'Trigeminal', type: 'Mixed', tests: 'Motor: Temporalis & masseter palpation while clenching, pterygoid jaw deviation strength, jaw jerk reflex (UMN vs LMN). Sensory: Light touch & pain across V1, V2, V3 bilaterally.', pearl: 'Brisk jaw jerk = UMN lesion above pons. Jaw deviates TOWARDS weak pterygoid.' },
+      VI: { id: 'VI', name: 'Abducens', type: 'Motor', tests: '"H" test lateral eye abduction (Lateral Rectus), saccades, VOR.', pearl: 'Longest intracranial course -> classic false localising sign in raised ICP.' },
+      VII: { id: 'VII', name: 'Facial', type: 'Mixed', tests: 'Observe facial symmetry (UMN vs LMN), NAME facial expression muscles (frontalis, orbicularis oculi, orbicularis oris, buccinator), taste ant 2/3 tongue (sweet/salty), lacrimation/salivation, hyperacusis.', pearl: 'UMN spares forehead (bilateral upper-face innervation). LMN (Bell’s) paralyses entire ipsilateral face.' },
+      VIII: { id: 'VIII', name: 'Vestibulocochlear', type: 'Sensory', tests: 'Screen hearing (whisper), Weber’s & Rinne’s (512Hz tuning fork), balance in stance/gait.', pearl: 'Conductive: Weber to affected ear, Rinne negative (BC>AC). Sensorineural: Weber to healthy ear, Rinne positive (AC>BC).' },
+      IX_X: { id: 'IX_X', name: 'Glossopharyngeal & Vagus', type: 'Mixed', tests: 'Swallowing (dysphagia), symmetrical uvula/palatal lift ("Ahhh"), speech (dysphonia), gag reflex (if indicated), autonomic effects.', pearl: 'Uvula deviates AWAY from the side of a CN X lesion.' },
+      XI: { id: 'XI', name: 'Accessory', type: 'Motor', tests: 'Sternocleidomastoid (head turn against resistance) & Upper Trapezius (shoulder shrug) — UMN vs LMN pattern.', pearl: 'Right SCM rotates the chin to the LEFT (contralateral rotation).' },
+      XII: { id: 'XII', name: 'Hypoglossal', type: 'Motor', tests: 'Observe tongue at rest (fasciculations, wasting, deviation), protrude tongue (deviation), resisted tongue strength in cheek.', pearl: 'LMN lesion: tongue deviates TOWARDS the side of the lesion ("licks the lesion").' },
+    };
+
+    // --- TAB 3: LIMB SMR & PERIPHERAL MATRIX ---
+    const LIMB_MATRIX = {
+      cervical: {
+        title: 'Cervical Nerve Roots (SMR: C5–T1)',
+        trap: 'TRAP: Name specific muscles, NOT just actions! Sequence: Soft (R, L, compare) -> Sharp (R, L, compare).',
+        items: [
+          { code: 'C5', sensory: 'Lateral aspect of upper arm (deltoid to lateral elbow)', motor: 'Biceps, Deltoid', reflex: 'Biceps (0–4)' },
+          { code: 'C6', sensory: 'Lateral forearm, thumb & 1st (index) finger', motor: 'Wrist extensors (ECRL/ECRB), Biceps', reflex: 'Brachioradialis (0–4)' },
+          { code: 'C7', sensory: 'Middle (3rd) finger', motor: 'Triceps, Wrist flexors, Finger extensors', reflex: 'Triceps (0–4)' },
+          { code: 'C8', sensory: 'Ring (4th) & little (5th) fingers', motor: 'Flexor digitorum profundus (3rd DIP flexion), finger ext & adduction', reflex: '(Finger flexors)' },
+          { code: 'T1', sensory: 'Medial wrist to medial elbow (medial forearm)', motor: '5th finger abduction, Interossei / Abductor digiti minimi', reflex: 'None' },
+        ],
+      },
+      lumbar: {
+        title: 'Lumbar & Sacral Nerve Roots (SMR: L2–S1)',
+        trap: 'TRAP: Name specific muscles (Iliopsoas, Quads, Tibialis anterior, EHL, Gastroc/Soleus) + state MRC (1–5) & Reflex (1+–4+) scales!',
+        items: [
+          { code: 'L2', sensory: 'Lateral to medial anterior upper thigh (oblique band)', motor: 'Iliopsoas, Sartorius, Pectineus (hip flexion)', reflex: 'None' },
+          { code: 'L3', sensory: 'Lateral to medial anterior lower thigh & medial knee', motor: 'Quadriceps femoris (knee extension)', reflex: '(Patellar)' },
+          { code: 'L4', sensory: 'Medial aspect of lower leg & medial ankle', motor: 'Tibialis anterior (ankle dorsiflexion — supine or heel walking)', reflex: 'Patellar (1+–4+)' },
+          { code: 'L5', sensory: 'Lateral aspect of lower leg & dorsum (top) of foot', motor: 'Extensor hallucis longus (hallux extension)', reflex: 'None' },
+          { code: 'S1', sensory: 'Lateral aspect of foot & posterior calf', motor: 'Gastrocnemius & Soleus (ankle plantarflexion — supine or toe walking)', reflex: 'Achilles (1+–4+)' },
+        ],
+      },
+      upper_periph: {
+        title: 'Upper Limb Peripheral Nerves',
+        trap: 'TRAP: Radial = Elbow & Wrist EXTENSORS (wrist drop) vs. Median/Ulnar = FLEXORS! Do NOT confuse extensors & flexors under pressure.',
+        items: [
+          { code: 'Axillary', sensory: '"Military patch" over deltoid & superior/posterior arm', motor: 'Deltoid, Teres minor', reflex: 'None' },
+          { code: 'Med / Lat Cutaneous', sensory: 'Skin over medial & lateral aspects of forearm respectively', motor: 'Sensory only in forearm (musculocutaneous -> biceps)', reflex: 'None' },
+          { code: 'Radial', sensory: 'Posterior upper arm, middle posterior forearm & lateral 2/3 DORSUM of hand', motor: 'Elbow & wrist EXTENSORS (triceps, brachioradialis, ECRL/B)', reflex: 'Triceps / Brachioradialis', warn: true },
+          { code: 'Median', sensory: 'PALMAR surface lateral 2/3 of hand (thumb, index, middle, lat ring)', motor: 'Most wrist FLEXORS + lateral palm / thenar (thumb opposition)', reflex: 'None', warn: true },
+          { code: 'Ulnar', sensory: 'Medial half of hand & medial 1.5 digits (little + medial ring)', motor: 'Flexor carpi ulnaris (weak wrist flex, ulnar dev) & majority of intrinsic hand muscles', reflex: 'None' },
+        ],
+      },
+      lower_periph: {
+        title: 'Lower Limb Peripheral Nerves',
+        trap: 'TRAP: State both sensory territory & exact muscles; remember Sciatic splits into Tibial & Common Fibular/Peroneal.',
+        items: [
+          { code: 'Femoral', sensory: 'Anterior/medial thigh & medial aspect of lower leg/ankle (saphenous)', motor: 'Hip flexors (iliopsoas) & knee extensors (quadriceps)', reflex: 'Patellar (L3/L4)' },
+          { code: 'Lat. Cutaneous', sensory: 'Lateral aspect of thigh (purely sensory — meralgia paraesthetica)', motor: 'Sensory only', reflex: 'None' },
+          { code: 'Obturator', sensory: 'Medial aspect of thigh', motor: 'Adductor muscles of hip (adductor longus/brevis/magnus, gracilis)', reflex: 'None' },
+          { code: 'Sciatic', sensory: 'Posterior thigh (splits into Tibial & Common Fibular/Peroneal)', motor: 'Hamstrings (biceps femoris, semitendinosus, semimembranosus)', reflex: 'Achilles (via tibial)' },
+          { code: 'Tibial', sensory: 'Sole of foot & posterior calf', motor: 'Gastrocnemius, Soleus (plantarflexion) & deep flexors (metatarsal flexion)', reflex: 'Achilles (S1)' },
+          { code: 'Fibular (Peroneal)', sensory: 'Distal lateral lower leg & dorsum of foot', motor: 'Tibialis anterior (dorsiflexion) & toe extensors (EHL, EDL)', reflex: 'None' },
+        ],
+      },
+    };
+
+    // --- TAB 4: OSCE PROMPTS & 8-SECTION TESTING OVERVIEW ---
+    const OSCE_PROMPTS = [
+      {
+        id: 'os1', sec: '1. Cerebral Function',
+        prompt: 'Screen Cerebral Function: Orientation, MMSE elements, GCS awareness & Primitive Reflexes.',
+        trap: 'State that Pout, Grasp & Glabellar reflexes are frontal release signs indicating cognitive/frontal disinhibition.',
+        points: [
+          'Check date & place orientation; observe behaviour, appearance, mood & speech during history',
+          'Explain Glasgow Coma Scale (GCS 3–15) use in trauma + awareness of MMSI / MoCA for deeper screen',
+          'MMSE screen: Register 3 objects, naming, 3-stage verbal command, recall 3 objects',
+          'Test Primitive Reflexes: Pout reflex, Grasp reflex, Glabellar tap',
+        ],
+      },
+      {
+        id: 'os2', sec: '2. Stance, Gait & Cerebellar',
+        prompt: 'Demonstrate Stance, Gait & Cerebellar coordination testing with safety guarding.',
+        trap: 'Guard patient closely during Romberg’s (eyes closed) and tandem walk.',
+        points: [
+          'Observe ataxia & tremor types (resting, intention, dysmetria, pill-rolling, end-point, against gravity)',
+          'Stance: Wide-based stance & Romberg’s (eyes open then closed — tests dorsal columns)',
+          'Gait: Free walk (antalgic, steppage, ataxic, shuffling), Tandem walk, Heel walk (L4/peroneal), Toe walk (S1/tibial)',
+          'Cerebellar: Finger-to-nose, Rapid alternating pronation/supination, Heel-down-shin, Rebound test',
+        ],
+      },
+      {
+        id: 'os3', sec: '3. Cranial Nerves',
+        prompt: 'Examine CN III, IV, VI & CN V (Trigeminal) including jaw jerk interpretation.',
+        trap: 'Palpate BOTH temporalis & masseter. Brisk jaw jerk = UMN lesion above pons.',
+        points: [
+          'Inspect ptosis & pupils (meiosis/mydriasis/anisocoria, border), direct/consensual light & accommodation',
+          'CN III/IV/VI: Saccades (U/D/L/R), convergence, smooth pursuit ("H": LR=VI, SO down & in=IV), VOR',
+          'CN V Motor: Palpate temporalis & masseter while clenching, pterygoid jaw deviation, jaw jerk reflex',
+          'CN V Sensory: Light touch & pain across V1, V2, V3 bilaterally',
+        ],
+      },
+      {
+        id: 'os4', sec: '3. Cranial Nerves',
+        prompt: 'Examine CN VII (Facial) & CN VIII (Vestibulocochlear) and explain abnormal findings.',
+        trap: 'Name the facial expression muscles! UMN spares forehead; LMN affects full ipsilateral face.',
+        points: [
+          'CN VII: Facial symmetry (UMN vs LMN), NAME muscles (frontalis, orbicularis oculi/oris, buccinator)',
+          'CN VII non-motor: Taste ant 2/3 tongue (sweet/salty), lacrimation/salivation, hyperacusis',
+          'CN VIII: Whisper screen, Weber’s & Rinne’s (512Hz) — explain conductive vs sensorineural patterns',
+          'CN VIII vestibular: Mention balance testing in stance/gait',
+        ],
+      },
+      {
+        id: 'os5', sec: '4. General Motor',
+        prompt: 'Demonstrate General Motor tone testing, joint play fluidity, and bedside UMN signs.',
+        trap: 'Assess proximal joints (elbow/knee) FIRST, then distal (wrist/ankle).',
+        points: [
+          'Observe/palpate muscle tone (flaccid, spastic, atrophy, hypertrophy/pseudohypertrophy) & fasciculations',
+          'Screen pattern weakness (glove-stocking, ascending, full limb, bilateral/symmetrical)',
+          'Joint play fluidity (elbow/knee then wrist/ankle): explain cogwheel, clasp-knife, lead-pipe',
+          'UMN signs: Ankle clonus, Babinski & Chaddock signs, Hoffmann’s sign + Abdominal strength (half sit-up)',
+        ],
+      },
+      {
+        id: 'os6', sec: '5. General Somatosensory',
+        prompt: 'Demonstrate General Somatosensory & Cortical Sensory testing.',
+        trap: 'Hold the SIDES of the digit for proprioception; confirm primary touch before cortical tests.',
+        points: [
+          'Screen sensory patterns (glove-stocking, full limb, bilateral/symmetrical)',
+          'Vibration sense (128Hz tuning fork) & Proprioception (toes & fingers)',
+          'Touch localisation / Sensory inattention (neglect — Right Parietal = Left Neglect)',
+          'Cortical tests: Stereognosis & Graphaesthesia (contralateral parietal lobe)',
+        ],
+      },
+      {
+        id: 'os7', sec: '6. Upper Limb Neuro',
+        prompt: 'Demonstrate C6 SMR & contrast Radial vs. Median peripheral nerve testing.',
+        trap: 'Name specific muscles! Radial = EXTENSORS (wrist drop), Median = FLEXORS + thumb opposition.',
+        points: [
+          'C6 Sensory (soft R/L -> sharp R/L): Lateral forearm, thumb & index finger (Grade 0–2)',
+          'C6 Motor & Reflex: NAME Wrist extensors & Biceps (MRC 1–5); Brachioradialis reflex (0–4)',
+          'Radial nerve: Posterior arm/forearm & lateral 2/3 DORSUM of hand; elbow & wrist EXTENSORS',
+          'Median nerve: PALMAR lateral 2/3 of hand; most wrist FLEXORS & thumb opposition',
+        ],
+      },
+      {
+        id: 'os8', sec: '7. Lower Limb Neuro',
+        prompt: 'Demonstrate L4, L5 & S1 SMR with exact muscles, reflexes, and grading scales.',
+        trap: 'Name Tibialis anterior (L4), Extensor hallucis longus (L5), Gastrocnemius & Soleus (S1)!',
+        points: [
+          'L4: Medial lower leg/ankle; NAME Tibialis anterior (heel walk); Patellar reflex (1+–4+)',
+          'L5: Lateral lower leg & dorsum of foot; NAME Extensor hallucis longus (hallux ext); No reflex',
+          'S1: Lateral foot & posterior calf; NAME Gastrocnemius & Soleus (toe walk); Achilles reflex (1+–4+)',
+          'State MRC strength scale (1–5) & Sensory scale (0–2)',
+        ],
+      },
+      {
+        id: 'os9', sec: '8. Special Tests',
+        prompt: 'Talk through Hutchinson pupil stages, Dix-Hallpike vs. Fitz-Ritson’s, CAD & Beighton Scale.',
+        trap: 'Know Hutchinson stages & 5Ds/3Ns for CAD cold — these are emergency red flags.',
+        points: [
+          'Hutchinson pupil (cerebral compression): Ipsilateral constriction -> ipsilateral fixed dilation -> bilateral fixed dilation',
+          'Dix-Hallpike (BPPV — rotary nystagmus with latency/fatigue) vs. Fitz-Ritson’s (cervicogenic — fixed head, rotated trunk)',
+          'CAD screening (carotid/vertebral): 5Ds & 3Ns red flags prior to cervical manipulation',
+          'Pronator drift (UMN weakness), Fatigueable testing (hands/heel lifts — MG), Beighton Scale (0–9)',
+        ],
+      },
+    ];
+
+    const CHECKLIST_SECTIONS = [
+      { num: 1, title: '1) Cerebral Function', items: ['Orientation (date & place) + behaviour, appearance, mood, speech', 'Trauma awareness: Glasgow Coma Scale (GCS 3–15)', 'MMSE screen: Register & recall 3 objects, naming, 3-stage commands (MMSI/MoCA awareness)', 'Primitive reflexes (frontal release): Pout, Grasp, Glabellar tap'] },
+      { num: 2, title: '2) Stance, Gait & Cerebellar', items: ['Observe ataxia & tremors (resting, intention, dysmetria, pill-rolling, end-point, against gravity)', 'Stance: Wide-based stance & Romberg’s (eyes open then closed)', 'Gait: Free walk (antalgic, steppage, ataxic, shuffling), Tandem walk, Heel (L4/peroneal) & Toe (S1/tibial)', 'Cerebellar: Finger-to-nose, Rapid alternating pronation/supination, Heel-down-shin, Rebound test'] },
+      { num: 3, title: '3) Cranial Nerves (I–XII)', items: ['CN I (anosmia) & CN II (acuity, confrontation fields, visual neglect, ophthalmoscopy referral for papilloedema)', 'CN II & III: Direct/consensual light, ptosis, pupil size/border, accommodation', 'CN III, IV, VI: Saccades (U/D/L/R), convergence, smooth pursuit ("H"), VOR', 'CN V: Temporalis/masseter, pterygoids, jaw jerk + V1/V2/V3 light touch & pain', 'CN VII: UMN vs LMN, NAME muscles, taste ant 2/3, lacrimation/salivation, hyperacusis', 'CN VIII (whisper, Weber, Rinne, balance), IX & X (swallow, uvula, dysphonia, autonomic), XI (SCM/traps), XII (tongue)'] },
+      { num: 4, title: '4) General Motor Function', items: ['Observe/palpate tone (flaccid, spastic, atrophy, hypertrophy/pseudohypertrophy) & fasciculations', 'Pattern weakness (glove-stocking, ascending, full limb, bilateral/symmetrical)', 'Joint play fluidity (elbow/knee first, then wrist/ankle): Cogwheel, Clasp-knife, Lead-pipe', 'UMN signs: Ankle clonus, Babinski & Chaddock, Hoffmann’s + Abdominal strength (half sit-up)'] },
+      { num: 5, title: '5) General Somatosensory Function', items: ['Pattern paraesthesia/loss (glove-stocking, full limb, bilateral/symmetrical)', 'Vibration sense (128Hz tuning fork) & Proprioception (toes, fingers)', 'Touch localisation / Sensory inattention (neglect)', 'Cortical tests: Stereognosis & Graphaesthesia'] },
+      { num: 6, title: '6) Upper Limb Neurological Exam', items: ['Myotomes (Grade 1–5 — NAME MUSCLES): C5 Biceps/Deltoid, C6 Wrist ext, C7 Triceps, C8 FDP, T1 Interossei', 'Reflexes (Grade 0–4): C5 Biceps, C6 Brachioradialis, C7 Triceps', 'Dermatomes C5–T1 (light touch & pin-prick; define paraesthesia, allodynia, hypersensitivity)', 'Peripheral nerves: Axillary, Med/Lat cutaneous, Radial (EXTENSORS!), Median (FLEXORS), Ulnar'] },
+      { num: 7, title: '7) Lower Limb Neurological Exam', items: ['Myotomes (Grade 1–5 — NAME MUSCLES): L2 Iliopsoas/Sartorius/Pectineus, L3 Quads, L4 Tib ant, L5 EHL, S1 Gastroc/Soleus', 'Reflexes (Grade 1+–4+): L4 Patellar, S1 Achilles', 'Dermatomes L2–S1 (light touch & pain bilaterally, Grade 0–2)', 'Peripheral nerves: Femoral, Lat cutaneous, Obturator, Sciatic, Tibial, Fibular/Peroneal'] },
+      { num: 8, title: '8) Special Tests', items: ['Cervical Arterial Dysfunction (CAD) — carotid / vertebral arteries (5Ds & 3Ns)', 'Hutchinson pupil — cerebral compression (talk through stages & indications)', 'Dix-Hallpike (BPPV) & Fitz-Ritson’s (cervicogenic dizziness)', 'Pronator drift, Fatigueable testing (open/close hands, heel lifts), Beighton Scale (0–9)'] },
+    ];
+
+    // =========================================================================
+    // 3. STATE MANAGEMENT
+    // =========================================================================
+    const state = {
+      activeTab: 'simulators', // 'simulators' | 'cord' | 'nerves' | 'osce'
+      srs: loadStore('mchiro_srs', {}),
+
+      // Tab 1: Simulators
+      weberMode: 'normal',
+      hutchStage: 0,
+      beighton: {},
+      gcs: { eye: 4, verbal: 5, motor: 6 },
+
+      // Tab 2: Spinal Cord & Brain Lesions
+      selectedTract: 'dcml',
+      lesionFilter: 'all', // 'all' | 'due' | 'parietal' | 'frontal' | 'temporal' | 'cerebellum_bg'
+
+      // Tab 3: Cranial Nerves & Limb Matrix
+      cnLayer: 'off', // 'off' | 'cn5' | 'cn7' | 'h_test'
+      selectedCN: 'V',
+      limbTab: 'cervical', // 'cervical' | 'lumbar' | 'upper_periph' | 'lower_periph'
+
+      // Tab 4: OSCE & Checklist
+      osceDuration: 900,
+      osceRemaining: 900,
+      osceRunning: false,
+      oscePromptIdx: 0,
+      osceTicked: {},
+      osceShowScales: false,
+      oscePass: 0,
+      osceDrill: 0,
+      openAcc: { 1: true },
+      checkedOverview: loadStore('mchiro_neuro_checklist', {}),
+    };
+
+    let osceTimerId = null;
+
+    // --- Shared Leitner SRS Helpers ('mchiro_srs') ---
+    function isDue(id) {
+      const rec = state.srs[id];
+      if (!rec) return true;
+      return Date.now() >= rec.dueAt;
+    }
+
+    function setLeitner(id, box) {
+      const DAY = 86400000;
+      const offset = box === 'again' ? 0 : box === 'shaky' ? 2 * DAY : 7 * DAY;
+      state.srs[id] = { box, dueAt: Date.now() + offset };
+      saveStore('mchiro_srs', state.srs);
+      updateDueBadge();
+      const labels = { again: 'Queued for Today', shaky: 'Scheduled in 2 Days', solid: 'Scheduled in 7 Days' };
+      showToast(labels[box], box === 'solid' ? 'success' : box === 'shaky' ? 'info' : 'warn');
+      renderApp();
+    }
+
+    function updateDueBadge() {
+      const dueCount = BRAIN_LESIONS.filter((b) => isDue(b.id)).length;
+      const txt = document.getElementById('due-text');
+      const dot = document.getElementById('due-dot');
+      if (txt) txt.textContent = `Due: ${dueCount}`;
+      if (dot) dot.className = `w-2 h-2 rounded-full ${dueCount > 0 ? 'bg-amber-500' : 'bg-emerald-500'}`;
+    }
+
+    // =========================================================================
+    // 4. TAB NAVIGATION RENDERING
+    // =========================================================================
+    const TABS = [
+      { id: 'simulators', label: 'Simulators & Scales', short: 'Simulators', icon: '🩺' },
+      { id: 'cord', label: 'Spinal Cord & Lesions', short: 'Cord/Brain', icon: '🧠' },
+      { id: 'nerves', label: 'Nerve Maps & CNs', short: 'Nerves', icon: '⚡' },
+      { id: 'osce', label: '15-Min OSCE & List', short: 'OSCE', icon: '⏱️' },
+    ];
+
+    function setTab(id) {
+      state.activeTab = id;
+      renderTabs();
+      renderApp();
+      window.scrollTo({ top: 0, behavior: 'smooth' });
+    }
+
+    function renderTabs() {
+      document.getElementById('desktop-tabs').innerHTML = TABS.map((t) => {
+        const active = state.activeTab === t.id;
+        return `
+          <button type="button" onclick="setTab('${t.id}')" class="px-3 py-2 rounded-xl text-xs sm:text-sm font-bold transition flex items-center justify-center gap-1.5 ${
+            active ? 'bg-white dark:bg-slate-900 text-teal-700 dark:text-teal-300 shadow-xs' : 'text-slate-600 dark:text-slate-400 hover:text-slate-900 dark:hover:text-white'
+          }">
+            <span>${t.icon}</span>
+            <span>${t.label}</span>
+          </button>
+        `;
+      }).join('');
+
+      document.getElementById('mobile-bottom-tabs').innerHTML = TABS.map((t) => {
+        const active = state.activeTab === t.id;
+        return `
+          <button type="button" onclick="setTab('${t.id}')" class="py-1.5 px-1 rounded-xl flex flex-col items-center justify-center gap-0.5 transition ${
+            active ? 'bg-teal-50 dark:bg-teal-950/60 text-teal-700 dark:text-teal-300 font-extrabold' : 'text-slate-500 dark:text-slate-400 font-semibold'
+          }">
+            <span class="text-base leading-none">${t.icon}</span>
+            <span class="text-[10px] leading-tight truncate">${t.short}</span>
+          </button>
+        `;
+      }).join('');
+    }
+
+    function renderApp() {
+      const root = document.getElementById('app-root');
+      if (state.activeTab === 'simulators') root.innerHTML = renderSimulatorsTab();
+      else if (state.activeTab === 'cord') root.innerHTML = renderCordAndLesionsTab();
+      else if (state.activeTab === 'nerves') root.innerHTML = renderNervesTab();
+      else root.innerHTML = renderOsceTab();
+    }
+
+    // =========================================================================
+    // 5. TAB 1: SIMULATORS & SCALES
+    // =========================================================================
+    function renderSimulatorsTab() {
+      return `
+        <div class="space-y-6">
+          ${renderWeberRinneSimulator()}
+          ${renderHutchinsonStepper()}
+          <div class="grid grid-cols-1 lg:grid-cols-2 gap-5">
+            ${renderBeightonCalculator()}
+            ${renderGcsCalculator()}
+          </div>
+          ${renderSpecialTestsSplit()}
+        </div>
+      `;
+    }
+
+    function renderWeberRinneSimulator() {
+      const w = WEBER_MODES[state.weberMode];
+      // Patient's Right ear is on Viewer's Left (x=72); Patient's Left ear is on Viewer's Right (x=288)
+      const arrowLeft = w.dir === 'right'; // Patient's RIGHT -> viewer left
+      const arrowRight = w.dir === 'left'; // Patient's LEFT -> viewer right
+      const isMid = w.dir === 'midline';
+
+      return `
+        <section class="rounded-3xl bg-white dark:bg-slate-900 border border-slate-200 dark:border-slate-800 p-4 sm:p-6 space-y-4">
+          <div class="flex flex-wrap items-center justify-between gap-2">
+            <div>
+              <span class="px-2.5 py-0.5 rounded-lg text-[10px] font-extrabold uppercase bg-teal-100 dark:bg-teal-950 text-teal-800 dark:text-teal-300">CN VIII Simulator &bull; 512 Hz</span>
+              <h2 class="text-lg sm:text-xl font-extrabold text-slate-900 dark:text-white mt-1">Weber’s &amp; Rinne’s Tuning Fork Simulator</h2>
+            </div>
+          </div>
+
+          <!-- 5 Mode Buttons -->
+          <div class="flex flex-wrap gap-1.5">
+            ${Object.entries(WEBER_MODES).map(([key, obj]) => `
+              <button
+                type="button"
+                onclick="state.weberMode='${key}'; renderApp();"
+                class="px-3 py-2 rounded-xl text-xs font-bold border transition ${
+                  state.weberMode === key
+                    ? 'bg-teal-600 text-white border-teal-600 shadow-xs'
+                    : 'bg-slate-50 dark:bg-slate-800 text-slate-700 dark:text-slate-300 border-slate-200 dark:border-slate-700 hover:border-teal-400'
+                }"
+              >${obj.label}</button>
+            `).join('')}
+          </div>
+
+          <!-- SVG Head + Readouts -->
+          <div class="grid grid-cols-1 md:grid-cols-12 gap-4 items-center">
+            <div class="md:col-span-6 rounded-2xl bg-slate-50 dark:bg-slate-950/60 border border-slate-200 dark:border-slate-800 p-3">
+              <svg viewBox="0 0 360 220" class="w-full max-w-[360px] mx-auto h-auto" role="img" aria-label="Weber and Rinne Tuning Fork Diagram">
+                <rect x="0" y="0" width="360" height="220" rx="18" fill="var(--svg-bg)" />
+
+                <!-- Labels: Patient Right (viewer left) & Patient Left (viewer right) -->
+                <text x="64" y="24" text-anchor="middle" fill="var(--svg-muted)" font-size="10" font-weight="800">PATIENT RIGHT</text>
+                <text x="296" y="24" text-anchor="middle" fill="var(--svg-muted)" font-size="10" font-weight="800">PATIENT LEFT</text>
+
+                <!-- Ears -->
+                <ellipse cx="104" cy="128" rx="14" ry="26" fill="${arrowLeft ? '#f59e0b' : 'var(--svg-skin)'}" fill-opacity="${arrowLeft ? '0.45' : '1'}" stroke="${arrowLeft ? '#d97706' : 'var(--svg-stroke)'}" stroke-width="2" />
+                <ellipse cx="256" cy="128" rx="14" ry="26" fill="${arrowRight ? '#f59e0b' : 'var(--svg-skin)'}" fill-opacity="${arrowRight ? '0.45' : '1'}" stroke="${arrowRight ? '#d97706' : 'var(--svg-stroke)'}" stroke-width="2" />
+
+                <!-- Head Contour -->
+                <path d="M 110,118 C 110,56 142,38 180,38 C 218,38 250,56 250,118 C 250,164 228,196 180,200 C 132,196 110,164 110,118 Z" fill="var(--svg-skin)" stroke="var(--svg-stroke)" stroke-width="2" />
+
+                <!-- Eyes & Nose -->
+                <circle cx="154" cy="116" r="4" fill="var(--svg-stroke)" />
+                <circle cx="206" cy="116" r="4" fill="var(--svg-stroke)" />
+                <path d="M 176,120 L 180,144 L 184,120" fill="none" stroke="var(--svg-stroke)" stroke-width="1.5" />
+                <path d="M 164,166 Q 180,174 196,166" fill="none" stroke="var(--svg-stroke)" stroke-width="1.8" stroke-linecap="round" />
+
+                <!-- 512 Hz Tuning Fork at Forehead -->
+                <g>
+                  <circle cx="180" cy="70" r="14" fill="#0d9488" fill-opacity="0.2" class="fork-wave" />
+                  <line x1="180" y1="68" x2="180" y2="34" stroke="#0d9488" stroke-width="3.5" stroke-linecap="round" />
+                  <path d="M 172,14 L 172,32 C 172,38 188,38 188,32 L 188,14" fill="none" stroke="#0d9488" stroke-width="3" stroke-linecap="round" />
+                  <circle cx="180" cy="68" r="4.5" fill="#0d9488" />
+                  <text x="180" y="92" text-anchor="middle" fill="#0d9488" font-size="9.5" font-weight="800">512 Hz</text>
+                </g>
+
+                <!-- Lateralisation Arrows -->
+                ${isMid ? `
+                  <path d="M 162,70 L 124,96" stroke="#10b981" stroke-width="3" stroke-linecap="round" marker-end="none" />
+                  <polygon points="118,100 128,98 124,90" fill="#10b981" />
+                  <path d="M 198,70 L 236,96" stroke="#10b981" stroke-width="3" stroke-linecap="round" />
+                  <polygon points="242,100 236,90 232,98" fill="#10b981" />
+                ` : ''}
+                ${arrowLeft ? `
+                  <path d="M 162,70 L 118,104" stroke="#f59e0b" stroke-width="4" stroke-linecap="round" />
+                  <polygon points="110,110 124,107 117,97" fill="#f59e0b" />
+                  <text x="64" y="132" text-anchor="middle" fill="#d97706" font-size="11" font-weight="800">LOUDER</text>
+                ` : ''}
+                ${arrowRight ? `
+                  <path d="M 198,70 L 242,104" stroke="#f59e0b" stroke-width="4" stroke-linecap="round" />
+                  <polygon points="250,110 243,97 236,107" fill="#f59e0b" />
+                  <text x="296" y="132" text-anchor="middle" fill="#d97706" font-size="11" font-weight="800">LOUDER</text>
+                ` : ''}
+              </svg>
+            </div>
+
+            <!-- Readout Panel -->
+            <div class="md:col-span-6 space-y-3">
+              <div class="p-3.5 rounded-2xl bg-teal-50/70 dark:bg-teal-950/30 border border-teal-200 dark:border-teal-800/70">
+                <span class="block text-[10px] font-extrabold uppercase text-teal-700 dark:text-teal-400">Weber’s Test (Forehead Midline)</span>
+                <p class="text-sm sm:text-base font-extrabold text-slate-900 dark:text-white mt-0.5">${w.weberText}</p>
+              </div>
+
+              <!-- Bilateral Rinne's Readout -->
+              <div class="grid grid-cols-2 gap-2.5">
+                <div class="p-3 rounded-2xl border ${w.rightRinne.ok ? 'bg-emerald-50/60 dark:bg-emerald-950/25 border-emerald-200 dark:border-emerald-800/60' : 'bg-rose-50/80 dark:bg-rose-950/35 border-rose-300 dark:border-rose-800'}">
+                  <span class="block text-[10px] font-extrabold uppercase text-slate-500">Right Ear Rinne’s</span>
+                  <span class="block text-base font-extrabold ${w.rightRinne.ok ? 'text-emerald-700 dark:text-emerald-300' : 'text-rose-700 dark:text-rose-300'}">${w.rightRinne.formula}</span>
+                  <span class="block text-[11px] font-semibold text-slate-600 dark:text-slate-300">${w.rightRinne.status}</span>
+                </div>
+                <div class="p-3 rounded-2xl border ${w.leftRinne.ok ? 'bg-emerald-50/60 dark:bg-emerald-950/25 border-emerald-200 dark:border-emerald-800/60' : 'bg-rose-50/80 dark:bg-rose-950/35 border-rose-300 dark:border-rose-800'}">
+                  <span class="block text-[10px] font-extrabold uppercase text-slate-500">Left Ear Rinne’s</span>
+                  <span class="block text-base font-extrabold ${w.leftRinne.ok ? 'text-emerald-700 dark:text-emerald-300' : 'text-rose-700 dark:text-rose-300'}">${w.leftRinne.formula}</span>
+                  <span class="block text-[11px] font-semibold text-slate-600 dark:text-slate-300">${w.leftRinne.status}</span>
+                </div>
+              </div>
+
+              <div class="p-3.5 rounded-2xl bg-slate-50 dark:bg-slate-800/60 text-xs sm:text-sm space-y-1.5">
+                <p class="text-slate-700 dark:text-slate-200"><strong>Mechanism:</strong> ${w.explanation}</p>
+                <p class="text-slate-500 dark:text-slate-400"><strong>Causes:</strong> ${w.causes}</p>
+              </div>
+            </div>
+          </div>
+        </section>
+      `;
+    }
+
+    function renderHutchinsonStepper() {
+      const h = HUTCHINSON_STAGES[state.hutchStage];
+      const badgeStyles = {
+        emerald: 'bg-emerald-100 dark:bg-emerald-950 text-emerald-800 dark:text-emerald-300',
+        amber: 'bg-amber-100 dark:bg-amber-950 text-amber-800 dark:text-amber-300',
+        rose: 'bg-rose-600 text-white',
+      };
+
+      return `
+        <section class="rounded-3xl bg-white dark:bg-slate-900 border border-slate-200 dark:border-slate-800 p-4 sm:p-6 space-y-4">
+          <div class="flex flex-wrap items-start justify-between gap-2">
+            <div>
+              <span class="px-2.5 py-0.5 rounded-lg text-[10px] font-extrabold uppercase bg-rose-100 dark:bg-rose-950 text-rose-700 dark:text-rose-300">Cerebral Compression / Raised ICP</span>
+              <h2 class="text-lg sm:text-xl font-extrabold text-slate-900 dark:text-white mt-1">Hutchinson Pupil Stage Stepper</h2>
+            </div>
+            <span class="px-3 py-1 rounded-xl text-xs font-extrabold ${badgeStyles[h.urgencyColor]}">${h.urgency}</span>
+          </div>
+
+          <!-- Stage Buttons & Range Slider -->
+          <div class="space-y-2.5">
+            <div class="grid grid-cols-5 gap-1.5">
+              ${HUTCHINSON_STAGES.map((st) => `
+                <button
+                  type="button"
+                  onclick="state.hutchStage=${st.stage}; renderApp();"
+                  class="py-2 px-1 rounded-xl text-[11px] sm:text-xs font-bold border transition ${
+                    state.hutchStage === st.stage
+                      ? 'bg-rose-600 text-white border-rose-600 shadow-xs'
+                      : 'bg-slate-50 dark:bg-slate-800 text-slate-600 dark:text-slate-300 border-slate-200 dark:border-slate-700'
+                  }"
+                >${st.short}</button>
+              `).join('')}
+            </div>
+            <input
+              type="range"
+              min="0"
+              max="4"
+              step="1"
+              value="${state.hutchStage}"
+              aria-label="Hutchinson Pupil Stage Slider"
+              oninput="state.hutchStage=parseInt(this.value,10); renderApp();"
+              class="w-full accent-rose-600 cursor-pointer"
+            />
+          </div>
+
+          <!-- Dynamic Side-by-Side SVG Eyes -->
+          <div class="grid grid-cols-1 md:grid-cols-12 gap-4 items-center">
+            <div class="md:col-span-6 rounded-2xl bg-slate-50 dark:bg-slate-950/60 border border-slate-200 dark:border-slate-800 p-3">
+              <svg viewBox="0 0 360 150" class="w-full max-w-[360px] mx-auto h-auto" role="img" aria-label="Hutchinson Pupil Eyes Diagram">
+                <rect x="0" y="0" width="360" height="150" rx="16" fill="var(--svg-bg)" />
+
+                <!-- Ipsilateral Eye (Left Side of Diagram) -->
+                <text x="95" y="24" text-anchor="middle" fill="var(--svg-muted)" font-size="10" font-weight="800">IPSILATERAL (LESION SIDE)</text>
+                <path d="M 32,76 Q 95,28 158,76 Q 95,124 32,76 Z" fill="#ffffff" stroke="var(--svg-stroke)" stroke-width="2" />
+                <circle cx="95" cy="76" r="30" fill="var(--svg-iris)" fill-opacity="0.85" />
+                <circle cx="95" cy="76" r="${h.ipsiR}" fill="#020617" class="pupil-circle" />
+                <circle cx="88" cy="69" r="3" fill="#ffffff" fill-opacity="0.75" />
+                <text x="95" y="136" text-anchor="middle" fill="var(--svg-text)" font-size="10" font-weight="700">Light: ${h.ipsiReflex}</text>
+
+                <!-- Contralateral Eye (Right Side of Diagram) -->
+                <text x="265" y="24" text-anchor="middle" fill="var(--svg-muted)" font-size="10" font-weight="800">CONTRALATERAL EYE</text>
+                <path d="M 202,76 Q 265,28 328,76 Q 265,124 202,76 Z" fill="#ffffff" stroke="var(--svg-stroke)" stroke-width="2" />
+                <circle cx="265" cy="76" r="30" fill="var(--svg-iris)" fill-opacity="0.85" />
+                <circle cx="265" cy="76" r="${h.contraR}" fill="#020617" class="pupil-circle" />
+                <circle cx="258" cy="69" r="3" fill="#ffffff" fill-opacity="0.75" />
+                <text x="265" y="136" text-anchor="middle" fill="var(--svg-text)" font-size="10" font-weight="700">Light: ${h.contraReflex}</text>
+              </svg>
+            </div>
+
+            <!-- Exam Talk-Through Box -->
+            <div class="md:col-span-6 p-4 rounded-2xl bg-slate-50 dark:bg-slate-800/60 border border-slate-200 dark:border-slate-700 space-y-2">
+              <h3 class="text-sm sm:text-base font-extrabold text-slate-900 dark:text-white">${h.title}</h3>
+              <ul class="list-disc pl-5 space-y-1.5 text-xs sm:text-sm text-slate-700 dark:text-slate-200">
+                ${h.talkThrough.map((pt) => `<li>${pt}</li>`).join('')}
+              </ul>
+            </div>
+          </div>
+        </section>
+      `;
+    }
+
+    function renderBeightonCalculator() {
+      const score = BEIGHTON_ITEMS.filter((i) => state.beighton[i.id]).length;
+      const interp = score >= 5
+        ? { text: 'Positive Generalised Hypermobility Screen (≥5/9 adults <50; ≥4/9 if >50)', cls: 'bg-amber-100 dark:bg-amber-950/60 text-amber-800 dark:text-amber-300' }
+        : score >= 4
+          ? { text: 'Borderline / Positive in Adults >50 (≥4/9) — assess clinical context', cls: 'bg-sky-100 dark:bg-sky-950/60 text-sky-800 dark:text-sky-300' }
+          : { text: 'Within Normal Mobility Range (<4/9)', cls: 'bg-emerald-100 dark:bg-emerald-950/60 text-emerald-800 dark:text-emerald-300' };
+
+      return `
+        <section class="rounded-3xl bg-white dark:bg-slate-900 border border-slate-200 dark:border-slate-800 p-4 sm:p-5 flex flex-col justify-between gap-3">
+          <div class="space-y-3">
+            <div class="flex items-center justify-between gap-2">
+              <div>
+                <span class="text-[10px] font-extrabold uppercase text-indigo-600 dark:text-indigo-400">Hypermobility Screen</span>
+                <h3 class="text-base sm:text-lg font-extrabold text-slate-900 dark:text-white">Beighton Scale (0–9)</h3>
+              </div>
+              <div class="flex items-center gap-2">
+                <span class="px-3 py-1 rounded-xl text-sm font-extrabold bg-indigo-600 text-white">${score} / 9</span>
+                <button type="button" onclick="state.beighton={}; renderApp();" class="px-2.5 py-1 rounded-xl text-xs font-bold bg-slate-100 dark:bg-slate-800 text-slate-600 dark:text-slate-300">Reset</button>
+              </div>
+            </div>
+
+            <div class="space-y-1.5">
+              ${BEIGHTON_ITEMS.map((item) => {
+                const on = !!state.beighton[item.id];
+                return `
+                  <label class="flex items-center justify-between gap-2 px-3 py-2 rounded-xl border cursor-pointer transition ${
+                    on ? 'bg-indigo-50/70 dark:bg-indigo-950/35 border-indigo-400 dark:border-indigo-700' : 'bg-slate-50/70 dark:bg-slate-800/50 border-slate-200 dark:border-slate-800'
+                  }">
+                    <div class="flex items-center gap-2.5 min-w-0">
+                      <input type="checkbox" ${on ? 'checked' : ''} onchange="state.beighton['${item.id}']=!state.beighton['${item.id}']; renderApp();" class="w-4 h-4 accent-indigo-600 rounded shrink-0" />
+                      <span class="text-xs font-semibold text-slate-800 dark:text-slate-200">${item.label}</span>
+                    </div>
+                    <span class="text-[10px] font-extrabold text-slate-400 shrink-0">+1</span>
+                  </label>
+                `;
+              }).join('')}
+            </div>
+          </div>
+
+          <div class="px-3 py-2 rounded-xl text-xs font-bold ${interp.cls}">${interp.text}</div>
+        </section>
+      `;
+    }
+
+    function renderGcsCalculator() {
+      const { eye, verbal, motor } = state.gcs;
+      const total = eye + verbal + motor;
+      const band = total >= 13
+        ? { label: 'Mild (13–15)', cls: 'bg-emerald-100 dark:bg-emerald-950/60 text-emerald-800 dark:text-emerald-300' }
+        : total >= 9
+          ? { label: 'Moderate (9–12)', cls: 'bg-amber-100 dark:bg-amber-950/60 text-amber-800 dark:text-amber-300' }
+          : { label: 'Severe (≤8) — Emergency Airway/ICU', cls: 'bg-rose-600 text-white' };
+
+      const renderCol = (title, key, opts) => `
+        <div class="space-y-1">
+          <span class="block text-[10px] font-extrabold uppercase text-slate-400 px-1">${title}</span>
+          ${opts.map((o) => `
+            <button
+              type="button"
+              onclick="state.gcs.${key}=${o.v}; renderApp();"
+              class="w-full text-left px-2.5 py-1.5 rounded-xl text-[11px] font-bold border transition ${
+                state.gcs[key] === o.v
+                  ? 'bg-teal-600 text-white border-teal-600 shadow-xs'
+                  : 'bg-slate-50 dark:bg-slate-800/60 text-slate-700 dark:text-slate-300 border-slate-200 dark:border-slate-700 hover:border-teal-400'
+              }"
+            >${o.label}</button>
+          `).join('')}
+        </div>
+      `;
+
+      return `
+        <section class="rounded-3xl bg-white dark:bg-slate-900 border border-slate-200 dark:border-slate-800 p-4 sm:p-5 flex flex-col justify-between gap-3">
+          <div class="space-y-3">
+            <div class="flex items-center justify-between gap-2">
+              <div>
+                <span class="text-[10px] font-extrabold uppercase text-teal-600 dark:text-teal-400">Trauma Consciousness Scale</span>
+                <h3 class="text-base sm:text-lg font-extrabold text-slate-900 dark:text-white">Glasgow Coma Scale (3–15)</h3>
+              </div>
+              <div class="text-right">
+                <span class="px-3 py-1 rounded-xl text-sm font-extrabold bg-slate-900 dark:bg-white text-white dark:text-slate-900">E${eye} V${verbal} M${motor} = ${total}/15</span>
+              </div>
+            </div>
+
+            <div class="grid grid-cols-1 sm:grid-cols-3 gap-2.5">
+              ${renderCol('Eye (1–4)', 'eye', GCS_OPTIONS.eye)}
+              ${renderCol('Verbal (1–5)', 'verbal', GCS_OPTIONS.verbal)}
+              ${renderCol('Motor (1–6)', 'motor', GCS_OPTIONS.motor)}
+            </div>
+          </div>
+
+          <div class="flex items-center justify-between gap-2 px-3 py-2 rounded-xl text-xs font-extrabold ${band.cls}">
+            <span>Severity Band: ${band.label}</span>
+            <button type="button" onclick="state.gcs={eye:4,verbal:5,motor:6}; renderApp();" class="underline text-[11px]">Reset 15</button>
+          </div>
+        </section>
+      `;
+    }
+
+    function renderSpecialTestsSplit() {
+      return `
+        <section class="space-y-3">
+          <h2 class="text-xs font-extrabold uppercase tracking-wider text-slate-400 px-1">Special Tests &amp; Dizziness Differential Split</h2>
+
+          <!-- 3-Column Dizziness & Vascular Split -->
+          <div class="grid grid-cols-1 md:grid-cols-3 gap-3.5">
+            <article class="rounded-2xl bg-white dark:bg-slate-900 border-2 border-sky-200 dark:border-sky-900/60 p-4 space-y-2">
+              <span class="px-2 py-0.5 rounded-md text-[10px] font-extrabold uppercase bg-sky-100 dark:bg-sky-950 text-sky-700 dark:text-sky-300">Peripheral Vestibular</span>
+              <h3 class="text-base font-extrabold text-slate-900 dark:text-white">Dix-Hallpike Test</h3>
+              <p class="text-xs text-slate-600 dark:text-slate-300"><strong>Screens:</strong> BPPV (posterior semicircular canal).</p>
+              <p class="text-xs text-slate-700 dark:text-slate-200"><strong>Positive:</strong> Brief latency (2–5s), torsional/rotary nystagmus &amp; vertigo that fatigues on repeat.</p>
+            </article>
+
+            <article class="rounded-2xl bg-white dark:bg-slate-900 border-2 border-teal-200 dark:border-teal-900/60 p-4 space-y-2">
+              <span class="px-2 py-0.5 rounded-md text-[10px] font-extrabold uppercase bg-teal-100 dark:bg-teal-950 text-teal-700 dark:text-teal-300">Cervical Proprioceptive</span>
+              <h3 class="text-base font-extrabold text-slate-900 dark:text-white">Fitz-Ritson’s Test</h3>
+              <p class="text-xs text-slate-600 dark:text-slate-300"><strong>Screens:</strong> Cervicogenic dizziness.</p>
+              <p class="text-xs text-slate-700 dark:text-slate-200"><strong>Method:</strong> Head held still (isolating vestibular system) while seated patient rotates trunk -> dizziness indicates cervical origin.</p>
+            </article>
+
+            <article class="rounded-2xl bg-white dark:bg-slate-900 border-2 border-rose-300 dark:border-rose-900 p-4 space-y-2">
+              <span class="px-2 py-0.5 rounded-md text-[10px] font-extrabold uppercase bg-rose-600 text-white">Vascular Red Flag</span>
+              <h3 class="text-base font-extrabold text-slate-900 dark:text-white">CAD Screening (Carotid/Vertebral)</h3>
+              <p class="text-xs text-slate-600 dark:text-slate-300"><strong>5 Ds:</strong> Dizziness, Diplopia, Dysarthria, Dysphagia, Drop attacks.</p>
+              <p class="text-xs text-slate-700 dark:text-slate-200"><strong>3 Ns + A:</strong> Nausea, Numbness (facial/limb), Nystagmus + Ataxia. <strong>STOP &amp; Refer urgently.</strong></p>
+            </article>
+          </div>
+
+          <!-- 2-Column Motor Special Tests -->
+          <div class="grid grid-cols-1 sm:grid-cols-2 gap-3.5">
+            <article class="rounded-2xl bg-white dark:bg-slate-900 border border-slate-200 dark:border-slate-800 p-4 space-y-1.5">
+              <span class="text-[10px] font-extrabold uppercase text-purple-600 dark:text-purple-400">Subtle UMN Sign</span>
+              <h3 class="text-sm sm:text-base font-extrabold text-slate-900 dark:text-white">Pronator Drift</h3>
+              <p class="text-xs text-slate-600 dark:text-slate-300">Arms extended forward, palms up, eyes closed (20–30s). Downward drift + forearm pronation = subtle proximal weakness / contralateral UMN lesion.</p>
+            </article>
+            <article class="rounded-2xl bg-white dark:bg-slate-900 border border-slate-200 dark:border-slate-800 p-4 space-y-1.5">
+              <span class="text-[10px] font-extrabold uppercase text-amber-600 dark:text-amber-400">Neuromuscular Junction</span>
+              <h3 class="text-sm sm:text-base font-extrabold text-slate-900 dark:text-white">Fatigueable Muscle Testing</h3>
+              <p class="text-xs text-slate-600 dark:text-slate-300">Repeated rapid open/close hands or repeated heel lifts. Progressive loss of power with repetition screens for Myasthenia Gravis.</p>
+            </article>
+          </div>
+        </section>
+      `;
+    }
+
+    // =========================================================================
+    // 6. TAB 2: SPINAL CORD CROSS-SECTION & BRAIN LESIONS
+    // =========================================================================
+    function renderCordAndLesionsTab() {
+      const tract = CORD_TRACTS[state.selectedTract] || CORD_TRACTS.dcml;
+      const tCls = (id) => `svg-hit ${state.selectedTract === id ? 'svg-hit-active' : ''}`;
+
+      const filters = [
+        { id: 'all', label: 'All (10)' },
+        { id: 'due', label: `Due (${BRAIN_LESIONS.filter((b) => isDue(b.id)).length})` },
+        { id: 'parietal', label: 'Parietal' },
+        { id: 'frontal', label: 'Frontal' },
+        { id: 'temporal', label: 'Temporal' },
+        { id: 'cerebellum_bg', label: 'Cerebellum / BG' },
+      ];
+
+      const lesions = BRAIN_LESIONS.filter((b) => {
+        if (state.lesionFilter === 'due') return isDue(b.id);
+        if (state.lesionFilter === 'all') return true;
+        return b.group === state.lesionFilter;
+      });
+
+      return `
+        <div class="space-y-6">
+          <!-- 1. INTERACTIVE SPINAL CORD CROSS-SECTION -->
+          <section class="rounded-3xl bg-white dark:bg-slate-900 border border-slate-200 dark:border-slate-800 p-4 sm:p-6 space-y-4">
+            <div class="flex flex-wrap items-center justify-between gap-2">
+              <div>
+                <span class="px-2.5 py-0.5 rounded-lg text-[10px] font-extrabold uppercase bg-teal-100 dark:bg-teal-950 text-teal-800 dark:text-teal-300">Tracts &rarr; Bedside Tests</span>
+                <h2 class="text-lg sm:text-xl font-extrabold text-slate-900 dark:text-white mt-1">Interactive Spinal Cord Cross-Section</h2>
+              </div>
+              <span class="text-xs font-semibold text-slate-400">Tap any coloured tract</span>
+            </div>
+
+            <!-- Anatomically Proportioned Transverse Cord SVG -->
+            <div class="max-w-md mx-auto">
+              <svg viewBox="0 0 400 280" class="w-full h-auto" role="img" aria-label="Transverse Spinal Cord Cross-Section">
+                <rect x="0" y="0" width="400" height="280" rx="20" fill="var(--svg-bg)" />
+
+                <text x="200" y="20" text-anchor="middle" fill="var(--svg-muted)" font-size="10" font-weight="800">POSTERIOR (DORSAL)</text>
+                <text x="200" y="268" text-anchor="middle" fill="var(--svg-muted)" font-size="10" font-weight="800">ANTERIOR (VENTRAL)</text>
+
+                <!-- Cord White Matter Outline with Posterior Median Sulcus & Anterior Median Fissure -->
+                <path
+                  d="M 200,34 C 282,34 352,78 352,140 C 352,202 288,244 212,244 L 200,204 L 188,244 C 112,244 48,202 48,140 C 48,78 118,34 200,34 Z"
+                  fill="var(--svg-cord-white)"
+                  stroke="var(--svg-stroke)"
+                  stroke-width="2.2"
+                />
+                <!-- Posterior Median Sulcus -->
+                <line x1="200" y1="34" x2="200" y2="128" stroke="var(--svg-stroke)" stroke-width="1.6" stroke-dasharray="3 2" />
+
+                <!-- Butterfly Grey Matter -->
+                <path
+                  d="M 164,72 C 154,70 144,82 146,104 C 148,124 142,138 128,154 C 114,170 116,198 136,204 C 158,210 172,190 176,164 C 184,154 216,154 224,164 C 228,190 242,210 264,204 C 284,198 286,170 272,154 C 258,138 252,124 254,104 C 256,82 246,70 236,72 C 224,74 220,108 216,124 C 208,130 192,130 184,124 C 180,108 176,74 164,72 Z"
+                  fill="var(--svg-cord-grey)"
+                  fill-opacity="0.55"
+                  stroke="var(--svg-stroke)"
+                  stroke-width="1.6"
+                />
+                <!-- Central Canal -->
+                <circle cx="200" cy="142" r="4" fill="var(--svg-bg)" stroke="var(--svg-stroke)" stroke-width="1.4" />
+
+                <!-- CLICKABLE TRACT 1: DCML (Dorsal Columns - Sky) -->
+                <path onclick="state.selectedTract='dcml'; renderApp();" class="${tCls('dcml')}" d="M 166,42 C 184,38 216,38 234,42 L 222,118 C 210,122 190,122 178,118 Z" fill="#0ea5e9" fill-opacity="0.82" stroke="#0369a1" stroke-width="1.4" />
+                <text x="200" y="76" text-anchor="middle" fill="#fff" font-size="10.5" font-weight="800" pointer-events="none">DCML</text>
+
+                <!-- CLICKABLE TRACT 2: Lateral Corticospinal Tract (UMN - Rose, Bilateral) -->
+                <ellipse onclick="state.selectedTract='cst'; renderApp();" class="${tCls('cst')}" cx="116" cy="126" rx="22" ry="18" fill="#f43f5e" fill-opacity="0.86" stroke="#be123c" stroke-width="1.4" />
+                <ellipse onclick="state.selectedTract='cst'; renderApp();" class="${tCls('cst')}" cx="284" cy="126" rx="22" ry="18" fill="#f43f5e" fill-opacity="0.86" stroke="#be123c" stroke-width="1.4" />
+                <text x="116" y="130" text-anchor="middle" fill="#fff" font-size="9.5" font-weight="800" pointer-events="none">CST</text>
+                <text x="284" y="130" text-anchor="middle" fill="#fff" font-size="9.5" font-weight="800" pointer-events="none">CST</text>
+
+                <!-- CLICKABLE TRACT 3: Dorsal Spinocerebellar Tract (Teal, Lateral Margin) -->
+                <path onclick="state.selectedTract='dsct'; renderApp();" class="${tCls('dsct')}" d="M 60,116 C 68,94 84,82 96,90 C 90,108 88,128 90,144 C 76,148 58,136 60,116 Z" fill="#14b8a6" fill-opacity="0.88" stroke="#0f766e" stroke-width="1.4" />
+                <path onclick="state.selectedTract='dsct'; renderApp();" class="${tCls('dsct')}" d="M 340,116 C 332,94 316,82 304,90 C 310,108 312,128 310,144 C 324,148 342,136 340,116 Z" fill="#14b8a6" fill-opacity="0.88" stroke="#0f766e" stroke-width="1.4" />
+                <text x="76" y="120" text-anchor="middle" fill="#fff" font-size="8.5" font-weight="800" pointer-events="none">DSCT</text>
+                <text x="324" y="120" text-anchor="middle" fill="#fff" font-size="8.5" font-weight="800" pointer-events="none">DSCT</text>
+
+                <!-- CLICKABLE TRACT 4: Spinothalamic Tract (Anterolateral - Amber) -->
+                <path onclick="state.selectedTract='stt'; renderApp();" class="${tCls('stt')}" d="M 74,162 C 88,162 104,174 114,196 C 122,212 114,224 98,218 C 78,208 66,184 74,162 Z" fill="#f59e0b" fill-opacity="0.88" stroke="#b45309" stroke-width="1.4" />
+                <path onclick="state.selectedTract='stt'; renderApp();" class="${tCls('stt')}" d="M 326,162 C 312,162 296,174 286,196 C 278,212 286,224 302,218 C 322,208 334,184 326,162 Z" fill="#f59e0b" fill-opacity="0.88" stroke="#b45309" stroke-width="1.4" />
+                <text x="92" y="196" text-anchor="middle" fill="#fff" font-size="9.5" font-weight="800" pointer-events="none">STT</text>
+                <text x="308" y="196" text-anchor="middle" fill="#fff" font-size="9.5" font-weight="800" pointer-events="none">STT</text>
+
+                <!-- CLICKABLE TRACT 5: Ventral Horn (LMN - Purple) -->
+                <circle onclick="state.selectedTract='vh'; renderApp();" class="${tCls('vh')}" cx="144" cy="182" r="16" fill="#8b5cf6" fill-opacity="0.9" stroke="#5b21b6" stroke-width="1.4" />
+                <circle onclick="state.selectedTract='vh'; renderApp();" class="${tCls('vh')}" cx="256" cy="182" r="16" fill="#8b5cf6" fill-opacity="0.9" stroke="#5b21b6" stroke-width="1.4" />
+                <text x="144" y="185" text-anchor="middle" fill="#fff" font-size="9" font-weight="800" pointer-events="none">LMN</text>
+                <text x="256" y="185" text-anchor="middle" fill="#fff" font-size="9" font-weight="800" pointer-events="none">LMN</text>
+              </svg>
+
+              <!-- Quick Tract Pills -->
+              <div class="mt-3 flex flex-wrap justify-center gap-1.5">
+                ${Object.entries(CORD_TRACTS).map(([id, obj]) => `
+                  <button type="button" onclick="state.selectedTract='${id}'; renderApp();" class="px-2.5 py-1.5 rounded-xl text-xs font-bold border transition ${
+                    state.selectedTract === id ? 'bg-teal-600 text-white border-teal-600' : 'bg-slate-50 dark:bg-slate-800 text-slate-700 dark:text-slate-300 border-slate-200 dark:border-slate-700'
+                  }">${obj.name.split(' (')[0]}</button>
+                `).join('')}
+              </div>
+            </div>
+
+            <!-- Pinned Info Card Directly Below SVG -->
+            <div class="rounded-2xl bg-slate-50 dark:bg-slate-800/60 border-2 border-teal-200 dark:border-teal-900/70 p-4 space-y-2.5">
+              <div class="flex flex-wrap items-center justify-between gap-2">
+                <h3 class="text-base font-extrabold text-slate-900 dark:text-white">${tract.name}</h3>
+                <span class="px-2.5 py-0.5 rounded-lg text-[11px] font-bold bg-white dark:bg-slate-900 text-teal-700 dark:text-teal-300 border border-slate-200 dark:border-slate-700">${tract.badge}</span>
+              </div>
+              <div class="grid grid-cols-1 sm:grid-cols-2 gap-2.5 text-xs sm:text-sm">
+                <div class="p-2.5 rounded-xl bg-white dark:bg-slate-900"><strong class="text-slate-400 uppercase text-[10px] block">Function</strong>${tract.function}</div>
+                <div class="p-2.5 rounded-xl bg-white dark:bg-slate-900"><strong class="text-slate-400 uppercase text-[10px] block">Decussation</strong>${tract.decussation}</div>
+                <div class="p-2.5 rounded-xl bg-white dark:bg-slate-900"><strong class="text-slate-400 uppercase text-[10px] block">Lesion Pattern</strong>${tract.lesion}</div>
+                <div class="p-2.5 rounded-xl bg-teal-50/70 dark:bg-teal-950/40 border border-teal-200 dark:border-teal-800/60"><strong class="text-teal-700 dark:text-teal-400 uppercase text-[10px] block">Exact Year 3 Bedside Tests</strong><span class="font-semibold">${tract.tests}</span></div>
+              </div>
+            </div>
+          </section>
+
+          <!-- 2. BRAIN LESIONS & CORTICAL LOCALISATION BOARD (SHARED LEITNER SRS) -->
+          <section class="space-y-3.5">
+            <div class="flex flex-wrap items-center justify-between gap-2 px-1">
+              <div>
+                <h2 class="text-lg font-extrabold text-slate-900 dark:text-white">Brain Lesions &amp; Cortical Localisation</h2>
+                <p class="text-xs text-slate-500 dark:text-slate-400">Synced with your shared Leitner schedule (Again / Shaky / Solid).</p>
+              </div>
+            </div>
+
+            <!-- Filter Pills -->
+            <div class="flex flex-wrap gap-1.5">
+              ${filters.map((f) => `
+                <button
+                  type="button"
+                  onclick="state.lesionFilter='${f.id}'; renderApp();"
+                  class="px-3 py-1.5 rounded-xl text-xs font-bold border transition ${
+                    state.lesionFilter === f.id
+                      ? 'bg-purple-600 text-white border-purple-600 shadow-xs'
+                      : 'bg-white dark:bg-slate-900 text-slate-700 dark:text-slate-300 border-slate-200 dark:border-slate-800 hover:border-purple-400'
+                  }"
+                >${f.label}</button>
+              `).join('')}
+            </div>
+
+            ${lesions.length ? `
+              <div class="grid grid-cols-1 md:grid-cols-2 gap-3.5">
+                ${lesions.map((item) => {
+                  const rec = state.srs[item.id];
+                  const box = rec ? rec.box : null;
+                  return `
+                    <article class="rounded-2xl bg-white dark:bg-slate-900 border border-slate-200 dark:border-slate-800 p-4 flex flex-col justify-between gap-3">
+                      <div class="space-y-2">
+                        <div class="flex items-start justify-between gap-2">
+                          <h3 class="text-sm sm:text-base font-extrabold text-slate-900 dark:text-white">${item.term}</h3>
+                          <span class="px-2 py-0.5 rounded-lg text-[10px] font-extrabold bg-purple-100 dark:bg-purple-950/60 text-purple-800 dark:text-purple-300 shrink-0">${item.badge}</span>
+                        </div>
+                        <p class="text-xs sm:text-sm text-slate-700 dark:text-slate-300">${item.desc}</p>
+                        <div class="text-xs space-y-1 pt-1">
+                          <p><strong class="text-slate-500">Site:</strong> ${item.site}</p>
+                          <p><strong class="text-slate-500">Bedside Test:</strong> ${item.test}</p>
+                        </div>
+                        ${item.guardrail ? `<p class="px-3 py-1.5 rounded-xl bg-amber-50 dark:bg-amber-950/40 border border-amber-300 dark:border-amber-800 text-xs font-extrabold text-amber-900 dark:text-amber-200">⚠ ${item.guardrail}</p>` : ''}
+                      </div>
+
+                      <!-- Leitner SRS Controls -->
+                      <div class="flex items-center gap-1.5 pt-2 border-t border-slate-100 dark:border-slate-800">
+                        <button type="button" onclick="setLeitner('${item.id}','again')" class="flex-1 py-1.5 rounded-xl text-[11px] font-bold border transition ${box==='again' ? 'bg-rose-600 text-white border-rose-600' : 'bg-rose-50/70 dark:bg-rose-950/30 text-rose-700 dark:text-rose-300 border-rose-200 dark:border-rose-800/60'}">Again (Today)</button>
+                        <button type="button" onclick="setLeitner('${item.id}','shaky')" class="flex-1 py-1.5 rounded-xl text-[11px] font-bold border transition ${box==='shaky' ? 'bg-amber-500 text-white border-amber-500' : 'bg-amber-50/70 dark:bg-amber-950/30 text-amber-800 dark:text-amber-300 border-amber-200 dark:border-amber-800/60'}">Shaky (2d)</button>
+                        <button type="button" onclick="setLeitner('${item.id}','solid')" class="flex-1 py-1.5 rounded-xl text-[11px] font-bold border transition ${box==='solid' ? 'bg-emerald-600 text-white border-emerald-600' : 'bg-emerald-50/70 dark:bg-emerald-950/30 text-emerald-700 dark:text-emerald-300 border-emerald-200 dark:border-emerald-800/60'}">Solid (7d)</button>
+                      </div>
+                    </article>
+                  `;
+                }).join('')}
+              </div>
+            ` : `
+              <div class="p-8 text-center rounded-3xl bg-white dark:bg-slate-900 border border-slate-200 dark:border-slate-800 text-sm text-slate-500">
+                All caught up! No lesion cards due in this filter.
+              </div>
+            `}
+          </section>
+        </div>
+      `;
+    }
+
+    // =========================================================================
+    // 7. TAB 3: NERVE MAPS & CRANIAL NERVES
+    // =========================================================================
+    function setCNLayer(layer) {
+      state.cnLayer = layer;
+      if (layer === 'cn5') state.selectedCN = 'V';
+      else if (layer === 'cn7') state.selectedCN = 'VII';
+      else if (layer === 'h_test') state.selectedCN = 'III';
+      renderApp();
+    }
+
+    function renderNervesTab() {
+      const cn = CN_DATA[state.selectedCN] || CN_DATA.V;
+      const cnPills = ['I','II','III','IV','V','VI','VII','VIII','IX_X','XI','XII'];
+      const faceContour = `M 98,124 C 98,52 130,30 170,30 C 210,30 242,52 242,124 C 242,174 226,214 202,238 C 188,250 152,250 138,238 C 114,214 98,174 98,124 Z`;
+      const mat = LIMB_MATRIX[state.limbTab];
+
+      return `
+        <div class="space-y-6">
+          <!-- 1. CRANIAL NERVE LAYER SWITCHER -->
+          <section class="rounded-3xl bg-white dark:bg-slate-900 border border-slate-200 dark:border-slate-800 p-4 sm:p-6 space-y-4">
+            <div>
+              <span class="px-2.5 py-0.5 rounded-lg text-[10px] font-extrabold uppercase bg-teal-100 dark:bg-teal-950 text-teal-800 dark:text-teal-300">Clean Layer Switcher</span>
+              <h2 class="text-lg sm:text-xl font-extrabold text-slate-900 dark:text-white mt-1">Cranial Nerves (I–XII)</h2>
+            </div>
+
+            <!-- 4 Mutually Exclusive Layer Buttons -->
+            <div class="grid grid-cols-2 sm:grid-cols-4 gap-1.5">
+              ${[
+                { id: 'off', label: 'Clean Face (Pins I–XII)' },
+                { id: 'cn5', label: 'CN V (V1/V2/V3 Zones)' },
+                { id: 'cn7', label: 'CN VII (UMN vs LMN)' },
+                { id: 'h_test', label: "CN III/IV/VI ('H' Test)" },
+              ].map((b) => `
+                <button
+                  type="button"
+                  onclick="setCNLayer('${b.id}')"
+                  class="px-3 py-2 rounded-xl text-xs font-bold border transition ${
+                    state.cnLayer === b.id
+                      ? 'bg-teal-600 text-white border-teal-600 shadow-xs'
+                      : 'bg-slate-50 dark:bg-slate-800 text-slate-700 dark:text-slate-300 border-slate-200 dark:border-slate-700'
+                  }"
+                >${b.label}</button>
+              `).join('')}
+            </div>
+
+            <!-- SVG Stage -->
+            <div class="max-w-[460px] mx-auto">
+              ${state.cnLayer === 'cn7' ? `
+                <svg viewBox="0 0 420 225" class="w-full h-auto" role="img" aria-label="CN VII UMN vs LMN Comparison">
+                  <rect x="0" y="0" width="420" height="225" rx="20" fill="var(--svg-bg)" />
+
+                  <text x="105" y="24" text-anchor="middle" fill="#2563eb" font-size="11.5" font-weight="800">UMN LESION (e.g. Stroke)</text>
+                  <clipPath id="clip-umn-v5"><ellipse cx="105" cy="116" rx="54" ry="70" /></clipPath>
+                  <ellipse cx="105" cy="116" rx="54" ry="70" fill="var(--svg-skin)" stroke="var(--svg-stroke)" stroke-width="2" />
+                  <rect x="105" y="116" width="58" height="75" fill="#3b82f6" fill-opacity="0.42" clip-path="url(#clip-umn-v5)" />
+                  <path d="M 74,86 Q 88,80 98,86 M 112,86 Q 124,80 136,86" fill="none" stroke="#10b981" stroke-width="3" stroke-linecap="round" />
+                  <circle cx="86" cy="102" r="4" fill="var(--svg-text)" />
+                  <circle cx="124" cy="102" r="4" fill="var(--svg-text)" />
+                  <path d="M 86,148 Q 105,150 126,160" fill="none" stroke="#2563eb" stroke-width="3" stroke-linecap="round" />
+                  <text x="105" y="206" text-anchor="middle" fill="#10b981" font-size="10.5" font-weight="800">Forehead SPARED ✓</text>
+
+                  <line x1="210" y1="18" x2="210" y2="208" stroke="var(--svg-line)" stroke-dasharray="4 4" />
+
+                  <text x="315" y="24" text-anchor="middle" fill="#d97706" font-size="11.5" font-weight="800">LMN LESION (Bell’s Palsy)</text>
+                  <clipPath id="clip-lmn-v5"><ellipse cx="315" cy="116" rx="54" ry="70" /></clipPath>
+                  <ellipse cx="315" cy="116" rx="54" ry="70" fill="var(--svg-skin)" stroke="var(--svg-stroke)" stroke-width="2" />
+                  <rect x="315" y="42" width="58" height="150" fill="#f59e0b" fill-opacity="0.45" clip-path="url(#clip-lmn-v5)" />
+                  <path d="M 284,86 Q 298,80 308,86" fill="none" stroke="#10b981" stroke-width="3" stroke-linecap="round" />
+                  <line x1="322" y1="92" x2="346" y2="94" stroke="#d97706" stroke-width="3" stroke-linecap="round" />
+                  <circle cx="296" cy="102" r="4" fill="var(--svg-text)" />
+                  <circle cx="334" cy="104" r="5" fill="none" stroke="#d97706" stroke-width="2" />
+                  <path d="M 296,148 Q 315,150 336,162" fill="none" stroke="#d97706" stroke-width="3" stroke-linecap="round" />
+                  <text x="315" y="206" text-anchor="middle" fill="#d97706" font-size="10.5" font-weight="800">FULL Ipsilateral Face Droop</text>
+                </svg>
+              ` : `
+                <svg viewBox="0 0 460 345" class="w-full h-auto" role="img" aria-label="Cranial Nerves Anatomical Map">
+                  <defs>
+                    <clipPath id="clip-cn-face"><path d="${faceContour}" /></clipPath>
+                  </defs>
+                  <rect x="0" y="0" width="460" height="345" rx="22" fill="var(--svg-bg)" />
+
+                  <!-- Neck & Shoulders (CN XI) -->
+                  <path d="M 142,235 L 142,268 C 110,276 72,288 52,314 L 52,336 L 288,336 L 288,314 C 268,288 230,276 198,268 L 198,235 Z" fill="var(--svg-skin)" stroke="var(--svg-stroke)" stroke-width="1.8" />
+                  <g onclick="state.selectedCN='XI'; renderApp();" class="svg-hit">
+                    <path d="M 134,235 L 146,235 L 164,306 L 152,308 Z" fill="#10b981" fill-opacity="0.48" />
+                    <path d="M 206,235 L 194,235 L 176,306 L 188,308 Z" fill="#10b981" fill-opacity="0.48" />
+                    <circle cx="96" cy="310" r="12" fill="${state.selectedCN==='XI'?'#0d9488':'#10b981'}" />
+                    <text x="96" y="313" text-anchor="middle" fill="#fff" font-size="9" font-weight="800">XI</text>
+                  </g>
+
+                  <!-- Ears (CN VIII) -->
+                  <path onclick="state.selectedCN='VIII'; renderApp();" class="svg-hit" d="M 96,128 C 80,126 76,160 88,180 C 94,188 102,186 104,174 Z" fill="var(--svg-skin)" stroke="var(--svg-stroke)" stroke-width="1.6" />
+                  <path onclick="state.selectedCN='VIII'; renderApp();" class="svg-hit" d="M 244,128 C 260,126 264,160 252,180 C 246,188 238,186 236,174 Z" fill="var(--svg-skin)" stroke="var(--svg-stroke)" stroke-width="1.6" />
+                  <g onclick="state.selectedCN='VIII'; renderApp();" class="svg-hit">
+                    <circle cx="82" cy="154" r="11" fill="${state.selectedCN==='VIII'?'#0d9488':'#f59e0b'}" />
+                    <text x="82" y="157" text-anchor="middle" fill="#fff" font-size="8.5" font-weight="800">VIII</text>
+                  </g>
+
+                  <!-- Base Face -->
+                  <path d="${faceContour}" fill="var(--svg-skin)" stroke="var(--svg-stroke)" stroke-width="2" />
+
+                  <!-- LAYER: CN V (V1/V2/V3 clipped cleanly inside face) -->
+                  ${state.cnLayer === 'cn5' ? `
+                    <g clip-path="url(#clip-cn-face)">
+                      <path onclick="state.selectedCN='V'; renderApp();" class="svg-hit" d="M 90,25 L 250,25 L 250,126 L 170,136 L 90,126 Z" fill="#0ea5e9" fill-opacity="0.38" stroke="var(--svg-stroke)" stroke-width="1" />
+                      <path onclick="state.selectedCN='V'; renderApp();" class="svg-hit" d="M 90,126 L 170,136 L 250,126 L 250,192 L 170,198 L 90,192 Z" fill="#14b8a6" fill-opacity="0.38" stroke="var(--svg-stroke)" stroke-width="1" />
+                      <path onclick="state.selectedCN='V'; renderApp();" class="svg-hit" d="M 90,192 L 170,198 L 250,192 L 250,260 L 90,260 Z" fill="#8b5cf6" fill-opacity="0.4" stroke="var(--svg-stroke)" stroke-width="1" />
+                      <ellipse onclick="state.selectedCN='V'; renderApp();" class="svg-hit" cx="110" cy="96" rx="8" ry="15" fill="#4f46e5" fill-opacity="0.8" />
+                      <rect onclick="state.selectedCN='V'; renderApp();" class="svg-hit" x="108" y="164" width="16" height="32" rx="6" fill="#4f46e5" fill-opacity="0.8" />
+                    </g>
+                    <text x="170" y="64" text-anchor="middle" fill="var(--svg-text)" font-size="11" font-weight="800" pointer-events="none">V1 (Ophthalmic)</text>
+                    <text x="170" y="170" text-anchor="middle" fill="var(--svg-text)" font-size="11" font-weight="800" pointer-events="none">V2 (Maxillary)</text>
+                    <text x="170" y="226" text-anchor="middle" fill="var(--svg-text)" font-size="11" font-weight="800" pointer-events="none">V3 (Mandibular)</text>
+                  ` : ''}
+
+                  <!-- Eyes, Nose, Mouth -->
+                  <ellipse cx="140" cy="112" rx="15" ry="8.5" fill="#fff" stroke="var(--svg-stroke)" stroke-width="1.5" />
+                  <circle cx="140" cy="112" r="4.5" fill="#0f172a" />
+                  <ellipse cx="200" cy="112" rx="15" ry="8.5" fill="#fff" stroke="var(--svg-stroke)" stroke-width="1.5" />
+                  <circle cx="200" cy="112" r="4.5" fill="#0f172a" />
+                  <path d="M 166,120 L 174,120 L 178,158 Q 170,164 162,158 Z" fill="none" stroke="var(--svg-stroke)" stroke-width="1.4" />
+                  <path d="M 148,196 Q 170,204 192,196" fill="none" stroke="var(--svg-stroke)" stroke-width="2" stroke-linecap="round" />
+
+                  <!-- LAYER: H-Test -->
+                  ${state.cnLayer === 'h_test' ? `
+                    <path d="M 118,86 L 118,140 M 222,86 L 222,140 M 118,113 L 222,113" stroke="#0d9488" stroke-width="3" stroke-dasharray="4 3" />
+                    <g onclick="state.selectedCN='VI'; renderApp();" class="svg-hit"><rect x="226" y="102" width="34" height="20" rx="6" fill="#f59e0b" /><text x="243" y="115" text-anchor="middle" fill="#fff" font-size="9" font-weight="800">LR VI</text></g>
+                    <g onclick="state.selectedCN='IV'; renderApp();" class="svg-hit"><rect x="174" y="132" width="34" height="20" rx="6" fill="#e11d48" /><text x="191" y="145" text-anchor="middle" fill="#fff" font-size="9" font-weight="800">SO IV</text></g>
+                    <g onclick="state.selectedCN='III'; renderApp();" class="svg-hit"><rect x="100" y="72" width="36" height="18" rx="6" fill="#0ea5e9" /><text x="118" y="84" text-anchor="middle" fill="#fff" font-size="9" font-weight="800">SR III</text></g>
+                  ` : ''}
+
+                  <!-- LAYER: Clean Face Pins -->
+                  ${state.cnLayer === 'off' ? `
+                    <g onclick="state.selectedCN='I'; renderApp();" class="svg-hit"><circle cx="170" cy="144" r="10.5" fill="${state.selectedCN==='I'?'#0d9488':'#ec4899'}" /><text x="170" y="147" text-anchor="middle" fill="#fff" font-size="9" font-weight="800">I</text></g>
+                    <g onclick="state.selectedCN='II'; renderApp();" class="svg-hit"><circle cx="140" cy="88" r="10.5" fill="${state.selectedCN==='II'?'#0d9488':'#0284c7'}" /><text x="140" y="91" text-anchor="middle" fill="#fff" font-size="9" font-weight="800">II</text></g>
+                    <g onclick="state.selectedCN='III'; renderApp();" class="svg-hit"><circle cx="200" cy="88" r="10.5" fill="${state.selectedCN==='III'?'#0d9488':'#0ea5e9'}" /><text x="200" y="91" text-anchor="middle" fill="#fff" font-size="8.5" font-weight="800">III</text></g>
+                    <g onclick="state.selectedCN='V'; renderApp();" class="svg-hit"><circle cx="122" cy="166" r="10.5" fill="${state.selectedCN==='V'?'#0d9488':'#6366f1'}" /><text x="122" y="169" text-anchor="middle" fill="#fff" font-size="9" font-weight="800">V</text></g>
+                    <g onclick="state.selectedCN='VII'; renderApp();" class="svg-hit"><circle cx="218" cy="166" r="10.5" fill="${state.selectedCN==='VII'?'#0d9488':'#3b82f6'}" /><text x="218" y="169" text-anchor="middle" fill="#fff" font-size="8.5" font-weight="800">VII</text></g>
+                  ` : ''}
+
+                  <!-- Open Mouth Inset (CN IX/X & XII) -->
+                  <rect x="304" y="54" width="142" height="176" rx="20" fill="var(--svg-skin)" stroke="var(--svg-line)" stroke-width="1.6" />
+                  <text x="375" y="74" text-anchor="middle" fill="var(--svg-muted)" font-size="9.5" font-weight="800">OPEN MOUTH</text>
+                  <ellipse cx="375" cy="148" rx="50" ry="54" fill="#9f1239" fill-opacity="0.2" stroke="var(--svg-stroke)" stroke-width="1.4" />
+                  <path onclick="state.selectedCN='IX_X'; renderApp();" class="svg-hit" d="M 329,132 Q 350,108 367,126 L 371,144 Q 375,152 379,144 L 383,126 Q 400,108 421,132 C 413,100 337,100 329,132 Z" fill="#f43f5e" fill-opacity="0.82" />
+                  <text x="375" y="118" text-anchor="middle" fill="#fff" font-size="8.5" font-weight="800" pointer-events="none">Uvula (IX/X)</text>
+                  <path onclick="state.selectedCN='XII'; renderApp();" class="svg-hit" d="M 335,168 Q 375,150 415,168 C 411,194 394,202 375,202 C 356,202 339,194 335,168 Z" fill="#fb7185" fill-opacity="0.9" />
+                  <text x="375" y="187" text-anchor="middle" fill="#fff" font-size="9.5" font-weight="800" pointer-events="none">Tongue (XII)</text>
+                </svg>
+              `}
+            </div>
+
+            <!-- CN I–XII Quick Pills -->
+            <div class="flex flex-wrap justify-center gap-1.5">
+              ${cnPills.map((pid) => `
+                <button type="button" onclick="state.selectedCN='${pid}'; renderApp();" class="px-2.5 py-1.5 rounded-xl text-xs font-bold border transition ${
+                  state.selectedCN === pid ? 'bg-teal-600 text-white border-teal-600' : 'bg-slate-50 dark:bg-slate-800 text-slate-700 dark:text-slate-300 border-slate-200 dark:border-slate-700'
+                }">CN ${pid === 'IX_X' ? 'IX & X' : pid}</button>
+              `).join('')}
+            </div>
+
+            <!-- Pinned CN Info Card Directly Underneath -->
+            <div class="rounded-2xl bg-slate-50 dark:bg-slate-800/60 border-2 border-teal-200 dark:border-teal-900/70 p-4 space-y-2">
+              <div class="flex items-center justify-between gap-2">
+                <h3 class="text-base font-extrabold text-slate-900 dark:text-white">CN ${cn.id === 'IX_X' ? 'IX & X' : cn.id}: ${cn.name}</h3>
+                <span class="px-2.5 py-0.5 rounded-lg text-[11px] font-bold bg-white dark:bg-slate-900 text-slate-700 dark:text-slate-300 border border-slate-200 dark:border-slate-700">${cn.type}</span>
+              </div>
+              <p class="text-xs sm:text-sm text-slate-700 dark:text-slate-200 leading-relaxed"><strong>Year 3 Tests:</strong> ${cn.tests}</p>
+              <p class="text-xs sm:text-sm text-teal-800 dark:text-teal-300 bg-teal-50/80 dark:bg-teal-950/40 px-3 py-2 rounded-xl font-semibold"><strong>Clinical Pearl:</strong> ${cn.pearl}</p>
+            </div>
+          </section>
+
+          <!-- 2. UPPER & LOWER LIMB QUICK-TAP SMR & PERIPHERAL MATRIX -->
+          <section class="rounded-3xl bg-white dark:bg-slate-900 border border-slate-200 dark:border-slate-800 p-4 sm:p-6 space-y-4">
+            <div>
+              <span class="px-2.5 py-0.5 rounded-lg text-[10px] font-extrabold uppercase bg-indigo-100 dark:bg-indigo-950 text-indigo-800 dark:text-indigo-300">SMR &amp; Peripheral Matrix</span>
+              <h2 class="text-lg sm:text-xl font-extrabold text-slate-900 dark:text-white mt-1">Upper &amp; Lower Limb Quick-Tap Reference</h2>
+            </div>
+
+            <!-- 4 Matrix Mode Toggles -->
+            <div class="grid grid-cols-2 sm:grid-cols-4 gap-1.5">
+              ${[
+                { id: 'cervical', label: 'Cervical SMR (C5–T1)' },
+                { id: 'lumbar', label: 'Lumbar SMR (L2–S1)' },
+                { id: 'upper_periph', label: 'Upper Peripheral' },
+                { id: 'lower_periph', label: 'Lower Peripheral' },
+              ].map((t) => `
+                <button type="button" onclick="state.limbTab='${t.id}'; renderApp();" class="px-3 py-2 rounded-xl text-xs font-bold border transition ${
+                  state.limbTab === t.id ? 'bg-indigo-600 text-white border-indigo-600 shadow-xs' : 'bg-slate-50 dark:bg-slate-800 text-slate-700 dark:text-slate-300 border-slate-200 dark:border-slate-700'
+                }">${t.label}</button>
+              `).join('')}
+            </div>
+
+            <!-- Bold Assessor Trap Guardrail -->
+            <div class="p-3 rounded-2xl bg-amber-50 dark:bg-amber-950/40 border-2 border-amber-300 dark:border-amber-800 text-xs sm:text-sm font-extrabold text-amber-900 dark:text-amber-200">
+              ⚠ ${mat.trap}
+            </div>
+
+            <!-- Responsive Matrix Cards -->
+            <div class="grid grid-cols-1 sm:grid-cols-2 gap-3">
+              ${mat.items.map((row) => `
+                <article class="p-3.5 rounded-2xl border ${row.warn ? 'bg-rose-50/50 dark:bg-rose-950/20 border-rose-300 dark:border-rose-800' : 'bg-slate-50/70 dark:bg-slate-800/50 border-slate-200 dark:border-slate-800'} space-y-1.5">
+                  <div class="flex items-center justify-between gap-2">
+                    <span class="text-sm font-extrabold ${row.warn ? 'text-rose-700 dark:text-rose-300' : 'text-indigo-700 dark:text-indigo-300'}">${row.code}</span>
+                    <span class="px-2 py-0.5 rounded-lg text-[10px] font-bold bg-emerald-100 dark:bg-emerald-950/60 text-emerald-800 dark:text-emerald-300">R: ${row.reflex}</span>
+                  </div>
+                  <p class="text-xs text-slate-700 dark:text-slate-300"><strong>S:</strong> ${row.sensory}</p>
+                  <p class="text-xs text-slate-900 dark:text-white font-semibold"><strong>M (Name Muscles):</strong> ${row.motor}</p>
+                </article>
+              `).join('')}
+            </div>
+          </section>
+        </div>
+      `;
+    }
+
+    // =========================================================================
+    // 8. TAB 4: 15-MIN OSCE & 8-SECTION TESTING CHECKLIST
+    // =========================================================================
+    function formatClock(secs) {
+      return `${String(Math.floor(secs / 60)).padStart(2, '0')}:${String(secs % 60).padStart(2, '0')}`;
+    }
+
+    function setOscePreset(secs) {
+      clearInterval(osceTimerId);
+      state.osceRunning = false;
+      state.osceDuration = secs;
+      state.osceRemaining = secs;
+      renderApp();
+    }
+
+    function toggleOsceTimer() {
+      if (state.osceRunning) {
+        clearInterval(osceTimerId);
+        state.osceRunning = false;
+      } else {
+        state.osceRunning = true;
+        osceTimerId = setInterval(() => {
+          if (state.osceRemaining > 0) {
+            state.osceRemaining--;
+            const el = document.getElementById('osce-clock');
+            if (el) el.textContent = formatClock(state.osceRemaining);
+          } else {
+            clearInterval(osceTimerId);
+            state.osceRunning = false;
+            showToast('Time up! OSCE station finished.', 'warn');
+            renderApp();
+          }
+        }, 1000);
+      }
+      renderApp();
+    }
+
+    function drawNextOsce() {
+      state.oscePromptIdx = Math.floor(Math.random() * OSCE_PROMPTS.length);
+      state.osceTicked = {};
+      renderApp();
+    }
+
+    function renderOsceTab() {
+      const p = OSCE_PROMPTS[state.oscePromptIdx] || OSCE_PROMPTS[0];
+      const tickedCount = p.points.filter((_, i) => state.osceTicked[i]).length;
+
+      const totalOverview = CHECKLIST_SECTIONS.reduce((sum, s) => sum + s.items.length, 0);
+      const doneOverview = Object.values(state.checkedOverview).filter(Boolean).length;
+      const pctOverview = totalOverview ? Math.round((doneOverview / totalOverview) * 100) : 0;
+
+      return `
+        <div class="max-w-3xl mx-auto space-y-6">
+          <!-- 1. SAY IT ALOUD OSCE SIMULATOR -->
+          <section class="space-y-4">
+            <!-- Timer Bar -->
+            <div class="rounded-3xl bg-white dark:bg-slate-900 border border-slate-200 dark:border-slate-800 p-4 sm:p-5 flex flex-wrap items-center justify-between gap-4">
+              <div>
+                <span class="text-[10px] font-extrabold uppercase tracking-wider text-teal-600 dark:text-teal-400">OSCE Practical Countdown</span>
+                <div id="osce-clock" class="text-4xl font-extrabold tabular-nums text-slate-900 dark:text-white">${formatClock(state.osceRemaining)}</div>
+                <div class="mt-2 flex gap-1.5">
+                  <button type="button" onclick="setOscePreset(900)" class="px-3 py-1 rounded-xl text-xs font-bold ${state.osceDuration===900?'bg-teal-600 text-white':'bg-slate-100 dark:bg-slate-800'}">15:00 Full Exam</button>
+                  <button type="button" onclick="setOscePreset(60)" class="px-3 py-1 rounded-xl text-xs font-bold ${state.osceDuration===60?'bg-indigo-600 text-white':'bg-slate-100 dark:bg-slate-800'}">01:00 Rapid</button>
+                </div>
+              </div>
+              <div class="flex flex-col items-start sm:items-end gap-2">
+                <div class="flex gap-2">
+                  <button type="button" onclick="toggleOsceTimer()" class="px-4 py-2 rounded-xl text-xs font-extrabold text-white ${state.osceRunning ? 'bg-amber-600' : 'bg-teal-600'}">${state.osceRunning ? 'Pause' : 'Start'}</button>
+                  <button type="button" onclick="setOscePreset(state.osceDuration)" class="px-3.5 py-2 rounded-xl text-xs font-bold bg-slate-100 dark:bg-slate-800">Reset</button>
+                </div>
+                <span class="text-xs font-bold text-slate-500">Session: <span class="text-emerald-600">${state.oscePass} Pass</span> &bull; <span class="text-rose-600">${state.osceDrill} Drill</span></span>
+              </div>
+            </div>
+
+            <!-- Prompt Card -->
+            <div class="rounded-3xl bg-white dark:bg-slate-900 border-2 border-teal-200 dark:border-teal-900/70 p-5 space-y-4">
+              <div class="flex flex-wrap items-center justify-between gap-2">
+                <span class="px-2.5 py-0.5 rounded-lg text-[11px] font-extrabold bg-indigo-100 dark:bg-indigo-950 text-indigo-700 dark:text-indigo-300">${p.sec}</span>
+                <div class="flex items-center gap-2">
+                  <span class="text-xs font-extrabold text-teal-600 dark:text-teal-400">Self-Score: ${tickedCount}/${p.points.length}</span>
+                  <button type="button" onclick="drawNextOsce()" class="px-3 py-1.5 rounded-xl bg-indigo-600 text-white text-xs font-bold">🎲 Random</button>
+                </div>
+              </div>
+
+              <h3 class="text-base sm:text-lg font-extrabold text-slate-900 dark:text-white">Examiner: “${p.prompt}”</h3>
+
+              <div class="p-3 rounded-xl bg-amber-50 dark:bg-amber-950/40 border border-amber-200 dark:border-amber-800/70 text-xs font-bold text-amber-900 dark:text-amber-200">
+                ⚠ Assessor Trap: ${p.trap}
+              </div>
+
+              <div class="rounded-2xl border border-slate-200 dark:border-slate-800 divide-y divide-slate-100 dark:divide-slate-800">
+                ${p.points.map((pt, i) => `
+                  <label class="flex items-start gap-3 p-3 cursor-pointer hover:bg-slate-50 dark:hover:bg-slate-800/40">
+                    <input type="checkbox" ${state.osceTicked[i] ? 'checked' : ''} onchange="state.osceTicked[${i}]=!state.osceTicked[${i}]; renderApp();" class="mt-0.5 w-4 h-4 accent-teal-600 rounded shrink-0" />
+                    <span class="text-xs sm:text-sm ${state.osceTicked[i] ? 'line-through text-slate-400' : 'text-slate-800 dark:text-slate-200'}">${pt}</span>
+                  </label>
+                `).join('')}
+              </div>
+
+              <div class="grid grid-cols-2 gap-3">
+                <button type="button" onclick="state.oscePass++; drawNextOsce(); showToast('Marked Pass ✓','success');" class="py-2.5 rounded-xl bg-emerald-600 text-white text-xs font-extrabold">✓ Pass &amp; Next</button>
+                <button type="button" onclick="state.osceDrill++; drawNextOsce(); showToast('Flagged to Drill ↺','warn');" class="py-2.5 rounded-xl bg-rose-600 text-white text-xs font-extrabold">↺ Drill &amp; Next</button>
+              </div>
+            </div>
+
+            <!-- Expandable Grading Scales Reference -->
+            <div class="rounded-2xl bg-white dark:bg-slate-900 border border-slate-200 dark:border-slate-800 overflow-hidden">
+              <button type="button" onclick="state.osceShowScales=!state.osceShowScales; renderApp();" class="w-full px-4 py-3 flex items-center justify-between text-left text-xs sm:text-sm font-extrabold text-slate-900 dark:text-white">
+                <span>📊 Exam Grading Scales Reference (MRC 1–5, Reflex 0–4 / 1+–4+, Sensation 0–2)</span>
+                <span>${state.osceShowScales ? '▲' : '▼'}</span>
+              </button>
+              ${state.osceShowScales ? `
+                <div class="p-4 pt-1 border-t border-slate-100 dark:border-slate-800 grid grid-cols-1 sm:grid-cols-3 gap-3 text-xs">
+                  <div class="p-3 rounded-xl bg-slate-50 dark:bg-slate-800/60 space-y-1">
+                    <strong class="block text-indigo-600 dark:text-indigo-400">Myotomes (MRC 0–5)</strong>
+                    <p><strong>5:</strong> Normal full power</p>
+                    <p><strong>4:</strong> Active against resistance (reduced)</p>
+                    <p><strong>3:</strong> Active against gravity only</p>
+                    <p><strong>2:</strong> Active with gravity eliminated</p>
+                    <p><strong>1:</strong> Flicker / trace contraction</p>
+                    <p><strong>0:</strong> No contraction</p>
+                  </div>
+                  <div class="p-3 rounded-xl bg-slate-50 dark:bg-slate-800/60 space-y-1">
+                    <strong class="block text-teal-600 dark:text-teal-400">Reflexes (0–4 / 1+–4+)</strong>
+                    <p><strong>0:</strong> Absent (areflexia)</p>
+                    <p><strong>1 / 1+:</strong> Diminished / hyporeflexia</p>
+                    <p><strong>2 / 2+:</strong> Normal / brisk</p>
+                    <p><strong>3 / 3+:</strong> Brisker than average</p>
+                    <p><strong>4 / 4+:</strong> Hyperreflexia with clonus (UMN)</p>
+                  </div>
+                  <div class="p-3 rounded-xl bg-slate-50 dark:bg-slate-800/60 space-y-1">
+                    <strong class="block text-amber-600 dark:text-amber-400">Sensation (0–2)</strong>
+                    <p><strong>2:</strong> Normal intact sensation</p>
+                    <p><strong>1:</strong> Impaired / altered (hypo/hyper)</p>
+                    <p><strong>0:</strong> Absent sensation (anaesthesia)</p>
+                  </div>
+                </div>
+              ` : ''}
+            </div>
+          </section>
+
+          <!-- 2. COMPACT 8-SECTION YEAR 3 TESTING OVERVIEW ACCORDION -->
+          <section class="space-y-2.5">
+            <div class="p-4 rounded-2xl bg-white dark:bg-slate-900 border border-slate-200 dark:border-slate-800 space-y-2">
+              <div class="flex items-center justify-between">
+                <h2 class="text-sm sm:text-base font-extrabold text-slate-900 dark:text-white">Year 3 Testing Overview (${doneOverview}/${totalOverview} — ${pctOverview}%)</h2>
+                <button type="button" onclick="state.checkedOverview={}; saveStore('mchiro_neuro_checklist',{}); renderApp();" class="px-2.5 py-1 rounded-lg bg-slate-100 dark:bg-slate-800 text-xs font-bold">Reset</button>
+              </div>
+              <div class="w-full h-2 rounded-full bg-slate-200 dark:bg-slate-800 overflow-hidden">
+                <div class="h-full bg-teal-500 transition-all duration-300" style="width:${pctOverview}%"></div>
+              </div>
+            </div>
+
+            ${CHECKLIST_SECTIONS.map((sec) => {
+              const isOpen = !!state.openAcc[sec.num];
+              const doneSec = sec.items.filter((_, idx) => state.checkedOverview[`n${sec.num}_${idx}`]).length;
+              return `
+                <div class="rounded-2xl bg-white dark:bg-slate-900 border border-slate-200 dark:border-slate-800 overflow-hidden">
+                  <button type="button" onclick="state.openAcc[${sec.num}]=!state.openAcc[${sec.num}]; renderApp();" class="w-full px-4 py-3 flex items-center justify-between text-left">
+                    <span class="text-xs sm:text-sm font-extrabold text-slate-900 dark:text-white">${sec.title}</span>
+                    <span class="text-xs font-bold text-slate-500">${doneSec}/${sec.items.length} ${isOpen ? '▲' : '▼'}</span>
+                  </button>
+                  ${isOpen ? `
+                    <div class="border-t border-slate-100 dark:border-slate-800 divide-y divide-slate-100 dark:divide-slate-800/70">
+                      ${sec.items.map((txt, idx) => {
+                        const k = `n${sec.num}_${idx}`;
+                        const chk = !!state.checkedOverview[k];
+                        return `
+                          <label class="flex items-start gap-3 px-4 py-2.5 cursor-pointer">
+                            <input type="checkbox" ${chk ? 'checked' : ''} onchange="state.checkedOverview['${k}']=!state.checkedOverview['${k}']; saveStore('mchiro_neuro_checklist',state.checkedOverview); renderApp();" class="mt-0.5 w-4 h-4 accent-teal-600 rounded shrink-0" />
+                            <span class="text-xs sm:text-sm ${chk ? 'line-through text-slate-400' : 'text-slate-700 dark:text-slate-200'}">${txt}</span>
+                          </label>
+                        `;
+                      }).join('')}
+                    </div>
+                  ` : ''}
+                </div>
+              `;
+            }).join('')}
+          </section>
+        </div>
+      `;
+    }
+
+    // =========================================================================
+    // 9. INITIALISE APP
+    // =========================================================================
+    initTheme();
+    updateDueBadge();
+    renderTabs();
+    renderApp();
+  </script>
+</body>
+</html>
