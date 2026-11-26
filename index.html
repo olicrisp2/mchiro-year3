@@ -3,19 +3,19 @@
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover" />
-  <title>MChiro Year 3 – McTimoney Revision Hub</title>
+  <title>MChiro Year 3 Hub – McTimoney College</title>
 
   <style>
     /* =========================================================================
        1. DESIGN TOKENS: APPLE HEALTH MINIMALIST × DUOLINGO TACTILE 3D
-       Zero external CDNs — pure system typography & inline SVGs.
+       Zero external CDNs — pure system font stack & inline SVG icons.
        ========================================================================= */
     :root {
       --bg-page: #F2F2F7;
       --bg-card: #FFFFFF;
       --bg-subtle: #EAEAF0;
       --bg-input: #FFFFFF;
-      --bg-glass: rgba(242, 242, 247, 0.88);
+      --bg-glass: rgba(242, 242, 247, 0.90);
       --border-soft: rgba(15, 23, 42, 0.10);
       --border-strong: rgba(15, 23, 42, 0.20);
       --text-main: #0F172A;
@@ -23,43 +23,38 @@
       --shadow-card: 0 2px 12px rgba(15, 23, 42, 0.05), 0 1px 2px rgba(15, 23, 42, 0.03);
 
       /* Semantic Palette */
-      --blue: #007AFF;
-      --blue-dark: #005BBF;
-      --blue-soft: rgba(0, 122, 255, 0.10);
-      --blue-border: rgba(0, 122, 255, 0.28);
+      --blue: #2563EB;
+      --blue-dark: #1D4ED8;
+      --blue-soft: rgba(37, 99, 235, 0.10);
+      --blue-border: rgba(37, 99, 235, 0.28);
+
+      --emerald: #059669;
+      --emerald-dark: #047857;
+      --emerald-soft: rgba(5, 150, 105, 0.11);
+      --emerald-border: rgba(5, 150, 105, 0.30);
+
+      --purple: #7C3AED;
+      --purple-dark: #5B21B6;
+      --purple-soft: rgba(124, 58, 237, 0.10);
+      --purple-border: rgba(124, 58, 237, 0.30);
 
       --indigo: #4F46E5;
       --indigo-dark: #3730A3;
       --indigo-soft: rgba(79, 70, 229, 0.10);
       --indigo-border: rgba(79, 70, 229, 0.28);
 
-      --purple: #7C3AED;
-      --purple-dark: #5B21B6;
-      --purple-soft: rgba(124, 58, 237, 0.10);
-      --purple-border: rgba(124, 58, 237, 0.28);
-
-      --emerald: #10B981;
-      --emerald-dark: #047857;
-      --emerald-soft: rgba(16, 185, 129, 0.12);
-      --emerald-border: rgba(16, 185, 129, 0.32);
-
-      --teal: #0D9488;
-      --teal-dark: #0F766E;
-      --teal-soft: rgba(13, 148, 136, 0.11);
-      --teal-border: rgba(13, 148, 136, 0.30);
-
-      --coral: #E11D48;
-      --coral-dark: #9F1239;
-      --coral-soft: rgba(225, 29, 72, 0.10);
-      --coral-border: rgba(225, 29, 72, 0.28);
+      --coral: #DC2626;
+      --coral-dark: #991B1B;
+      --coral-soft: rgba(220, 38, 38, 0.10);
+      --coral-border: rgba(220, 38, 38, 0.28);
 
       --amber: #D97706;
       --amber-dark: #92400E;
-      --amber-soft: rgba(217, 119, 6, 0.13);
+      --amber-soft: rgba(217, 119, 6, 0.12);
       --amber-border: rgba(217, 119, 6, 0.32);
 
       --fb-correct-bg: #ECFDF5;
-      --fb-wrong-bg: #FFF1F2;
+      --fb-wrong-bg: #FEF2F2;
     }
 
     .dark {
@@ -67,7 +62,7 @@
       --bg-card: #131B2E;
       --bg-subtle: #1E293B;
       --bg-input: #131B2E;
-      --bg-glass: rgba(9, 13, 22, 0.88);
+      --bg-glass: rgba(9, 13, 22, 0.90);
       --border-soft: rgba(248, 250, 252, 0.11);
       --border-strong: rgba(248, 250, 252, 0.22);
       --text-main: #F8FAFC;
@@ -75,22 +70,19 @@
       --shadow-card: 0 4px 18px rgba(0, 0, 0, 0.48);
 
       --blue-soft: rgba(59, 130, 246, 0.18);
-      --blue-border: rgba(96, 165, 250, 0.40);
+      --blue-border: rgba(96, 165, 250, 0.42);
 
-      --indigo-soft: rgba(99, 102, 241, 0.20);
-      --indigo-border: rgba(129, 140, 248, 0.42);
+      --emerald-soft: rgba(16, 185, 129, 0.18);
+      --emerald-border: rgba(52, 211, 153, 0.40);
 
       --purple-soft: rgba(139, 92, 246, 0.20);
       --purple-border: rgba(167, 139, 250, 0.42);
 
-      --emerald-soft: rgba(16, 185, 129, 0.18);
-      --emerald-border: rgba(52, 211, 153, 0.38);
+      --indigo-soft: rgba(99, 102, 241, 0.20);
+      --indigo-border: rgba(129, 140, 248, 0.42);
 
-      --teal-soft: rgba(20, 184, 166, 0.18);
-      --teal-border: rgba(45, 212, 191, 0.38);
-
-      --coral-soft: rgba(244, 63, 94, 0.19);
-      --coral-border: rgba(251, 113, 133, 0.42);
+      --coral-soft: rgba(239, 68, 68, 0.19);
+      --coral-border: rgba(248, 113, 113, 0.42);
 
       --amber-soft: rgba(245, 158, 11, 0.20);
       --amber-border: rgba(251, 191, 36, 0.42);
@@ -110,17 +102,12 @@
       min-height: 100vh;
       background-color: var(--bg-page);
       color: var(--text-main);
-      font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Helvetica, Arial, sans-serif;
+      font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif;
       line-height: 1.46;
       overflow-x: hidden;
       -webkit-font-smoothing: antialiased;
       -webkit-tap-highlight-color: transparent;
       transition: background-color 0.2s ease, color 0.2s ease;
-      padding-bottom: 92px;
-    }
-
-    @media (min-width: 769px) {
-      body { padding-bottom: 48px; }
     }
 
     h1, h2, h3, h4, p { margin: 0; }
@@ -141,6 +128,19 @@
 
     @media (min-width: 640px) {
       .container { padding: 0 22px; }
+    }
+
+    /* Proper bottom padding on <main> so content is never hidden behind mobile nav */
+    .main-stack {
+      display: flex;
+      flex-direction: column;
+      gap: 20px;
+      padding-top: 16px;
+      padding-bottom: 104px;
+    }
+
+    @media (min-width: 769px) {
+      .main-stack { padding-bottom: 52px; }
     }
 
     /* =========================================================================
@@ -176,7 +176,7 @@
       width: 38px;
       height: 38px;
       border-radius: 12px;
-      background: linear-gradient(135deg, var(--indigo), var(--emerald));
+      background: linear-gradient(135deg, var(--blue), var(--purple));
       color: #FFFFFF;
       font-weight: 800;
       font-size: 14px;
@@ -184,13 +184,13 @@
       align-items: center;
       justify-content: center;
       flex-shrink: 0;
-      box-shadow: 0 3px 10px rgba(79, 70, 229, 0.25);
+      box-shadow: 0 3px 10px rgba(37, 99, 235, 0.25);
     }
 
     .brand-text { min-width: 0; }
 
     .brand-title {
-      font-size: 16px;
+      font-size: 15.5px;
       font-weight: 800;
       letter-spacing: -0.02em;
       white-space: nowrap;
@@ -219,7 +219,7 @@
       align-items: center;
       gap: 4px;
       min-height: 36px;
-      padding: 6px 11px;
+      padding: 6px 10px;
       border-radius: 12px;
       background: var(--amber-soft);
       border: 1.5px solid var(--amber-border);
@@ -243,27 +243,17 @@
       background: var(--bg-card);
       color: var(--text-main);
       font-size: 12.5px;
-      font-weight: 700;
+      font-weight: 800;
       cursor: pointer;
-      transition: border-color 0.15s ease, background-color 0.15s ease;
+      transition: border-color 0.14s ease, background-color 0.14s ease;
+      white-space: nowrap;
     }
-    .hdr-btn:hover { border-color: var(--border-strong); }
+    .hdr-btn:hover { border-color: var(--blue); }
     .hdr-btn.square { width: 36px; padding: 0; }
-    .hdr-btn .lbl { display: none; }
-    @media (min-width: 520px) {
-      .hdr-btn .lbl { display: inline; }
-    }
 
     /* =========================================================================
-       4. SHARED SURFACES, BADGES & TACTILE 3D BUTTONS
+       4. SHARED SURFACES, BADGES & DUOLINGO TACTILE 3D BUTTONS
        ========================================================================= */
-    .main-stack {
-      display: flex;
-      flex-direction: column;
-      gap: 22px;
-      padding-top: 16px;
-    }
-
     .ah-card {
       background: var(--bg-card);
       border: 1px solid var(--border-soft);
@@ -295,33 +285,31 @@
       border-radius: 999px;
       font-size: 11px;
       font-weight: 800;
-      letter-spacing: 0.02em;
+      letter-spacing: 0.015em;
       white-space: nowrap;
     }
     .badge-blue { background: var(--blue-soft); color: var(--blue-dark); border: 1px solid var(--blue-border); }
     .dark .badge-blue { color: #93C5FD; }
-    .badge-indigo { background: var(--indigo-soft); color: var(--indigo); border: 1px solid var(--indigo-border); }
-    .dark .badge-indigo { color: #A5B4FC; }
-    .badge-purple { background: var(--purple-soft); color: var(--purple); border: 1px solid var(--purple-border); }
-    .dark .badge-purple { color: #DDD6FE; }
     .badge-emerald { background: var(--emerald-soft); color: var(--emerald-dark); border: 1px solid var(--emerald-border); }
     .dark .badge-emerald { color: #6EE7B7; }
-    .badge-teal { background: var(--teal-soft); color: var(--teal-dark); border: 1px solid var(--teal-border); }
-    .dark .badge-teal { color: #5EEAD4; }
-    .badge-coral { background: var(--coral-soft); color: var(--coral); border: 1px solid var(--coral-border); }
-    .dark .badge-coral { color: #FDA4AF; }
+    .badge-purple { background: var(--purple-soft); color: var(--purple-dark); border: 1px solid var(--purple-border); }
+    .dark .badge-purple { color: #DDD6FE; }
+    .badge-indigo { background: var(--indigo-soft); color: var(--indigo-dark); border: 1px solid var(--indigo-border); }
+    .dark .badge-indigo { color: #C7D2FE; }
+    .badge-coral { background: var(--coral-soft); color: var(--coral-dark); border: 1px solid var(--coral-border); }
+    .dark .badge-coral { color: #FCA5A5; }
     .badge-amber { background: var(--amber-soft); color: var(--amber-dark); border: 1px solid var(--amber-border); }
     .dark .badge-amber { color: #FDE68A; }
     .badge-muted { background: var(--bg-subtle); color: var(--text-muted); border: 1px solid var(--border-soft); }
 
-    /* Tactile Duolingo-style 3D Push Buttons */
+    /* Duolingo Tactile 3D Buttons (border-bottom: 4px solid ... depressing on :active) */
     .btn-3d {
       display: inline-flex;
       align-items: center;
       justify-content: center;
       gap: 7px;
       min-height: 44px;
-      padding: 11px 16px;
+      padding: 10px 16px;
       border-radius: 14px;
       font-size: 14px;
       font-weight: 800;
@@ -331,11 +319,11 @@
       text-align: center;
       transition: transform 0.08s ease, border-bottom-width 0.08s ease, filter 0.14s ease;
     }
+    .btn-3d:hover:not(:disabled) { filter: brightness(1.06); }
     .btn-3d:active:not(:disabled) {
       transform: translateY(2px);
       border-bottom-width: 2px !important;
     }
-    .btn-3d:hover:not(:disabled) { filter: brightness(1.06); }
     .btn-full { width: 100%; }
 
     .btn-blue {
@@ -350,23 +338,30 @@
       border: 2px solid var(--emerald);
       border-bottom: 4px solid var(--emerald-dark);
     }
+    .btn-emerald-soft {
+      background: var(--emerald-soft);
+      color: var(--emerald-dark);
+      border: 2px solid var(--emerald-border);
+      border-bottom: 4px solid var(--emerald);
+    }
+    .dark .btn-emerald-soft { color: #6EE7B7; }
     .btn-purple {
       background: var(--purple);
       color: #FFFFFF;
       border: 2px solid var(--purple);
       border-bottom: 4px solid var(--purple-dark);
     }
-    .btn-indigo {
-      background: var(--indigo);
-      color: #FFFFFF;
-      border: 2px solid var(--indigo);
-      border-bottom: 4px solid var(--indigo-dark);
-    }
     .btn-coral {
       background: var(--coral);
       color: #FFFFFF;
       border: 2px solid var(--coral);
       border-bottom: 4px solid var(--coral-dark);
+    }
+    .btn-amber {
+      background: var(--amber);
+      color: #FFFFFF;
+      border: 2px solid var(--amber);
+      border-bottom: 4px solid var(--amber-dark);
     }
     .btn-neutral {
       background: var(--bg-subtle);
@@ -376,7 +371,7 @@
     }
 
     /* =========================================================================
-       5. SECTION 1: GLOBAL INSTANT SEARCH
+       5. GLOBAL INSTANT SEARCH
        ========================================================================= */
     .search-wrap { position: relative; }
 
@@ -470,7 +465,57 @@
     }
 
     /* =========================================================================
-       6. SECTION 2: INTERACTIVE VISUAL LESSONS (3 ACTIVATED CARDS)
+       6. FEATURED QUICK-LAUNCH CARD: YEAR 3 PLANNER & SCAFFOLDING
+       ========================================================================= */
+    .planner-hero {
+      padding: 18px;
+      border: 1.5px solid var(--purple-border);
+      background: linear-gradient(135deg, var(--purple-soft), var(--bg-card) 52%, var(--indigo-soft));
+      display: flex;
+      flex-direction: column;
+      gap: 14px;
+    }
+
+    .planner-top {
+      display: flex;
+      align-items: flex-start;
+      justify-content: space-between;
+      gap: 12px;
+      flex-wrap: wrap;
+    }
+
+    .planner-pills {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 8px;
+    }
+
+    .planner-stat-pill {
+      display: inline-flex;
+      align-items: center;
+      gap: 6px;
+      padding: 6px 11px;
+      border-radius: 12px;
+      background: var(--bg-card);
+      border: 1px solid var(--border-soft);
+      font-size: 12px;
+      font-weight: 800;
+      color: var(--text-main);
+      box-shadow: 0 1px 3px rgba(15, 23, 42, 0.04);
+    }
+
+    @media (min-width: 700px) {
+      .planner-bottom {
+        display: flex;
+        align-items: center;
+        justify-content: space-between;
+        gap: 14px;
+      }
+      .planner-cta { width: auto; min-width: 225px; flex-shrink: 0; }
+    }
+
+    /* =========================================================================
+       7. INTERACTIVE VISUAL LESSONS (3 CARDS)
        ========================================================================= */
     .lessons-grid {
       display: grid;
@@ -503,28 +548,28 @@
     }
 
     .lesson-title {
-      font-size: 16px;
+      font-size: 15.5px;
       font-weight: 800;
-      line-height: 1.28;
+      line-height: 1.3;
       letter-spacing: -0.015em;
     }
 
     .lesson-sub {
       font-size: 12.5px;
       color: var(--text-muted);
-      line-height: 1.45;
+      line-height: 1.44;
     }
 
     /* =========================================================================
-       7. SECTION 3: REVISION PULSE & QUICK 5-MINUTE MIX (2-CARD ROW)
+       8. REVISION PULSE & QUICK 5-MINUTE MIX BENTO
        ========================================================================= */
-    .pulse-row {
+    .pulse-bento {
       display: grid;
       grid-template-columns: 1fr;
       gap: 14px;
     }
-    @media (min-width: 760px) {
-      .pulse-row { grid-template-columns: 1.25fr 1fr; }
+    @media (min-width: 740px) {
+      .pulse-bento { grid-template-columns: 1.25fr 1fr; }
     }
 
     .pulse-card {
@@ -547,10 +592,10 @@
       font-size: 26px;
       font-weight: 800;
       letter-spacing: -0.03em;
-      color: var(--indigo);
+      color: var(--amber-dark);
       font-variant-numeric: tabular-nums;
     }
-    .dark .countdown-num { color: #A5B4FC; }
+    .dark .countdown-num { color: #FCD34D; }
 
     .srs-grid {
       display: grid;
@@ -559,7 +604,7 @@
     }
 
     .srs-tile {
-      padding: 10px 8px;
+      padding: 10px 6px;
       border-radius: 14px;
       text-align: center;
       border: 1px solid var(--border-soft);
@@ -576,7 +621,7 @@
       font-variant-numeric: tabular-nums;
     }
     .t-coral .srs-val { color: var(--coral); }
-    .dark .t-coral .srs-val { color: #FDA4AF; }
+    .dark .t-coral .srs-val { color: #FCA5A5; }
     .t-emerald .srs-val { color: var(--emerald-dark); }
     .dark .t-emerald .srs-val { color: #6EE7B7; }
     .t-blue .srs-val { color: var(--blue-dark); }
@@ -584,10 +629,11 @@
 
     .srs-lbl {
       display: block;
-      font-size: 11px;
+      font-size: 10.5px;
       font-weight: 700;
       color: var(--text-muted);
       margin-top: 2px;
+      line-height: 1.25;
     }
 
     .mix-card {
@@ -596,12 +642,12 @@
       flex-direction: column;
       justify-content: space-between;
       gap: 14px;
-      background: linear-gradient(135deg, var(--indigo-soft), var(--bg-card) 55%, var(--amber-soft));
-      border: 1.5px solid var(--indigo-border);
+      background: linear-gradient(135deg, var(--amber-soft), var(--bg-card) 58%, var(--blue-soft));
+      border: 1.5px solid var(--amber-border);
     }
 
     /* =========================================================================
-       8. SECTION 4: CORE YEAR 3 MODULE HUBS (2×2 GRID)
+       9. CORE MODULE HUBS (2×2 GRID)
        ========================================================================= */
     .modules-grid {
       display: grid;
@@ -619,86 +665,40 @@
       justify-content: space-between;
       gap: 14px;
       border-top-width: 4px;
-      transition: transform 0.14s ease, box-shadow 0.14s ease;
+      transition: transform 0.14s ease;
     }
     .module-card:hover { transform: translateY(-2px); }
 
-    .mod-neuro { border-top-color: var(--purple); }
+    .mod-neuro { border-top-color: var(--blue); }
     .mod-msk { border-top-color: var(--coral); }
-    .mod-chiro { border-top-color: var(--teal); }
+    .mod-chiro { border-top-color: var(--emerald); }
     .mod-written { border-top-color: var(--amber); }
 
     .mod-head {
       display: flex;
-      align-items: center;
-      gap: 12px;
+      align-items: flex-start;
+      justify-content: space-between;
+      gap: 10px;
     }
-
-    .mod-icon {
-      width: 44px;
-      height: 44px;
-      border-radius: 13px;
-      display: inline-flex;
-      align-items: center;
-      justify-content: center;
-      flex-shrink: 0;
-    }
-    .icon-purple { background: var(--purple-soft); color: var(--purple); border: 1px solid var(--purple-border); }
-    .dark .icon-purple { color: #C4B5FD; }
-    .icon-coral { background: var(--coral-soft); color: var(--coral); border: 1px solid var(--coral-border); }
-    .dark .icon-coral { color: #FDA4AF; }
-    .icon-teal { background: var(--teal-soft); color: var(--teal); border: 1px solid var(--teal-border); }
-    .dark .icon-teal { color: #5EEAD4; }
-    .icon-amber { background: var(--amber-soft); color: var(--amber); border: 1px solid var(--amber-border); }
-    .dark .icon-amber { color: #FCD34D; }
 
     .mod-title {
       font-size: 16.5px;
       font-weight: 800;
       letter-spacing: -0.02em;
-    }
-    .mod-sub {
-      font-size: 12px;
-      font-weight: 600;
-      color: var(--text-muted);
-      margin-top: 2px;
-    }
-
-    .tag-row {
-      display: flex;
-      flex-wrap: wrap;
-      gap: 6px;
-    }
-    .focus-tag {
-      padding: 4px 9px;
-      border-radius: 8px;
-      background: var(--bg-subtle);
-      border: 1px solid var(--border-soft);
-      color: var(--text-main);
-      font-size: 11.5px;
-      font-weight: 700;
-    }
-
-    .mod-footer {
       display: flex;
       align-items: center;
-      justify-content: space-between;
-      gap: 10px;
-      padding-top: 12px;
-      border-top: 1px solid var(--border-soft);
+      gap: 7px;
     }
 
-    .mod-link-label {
+    .mod-desc {
       font-size: 13px;
-      font-weight: 800;
-      color: var(--blue);
-      display: inline-flex;
-      align-items: center;
-      gap: 4px;
+      color: var(--text-muted);
+      margin-top: 6px;
+      line-height: 1.46;
     }
 
     /* =========================================================================
-       9. MODALS (QUICK 5-MINUTE MIX & PHONE <-> LAPTOP SYNC)
+       10. MODALS (5-MINUTE MIX & PHONE <-> LAPTOP SYNC)
        ========================================================================= */
     .modal-backdrop {
       position: fixed;
@@ -721,7 +721,7 @@
       background: var(--bg-card);
       border: 1px solid var(--border-soft);
       border-radius: 22px;
-      box-shadow: 0 20px 50px rgba(0, 0, 0, 0.34);
+      box-shadow: 0 20px 50px rgba(0, 0, 0, 0.35);
       overflow: hidden;
       display: flex;
       flex-direction: column;
@@ -750,6 +750,7 @@
       display: inline-flex;
       align-items: center;
       justify-content: center;
+      flex-shrink: 0;
     }
     .modal-close:hover { color: var(--text-main); }
 
@@ -777,7 +778,7 @@
     }
 
     .mix-q-text {
-      font-size: 16px;
+      font-size: 15.5px;
       font-weight: 800;
       line-height: 1.4;
       letter-spacing: -0.015em;
@@ -899,7 +900,7 @@
     .fb-title.correct { color: var(--emerald-dark); }
     .dark .fb-title.correct { color: #6EE7B7; }
     .fb-title.wrong { color: var(--coral-dark); }
-    .dark .fb-title.wrong { color: #FDA4AF; }
+    .dark .fb-title.wrong { color: #FCA5A5; }
 
     .fb-pearl {
       font-size: 13px;
@@ -926,7 +927,7 @@
     }
 
     /* =========================================================================
-       10. FIXED MOBILE THUMB-ZONE BOTTOM NAVIGATION BAR (5 ITEMS)
+       11. FIXED MOBILE THUMB-ZONE BOTTOM NAVIGATION BAR (6 LINKS)
        ========================================================================= */
     .mobile-nav {
       position: fixed;
@@ -938,49 +939,46 @@
       backdrop-filter: blur(20px);
       -webkit-backdrop-filter: blur(20px);
       border-top: 1px solid var(--border-soft);
-      padding: 6px 8px calc(6px + env(safe-area-inset-bottom, 0px));
+      padding: 6px 6px calc(6px + env(safe-area-inset-bottom, 0px));
     }
     @media (min-width: 769px) {
       .mobile-nav { display: none; }
     }
 
     .mobile-nav-grid {
-      max-width: 480px;
+      max-width: 540px;
       margin: 0 auto;
       display: grid;
-      grid-template-columns: repeat(5, 1fr);
-      gap: 3px;
+      grid-template-columns: repeat(6, 1fr);
+      gap: 2px;
     }
 
-    .mnav-item {
-      border: none;
-      background: transparent;
-      color: var(--text-muted);
-      padding: 6px 2px;
-      border-radius: 12px;
+    .mnav-link {
       display: flex;
       flex-direction: column;
       align-items: center;
       justify-content: center;
-      gap: 3px;
-      cursor: pointer;
-      font-size: 10px;
+      gap: 2px;
+      padding: 6px 2px;
+      border-radius: 11px;
+      color: var(--text-muted);
+      font-size: 9.5px;
       font-weight: 700;
       text-align: center;
       transition: background-color 0.14s ease, color 0.14s ease;
     }
-    .mnav-item.active {
+    .mnav-link.active {
       color: var(--blue);
       background: var(--blue-soft);
       font-weight: 800;
     }
 
     /* =========================================================================
-       11. TOAST NOTIFICATIONS & ANIMATIONS
+       12. TOAST NOTIFICATIONS & ANIMATIONS
        ========================================================================= */
     .toast-wrap {
       position: fixed;
-      bottom: 86px;
+      bottom: 88px;
       right: 14px;
       z-index: 80;
       display: flex;
@@ -997,15 +995,15 @@
       padding: 10px 15px;
       border-radius: 14px;
       font-size: 13px;
-      font-weight: 700;
+      font-weight: 800;
       box-shadow: 0 8px 24px rgba(0, 0, 0, 0.24);
       background: var(--text-main);
       color: var(--bg-card);
       transition: opacity 0.25s ease, transform 0.25s ease;
     }
-    .toast.emerald { background: var(--emerald-dark); color: #FFFFFF; }
-    .toast.amber { background: var(--amber-dark); color: #FFFFFF; }
-    .toast.coral { background: var(--coral-dark); color: #FFFFFF; }
+    .toast.emerald { background: var(--emerald); color: #FFFFFF; }
+    .toast.amber { background: var(--amber); color: #FFFFFF; }
+    .toast.coral { background: var(--coral); color: #FFFFFF; }
 
     @keyframes popIn {
       from { opacity: 0; transform: scale(0.96) translateY(8px); }
@@ -1019,38 +1017,32 @@
 </head>
 <body>
 
-  <!-- Toast Notification Container (No alert() or confirm() used) -->
+  <!-- Toast Container (replaces alert/confirm) -->
   <div id="toast-wrap" class="toast-wrap" aria-live="polite"></div>
 
   <!-- =========================================================================
-       STICKY FROSTED-GLASS HEADER
+       1. STICKY FROSTED-GLASS HEADER
        ========================================================================= -->
   <header class="top-header">
     <div class="container header-inner">
-      <a href="index.html" class="brand" aria-label="MChiro Year 3 Revision Hub Home">
+      <a href="index.html" class="brand" aria-label="MChiro Year 3 Hub Home">
         <div class="brand-mark">Y3</div>
         <div class="brand-text">
-          <h1 class="brand-title">MChiro Year 3</h1>
-          <p class="brand-sub">McTimoney Revision Hub</p>
+          <h1 class="brand-title">MChiro Year 3 Hub</h1>
+          <p class="brand-sub">McTimoney College &bull; Jan 2027</p>
         </div>
       </a>
 
       <div class="header-controls">
         <!-- Live XP Pill (sums ul + ll + cn up to 380 XP) -->
-        <div class="xp-pill" title="Total Interactive Visual Lesson XP (max 380 XP)">
+        <div class="xp-pill" title="Interactive Visual Lessons XP (up to 380 XP)">
           <span>⚡</span>
           <span id="header-xp">0 XP</span>
         </div>
 
         <!-- Phone <-> Laptop Sync Button -->
         <button type="button" class="hdr-btn" onclick="openSyncModal()" title="Phone ↔ Laptop Progress Sync">
-          <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
-            <path d="M21 12a9 9 0 0 0-9-9 9.75 9.75 0 0 0-6.74 2.74L3 8"/>
-            <path d="M3 3v5h5"/>
-            <path d="M3 12a9 9 0 0 0 9 9 9.75 9.75 0 0 0 6.74-2.74L21 16"/>
-            <path d="M16 16h5v5"/>
-          </svg>
-          <span class="lbl">Sync</span>
+          <span>⇄ Sync</span>
         </button>
 
         <!-- Light / Dark Mode Toggle -->
@@ -1068,9 +1060,9 @@
   <!-- =========================================================================
        MAIN DASHBOARD
        ========================================================================= -->
-  <main id="top" class="container main-stack">
+  <main class="container main-stack">
 
-    <!-- SECTION 1: GLOBAL INSTANT SEARCH BAR -->
+    <!-- 2. GLOBAL INSTANT SEARCH BAR -->
     <section aria-label="Global Instant Search">
       <div class="search-wrap">
         <span class="search-icon" aria-hidden="true">
@@ -1083,8 +1075,8 @@
           id="global-search"
           class="search-input"
           type="search"
-          placeholder="Search dermatomes, CN VII, OA vs RA, Beighton, PICO..."
-          aria-label="Search Year 3 topics"
+          placeholder="Search Planner, CN VII, C5–T1, OA vs RA, 1st Rib, PICO..."
+          aria-label="Search Year 3 clinical topics and tools"
           oninput="handleSearch(this.value)"
         />
         <button
@@ -1098,192 +1090,154 @@
       <div id="search-results" class="ah-card search-results"></div>
     </section>
 
-    <!-- SECTION 2: INTERACTIVE VISUAL LESSONS (ALL 3 ACTIVATED) -->
+    <!-- 3. FEATURED QUICK-LAUNCH CARD: YEAR 3 PLANNER & SCAFFOLDING -->
+    <section aria-label="Year 3 Planner and Scaffolding">
+      <article class="ah-card planner-hero">
+        <div class="planner-top">
+          <div>
+            <span class="badge badge-purple">New Year Ready &bull; Auto-Saving</span>
+            <h2 style="font-size:18.5px;font-weight:800;letter-spacing:-0.02em;margin-top:6px;">
+              🗓️ Year 3 Planner &amp; Scaffolding
+            </h2>
+            <p style="font-size:13px;color:var(--text-muted);margin-top:3px;">
+              Module vaults for all 7 Year 3 subjects, weighted assessment &amp; grade tracker, pre-term bridging checklist &amp; weekly routine.
+            </p>
+          </div>
+        </div>
+
+        <div class="planner-bottom" style="display:flex;flex-direction:column;gap:12px;">
+          <div id="planner-stat-pills" class="planner-pills"></div>
+          <a href="planner.html" class="btn-3d btn-purple btn-full planner-cta">
+            Open Year 3 Planner &rarr;
+          </a>
+        </div>
+      </article>
+    </section>
+
+    <!-- 4. INTERACTIVE VISUAL LESSONS (X / 3 COMPLETED) -->
     <section id="lessons-section" aria-label="Interactive Visual Lessons">
       <div class="section-head">
         <h2 class="section-title">Interactive Visual Lessons</h2>
         <span id="lessons-progress-badge" class="badge badge-blue">0 / 3 Completed</span>
       </div>
-
       <div id="lessons-grid" class="lessons-grid"></div>
     </section>
 
-    <!-- SECTION 3: REVISION PULSE & QUICK 5-MINUTE MIX -->
+    <!-- 5. REVISION PULSE & QUICK 5-MINUTE MIX -->
     <section aria-label="Revision Pulse and Quick 5-Minute Mix">
       <div class="section-head">
-        <h2 class="section-title">Revision Pulse &amp; Warm-Up</h2>
-        <span class="badge badge-muted mono">Starts Jan 25, 2027</span>
+        <h2 class="section-title">Revision Pulse &amp; 5-Min Mix</h2>
+        <span class="badge badge-amber mono">Start: 25 Jan 2027</span>
       </div>
 
-      <div class="pulse-row">
-        <!-- Card A: Year 3 Countdown & Leitner Pulse -->
+      <div class="pulse-bento">
+        <!-- Bento Card A: Countdown & Leitner SRS Pulse -->
         <article class="ah-card pulse-card">
           <div class="countdown-row">
             <div>
-              <span class="badge badge-indigo">Year 3 Countdown</span>
-              <div style="margin-top: 6px; display: flex; align-items: baseline; gap: 6px; flex-wrap: wrap;">
+              <span class="badge badge-amber">Countdown to Year 3</span>
+              <div style="margin-top:6px;display:flex;align-items:baseline;gap:6px;flex-wrap:wrap;">
                 <span id="days-to-y3" class="countdown-num">--</span>
-                <span style="font-size: 14px; font-weight: 700; color: var(--text-muted);">days to Year 3</span>
+                <span id="days-to-y3-label" style="font-size:14px;font-weight:700;color:var(--text-muted);">days remaining</span>
               </div>
             </div>
-            <span class="mono" style="font-size: 11.5px; font-weight: 700; color: var(--text-muted);">Leitner SRS</span>
+            <span class="mono" style="font-size:11.5px;font-weight:800;color:var(--text-muted);">Leitner SRS</span>
           </div>
 
           <div class="srs-grid">
             <div class="srs-tile t-coral">
               <span id="srs-due" class="srs-val">0</span>
-              <span class="srs-lbl">Due Now</span>
+              <span class="srs-lbl">Due Today</span>
             </div>
             <div class="srs-tile t-emerald">
               <span id="srs-mastered" class="srs-val">0</span>
-              <span class="srs-lbl">Mastered</span>
+              <span class="srs-lbl">Mastered (Box 4–5)</span>
             </div>
             <div class="srs-tile t-blue">
               <span id="srs-total" class="srs-val">0</span>
-              <span class="srs-lbl">Tracked</span>
+              <span class="srs-lbl">Total Tracked</span>
             </div>
           </div>
         </article>
 
-        <!-- Card B: Quick 5-Minute Mix -->
+        <!-- Bento Card B: Quick 5-Minute Mix CTA -->
         <article class="ah-card mix-card">
           <div>
-            <span class="badge badge-amber">Interleaved Active Recall</span>
-            <h3 style="font-size: 17px; font-weight: 800; letter-spacing: -0.02em; margin-top: 8px;">Quick 5-Minute Mix</h3>
-            <p style="font-size: 13px; color: var(--text-muted); margin-top: 4px;">
-              5 random clinical questions across Neuro, MSK, Chiro 3 &amp; Research with instant clinical pearls.
+            <span class="badge badge-blue">Interleaved Recall</span>
+            <h3 style="font-size:17px;font-weight:800;letter-spacing:-0.02em;margin-top:8px;">Quick 5-Minute Mix</h3>
+            <p style="font-size:13px;color:var(--text-muted);margin-top:4px;">
+              5 random clinical questions across Neuro, MSK, Chiro 3 &amp; Written modules with instant 1-line clinical pearls.
             </p>
           </div>
-          <button type="button" class="btn-3d btn-indigo btn-full" onclick="openMixModal()">
-            Start 5-Min Warm-Up ⚡
+          <button type="button" class="btn-3d btn-amber btn-full" onclick="openMixModal()">
+            ⚡ Start 5-Min Mix (5 Qs)
           </button>
         </article>
       </div>
     </section>
 
-    <!-- SECTION 4: CORE YEAR 3 MODULE HUBS (2×2 GRID) -->
-    <section aria-label="Core Year 3 Module Hubs">
+    <!-- 6. CORE MODULE HUBS (4 MODULE CARDS) -->
+    <section aria-label="Core Module Hubs">
       <div class="section-head">
-        <h2 class="section-title">Core Year 3 Module Hubs</h2>
-        <span class="badge badge-muted">4 Workspaces</span>
+        <h2 class="section-title">Core Module Hubs</h2>
+        <span class="badge badge-muted">4 Clinical Workspaces</span>
       </div>
 
       <div class="modules-grid">
-        <!-- 1. Clinical Neurology -->
+        <!-- Clinical Neurology -->
         <article class="ah-card module-card mod-neuro">
-          <div style="display: flex; flex-direction: column; gap: 12px;">
+          <div>
             <div class="mod-head">
-              <div class="mod-icon icon-purple" aria-hidden="true">
-                <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
-                  <path d="M9.5 2A2.5 2.5 0 0 1 12 4.5v15a2.5 2.5 0 0 1-4.96.44 2.5 2.5 0 0 1-2.96-3.08 3 3 0 0 1-.34-5.58 2.5 2.5 0 0 1 1.32-4.24 2.5 2.5 0 0 1 1.98-3A2.5 2.5 0 0 1 9.5 2Z"/>
-                  <path d="M14.5 2A2.5 2.5 0 0 0 12 4.5v15a2.5 2.5 0 0 0 4.96.44 2.5 2.5 0 0 0 2.96-3.08 3 3 0 0 0 .34-5.58 2.5 2.5 0 0 0-1.32-4.24 2.5 2.5 0 0 0-1.98-3A2.5 2.5 0 0 0 14.5 2Z"/>
-                </svg>
-              </div>
-              <div>
-                <h3 class="mod-title">Clinical Neurology</h3>
-                <p class="mod-sub">Bedside Exams, Simulators &amp; Lesions</p>
-              </div>
+              <h3 class="mod-title"><span>🧠</span><span>Clinical Neurology</span></h3>
+              <span class="badge badge-blue">Year 2: 82%</span>
             </div>
-            <div class="tag-row">
-              <span class="focus-tag">Whole-Face CN Map</span>
-              <span class="focus-tag">SMR Screening</span>
-              <span class="focus-tag">Weber/Rinne</span>
-              <span class="focus-tag">Hutchinson &amp; GCS</span>
-              <span class="focus-tag">15-Min OSCE</span>
-            </div>
+            <p class="mod-desc">
+              Whole-Face CN Map, SMR Screening, Weber/Rinne &amp; Hutchinson Simulators, Spinal Cord Lesions &amp; 15-Min OSCE.
+            </p>
           </div>
-          <div class="mod-footer">
-            <span class="badge badge-purple">Neuro Hub</span>
-            <a href="neuro.html" class="btn-3d btn-purple" style="min-height: 38px; padding: 7px 14px; font-size: 13px;">Open &rarr;</a>
-          </div>
+          <a href="neuro.html" class="btn-3d btn-blue btn-full">Open Neuro Hub &rarr;</a>
         </article>
 
-        <!-- 2. Musculoskeletal Medicine -->
+        <!-- Musculoskeletal Medicine -->
         <article class="ah-card module-card mod-msk">
-          <div style="display: flex; flex-direction: column; gap: 12px;">
+          <div>
             <div class="mod-head">
-              <div class="mod-icon icon-coral" aria-hidden="true">
-                <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
-                  <path d="M17 10c.7-.7 1.69 0 2.5 0a2.5 2.5 0 1 0 0-5 .5.5 0 0 1-.5-.5 2.5 2.5 0 1 0-5 0c0 .81.7 1.8 0 2.5l-7 7c-.7.7-1.69 0-2.5 0a2.5 2.5 0 0 0 0 5c.28 0 .5.22.5.5a2.5 2.5 0 1 0 5 0c0-.81-.7-1.8 0-2.5Z"/>
-                </svg>
-              </div>
-              <div>
-                <h3 class="mod-title">Musculoskeletal Medicine</h3>
-                <p class="mod-sub">Pathology, Metabolic Bone &amp; Red Flags</p>
-              </div>
+              <h3 class="mod-title"><span>🦴</span><span>Musculoskeletal Medicine</span></h3>
+              <span class="badge badge-coral">Priority 1 Bridge</span>
             </div>
-            <div class="tag-row">
-              <span class="focus-tag">OA vs RA SVG</span>
-              <span class="focus-tag">CKD &rarr; Bone Domino</span>
-              <span class="focus-tag">Red Flags</span>
-              <span class="focus-tag">SAQ / LAQ Marking</span>
-            </div>
+            <p class="mod-desc">
+              OA vs. RA, Metabolic Bone Disease, Renal Osteodystrophy, Red Flags &amp; Differential Tables.
+            </p>
           </div>
-          <div class="mod-footer">
-            <span class="badge badge-coral">MSK Hub</span>
-            <a href="msk.html" class="btn-3d btn-coral" style="min-height: 38px; padding: 7px 14px; font-size: 13px;">Open &rarr;</a>
-          </div>
+          <a href="msk.html" class="btn-3d btn-coral btn-full">Open MSK Hub &rarr;</a>
         </article>
 
-        <!-- 3. Chiropractic Studies 3 -->
+        <!-- Chiropractic Studies 3 -->
         <article class="ah-card module-card mod-chiro">
-          <div style="display: flex; flex-direction: column; gap: 12px;">
+          <div>
             <div class="mod-head">
-              <div class="mod-icon icon-teal" aria-hidden="true">
-                <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
-                  <path d="M18 11V6a2 2 0 0 0-2-2 2 2 0 0 0-2 2"/>
-                  <path d="M14 10V4a2 2 0 0 0-2-2 2 2 0 0 0-2 2v2"/>
-                  <path d="M10 10.5V6a2 2 0 0 0-2-2 2 2 0 0 0-2 2v8"/>
-                  <path d="M18 8a2 2 0 1 1 4 0v6a8 8 0 0 1-8 8h-2c-2.8 0-4.5-.86-5.99-2.34l-3.6-3.6a2 2 0 0 1 2.83-2.82L7 15"/>
-                </svg>
-              </div>
-              <div>
-                <h3 class="mod-title">Chiropractic Studies 3</h3>
-                <p class="mod-sub">McTimoney Routine, Cues &amp; 40-Min Sim</p>
-              </div>
+              <h3 class="mod-title"><span>🤲</span><span>Chiropractic Studies 3</span></h3>
+              <span class="badge badge-emerald">Year 2: 78%</span>
             </div>
-            <div class="tag-row">
-              <span class="focus-tag">Full-Body Routine</span>
-              <span class="focus-tag">Year 2 Guardrails</span>
-              <span class="focus-tag">Palpation &amp; Transfers</span>
-              <span class="focus-tag">Year 3 Slots</span>
-            </div>
+            <p class="mod-desc">
+              Full-Body McTimoney Routine, Colour-Coded Stance/Hand Steps &amp; Year 2 Practical Assessor Fixes.
+            </p>
           </div>
-          <div class="mod-footer">
-            <span class="badge badge-teal">Chiro 3 Hub</span>
-            <a href="chiro.html" class="btn-3d btn-emerald" style="min-height: 38px; padding: 7px 14px; font-size: 13px;">Open &rarr;</a>
-          </div>
+          <a href="chiro.html" class="btn-3d btn-emerald btn-full">Open Chiro 3 Hub &rarr;</a>
         </article>
 
-        <!-- 4. Written & Foundation -->
+        <!-- Written & Foundation -->
         <article class="ah-card module-card mod-written">
-          <div style="display: flex; flex-direction: column; gap: 12px;">
+          <div>
             <div class="mod-head">
-              <div class="mod-icon icon-amber" aria-hidden="true">
-                <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
-                  <path d="M14.5 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V7.5L14.5 2z"/>
-                  <polyline points="14 2 14 8 20 8"/>
-                  <line x1="16" y1="13" x2="8" y2="13"/>
-                  <line x1="16" y1="17" x2="8" y2="17"/>
-                  <line x1="10" y1="9" x2="8" y2="9"/>
-                </svg>
-              </div>
-              <div>
-                <h3 class="mod-title">Written &amp; Foundation</h3>
-                <p class="mod-sub">Rubric Auditing, Research &amp; BPS</p>
-              </div>
+              <h3 class="mod-title"><span>✍️</span><span>Written &amp; Foundation</span></h3>
+              <span class="badge badge-amber">Clinic 3 &bull; Res 2 &bull; Phil 3 &bull; Behav</span>
             </div>
-            <div class="tag-row">
-              <span class="focus-tag">Essay Pre-Flight Scanner</span>
-              <span class="focus-tag">Clinic Studies 3</span>
-              <span class="focus-tag">Research 2 PICO</span>
-              <span class="focus-tag">Phil 3 &amp; Behav Sci</span>
-            </div>
+            <p class="mod-desc">
+              Pre-Flight Essay Scanner, Strict Rubric Auditor, PICO Builder, Study Designs &amp; BPS Triangle.
+            </p>
           </div>
-          <div class="mod-footer">
-            <span class="badge badge-amber">Written Hub</span>
-            <a href="written.html" class="btn-3d btn-blue" style="min-height: 38px; padding: 7px 14px; font-size: 13px;">Open &rarr;</a>
-          </div>
+          <a href="written.html" class="btn-3d btn-amber btn-full">Open Written Hub &rarr;</a>
         </article>
       </div>
     </section>
@@ -1291,49 +1245,32 @@
   </main>
 
   <!-- =========================================================================
-       FIXED MOBILE THUMB-ZONE BOTTOM NAVIGATION BAR (5 ITEMS)
+       8. FIXED MOBILE THUMB-ZONE BOTTOM NAVIGATION BAR (6 LINKS)
        ========================================================================= -->
-  <nav class="mobile-nav" aria-label="Mobile Navigation">
+  <nav class="mobile-nav" aria-label="Mobile Hub Navigation">
     <div class="mobile-nav-grid">
-      <a href="index.html" class="mnav-item active" aria-current="page">
-        <svg width="19" height="19" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.1" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
-          <path d="m3 9 9-7 9 7v11a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2z"/>
-          <polyline points="9 22 9 12 15 12 15 22"/>
-        </svg>
+      <a href="index.html" class="mnav-link active" aria-current="page">
+        <svg width="17" height="17" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.1" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="m3 9 9-7 9 7v11a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2z"/><polyline points="9 22 9 12 15 12 15 22"/></svg>
         <span>Home</span>
       </a>
-
-      <button type="button" class="mnav-item" onclick="scrollToLessons()">
-        <svg width="19" height="19" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.1" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
-          <circle cx="12" cy="12" r="10"/>
-          <circle cx="12" cy="12" r="6"/>
-          <circle cx="12" cy="12" r="2"/>
-        </svg>
-        <span>Lessons</span>
-      </button>
-
-      <a href="neuro.html" class="mnav-item">
-        <svg width="19" height="19" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.1" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
-          <path d="M9.5 2A2.5 2.5 0 0 1 12 4.5v15a2.5 2.5 0 0 1-4.96.44 2.5 2.5 0 0 1-2.96-3.08 3 3 0 0 1-.34-5.58 2.5 2.5 0 0 1 1.32-4.24 2.5 2.5 0 0 1 1.98-3A2.5 2.5 0 0 1 9.5 2Z"/>
-          <path d="M14.5 2A2.5 2.5 0 0 0 12 4.5v15a2.5 2.5 0 0 0 4.96.44 2.5 2.5 0 0 0 2.96-3.08 3 3 0 0 0 .34-5.58 2.5 2.5 0 0 0-1.32-4.24 2.5 2.5 0 0 0-1.98-3A2.5 2.5 0 0 0 14.5 2Z"/>
-        </svg>
+      <a href="planner.html" class="mnav-link">
+        <svg width="17" height="17" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.1" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><rect x="3" y="4" width="18" height="18" rx="2"/><line x1="16" y1="2" x2="16" y2="6"/><line x1="8" y1="2" x2="8" y2="6"/><line x1="3" y1="10" x2="21" y2="10"/></svg>
+        <span>Planner</span>
+      </a>
+      <a href="neuro.html" class="mnav-link">
+        <svg width="17" height="17" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.1" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M9.5 2A2.5 2.5 0 0 1 12 4.5v15a2.5 2.5 0 0 1-4.96.44 2.5 2.5 0 0 1-2.96-3.08 3 3 0 0 1-.34-5.58 2.5 2.5 0 0 1 1.32-4.24 2.5 2.5 0 0 1 1.98-3A2.5 2.5 0 0 1 9.5 2Z"/><path d="M14.5 2A2.5 2.5 0 0 0 12 4.5v15a2.5 2.5 0 0 0 4.96.44 2.5 2.5 0 0 0 2.96-3.08 3 3 0 0 0 .34-5.58 2.5 2.5 0 0 0-1.32-4.24 2.5 2.5 0 0 0-1.98-3A2.5 2.5 0 0 0 14.5 2Z"/></svg>
         <span>Neuro</span>
       </a>
-
-      <a href="msk.html" class="mnav-item">
-        <svg width="19" height="19" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.1" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
-          <path d="M17 10c.7-.7 1.69 0 2.5 0a2.5 2.5 0 1 0 0-5 .5.5 0 0 1-.5-.5 2.5 2.5 0 1 0-5 0c0 .81.7 1.8 0 2.5l-7 7c-.7.7-1.69 0-2.5 0a2.5 2.5 0 0 0 0 5c.28 0 .5.22.5.5a2.5 2.5 0 1 0 5 0c0-.81-.7-1.8 0-2.5Z"/>
-        </svg>
+      <a href="msk.html" class="mnav-link">
+        <svg width="17" height="17" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.1" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M17 10c.7-.7 1.69 0 2.5 0a2.5 2.5 0 1 0 0-5 .5.5 0 0 1-.5-.5 2.5 2.5 0 1 0-5 0c0 .81.7 1.8 0 2.5l-7 7c-.7.7-1.69 0-2.5 0a2.5 2.5 0 0 0 0 5c.28 0 .5.22.5.5a2.5 2.5 0 1 0 5 0c0-.81-.7-1.8 0-2.5Z"/></svg>
         <span>MSK</span>
       </a>
-
-      <a href="written.html" class="mnav-item">
-        <svg width="19" height="19" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.1" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
-          <path d="M14.5 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V7.5L14.5 2z"/>
-          <polyline points="14 2 14 8 20 8"/>
-          <line x1="16" y1="13" x2="8" y2="13"/>
-          <line x1="16" y1="17" x2="8" y2="17"/>
-        </svg>
+      <a href="chiro.html" class="mnav-link">
+        <svg width="17" height="17" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.1" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M18 11V6a2 2 0 0 0-2-2 2 2 0 0 0-2 2"/><path d="M14 10V4a2 2 0 0 0-2-2 2 2 0 0 0-2 2v2"/><path d="M10 10.5V6a2 2 0 0 0-2-2 2 2 0 0 0-2 2v8"/><path d="M18 8a2 2 0 1 1 4 0v6a8 8 0 0 1-8 8h-2c-2.8 0-4.5-.86-5.99-2.34l-3.6-3.6a2 2 0 0 1 2.83-2.82L7 15"/></svg>
+        <span>Chiro</span>
+      </a>
+      <a href="written.html" class="mnav-link">
+        <svg width="17" height="17" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.1" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M14.5 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V7.5L14.5 2z"/><polyline points="14 2 14 8 20 8"/></svg>
         <span>Written</span>
       </a>
     </div>
@@ -1342,49 +1279,49 @@
   <!-- =========================================================================
        MODAL 1: QUICK 5-MINUTE MIX
        ========================================================================= -->
-  <div id="mix-modal" class="modal-backdrop" role="dialog" aria-modal="true" aria-label="Quick 5-Minute Warm-Up">
+  <div id="mix-modal" class="modal-backdrop" role="dialog" aria-modal="true" aria-label="Quick 5-Minute Mix">
     <div id="mix-box" class="modal-box"></div>
   </div>
 
   <!-- =========================================================================
-       MODAL 2: PHONE <-> LAPTOP PROGRESS SYNC
+       MODAL 2: PHONE <-> LAPTOP PROGRESS SYNC (ALL 4 KEYS)
        ========================================================================= -->
   <div id="sync-modal" class="modal-backdrop" role="dialog" aria-modal="true" aria-label="Phone and Laptop Progress Sync">
     <div class="modal-box">
       <div class="modal-header">
         <div>
-          <h3 style="font-size: 16px; font-weight: 800;">Phone &harr; Laptop Progress Sync</h3>
-          <p style="font-size: 11.5px; color: var(--text-muted); margin-top: 2px;">
-            Syncs Leitner SRS (<span class="mono">mchiro_srs_v4</span>), Lessons (UL, LL, CN) &amp; Theme privately.
+          <h3 style="font-size:16px;font-weight:800;">Phone &harr; Laptop Progress Sync</h3>
+          <p style="font-size:11.5px;color:var(--text-muted);margin-top:2px;">
+            Bundles Leitner SRS, Lessons (UL/LL/CN), Year 3 Planner &amp; Theme privately.
           </p>
         </div>
         <button type="button" class="modal-close" onclick="closeSyncModal()" aria-label="Close Sync Modal">&times;</button>
       </div>
 
       <div class="modal-body">
-        <!-- Export -->
-        <div style="display: flex; flex-direction: column; gap: 8px;">
-          <div style="display: flex; align-items: center; justify-content: space-between; gap: 8px; flex-wrap: wrap;">
+        <!-- Step 1: Export -->
+        <div style="display:flex;flex-direction:column;gap:8px;">
+          <div style="display:flex;align-items:center;justify-content:space-between;gap:8px;flex-wrap:wrap;">
             <span class="badge badge-emerald">1. Copy From This Device</span>
-            <button type="button" class="btn-3d btn-emerald" style="min-height: 36px; padding: 6px 13px; font-size: 12.5px;" onclick="copySyncCode()">
+            <button type="button" class="btn-3d btn-emerald" style="min-height:36px;padding:6px 13px;font-size:12.5px;" onclick="copySyncCode()">
               Copy Sync Code
             </button>
           </div>
           <textarea id="sync-export" class="sync-textarea mono" rows="3" readonly aria-label="Exported Sync Code"></textarea>
         </div>
 
-        <!-- Import -->
-        <div style="display: flex; flex-direction: column; gap: 8px; padding-top: 12px; border-top: 1px solid var(--border-soft);">
-          <span class="badge badge-blue" style="align-self: flex-start;">2. Import From Another Device</span>
+        <!-- Step 2: Import -->
+        <div style="display:flex;flex-direction:column;gap:8px;padding-top:12px;border-top:1px solid var(--border-soft);">
+          <span class="badge badge-blue" style="align-self:flex-start;">2. Restore From Another Device</span>
           <textarea
             id="sync-import"
             class="sync-textarea mono"
             rows="3"
             placeholder="Paste sync code copied from your phone or laptop..."
-            aria-label="Paste Sync Code"
+            aria-label="Paste Sync Code to Restore"
           ></textarea>
-          <button type="button" class="btn-3d btn-blue btn-full" onclick="importSyncCode()">
-            Import &amp; Sync
+          <button type="button" class="btn-3d btn-blue btn-full" onclick="restoreSyncCode()">
+            Restore Progress
           </button>
         </div>
       </div>
@@ -1393,7 +1330,7 @@
 
   <script>
     // =========================================================================
-    // 1. SAFE LOCALSTORAGE, THEME ('mchiro_theme') & TOASTS
+    // 1. SAFE STORAGE, THEME ('mchiro_theme' — DEFAULT LIGHT) & TOASTS
     // =========================================================================
     function safeGet(key) {
       try { return localStorage.getItem(key); } catch (e) { return null; }
@@ -1418,8 +1355,8 @@
 
     function initTheme() {
       const saved = safeGet('mchiro_theme');
-      const prefersDark = window.matchMedia && window.matchMedia('(prefers-color-scheme: dark)').matches;
-      const isDark = saved ? (saved === 'dark' || saved === '"dark"') : prefersDark;
+      // Default to light if not explicitly saved as dark
+      const isDark = saved === 'dark' || saved === '"dark"';
       applyTheme(isDark);
     }
 
@@ -1445,12 +1382,77 @@
         el.style.opacity = '0';
         el.style.transform = 'translateY(8px)';
         setTimeout(() => el.remove(), 260);
-      }, 2300);
+      }, 2200);
+    }
+
+    // UTF-8 safe Base64 encode/decode (handles emojis & clinical symbols cleanly)
+    function encodeBase64Utf8(str) {
+      try {
+        if (typeof TextEncoder !== 'undefined') {
+          const bytes = new TextEncoder().encode(str);
+          let bin = '';
+          bytes.forEach((b) => { bin += String.fromCharCode(b); });
+          return btoa(bin);
+        }
+        return btoa(unescape(encodeURIComponent(str)));
+      } catch (e) {
+        return '';
+      }
+    }
+
+    function decodeBase64Utf8(b64) {
+      const bin = atob(b64);
+      if (typeof TextDecoder !== 'undefined') {
+        const bytes = new Uint8Array(bin.length);
+        for (let i = 0; i < bin.length; i++) bytes[i] = bin.charCodeAt(i);
+        return new TextDecoder().decode(bytes);
+      }
+      return decodeURIComponent(escape(bin));
     }
 
     // =========================================================================
-    // 2. LIVE LESSONS PROGRESS ('mchiro_lessons_v1') & LEITNER PULSE ('mchiro_srs_v4')
+    // 2. LIVE METRICS: PLANNER, LESSONS, COUNTDOWN & LEITNER SRS
     // =========================================================================
+    function getPlannerSummary() {
+      const raw = safeGet('mchiro_planner_v1');
+      if (!raw) {
+        return {
+          modulesLabel: '7 Module Vaults',
+          assessLabel: 'Assessments: 4 Templates',
+          prepLabel: 'Pre-Term Readiness: Ready to start',
+        };
+      }
+      const data = safeJSON(raw, null);
+      if (!data) {
+        return {
+          modulesLabel: '7 Module Vaults',
+          assessLabel: 'Assessments: 4 Templates',
+          prepLabel: 'Pre-Term Readiness: Ready to start',
+        };
+      }
+
+      const modCount = Array.isArray(data.modules) && data.modules.length ? data.modules.length : 7;
+
+      let assessLabel = 'Assessments: 4 Templates';
+      if (Array.isArray(data.assessments)) {
+        const upcoming = data.assessments.filter((a) => a && a.status !== 'Submitted' && a.status !== 'Graded').length;
+        assessLabel = `Assessments: ${upcoming} Upcoming`;
+      }
+
+      let prepLabel = 'Pre-Term Readiness: Ready to start';
+      if (Array.isArray(data.prepTasks) && data.prepTasks.length > 0) {
+        const done = data.prepTasks.filter((t) => t && t.done).length;
+        const pct = Math.round((done / data.prepTasks.length) * 100);
+        prepLabel = `Pre-Term Readiness: ${pct}%`;
+      }
+
+      return {
+        modulesLabel: `${modCount} Module Vaults`,
+        assessLabel,
+        prepLabel,
+      };
+    }
+
     function getLessonsSummary() {
       const data = safeJSON(safeGet('mchiro_lessons_v1'), {});
       const ulDone = Boolean(data.ul && data.ul.completed);
@@ -1464,7 +1466,7 @@
       const completedCount = (ulDone ? 1 : 0) + (llDone ? 1 : 0) + (cnDone ? 1 : 0);
       const totalXp = Math.min(380, ulXp + llXp + cnXp);
 
-      return { ulDone, llDone, cnDone, ulXp, llXp, cnXp, completedCount, totalXp };
+      return { ulDone, llDone, cnDone, completedCount, totalXp };
     }
 
     function getSrsSummary() {
@@ -1476,30 +1478,36 @@
 
       entries.forEach((rec) => {
         const dueAt = rec.dueAt !== undefined ? Number(rec.dueAt) : (rec.nextDue !== undefined ? Number(rec.nextDue) : 0);
-        const box = rec.box || (rec.level === 2 ? 'solid' : rec.level === 1 ? 'shaky' : 'again');
-        if (now >= dueAt || box === 'again') {
-          due++;
-        } else if (box === 'solid') {
-          mastered++;
-        }
+        const box = rec.box;
+        const lvl = rec.level;
+
+        const isMastered =
+          box === 'solid' ||
+          (typeof box === 'number' && box >= 4) ||
+          (typeof lvl === 'number' && lvl >= 2);
+
+        const isDueNow =
+          box === 'again' ||
+          (typeof box === 'number' && box <= 1) ||
+          (dueAt > 0 && now >= dueAt);
+
+        if (isDueNow) due++;
+        else if (isMastered) mastered++;
       });
 
       return { due, mastered, total: entries.length };
     }
 
     function renderDashboard() {
-      // 1) Live Year 3 Countdown (Jan 25, 2027)
-      const y3Date = new Date('2027-01-25T09:00:00Z');
-      const daysLeft = Math.max(0, Math.ceil((y3Date.getTime() - Date.now()) / 86400000));
-      document.getElementById('days-to-y3').textContent = String(daysLeft);
+      // 1) Planner Quick-Launch Live Pills
+      const pl = getPlannerSummary();
+      document.getElementById('planner-stat-pills').innerHTML = `
+        <span class="planner-stat-pill">📚 ${pl.modulesLabel}</span>
+        <span class="planner-stat-pill">📅 ${pl.assessLabel}</span>
+        <span class="planner-stat-pill">🚀 ${pl.prepLabel}</span>
+      `;
 
-      // 2) Live Leitner SRS Pulse
-      const srs = getSrsSummary();
-      document.getElementById('srs-due').textContent = String(srs.due);
-      document.getElementById('srs-mastered').textContent = String(srs.mastered);
-      document.getElementById('srs-total').textContent = String(srs.total);
-
-      // 3) Live Visual Lessons XP & 3 Activated Cards
+      // 2) Live XP & 3 Interactive Visual Lessons
       const ls = getLessonsSummary();
       document.getElementById('header-xp').textContent = `${ls.totalXp} XP`;
 
@@ -1507,76 +1515,102 @@
       progBadge.textContent = `${ls.completedCount} / 3 Completed`;
       progBadge.className = ls.completedCount === 3 ? 'badge badge-emerald' : 'badge badge-blue';
 
-      const grid = document.getElementById('lessons-grid');
-      grid.innerHTML = `
-        <!-- Lesson 1: Upper Limb -->
-        <article class="ah-card lesson-card ${ls.ulDone ? 'is-done' : 'accent-blue'}">
-          <div class="lesson-top">
-            <div style="display:flex;align-items:center;justify-content:space-between;gap:8px;">
-              ${ls.ulDone
-                ? `<span class="badge badge-emerald">✓ Completed &bull; +120 XP</span>`
-                : `<span class="badge badge-blue">LIVE &bull; 5 min &bull; +120 XP</span>`
-              }
-            </div>
-            <h3 class="lesson-title">Lesson 1: Upper Limb SMR &amp; Peripheral Nerves</h3>
-            <p class="lesson-sub">C5–T1 &bull; Arm &amp; 5-Finger SVGs &bull; Assessor Traps</p>
-          </div>
-          <a href="lesson-ul.html" class="btn-3d ${ls.ulDone ? 'btn-emerald' : 'btn-blue'} btn-full">
-            ${ls.ulDone ? 'Review Lesson &rarr;' : 'Start Lesson 1 &rarr;'}
-          </a>
-        </article>
+      const lessonsMeta = [
+        {
+          key: 'ul',
+          done: ls.ulDone,
+          xp: 120,
+          accent: 'accent-blue',
+          btnCls: 'btn-blue',
+          href: 'lesson-ul.html',
+          title: 'Lesson 1: Upper Limb SMR & Peripheral Nerves',
+          desc: 'C5–T1 dermatomes, myotomes, reflexes & UL peripheral nerves • +120 XP',
+        },
+        {
+          key: 'll',
+          done: ls.llDone,
+          xp: 120,
+          accent: 'accent-emerald',
+          btnCls: 'btn-emerald',
+          href: 'lesson-ll.html',
+          title: 'Lesson 2: Lower Limb SMR & Peripheral Nerves',
+          desc: 'L2–S1 sculpted leg, 5-toe foot & LL peripheral nerves • +120 XP',
+        },
+        {
+          key: 'cn',
+          done: ls.cnDone,
+          xp: 140,
+          accent: 'accent-purple',
+          btnCls: 'btn-purple',
+          href: 'lesson-cn.html',
+          title: 'Lesson 3: Cranial Nerves I–XII & Eye/Face Lab',
+          desc: 'CN V map, H-Test moving pupils & CN VII UMN/LMN • +140 XP',
+        },
+      ];
 
-        <!-- Lesson 2: Lower Limb -->
-        <article class="ah-card lesson-card ${ls.llDone ? 'is-done' : 'accent-emerald'}">
+      document.getElementById('lessons-grid').innerHTML = lessonsMeta.map((l) => `
+        <article class="ah-card lesson-card ${l.done ? 'is-done' : l.accent}">
           <div class="lesson-top">
             <div style="display:flex;align-items:center;justify-content:space-between;gap:8px;">
-              ${ls.llDone
-                ? `<span class="badge badge-emerald">✓ Completed &bull; +120 XP</span>`
-                : `<span class="badge badge-emerald">LIVE &bull; 5 min &bull; +120 XP</span>`
+              ${l.done
+                ? `<span class="badge badge-emerald">✓ Completed &bull; +${l.xp} XP</span>`
+                : `<span class="badge badge-blue">Live &bull; 5 min</span>`
               }
             </div>
-            <h3 class="lesson-title">Lesson 2: Lower Limb SMR &amp; Peripheral Nerves</h3>
-            <p class="lesson-sub">L2–S1 &bull; Sculpted Leg &amp; 5-Toe SVGs &bull; Traps</p>
+            <h3 class="lesson-title">${l.title}</h3>
+            <p class="lesson-sub">${l.desc}</p>
           </div>
-          <a href="lesson-ll.html" class="btn-3d btn-emerald btn-full">
-            ${ls.llDone ? 'Review Lesson &rarr;' : 'Start Lesson 2 &rarr;'}
+          <a href="${l.href}" class="btn-3d ${l.done ? 'btn-emerald-soft' : l.btnCls} btn-full">
+            ${l.done ? 'Review Lesson &rarr;' : 'Start Lesson &rarr;'}
           </a>
         </article>
+      `).join('');
 
-        <!-- Lesson 3: Cranial Nerves (NEWLY ACTIVATED!) -->
-        <article class="ah-card lesson-card ${ls.cnDone ? 'is-done' : 'accent-purple'}">
-          <div class="lesson-top">
-            <div style="display:flex;align-items:center;justify-content:space-between;gap:8px;">
-              ${ls.cnDone
-                ? `<span class="badge badge-emerald">✓ Completed &bull; +140 XP</span>`
-                : `<span class="badge badge-purple">NEW &bull; 6 min &bull; +140 XP</span>`
-              }
-            </div>
-            <h3 class="lesson-title">Lesson 3: Cranial Nerves (I–XII) &amp; Eye/Face Lab</h3>
-            <p class="lesson-sub">CN V Face &bull; Moving H-Test Eyes &bull; CN VII UMN/LMN</p>
-          </div>
-          <a href="lesson-cn.html" class="btn-3d ${ls.cnDone ? 'btn-emerald' : 'btn-purple'} btn-full">
-            ${ls.cnDone ? 'Review Lesson &rarr;' : 'Start Lesson 3 &rarr;'}
-          </a>
-        </article>
-      `;
+      // 3) Live Countdown to January 25, 2027
+      const y3Date = new Date('2027-01-25T09:00:00Z');
+      const diffDays = Math.ceil((y3Date.getTime() - Date.now()) / 86400000);
+      const cdNum = document.getElementById('days-to-y3');
+      const cdLbl = document.getElementById('days-to-y3-label');
+      if (diffDays <= 0) {
+        cdNum.textContent = 'Year 3 Active!';
+        cdLbl.textContent = '';
+      } else {
+        cdNum.textContent = String(diffDays);
+        cdLbl.textContent = 'days to Jan 25, 2027';
+      }
+
+      // 4) Live Leitner SRS Pulse
+      const srs = getSrsSummary();
+      document.getElementById('srs-due').textContent = String(srs.due);
+      document.getElementById('srs-mastered').textContent = String(srs.mastered);
+      document.getElementById('srs-total').textContent = String(srs.total);
     }
 
     // =========================================================================
-    // 3. GLOBAL INSTANT SEARCH (54 HIGH-YIELD YEAR 3 ITEMS)
+    // 3. GLOBAL INSTANT SEARCH (60 ITEMS ACROSS ALL 8 FILES)
     // =========================================================================
     const SEARCH_INDEX = [
-      // Visual Lessons (UL, LL, CN)
-      { title: 'Lesson 1: Upper Limb SMR & Peripheral Nerves (C5–T1)', mod: 'Lesson 1', cls: 'badge-blue', href: 'lesson-ul.html', keys: 'upper limb lesson 1 arm 5 fingers spotlight c5 c6 c7 c8 t1 smr' },
+      // Planner & Scaffolding (planner.html)
+      { title: 'Year 3 Planner & Scaffolding Hub', mod: 'Planner', cls: 'badge-purple', href: 'planner.html', keys: 'year 3 planner scaffolding timetable onboarding january 2027' },
+      { title: '7 Module Vaults (Handbook Slots, Syllabus & Scratchpads)', mod: 'Planner', cls: 'badge-purple', href: 'planner.html', keys: 'module vaults 7 modules handbook leader syllabus lecture checklist scratchpad' },
+      { title: 'Assessment & Deadline Tracker (Weightings & Countdown)', mod: 'Planner', cls: 'badge-purple', href: 'planner.html', keys: 'assessment tracker deadlines due dates weightings status template' },
+      { title: 'Weighted Year 3 Average Grade Calculator', mod: 'Planner', cls: 'badge-purple', href: 'planner.html', keys: 'weighted average grade calculator actual target percentage' },
+      { title: 'Pre-Term Readiness & Bridging Checklist (Priority 1–3)', mod: 'Planner', cls: 'badge-purple', href: 'planner.html', keys: 'pre term readiness bridging checklist score milestones' },
+      { title: 'Term-Time Weekly Study Routine Builder', mod: 'Planner', cls: 'badge-purple', href: 'planner.html', keys: 'weekly study routine monday sunday morning afternoon evening timetable' },
+      { title: 'Module Reading Lists & JSON/Base64 Backup', mod: 'Planner', cls: 'badge-purple', href: 'planner.html', keys: 'reading list textbooks sources json backup restore sync' },
+
+      // Lesson 1: Upper Limb (lesson-ul.html)
+      { title: 'Lesson 1: Upper Limb SMR & Peripheral Nerves (C5–T1)', mod: 'Lesson 1', cls: 'badge-blue', href: 'lesson-ul.html', keys: 'upper limb smr lesson 1 arm 5 fingers spotlight c5 c6 c7 c8 t1' },
       { title: 'C5 Dermatome, Myotome (Biceps/Deltoid) & Biceps Reflex', mod: 'Lesson 1', cls: 'badge-blue', href: 'lesson-ul.html', keys: 'c5 lateral upper arm biceps deltoid shoulder abduction elbow flexion reflex' },
       { title: 'C6 Dermatome (Thumb/Index), Wrist Extensors & Brachioradialis', mod: 'Lesson 1', cls: 'badge-blue', href: 'lesson-ul.html', keys: 'c6 lateral forearm thumb index 1st finger wrist extensors biceps brachioradialis' },
       { title: 'C7 Dermatome (Middle Finger), Triceps & Wrist Flexors', mod: 'Lesson 1', cls: 'badge-blue', href: 'lesson-ul.html', keys: 'c7 middle finger triceps wrist flexors elbow extension reflex' },
       { title: 'C8 Dermatome (Ring/Little) & Flexor Digitorum Profundus (DIP)', mod: 'Lesson 1', cls: 'badge-blue', href: 'lesson-ul.html', keys: 'c8 ring 4th little 5th finger flexor digitorum profundus fdp dip joint' },
-      { title: 'T1 Dermatome (Medial Forearm) & Interossei (5th Abduction)', mod: 'Lesson 1', cls: 'badge-blue', href: 'lesson-ul.html', keys: 't1 medial wrist medial elbow forearm interossei 5th finger abduction' },
-      { title: 'Radial vs. Median Trap (EXTENSORS Wrist Drop vs. FLEXORS)', mod: 'Lesson 1', cls: 'badge-blue', href: 'lesson-ul.html', keys: 'radial median trap extensors flexors wrist drop palmar dorsal lateral 2/3 carpal tunnel' },
-      { title: 'Axillary ("Military Patch") & Ulnar Nerve (FCU / Intrinsic Hand)', mod: 'Lesson 1', cls: 'badge-blue', href: 'lesson-ul.html', keys: 'axillary military patch deltoid teres minor ulnar fcu medial hand fingers' },
+      { title: 'T1 Dermatome (Medial Forearm) & Interossei (5th Abduction)', mod: 'Lesson 1', cls: 'badge-blue', href: 'lesson-ul.html', keys: 't1 medial wrist elbow forearm interossei 5th finger abduction' },
+      { title: 'Radial vs. Median Trap (EXTENSORS Wrist Drop vs. FLEXORS)', mod: 'Lesson 1', cls: 'badge-blue', href: 'lesson-ul.html', keys: 'radial median trap extensors flexors wrist drop palmar dorsal lateral 2/3' },
+      { title: 'Axillary ("Military Patch") & Ulnar Nerve (FCU / Intrinsic Hand)', mod: 'Lesson 1', cls: 'badge-blue', href: 'lesson-ul.html', keys: 'axillary military patch deltoid teres minor ulnar fcu medial hand' },
 
-      { title: 'Lesson 2: Lower Limb SMR & Peripheral Nerves (L2–S1)', mod: 'Lesson 2', cls: 'badge-emerald', href: 'lesson-ll.html', keys: 'lower limb lesson 2 leg 5 toes sole spotlight l2 l3 l4 l5 s1 smr' },
+      // Lesson 2: Lower Limb (lesson-ll.html)
+      { title: 'Lesson 2: Lower Limb SMR & Peripheral Nerves (L2–S1)', mod: 'Lesson 2', cls: 'badge-emerald', href: 'lesson-ll.html', keys: 'lower limb smr lesson 2 sculpted leg 5 toes sole spotlight l2 l3 l4 l5 s1' },
       { title: 'L2 Dermatome & Hip Flexors (Iliopsoas, Sartorius, Pectineus)', mod: 'Lesson 2', cls: 'badge-emerald', href: 'lesson-ll.html', keys: 'l2 anterior upper thigh hip flexion iliopsoas sartorius pectineus no reflex' },
       { title: 'L3 Dermatome (Ant. Lower Thigh) & Quadriceps', mod: 'Lesson 2', cls: 'badge-emerald', href: 'lesson-ll.html', keys: 'l3 anterior lower thigh knee extension quadriceps patellar' },
       { title: 'L4 Dermatome (Medial Shin), Tibialis Anterior & Patellar Reflex', mod: 'Lesson 2', cls: 'badge-emerald', href: 'lesson-ll.html', keys: 'l4 medial lower leg ankle tibialis anterior dorsiflexion heel walk patellar 1+ 4+' },
@@ -1585,53 +1619,52 @@
       { title: 'Fibular (Peroneal) Nerve (Foot Drop) vs. Tibial Nerve (Sole)', mod: 'Lesson 2', cls: 'badge-emerald', href: 'lesson-ll.html', keys: 'fibular peroneal foot drop steppage dorsum tibial sole plantar sciatic' },
       { title: 'Femoral, Obturator & Lateral Cutaneous Thigh (LFCN Purely Sensory)', mod: 'Lesson 2', cls: 'badge-emerald', href: 'lesson-ll.html', keys: 'femoral saphenous obturator adductors lfcn lateral cutaneous thigh purely sensory' },
 
-      { title: 'Lesson 3: Cranial Nerves (I–XII) & Eye/Face Visual Lab', mod: 'Lesson 3', cls: 'badge-purple', href: 'lesson-cn.html', keys: 'cranial nerves lesson 3 cn i ii iii iv v vi vii viii ix x xi xii eye face lab' },
-      { title: 'CN V Trigeminal Face Map (V1 / V2 / V3 & Spared Jaw Angle)', mod: 'Lesson 3', cls: 'badge-purple', href: 'lesson-cn.html', keys: 'cn v trigeminal v1 v2 v3 ophthalmic maxillary mandibular jaw jerk c2 c3 spared angle masseter temporalis' },
-      { title: 'H-Test Extraocular Eye Lab (LR6 SO4, All the Rest 3 + Pupil)', mod: 'Lesson 3', cls: 'badge-purple', href: 'lesson-cn.html', keys: 'h test extraocular eyes lr6 so4 cn iii iv vi oculomotor trochlear abducens pupil light reflex' },
-      { title: 'CN VII Facial Nerve: UMN (Forehead Spared) vs. LMN (Bell’s Palsy)', mod: 'Lesson 3', cls: 'badge-purple', href: 'lesson-cn.html', keys: 'cn vii facial nerve umn lmn bells palsy forehead spared frontalis orbicularis taste hyperacusis salivation' },
-      { title: 'Bulbar Deviation Trap: CN X Uvula (AWAY) vs. CN XII Tongue (TOWARD)', mod: 'Lesson 3', cls: 'badge-purple', href: 'lesson-cn.html', keys: 'cn ix x xi xii glossopharyngeal vagus uvula away accessory scm trapezius hypoglossal tongue toward licks lesion' },
+      // Lesson 3: Cranial Nerves (lesson-cn.html)
+      { title: 'Lesson 3: Cranial Nerves I–XII & Eye/Face Lab', mod: 'Lesson 3', cls: 'badge-purple', href: 'lesson-cn.html', keys: 'cranial nerves lesson 3 cn i ii iii iv v vi vii viii ix x xi xii eye face lab' },
+      { title: 'CN V Trigeminal Face Map (V1/V2/V3 & Spared Jaw Angle)', mod: 'Lesson 3', cls: 'badge-purple', href: 'lesson-cn.html', keys: 'cn v trigeminal v1 v2 v3 ophthalmic maxillary mandibular jaw jerk c2 c3 spared angle' },
+      { title: 'H-Test Extraocular Eye Lab (LR6 SO4, All the Rest 3 + Pupils)', mod: 'Lesson 3', cls: 'badge-purple', href: 'lesson-cn.html', keys: 'h test extraocular eyes lr6 so4 cn iii iv vi oculomotor trochlear abducens moving pupils' },
+      { title: 'CN VII Facial Nerve: UMN (Forehead Spared) vs. LMN (Bell’s Palsy)', mod: 'Lesson 3', cls: 'badge-purple', href: 'lesson-cn.html', keys: 'cn vii facial nerve umn lmn bells palsy forehead spared frontalis orbicularis taste hyperacusis' },
+      { title: 'Bulbar Deviation Trap: CN X Uvula (AWAY) vs. CN XII Tongue (TOWARD)', mod: 'Lesson 3', cls: 'badge-purple', href: 'lesson-cn.html', keys: 'cn ix x xi xii uvula away scm trapezius hypoglossal tongue toward licks lesion' },
 
-      // Clinical Neurology Hub (neuro.html)
-      { title: 'Interactive Whole-Face Cranial Nerve Map (CN I–XII)', mod: 'Clinical Neuro', cls: 'badge-purple', href: 'neuro.html', keys: 'whole face cranial nerve map cn i xii interactive face eyes ears tongue shoulders' },
-      { title: 'SMR Screening & Grading Scales (MRC 1–5, UL 0–4, LL 1+–4+, Sens 0–2)', mod: 'Clinical Neuro', cls: 'badge-purple', href: 'neuro.html', keys: 'smr screening grading scales mrc reflexes sensation paraesthesia allodynia hypersensitivity' },
-      { title: 'Weber’s & Rinne’s Hearing Simulator (512 Hz)', mod: 'Clinical Neuro', cls: 'badge-purple', href: 'neuro.html', keys: 'weber rinne 512hz conductive sensorineural hearing lateralise ac bc cn viii' },
-      { title: 'Hutchinson Pupil 4-Stage Stepper (Cerebral Compression)', mod: 'Clinical Neuro', cls: 'badge-purple', href: 'neuro.html', keys: 'hutchinson pupil raised icp cn iii miosis mydriasis blown uncal herniation' },
-      { title: 'Beighton Scale (Hypermobility 0–9 Calculator)', mod: 'Clinical Neuro', cls: 'badge-purple', href: 'neuro.html', keys: 'beighton scale hypermobility 0 9 elbow knee thumb little finger palms' },
-      { title: 'Glasgow Coma Scale (GCS 3–15 Calculator)', mod: 'Clinical Neuro', cls: 'badge-purple', href: 'neuro.html', keys: 'gcs glasgow coma scale eye verbal motor trauma consciousness' },
-      { title: 'CAD Screening (5Ds & 3Ns), Dix-Hallpike (BPPV) & Fitz-Ritson’s', mod: 'Clinical Neuro', cls: 'badge-purple', href: 'neuro.html', keys: 'cad cervical arterial dysfunction 5ds 3ns dix hallpike bppv fitz ritson cervicogenic dizziness' },
-      { title: 'UMN Signs: Babinski, Chaddock, Hoffmann’s, Clonus & Pronator Drift', mod: 'Clinical Neuro', cls: 'badge-purple', href: 'neuro.html', keys: 'babinski chaddock hoffmann ankle clonus umn spasticity pronator drift' },
-      { title: 'Spinal Cord Cross-Section (DCML, Spinothalamic, CST & Ant Horn)', mod: 'Clinical Neuro', cls: 'badge-purple', href: 'neuro.html', keys: 'spinal cord tracts dcml dorsal column spinothalamic stt corticospinal cst anterior horn 128hz vibration proprioception' },
-      { title: 'Brain Lesions: Broca’s, Wernicke’s, Arcuate, Neglect & Fusiform', mod: 'Clinical Neuro', cls: 'badge-purple', href: 'neuro.html', keys: 'broca wernicke arcuate fasciculus hemispatial neglect right parietal fusiform prosopagnosia cerebellum' },
-      { title: '15-Minute Neuro OSCE Timer & 8-Section Testing Overview', mod: 'Clinical Neuro', cls: 'badge-purple', href: 'neuro.html', keys: 'osce 15 minute timer cerebellar romberg tandem gait testing overview checklist' },
+      // Clinical Neurology (neuro.html)
+      { title: 'Interactive Whole-Face Cranial Nerve Map (CN I–XII)', mod: 'Neuro', cls: 'badge-blue', href: 'neuro.html', keys: 'whole face cn map cranial nerves interactive face eyes ears mouth tongue shoulders' },
+      { title: 'SMR Screening Matrix & Grading Scales (MRC 1–5, UL 0–4, LL 1+–4+)', mod: 'Neuro', cls: 'badge-blue', href: 'neuro.html', keys: 'smr screening grading scales mrc reflexes sensation 0 2 paraesthesia allodynia' },
+      { title: 'Weber’s & Rinne’s Hearing Simulator (512 Hz)', mod: 'Neuro', cls: 'badge-blue', href: 'neuro.html', keys: 'weber rinne 512hz conductive sensorineural hearing lateralise ac bc cn viii' },
+      { title: 'Hutchinson Pupil 4-Stage Stepper (Cerebral Compression)', mod: 'Neuro', cls: 'badge-blue', href: 'neuro.html', keys: 'hutchinson pupil raised icp cn iii miosis mydriasis blown uncal herniation' },
+      { title: 'Beighton Scale (Hypermobility 0–9 Calculator)', mod: 'Neuro', cls: 'badge-blue', href: 'neuro.html', keys: 'beighton scale hypermobility 0 9 elbow knee thumb little finger palms' },
+      { title: 'Glasgow Coma Scale (GCS 3–15 Calculator)', mod: 'Neuro', cls: 'badge-blue', href: 'neuro.html', keys: 'gcs glasgow coma scale eye verbal motor trauma consciousness' },
+      { title: 'CAD Screening (5Ds/3Ns), Dix-Hallpike (BPPV) & Fitz-Ritson’s', mod: 'Neuro', cls: 'badge-blue', href: 'neuro.html', keys: 'cad cervical arterial dysfunction 5ds 3ns dix hallpike bppv fitz ritson dizziness' },
+      { title: 'Spinal Cord Cross-Section (DCML, STT, CST & Anterior Horn)', mod: 'Neuro', cls: 'badge-blue', href: 'neuro.html', keys: 'spinal cord lesions tracts dcml dorsal column spinothalamic stt corticospinal cst 128hz' },
+      { title: 'Brain Lesions: Broca’s, Wernicke’s, Arcuate, Neglect & Fusiform', mod: 'Neuro', cls: 'badge-blue', href: 'neuro.html', keys: 'broca wernicke arcuate fasciculus right parietal hemispatial neglect fusiform cerebellum' },
+      { title: '15-Minute Neuro OSCE Timer & 8-Section Testing Overview', mod: 'Neuro', cls: 'badge-blue', href: 'neuro.html', keys: '15 min osce timer cerebellar romberg tandem gait babinski hoffmann clonus checklist' },
 
       // Musculoskeletal Medicine (msk.html)
-      { title: 'OA vs. RA Joint Cross-Section, Cytokines (TNF-α/IL-1/IL-6) & DMARDs', mod: 'MSK Medicine', cls: 'badge-coral', href: 'msk.html', keys: 'oa ra osteoarthritis rheumatoid arthritis cartilage osteophyte pannus synovitis loss morning stiffness dmards' },
-      { title: 'CKD → Renal Osteodystrophy 5-Step Domino Pathway', mod: 'MSK Medicine', cls: 'badge-coral', href: 'msk.html', keys: 'ckd renal osteodystrophy phosphate vitamin d calcitriol hypocalcaemia secondary hyperparathyroidism pth' },
-      { title: 'Hot Swollen Joint Triage: Septic Arthritis vs. Acute Gout', mod: 'MSK Medicine', cls: 'badge-coral', href: 'msk.html', keys: 'hot swollen joint septic arthritis gout pseudogout cppd podagra msu crystals fever emergency' },
-      { title: 'Metabolic Bone: Osteoporosis, Osteopenia, Osteomalacia & Paget’s', mod: 'MSK Medicine', cls: 'badge-coral', href: 'msk.html', keys: 'osteoporosis osteopenia osteomalacia pagets dexa t score alp looser zones' },
-      { title: 'ACS Spectrum: Stable/Unstable Angina, NSTEMI & STEMI', mod: 'MSK Medicine', cls: 'badge-coral', href: 'msk.html', keys: 'acs angina nstemi stemi troponin nitric oxide plaque rupture chest pain 999' },
-      { title: 'Hypertension Urgent-Referral Thresholds (≥180/120)', mod: 'MSK Medicine', cls: 'badge-coral', href: 'msk.html', keys: 'hypertension bp 180 120 accelerated papilloedema emergency' },
-      { title: 'Addisonian (Adrenal) Crisis & Electrolyte Triad', mod: 'MSK Medicine', cls: 'badge-coral', href: 'msk.html', keys: 'addisonian adrenal crisis cortisol hypotension hyponatraemia hyperkalaemia hypoglycaemia' },
-      { title: 'Cauda Equina Syndrome (CES) Red Flags & Same-Day MRI', mod: 'MSK Medicine', cls: 'badge-coral', href: 'msk.html', keys: 'cauda equina ces saddle anaesthesia bladder bowel bilateral sciatica emergency mri' },
-      { title: 'Tumour Grading vs. Staging (TNM) & Spinal Metastases', mod: 'MSK Medicine', cls: 'badge-coral', href: 'msk.html', keys: 'tumour grading staging tnm metastases cancer night pain weight loss' },
-      { title: 'Crohn’s Disease vs. Ulcerative Colitis (IBD)', mod: 'MSK Medicine', cls: 'badge-coral', href: 'msk.html', keys: 'crohns ulcerative colitis ibd skip lesions transmural mucosal bloody diarrhoea' },
-      { title: 'MSK SAQ / LAQ Point-by-Point Self-Marking', mod: 'MSK Medicine', cls: 'badge-coral', href: 'msk.html', keys: 'saq laq short long answer self marking exam practice' },
+      { title: 'OA vs. RA Joint Pathology, Cytokines (TNF-α/IL-1/IL-6) & DMARDs', mod: 'MSK', cls: 'badge-coral', href: 'msk.html', keys: 'oa vs ra osteoarthritis rheumatoid arthritis cartilage osteophyte pannus synovitis morning stiffness dmards' },
+      { title: 'CKD → Renal Osteodystrophy 5-Step Domino Pathway', mod: 'MSK', cls: 'badge-coral', href: 'msk.html', keys: 'ckd renal osteodystrophy phosphate vitamin d calcitriol hypocalcaemia secondary hyperparathyroidism pth' },
+      { title: 'Metabolic Bone: Osteoporosis, Osteopenia, Osteomalacia & Paget’s', mod: 'MSK', cls: 'badge-coral', href: 'msk.html', keys: 'metabolic bone osteoporosis osteopenia osteomalacia pagets dexa t score alp looser zones' },
+      { title: 'Hot Swollen Joint: Septic Arthritis vs. Acute Gout / Pseudogout', mod: 'MSK', cls: 'badge-coral', href: 'msk.html', keys: 'gout pseudogout septic arthritis hot swollen joint podagra msu crystals fever emergency' },
+      { title: 'Cauda Equina Syndrome (CES) Red Flags & Same-Day MRI', mod: 'MSK', cls: 'badge-coral', href: 'msk.html', keys: 'cauda equina ces red flags saddle anaesthesia bladder bowel bilateral sciatica mri' },
+      { title: 'Cardiovascular Red Flags: ACS (Angina/NSTEMI/STEMI) & HTN Crisis', mod: 'MSK', cls: 'badge-coral', href: 'msk.html', keys: 'acs angina nstemi stemi troponin hypertension 180 120 red flags chest pain' },
+      { title: 'Addisonian Crisis, Tumour Grading vs. Staging (TNM) & IBD', mod: 'MSK', cls: 'badge-coral', href: 'msk.html', keys: 'addisonian adrenal crisis tumour grading staging tnm metastases crohns ulcerative colitis' },
+      { title: 'MSK SAQ / LAQ Point-by-Point Self-Marking Bank', mod: 'MSK', cls: 'badge-coral', href: 'msk.html', keys: 'msk saq laq short long answer exam practice differential tables' },
 
       // Chiropractic Studies 3 (chiro.html)
-      { title: '54-Step McTimoney Full-Body Check Routine (4-Colour Key)', mod: 'Chiro 3', cls: 'badge-teal', href: 'chiro.html', keys: 'mctimoney full body check routine 54 steps bench patient practitioner hand placement' },
-      { title: 'Atlas Palpation & Adjustment (Anteriority Side & Elbow Cue)', mod: 'Chiro 3', cls: 'badge-teal', href: 'chiro.html', keys: 'atlas adjustment anteriority ttr horse stance elbow accuracy mastoid jaw' },
-      { title: 'Cervical Spine Caterpillar Palpation & Strikes (Nail 2)', mod: 'Chiro 3', cls: 'badge-teal', href: 'chiro.html', keys: 'cervical strikes caterpillar nail 2 outer foot anterior head' },
-      { title: 'Pelvic Adjustments: Rotation, Tilt (Chin Tuck) & Torsion I / II', mod: 'Chiro 3', cls: 'badge-teal', href: 'chiro.html', keys: 'pelvic rotation posterior tilt chin tuck sternum torsion 1 2 male female nail 3' },
-      { title: '1st Rib ("Superman" Follow-Through) & Posterior Rib Adjustments', mod: 'Chiro 3', cls: 'badge-teal', href: 'chiro.html', keys: '1st rib posterior ribs superman follow through curled nail hand rugby ball' },
-      { title: 'Prone Spine Palpation in Threes, Double Transfer & SIJ/PSIS', mod: 'Chiro 3', cls: 'badge-teal', href: 'chiro.html', keys: 'prone spine palpation threes even fingers roll on off double transfer sij psis clavicle' },
-      { title: '40-Minute Chiropractic Practical Exam Simulator', mod: 'Chiro 3', cls: 'badge-teal', href: 'chiro.html', keys: '40 min practical exam simulator timer random technique drill' },
+      { title: '54-Step McTimoney Full-Body Check Routine (4-Colour Key)', mod: 'Chiro 3', cls: 'badge-emerald', href: 'chiro.html', keys: 'mctimoney routine full body check 54 steps bench patient practitioner hand placement' },
+      { title: 'Atlas Palpation & Adjustment (Anteriority Side & Elbow Cue)', mod: 'Chiro 3', cls: 'badge-emerald', href: 'chiro.html', keys: 'atlas adjustment anteriority ttr horse stance elbow accuracy mastoid jaw' },
+      { title: 'Cervical Spine Caterpillar Palpation & Strikes (Nail 2)', mod: 'Chiro 3', cls: 'badge-emerald', href: 'chiro.html', keys: 'cervical strikes caterpillar nail 2 outer foot narrow fencing stance' },
+      { title: 'Pelvic Adjustments: Rotation, Tilt (Chin Tuck) & Torsion I / II', mod: 'Chiro 3', cls: 'badge-emerald', href: 'chiro.html', keys: 'pelvic rotation posterior tilt chin tuck sternum torsion 1 2 male female nail 3' },
+      { title: '1st Rib ("Superman" & Crisp Nail Hand) & Posterior Ribs', mod: 'Chiro 3', cls: 'badge-emerald', href: 'chiro.html', keys: '1st rib posterior ribs superman follow through nail hand curled rugby ball' },
+      { title: 'Prone Spine Palpation in Threes, Double Transfers & PSIS / SIJ', mod: 'Chiro 3', cls: 'badge-emerald', href: 'chiro.html', keys: 'prone spine palpation threes double transfer roll on off psis sij clavicle' },
+      { title: '40-Minute Chiropractic Practical Simulator & Year 2 Fixes', mod: 'Chiro 3', cls: 'badge-emerald', href: 'chiro.html', keys: '40 min practical simulator timer year 2 assessor feedback fixes' },
 
-      // Written & Foundation Modules (written.html)
-      { title: 'Pre-Flight Essay Scanner (Word Count, 1st-Person, Quotes, Harvard)', mod: 'Written & Found.', cls: 'badge-amber', href: 'written.html', keys: 'pre flight essay scanner word count 10 percent first person voice direct quotes citation density harvard' },
-      { title: 'Clinic Studies 3: Borton’s Framework & 70%+ Critical Evaluation', mod: 'Written & Found.', cls: 'badge-amber', href: 'written.html', keys: 'clinic studies borton what so what now what critical evaluation description 70 rubric' },
-      { title: 'Research 2: PICO Builder, Study Design & Bias Matrix', mod: 'Written & Found.', cls: 'badge-amber', href: 'written.html', keys: 'research 2 pico population intervention comparison outcome rct cohort case control bias snnout sppin nnt' },
-      { title: 'Behavioural Sciences: Biopsychosocial (BPS) Model & Yellow Flags', mod: 'Written & Found.', cls: 'badge-amber', href: 'written.html', keys: 'behavioural sciences biopsychosocial bps yellow flags abcdefw fear avoidance self efficacy motivational interviewing' },
-      { title: 'Philosophy 3: Vitalism vs. Materialism, Popper & 4 Pillars of Ethics', mod: 'Written & Found.', cls: 'badge-amber', href: 'written.html', keys: 'philosophy 3 vitalism materialism holism reductionism popper falsifiability evidence informed ethics' },
+      // Written & Foundation (written.html)
+      { title: 'Pre-Flight Essay Scanner (Word Count ±10%, 1st-Person, Quotes)', mod: 'Written', cls: 'badge-amber', href: 'written.html', keys: 'pre flight essay scanner word count first person voice direct quotes citation density' },
+      { title: 'Harvard Referencing Rules & Strict Rubric Auditor', mod: 'Written', cls: 'badge-amber', href: 'written.html', keys: 'harvard referencing reference list bibliography page numbers rubric auditor strict marking prompt' },
+      { title: 'Clinic Studies 3: Borton’s Framework & 70%+ Critical Evaluation', mod: 'Written', cls: 'badge-amber', href: 'written.html', keys: 'clinic studies 3 borton what so what now what critical evaluation description 70' },
+      { title: 'Research 2: Interactive PICO Builder & Study Design Matrix', mod: 'Written', cls: 'badge-amber', href: 'written.html', keys: 'research 2 pico builder population intervention comparison outcome rct cohort case control bias' },
+      { title: 'Biostatistics & Paradigm Flashcards (SnNout, SpPin, NNT, CI)', mod: 'Written', cls: 'badge-amber', href: 'written.html', keys: 'biostatistics snnout sppin nnt confidence interval p value ontology epistemology positivism' },
+      { title: 'Behavioural Sciences: Biopsychosocial (BPS) Triangle & Yellow Flags', mod: 'Written', cls: 'badge-amber', href: 'written.html', keys: 'behavioural sciences biopsychosocial bps triangle yellow flags abcdefw fear avoidance motivational interviewing' },
+      { title: 'Philosophy 3: Vitalism vs. Materialism, Popper & 4 Pillars of Ethics', mod: 'Written', cls: 'badge-amber', href: 'written.html', keys: 'philosophy 3 vitalism materialism holism reductionism popper falsifiability evidence informed ethics' },
     ];
 
     function handleSearch(raw) {
@@ -1660,7 +1693,7 @@
         const safe = q.replace(/</g, '&lt;').replace(/>/g, '&gt;');
         box.innerHTML = `
           <div style="padding:16px;text-align:center;font-size:13px;color:var(--text-muted);">
-            No matches for "<strong>${safe}</strong>". Try <em>CN VII</em>, <em>L5</em>, <em>OA vs RA</em>, <em>Beighton</em>, or <em>PICO</em>.
+            No matches for "<strong>${safe}</strong>". Try <em>Planner</em>, <em>CN VII</em>, <em>L5</em>, <em>OA vs RA</em>, <em>1st Rib</em>, or <em>PICO</em>.
           </div>
         `;
         return;
@@ -1689,155 +1722,155 @@
     }
 
     // =========================================================================
-    // 4. QUICK 5-MINUTE MIX MODAL (20-QUESTION INTERLEAVED BANK)
+    // 4. QUICK 5-MINUTE MIX MODAL (20-QUESTION INTERLEAVED CLINICAL BANK)
     // =========================================================================
     const MIX_BANK = [
-      // Neuro (SMR, CNs, Hutchinson, Weber/Rinne)
+      // Clinical Neurology (SMR, CNs, Red Flags, Assessor Traps)
       {
-        cat: 'Upper Limb SMR', badge: 'badge-blue',
-        q: 'Which specific muscle must you name for the C8 myotome (not just "grip")?',
+        cat: 'Neuro • UL Trap', badge: 'badge-blue',
+        q: 'For the C8 myotome, which specific muscle must you name (not just "grip")?',
         opts: ['Flexor digitorum profundus (DIP joint)', 'Interossei (5th finger abduction)', 'Brachioradialis', 'Flexor carpi ulnaris'],
         ans: 0,
-        pearl: 'C8 tests Flexor digitorum profundus (distal phalanx / DIP flexion of the 3rd finger). Interossei is T1!',
+        pearl: 'Always name exact muscles for myotomes: C8 = Flexor digitorum profundus (DIP joint); T1 = Interossei.',
       },
       {
-        cat: 'Upper Limb Trap', badge: 'badge-coral',
-        q: 'Avoid the "Ext / flexion confusion" trap: What does the Radial nerve innervate?',
-        opts: ['Elbow & wrist EXTENSORS (lesion = wrist drop)', 'Most wrist FLEXORS & thumb opposition', 'Intrinsic hand muscles & FCU', 'Deltoid & teres minor only'],
+        cat: 'Neuro • UL Trap', badge: 'badge-coral',
+        q: 'Avoid the "Ext / flexion confusion" trap: What does the Radial nerve supply?',
+        opts: ['Elbow & wrist EXTENSORS (injury = wrist drop)', 'Most wrist FLEXORS & thumb opposition', 'Intrinsic hand muscles & FCU', 'Deltoid & teres minor only'],
         ans: 0,
-        pearl: 'Radial = posterior arm/forearm & EXTENSORS (wrist drop). Median = palmar lateral 2/3 & most wrist FLEXORS.',
+        pearl: 'Radial = posterior arm/forearm & EXTENSORS (wrist drop); Median = palmar lateral 2/3 & most wrist FLEXORS.',
       },
       {
-        cat: 'Lower Limb Trap', badge: 'badge-coral',
+        cat: 'Neuro • LL Trap', badge: 'badge-coral',
         q: 'Which nerve root tests Extensor Hallucis Longus (EHL) and has NO standard reflex?',
         opts: ['L5', 'L4', 'S1', 'L3'],
         ans: 0,
-        pearl: 'L5 = lateral shin, dorsum of foot & hallux; Extensor hallucis longus (EHL); NO standard reflex (Patellar = L4, Achilles = S1).',
+        pearl: 'L5 tests Extensor hallucis longus (hallux extension) and has NO standard reflex (Patellar = L4, Achilles = S1).',
       },
       {
-        cat: 'Lower Limb SMR', badge: 'badge-emerald',
-        q: 'What grading scale is required for Lower Limb Reflexes (Patellar L4 & Achilles S1)?',
+        cat: 'Neuro • SMR Scale', badge: 'badge-blue',
+        q: 'What grading scale is required for Lower Limb reflexes (Patellar L4 & Achilles S1)?',
         opts: ['1+ to 4+ (with 0 = absent)', '0 to 4', '1 to 5 (MRC)', '0 to 2'],
         ans: 0,
-        pearl: 'McTimoney Year 3 distinction: Upper Limb reflexes = 0–4; Lower Limb reflexes = 1+ to 4+; Myotomes = 1–5; Sensation = 0–2.',
+        pearl: 'Upper Limb reflexes use 0–4, whereas Lower Limb reflexes use 1+ to 4+ (Myotomes = 1–5; Sensation = 0–2).',
       },
       {
-        cat: 'Cranial Nerves', badge: 'badge-purple',
-        q: 'Which CN V division carries jaw motor power AND spares the C2/C3 angle of the jaw?',
-        opts: ['V3 (Mandibular) — temporalis, masseter & pterygoids', 'V2 (Maxillary) — cheek & upper lip', 'V1 (Ophthalmic) — forehead & cornea', 'CN VII — facial expression muscles'],
+        cat: 'Neuro • CN VII', badge: 'badge-purple',
+        q: 'In an UMN Facial Nerve (CN VII) lesion (e.g., stroke), why is the forehead spared?',
+        opts: ['Frontalis receives bilateral cortical innervation', 'Frontalis is supplied by CN V (Trigeminal)', 'Bell’s palsy always spares the forehead', 'CN VII only innervates the lower face'],
         ans: 0,
-        pearl: 'V3 (Mandibular) supplies lower lip/chin (sparing the C2/C3 angle of jaw) and carries all muscles of mastication.',
+        pearl: 'UMN CN VII lesions spare the forehead via bilateral cortical input; LMN (Bell’s palsy) paralyses the full ipsilateral hemiface.',
       },
       {
-        cat: 'Cranial Nerves', badge: 'badge-purple',
-        q: 'In an UMN Facial Nerve (CN VII) lesion such as stroke, why is the forehead spared?',
-        opts: ['Upper facial muscles receive bilateral cortical innervation', 'Frontalis is supplied by CN V (Trigeminal)', 'Bell’s palsy always spares the forehead', 'CN VII only supplies the lower face'],
+        cat: 'Neuro • CN V', badge: 'badge-purple',
+        q: 'Which Trigeminal (CN V) division carries jaw motor power AND spares the C2/C3 angle of the jaw?',
+        opts: ['V3 (Mandibular) — temporalis, masseter & pterygoids', 'V2 (Maxillary) — cheek & upper lip', 'V1 (Ophthalmic) — forehead & cornea', 'CN VII — facial expression'],
         ans: 0,
-        pearl: 'UMN CN VII lesion spares the forehead (bilateral cortical input); LMN (Bell’s palsy) paralyses the entire ipsilateral hemiface.',
+        pearl: 'V3 (Mandibular) supplies the chin/anterior jaw (sparing the C2/C3 angle of jaw) and carries all mastication muscles.',
       },
       {
-        cat: 'Cranial Nerves', badge: 'badge-purple',
+        cat: 'Neuro • H-Test', badge: 'badge-purple',
         q: 'On the H-Test, which gaze direction isolates Superior Oblique (CN IV — SO4)?',
         opts: ['Down & In (adducted depression)', 'Straight Lateral / Out (abduction)', 'Up & Out (abducted elevation)', 'Up & In (adducted elevation)'],
         ans: 0,
-        pearl: 'SO4 = Superior Oblique (CN IV) moves the adducted eye Down & In. LR6 = Lateral Rectus (CN VI) pulls straight Lateral.',
+        pearl: 'SO4 = Superior Oblique (CN IV) pulls the adducted eye Down & In; LR6 = Lateral Rectus (CN VI) abducts laterally.',
       },
       {
-        cat: 'CN VIII Simulator', badge: 'badge-blue',
-        q: 'In Left Conductive hearing loss, where does Weber’s lateralise and what is Left Rinne’s?',
-        opts: ['Weber to LEFT (affected); Left Rinne NEGATIVE (BC > AC)', 'Weber to RIGHT (healthy); Left Rinne POSITIVE (AC > BC)', 'Weber midline; Left Rinne NEGATIVE', 'Weber to LEFT; Left Rinne POSITIVE (AC > BC)'],
-        ans: 0,
-        pearl: 'Conductive loss lateralises Weber to the AFFECTED ear, and Rinne is negative (Bone > Air) on that side.',
-      },
-      {
-        cat: 'Neuro Red Flag', badge: 'badge-coral',
+        cat: 'Neuro • Red Flag', badge: 'badge-coral',
         q: 'What is Stage 2 of the Hutchinson pupil progression in rising intracranial pressure (ICP)?',
-        opts: ['Ipsilateral fixed, dilated pupil ("blown pupil") — 999 emergency', 'Bilateral pinpoint pupils', 'Contralateral fixed dilation first', 'Normal reactive pupils bilaterally'],
+        opts: ['Ipsilateral fixed, dilated pupil ("blown pupil") — 999 emergency', 'Bilateral pinpoint reactive pupils', 'Contralateral fixed dilation first', 'Normal reactive pupils bilaterally'],
         ans: 0,
         pearl: 'Hutchinson stages: 1) Ipsi constriction → 2) Ipsi fixed dilation (CN III compression) → 3) Contra constriction → 4) Bilateral fixed dilation.',
       },
-
-      // MSK Medicine (OA vs RA, CKD Renal Osteodystrophy, Septic Arthritis, Cauda Equina)
       {
-        cat: 'MSK Medicine', badge: 'badge-coral',
+        cat: 'Neuro • CN VIII', badge: 'badge-blue',
+        q: 'In Left Conductive hearing loss, where does Weber’s lateralise and what is Left Rinne’s?',
+        opts: ['Weber to LEFT (affected); Left Rinne NEGATIVE (BC > AC)', 'Weber to RIGHT (healthy); Left Rinne POSITIVE (AC > BC)', 'Weber midline; Left Rinne NEGATIVE', 'Weber to LEFT; Left Rinne POSITIVE'],
+        ans: 0,
+        pearl: 'Conductive loss lateralises Weber to the AFFECTED ear with a negative Rinne (BC > AC) on that side.',
+      },
+
+      // MSK Medicine (OA vs RA, CKD Renal Osteodystrophy, Cauda Equina, Septic Arthritis)
+      {
+        cat: 'MSK • OA vs RA', badge: 'badge-coral',
         q: 'How does morning stiffness differentiate Osteoarthritis (OA) from Rheumatoid Arthritis (RA)?',
-        opts: ['OA < 30 minutes (worse end of day) vs. RA > 60 minutes (improves with gentle movement)', 'OA > 60 minutes vs. RA < 15 minutes', 'Both always exceed 2 hours', 'Neither causes morning stiffness'],
+        opts: ['OA < 30 min (worse end of day) vs. RA > 60 min (improves with movement)', 'OA > 60 min vs. RA < 15 min', 'Both always exceed 2 hours', 'Neither causes morning stiffness'],
         ans: 0,
-        pearl: 'RA is autoimmune synovitis (TNF-α, IL-1, IL-6 → pannus) causing prolonged morning stiffness (>60 min) & symmetric MCP/PIP/wrist swelling.',
+        pearl: 'RA is autoimmune synovitis (TNF-α/IL-1/IL-6 → pannus) with >60 min morning stiffness; OA is degenerative (<30 min).',
       },
       {
-        cat: 'MSK Medicine', badge: 'badge-coral',
-        q: 'In CKD → Renal Osteodystrophy, what directly triggers Secondary Hyperparathyroidism (↑ PTH)?',
-        opts: ['Hypocalcaemia from ↓ active Vitamin D (calcitriol) + phosphate retention', 'Excessive dietary calcium intake', 'Overproduction of calcitriol by the failing kidney', 'Isolated elevated alkaline phosphatase (ALP)'],
+        cat: 'MSK • Renal Bone', badge: 'badge-coral',
+        q: 'In CKD → Renal Osteodystrophy, what triggers Secondary Hyperparathyroidism (↑ PTH)?',
+        opts: ['Hypocalcaemia from ↓ active Vitamin D (calcitriol) + phosphate retention', 'Excessive dietary calcium intake', 'Excessive calcitriol production by the kidney', 'Isolated elevated alkaline phosphatase (ALP)'],
         ans: 0,
-        pearl: 'CKD → ↑ PO₄ + ↓ 1α-hydroxylase (↓ calcitriol) → ↓ Ca²⁺ → ↑ PTH → osteoclast bone resorption (fragility / HVT contraindication!).',
+        pearl: 'CKD → ↑ PO₄ + ↓ calcitriol → ↓ Ca²⁺ → ↑ PTH → osteoclast bone resorption (fragility / HVT contraindication).',
       },
       {
-        cat: 'MSK Red Flag', badge: 'badge-coral',
-        q: 'A 62-year-old has an acutely hot, swollen knee, fever (38.5°C) & severe pain on ANY passive ROM. Immediate action?',
-        opts: ['Urgent SAME-DAY A&E referral to rule out Septic Arthritis', 'Ice & re-book in 1 week for suspected gout', 'Gentle knee mobilisation first', 'Treat as routine OA flare'],
+        cat: 'MSK • Red Flag', badge: 'badge-coral',
+        q: 'Which symptom cluster requires immediate same-day A&E referral for Cauda Equina Syndrome (CES)?',
+        opts: ['Saddle anaesthesia (S2–S4), new bladder/bowel dysfunction & bilateral sciatica', 'Unilateral calf cramp relieved by walking', 'Isolated morning lumbar stiffness < 20 min', 'Mild thoracic ache after lifting'],
         ans: 0,
-        pearl: 'Hot swollen joint + fever/systemic malaise = Septic Arthritis emergency → immediate A&E for joint aspiration before IV antibiotics.',
+        pearl: 'Cauda Equina Syndrome is a surgical emergency requiring same-day MRI & decompression to prevent permanent nerve damage.',
       },
       {
-        cat: 'Spine Red Flag', badge: 'badge-coral',
-        q: 'Which cluster requires immediate same-day A&E referral for suspected Cauda Equina Syndrome (CES)?',
-        opts: ['Saddle anaesthesia (S2–S4), new bladder/bowel dysfunction & bilateral sciatica', 'Unilateral calf cramp relieved by walking', 'Isolated morning lumbar stiffness < 20 minutes', 'Mild localised thoracic ache after gardening'],
+        cat: 'MSK • Red Flag', badge: 'badge-coral',
+        q: 'A patient presents with an acutely hot, swollen knee, fever (38.5°C) & severe pain on any passive ROM. Action?',
+        opts: ['Immediate same-day A&E referral to rule out Septic Arthritis', 'Ice and review in 7 days for suspected gout', 'Gentle knee mobilisation first', 'Treat as routine OA flare'],
         ans: 0,
-        pearl: 'CES is a surgical emergency — urgent same-day MRI & decompression prevent permanent sphincter and neurological damage.',
+        pearl: 'Hot swollen joint + systemic fever/malaise = Septic Arthritis emergency requiring urgent A&E joint aspiration & IV antibiotics.',
       },
 
-      // Chiro Studies 3 (McTimoney stance/transfer guardrails)
+      // Chiropractic Studies 3 (McTimoney Sequence, 1st Rib, PSIS, Pelvic Tilt)
       {
-        cat: 'Chiro Studies 3', badge: 'badge-teal',
+        cat: 'Chiro 3 • Routine', badge: 'badge-emerald',
         q: 'In the McTimoney Full-Body Check, which shoulder does the patient lie on for the Side-Lying Atlas adjustment?',
-        opts: ['The Anterior Atlas side (lock elbows before adjusting)', 'The Posterior Atlas side', 'Always the Left shoulder', 'Always the Right shoulder'],
+        opts: ['The Anterior Atlas side (set elbows before adjusting)', 'The Posterior Atlas side', 'Always the Left shoulder', 'Always the Right shoulder'],
         ans: 0,
-        pearl: 'Seated Atlas palpation checks for Anteriority — patient lies on the Anterior Atlas shoulder. Set elbows cleanly before adjusting!',
+        pearl: 'Seated Atlas palpation checks for Anteriority — the patient lies on the Anterior Atlas side; lock elbows before adjusting.',
       },
       {
-        cat: 'Chiro Studies 3', badge: 'badge-teal',
-        q: 'What are the two Year 2 assessor cues to lock in for the Inferior Pelvic Tilt adjustment?',
-        opts: ['Ask patient to TUCK CHIN & drop lower so sternum aligns with ischium', 'Keep sternum superior to ischium & extend chin', 'Use a block thrust with zero follow-through', 'Stand in a narrow fencing stance under the stool'],
+        cat: 'Chiro 3 • 1st Rib', badge: 'badge-emerald',
+        q: 'What is the Year 2 assessor fix for the Prone 1st Rib adjustment nail hand and follow-through?',
+        opts: ['Keep nail hand crisp (avoid curling) & use "Superman" follow-through to the side', 'Curl the nail hand tightly with zero follow-through', 'Use a Swallow follow-through from the sternum', 'Adjust standing in horse stance at 45°'],
         ans: 0,
-        pearl: 'Inferior Pelvic Tilt: Tuck chin + drop lower into kneeling adjustment so sternum is NOT superior to the ischium.',
+        pearl: 'Prone 1st Rib: Kneel at patient’s head, keep nail hand crisp (don’t curl!), and strike with a "Superman" follow-through.',
       },
       {
-        cat: 'Chiro Studies 3', badge: 'badge-teal',
-        q: 'What is the signature follow-through & top hand cue for the Prone 1st Rib adjustment?',
-        opts: ['"Superman" follow-through to the side; keep nail hand crisp & flat (avoid curling)', 'Block thrust with zero follow-through', 'Swallow follow-through from sternum', 'Horse stance at 45° along the rugby ball'],
+        cat: 'Chiro 3 • PSIS', badge: 'badge-emerald',
+        q: 'What Year 2 assessor cue improves the Prone PSIS / SIJ adjustment?',
+        opts: ['Drop body lower, align sternum with the adjustment & take more of the slack', 'Stand taller with sternum superior to the pelvis', 'Use a single transfer with no follow-through', 'Adjust from the same side as the superior PSIS'],
         ans: 0,
-        pearl: '1st Rib: Kneel at Px head, nail elbow down, palp elbow up, strike with "Superman" follow-through & avoid curling the nail hand!',
-      },
-      {
-        cat: 'Chiro Studies 3', badge: 'badge-teal',
-        q: 'When performing Prone Spine Double Transfers, what key Year 2 guardrail protects accuracy?',
-        opts: ['Roll cleanly on/off without coming off the contact, keeping palpating fingers even', 'Lift completely off the spinous process before transferring', 'Keep the left finger slightly superior on SPs', 'Step into horse stance just before right lumbar adjustments'],
-        ans: 0,
-        pearl: 'Keep palpating fingers even on SPs, roll smoothly on/off double transfers without breaking contact, and stay in fencing stance!',
+        pearl: 'For PSIS/SIJ: adjust from the opposite side, drop body lower with sternum in line, and take out more slack before thrusting.',
       },
 
-      // Written, Research & Behavioural Sciences
+      // Written, Research & Clinic Studies
       {
-        cat: 'Research 2', badge: 'badge-amber',
-        q: 'In clinical question framing, what does the PICO acronym stand for?',
+        cat: 'Written • Voice', badge: 'badge-amber',
+        q: 'What is the recurring McTimoney tutor rule regarding first-person voice ("I/me/my/we") in essays?',
+        opts: ['Avoid first-person voice completely unless the brief explicitly permits it', 'Use first-person freely throughout all reflections', 'Use first-person in the conclusion only', 'First-person is required for Philosophy 3'],
+        ans: 0,
+        pearl: 'Both Clinic Studies II and Philosophy feedback stress maintaining third-person academic voice unless explicitly permitted.',
+      },
+      {
+        cat: 'Written • Harvard', badge: 'badge-amber',
+        q: 'What heading must be used at the end of a McTimoney assignment, and what must every direct quote include?',
+        opts: ['"Reference List" (NOT Bibliography) & page number (p./pp.) in the citation', '"Bibliography" & year only', '"Works Cited" & website URL only', '"Reference List" & no page numbers needed'],
+        ans: 0,
+        pearl: 'Always title the section "Reference List" (not Bibliography) and include p./pp. page numbers on every direct quote.',
+      },
+      {
+        cat: 'Research 2 • PICO', badge: 'badge-amber',
+        q: 'In Research 2 evidence-based question framing, what does PICO stand for?',
         opts: ['Population, Intervention, Comparison, Outcome', 'Pathology, Investigation, Care, Observation', 'Patient, Incidence, Cohort, Odds Ratio', 'Paradigm, Induction, Critique, Ontology'],
         ans: 0,
         pearl: 'PICO structures searchable clinical questions: Population/Patient, Intervention, Comparison, Outcome.',
       },
       {
-        cat: 'Written Modules', badge: 'badge-amber',
-        q: 'In McTimoney Harvard referencing, what is mandatory for EVERY direct quote and for the final reference heading?',
-        opts: ['Page number (p./pp.) in the citation & heading titled "Reference List" (not Bibliography)', 'Year only & heading titled "Bibliography"', 'First-person voice & clinic website citations', 'Introducing new references inside the conclusion'],
+        cat: 'Clinic 3 • Borton', badge: 'badge-amber',
+        q: 'What are the three stages of Borton’s reflective framework used to upgrade description into 70%+ critical evaluation?',
+        opts: ['What? → So What? → Now What?', 'Plan → Do → Review', 'Subjective → Objective → Plan', 'History → Exam → Diagnosis'],
         ans: 0,
-        pearl: 'McTimoney rubric rules: p./pp. on every direct quote, title it "Reference List", avoid 1st-person unless permitted, zero new content in conclusion.',
-      },
-      {
-        cat: 'Behavioural Sci', badge: 'badge-amber',
-        q: 'In the Psychosocial Yellow Flags framework (ABCDEFW), what do "A" and "B" screen for?',
-        opts: ['Attitudes/Beliefs (pain = harm) & Behaviours (fear-avoidance / extended rest)', 'Anatomy & Biomechanics', 'Acute Trauma & Blood Pressure', 'Antibiotics & Biologics'],
-        ans: 0,
-        pearl: 'Yellow Flags (ABCDEFW): Attitudes, Behaviours, Compensation, Diagnosis/iatrogenic labels, Emotions, Family, Work — predictors of chronicity.',
+        pearl: 'Borton’s What? → So What? → Now What? moves writing from narrative description (~64%) into 70%+ critical evaluation.',
       },
     ];
 
@@ -1902,19 +1935,19 @@
         const pct = Math.round((mix.score / mix.deck.length) * 100);
         box.innerHTML = `
           <div class="modal-header">
-            <span class="badge badge-emerald">5-Min Warm-Up Complete</span>
+            <span class="badge badge-emerald">5-Min Mix Complete</span>
             <button type="button" class="modal-close" onclick="closeMixModal()" aria-label="Close">&times;</button>
           </div>
-          <div class="modal-body" style="text-align:center; padding: 26px 20px;">
+          <div class="modal-body" style="text-align:center;padding:26px 20px;">
             <div style="width:60px;height:60px;margin:0 auto;border-radius:18px;background:var(--emerald);color:#FFF;font-size:28px;display:flex;align-items:center;justify-content:center;">⚡</div>
             <h3 style="font-size:28px;font-weight:800;letter-spacing:-0.02em;">${mix.score} / ${mix.deck.length} (${pct}%)</h3>
             <p style="font-size:13.5px;color:var(--text-muted);max-width:360px;margin:0 auto;">
               ${mix.score >= 4
-                ? 'Sharp cross-module recall — your Year 3 clinical reflexes are firing fast!'
-                : 'Solid warm-up — jump into Lessons 1–3 or the module hubs to lock in any tricky traps.'}
+                ? 'Sharp cross-module recall — your Year 3 clinical instincts are firing fast!'
+                : 'Great warm-up — jump into Lessons 1–3 or the module hubs to lock in any tricky traps.'}
             </p>
             <div style="display:flex;flex-direction:column;gap:10px;margin-top:8px;">
-              <button type="button" class="btn-3d btn-indigo btn-full" onclick="openMixModal()">Run Another 5-Min Mix ⚡</button>
+              <button type="button" class="btn-3d btn-amber btn-full" onclick="openMixModal()">Play Another 5 ⚡</button>
               <button type="button" class="btn-3d btn-neutral btn-full" onclick="closeMixModal()">Back to Dashboard</button>
             </div>
           </div>
@@ -1971,7 +2004,7 @@
               </div>
             </div>
             <button type="button" class="btn-3d ${isRight ? 'btn-emerald' : 'btn-coral'} btn-full" onclick="nextMixStep()">
-              ${mix.idx + 1 >= mix.deck.length ? 'Finish Mix &rarr;' : 'Continue &rarr;'}
+              ${mix.idx + 1 >= mix.deck.length ? 'Finish &rarr;' : 'Next &rarr;'}
             </button>
           </div>
         ` : ''}
@@ -1979,19 +2012,16 @@
     }
 
     // =========================================================================
-    // 5. PHONE <-> LAPTOP PROGRESS SYNC MODAL (BASE64)
+    // 5. PHONE <-> LAPTOP PROGRESS SYNC MODAL (ALL 4 LOCALSTORAGE KEYS)
     // =========================================================================
     function buildSyncCode() {
-      try {
-        const payload = {
-          srs: safeGet('mchiro_srs_v4'),
-          lessons: safeGet('mchiro_lessons_v1'),
-          theme: safeGet('mchiro_theme'),
-        };
-        return btoa(unescape(encodeURIComponent(JSON.stringify(payload))));
-      } catch (e) {
-        return '';
-      }
+      const payload = {
+        mchiro_srs_v4: safeGet('mchiro_srs_v4'),
+        mchiro_lessons_v1: safeGet('mchiro_lessons_v1'),
+        mchiro_planner_v1: safeGet('mchiro_planner_v1'),
+        mchiro_theme: safeGet('mchiro_theme'),
+      };
+      return encodeBase64Utf8(JSON.stringify(payload));
     }
 
     function openSyncModal() {
@@ -2020,13 +2050,13 @@
         ta.select();
         document.execCommand('copy');
         document.body.removeChild(ta);
-        showToast('Sync code copied! Paste on your other device.', 'emerald');
+        showToast('Copied!', 'emerald');
       } catch (e) {
         showToast('Select and copy the sync code manually.', 'amber');
       }
     }
 
-    function importSyncCode() {
+    function restoreSyncCode() {
       const raw = (document.getElementById('sync-import').value || '').trim();
       if (!raw) {
         showToast('Paste a sync code first.', 'amber');
@@ -2034,28 +2064,37 @@
       }
 
       try {
-        const decoded = JSON.parse(decodeURIComponent(escape(atob(raw))));
-        if (!decoded || typeof decoded !== 'object') throw new Error('Invalid');
+        const decoded = JSON.parse(decodeBase64Utf8(raw));
+        if (!decoded || typeof decoded !== 'object') throw new Error('Invalid sync object');
 
         let restored = 0;
 
-        if (typeof decoded.srs === 'string') {
-          JSON.parse(decoded.srs);
-          safeSet('mchiro_srs_v4', decoded.srs);
-          restored++;
-        } else if (typeof decoded.mchiro_srs_v4 === 'string') {
-          JSON.parse(decoded.mchiro_srs_v4);
-          safeSet('mchiro_srs_v4', decoded.mchiro_srs_v4);
+        // 1. Leitner SRS (supports current & legacy field names)
+        const srsVal = decoded.mchiro_srs_v4 !== undefined ? decoded.mchiro_srs_v4 : decoded.srs;
+        if (typeof srsVal === 'string') {
+          JSON.parse(srsVal);
+          safeSet('mchiro_srs_v4', srsVal);
           restored++;
         }
 
-        if (typeof decoded.lessons === 'string') {
-          JSON.parse(decoded.lessons);
-          safeSet('mchiro_lessons_v1', decoded.lessons);
+        // 2. Visual Lessons
+        const lessonsVal = decoded.mchiro_lessons_v1 !== undefined ? decoded.mchiro_lessons_v1 : decoded.lessons;
+        if (typeof lessonsVal === 'string') {
+          JSON.parse(lessonsVal);
+          safeSet('mchiro_lessons_v1', lessonsVal);
           restored++;
         }
 
-        const themeVal = decoded.theme || decoded.mchiro_theme;
+        // 3. Year 3 Planner
+        const plannerVal = decoded.mchiro_planner_v1 !== undefined ? decoded.mchiro_planner_v1 : decoded.planner;
+        if (typeof plannerVal === 'string') {
+          JSON.parse(plannerVal);
+          safeSet('mchiro_planner_v1', plannerVal);
+          restored++;
+        }
+
+        // 4. Theme
+        const themeVal = decoded.mchiro_theme !== undefined ? decoded.mchiro_theme : decoded.theme;
         if (themeVal === 'dark' || themeVal === 'light') {
           safeSet('mchiro_theme', themeVal);
           restored++;
@@ -2069,20 +2108,15 @@
         initTheme();
         renderDashboard();
         closeSyncModal();
-        showToast('Progress synced & dashboard refreshed!', 'emerald');
+        showToast('✓ Progress restored & synced!', 'emerald');
       } catch (e) {
         showToast('Invalid sync code — check you copied the full text.', 'coral');
       }
     }
 
     // =========================================================================
-    // 6. HELPERS & INITIALISATION
+    // 6. MODAL BACKDROP LISTENERS & INITIALISATION
     // =========================================================================
-    function scrollToLessons() {
-      const el = document.getElementById('lessons-section');
-      if (el) el.scrollIntoView({ behavior: 'smooth', block: 'start' });
-    }
-
     document.getElementById('mix-modal').addEventListener('click', function (e) {
       if (e.target === this) closeMixModal();
     });
