@@ -1,0 +1,2672 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover" />
+  <title>Lesson 3: Cranial Nerves (I–XII) &amp; Eye/Face Lab – MChiro Year 3 Hub</title>
+
+  <style>
+    /* =========================================================================
+       1. DESIGN TOKENS & THEME VARIABLES (LIGHT / DARK SYNCED: mchiro_theme)
+       Zero external CDNs — pure system font stack for instant mobile loading.
+       ========================================================================= */
+    :root {
+      --bg-page: #F2F2F7;
+      --bg-card: #FFFFFF;
+      --bg-subtle: #EAEAF0;
+      --bg-header: rgba(255, 255, 255, 0.92);
+      --border-card: #E2E8F0;
+      --border-strong: #CBD5E1;
+      --text-main: #1C1C1E;
+      --text-muted: #636366;
+
+      /* Semantic Cognitive Colour-Coding */
+      --sem-blue: #007AFF;
+      --sem-blue-dark: #005BBF;
+      --sem-blue-soft: rgba(0, 122, 255, 0.11);
+      --sem-blue-border: rgba(0, 122, 255, 0.3);
+
+      --sem-emerald: #10B981;
+      --sem-emerald-dark: #047857;
+      --sem-emerald-soft: rgba(16, 185, 129, 0.12);
+      --sem-emerald-border: rgba(16, 185, 129, 0.34);
+
+      --sem-purple: #8B5CF6;
+      --sem-purple-dark: #6D28D9;
+      --sem-purple-soft: rgba(139, 92, 246, 0.12);
+      --sem-purple-border: rgba(139, 92, 246, 0.34);
+
+      --sem-coral: #EF4444;
+      --sem-coral-dark: #B91C1C;
+      --sem-coral-soft: rgba(239, 68, 68, 0.11);
+      --sem-coral-border: rgba(239, 68, 68, 0.35);
+
+      --sem-amber: #F59E0B;
+      --sem-amber-dark: #B45309;
+      --sem-amber-soft: rgba(245, 158, 11, 0.14);
+      --sem-amber-border: rgba(245, 158, 11, 0.38);
+
+      /* SVG Anatomical Tokens */
+      --svg-bg: #F8FAFC;
+      --svg-skin: #ECEFF4;
+      --svg-quiz-fill: #DFE7F2;
+      --svg-quiz-hover: #CBD6E6;
+      --svg-outline: #1E293B;
+      --svg-focus-stroke: #0F172A;
+      --svg-landmark: rgba(30, 41, 59, 0.5);
+      --svg-divider: #475569;
+      --svg-label-bg: #FFFFFF;
+      --svg-label-text: #0F172A;
+      --svg-iris: #007AFF;
+      --svg-c2c3: #CBD5E1;
+
+      --drawer-correct-bg: #ECFDF5;
+      --drawer-wrong-bg: #FEF2F2;
+      --shadow-card: 0 2px 12px rgba(15, 23, 42, 0.05);
+    }
+
+    .dark {
+      --bg-page: #0B1120;
+      --bg-card: #131D33;
+      --bg-subtle: #1C2944;
+      --bg-header: rgba(11, 17, 32, 0.94);
+      --border-card: #263654;
+      --border-strong: #374B70;
+      --text-main: #F8FAFC;
+      --text-muted: #94A3B8;
+
+      --sem-blue: #38BDF8;
+      --sem-blue-dark: #0284C7;
+      --sem-blue-soft: rgba(56, 189, 248, 0.18);
+      --sem-blue-border: rgba(56, 189, 248, 0.38);
+
+      --sem-emerald-soft: rgba(16, 185, 129, 0.18);
+      --sem-emerald-border: rgba(52, 211, 153, 0.38);
+
+      --sem-purple-soft: rgba(139, 92, 246, 0.22);
+      --sem-purple-border: rgba(167, 139, 250, 0.4);
+
+      --sem-coral-soft: rgba(239, 68, 68, 0.2);
+      --sem-coral-border: rgba(248, 113, 113, 0.42);
+
+      --sem-amber-soft: rgba(245, 158, 11, 0.2);
+      --sem-amber-border: rgba(251, 191, 36, 0.42);
+
+      --svg-bg: #0F172A;
+      --svg-skin: #1E293B;
+      --svg-quiz-fill: #23324D;
+      --svg-quiz-hover: #304569;
+      --svg-outline: #E2E8F0;
+      --svg-focus-stroke: #FFFFFF;
+      --svg-landmark: rgba(226, 232, 240, 0.5);
+      --svg-divider: #94A3B8;
+      --svg-label-bg: #0F172A;
+      --svg-label-text: #F8FAFC;
+      --svg-iris: #38BDF8;
+      --svg-c2c3: #334155;
+
+      --drawer-correct-bg: #08291F;
+      --drawer-wrong-bg: #2C1018;
+      --shadow-card: 0 4px 18px rgba(0, 0, 0, 0.4);
+    }
+
+    /* =========================================================================
+       2. BASE RESET & SYSTEM TYPOGRAPHY
+       ========================================================================= */
+    *, *::before, *::after { box-sizing: border-box; }
+    html { scroll-behavior: smooth; }
+
+    body {
+      margin: 0;
+      min-height: 100vh;
+      display: flex;
+      flex-direction: column;
+      background-color: var(--bg-page);
+      color: var(--text-main);
+      font-family: system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Helvetica, Arial, sans-serif;
+      line-height: 1.48;
+      overflow-x: hidden;
+      -webkit-font-smoothing: antialiased;
+      -webkit-tap-highlight-color: transparent;
+      transition: background-color 0.2s ease, color 0.2s ease;
+    }
+
+    h1, h2, h3, h4, p { margin: 0; }
+    a { color: inherit; text-decoration: none; }
+    button { font-family: inherit; }
+
+    .mono {
+      font-family: ui-monospace, SFMono-Regular, Menlo, Monaco, Consolas, monospace;
+      letter-spacing: -0.02em;
+    }
+
+    /* =========================================================================
+       3. STICKY TOP BAR & DUOLINGO ANIMATED PROGRESS BAR
+       ========================================================================= */
+    .top-header {
+      position: sticky;
+      top: 0;
+      z-index: 40;
+      background: var(--bg-header);
+      backdrop-filter: blur(18px);
+      -webkit-backdrop-filter: blur(18px);
+      border-bottom: 1px solid var(--border-card);
+    }
+
+    .header-inner {
+      max-width: 680px;
+      margin: 0 auto;
+      padding: 10px 14px;
+      display: flex;
+      flex-direction: column;
+      gap: 10px;
+    }
+
+    .header-row {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      gap: 8px;
+      flex-wrap: wrap;
+    }
+
+    .nav-links {
+      display: inline-flex;
+      align-items: center;
+      gap: 6px;
+      flex-shrink: 0;
+    }
+
+    .nav-pill {
+      display: inline-flex;
+      align-items: center;
+      gap: 4px;
+      min-height: 36px;
+      padding: 6px 10px;
+      border-radius: 11px;
+      background: var(--bg-subtle);
+      color: var(--text-main);
+      font-size: 12px;
+      font-weight: 800;
+      transition: background-color 0.15s ease;
+    }
+    .nav-pill:hover { background: var(--border-card); }
+
+    .mode-switch {
+      display: inline-flex;
+      align-items: center;
+      padding: 3px;
+      border-radius: 12px;
+      background: var(--bg-subtle);
+      border: 1px solid var(--border-card);
+    }
+
+    .mode-btn {
+      border: none;
+      background: transparent;
+      color: var(--text-muted);
+      min-height: 30px;
+      padding: 4px 11px;
+      border-radius: 9px;
+      font-size: 11.5px;
+      font-weight: 800;
+      cursor: pointer;
+      transition: all 0.15s ease;
+      white-space: nowrap;
+    }
+    .mode-btn.active {
+      background: var(--bg-card);
+      color: var(--text-main);
+      box-shadow: 0 1px 4px rgba(0, 0, 0, 0.1);
+    }
+
+    .header-right {
+      display: flex;
+      align-items: center;
+      gap: 6px;
+      flex-shrink: 0;
+    }
+
+    .xp-pill {
+      display: inline-flex;
+      align-items: center;
+      gap: 4px;
+      min-height: 36px;
+      padding: 6px 10px;
+      border-radius: 11px;
+      background: var(--sem-amber-soft);
+      border: 1px solid var(--sem-amber-border);
+      color: var(--sem-amber-dark);
+      font-size: 12px;
+      font-weight: 800;
+      font-variant-numeric: tabular-nums;
+      white-space: nowrap;
+    }
+    .dark .xp-pill { color: #FCD34D; }
+
+    .theme-btn {
+      width: 36px;
+      height: 36px;
+      border-radius: 11px;
+      border: 1px solid var(--border-card);
+      background: var(--bg-subtle);
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      font-size: 15px;
+      cursor: pointer;
+      transition: background-color 0.15s ease;
+    }
+    .theme-btn:hover { background: var(--border-card); }
+
+    .progress-row {
+      display: flex;
+      align-items: center;
+      gap: 10px;
+    }
+    .progress-row.hidden { display: none; }
+
+    .progress-track {
+      flex: 1;
+      height: 14px;
+      border-radius: 999px;
+      background: var(--bg-subtle);
+      padding: 2px;
+      overflow: hidden;
+    }
+
+    .progress-fill {
+      position: relative;
+      height: 100%;
+      border-radius: 999px;
+      background: var(--sem-emerald);
+      transition: width 0.45s cubic-bezier(0.22, 1, 0.36, 1), background-color 0.25s ease;
+      overflow: hidden;
+    }
+    .progress-fill.replay { background: var(--sem-amber); }
+    .progress-fill::after {
+      content: '';
+      position: absolute;
+      top: 2px;
+      left: 6px;
+      right: 6px;
+      height: 3px;
+      border-radius: 999px;
+      background: rgba(255, 255, 255, 0.45);
+    }
+
+    .progress-label {
+      font-size: 11.5px;
+      font-weight: 800;
+      color: var(--text-muted);
+      font-variant-numeric: tabular-nums;
+      flex-shrink: 0;
+    }
+
+    /* =========================================================================
+       4. MAIN LAYOUT, CARDS, PILLS & SEMANTIC COGNITIVE BOXES
+       ========================================================================= */
+    .app-main {
+      flex: 1;
+      width: 100%;
+      max-width: 680px;
+      margin: 0 auto;
+      padding: 16px 14px 158px;
+    }
+
+    .stack { display: flex; flex-direction: column; gap: 14px; }
+    .stack-sm { display: flex; flex-direction: column; gap: 10px; }
+
+    .card {
+      background: var(--bg-card);
+      border: 2px solid var(--border-card);
+      border-radius: 22px;
+      box-shadow: var(--shadow-card);
+    }
+
+    .svg-card { padding: 12px; }
+
+    .info-card {
+      padding: 16px;
+      display: flex;
+      flex-direction: column;
+      gap: 10px;
+    }
+
+    .flex-between {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      gap: 8px;
+      flex-wrap: wrap;
+    }
+
+    .step-badge {
+      display: inline-flex;
+      align-items: center;
+      gap: 5px;
+      padding: 5px 10px;
+      border-radius: 10px;
+      font-size: 11px;
+      font-weight: 800;
+      text-transform: uppercase;
+      letter-spacing: 0.04em;
+    }
+    .badge-blue { background: var(--sem-blue-soft); color: var(--sem-blue-dark); border: 1px solid var(--sem-blue-border); }
+    .dark .badge-blue { color: #7DD3FC; }
+    .badge-emerald { background: var(--sem-emerald-soft); color: var(--sem-emerald-dark); border: 1px solid var(--sem-emerald-border); }
+    .dark .badge-emerald { color: #6EE7B7; }
+    .badge-purple { background: var(--sem-purple-soft); color: var(--sem-purple-dark); border: 1px solid var(--sem-purple-border); }
+    .dark .badge-purple { color: #C4B5FD; }
+    .badge-coral { background: var(--sem-coral-soft); color: var(--sem-coral-dark); border: 1px solid var(--sem-coral-border); }
+    .dark .badge-coral { color: #FCA5A5; }
+    .badge-amber { background: var(--sem-amber-soft); color: var(--sem-amber-dark); border: 1px solid var(--sem-amber-border); }
+    .dark .badge-amber { color: #FCD34D; }
+
+    .step-title {
+      font-size: 21px;
+      font-weight: 800;
+      line-height: 1.25;
+      letter-spacing: -0.02em;
+      margin-top: 8px;
+    }
+
+    .step-prompt {
+      font-size: 18px;
+      font-weight: 800;
+      line-height: 1.36;
+      letter-spacing: -0.015em;
+      margin-top: 8px;
+    }
+
+    .step-sub {
+      font-size: 13.5px;
+      color: var(--text-muted);
+      margin-top: 4px;
+    }
+
+    /* Pill Grids (Generous >= 44px touch targets) */
+    .pill-row {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 7px;
+    }
+    .pill-grid-2 {
+      display: grid;
+      grid-template-columns: repeat(2, 1fr);
+      gap: 8px;
+    }
+    .pill-grid-3 {
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap: 7px;
+    }
+    .pill-grid-4 {
+      display: grid;
+      grid-template-columns: repeat(4, 1fr);
+      gap: 7px;
+    }
+    @media (min-width: 520px) {
+      .pill-grid-6 {
+        display: grid;
+        grid-template-columns: repeat(6, 1fr);
+        gap: 7px;
+      }
+    }
+    @media (max-width: 519px) {
+      .pill-grid-6 {
+        display: grid;
+        grid-template-columns: repeat(4, 1fr);
+        gap: 7px;
+      }
+    }
+
+    .zone-pill {
+      flex: 1;
+      min-width: 56px;
+      min-height: 44px;
+      padding: 8px 10px;
+      border-radius: 13px;
+      border: 2px solid var(--border-card);
+      background: var(--bg-card);
+      color: var(--text-muted);
+      font-size: 12.5px;
+      font-weight: 800;
+      cursor: pointer;
+      transition: all 0.14s ease;
+      text-align: center;
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+    }
+    .zone-pill:hover { border-color: var(--sem-blue); color: var(--text-main); }
+    .zone-pill.active {
+      background: var(--sem-blue);
+      border-color: var(--sem-blue);
+      color: #FFFFFF;
+    }
+
+    .reset-pill {
+      display: inline-flex;
+      align-items: center;
+      gap: 5px;
+      min-height: 36px;
+      padding: 6px 12px;
+      border-radius: 999px;
+      border: 1.5px solid var(--border-strong);
+      background: var(--bg-subtle);
+      color: var(--text-main);
+      font-size: 11.5px;
+      font-weight: 800;
+      cursor: pointer;
+      transition: all 0.14s ease;
+    }
+    .reset-pill:hover:not(:disabled) {
+      border-color: var(--sem-blue);
+      color: var(--sem-blue);
+    }
+    .reset-pill:disabled {
+      opacity: 0.45;
+      cursor: default;
+    }
+
+    /* Semantic Info Cards */
+    .sem-box {
+      padding: 11px 13px;
+      border-radius: 14px;
+      font-size: 13.5px;
+      border: 1px solid transparent;
+    }
+    .sem-box-label {
+      display: block;
+      font-size: 10.5px;
+      font-weight: 800;
+      text-transform: uppercase;
+      letter-spacing: 0.05em;
+      margin-bottom: 3px;
+    }
+
+    .sem-blue { background: var(--sem-blue-soft); border-color: var(--sem-blue-border); }
+    .sem-blue .sem-box-label { color: var(--sem-blue-dark); }
+    .dark .sem-blue .sem-box-label { color: #7DD3FC; }
+
+    .sem-emerald { background: var(--sem-emerald-soft); border-color: var(--sem-emerald-border); }
+    .sem-emerald .sem-box-label { color: var(--sem-emerald-dark); }
+    .dark .sem-emerald .sem-box-label { color: #6EE7B7; }
+
+    .sem-purple { background: var(--sem-purple-soft); border-color: var(--sem-purple-border); }
+    .sem-purple .sem-box-label { color: var(--sem-purple-dark); }
+    .dark .sem-purple .sem-box-label { color: #C4B5FD; }
+
+    .sem-amber { background: var(--sem-amber-soft); border-color: var(--sem-amber-border); }
+    .sem-amber .sem-box-label { color: var(--sem-amber-dark); }
+    .dark .sem-amber .sem-box-label { color: #FCD34D; }
+
+    .sem-coral { background: var(--sem-coral-soft); border-color: var(--sem-coral-border); }
+    .sem-coral .sem-box-label { color: var(--sem-coral-dark); }
+    .dark .sem-coral .sem-box-label { color: #FCA5A5; }
+
+    .mini-tile {
+      padding: 11px 10px;
+      border-radius: 14px;
+      border: 1px solid var(--border-card);
+      text-align: center;
+    }
+    .mini-tile strong {
+      display: block;
+      font-size: 13.5px;
+      font-weight: 800;
+    }
+    .mini-tile span {
+      display: block;
+      font-size: 11.5px;
+      font-weight: 600;
+      margin-top: 2px;
+      color: var(--text-muted);
+    }
+
+    /* =========================================================================
+       5. TACTILE 3D DUOLINGO BUTTONS & MULTIPLE-CHOICE CARDS
+       ========================================================================= */
+    .btn-3d {
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      gap: 8px;
+      width: 100%;
+      min-height: 48px;
+      padding: 13px 18px;
+      border-radius: 16px;
+      font-size: 15px;
+      font-weight: 800;
+      letter-spacing: 0.02em;
+      cursor: pointer;
+      user-select: none;
+      transition: transform 0.08s ease, border-bottom-width 0.08s ease, filter 0.15s ease, opacity 0.15s ease;
+    }
+    .btn-3d:active:not(:disabled) {
+      transform: translateY(2px);
+      border-bottom-width: 2px !important;
+    }
+    .btn-3d:disabled {
+      opacity: 0.42;
+      cursor: not-allowed;
+      transform: none !important;
+    }
+
+    .btn-emerald {
+      background: var(--sem-emerald);
+      color: #FFFFFF;
+      border: 2px solid var(--sem-emerald);
+      border-bottom: 4px solid var(--sem-emerald-dark);
+    }
+    .btn-emerald:hover:not(:disabled) { filter: brightness(1.05); }
+
+    .btn-blue {
+      background: #007AFF;
+      color: #FFFFFF;
+      border: 2px solid #007AFF;
+      border-bottom: 4px solid #005BBF;
+    }
+    .btn-blue:hover:not(:disabled) { filter: brightness(1.06); }
+
+    .btn-coral {
+      background: var(--sem-coral);
+      color: #FFFFFF;
+      border: 2px solid var(--sem-coral);
+      border-bottom: 4px solid var(--sem-coral-dark);
+    }
+    .btn-coral:hover:not(:disabled) { filter: brightness(1.05); }
+
+    .btn-neutral {
+      background: var(--bg-card);
+      color: var(--text-main);
+      border: 2px solid var(--border-card);
+      border-bottom: 4px solid var(--border-strong);
+    }
+    .btn-neutral:hover:not(:disabled) { background: var(--bg-subtle); }
+
+    .choice-card {
+      width: 100%;
+      min-height: 54px;
+      padding: 13px 14px;
+      border-radius: 16px;
+      background: var(--bg-card);
+      border: 2px solid var(--border-card);
+      border-bottom: 4px solid var(--border-strong);
+      color: var(--text-main);
+      text-align: left;
+      display: flex;
+      align-items: center;
+      gap: 12px;
+      cursor: pointer;
+      transition: transform 0.08s ease, border-color 0.15s ease, background-color 0.15s ease;
+    }
+    .choice-card:hover:not(:disabled) {
+      border-color: var(--sem-blue);
+      background: var(--sem-blue-soft);
+    }
+    .choice-card:active:not(:disabled) {
+      transform: translateY(2px);
+      border-bottom-width: 2px;
+    }
+    .choice-card:disabled { cursor: default; }
+
+    .choice-letter {
+      width: 32px;
+      height: 32px;
+      border-radius: 10px;
+      background: var(--bg-subtle);
+      border: 1.5px solid var(--border-card);
+      font-size: 12px;
+      font-weight: 800;
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      flex-shrink: 0;
+    }
+
+    .choice-text {
+      font-size: 14px;
+      font-weight: 600;
+      line-height: 1.38;
+    }
+
+    .choice-selected {
+      border-color: var(--sem-blue) !important;
+      border-bottom-color: var(--sem-blue-dark) !important;
+      background: var(--sem-blue-soft) !important;
+    }
+    .choice-selected .choice-letter {
+      background: var(--sem-blue);
+      border-color: var(--sem-blue);
+      color: #FFFFFF;
+    }
+
+    .choice-correct {
+      border-color: var(--sem-emerald) !important;
+      border-bottom-color: var(--sem-emerald-dark) !important;
+      background: var(--sem-emerald-soft) !important;
+    }
+    .choice-correct .choice-letter {
+      background: var(--sem-emerald);
+      border-color: var(--sem-emerald);
+      color: #FFFFFF;
+    }
+
+    .choice-wrong {
+      border-color: var(--sem-coral) !important;
+      border-bottom-color: var(--sem-coral-dark) !important;
+      background: var(--sem-coral-soft) !important;
+    }
+    .choice-wrong .choice-letter {
+      background: var(--sem-coral);
+      border-color: var(--sem-coral);
+      color: #FFFFFF;
+    }
+
+    /* =========================================================================
+       6. INTERACTIVE SVG SPOTLIGHT / FADE-OTHERS ISOLATION & MOVING PUPILS
+       ========================================================================= */
+    .anatomy-svg {
+      display: block;
+      width: 100%;
+      max-width: 440px;
+      height: auto;
+      margin: 0 auto;
+      user-select: none;
+    }
+
+    .cn-zone {
+      cursor: pointer;
+      transition: opacity 0.22s ease, filter 0.22s ease, fill 0.18s ease, stroke-width 0.18s ease;
+    }
+    .cn-zone:hover {
+      filter: brightness(1.07);
+    }
+
+    .zone-label {
+      transition: opacity 0.22s ease, filter 0.22s ease;
+    }
+
+    .cn-zone-quiz {
+      fill: var(--svg-quiz-fill);
+    }
+    .cn-zone-quiz:hover {
+      fill: var(--svg-quiz-hover);
+    }
+
+    /* SPOTLIGHT / FADE-OTHERS RULE */
+    .anatomy-svg.has-selection .cn-zone:not(.is-active):not(.is-correct):not(.is-wrong) {
+      opacity: 0.16;
+      filter: saturate(0.25);
+    }
+    .anatomy-svg.has-selection .zone-label:not(.is-active) {
+      opacity: 0.25;
+    }
+
+    .cn-zone.is-active {
+      opacity: 1 !important;
+      stroke: var(--svg-focus-stroke);
+      stroke-width: 2.3px;
+      filter: drop-shadow(0 0 8px rgba(15, 23, 42, 0.28));
+    }
+    .dark .cn-zone.is-active {
+      filter: drop-shadow(0 0 10px rgba(248, 250, 252, 0.36));
+    }
+
+    .cn-zone.is-quiz-selected {
+      fill: #007AFF !important;
+      fill-opacity: 0.9 !important;
+    }
+
+    .cn-zone.is-correct {
+      opacity: 1 !important;
+      fill: #10B981 !important;
+      fill-opacity: 0.92 !important;
+      stroke: var(--svg-focus-stroke);
+      stroke-width: 2.3px;
+      animation: pulseGreen 0.65s ease-in-out 2;
+    }
+
+    .cn-zone.is-wrong {
+      opacity: 1 !important;
+      fill: #EF4444 !important;
+      fill-opacity: 0.88 !important;
+      stroke: var(--svg-focus-stroke);
+      stroke-width: 2px;
+    }
+
+    /* Smooth moving pupils for H-Test SVG B */
+    .eye-gaze-group {
+      transition: transform 0.32s cubic-bezier(0.22, 1, 0.36, 1);
+    }
+
+    @keyframes pulseGreen {
+      0%, 100% { filter: drop-shadow(0 0 0 rgba(16, 185, 129, 0)); }
+      50% { filter: drop-shadow(0 0 12px rgba(16, 185, 129, 0.95)); }
+    }
+
+    /* =========================================================================
+       7. FIXED BOTTOM ACTION / FEEDBACK DRAWER & EXPLORE SUB-TABS
+       ========================================================================= */
+    .bottom-drawer-wrap {
+      position: fixed;
+      bottom: 0;
+      left: 0;
+      right: 0;
+      z-index: 50;
+      pointer-events: none;
+    }
+
+    .drawer-bar {
+      pointer-events: auto;
+      background: var(--bg-header);
+      backdrop-filter: blur(14px);
+      -webkit-backdrop-filter: blur(14px);
+      border-top: 1px solid var(--border-card);
+    }
+
+    .drawer-feedback {
+      pointer-events: auto;
+      border-top-width: 2px;
+      border-top-style: solid;
+      box-shadow: 0 -10px 30px rgba(0, 0, 0, 0.14);
+      animation: slideUp 0.22s cubic-bezier(0.22, 1, 0.36, 1) forwards;
+    }
+    .drawer-feedback.correct {
+      background: var(--drawer-correct-bg);
+      border-top-color: var(--sem-emerald);
+    }
+    .drawer-feedback.wrong {
+      background: var(--drawer-wrong-bg);
+      border-top-color: var(--sem-coral);
+    }
+
+    .drawer-inner {
+      max-width: 680px;
+      margin: 0 auto;
+      padding: 14px 14px calc(14px + env(safe-area-inset-bottom, 0px));
+      display: flex;
+      flex-direction: column;
+      gap: 12px;
+    }
+
+    .fb-row {
+      display: flex;
+      align-items: flex-start;
+      gap: 11px;
+    }
+
+    .fb-icon {
+      width: 32px;
+      height: 32px;
+      border-radius: 999px;
+      color: #FFFFFF;
+      font-weight: 800;
+      font-size: 16px;
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      flex-shrink: 0;
+    }
+    .fb-icon.correct { background: var(--sem-emerald); }
+    .fb-icon.wrong { background: var(--sem-coral); }
+
+    .fb-title {
+      font-size: 15.5px;
+      font-weight: 800;
+    }
+    .fb-title.correct { color: var(--sem-emerald-dark); }
+    .dark .fb-title.correct { color: #6EE7B7; }
+    .fb-title.wrong { color: var(--sem-coral-dark); }
+    .dark .fb-title.wrong { color: #FCA5A5; }
+
+    .fb-msg {
+      font-size: 13.5px;
+      margin-top: 2px;
+      color: var(--text-main);
+    }
+
+    .hint-text {
+      text-align: center;
+      font-size: 12.5px;
+      font-weight: 600;
+      color: var(--text-muted);
+    }
+
+    .sub-seg-3 {
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap: 5px;
+      padding: 5px;
+      border-radius: 16px;
+      background: var(--bg-subtle);
+      border: 1px solid var(--border-card);
+    }
+    .sub-seg-btn {
+      border: none;
+      background: transparent;
+      color: var(--text-muted);
+      min-height: 40px;
+      padding: 8px 6px;
+      border-radius: 11px;
+      font-size: 12px;
+      font-weight: 800;
+      cursor: pointer;
+      transition: all 0.15s ease;
+    }
+    .sub-seg-btn.active {
+      background: var(--bg-card);
+      color: var(--text-main);
+      box-shadow: 0 1px 4px rgba(0, 0, 0, 0.1);
+    }
+
+    /* Celebration Screen */
+    .celebration-card {
+      position: relative;
+      overflow: hidden;
+      padding: 28px 20px;
+      text-align: center;
+      border-color: var(--sem-emerald);
+      display: flex;
+      flex-direction: column;
+      gap: 18px;
+    }
+
+    .trophy-badge {
+      width: 66px;
+      height: 66px;
+      margin: 0 auto;
+      border-radius: 20px;
+      background: var(--sem-emerald);
+      color: #FFFFFF;
+      font-size: 32px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      box-shadow: 0 8px 20px rgba(16, 185, 129, 0.35);
+    }
+
+    .stat-grid {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 10px;
+    }
+
+    .stat-box {
+      padding: 14px;
+      border-radius: 16px;
+      border: 2px solid transparent;
+    }
+    .stat-val {
+      display: block;
+      font-size: 24px;
+      font-weight: 800;
+      margin-top: 2px;
+    }
+
+    .confetti-layer {
+      position: absolute;
+      inset: 0;
+      overflow: hidden;
+      pointer-events: none;
+    }
+    .confetti-piece {
+      position: absolute;
+      top: -12px;
+      width: 9px;
+      height: 13px;
+      border-radius: 3px;
+      animation: confettiFall linear forwards;
+    }
+
+    @keyframes slideUp {
+      from { transform: translateY(100%); opacity: 0.7; }
+      to { transform: translateY(0); opacity: 1; }
+    }
+    @keyframes stepIn {
+      from { opacity: 0; transform: translateY(7px); }
+      to { opacity: 1; transform: translateY(0); }
+    }
+    .step-enter { animation: stepIn 0.2s ease-out forwards; }
+
+    @keyframes confettiFall {
+      0% { transform: translateY(-20px) rotate(0deg); opacity: 1; }
+      100% { transform: translateY(440px) rotate(540deg); opacity: 0; }
+    }
+  </style>
+</head>
+<body>
+
+  <!-- =========================================================================
+       STICKY TOP BAR
+       ========================================================================= -->
+  <header class="top-header">
+    <div class="header-inner">
+      <div class="header-row">
+        <div class="nav-links">
+          <a href="index.html" class="nav-pill" aria-label="Back to MChiro Year 3 Hub">&larr; Hub</a>
+          <a href="neuro.html" class="nav-pill" aria-label="Open Clinical Neurology Hub">Neuro</a>
+        </div>
+
+        <div class="mode-switch" role="tablist" aria-label="Lesson or Explore Lab Mode">
+          <button type="button" id="mode-btn-lesson" class="mode-btn active" onclick="setAppMode('lesson')">Lesson</button>
+          <button type="button" id="mode-btn-explore" class="mode-btn" onclick="setAppMode('explore')">Explore Lab</button>
+        </div>
+
+        <div class="header-right">
+          <div class="xp-pill" title="Lesson XP">
+            <span>⚡</span>
+            <span id="xp-value">0 XP</span>
+          </div>
+          <button type="button" id="theme-toggle-btn" class="theme-btn" onclick="toggleTheme()" aria-label="Toggle Light or Dark Mode">🌙</button>
+        </div>
+      </div>
+
+      <div id="progress-row" class="progress-row">
+        <div class="progress-track">
+          <div id="progress-fill" class="progress-fill" style="width: 7%"></div>
+        </div>
+        <span id="progress-label" class="progress-label">1 / 14</span>
+      </div>
+    </div>
+  </header>
+
+  <!-- =========================================================================
+       MAIN APP CONTAINER
+       ========================================================================= -->
+  <main id="app-main" class="app-main"></main>
+
+  <!-- =========================================================================
+       FIXED BOTTOM ACTION / FEEDBACK DRAWER
+       ========================================================================= -->
+  <div id="bottom-drawer" class="bottom-drawer-wrap"></div>
+
+  <script>
+    // =========================================================================
+    // 1. PERSISTENT LIGHT / DARK THEME ('mchiro_theme') & HUB SYNC ('mchiro_lessons_v1')
+    // =========================================================================
+    function initTheme() {
+      let saved = null;
+      try { saved = localStorage.getItem('mchiro_theme'); } catch (e) {}
+      const prefersDark = window.matchMedia && window.matchMedia('(prefers-color-scheme: dark)').matches;
+      const isDark = saved ? (saved === 'dark' || saved === '"dark"') : prefersDark;
+      applyTheme(isDark);
+    }
+
+    function applyTheme(isDark) {
+      document.documentElement.classList.toggle('dark', isDark);
+      try { localStorage.setItem('mchiro_theme', isDark ? 'dark' : 'light'); } catch (e) {}
+      const btn = document.getElementById('theme-toggle-btn');
+      if (btn) btn.textContent = isDark ? '☀️' : '🌙';
+    }
+
+    function toggleTheme() {
+      applyTheme(!document.documentElement.classList.contains('dark'));
+    }
+
+    function saveLessonCompletion() {
+      try {
+        const raw = localStorage.getItem('mchiro_lessons_v1');
+        const existing = raw ? JSON.parse(raw) : {};
+        const merged = Object.assign({}, existing && typeof existing === 'object' ? existing : {}, {
+          cn: {
+            completed: true,
+            xp: 140,
+            updatedAt: Date.now(),
+          },
+        });
+        localStorage.setItem('mchiro_lessons_v1', JSON.stringify(merged));
+      } catch (e) {
+        // Safely ignore storage quota / private mode errors
+      }
+    }
+
+    // =========================================================================
+    // 2. MCTIMONEY YEAR 3 CRANIAL NERVE DATA (SVGs A, B, C & FULL CN I–XII DECK)
+    // =========================================================================
+
+    // --- SVG A: CN V Trigeminal Divisions ---
+    const CNV_DATA = {
+      V1: {
+        id: 'V1',
+        name: 'V1 • Ophthalmic Division',
+        color: '#007AFF',
+        badgeCls: 'badge-blue',
+        hook: 'Forehead to Tip of Nose',
+        sensory: 'Forehead, anterior scalp to vertex, upper eyelid, cornea, bridge and TIP of the nose.',
+        motor: 'Purely sensory division (no motor fibres).',
+        reflex: 'Afferent limb of corneal blink reflex (efferent = CN VII).',
+        analogy: 'Think of a ski-goggle strap plus the bridge & tip of your nose.',
+        trap: 'Light touch AND pin-prick bilaterally; check both forehead and nose bridge/tip.',
+      },
+      V2: {
+        id: 'V2',
+        name: 'V2 • Maxillary Division',
+        color: '#10B981',
+        badgeCls: 'badge-emerald',
+        hook: 'Cheekbone & Upper Lip',
+        sensory: 'Lower eyelid, malar cheek / zygoma, side of nose, upper lip, and maxillary teeth.',
+        motor: 'Purely sensory division (no motor fibres).',
+        reflex: 'Tested via bilateral light touch & pin-prick comparison.',
+        analogy: 'Sits right across the cheek / moustache zone under the eyes.',
+        trap: 'Test symmetrically across both cheeks (soft R/L compare → sharp R/L compare).',
+      },
+      V3: {
+        id: 'V3',
+        name: 'V3 • Mandibular Division',
+        color: '#8B5CF6',
+        badgeCls: 'badge-purple',
+        hook: 'Jaw & Chin — SPARES Angle of Jaw!',
+        sensory: 'Lower lip, chin, anterior jaw & temple — SPARES the angle of the jaw (C2/C3 great auricular nerve)!',
+        motor: 'Temporalis & Masseter (clench & palpate), Pterygoids (resisted jaw deviation).',
+        reflex: 'Jaw jerk reflex (brisk = UMN lesion above pons; absent = LMN lesion).',
+        analogy: 'A beard strap that stops SHORT of the jaw angle — plus the only CN V branch with motor power!',
+        trap: 'CLASSIC TRAP: V3 spares the angle of the jaw (C2/C3)! And in an LMN pterygoid lesion, the jaw deviates TOWARDS the weak side.',
+      },
+    };
+
+    // --- SVG B: H-Test Extraocular Muscles & Pupil Reflex ---
+    // Coords (dx, dy) shift the pupils in examiner's view of Patient's Right Eye
+    const HTEST_DATA = {
+      sr: {
+        id: 'sr',
+        short: 'Up & Out',
+        muscle: 'Superior Rectus',
+        nerve: 'CN III (Oculomotor)',
+        color: '#10B981',
+        badgeCls: 'badge-emerald',
+        dx: -7, dy: -6,
+        action: 'Elevates the abducted eye (Up & Out).',
+        detail: 'Part of "all the rest 3" — isolated when the eye is abducted laterally first, then elevated.',
+        trap: 'Remember the H-test draws the horizontal bar first before moving up/down so recti & obliques are isolated!',
+      },
+      lr: {
+        id: 'lr',
+        short: 'Lateral (Out)',
+        muscle: 'Lateral Rectus',
+        nerve: 'CN VI (Abducens)',
+        color: '#007AFF',
+        badgeCls: 'badge-blue',
+        dx: -9, dy: 0,
+        action: 'Abducts the eye laterally (pulls eye outward).',
+        detail: '"LR6" — Lateral Rectus is solely supplied by CN VI (Abducens).',
+        trap: 'CN VI palsy causes horizontal diplopia worse looking towards the affected side (and is a classic false localising sign of raised ICP).',
+      },
+      ir: {
+        id: 'ir',
+        short: 'Down & Out',
+        muscle: 'Inferior Rectus',
+        nerve: 'CN III (Oculomotor)',
+        color: '#10B981',
+        badgeCls: 'badge-emerald',
+        dx: -7, dy: 6,
+        action: 'Depresses the abducted eye (Down & Out).',
+        detail: 'Part of "all the rest 3" — isolated when the eye looks outward then downward.',
+        trap: 'In a complete CN III palsy, unopposed LR (VI) + SO (IV) pull the eye "down & out" with ptosis & dilated pupil.',
+      },
+      io: {
+        id: 'io',
+        short: 'Up & In',
+        muscle: 'Inferior Oblique',
+        nerve: 'CN III (Oculomotor)',
+        color: '#10B981',
+        badgeCls: 'badge-emerald',
+        dx: 7, dy: -6,
+        action: 'Elevates the adducted eye (Up & In).',
+        detail: 'Part of "all the rest 3" — isolated when the eye looks medially (inward) then upward.',
+        trap: 'Don’t confuse the obliques: Inferior Oblique = Up & In (CN III); Superior Oblique = Down & In (CN IV).',
+      },
+      mr: {
+        id: 'mr',
+        short: 'Medial (In)',
+        muscle: 'Medial Rectus',
+        nerve: 'CN III (Oculomotor)',
+        color: '#10B981',
+        badgeCls: 'badge-emerald',
+        dx: 9, dy: 0,
+        action: 'Adducts the eye medially (towards the nose).',
+        detail: 'Also drives bilateral convergence when tracking a finger approaching the nose.',
+        trap: 'Check convergence, saccades (U/D/L/R), smooth pursuit ("H"), and VOR alongside the eye trio.',
+      },
+      so: {
+        id: 'so',
+        short: 'Down & In',
+        muscle: 'Superior Oblique',
+        nerve: 'CN IV (Trochlear)',
+        color: '#F59E0B',
+        badgeCls: 'badge-amber',
+        dx: 7, dy: 6,
+        action: 'Depresses the adducted eye (Down & In) + intorsion.',
+        detail: '"SO4" — Superior Oblique is solely supplied by CN IV (Trochlear).',
+        trap: 'CN IV palsy causes vertical diplopia worse walking downstairs or reading (patients often tilt head away to compensate).',
+      },
+      pupil: {
+        id: 'pupil',
+        short: 'Pupil Reflex',
+        muscle: 'Sphincter Pupillae (Parasympathetic)',
+        nerve: 'CN II (Afferent) → CN III (Efferent)',
+        color: '#8B5CF6',
+        badgeCls: 'badge-purple',
+        dx: 0, dy: 0,
+        action: 'Direct & Consensual pupillary light constriction + Accommodation.',
+        detail: 'Light enters via CN II (afferent) and constricts BOTH pupils via bilateral CN III (efferent).',
+        trap: 'RED FLAG — Hutchinson Pupil (cerebral compression): Ipsi constriction → Ipsi fixed dilated ("blown pupil") → Contra constriction → Bilateral fixed dilated.',
+      },
+    };
+
+    // --- SVG C: CN VII Facial Nerve UMN vs LMN ---
+    const CN7_DATA = {
+      umn: {
+        id: 'umn',
+        title: 'UMN Lesion (e.g., Stroke)',
+        badge: 'Forehead Spared ✓',
+        badgeCls: 'badge-blue',
+        color: '#007AFF',
+        pattern: 'Contralateral LOWER face weakness (mouth droops); FOREHEAD wrinkles preserved bilaterally.',
+        mechanism: 'The upper face (frontalis) receives BILATERAL cortical innervation, so a unilateral stroke spares the forehead.',
+        nonMotor: 'Always screen limb weakness, speech (aphasia), and urgent FAST stroke signs.',
+        trap: 'Forehead SPARED = UMN! Look for contralateral lower facial droop.',
+      },
+      lmn: {
+        id: 'lmn',
+        title: "LMN Lesion (e.g., Bell's Palsy)",
+        badge: 'Full Ipsilateral Face',
+        badgeCls: 'badge-coral',
+        color: '#EF4444',
+        pattern: 'ENTIRE ipsilateral half of face affected: smooth forehead (no wrinkles), inability to close eye (orbicularis oculi), and drooping mouth.',
+        mechanism: 'Damage at or distal to the facial nucleus / facial nerve blocks ALL motor fibres to that half of the face.',
+        nonMotor: 'Must explain to assessor: Anterior 2/3 taste (sweet/salty), lacrimation/salivation (dry eye/mouth), hyperacusis (stapedius), & postromedial outer ear sensation.',
+        trap: 'McTimoney Assessor Omission Trap: Students often forget taste (ant 2/3), dry mouth/salivation, hyperacusis, and postromedial outer ear!',
+      },
+    };
+
+    // --- EXPLORE TAB 3: ALL CN I–XII QUICK DECK ---
+    const ALL_CN_DECK = [
+      {
+        id: 'I', name: 'Olfactory', type: 'Sensory',
+        sensory: 'Smell (olfaction).',
+        motor: 'None.',
+        tests: 'Explain only — not routinely tested; take history of anosmia.',
+        abnormal: 'Anosmia: rule out nasal obstruction/rhinitis first, then cribriform plate trauma or frontal lobe mass.',
+        trap: 'Do not waste OSCE time testing coffee/mint — state "explain only, ask history of anosmia".',
+      },
+      {
+        id: 'II', name: 'Optic', type: 'Sensory',
+        sensory: 'Vision, visual fields & afferent pupillary light reflex.',
+        motor: 'None.',
+        tests: 'Visual acuity (Snellen/small print), 4-quadrant visual fields (confrontation), visual neglect test, afferent light reflex, refer out for ophthalmoscopy.',
+        abnormal: 'Field cuts, visual neglect (Right Parietal / PPC lesion), papilloedema (weeks of raised ICP).',
+        trap: 'Always explain ophthalmoscopy referral (papilloedema = weeks of raised ICP) AND visual neglect (PPC lesion)!',
+      },
+      {
+        id: 'III', name: 'Oculomotor', type: 'Motor + Para',
+        sensory: 'None.',
+        motor: 'SR, IR, MR, IO, Levator palpebrae + pupillary constriction (parasympathetic).',
+        tests: 'Ptosis, pupil size/border, direct & consensual light reflex, accommodation, saccades (U/D/L/R), convergence, smooth pursuit ("H"), VOR.',
+        abnormal: 'Ptosis, "down & out" eye, fixed dilated pupil (check Hutchinson 4-stage cerebral compression!).',
+        trap: 'Tested together with CN IV & VI ("LR6 SO4, all the rest 3"). Know Hutchinson pupil cold!',
+      },
+      {
+        id: 'IV', name: 'Trochlear', type: 'Motor',
+        sensory: 'None.',
+        motor: 'Superior Oblique (SO4).',
+        tests: 'Smooth pursuit ("H" test — Down & In), intorsion, convergence.',
+        abnormal: 'Vertical diplopia worse walking downstairs or reading.',
+        trap: 'Isolated specifically by looking DOWN and IN (adducted depression).',
+      },
+      {
+        id: 'V', name: 'Trigeminal', type: 'Mixed',
+        sensory: 'Light touch & pin-prick across V1, V2, V3 (spares angle of jaw — C2/C3!).',
+        motor: 'Temporalis & Masseter (palpate clench), Pterygoids (jaw deviation strength).',
+        tests: 'V1/V2/V3 light touch & pain, temporalis/masseter palpation, resisted jaw deviation, jaw jerk reflex.',
+        abnormal: 'Brisk jaw jerk = UMN above pons; absent = LMN. Jaw deviates TOWARDS weak LMN pterygoid.',
+        trap: 'V3 spares the angle of the jaw! Palpate BOTH temporalis and masseter.',
+      },
+      {
+        id: 'VI', name: 'Abducens', type: 'Motor',
+        sensory: 'None.',
+        motor: 'Lateral Rectus (LR6).',
+        tests: 'Smooth pursuit ("H" test — lateral abduction), saccades, VOR.',
+        abnormal: 'Horizontal diplopia worse looking towards affected side; false localising sign in raised ICP.',
+        trap: 'Abducts the eye laterally (LR6).',
+      },
+      {
+        id: 'VII', name: 'Facial', type: 'Mixed',
+        sensory: 'Taste anterior 2/3 tongue (sweet/salty), postromedial outer ear; lacrimation/salivation, stapedius (hyperacusis).',
+        motor: 'Muscles of facial expression (NAME them: frontalis, orbicularis oculi, orbicularis oris, buccinator).',
+        tests: 'Facial symmetry (UMN vs LMN), name muscles during expressions, ask about taste, dry eye/mouth, hyperacusis, postromedial ear sensation.',
+        abnormal: 'UMN (stroke) spares forehead. LMN (Bell’s palsy) paralyses entire ipsilateral hemiface.',
+        trap: 'Name the facial muscles AND mention taste (ant 2/3), dry mouth/salivation, hyperacusis & postromedial ear!',
+      },
+      {
+        id: 'VIII', name: 'Vestibulocochlear', type: 'Sensory',
+        sensory: 'Hearing (cochlear) & balance/equilibrium (vestibular).',
+        motor: 'None.',
+        tests: 'Whisper hearing screen, 512 Hz Weber’s & Rinne’s tests, PLUS balance tests in stance & gait.',
+        abnormal: 'Conductive: Weber to affected ear, Rinne negative (BC > AC). Sensorineural: Weber to good ear, Rinne positive (AC > BC).',
+        trap: 'Don’t forget to explain balance tests (stance/gait) as part of CN VIII!',
+      },
+      {
+        id: 'IX', name: 'Glossopharyngeal', type: 'Mixed',
+        sensory: 'Posterior 1/3 tongue taste & sensation, afferent gag reflex.',
+        motor: 'Stylopharyngeus (swallowing).',
+        tests: 'Tested together with CN X: swallowing (dysphagia), observe pharynx/palatal lift, gag reflex if indicated.',
+        abnormal: 'Loss of afferent gag reflex, dysphagia.',
+        trap: 'Always test and explain CN IX & X together.',
+      },
+      {
+        id: 'X', name: 'Vagus', type: 'Mixed',
+        sensory: 'Pharynx, larynx & thoracic/abdominal viscera.',
+        motor: 'Soft palate, pharynx, larynx + parasympathetic autonomic supply.',
+        tests: 'Swallowing, symmetrical palatal lift & uvula ("Ahh"), speech (dysphonia), gag (efferent), autonomic effects.',
+        abnormal: 'Uvula deviates AWAY from the lesion side; hoarse voice (dysphonia), dysphagia.',
+        trap: 'Uvula deviates AWAY from lesion (opposite to CN XII tongue!).',
+      },
+      {
+        id: 'XI', name: 'Accessory', type: 'Motor',
+        sensory: 'None.',
+        motor: 'Sternocleidomastoid (SCM) & Upper Trapezius.',
+        tests: 'Resisted head rotation (SCM — turns chin to OPPOSITE side) & resisted shoulder shrug (Trapezius) — UMN vs LMN.',
+        abnormal: 'Right SCM weakness impairs turning head to the LEFT; shoulder droop/winging.',
+        trap: 'Remember SCM rotates the head to the OPPOSITE side!',
+      },
+      {
+        id: 'XII', name: 'Hypoglossal', type: 'Motor',
+        sensory: 'None.',
+        motor: 'Intrinsic & extrinsic tongue muscles.',
+        tests: 'Observe tongue at rest (wasting, fasciculations, deviation), protrude tongue, resisted cheek push (UMN/LMN).',
+        abnormal: 'LMN lesion: tongue deviates TOWARDS the lesion ("licks the lesion") with ipsilateral wasting/fasciculations.',
+        trap: 'CN XII tongue deviates TOWARDS LMN lesion vs. CN X uvula deviates AWAY from lesion!',
+      },
+    ];
+
+    // =========================================================================
+    // 3. 14-STEP GUIDED LESSON CURRICULUM (+140 XP)
+    // =========================================================================
+    const LESSON_STEPS = [
+      {
+        id: 'cn_1',
+        type: 'teach_cn12',
+        badge: 'Visual Teach • 1 of 14',
+        title: 'CN I (Olfactory) & CN II (Optic)',
+        subtitle: 'Master the first two purely sensory cranial nerves — and the two classic CN II exam omissions.',
+      },
+      {
+        id: 'cn_2',
+        type: 'choice',
+        badge: '⚠️ CN II Assessor Trap',
+        isTrap: true,
+        prompt: 'Why do we refer out for <strong>ophthalmoscopy</strong> in a CN II exam, and what does a positive <strong>visual neglect</strong> test indicate?',
+        options: [
+          { id: 'a', text: 'Papilloedema (suggestive of weeks of raised ICP) & a Posterior Parietal Cortex (Right Parietal) lesion' },
+          { id: 'b', text: 'Acute cataracts & a Cerebellar hemisphere lesion' },
+          { id: 'c', text: 'Colour blindness & a Brainstem (CN VI) lesion' },
+          { id: 'd', text: 'Glaucoma & a Left Frontal (Broca’s) lesion' },
+        ],
+        correct: 'a',
+        correctMsg: 'Spot on! Ophthalmoscopy checks for papilloedema (weeks of raised ICP), and visual neglect localises to the Posterior Parietal Cortex (usually Right Parietal → Left neglect).',
+        wrongMsg: 'Remember both CN II traps: Ophthalmoscopy referral checks for papilloedema (weeks of raised ICP), and visual neglect indicates a Posterior Parietal Cortex (PPC) lesion.',
+      },
+      {
+        id: 'cn_3',
+        type: 'teach_eyes',
+        badge: 'Visual Teach • SVG B',
+        title: 'The Eye Trio: CN III, IV & VI ("LR6 SO4, All the Rest 3")',
+        subtitle: 'Tap any gaze direction on the H-Test or the central Pupil badge to move the eyes and spotlight each nerve.',
+      },
+      {
+        id: 'cn_4',
+        type: 'quiz_eyes',
+        badge: 'Tap the H-Test',
+        prompt: 'Tap the gaze direction on the H-Test that isolates <strong>CN IV (Trochlear — Superior Oblique)</strong>.',
+        target: 'so',
+        correctMsg: 'SO4! Superior Oblique (CN IV) pulls the adducted eye DOWN & IN (also intorsion — diplopia worse walking downstairs).',
+        wrongMsg: 'Remember "SO4": Superior Oblique (CN IV) is isolated by looking DOWN & IN (bottom-right on Patient’s Right Eye H-Test).',
+      },
+      {
+        id: 'cn_5',
+        type: 'quiz_eyes',
+        badge: 'Tap the H-Test',
+        prompt: 'Tap the gaze direction that isolates <strong>CN VI (Abducens — Lateral Rectus)</strong>.',
+        target: 'lr',
+        correctMsg: 'LR6! Lateral Rectus (CN VI) abducts the eye straight LATERALLY (outward).',
+        wrongMsg: 'Remember "LR6": Lateral Rectus (CN VI) is isolated by straight LATERAL (Out) abduction.',
+      },
+      {
+        id: 'cn_6',
+        type: 'teach_cn5',
+        badge: 'Visual Teach • SVG A',
+        title: 'CN V (Trigeminal): V1, V2, V3 & Jaw Motor',
+        subtitle: 'Tap V1, V2, or V3 on the sculpted face to spotlight each zone — notice how V3 spares the angle of the jaw!',
+      },
+      {
+        id: 'cn_7',
+        type: 'quiz_cn5',
+        badge: 'Tap the Face',
+        prompt: 'Tap the <strong>V2 (Maxillary)</strong> dermatome territory on the face.',
+        target: 'V2',
+        correctMsg: 'V2 (Maxillary) covers the lower eyelid, cheek/zygoma, side of nose, and upper lip.',
+        wrongMsg: 'V2 (Maxillary) is the middle cheek & upper lip band, spotlighted in green above.',
+      },
+      {
+        id: 'cn_8',
+        type: 'quiz_cn5',
+        badge: 'Tap the Face',
+        prompt: 'Tap the <strong>V3 (Mandibular)</strong> territory — remembering it spares the angle of the jaw (C2/C3).',
+        target: 'V3',
+        correctMsg: 'V3 (Mandibular) covers the lower lip, chin & anterior jaw (sparing the C2/C3 angle of jaw) — and carries CN V motor!',
+        wrongMsg: 'V3 (Mandibular) is the lower lip, chin & anterior jaw band (stopping short of the C2/C3 jaw angle).',
+      },
+      {
+        id: 'cn_9',
+        type: 'teach_cn7',
+        badge: 'Visual Teach • SVG C',
+        title: 'CN VII (Facial): UMN vs. LMN & Hidden Non-Motor Functions',
+        subtitle: 'Tap either face schematic to spotlight UMN (Forehead Spared) vs. LMN (Full Ipsilateral Face).',
+      },
+      {
+        id: 'cn_10',
+        type: 'choice',
+        badge: '⚠️ CN VII Assessor Trap',
+        isTrap: true,
+        prompt: 'A patient presents with unilateral facial weakness <em>including</em> loss of forehead wrinkles on the right side. Is this <strong>UMN or LMN</strong>, and what non-motor functions must you explain?',
+        options: [
+          { id: 'a', text: 'LMN (Bell’s palsy) — explain taste (ant 2/3 tongue), lacrimation/salivation (dry mouth), hyperacusis & postromedial outer ear' },
+          { id: 'b', text: 'UMN (Stroke) — explain taste (post 1/3 tongue) & gag reflex' },
+          { id: 'c', text: 'LMN — purely motor nerve with no sensory or autonomic functions' },
+          { id: 'd', text: 'UMN — forehead is always lost first in a cortical stroke' },
+        ],
+        correct: 'a',
+        correctMsg: 'Nailed it! Loss of forehead wrinkles = LMN (full ipsilateral face). Always mention ant 2/3 taste, dry mouth/lacrimation, hyperacusis, & postromedial outer ear!',
+        wrongMsg: 'Forehead affected = LMN (Bell’s palsy)! And never omit the CN VII non-motor list: ant 2/3 taste (sweet/salty), salivation/lacrimation, hyperacusis, & postromedial outer ear.',
+      },
+      {
+        id: 'cn_11',
+        type: 'teach_cn8',
+        badge: 'Visual Teach • 11 of 14',
+        title: 'CN VIII (Vestibulocochlear): Hearing & Balance',
+        subtitle: 'Lock in the 512 Hz Weber’s & Rinne’s rules — and never forget to mention balance tests!',
+      },
+      {
+        id: 'cn_12',
+        type: 'choice',
+        badge: 'Clinical Reasoning',
+        prompt: 'Weber’s lateralises to the <strong>RIGHT</strong> ear, and Rinne’s is <strong>negative (BC &gt; AC)</strong> on the RIGHT. What type of hearing loss is this?',
+        options: [
+          { id: 'a', text: 'Right conductive hearing loss' },
+          { id: 'b', text: 'Right sensorineural hearing loss' },
+          { id: 'c', text: 'Left conductive hearing loss' },
+          { id: 'd', text: 'Left sensorineural hearing loss' },
+        ],
+        correct: 'a',
+        correctMsg: 'Correct! Conductive loss lateralises Weber to the AFFECTED ear (Right) and makes Rinne negative (Bone > Air) on that side.',
+        wrongMsg: 'Weber to affected ear + Negative Rinne (BC > AC) on that same side = Conductive hearing loss (Right conductive). Sensorineural lateralises to the GOOD ear with AC > BC.',
+      },
+      {
+        id: 'cn_13',
+        type: 'teach_bulbar',
+        badge: 'Visual Teach • 13 of 14',
+        title: 'The Lower Bulbar Four: CN IX, X, XI & XII',
+        subtitle: 'Master the exact deviation directions: Uvula AWAY (CN X), SCM OPPOSITE (CN XI), Tongue TOWARDS (CN XII).',
+      },
+      {
+        id: 'cn_14',
+        type: 'choice',
+        badge: '⚠️ Bulbar Deviation Trap',
+        isTrap: true,
+        prompt: 'On tongue protrusion, the tongue deviates to the <strong>LEFT</strong> with left-sided fasciculations. Which nerve &amp; side is affected, and how does this compare to a CN X uvula lesion?',
+        options: [
+          { id: 'a', text: 'Left CN XII (Hypoglossal) LMN — tongue deviates TOWARDS the lesion, whereas CN X uvula deviates AWAY from the lesion' },
+          { id: 'b', text: 'Right CN XII — both tongue and uvula deviate AWAY from the lesion' },
+          { id: 'c', text: 'Left CN X (Vagus) — tongue and uvula both deviate TOWARDS the lesion' },
+          { id: 'd', text: 'Left CN XI (Accessory) — tongue deviates away from the lesion' },
+        ],
+        correct: 'a',
+        correctMsg: 'Flawless! Left CN XII LMN ("licks the lesion" + fasciculations = TOWARDS the lesion), whereas CN X uvula pulls AWAY to the healthy side!',
+        wrongMsg: 'Watch the classic pair: CN XII LMN tongue deviates TOWARDS the lesion ("licks the lesion"), whereas CN X uvula deviates AWAY from the lesion.',
+      },
+    ];
+
+    // =========================================================================
+    // 4. APPLICATION STATE
+    // =========================================================================
+    const state = {
+      appMode: 'lesson', // 'lesson' | 'explore'
+      stepIdx: 0,
+      inMistakeReplay: false,
+      mistakeQueue: [],
+      mistakeCursor: 0,
+      hadMistakes: false,
+      completed: false,
+
+      selectedAnswer: null,
+      checked: false,
+      isCorrect: false,
+
+      // Teach interactive selections
+      teachEyes: 'so',
+      teachCn5: 'V3',
+      teachCn7: 'lmn',
+
+      // XP & Accuracy
+      xp: 0,
+      earnedStepXp: {},
+      firstTryTotal: 0,
+      firstTryCorrect: 0,
+      seenQuizSteps: {},
+
+      // Free Explore Lab (3-tab sub-switcher)
+      exploreSub: 'cn5', // 'cn5' | 'eyes_cn7' | 'deck'
+      exploreCn5: 'V3',
+      exploreEyes: 'so',
+      exploreCn7: 'lmn',
+      exploreDeckCn: 'VII',
+    };
+
+    function getCurrentStep() {
+      if (state.inMistakeReplay) {
+        return LESSON_STEPS[state.mistakeQueue[state.mistakeCursor]];
+      }
+      return LESSON_STEPS[state.stepIdx];
+    }
+
+    // =========================================================================
+    // 5. THREE SCULPTED INTERACTIVE SVGs WITH SPOTLIGHT / FADE-OTHERS ISOLATION
+    // =========================================================================
+
+    /**
+     * Sculpted symmetrical anterior head & face silhouette (clipPath for CN V1/V2/V3)
+     */
+    const FACE_HEAD_PATH = `
+      M 195,28
+      C 254,28 294,68 296,128
+      C 298,170 293,210 282,244
+      C 271,276 250,304 226,320
+      C 214,328 205,332 195,332
+      C 185,332 176,328 164,320
+      C 140,304 119,276 108,244
+      C 97,210 92,170 94,128
+      C 96,68 136,28 195,28 Z
+    `;
+
+    /**
+     * SVG A — Sculpted Anatomical Face & Trigeminal (CN V1, V2, V3) Map
+     * Visually spares the angle of the jaw (C2/C3 Great Auricular Nerve)!
+     */
+    function buildFaceCn5SVG(mode, activeZone, fb) {
+      const isQuiz = mode === 'quiz';
+      const uid = isQuiz ? 'cn5q' : 'cn5t';
+      const hasSel = isQuiz
+        ? Boolean(fb && (fb.selected || fb.checked))
+        : Boolean(activeZone);
+
+      function zProps(zId) {
+        const col = CNV_DATA[zId].color;
+        if (!isQuiz) {
+          const isAct = activeZone === zId;
+          return `fill="${col}" fill-opacity="${isAct ? '0.88' : '0.72'}" class="cn-zone ${isAct ? 'is-active' : ''}"`;
+        }
+        if (fb && fb.checked) {
+          if (zId === fb.correctTarget) return `class="cn-zone is-correct"`;
+          if (zId === fb.selected && !fb.isCorrect) return `class="cn-zone is-wrong"`;
+          return `class="cn-zone cn-zone-quiz"`;
+        }
+        if (fb && fb.selected === zId) {
+          return `class="cn-zone is-active is-quiz-selected"`;
+        }
+        return `class="cn-zone cn-zone-quiz"`;
+      }
+
+      const lblCls = (zId) => `zone-label ${activeZone === zId ? 'is-active' : ''}`;
+      const tap = (zId) => isQuiz
+        ? `onclick="selectQuizZone('${zId}')"`
+        : `onclick="inspectCn5('${zId}')"`;
+
+      return `
+        <svg viewBox="0 0 390 368" class="anatomy-svg ${hasSel ? 'has-selection' : ''}" role="img" aria-label="Sculpted Anterior Face Trigeminal CN V1 V2 V3 Map">
+          <defs>
+            <clipPath id="${uid}_face_clip"><path d="${FACE_HEAD_PATH}" /></clipPath>
+          </defs>
+
+          <!-- Clean Canvas -->
+          <rect x="0" y="0" width="390" height="368" rx="20" fill="var(--svg-bg)" />
+
+          <!-- Subtle Neck & Ears (Outside V1/V2/V3 clip) -->
+          <path d="M 152,306 L 146,356 L 244,356 L 238,306 Z" fill="var(--svg-skin)" stroke="var(--svg-outline)" stroke-width="1.8" />
+          <path d="M 94,158 C 79,158 76,184 82,204 C 86,216 94,220 101,214" fill="var(--svg-skin)" stroke="var(--svg-outline)" stroke-width="1.9" stroke-linecap="round" />
+          <path d="M 296,158 C 311,158 314,184 308,204 C 304,216 296,220 289,214" fill="var(--svg-skin)" stroke="var(--svg-outline)" stroke-width="1.9" stroke-linecap="round" />
+
+          <!-- Base Face Fill -->
+          <path d="${FACE_HEAD_PATH}" fill="var(--svg-skin)" />
+
+          <!-- Clipped Trigeminal Territories (V1, V2, V3 + Spared C2/C3 Jaw Angles) -->
+          <g clip-path="url(#${uid}_face_clip)">
+            <!-- Neutral Hairline Cap -->
+            <path d="M 85,20 L 305,20 L 305,74 C 260,56 130,56 85,74 Z" fill="var(--svg-c2c3)" fill-opacity="0.65" />
+
+            <!-- V1 (Ophthalmic): Forehead, upper eyelid, bridge & tip of nose -->
+            <path ${tap('V1')} ${zProps('V1')} d="M 86,70 C 130,54 260,54 304,70 L 304,154 L 266,156 C 242,158 224,162 214,174 L 210,218 C 204,226 186,226 180,218 L 176,174 C 166,162 148,158 124,156 L 86,154 Z" />
+
+            <!-- V2 (Maxillary): Lower eyelid, cheeks/zygoma, side of nose & upper lip -->
+            <path ${tap('V2')} ${zProps('V2')} d="M 86,154 L 124,156 C 148,158 166,162 176,174 L 180,218 C 186,226 204,226 210,218 L 214,174 C 224,162 242,158 266,156 L 304,154 L 304,200 L 270,224 C 248,242 232,256 195,256 C 158,256 142,242 120,224 L 86,200 Z" />
+
+            <!-- V3 (Mandibular): Anterior temple, lower lip, chin — SPARING BOTH ANGLES OF JAW! -->
+            <path ${tap('V3')} ${zProps('V3')} d="M 92,200 L 120,224 C 142,242 158,256 195,256 C 232,256 248,242 270,224 L 298,200 L 298,228 C 282,226 266,238 258,262 C 252,278 248,298 242,326 L 148,326 C 142,298 138,278 132,262 C 124,238 108,226 92,228 Z" />
+
+            <!-- Spared Angle of Jaw Notches (C2/C3 Great Auricular Nerve) -->
+            <path d="M 90,228 C 108,226 124,238 132,262 C 138,278 142,298 148,328 L 90,328 Z" fill="var(--svg-c2c3)" fill-opacity="0.88" pointer-events="none" />
+            <path d="M 300,228 C 282,226 266,238 258,262 C 252,278 248,298 242,328 L 300,328 Z" fill="var(--svg-c2c3)" fill-opacity="0.88" pointer-events="none" />
+
+            <!-- Crisp Zone Boundary Dividers -->
+            <path d="M 92,154 L 124,156 C 148,158 166,162 176,174 L 180,218 C 186,226 204,226 210,218 L 214,174 C 224,162 242,158 266,156 L 298,154" fill="none" stroke="var(--svg-divider)" stroke-width="1.5" stroke-dasharray="${isQuiz ? '4 2.5' : 'none'}" pointer-events="none" />
+            <path d="M 94,202 L 120,224 C 142,242 158,256 195,256 C 232,256 248,242 270,224 L 296,202" fill="none" stroke="var(--svg-divider)" stroke-width="1.5" stroke-dasharray="${isQuiz ? '4 2.5' : 'none'}" pointer-events="none" />
+            <path d="M 96,228 C 110,227 124,240 132,262 C 138,278 142,298 147,322" fill="none" stroke="#EF4444" stroke-width="1.7" stroke-dasharray="3.5 2.5" pointer-events="none" />
+            <path d="M 294,228 C 280,227 266,240 258,262 C 252,278 248,298 243,322" fill="none" stroke="#EF4444" stroke-width="1.7" stroke-dasharray="3.5 2.5" pointer-events="none" />
+          </g>
+
+          <!-- Full-Sharpness Head Contour & Facial Features ON TOP -->
+          <path d="${FACE_HEAD_PATH}" fill="none" stroke="var(--svg-outline)" stroke-width="2.2" pointer-events="none" />
+          <g pointer-events="none" fill="none" stroke="var(--svg-outline)" stroke-linecap="round" stroke-linejoin="round">
+            <!-- Hairline hint -->
+            <path d="M 102,74 C 144,54 246,54 288,74" stroke="var(--svg-landmark)" stroke-width="1.4" />
+            <!-- Eyebrows -->
+            <path d="M 126,136 Q 148,127 170,136" stroke-width="2.4" />
+            <path d="M 220,136 Q 242,127 264,136" stroke-width="2.4" />
+            <!-- Eyes -->
+            <path d="M 130,154 Q 149,143 168,154 Q 149,164 130,154 Z" fill="#FFFFFF" stroke-width="1.8" />
+            <circle cx="149" cy="154" r="6" fill="var(--svg-outline)" stroke="none" />
+            <circle cx="147" cy="152" r="1.8" fill="#FFFFFF" stroke="none" />
+            <path d="M 222,154 Q 241,143 260,154 Q 241,164 222,154 Z" fill="#FFFFFF" stroke-width="1.8" />
+            <circle cx="241" cy="154" r="6" fill="var(--svg-outline)" stroke="none" />
+            <circle cx="239" cy="152" r="1.8" fill="#FFFFFF" stroke="none" />
+            <!-- Nose bridge & nostrils -->
+            <path d="M 195,154 L 195,204 M 181,208 Q 195,217 209,208" stroke-width="1.7" />
+            <!-- Lips -->
+            <path d="M 164,255 Q 180,247 195,252 Q 210,247 226,255 Q 195,264 164,255 Z" fill="var(--svg-label-bg)" fill-opacity="0.35" stroke-width="1.7" />
+            <path d="M 168,256 Q 195,268 222,256" stroke-width="1.5" />
+          </g>
+
+          <!-- Zone Labels (Explore/Teach Mode Only) -->
+          ${!isQuiz ? `
+            <g pointer-events="none">
+              <g class="${lblCls('V1')}">
+                <rect x="148" y="84" width="94" height="26" rx="9" fill="var(--svg-label-bg)" stroke="#007AFF" stroke-width="1.8" />
+                <text x="195" y="101" text-anchor="middle" fill="#007AFF" font-size="11" font-weight="800">V1 Ophthalmic</text>
+              </g>
+              <g class="${lblCls('V2')}">
+                <rect x="12" y="180" width="84" height="25" rx="8" fill="#10B981" />
+                <text x="54" y="196" text-anchor="middle" fill="#FFFFFF" font-size="10.2" font-weight="800">V2 Maxillary</text>
+              </g>
+              <g class="${lblCls('V3')}">
+                <rect x="146" y="284" width="98" height="25" rx="8" fill="#8B5CF6" />
+                <text x="195" y="300" text-anchor="middle" fill="#FFFFFF" font-size="10.2" font-weight="800">V3 Mandibular</text>
+              </g>
+              <!-- Spared Angle of Jaw Callout (Always Visible Clinical Pearl) -->
+              <line x1="274" y1="264" x2="306" y2="274" stroke="#EF4444" stroke-width="1.6" />
+              <circle cx="274" cy="264" r="3.2" fill="#EF4444" />
+              <rect x="292" y="274" width="90" height="36" rx="9" fill="var(--svg-label-bg)" stroke="#EF4444" stroke-width="1.6" />
+              <text x="337" y="289" text-anchor="middle" fill="#EF4444" font-size="9" font-weight="800">C2/C3 SPARED</text>
+              <text x="337" y="302" text-anchor="middle" fill="var(--text-muted)" font-size="7.8" font-weight="700">Angle of Jaw</text>
+            </g>
+          ` : `
+            <g pointer-events="none">
+              <text x="195" y="18" text-anchor="middle" fill="var(--text-muted)" font-size="9.5" font-weight="800" letter-spacing="0.05em">TAP THE TRIGEMINAL DIVISION ON THE FACE</text>
+              <text x="337" y="294" text-anchor="middle" fill="#EF4444" font-size="8.5" font-weight="800">C2/C3 Spared</text>
+            </g>
+          `}
+        </svg>
+      `;
+    }
+
+    /**
+     * SVG B — Interactive H-Test & Extraocular Eye Lab (CN III, IV, VI)
+     * 6 Tappable Gaze Targets + Central Pupil Light Reflex + Smoothly Shifting Pupils
+     */
+    function buildHTestSVG(mode, activeTarget, fb) {
+      const isQuiz = mode === 'quiz';
+      const hasSel = isQuiz
+        ? Boolean(fb && (fb.selected || fb.checked))
+        : Boolean(activeTarget);
+
+      // Determine pupil gaze shift (dx, dy)
+      let lookKey = null;
+      if (isQuiz) {
+        if (fb && fb.checked) lookKey = fb.correctTarget;
+        else if (fb && fb.selected) lookKey = fb.selected;
+      } else {
+        lookKey = activeTarget;
+      }
+      const gaze = (lookKey && HTEST_DATA[lookKey]) ? HTEST_DATA[lookKey] : { dx: 0, dy: 0 };
+      const isPupilActive = lookKey === 'pupil';
+      const pupilRadius = isPupilActive ? 6.5 : 10.5;
+
+      function nodeProps(id) {
+        const col = HTEST_DATA[id].color;
+        if (!isQuiz) {
+          const isAct = activeTarget === id;
+          return `fill="${col}" fill-opacity="${isAct ? '0.96' : '0.84'}" class="cn-zone ${isAct ? 'is-active' : ''}"`;
+        }
+        if (fb && fb.checked) {
+          if (id === fb.correctTarget) return `class="cn-zone is-correct"`;
+          if (id === fb.selected && !fb.isCorrect) return `class="cn-zone is-wrong"`;
+          return `class="cn-zone cn-zone-quiz"`;
+        }
+        if (fb && fb.selected === id) {
+          return `class="cn-zone is-active is-quiz-selected"`;
+        }
+        return `class="cn-zone cn-zone-quiz"`;
+      }
+
+      const tap = (id) => isQuiz
+        ? `onclick="selectQuizZone('${id}')"`
+        : `onclick="inspectEyeTarget('${id}')"`;
+
+      const lblColor = (id) => {
+        if (!isQuiz) return '#FFFFFF';
+        if (fb && fb.checked && (id === fb.correctTarget || id === fb.selected)) return '#FFFFFF';
+        if (fb && fb.selected === id) return '#FFFFFF';
+        return 'var(--svg-label-text)';
+      };
+
+      const targets = [
+        { id: 'sr', x: 14, y: 122, dir: '↖ Up & Out', sub: 'SR (CN III)' },
+        { id: 'lr', x: 14, y: 186, dir: '← Lateral (Out)', sub: 'LR (CN VI)' },
+        { id: 'ir', x: 14, y: 250, dir: '↙ Down & Out', sub: 'IR (CN III)' },
+        { id: 'io', x: 266, y: 122, dir: 'Up & In ↗', sub: 'IO (CN III)' },
+        { id: 'mr', x: 266, y: 186, dir: 'Medial (In) →', sub: 'MR (CN III)' },
+        { id: 'so', x: 266, y: 250, dir: 'Down & In ↘', sub: 'SO (CN IV)' },
+      ];
+
+      return `
+        <svg viewBox="0 0 390 318" class="anatomy-svg ${hasSel ? 'has-selection' : ''}" role="img" aria-label="Interactive H-Test Extraocular Eye Lab CN III IV VI">
+          <rect x="0" y="0" width="390" height="318" rx="20" fill="var(--svg-bg)" />
+
+          <!-- Examiner View Headers -->
+          <text x="108" y="21" text-anchor="middle" fill="var(--text-muted)" font-size="9.5" font-weight="800" letter-spacing="0.05em">PATIENT'S RIGHT EYE</text>
+          <text x="282" y="21" text-anchor="middle" fill="var(--text-muted)" font-size="9.5" font-weight="800" letter-spacing="0.05em">PATIENT'S LEFT EYE</text>
+
+          <!-- Pair of Sculpted Anatomical Eyes -->
+          <defs>
+            <clipPath id="eye_clip_r"><path d="M 46,66 Q 108,28 170,66 Q 108,104 46,66 Z" /></clipPath>
+            <clipPath id="eye_clip_l"><path d="M 220,66 Q 282,28 344,66 Q 282,104 220,66 Z" /></clipPath>
+          </defs>
+
+          <!-- Patient's Right Eye (Viewer Left) -->
+          <path d="M 46,66 Q 108,28 170,66 Q 108,104 46,66 Z" fill="#FFFFFF" stroke="var(--svg-outline)" stroke-width="2.2" />
+          <g clip-path="url(#eye_clip_r)">
+            <g class="eye-gaze-group" style="transform: translate(${gaze.dx}px, ${gaze.dy}px);">
+              <circle cx="108" cy="66" r="22" fill="var(--svg-iris)" fill-opacity="0.88" />
+              <circle cx="108" cy="66" r="${pupilRadius}" fill="#0F172A" style="transition: r 0.25s ease;" />
+              <circle cx="102" cy="59" r="3" fill="#FFFFFF" fill-opacity="0.88" />
+            </g>
+          </g>
+          <path d="M 46,66 Q 108,28 170,66 Q 108,104 46,66 Z" fill="none" stroke="var(--svg-outline)" stroke-width="2.2" pointer-events="none" />
+
+          <!-- Patient's Left Eye (Viewer Right) -->
+          <path d="M 220,66 Q 282,28 344,66 Q 282,104 220,66 Z" fill="#FFFFFF" stroke="var(--svg-outline)" stroke-width="2.2" />
+          <g clip-path="url(#eye_clip_l)">
+            <g class="eye-gaze-group" style="transform: translate(${gaze.dx}px, ${gaze.dy}px);">
+              <circle cx="282" cy="66" r="22" fill="var(--svg-iris)" fill-opacity="0.88" />
+              <circle cx="282" cy="66" r="${pupilRadius}" fill="#0F172A" style="transition: r 0.25s ease;" />
+              <circle cx="276" cy="59" r="3" fill="#FFFFFF" fill-opacity="0.88" />
+            </g>
+          </g>
+          <path d="M 220,66 Q 282,28 344,66 Q 282,104 220,66 Z" fill="none" stroke="var(--svg-outline)" stroke-width="2.2" pointer-events="none" />
+
+          <!-- H-Test Connecting Frame (Patient's Right Eye Reference) -->
+          <text x="195" y="114" text-anchor="middle" fill="var(--text-muted)" font-size="8.8" font-weight="800" letter-spacing="0.05em">H-TEST (PATIENT'S RIGHT EYE)</text>
+          <path d="M 69,144 L 69,272 M 321,144 L 321,272 M 124,209 L 266,209" fill="none" stroke="var(--border-strong)" stroke-width="4" stroke-linecap="round" pointer-events="none" />
+
+          <!-- 6 Tappable Gaze-Direction Targets -->
+          ${targets.map((t) => `
+            <g ${tap(t.id)} style="cursor:pointer;">
+              <rect x="${t.x}" y="${t.y}" width="110" height="46" rx="13" ${nodeProps(t.id)} />
+              <text x="${t.x + 55}" y="${isQuiz ? t.y + 27 : t.y + 20}" text-anchor="middle" fill="${lblColor(t.id)}" font-size="10.5" font-weight="800" pointer-events="none">${t.dir}</text>
+              ${!isQuiz ? `<text x="${t.x + 55}" y="${t.y + 35}" text-anchor="middle" fill="#FFFFFF" fill-opacity="0.92" font-size="9" font-weight="700" pointer-events="none">${t.sub}</text>` : ''}
+            </g>
+          `).join('')}
+
+          <!-- Central Tappable Pupil / Light Reflex Badge -->
+          <g ${tap('pupil')} style="cursor:pointer;">
+            <rect x="139" y="182" width="112" height="54" rx="14" ${nodeProps('pupil')} />
+            <text x="195" y="203" text-anchor="middle" fill="${lblColor('pupil')}" font-size="10" font-weight="800" pointer-events="none">🔦 Pupil Reflex</text>
+            <text x="195" y="219" text-anchor="middle" fill="${lblColor('pupil')}" fill-opacity="0.9" font-size="8.5" font-weight="700" pointer-events="none">${isQuiz ? 'Light Reaction' : 'CN II → CN III'}</text>
+          </g>
+        </svg>
+      `;
+    }
+
+    /**
+     * SVG C — CN VII Facial Nerve (UMN vs. LMN) Side-by-Side Schematic
+     */
+    function buildCn7CompareSVG(activeSide) {
+      const hasSel = Boolean(activeSide);
+      const uAct = activeSide === 'umn';
+      const lAct = activeSide === 'lmn';
+
+      return `
+        <svg viewBox="0 0 390 240" class="anatomy-svg ${hasSel ? 'has-selection' : ''}" role="img" aria-label="CN VII Facial Nerve UMN vs LMN Comparison">
+          <rect x="0" y="0" width="390" height="240" rx="20" fill="var(--svg-bg)" />
+
+          <!-- LEFT CARD: UMN LESION (Forehead Spared) -->
+          <g onclick="inspectCn7('umn')" class="cn-zone ${uAct ? 'is-active' : ''}" style="cursor:pointer;">
+            <rect x="14" y="14" width="174" height="212" rx="16" fill="var(--bg-card)" stroke="${uAct ? '#007AFF' : 'var(--border-card)'}" stroke-width="${uAct ? '2.5' : '1.6'}" />
+            <rect x="26" y="24" width="150" height="22" rx="8" fill="#007AFF" />
+            <text x="101" y="39" text-anchor="middle" fill="#FFFFFF" font-size="10" font-weight="800">UMN (e.g. Stroke)</text>
+
+            <!-- Face Oval -->
+            <ellipse cx="101" cy="126" rx="46" ry="56" fill="var(--svg-skin)" stroke="var(--svg-outline)" stroke-width="2" />
+            <!-- Forehead Wrinkles PRESERVED bilaterally -->
+            <path d="M 74,90 Q 86,86 96,90 M 74,98 Q 86,94 96,98" fill="none" stroke="#10B981" stroke-width="2" stroke-linecap="round" />
+            <path d="M 106,90 Q 116,86 128,90 M 106,98 Q 116,94 128,98" fill="none" stroke="#10B981" stroke-width="2" stroke-linecap="round" />
+            <!-- Eyes BOTH close normally -->
+            <path d="M 74,116 Q 84,110 93,116" fill="none" stroke="var(--svg-outline)" stroke-width="2" stroke-linecap="round" />
+            <path d="M 109,116 Q 118,110 128,116" fill="none" stroke="var(--svg-outline)" stroke-width="2" stroke-linecap="round" />
+            <!-- Lower contralateral mouth droop -->
+            <path d="M 80,152 Q 101,150 116,154 Q 124,158 128,166" fill="none" stroke="#EF4444" stroke-width="2.6" stroke-linecap="round" />
+            <circle cx="126" cy="164" r="4" fill="#EF4444" fill-opacity="0.3" />
+
+            <text x="101" y="202" text-anchor="middle" fill="#10B981" font-size="9.5" font-weight="800">✓ Forehead SPARED</text>
+            <text x="101" y="216" text-anchor="middle" fill="var(--text-muted)" font-size="8.2" font-weight="700">Lower contralateral droop</text>
+          </g>
+
+          <!-- RIGHT CARD: LMN LESION (Bell's Palsy) -->
+          <g onclick="inspectCn7('lmn')" class="cn-zone ${lAct ? 'is-active' : ''}" style="cursor:pointer;">
+            <rect x="202" y="14" width="174" height="212" rx="16" fill="var(--bg-card)" stroke="${lAct ? '#EF4444' : 'var(--border-card)'}" stroke-width="${lAct ? '2.5' : '1.6'}" />
+            <rect x="214" y="24" width="150" height="22" rx="8" fill="#EF4444" />
+            <text x="289" y="39" text-anchor="middle" fill="#FFFFFF" font-size="10" font-weight="800">LMN (Bell's Palsy)</text>
+
+            <!-- Face Oval with Red Shading on Affected Half -->
+            <ellipse cx="289" cy="126" rx="46" ry="56" fill="var(--svg-skin)" stroke="var(--svg-outline)" stroke-width="2" />
+            <path d="M 289,70 A 46,56 0 0,1 289,182 Z" fill="#EF4444" fill-opacity="0.2" />
+            <!-- Healthy side wrinkles only -->
+            <path d="M 262,90 Q 274,86 284,90 M 262,98 Q 274,94 284,98" fill="none" stroke="#10B981" stroke-width="2" stroke-linecap="round" />
+            <!-- Smooth affected forehead (no wrinkles) -->
+            <text x="308" y="96" text-anchor="middle" fill="#EF4444" font-size="8" font-weight="800">SMOOTH</text>
+            <!-- Healthy closed eye vs Affected wide-open eye -->
+            <path d="M 262,116 Q 272,110 281,116" fill="none" stroke="var(--svg-outline)" stroke-width="2" stroke-linecap="round" />
+            <ellipse cx="308" cy="116" rx="9" ry="5.5" fill="#FFFFFF" stroke="#EF4444" stroke-width="2" />
+            <circle cx="308" cy="116" r="2.8" fill="#EF4444" />
+            <!-- Ipsilateral mouth droop -->
+            <path d="M 268,152 Q 289,150 304,155 Q 312,160 316,168" fill="none" stroke="#EF4444" stroke-width="2.6" stroke-linecap="round" />
+
+            <text x="289" y="202" text-anchor="middle" fill="#EF4444" font-size="9.5" font-weight="800">✕ Entire Half Affected</text>
+            <text x="289" y="216" text-anchor="middle" fill="var(--text-muted)" font-size="8.2" font-weight="700">Forehead + Eye + Mouth</text>
+          </g>
+        </svg>
+      `;
+    }
+
+    // =========================================================================
+    // 6. INTERACTION HANDLERS (SPOTLIGHT, QUIZ & MISTAKE REVIEW LOOP)
+    // =========================================================================
+    function setAppMode(mode) {
+      state.appMode = mode;
+      renderAll();
+      window.scrollTo({ top: 0, behavior: 'smooth' });
+    }
+
+    function inspectCn5(zId) {
+      if (state.appMode === 'explore') {
+        state.exploreCn5 = state.exploreCn5 === zId ? null : zId;
+      } else {
+        state.teachCn5 = state.teachCn5 === zId ? null : zId;
+      }
+      renderAll();
+    }
+
+    function inspectEyeTarget(tId) {
+      if (state.appMode === 'explore') {
+        state.exploreEyes = state.exploreEyes === tId ? null : tId;
+      } else {
+        state.teachEyes = state.teachEyes === tId ? null : tId;
+      }
+      renderAll();
+    }
+
+    function inspectCn7(side) {
+      if (state.appMode === 'explore') {
+        state.exploreCn7 = state.exploreCn7 === side ? null : side;
+      } else {
+        state.teachCn7 = state.teachCn7 === side ? null : side;
+      }
+      renderAll();
+    }
+
+    function selectQuizZone(zId) {
+      if (state.checked) return;
+      state.selectedAnswer = state.selectedAnswer === zId ? null : zId;
+      renderAll();
+    }
+
+    function selectChoice(optId) {
+      if (state.checked) return;
+      state.selectedAnswer = optId;
+      renderAll();
+    }
+
+    function awardStepXp(stepId) {
+      if (!state.earnedStepXp[stepId]) {
+        state.earnedStepXp[stepId] = true;
+        state.xp += 10; // 14 steps × 10 XP = +140 XP
+      }
+    }
+
+    function checkAnswer() {
+      const step = getCurrentStep();
+      if (!state.selectedAnswer || state.checked) return;
+
+      const correctVal = step.type === 'choice' ? step.correct : step.target;
+      const isRight = state.selectedAnswer === correctVal;
+
+      state.checked = true;
+      state.isCorrect = isRight;
+
+      if (!state.inMistakeReplay && !state.seenQuizSteps[step.id]) {
+        state.seenQuizSteps[step.id] = true;
+        state.firstTryTotal++;
+        if (isRight) state.firstTryCorrect++;
+      }
+
+      if (isRight) {
+        awardStepXp(step.id);
+      } else {
+        state.hadMistakes = true;
+        const origIdx = LESSON_STEPS.findIndex((s) => s.id === step.id);
+        if (!state.inMistakeReplay) {
+          if (!state.mistakeQueue.includes(origIdx)) state.mistakeQueue.push(origIdx);
+        } else {
+          state.mistakeQueue.push(origIdx);
+        }
+      }
+
+      renderAll();
+    }
+
+    function finishLesson() {
+      state.completed = true;
+      state.xp = 140;
+      saveLessonCompletion();
+    }
+
+    function continueLesson() {
+      const step = getCurrentStep();
+      if (step && step.type.startsWith('teach_')) {
+        awardStepXp(step.id);
+      }
+
+      state.selectedAnswer = null;
+      state.checked = false;
+      state.isCorrect = false;
+
+      if (!state.inMistakeReplay) {
+        if (state.stepIdx + 1 < LESSON_STEPS.length) {
+          state.stepIdx++;
+        } else if (state.mistakeQueue.length > 0) {
+          state.inMistakeReplay = true;
+          state.mistakeCursor = 0;
+        } else {
+          finishLesson();
+        }
+      } else {
+        if (state.mistakeCursor + 1 < state.mistakeQueue.length) {
+          state.mistakeCursor++;
+        } else {
+          finishLesson();
+        }
+      }
+
+      renderAll();
+      window.scrollTo({ top: 0, behavior: 'smooth' });
+    }
+
+    function replayLesson() {
+      state.appMode = 'lesson';
+      state.stepIdx = 0;
+      state.inMistakeReplay = false;
+      state.mistakeQueue = [];
+      state.mistakeCursor = 0;
+      state.hadMistakes = false;
+      state.completed = false;
+      state.selectedAnswer = null;
+      state.checked = false;
+      state.isCorrect = false;
+      state.teachEyes = 'so';
+      state.teachCn5 = 'V3';
+      state.teachCn7 = 'lmn';
+      state.xp = 0;
+      state.earnedStepXp = {};
+      state.firstTryTotal = 0;
+      state.firstTryCorrect = 0;
+      state.seenQuizSteps = {};
+      renderAll();
+      window.scrollTo({ top: 0, behavior: 'smooth' });
+    }
+
+    // =========================================================================
+    // 7. RENDER HEADER & ROUTER
+    // =========================================================================
+    function renderHeader() {
+      document.getElementById('mode-btn-lesson').classList.toggle('active', state.appMode === 'lesson');
+      document.getElementById('mode-btn-explore').classList.toggle('active', state.appMode === 'explore');
+      document.getElementById('xp-value').textContent = `${state.xp} XP`;
+
+      const row = document.getElementById('progress-row');
+      const fill = document.getElementById('progress-fill');
+      const lbl = document.getElementById('progress-label');
+
+      if (state.appMode === 'explore') {
+        row.classList.add('hidden');
+        return;
+      }
+      row.classList.remove('hidden');
+
+      if (state.completed) {
+        fill.style.width = '100%';
+        fill.classList.remove('replay');
+        lbl.textContent = '14 / 14';
+      } else if (state.inMistakeReplay) {
+        const remaining = state.mistakeQueue.length - state.mistakeCursor;
+        const pct = Math.max(15, Math.round((state.mistakeCursor / state.mistakeQueue.length) * 100));
+        fill.style.width = `${pct}%`;
+        fill.classList.add('replay');
+        lbl.textContent = `🔁 ${remaining} left`;
+      } else {
+        const pct = Math.max(7, Math.round(((state.stepIdx + (state.checked && state.isCorrect ? 1 : 0)) / LESSON_STEPS.length) * 100));
+        fill.style.width = `${pct}%`;
+        fill.classList.remove('replay');
+        lbl.textContent = `${state.stepIdx + 1} / ${LESSON_STEPS.length}`;
+      }
+    }
+
+    function renderAll() {
+      renderHeader();
+      const main = document.getElementById('app-main');
+      const drawer = document.getElementById('bottom-drawer');
+
+      if (state.appMode === 'explore') {
+        main.innerHTML = renderExploreLab();
+        drawer.innerHTML = '';
+        return;
+      }
+
+      if (state.completed) {
+        main.innerHTML = renderCelebrationScreen();
+        drawer.innerHTML = '';
+        spawnConfetti();
+        return;
+      }
+
+      const step = getCurrentStep();
+      main.innerHTML = renderLessonStep(step);
+      drawer.innerHTML = renderBottomDrawer(step);
+    }
+
+    // =========================================================================
+    // 8. RENDER 14 GUIDED LESSON STEPS
+    // =========================================================================
+    function renderLessonStep(step) {
+      const mistakeBanner = state.inMistakeReplay
+        ? `<div style="margin-bottom:8px;"><span class="step-badge badge-amber">🔁 Mistake Review</span></div>`
+        : '';
+
+      // STEP 1: CN I & II Teach
+      if (step.type === 'teach_cn12') {
+        return `
+          <div class="stack step-enter">
+            <div>
+              <span class="step-badge badge-blue">${step.badge}</span>
+              <h2 class="step-title">${step.title}</h2>
+              <p class="step-sub">${step.subtitle}</p>
+            </div>
+
+            <article class="card info-card">
+              <div class="flex-between">
+                <span class="step-badge badge-blue mono">CN I • Olfactory</span>
+                <span style="font-size:12px;font-weight:700;color:var(--text-muted);">Purely Sensory</span>
+              </div>
+              <div class="sem-box sem-blue">
+                <span class="sem-box-label">Bedside Approach</span>
+                <p><strong>Explain only (not routinely tested)</strong> — ask patient about any history of <strong>anosmia</strong> (loss of smell).</p>
+              </div>
+            </article>
+
+            <article class="card info-card">
+              <div class="flex-between">
+                <span class="step-badge badge-blue mono">CN II • Optic</span>
+                <span style="font-size:12px;font-weight:700;color:var(--text-muted);">Vision &amp; Afferent Light</span>
+              </div>
+              <div class="sem-box sem-blue">
+                <span class="sem-box-label">5 Core Exam Elements</span>
+                <p><strong>1.</strong> Visual acuity (Snellen / small print) &bull; <strong>2.</strong> Visual fields (4-quadrant confrontation) &bull; <strong>3.</strong> Visual neglect test &bull; <strong>4.</strong> Afferent pupillary light reflex &bull; <strong>5.</strong> Refer out for ophthalmoscopy.</p>
+              </div>
+              <div class="sem-box sem-coral">
+                <span class="sem-box-label">⚠️ Assessor Traps (Say Both Aloud!)</span>
+                <p><strong>Visual Neglect</strong> = Posterior Parietal Cortex (Right Parietal) lesion.<br><strong>Ophthalmoscopy Referral</strong> = checks for <strong>papilloedema</strong> (suggestive of <em>weeks</em> of raised ICP).</p>
+              </div>
+            </article>
+          </div>
+        `;
+      }
+
+      // STEP 3: CN III, IV, VI Eye Trio Teach (SVG B)
+      if (step.type === 'teach_eyes') {
+        const cur = state.teachEyes ? HTEST_DATA[state.teachEyes] : null;
+        return `
+          <div class="stack step-enter">
+            <div>
+              <span class="step-badge badge-emerald">${step.badge}</span>
+              <h2 class="step-title">${step.title}</h2>
+              <p class="step-sub">${step.subtitle}</p>
+            </div>
+
+            <div class="card svg-card">
+              ${buildHTestSVG('explore', state.teachEyes, null)}
+            </div>
+
+            ${cur ? `
+              <article class="card info-card">
+                <div class="flex-between">
+                  <span class="step-badge ${cur.badgeCls}">${cur.nerve}</span>
+                  <span style="font-size:12px;font-weight:700;color:var(--text-muted);">${cur.short}</span>
+                </div>
+                <div class="sem-box sem-emerald">
+                  <span class="sem-box-label">Muscle &amp; Action</span>
+                  <p><strong>${cur.muscle}</strong> — ${cur.action}</p>
+                </div>
+                <div class="sem-box sem-purple">
+                  <span class="sem-box-label">Eye Trio Checklist</span>
+                  <p>Direct &amp; consensual light (CN II in → CN III out), accommodation, saccades (U/D/L/R), convergence, smooth pursuit ("H"), VOR.</p>
+                </div>
+                <div class="sem-box sem-coral">
+                  <span class="sem-box-label">⚠️ Clinical Pearl / Red Flag</span>
+                  <p>${cur.trap}</p>
+                </div>
+              </article>
+            ` : `
+              <div class="card info-card"><p class="hint-text">Tap any H-Test direction or the central Pupil badge above to spotlight it.</p></div>
+            `}
+          </div>
+        `;
+      }
+
+      // STEP 6: CN V Trigeminal Teach (SVG A)
+      if (step.type === 'teach_cn5') {
+        const z = state.teachCn5 ? CNV_DATA[state.teachCn5] : null;
+        return `
+          <div class="stack step-enter">
+            <div>
+              <span class="step-badge badge-blue">${step.badge}</span>
+              <h2 class="step-title">${step.title}</h2>
+              <p class="step-sub">${step.subtitle}</p>
+            </div>
+
+            <div class="pill-grid-3">
+              ${['V1', 'V2', 'V3'].map((k) => `
+                <button type="button" class="zone-pill mono ${state.teachCn5 === k ? 'active' : ''}" onclick="inspectCn5('${k}')">${k}</button>
+              `).join('')}
+            </div>
+
+            <div class="card svg-card">
+              ${buildFaceCn5SVG('explore', state.teachCn5, null)}
+            </div>
+
+            ${z ? `
+              <article class="card info-card">
+                <div class="flex-between">
+                  <span class="step-badge ${z.badgeCls}">${z.name}</span>
+                  <span style="font-size:12px;font-weight:700;color:var(--text-muted);">${z.hook}</span>
+                </div>
+                <div class="sem-box sem-blue">
+                  <span class="sem-box-label">Sensory (Light Touch &amp; Pin-Prick)</span>
+                  <p>${z.sensory}</p>
+                </div>
+                <div class="sem-box sem-emerald">
+                  <span class="sem-box-label">Motor</span>
+                  <p><strong>${z.motor}</strong></p>
+                </div>
+                <div class="sem-box sem-purple">
+                  <span class="sem-box-label">Reflex</span>
+                  <p>${z.reflex}</p>
+                </div>
+                <div class="sem-box sem-coral">
+                  <span class="sem-box-label">⚠️ Assessor Trap</span>
+                  <p><strong>${z.trap}</strong></p>
+                </div>
+              </article>
+            ` : `
+              <div class="card info-card"><p class="hint-text">All divisions visible — tap V1, V2, or V3 on the face to spotlight.</p></div>
+            `}
+          </div>
+        `;
+      }
+
+      // STEP 9: CN VII Facial Teach (SVG C)
+      if (step.type === 'teach_cn7') {
+        const cur = state.teachCn7 ? CN7_DATA[state.teachCn7] : null;
+        return `
+          <div class="stack step-enter">
+            <div>
+              <span class="step-badge badge-coral">${step.badge}</span>
+              <h2 class="step-title">${step.title}</h2>
+              <p class="step-sub">${step.subtitle}</p>
+            </div>
+
+            <div class="card svg-card">
+              ${buildCn7CompareSVG(state.teachCn7)}
+            </div>
+
+            ${cur ? `
+              <article class="card info-card">
+                <div class="flex-between">
+                  <span class="step-badge ${cur.badgeCls}">${cur.title}</span>
+                  <span style="font-size:12px;font-weight:700;color:var(--text-muted);">${cur.badge}</span>
+                </div>
+                <div class="sem-box sem-emerald">
+                  <span class="sem-box-label">Facial Pattern &amp; Mechanism</span>
+                  <p><strong>${cur.pattern}</strong> ${cur.mechanism}</p>
+                </div>
+                <div class="sem-box sem-amber">
+                  <span class="sem-box-label">💡 Classic McTimoney Non-Motor Omissions</span>
+                  <p>${cur.nonMotor}</p>
+                </div>
+              </article>
+            ` : `
+              <div class="card info-card"><p class="hint-text">Tap either UMN or LMN face above to spotlight its clinical breakdown.</p></div>
+            `}
+          </div>
+        `;
+      }
+
+      // STEP 11: CN VIII Teach
+      if (step.type === 'teach_cn8') {
+        return `
+          <div class="stack step-enter">
+            <div>
+              <span class="step-badge badge-purple">${step.badge}</span>
+              <h2 class="step-title">${step.title}</h2>
+              <p class="step-sub">${step.subtitle}</p>
+            </div>
+
+            <div class="pill-grid-2">
+              <article class="card info-card" style="border-color:var(--sem-amber-border);">
+                <span class="step-badge badge-amber">Conductive Loss</span>
+                <p style="font-size:13.5px;"><strong>Weber’s:</strong> Lateralises to <strong>AFFECTED</strong> ear (less room noise masking).</p>
+                <p style="font-size:13.5px;"><strong>Rinne’s:</strong> <strong>NEGATIVE (BC &gt; AC)</strong> on affected side.</p>
+              </article>
+
+              <article class="card info-card" style="border-color:var(--sem-blue-border);">
+                <span class="step-badge badge-blue">Sensorineural Loss</span>
+                <p style="font-size:13.5px;"><strong>Weber’s:</strong> Lateralises to <strong>GOOD (healthy)</strong> ear.</p>
+                <p style="font-size:13.5px;"><strong>Rinne’s:</strong> <strong>POSITIVE (AC &gt; BC)</strong> bilaterally (both reduced on bad side).</p>
+              </article>
+            </div>
+
+            <article class="card info-card">
+              <div class="sem-box sem-purple">
+                <span class="sem-box-label">Full CN VIII OSCE Sequence</span>
+                <p><strong>1.</strong> Whisper hearing screen &rarr; <strong>2.</strong> 512 Hz Weber’s (midline forehead) &rarr; <strong>3.</strong> 512 Hz Rinne’s (mastoid vs ear canal) &rarr; <strong>4.</strong> Vestibular balance.</p>
+              </div>
+              <div class="sem-box sem-coral">
+                <span class="sem-box-label">⚠️ Assessor Omission Trap</span>
+                <p><strong>Don’t forget Balance!</strong> Explicitly tell the examiner that CN VIII also controls vestibular balance (tested in stance &amp; gait / Romberg’s).</p>
+              </div>
+            </article>
+          </div>
+        `;
+      }
+
+      // STEP 13: Lower Bulbar Four Teach (CN IX, X, XI, XII)
+      if (step.type === 'teach_bulbar') {
+        return `
+          <div class="stack step-enter">
+            <div>
+              <span class="step-badge badge-emerald">${step.badge}</span>
+              <h2 class="step-title">${step.title}</h2>
+              <p class="step-sub">${step.subtitle}</p>
+            </div>
+
+            <article class="card info-card">
+              <div class="sem-box sem-purple">
+                <span class="sem-box-label">CN IX (Glossopharyngeal) &amp; CN X (Vagus)</span>
+                <p>Tested together: Swallowing (dysphagia), speech (dysphonia), symmetrical palatal lift ("Ahh"), gag reflex (if indicated), autonomic effects.<br><strong>Rule:</strong> Uvula deviates <strong>AWAY</strong> from the lesion side!</p>
+              </div>
+
+              <div class="sem-box sem-emerald">
+                <span class="sem-box-label">CN XI (Accessory)</span>
+                <p><strong>Sternocleidomastoid (SCM)</strong> turns the chin to the <strong>OPPOSITE</strong> side (Right SCM turns head Left) + <strong>Upper Trapezius</strong> shoulder shrug.</p>
+              </div>
+
+              <div class="sem-box sem-coral">
+                <span class="sem-box-label">CN XII (Hypoglossal) — "Licks the Lesion"</span>
+                <p>Observe tongue at rest for <strong>wasting &amp; fasciculations</strong>, protrude tongue, resisted cheek push.<br><strong>Rule:</strong> In an LMN lesion, the tongue deviates <strong>TOWARDS</strong> the lesion side!</p>
+              </div>
+            </article>
+          </div>
+        `;
+      }
+
+      // TAP-THE-SVG QUIZ STEPS (SVG A or SVG B)
+      if (step.type === 'quiz_eyes' || step.type === 'quiz_cn5') {
+        const fb = {
+          selected: state.selectedAnswer,
+          correctTarget: step.target,
+          checked: state.checked,
+          isCorrect: state.isCorrect,
+        };
+        return `
+          <div class="stack step-enter">
+            <div>
+              ${mistakeBanner}
+              <span class="step-badge badge-emerald">${step.badge}</span>
+              <h2 class="step-prompt">${step.prompt}</h2>
+            </div>
+
+            <div class="card svg-card">
+              ${step.type === 'quiz_eyes'
+                ? buildHTestSVG('quiz', null, fb)
+                : buildFaceCn5SVG('quiz', null, fb)}
+            </div>
+
+            <p class="hint-text">
+              ${state.selectedAnswer && !state.checked
+                ? 'Selection spotlighted — tap <strong>CHECK</strong> below to confirm!'
+                : !state.checked
+                  ? 'Tap directly on the diagram above.'
+                  : ''}
+            </p>
+          </div>
+        `;
+      }
+
+      // MULTIPLE-CHOICE QUIZ STEPS
+      if (step.type === 'choice') {
+        return `
+          <div class="stack step-enter">
+            <div>
+              ${mistakeBanner}
+              <span class="step-badge ${step.isTrap ? 'badge-coral' : 'badge-blue'}">${step.badge}</span>
+              <h2 class="step-prompt">${step.prompt}</h2>
+            </div>
+
+            <div class="stack-sm">
+              ${step.options.map((opt, idx) => {
+                const letter = ['A', 'B', 'C', 'D'][idx];
+                let cls = '';
+                if (state.checked) {
+                  if (opt.id === step.correct) cls = 'choice-correct';
+                  else if (opt.id === state.selectedAnswer && !state.isCorrect) cls = 'choice-wrong';
+                } else if (state.selectedAnswer === opt.id) {
+                  cls = 'choice-selected';
+                }
+                return `
+                  <button type="button" ${state.checked ? 'disabled' : ''} class="choice-card ${cls}" onclick="selectChoice('${opt.id}')">
+                    <span class="choice-letter">${letter}</span>
+                    <span class="choice-text">${opt.text}</span>
+                  </button>
+                `;
+              }).join('')}
+            </div>
+          </div>
+        `;
+      }
+
+      return '';
+    }
+
+    // =========================================================================
+    // 9. FIXED BOTTOM ACTION / FEEDBACK DRAWER
+    // =========================================================================
+    function renderBottomDrawer(step) {
+      if (step.type.startsWith('teach_')) {
+        return `
+          <div class="drawer-bar">
+            <div class="drawer-inner">
+              <button type="button" class="btn-3d btn-emerald" onclick="continueLesson()">CONTINUE</button>
+            </div>
+          </div>
+        `;
+      }
+
+      if (!state.checked) {
+        return `
+          <div class="drawer-bar">
+            <div class="drawer-inner">
+              <button type="button" class="btn-3d btn-blue" ${state.selectedAnswer ? '' : 'disabled'} onclick="checkAnswer()">CHECK</button>
+            </div>
+          </div>
+        `;
+      }
+
+      if (state.isCorrect) {
+        return `
+          <div class="drawer-feedback correct">
+            <div class="drawer-inner">
+              <div class="fb-row">
+                <span class="fb-icon correct">✓</span>
+                <div>
+                  <p class="fb-title correct">Spot on! +10 XP</p>
+                  <p class="fb-msg">${step.correctMsg}</p>
+                </div>
+              </div>
+              <button type="button" class="btn-3d btn-emerald" onclick="continueLesson()">CONTINUE</button>
+            </div>
+          </div>
+        `;
+      }
+
+      return `
+        <div class="drawer-feedback wrong">
+          <div class="drawer-inner">
+            <div class="fb-row">
+              <span class="fb-icon wrong">✕</span>
+              <div>
+                <p class="fb-title wrong">Watch the Trap! (Queued for Mistake Review)</p>
+                <p class="fb-msg">${step.wrongMsg}</p>
+              </div>
+            </div>
+            <button type="button" class="btn-3d btn-coral" onclick="continueLesson()">CONTINUE</button>
+          </div>
+        </div>
+      `;
+    }
+
+    // =========================================================================
+    // 10. FREE EXPLORE ANATOMY LAB (3-TAB SUB-SWITCHER)
+    // =========================================================================
+    function renderExploreLab() {
+      return `
+        <div class="stack step-enter">
+          <div class="sub-seg-3" role="tablist" aria-label="Explore Lab Tabs">
+            <button type="button" class="sub-seg-btn ${state.exploreSub === 'cn5' ? 'active' : ''}" onclick="state.exploreSub='cn5'; renderAll();">1. CN V Face</button>
+            <button type="button" class="sub-seg-btn ${state.exploreSub === 'eyes_cn7' ? 'active' : ''}" onclick="state.exploreSub='eyes_cn7'; renderAll();">2. Eyes &amp; CN VII</button>
+            <button type="button" class="sub-seg-btn ${state.exploreSub === 'deck' ? 'active' : ''}" onclick="state.exploreSub='deck'; renderAll();">3. All CN I–XII</button>
+          </div>
+
+          ${state.exploreSub === 'cn5' ? renderExploreCn5() : ''}
+          ${state.exploreSub === 'eyes_cn7' ? renderExploreEyesCn7() : ''}
+          ${state.exploreSub === 'deck' ? renderExploreDeck() : ''}
+        </div>
+      `;
+    }
+
+    function renderExploreCn5() {
+      const z = state.exploreCn5 ? CNV_DATA[state.exploreCn5] : null;
+      return `
+        <div class="stack">
+          <div class="flex-between">
+            <div>
+              <span class="step-badge badge-blue">SVG A &bull; Trigeminal Lab</span>
+              <h2 class="step-title">CN V Face Map (V1 / V2 / V3)</h2>
+            </div>
+            <button type="button" class="reset-pill" ${state.exploreCn5 ? '' : 'disabled'} onclick="state.exploreCn5=null; renderAll();">
+              <span>👁️</span>
+              <span>Show All Zones</span>
+            </button>
+          </div>
+
+          <div class="card svg-card">
+            ${buildFaceCn5SVG('explore', state.exploreCn5, null)}
+          </div>
+
+          <div class="pill-grid-3">
+            ${['V1', 'V2', 'V3'].map((k) => `
+              <button type="button" class="zone-pill mono ${state.exploreCn5 === k ? 'active' : ''}" onclick="inspectCn5('${k}')">${k}</button>
+            `).join('')}
+          </div>
+
+          ${z ? `
+            <article class="card info-card">
+              <div class="flex-between">
+                <span class="step-badge ${z.badgeCls}">${z.name}</span>
+                <span style="font-size:11.5px;font-weight:700;color:var(--text-muted);">Tap zone again to un-isolate</span>
+              </div>
+              <div class="sem-box sem-blue">
+                <span class="sem-box-label">Sensory</span>
+                <p>${z.sensory}</p>
+              </div>
+              <div class="sem-box sem-emerald">
+                <span class="sem-box-label">Motor</span>
+                <p><strong>${z.motor}</strong></p>
+              </div>
+              <div class="sem-box sem-purple">
+                <span class="sem-box-label">Reflex</span>
+                <p>${z.reflex}</p>
+              </div>
+              <div class="sem-box sem-amber">
+                <span class="sem-box-label">💡 Visual Analogy</span>
+                <p>${z.analogy}</p>
+              </div>
+              <div class="sem-box sem-coral">
+                <span class="sem-box-label">⚠️ Assessor Trap</span>
+                <p><strong>${z.trap}</strong></p>
+              </div>
+            </article>
+          ` : `
+            <article class="card info-card" style="text-align:center;">
+              <p style="font-size:14.5px;font-weight:800;">Showing All Trigeminal Divisions</p>
+              <p class="hint-text">Tap V1, V2, or V3 on the face above to spotlight it and inspect sensory, motor &amp; reflex notes.</p>
+            </article>
+          `}
+        </div>
+      `;
+    }
+
+    function renderExploreEyesCn7() {
+      const eye = state.exploreEyes ? HTEST_DATA[state.exploreEyes] : null;
+      const cn7 = state.exploreCn7 ? CN7_DATA[state.exploreCn7] : null;
+
+      return `
+        <div class="stack">
+          <!-- SVG B: H-Test Eye Lab -->
+          <div class="flex-between">
+            <div>
+              <span class="step-badge badge-emerald">SVG B &bull; Extraocular Lab</span>
+              <h2 class="step-title">H-Test &amp; Pupil Reflex</h2>
+            </div>
+            <button type="button" class="reset-pill" ${state.exploreEyes ? '' : 'disabled'} onclick="state.exploreEyes=null; renderAll();">
+              <span>👁️</span>
+              <span>Show All Zones</span>
+            </button>
+          </div>
+
+          <div class="card svg-card">
+            ${buildHTestSVG('explore', state.exploreEyes, null)}
+          </div>
+
+          ${eye ? `
+            <article class="card info-card">
+              <div class="flex-between">
+                <span class="step-badge ${eye.badgeCls}">${eye.nerve}</span>
+                <span style="font-size:12px;font-weight:700;color:var(--text-muted);">${eye.short}</span>
+              </div>
+              <div class="sem-box sem-emerald">
+                <span class="sem-box-label">Muscle &amp; Action</span>
+                <p><strong>${eye.muscle}</strong> — ${eye.action}</p>
+              </div>
+              <div class="sem-box sem-blue">
+                <span class="sem-box-label">Clinical Detail</span>
+                <p>${eye.detail}</p>
+              </div>
+              <div class="sem-box sem-coral">
+                <span class="sem-box-label">⚠️ Assessor Trap</span>
+                <p><strong>${eye.trap}</strong></p>
+              </div>
+            </article>
+          ` : `
+            <article class="card info-card" style="text-align:center;">
+              <p class="hint-text">Tap any direction on the H-Test or the Pupil Reflex badge to move the eyes &amp; spotlight the nerve.</p>
+            </article>
+          `}
+
+          <!-- SVG C: CN VII UMN vs LMN -->
+          <div class="flex-between" style="margin-top:6px;">
+            <div>
+              <span class="step-badge badge-coral">SVG C &bull; CN VII Comparison</span>
+              <h2 class="step-title">Facial Nerve: UMN vs. LMN</h2>
+            </div>
+            <button type="button" class="reset-pill" ${state.exploreCn7 ? '' : 'disabled'} onclick="state.exploreCn7=null; renderAll();">
+              <span>👁️</span>
+              <span>Show Both</span>
+            </button>
+          </div>
+
+          <div class="card svg-card">
+            ${buildCn7CompareSVG(state.exploreCn7)}
+          </div>
+
+          ${cn7 ? `
+            <article class="card info-card">
+              <div class="flex-between">
+                <span class="step-badge ${cn7.badgeCls}">${cn7.title}</span>
+                <span style="font-size:12px;font-weight:700;color:var(--text-muted);">${cn7.badge}</span>
+              </div>
+              <div class="sem-box sem-emerald">
+                <span class="sem-box-label">Pattern &amp; Mechanism</span>
+                <p><strong>${cn7.pattern}</strong> ${cn7.mechanism}</p>
+              </div>
+              <div class="sem-box sem-amber">
+                <span class="sem-box-label">💡 Non-Motor Functions to Explain</span>
+                <p>${cn7.nonMotor}</p>
+              </div>
+              <div class="sem-box sem-coral">
+                <span class="sem-box-label">⚠️ Assessor Trap</span>
+                <p><strong>${cn7.trap}</strong></p>
+              </div>
+            </article>
+          ` : ''}
+        </div>
+      `;
+    }
+
+    function renderExploreDeck() {
+      const cn = ALL_CN_DECK.find((c) => c.id === state.exploreDeckCn) || ALL_CN_DECK[6];
+
+      return `
+        <div class="stack">
+          <div>
+            <span class="step-badge badge-purple">All 12 Cranial Nerves</span>
+            <h2 class="step-title">CN I–XII Quick Deck</h2>
+            <p class="step-sub">Tap any cranial nerve pill for exact McTimoney Year 3 tests, muscles, and assessor traps.</p>
+          </div>
+
+          <div class="pill-grid-6">
+            ${ALL_CN_DECK.map((c) => `
+              <button
+                type="button"
+                class="zone-pill mono ${state.exploreDeckCn === c.id ? 'active' : ''}"
+                onclick="state.exploreDeckCn='${c.id}'; renderAll();"
+              >CN ${c.id}</button>
+            `).join('')}
+          </div>
+
+          <article class="card info-card">
+            <div class="flex-between">
+              <h3 style="font-size:18px;font-weight:800;"><span class="mono" style="color:var(--sem-blue);">CN ${cn.id}</span> &bull; ${cn.name}</h3>
+              <span class="step-badge badge-purple">${cn.type}</span>
+            </div>
+
+            <div class="sem-box sem-blue">
+              <span class="sem-box-label">Sensory / Afferent</span>
+              <p>${cn.sensory}</p>
+            </div>
+
+            <div class="sem-box sem-emerald">
+              <span class="sem-box-label">Motor / Muscles to Name</span>
+              <p><strong>${cn.motor}</strong></p>
+            </div>
+
+            <div class="sem-box sem-purple">
+              <span class="sem-box-label">McTimoney Year 3 Bedside Tests</span>
+              <p>${cn.tests}</p>
+            </div>
+
+            <div class="sem-box sem-amber">
+              <span class="sem-box-label">Abnormal Findings</span>
+              <p>${cn.abnormal}</p>
+            </div>
+
+            <div class="sem-box sem-coral">
+              <span class="sem-box-label">⚠️ Assessor Trap</span>
+              <p><strong>${cn.trap}</strong></p>
+            </div>
+          </article>
+        </div>
+      `;
+    }
+
+    // =========================================================================
+    // 11. CELEBRATION COMPLETION SCREEN (+140 XP & SAVED TO mchiro_lessons_v1)
+    // =========================================================================
+    function renderCelebrationScreen() {
+      const acc = state.firstTryTotal > 0
+        ? Math.round((state.firstTryCorrect / state.firstTryTotal) * 100)
+        : 100;
+
+      return `
+        <div class="card celebration-card step-enter">
+          <div id="confetti-layer" class="confetti-layer"></div>
+
+          <div style="position:relative;z-index:2;" class="stack-sm">
+            <div class="trophy-badge">🏆</div>
+            <div><span class="step-badge badge-emerald">Lesson 3 Complete!</span></div>
+            <h2 style="font-size:26px;font-weight:800;letter-spacing:-0.02em;">Cranial Nerves Mastered</h2>
+            <p class="step-sub">Saved to your Revision Hub progress. You cleared CN I–XII, the H-Test extraocular lab, Trigeminal V1–V3, Facial UMN vs. LMN, Weber/Rinne, and Bulbar deviations.</p>
+          </div>
+
+          <div style="position:relative;z-index:2;" class="stat-grid">
+            <div class="stat-box sem-amber">
+              <span class="sem-box-label">XP Earned</span>
+              <span class="stat-val" style="color:var(--sem-amber);">+140 XP</span>
+            </div>
+            <div class="stat-box sem-emerald">
+              <span class="sem-box-label">First-Try Accuracy</span>
+              <span class="stat-val" style="color:var(--sem-emerald);">${acc}%</span>
+            </div>
+          </div>
+
+          <div style="position:relative;z-index:2;" class="sem-box sem-blue">
+            <p style="font-weight:600;">
+              ${state.hadMistakes
+                ? '🔁 <strong>Mistake Mastery:</strong> You replayed and cleared every missed cranial nerve trap before finishing!'
+                : '✨ <strong>Flawless Run:</strong> Zero mistakes — every cranial nerve trap cleared on the first try!'}
+            </p>
+          </div>
+
+          <div style="position:relative;z-index:2;" class="stack-sm">
+            <button type="button" class="btn-3d btn-emerald" onclick="setAppMode('explore')">🔬 OPEN EXPLORE LAB</button>
+            <button type="button" class="btn-3d btn-blue" onclick="replayLesson()">↺ PRACTICE AGAIN</button>
+            <div class="pill-grid-2">
+              <a href="neuro.html" class="btn-3d btn-neutral" style="font-size:13.5px;">&larr; Neuro Hub</a>
+              <a href="index.html" class="btn-3d btn-neutral" style="font-size:13.5px;">🏠 Home Hub</a>
+            </div>
+          </div>
+        </div>
+      `;
+    }
+
+    function spawnConfetti() {
+      const layer = document.getElementById('confetti-layer');
+      if (!layer) return;
+      const colors = ['#10B981', '#007AFF', '#8B5CF6', '#F59E0B', '#EF4444'];
+      for (let i = 0; i < 36; i++) {
+        const piece = document.createElement('div');
+        piece.className = 'confetti-piece';
+        piece.style.left = `${Math.random() * 100}%`;
+        piece.style.backgroundColor = colors[i % colors.length];
+        piece.style.animationDuration = `${1.5 + Math.random() * 1.4}s`;
+        piece.style.animationDelay = `${Math.random() * 0.4}s`;
+        layer.appendChild(piece);
+      }
+    }
+
+    // =========================================================================
+    // 12. INITIALISE
+    // =========================================================================
+    initTheme();
+    renderAll();
+  </script>
+</body>
+</html>
