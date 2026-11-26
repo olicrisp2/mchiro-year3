@@ -1,225 +1,1054 @@
 <!DOCTYPE html>
-<html lang="en" class="scroll-smooth">
+<html lang="en">
 <head>
   <meta charset="UTF-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>MChiro Year 3 – Revision Hub</title>
-
-  <!-- Google Fonts: Plus Jakarta Sans (Display/Buttons) & Inter (Clean Body) -->
-  <link rel="preconnect" href="https://fonts.googleapis.com" />
-  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
-  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&family=Plus+Jakarta+Sans:wght@600;700;800&display=swap" rel="stylesheet" />
-
-  <!-- Tailwind CSS -->
-  <script src="https://cdn.tailwindcss.com"></script>
-  <script>
-    tailwind.config = {
-      darkMode: 'class',
-      theme: {
-        extend: {
-          fontFamily: {
-            display: ['"Plus Jakarta Sans"', 'system-ui', '-apple-system', 'sans-serif'],
-            sans: ['"Inter"', 'system-ui', '-apple-system', 'sans-serif'],
-          },
-        },
-      },
-    };
-  </script>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover" />
+  <title>MChiro Year 3 Hub – McTimoney College</title>
 
   <style>
     /* =========================================================================
-       APPLE HEALTH CARDS × DUOLINGO TACTILE 3D BUTTONS DESIGN TOKENS
+       1. DESIGN TOKENS: APPLE HEALTH MINIMALIST × DUOLINGO TACTILE 3D
+       Zero external CDN dependencies for instant mobile loading.
        ========================================================================= */
     :root {
-      --ah-bg: #F2F2F7;
-      --ah-card: #FFFFFF;
-      --ah-card-alt: #F9F9FB;
-      --ah-text: #1C1C1E;
-      --ah-muted: #636366;
-      --ah-border: rgba(60, 60, 67, 0.12);
-      --ah-glass: rgba(242, 242, 247, 0.84);
-      --ah-shadow: 0 2px 14px rgba(0, 0, 0, 0.045), 0 1px 2px rgba(0, 0, 0, 0.03);
+      --bg-page: #F2F2F7;
+      --bg-card: #FFFFFF;
+      --bg-subtle: #F7F7FA;
+      --bg-input: #FFFFFF;
+      --bg-glass: rgba(242, 242, 247, 0.86);
+      --border-soft: rgba(60, 60, 67, 0.12);
+      --border-strong: rgba(60, 60, 67, 0.2);
+      --text-main: #1C1C1E;
+      --text-muted: #636366;
+      --shadow-card: 0 2px 12px rgba(0, 0, 0, 0.045), 0 1px 2px rgba(0, 0, 0, 0.03);
+
+      /* Semantic Cognitive Colour Tokens */
+      --blue: #007AFF;
+      --blue-dark: #005BBF;
+      --blue-soft: rgba(0, 122, 255, 0.11);
+      --blue-border: rgba(0, 122, 255, 0.28);
+
+      --emerald: #22C55E;
+      --emerald-dark: #15803D;
+      --emerald-soft: rgba(34, 197, 94, 0.12);
+      --emerald-border: rgba(34, 197, 94, 0.32);
+
+      --purple: #8B5CF6;
+      --purple-dark: #6D28D9;
+      --purple-soft: rgba(139, 92, 246, 0.12);
+      --purple-border: rgba(139, 92, 246, 0.3);
+
+      --amber: #F59E0B;
+      --amber-dark: #B45309;
+      --amber-soft: rgba(245, 158, 11, 0.14);
+      --amber-border: rgba(245, 158, 11, 0.35);
+
+      --coral: #EF4444;
+      --coral-dark: #B91C1C;
+      --coral-soft: rgba(239, 68, 68, 0.11);
+      --coral-border: rgba(239, 68, 68, 0.32);
+
+      --indigo: #4F46E5;
+      --indigo-dark: #3730A3;
+
+      --fb-correct-bg: #ECFDF5;
+      --fb-wrong-bg: #FEF2F2;
     }
 
     .dark {
-      --ah-bg: #000000;
-      --ah-card: #1C1C1E;
-      --ah-card-alt: #2C2C2E;
-      --ah-text: #F2F2F7;
-      --ah-muted: #AEAEB2;
-      --ah-border: rgba(255, 255, 255, 0.11);
-      --ah-glass: rgba(28, 28, 30, 0.84);
-      --ah-shadow: 0 4px 18px rgba(0, 0, 0, 0.45);
+      --bg-page: #000000;
+      --bg-card: #1C1C1E;
+      --bg-subtle: #2C2C2E;
+      --bg-input: #1C1C1E;
+      --bg-glass: rgba(28, 28, 30, 0.86);
+      --border-soft: rgba(255, 255, 255, 0.11);
+      --border-strong: rgba(255, 255, 255, 0.2);
+      --text-main: #F2F2F7;
+      --text-muted: #AEAEB2;
+      --shadow-card: 0 4px 18px rgba(0, 0, 0, 0.48);
+
+      --blue-soft: rgba(0, 122, 255, 0.2);
+      --blue-border: rgba(10, 132, 255, 0.4);
+      --emerald-soft: rgba(34, 197, 94, 0.18);
+      --emerald-border: rgba(74, 222, 128, 0.38);
+      --purple-soft: rgba(139, 92, 246, 0.22);
+      --purple-border: rgba(167, 139, 250, 0.4);
+      --amber-soft: rgba(245, 158, 11, 0.2);
+      --amber-border: rgba(251, 191, 36, 0.4);
+      --coral-soft: rgba(239, 68, 68, 0.2);
+      --coral-border: rgba(248, 113, 113, 0.42);
+
+      --fb-correct-bg: #07291A;
+      --fb-wrong-bg: #2D0F14;
     }
+
+    /* =========================================================================
+       2. BASE RESET & SYSTEM TYPOGRAPHY
+       ========================================================================= */
+    *, *::before, *::after { box-sizing: border-box; }
+    html { scroll-behavior: smooth; }
 
     body {
-      background-color: var(--ah-bg);
-      color: var(--ah-text);
-      font-family: 'Inter', system-ui, -apple-system, sans-serif;
+      margin: 0;
+      min-height: 100vh;
+      background-color: var(--bg-page);
+      color: var(--text-main);
+      font-family: system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Helvetica, Arial, sans-serif;
+      line-height: 1.45;
+      overflow-x: hidden;
       -webkit-font-smoothing: antialiased;
       -webkit-tap-highlight-color: transparent;
+      transition: background-color 0.2s ease, color 0.2s ease;
+      padding-bottom: 92px; /* Safe room for mobile bottom nav */
     }
 
-    h1, h2, h3, h4, .font-display {
-      font-family: 'Plus Jakarta Sans', system-ui, -apple-system, sans-serif;
+    @media (min-width: 769px) {
+      body { padding-bottom: 44px; }
     }
 
-    /* Frosted Glass Sticky Bars */
-    .ah-glass {
-      background-color: var(--ah-glass);
+    h1, h2, h3, h4, p { margin: 0; }
+    a { color: inherit; text-decoration: none; }
+    button, input, textarea { font-family: inherit; }
+
+    .mono {
+      font-family: ui-monospace, SFMono-Regular, Menlo, Monaco, Consolas, monospace;
+    }
+
+    .container {
+      width: 100%;
+      max-width: 1020px;
+      margin: 0 auto;
+      padding: 0 14px;
+    }
+
+    @media (min-width: 640px) {
+      .container { padding: 0 22px; }
+    }
+
+    /* =========================================================================
+       3. STICKY FROSTED-GLASS HEADER
+       ========================================================================= */
+    .top-header {
+      position: sticky;
+      top: 0;
+      z-index: 40;
+      background: var(--bg-glass);
       backdrop-filter: blur(20px);
       -webkit-backdrop-filter: blur(20px);
-      border-color: var(--ah-border);
+      border-bottom: 1px solid var(--border-soft);
     }
 
-    /* Apple Health Minimalist Cards */
-    .ah-card {
-      background-color: var(--ah-card);
-      border: 1px solid var(--ah-border);
-      border-radius: 20px;
-      box-shadow: var(--ah-shadow);
+    .header-inner {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      gap: 10px;
+      padding-top: 10px;
+      padding-bottom: 10px;
     }
 
-    .ah-card-alt {
-      background-color: var(--ah-card-alt);
-      border: 1px solid var(--ah-border);
-      border-radius: 16px;
+    .brand {
+      display: flex;
+      align-items: center;
+      gap: 10px;
+      min-width: 0;
     }
 
-    .ah-text { color: var(--ah-text); }
-    .ah-muted { color: var(--ah-muted); }
-
-    /* Chunky Tactile 3D Duolingo-Style Buttons */
-    .btn-3d {
-      border-radius: 16px;
-      font-family: 'Plus Jakarta Sans', system-ui, sans-serif;
+    .brand-icon {
+      width: 38px;
+      height: 38px;
+      border-radius: 12px;
+      background: linear-gradient(135deg, var(--blue), var(--emerald));
+      color: #ffffff;
       font-weight: 800;
-      transition: transform 0.08s ease, border-bottom-width 0.08s ease, background-color 0.15s ease, opacity 0.15s ease;
-      cursor: pointer;
-      user-select: none;
+      font-size: 14px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      flex-shrink: 0;
+      letter-spacing: -0.02em;
+    }
+
+    .brand-text { min-width: 0; }
+
+    .brand-title {
+      font-size: 16px;
+      font-weight: 800;
+      letter-spacing: -0.02em;
+      white-space: nowrap;
+      overflow: hidden;
+      text-overflow: ellipsis;
+    }
+
+    .brand-sub {
+      font-size: 11px;
+      font-weight: 600;
+      color: var(--text-muted);
+      white-space: nowrap;
+      overflow: hidden;
+      text-overflow: ellipsis;
+    }
+
+    .header-controls {
+      display: flex;
+      align-items: center;
+      gap: 7px;
+      flex-shrink: 0;
+    }
+
+    .xp-pill {
+      display: inline-flex;
+      align-items: center;
+      gap: 4px;
+      padding: 7px 11px;
+      border-radius: 12px;
+      background: var(--amber-soft);
+      border: 1px solid var(--amber-border);
+      color: var(--amber-dark);
+      font-size: 12px;
+      font-weight: 800;
+      font-variant-numeric: tabular-nums;
+      white-space: nowrap;
+    }
+    .dark .xp-pill { color: #FCD34D; }
+
+    .icon-btn {
       display: inline-flex;
       align-items: center;
       justify-content: center;
-      gap: 0.4rem;
+      gap: 5px;
+      height: 36px;
+      padding: 0 11px;
+      border-radius: 12px;
+      border: 1px solid var(--border-soft);
+      background: var(--bg-card);
+      color: var(--text-main);
+      font-size: 12.5px;
+      font-weight: 700;
+      cursor: pointer;
+      transition: background-color 0.15s ease, border-color 0.15s ease;
+    }
+    .icon-btn:hover { border-color: var(--border-strong); }
+    .icon-btn.square { width: 36px; padding: 0; font-size: 15px; }
+    .icon-btn .btn-label { display: none; }
+    @media (min-width: 520px) {
+      .icon-btn .btn-label { display: inline; }
+    }
+
+    /* =========================================================================
+       4. CARDS, BADGES & TACTILE 3D PRESSABLE BUTTONS
+       ========================================================================= */
+    .main-stack {
+      display: flex;
+      flex-direction: column;
+      gap: 20px;
+      padding-top: 16px;
+    }
+
+    .ah-card {
+      background: var(--bg-card);
+      border: 1px solid var(--border-soft);
+      border-radius: 18px;
+      box-shadow: var(--shadow-card);
+    }
+
+    .section-head {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      gap: 10px;
+      flex-wrap: wrap;
+      margin-bottom: 10px;
+      padding: 0 2px;
+    }
+
+    .section-title {
+      font-size: 17px;
+      font-weight: 800;
+      letter-spacing: -0.02em;
+    }
+
+    .badge {
+      display: inline-flex;
+      align-items: center;
+      gap: 5px;
+      padding: 4px 10px;
+      border-radius: 999px;
+      font-size: 11px;
+      font-weight: 800;
+      letter-spacing: 0.02em;
+      white-space: nowrap;
+    }
+    .badge-blue { background: var(--blue-soft); color: var(--blue); border: 1px solid var(--blue-border); }
+    .dark .badge-blue { color: #60A5FA; }
+    .badge-emerald { background: var(--emerald-soft); color: var(--emerald-dark); border: 1px solid var(--emerald-border); }
+    .dark .badge-emerald { color: #4ADE80; }
+    .badge-purple { background: var(--purple-soft); color: var(--purple); border: 1px solid var(--purple-border); }
+    .dark .badge-purple { color: #C4B5FD; }
+    .badge-amber { background: var(--amber-soft); color: var(--amber-dark); border: 1px solid var(--amber-border); }
+    .dark .badge-amber { color: #FCD34D; }
+    .badge-coral { background: var(--coral-soft); color: var(--coral); border: 1px solid var(--coral-border); }
+    .dark .badge-coral { color: #FCA5A5; }
+    .badge-muted { background: var(--bg-subtle); color: var(--text-muted); border: 1px solid var(--border-soft); }
+
+    /* Duolingo Tactile 3D Pressable Buttons */
+    .btn-3d {
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      gap: 7px;
+      padding: 12px 16px;
+      border-radius: 14px;
+      font-size: 14px;
+      font-weight: 800;
+      letter-spacing: 0.01em;
+      cursor: pointer;
+      user-select: none;
+      text-align: center;
+      transition: transform 0.08s ease, border-bottom-width 0.08s ease, filter 0.15s ease, opacity 0.15s ease;
     }
     .btn-3d:active:not(:disabled) {
       transform: translateY(2px);
       border-bottom-width: 2px !important;
     }
     .btn-3d:disabled {
-      opacity: 0.45;
+      opacity: 0.55;
       cursor: not-allowed;
+      transform: none;
     }
+    .btn-full { width: 100%; }
+
+    .btn-blue {
+      background: var(--blue);
+      color: #ffffff;
+      border: 2px solid var(--blue);
+      border-bottom: 4px solid var(--blue-dark);
+    }
+    .btn-blue:hover:not(:disabled) { filter: brightness(1.06); }
 
     .btn-emerald {
-      background-color: #10b981;
+      background: var(--emerald);
       color: #ffffff;
-      border: 2px solid #10b981;
-      border-bottom: 4px solid #047857;
+      border: 2px solid var(--emerald);
+      border-bottom: 4px solid var(--emerald-dark);
     }
-    .btn-emerald:hover:not(:disabled) { background-color: #059669; }
+    .btn-emerald:hover:not(:disabled) { filter: brightness(1.05); }
 
     .btn-indigo {
-      background-color: #4f46e5;
+      background: var(--indigo);
       color: #ffffff;
-      border: 2px solid #4f46e5;
-      border-bottom: 4px solid #3730a3;
+      border: 2px solid var(--indigo);
+      border-bottom: 4px solid var(--indigo-dark);
     }
-    .btn-indigo:hover:not(:disabled) { background-color: #4338ca; }
+    .btn-indigo:hover:not(:disabled) { filter: brightness(1.07); }
 
-    .btn-sky {
-      background-color: #0ea5e9;
+    .btn-amber {
+      background: var(--amber);
+      color: #1C1C1E;
+      border: 2px solid var(--amber);
+      border-bottom: 4px solid var(--amber-dark);
+    }
+    .btn-amber:hover:not(:disabled) { filter: brightness(1.05); }
+
+    .btn-purple {
+      background: var(--purple);
       color: #ffffff;
-      border: 2px solid #0ea5e9;
-      border-bottom: 4px solid #0369a1;
+      border: 2px solid var(--purple);
+      border-bottom: 4px solid var(--purple-dark);
     }
-    .btn-sky:hover:not(:disabled) { background-color: #0284c7; }
+    .btn-purple:hover:not(:disabled) { filter: brightness(1.07); }
 
-    .btn-rose {
-      background-color: #f43f5e;
+    .btn-coral {
+      background: var(--coral);
       color: #ffffff;
-      border: 2px solid #f43f5e;
-      border-bottom: 4px solid #be123c;
-    }
-    .btn-rose:hover:not(:disabled) { background-color: #e11d48; }
-
-    .btn-neutral {
-      background-color: var(--ah-card-alt);
-      color: var(--ah-text);
-      border: 2px solid var(--ah-border);
-      border-bottom: 4px solid var(--ah-border);
+      border: 2px solid var(--coral);
+      border-bottom: 4px solid var(--coral-dark);
     }
 
-    /* Hide Scrollbars Cleanly */
-    .no-scrollbar::-webkit-scrollbar { display: none; }
-    .no-scrollbar { -ms-overflow-style: none; scrollbar-width: none; }
+    .btn-outline {
+      background: var(--bg-subtle);
+      color: var(--text-muted);
+      border: 2px solid var(--border-soft);
+      border-bottom: 4px solid var(--border-strong);
+    }
 
-    /* Feedback Slide-Up Animation */
+    /* =========================================================================
+       5. GLOBAL INSTANT SEARCH BAR
+       ========================================================================= */
+    .search-wrap { position: relative; }
+
+    .search-icon {
+      position: absolute;
+      left: 14px;
+      top: 50%;
+      transform: translateY(-50%);
+      color: var(--text-muted);
+      font-size: 15px;
+      pointer-events: none;
+    }
+
+    .search-input {
+      width: 100%;
+      padding: 13px 44px 13px 40px;
+      border-radius: 16px;
+      border: 1.5px solid var(--border-soft);
+      background: var(--bg-input);
+      color: var(--text-main);
+      font-size: 14px;
+      font-weight: 500;
+      box-shadow: var(--shadow-card);
+      transition: border-color 0.15s ease, box-shadow 0.15s ease;
+    }
+    .search-input::placeholder { color: var(--text-muted); }
+    .search-input:focus {
+      outline: none;
+      border-color: var(--blue);
+      box-shadow: 0 0 0 3px var(--blue-soft);
+    }
+
+    .search-clear {
+      position: absolute;
+      right: 10px;
+      top: 50%;
+      transform: translateY(-50%);
+      width: 28px;
+      height: 28px;
+      border-radius: 999px;
+      border: none;
+      background: var(--bg-subtle);
+      color: var(--text-muted);
+      font-size: 16px;
+      font-weight: 800;
+      cursor: pointer;
+      display: none;
+      align-items: center;
+      justify-content: center;
+    }
+    .search-clear.visible { display: inline-flex; }
+    .search-clear:hover { color: var(--text-main); }
+
+    .search-results {
+      margin-top: 8px;
+      overflow: hidden;
+      display: none;
+    }
+    .search-results.visible { display: block; }
+
+    .search-row {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      gap: 10px;
+      padding: 11px 14px;
+      border-bottom: 1px solid var(--border-soft);
+      transition: background-color 0.12s ease;
+    }
+    .search-row:last-child { border-bottom: none; }
+    .search-row:hover { background: var(--bg-subtle); }
+
+    .search-row-title {
+      font-size: 13.5px;
+      font-weight: 700;
+      color: var(--text-main);
+    }
+    .search-row-meta {
+      display: flex;
+      align-items: center;
+      gap: 6px;
+      margin-top: 3px;
+      flex-wrap: wrap;
+    }
+    .search-go {
+      font-size: 12px;
+      font-weight: 800;
+      color: var(--blue);
+      flex-shrink: 0;
+    }
+
+    /* =========================================================================
+       6. FEATURED INTERACTIVE VISUAL LESSONS GRID
+       ========================================================================= */
+    .lessons-grid {
+      display: grid;
+      grid-template-columns: 1fr;
+      gap: 12px;
+    }
+
+    @media (min-width: 820px) {
+      .lessons-grid {
+        grid-template-columns: repeat(3, 1fr);
+      }
+    }
+
+    .lesson-card {
+      padding: 16px;
+      display: flex;
+      flex-direction: column;
+      justify-content: space-between;
+      gap: 14px;
+      border-width: 1.5px;
+    }
+
+    .lesson-card.is-live {
+      border-color: var(--emerald-border);
+    }
+    .lesson-card.is-completed {
+      border-color: var(--emerald);
+    }
+    .lesson-card.is-coming {
+      border-style: dashed;
+      background: var(--bg-subtle);
+      opacity: 0.86;
+    }
+
+    .lesson-top {
+      display: flex;
+      flex-direction: column;
+      gap: 8px;
+    }
+
+    .lesson-title {
+      font-size: 16px;
+      font-weight: 800;
+      line-height: 1.28;
+      letter-spacing: -0.015em;
+    }
+
+    .lesson-desc {
+      font-size: 12.5px;
+      color: var(--text-muted);
+      line-height: 1.45;
+    }
+
+    /* =========================================================================
+       7. REVISION PULSE (4-STAT BAR) & QUICK 5-MINUTE MIX BANNER
+       ========================================================================= */
+    .pulse-card {
+      padding: 16px;
+      display: flex;
+      flex-direction: column;
+      gap: 14px;
+    }
+
+    .stats-grid {
+      display: grid;
+      grid-template-columns: repeat(2, 1fr);
+      gap: 10px;
+    }
+
+    @media (min-width: 640px) {
+      .stats-grid {
+        grid-template-columns: repeat(4, 1fr);
+      }
+    }
+
+    .stat-tile {
+      padding: 12px 10px;
+      border-radius: 14px;
+      text-align: center;
+      border: 1px solid var(--border-soft);
+      background: var(--bg-subtle);
+    }
+    .stat-tile.t-blue { background: var(--blue-soft); border-color: var(--blue-border); }
+    .stat-tile.t-coral { background: var(--coral-soft); border-color: var(--coral-border); }
+    .stat-tile.t-emerald { background: var(--emerald-soft); border-color: var(--emerald-border); }
+    .stat-tile.t-amber { background: var(--amber-soft); border-color: var(--amber-border); }
+
+    .stat-num {
+      display: block;
+      font-size: 22px;
+      font-weight: 800;
+      font-variant-numeric: tabular-nums;
+      letter-spacing: -0.02em;
+    }
+    .t-blue .stat-num { color: var(--blue); }
+    .dark .t-blue .stat-num { color: #60A5FA; }
+    .t-coral .stat-num { color: var(--coral); }
+    .dark .t-coral .stat-num { color: #F87171; }
+    .t-emerald .stat-num { color: var(--emerald-dark); }
+    .dark .t-emerald .stat-num { color: #4ADE80; }
+    .t-amber .stat-num { color: var(--amber-dark); }
+    .dark .t-amber .stat-num { color: #FCD34D; }
+
+    .stat-lbl {
+      display: block;
+      font-size: 11px;
+      font-weight: 700;
+      color: var(--text-muted);
+      margin-top: 2px;
+    }
+
+    .mix-banner {
+      display: flex;
+      flex-direction: column;
+      gap: 12px;
+      padding: 15px 16px;
+      border-radius: 16px;
+      background: linear-gradient(135deg, rgba(79, 70, 229, 0.12), rgba(245, 158, 11, 0.14));
+      border: 1.5px solid var(--amber-border);
+    }
+
+    @media (min-width: 640px) {
+      .mix-banner {
+        flex-direction: row;
+        align-items: center;
+        justify-content: space-between;
+      }
+    }
+
+    .mix-banner-title {
+      font-size: 15.5px;
+      font-weight: 800;
+      letter-spacing: -0.015em;
+    }
+    .mix-banner-sub {
+      font-size: 12.5px;
+      color: var(--text-muted);
+      margin-top: 2px;
+    }
+
+    /* =========================================================================
+       8. YEAR 3 MODULE HUBS (2-COL DESKTOP / 1-COL MOBILE)
+       ========================================================================= */
+    .modules-grid {
+      display: grid;
+      grid-template-columns: 1fr;
+      gap: 14px;
+    }
+
+    @media (min-width: 720px) {
+      .modules-grid {
+        grid-template-columns: repeat(2, 1fr);
+      }
+    }
+
+    .module-card {
+      padding: 18px;
+      display: flex;
+      flex-direction: column;
+      justify-content: space-between;
+      gap: 14px;
+      border-top-width: 4px;
+    }
+
+    .mod-neuro { border-top-color: var(--blue); }
+    .mod-msk { border-top-color: var(--coral); }
+    .mod-chiro { border-top-color: var(--emerald); }
+    .mod-written { border-top-color: var(--purple); }
+
+    .module-head {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      gap: 8px;
+    }
+
+    .module-title {
+      font-size: 17px;
+      font-weight: 800;
+      letter-spacing: -0.02em;
+      margin-top: 6px;
+    }
+
+    .module-desc {
+      font-size: 13px;
+      color: var(--text-muted);
+      margin-top: 5px;
+      line-height: 1.48;
+    }
+
+    .quick-pills {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 6px;
+      margin-top: 10px;
+    }
+
+    .inline-pill {
+      display: inline-flex;
+      align-items: center;
+      gap: 4px;
+      padding: 5px 10px;
+      border-radius: 10px;
+      font-size: 11.5px;
+      font-weight: 800;
+      background: var(--emerald-soft);
+      color: var(--emerald-dark);
+      border: 1px solid var(--emerald-border);
+      transition: filter 0.15s ease;
+    }
+    .dark .inline-pill { color: #4ADE80; }
+    .inline-pill:hover { filter: brightness(0.95); }
+
+    .module-footer {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      gap: 10px;
+      padding-top: 12px;
+      border-top: 1px solid var(--border-soft);
+    }
+
+    .module-meta {
+      font-size: 11.5px;
+      font-weight: 700;
+      color: var(--text-muted);
+    }
+
+    /* =========================================================================
+       9. MODALS (QUICK 5-MINUTE MIX & PHONE <-> LAPTOP SYNC)
+       ========================================================================= */
+    .modal-backdrop {
+      position: fixed;
+      inset: 0;
+      z-index: 60;
+      background: rgba(0, 0, 0, 0.62);
+      backdrop-filter: blur(5px);
+      -webkit-backdrop-filter: blur(5px);
+      display: none;
+      align-items: center;
+      justify-content: center;
+      padding: 14px;
+    }
+    .modal-backdrop.open { display: flex; }
+
+    .modal-box {
+      width: 100%;
+      max-width: 520px;
+      max-height: 90vh;
+      background: var(--bg-card);
+      border: 1px solid var(--border-soft);
+      border-radius: 22px;
+      box-shadow: 0 20px 50px rgba(0, 0, 0, 0.3);
+      overflow: hidden;
+      display: flex;
+      flex-direction: column;
+      animation: popIn 0.18s ease-out forwards;
+    }
+
+    .modal-header {
+      padding: 15px 18px;
+      border-bottom: 1px solid var(--border-soft);
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      gap: 10px;
+    }
+
+    .modal-close {
+      width: 32px;
+      height: 32px;
+      border-radius: 10px;
+      border: none;
+      background: var(--bg-subtle);
+      color: var(--text-muted);
+      font-size: 18px;
+      font-weight: 800;
+      cursor: pointer;
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+    }
+    .modal-close:hover { color: var(--text-main); }
+
+    .modal-body {
+      padding: 18px;
+      overflow-y: auto;
+      display: flex;
+      flex-direction: column;
+      gap: 14px;
+    }
+
+    /* Duolingo Progress Bar inside Mix Modal */
+    .duo-bar-track {
+      width: 100%;
+      height: 12px;
+      border-radius: 999px;
+      background: var(--bg-subtle);
+      padding: 2px;
+      overflow: hidden;
+    }
+    .duo-bar-fill {
+      height: 100%;
+      border-radius: 999px;
+      background: var(--emerald);
+      transition: width 0.35s cubic-bezier(0.22, 1, 0.36, 1);
+    }
+
+    .mix-q-text {
+      font-size: 16.5px;
+      font-weight: 800;
+      line-height: 1.38;
+      letter-spacing: -0.015em;
+    }
+
+    .choice-list {
+      display: flex;
+      flex-direction: column;
+      gap: 9px;
+    }
+
+    .choice-btn {
+      width: 100%;
+      padding: 13px 14px;
+      border-radius: 15px;
+      background: var(--bg-card);
+      border: 2px solid var(--border-soft);
+      border-bottom: 4px solid var(--border-strong);
+      color: var(--text-main);
+      text-align: left;
+      display: flex;
+      align-items: center;
+      gap: 11px;
+      cursor: pointer;
+      font-size: 13.5px;
+      font-weight: 600;
+      line-height: 1.35;
+      transition: transform 0.08s ease, border-color 0.14s ease, background-color 0.14s ease;
+    }
+    .choice-btn:hover:not(:disabled) {
+      border-color: var(--blue);
+      background: var(--blue-soft);
+    }
+    .choice-btn:active:not(:disabled) {
+      transform: translateY(2px);
+      border-bottom-width: 2px;
+    }
+    .choice-btn:disabled { cursor: default; }
+
+    .choice-key {
+      width: 28px;
+      height: 28px;
+      border-radius: 9px;
+      background: var(--bg-subtle);
+      border: 1px solid var(--border-soft);
+      font-size: 11.5px;
+      font-weight: 800;
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      flex-shrink: 0;
+    }
+
+    .choice-btn.is-correct {
+      background: var(--emerald-soft);
+      border-color: var(--emerald);
+      border-bottom-color: var(--emerald-dark);
+    }
+    .choice-btn.is-correct .choice-key {
+      background: var(--emerald);
+      border-color: var(--emerald);
+      color: #ffffff;
+    }
+
+    .choice-btn.is-wrong {
+      background: var(--coral-soft);
+      border-color: var(--coral);
+      border-bottom-color: var(--coral-dark);
+    }
+    .choice-btn.is-wrong .choice-key {
+      background: var(--coral);
+      border-color: var(--coral);
+      color: #ffffff;
+    }
+
+    .mix-feedback {
+      padding: 15px 18px;
+      border-top-width: 2px;
+      border-top-style: solid;
+      display: flex;
+      flex-direction: column;
+      gap: 11px;
+      animation: slideUp 0.2s ease-out forwards;
+    }
+    .mix-feedback.correct {
+      background: var(--fb-correct-bg);
+      border-top-color: var(--emerald);
+    }
+    .mix-feedback.wrong {
+      background: var(--fb-wrong-bg);
+      border-top-color: var(--coral);
+    }
+
+    .fb-head {
+      display: flex;
+      align-items: flex-start;
+      gap: 10px;
+    }
+    .fb-dot {
+      width: 28px;
+      height: 28px;
+      border-radius: 999px;
+      color: #ffffff;
+      font-weight: 800;
+      font-size: 14px;
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      flex-shrink: 0;
+    }
+    .fb-dot.correct { background: var(--emerald); }
+    .fb-dot.wrong { background: var(--coral); }
+
+    .fb-title {
+      font-size: 14.5px;
+      font-weight: 800;
+    }
+    .fb-title.correct { color: var(--emerald-dark); }
+    .dark .fb-title.correct { color: #4ADE80; }
+    .fb-title.wrong { color: var(--coral-dark); }
+    .dark .fb-title.wrong { color: #FCA5A5; }
+
+    .fb-pearl {
+      font-size: 13px;
+      margin-top: 2px;
+      color: var(--text-main);
+      line-height: 1.42;
+    }
+
+    .sync-textarea {
+      width: 100%;
+      padding: 11px 12px;
+      border-radius: 14px;
+      border: 1.5px solid var(--border-soft);
+      background: var(--bg-subtle);
+      color: var(--text-main);
+      font-size: 11.5px;
+      line-height: 1.4;
+      resize: vertical;
+      word-break: break-all;
+    }
+    .sync-textarea:focus {
+      outline: none;
+      border-color: var(--blue);
+    }
+
+    /* =========================================================================
+       10. MOBILE THUMB-ZONE BOTTOM NAVIGATION BAR (<= 768px)
+       ========================================================================= */
+    .mobile-nav {
+      position: fixed;
+      bottom: 0;
+      left: 0;
+      right: 0;
+      z-index: 45;
+      background: var(--bg-glass);
+      backdrop-filter: blur(20px);
+      -webkit-backdrop-filter: blur(20px);
+      border-top: 1px solid var(--border-soft);
+      padding: 7px 10px calc(7px + env(safe-area-inset-bottom, 0px));
+    }
+
+    @media (min-width: 769px) {
+      .mobile-nav { display: none; }
+    }
+
+    .mobile-nav-grid {
+      max-width: 440px;
+      margin: 0 auto;
+      display: grid;
+      grid-template-columns: repeat(4, 1fr);
+      gap: 4px;
+    }
+
+    .mnav-btn {
+      border: none;
+      background: transparent;
+      color: var(--text-muted);
+      padding: 6px 4px;
+      border-radius: 12px;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+      gap: 2px;
+      cursor: pointer;
+      font-size: 10.5px;
+      font-weight: 700;
+      transition: background-color 0.14s ease, color 0.14s ease;
+    }
+    .mnav-btn:active { background: var(--bg-subtle); }
+    .mnav-btn.primary { color: var(--blue); font-weight: 800; }
+    .mnav-icon { font-size: 17px; line-height: 1.1; }
+
+    /* =========================================================================
+       11. TOAST NOTIFICATIONS & ANIMATIONS
+       ========================================================================= */
+    .toast-wrap {
+      position: fixed;
+      bottom: 86px;
+      right: 14px;
+      z-index: 80;
+      display: flex;
+      flex-direction: column;
+      gap: 8px;
+      pointer-events: none;
+    }
+    @media (min-width: 769px) {
+      .toast-wrap { bottom: 20px; right: 20px; }
+    }
+
+    .toast {
+      pointer-events: auto;
+      padding: 10px 15px;
+      border-radius: 14px;
+      font-size: 13px;
+      font-weight: 700;
+      box-shadow: 0 8px 24px rgba(0, 0, 0, 0.22);
+      background: var(--text-main);
+      color: var(--bg-card);
+      transition: opacity 0.25s ease, transform 0.25s ease;
+    }
+    .toast.emerald { background: var(--emerald-dark); color: #ffffff; }
+    .toast.amber { background: var(--amber-dark); color: #ffffff; }
+    .toast.coral { background: var(--coral-dark); color: #ffffff; }
+
     @keyframes popIn {
-      from { opacity: 0; transform: translateY(8px); }
-      to { opacity: 1; transform: translateY(0); }
+      from { opacity: 0; transform: scale(0.96) translateY(8px); }
+      to { opacity: 1; transform: scale(1) translateY(0); }
     }
-    .pop-in {
-      animation: popIn 0.2s ease-out forwards;
+    @keyframes slideUp {
+      from { opacity: 0.6; transform: translateY(14px); }
+      to { opacity: 1; transform: translateY(0); }
     }
   </style>
 </head>
-<body class="min-h-screen overflow-x-hidden transition-colors duration-200">
+<body>
 
-  <!-- Toast Notification Container (No alert() or confirm() used) -->
-  <div id="toast-container" class="fixed bottom-24 md:bottom-6 right-4 z-50 flex flex-col gap-2 pointer-events-none"></div>
+  <!-- Toast Container (replaces alert/confirm) -->
+  <div id="toast-wrap" class="toast-wrap" aria-live="polite"></div>
 
   <!-- =========================================================================
-       STICKY FROSTED-GLASS HEADER
+       1. STICKY FROSTED-GLASS HEADER
        ========================================================================= -->
-  <header class="sticky top-0 z-40 ah-glass border-b">
-    <div class="max-w-5xl mx-auto px-3.5 sm:px-5 py-2.5 flex items-center justify-between gap-2">
-      <!-- Brand & Title -->
-      <a href="#top" class="flex items-center gap-2.5 min-w-0">
-        <div class="w-9 h-9 rounded-2xl bg-gradient-to-br from-emerald-500 to-teal-600 text-white font-display font-extrabold text-sm flex items-center justify-center shadow-xs shrink-0">
-          Y3
-        </div>
-        <div class="min-w-0">
-          <h1 class="text-base sm:text-lg font-display font-extrabold tracking-tight ah-text truncate">
-            MChiro Year 3
-          </h1>
-          <p class="text-[11px] font-medium ah-muted truncate hidden sm:block">
-            Revision Hub &bull; Visual Lessons &bull; Clinical OSCE Prep
-          </p>
+  <header class="top-header">
+    <div class="container header-inner">
+      <a href="#top" class="brand" aria-label="MChiro Year 3 Hub Home">
+        <div class="brand-icon">Y3</div>
+        <div class="brand-text">
+          <h1 class="brand-title">MChiro Year 3 Hub</h1>
+          <p class="brand-sub">McTimoney College &bull; Jan 2027</p>
         </div>
       </a>
 
-      <!-- Right Controls: Desktop Quick Links + Sync + Light/Dark Toggle -->
-      <div class="flex items-center gap-2 shrink-0">
-        <nav class="hidden lg:flex items-center gap-1 mr-1" aria-label="Quick Module Navigation">
-          <a href="lesson-ul.html" class="px-2.5 py-1.5 rounded-xl text-xs font-display font-bold text-emerald-600 dark:text-emerald-400 hover:bg-emerald-500/10 transition">Lessons</a>
-          <a href="neuro.html" class="px-2.5 py-1.5 rounded-xl text-xs font-display font-bold ah-muted hover:ah-text hover:bg-black/5 dark:hover:bg-white/10 transition">Neuro</a>
-          <a href="msk.html" class="px-2.5 py-1.5 rounded-xl text-xs font-display font-bold ah-muted hover:ah-text hover:bg-black/5 dark:hover:bg-white/10 transition">MSK</a>
-          <a href="chiro.html" class="px-2.5 py-1.5 rounded-xl text-xs font-display font-bold ah-muted hover:ah-text hover:bg-black/5 dark:hover:bg-white/10 transition">Chiro 3</a>
-          <a href="written.html" class="px-2.5 py-1.5 rounded-xl text-xs font-display font-bold ah-muted hover:ah-text hover:bg-black/5 dark:hover:bg-white/10 transition">Written</a>
-        </nav>
+      <div class="header-controls">
+        <div class="xp-pill" title="Total Visual Lesson XP">
+          <span>⚡</span>
+          <span id="header-xp">0 XP</span>
+        </div>
 
-        <!-- Sync Button -->
-        <button
-          type="button"
-          onclick="openSyncModal()"
-          class="px-3 py-2 rounded-xl bg-black/5 dark:bg-white/10 hover:bg-black/10 dark:hover:bg-white/15 ah-text text-xs font-display font-bold transition flex items-center gap-1.5"
-          title="Sync progress between Phone and Laptop"
-        >
+        <button type="button" class="icon-btn" onclick="openSyncModal()" title="Phone ↔ Laptop Progress Sync">
           <span>🔄</span>
-          <span>Sync</span>
+          <span class="btn-label">Sync</span>
         </button>
 
-        <!-- Light/Dark Mode Toggle -->
         <button
           type="button"
           id="theme-toggle-btn"
+          class="icon-btn square"
           onclick="toggleTheme()"
           aria-label="Toggle Light or Dark Mode"
-          class="w-10 h-10 rounded-xl bg-black/5 dark:bg-white/10 hover:bg-black/10 dark:hover:bg-white/15 flex items-center justify-center text-base transition"
-        >
-          🌙
-        </button>
+        >🌙</button>
       </div>
     </div>
   </header>
@@ -227,373 +1056,240 @@
   <!-- =========================================================================
        MAIN DASHBOARD CONTENT
        ========================================================================= -->
-  <main id="top" class="max-w-5xl mx-auto px-3.5 sm:px-5 py-5 pb-28 md:pb-14 space-y-6">
-
-    <!-- 1. TOP STATUS STRIP (REVISION PULSE) -->
-    <section class="ah-card p-4 sm:p-5 space-y-4">
-      <div class="flex flex-wrap items-center justify-between gap-3">
-        <div class="space-y-0.5">
-          <div class="flex flex-wrap items-center gap-2">
-            <span class="px-2.5 py-0.5 rounded-lg text-[10px] font-display font-extrabold uppercase tracking-wider bg-teal-500/15 text-teal-700 dark:text-teal-300">
-              Revision Pulse
-            </span>
-            <span id="countdown-pill" class="px-2.5 py-0.5 rounded-lg text-[11px] font-display font-extrabold bg-indigo-500/12 text-indigo-700 dark:text-indigo-300">
-              Year 3 Start: Jan 25, 2027
-            </span>
-          </div>
-          <h2 class="text-lg sm:text-xl font-display font-extrabold ah-text">
-            Spaced Repetition &amp; Daily Warm-Up
-          </h2>
-        </div>
-
-        <!-- Tactile 3D CTA: Quick 5-Min Mix -->
-        <button
-          type="button"
-          onclick="openMixModal()"
-          class="btn-3d btn-indigo w-full sm:w-auto px-5 py-3 text-xs sm:text-sm tracking-wide shadow-xs"
-        >
-          <span>⚡</span>
-          <span>Quick 5-Min Mix</span>
-        </button>
-      </div>
-
-      <!-- Live Leitner Stats from localStorage ('mchiro_srs_v4') -->
-      <div class="grid grid-cols-3 gap-2.5 text-center">
-        <div class="p-3 rounded-2xl bg-rose-500/10 border border-rose-500/20">
-          <span id="stat-due" class="block text-xl sm:text-2xl font-display font-extrabold text-rose-600 dark:text-rose-400 tabular-nums">0</span>
-          <span class="text-[11px] font-display font-bold text-rose-800 dark:text-rose-300">Due Today</span>
-        </div>
-        <div class="p-3 rounded-2xl bg-amber-500/10 border border-amber-500/20">
-          <span id="stat-shaky" class="block text-xl sm:text-2xl font-display font-extrabold text-amber-600 dark:text-amber-400 tabular-nums">0</span>
-          <span class="text-[11px] font-display font-bold text-amber-800 dark:text-amber-300">Shaky (2d)</span>
-        </div>
-        <div class="p-3 rounded-2xl bg-emerald-500/10 border border-emerald-500/20">
-          <span id="stat-solid" class="block text-xl sm:text-2xl font-display font-extrabold text-emerald-600 dark:text-emerald-400 tabular-nums">0</span>
-          <span class="text-[11px] font-display font-bold text-emerald-800 dark:text-emerald-300">Solid (7d)</span>
-        </div>
-      </div>
-    </section>
+  <main id="top" class="container main-stack">
 
     <!-- 2. GLOBAL INSTANT SEARCH BAR -->
-    <section id="search-section" class="space-y-2.5">
-      <div class="relative">
-        <span class="absolute inset-y-0 left-4 flex items-center ah-muted pointer-events-none">
-          <svg class="w-4 h-4" fill="none" stroke="currentColor" stroke-width="2.4" viewBox="0 0 24 24">
-            <path stroke-linecap="round" stroke-linejoin="round" d="M21 21l-4.35-4.35M17 11A6 6 0 115 11a6 6 0 0112 0z" />
-          </svg>
-        </span>
+    <section aria-label="Global Instant Search">
+      <div class="search-wrap">
+        <span class="search-icon" aria-hidden="true">🔍</span>
         <input
-          id="global-search-input"
+          id="global-search"
+          class="search-input"
           type="search"
+          placeholder="Search dermatomes, reflexes, OA vs RA, red flags, McTimoney..."
+          aria-label="Search Year 3 topics"
           oninput="handleSearch(this.value)"
-          placeholder="Search 45+ Year 3 topics (e.g. C6, Radial, Hutchinson, CKD, OA vs RA, Atlas, PICO)..."
-          aria-label="Global Instant Search across Year 3 topics"
-          class="w-full pl-11 pr-20 py-3.5 rounded-2xl ah-card text-xs sm:text-sm font-medium ah-text placeholder:text-slate-400 focus:outline-none focus:ring-2 focus:ring-emerald-500 transition"
         />
         <button
-          id="search-clear-btn"
           type="button"
+          id="search-clear"
+          class="search-clear"
           onclick="clearSearch()"
-          class="hidden absolute inset-y-2 right-2 px-3 rounded-xl bg-black/5 dark:bg-white/10 text-xs font-display font-bold ah-muted hover:ah-text"
-        >Clear</button>
+          aria-label="Clear search"
+        >&times;</button>
       </div>
-
-      <!-- Instant Search Results Dropdown -->
-      <div id="search-results" class="hidden"></div>
+      <div id="search-results" class="ah-card search-results"></div>
     </section>
 
     <!-- 3. FEATURED INTERACTIVE VISUAL LESSONS SECTION -->
-    <section id="lessons-section" class="space-y-3">
-      <div class="flex items-center justify-between gap-2 px-1">
-        <div class="flex items-center gap-2">
-          <h2 class="text-base sm:text-lg font-display font-extrabold ah-text">
-            Interactive Visual Lessons
-          </h2>
-          <span class="px-2.5 py-0.5 rounded-lg text-[10px] font-display font-extrabold uppercase tracking-wider bg-emerald-500/15 text-emerald-700 dark:text-emerald-300">
-            Guided Practice
-          </span>
+    <section id="lessons-section" aria-label="Interactive Visual Lessons">
+      <div class="section-head">
+        <h2 class="section-title">Interactive Visual Lessons</h2>
+        <span id="lessons-progress-pill" class="badge badge-blue">0 / 2 Completed</span>
+      </div>
+
+      <div id="lessons-grid" class="lessons-grid"></div>
+    </section>
+
+    <!-- 4. REVISION PULSE & QUICK 5-MINUTE MIX -->
+    <section class="ah-card pulse-card" aria-label="Revision Pulse and Quick 5-Minute Mix">
+      <div class="section-head" style="margin-bottom: 0;">
+        <h2 class="section-title">Revision Pulse</h2>
+        <span class="badge badge-muted mono">Jan 25, 2027</span>
+      </div>
+
+      <!-- Compact 4-Stat Bar -->
+      <div class="stats-grid">
+        <div class="stat-tile t-blue">
+          <span id="stat-days" class="stat-num">--</span>
+          <span class="stat-lbl">Days to Y3</span>
         </div>
-        <span class="text-xs font-semibold ah-muted hidden sm:inline">Teach &rarr; Tap &rarr; Replay</span>
+        <div class="stat-tile t-coral">
+          <span id="stat-due" class="stat-num">0</span>
+          <span class="stat-lbl">SRS Due Today</span>
+        </div>
+        <div class="stat-tile t-emerald">
+          <span id="stat-solid" class="stat-num">0</span>
+          <span class="stat-lbl">SRS Solid (7d)</span>
+        </div>
+        <div class="stat-tile t-amber">
+          <span id="stat-xp" class="stat-num">0</span>
+          <span class="stat-lbl">Lesson XP</span>
+        </div>
       </div>
 
-      <div class="grid grid-cols-1 md:grid-cols-12 gap-4">
-        <!-- Lesson 1: Prominent Tactile Featured Card -->
-        <article class="md:col-span-7 ah-card p-5 border-2 border-emerald-500/40 dark:border-emerald-500/35 flex flex-col justify-between gap-4 relative overflow-hidden">
-          <div class="space-y-2.5">
-            <div class="flex items-center justify-between gap-2">
-              <span class="px-2.5 py-1 rounded-xl text-[11px] font-display font-extrabold uppercase bg-emerald-500 text-white">
-                New &bull; Lesson 1
-              </span>
-              <span class="text-xs font-display font-bold text-emerald-600 dark:text-emerald-400">
-                ~4 min &bull; Visual SVG
-              </span>
+      <!-- Prominent Tactile 3D CTA Banner -->
+      <div class="mix-banner">
+        <div>
+          <h3 class="mix-banner-title">⚡ Quick 5-Minute Mix</h3>
+          <p class="mix-banner-sub">5 interleaved questions across Neuro, MSK, Chiro 3 &amp; Red Flags</p>
+        </div>
+        <button type="button" class="btn-3d btn-indigo" onclick="openMixModal()">
+          <span>⚡</span>
+          <span>Start 5-Min Mix</span>
+        </button>
+      </div>
+    </section>
+
+    <!-- 5. YEAR 3 MODULE HUBS -->
+    <section aria-label="Year 3 Module Hubs">
+      <div class="section-head">
+        <h2 class="section-title">Year 3 Module Hubs</h2>
+        <span class="badge badge-muted">4 Workspaces</span>
+      </div>
+
+      <div class="modules-grid">
+        <!-- Clinical Neurology -->
+        <article class="ah-card module-card mod-neuro">
+          <div>
+            <div class="module-head">
+              <span class="badge badge-blue">Clinical Neurology</span>
+              <span aria-hidden="true">🧠</span>
             </div>
-
-            <h3 class="text-lg sm:text-xl font-display font-extrabold ah-text leading-snug">
-              Lesson 1: Upper Limb SMR &amp; Peripheral Nerves
-            </h3>
-            <p class="text-xs sm:text-sm ah-muted leading-relaxed">
-              Interactive Arm SVG &bull; C5–T1 &bull; Radial, Median, Ulnar &bull; Mistake Replay Loop
+            <h3 class="module-title">Clinical Neurology</h3>
+            <p class="module-desc">
+              SMR, Peripheral &amp; Cranial Nerves, Weber/Rinne, Hutchinson Pupil, Beighton/GCS, Spinal Cord &amp; 15-Min OSCE.
             </p>
+            <div class="quick-pills">
+              <a href="lesson-ul.html" class="inline-pill">✨ Lesson 1: Upper Limb</a>
+              <a href="lesson-ll.html" class="inline-pill">✨ Lesson 2: Lower Limb</a>
+            </div>
           </div>
-
-          <a
-            href="lesson-ul.html"
-            class="btn-3d btn-emerald w-full py-3.5 text-sm sm:text-base tracking-wide text-center"
-          >
-            <span>Start Lesson</span>
-            <span>&rarr;</span>
-          </a>
+          <div class="module-footer">
+            <span class="module-meta">SMR &bull; Simulators &bull; OSCE</span>
+            <a href="neuro.html" class="btn-3d btn-blue" style="padding: 9px 14px; font-size: 13px;">Open &rarr;</a>
+          </div>
         </article>
 
-        <!-- Lesson 2: Muted Coming Next Preview Card -->
-        <article class="md:col-span-5 ah-card-alt p-5 border-2 border-dashed border-slate-300 dark:border-slate-700 flex flex-col justify-between gap-4 opacity-80">
-          <div class="space-y-2">
-            <div class="flex items-center justify-between gap-2">
-              <span class="px-2.5 py-1 rounded-xl text-[10px] font-display font-extrabold uppercase bg-black/10 dark:bg-white/10 ah-muted">
-                Coming Next
-              </span>
-              <span class="text-xs font-semibold ah-muted">Lesson 2</span>
+        <!-- Musculoskeletal Medicine -->
+        <article class="ah-card module-card mod-msk">
+          <div>
+            <div class="module-head">
+              <span class="badge badge-coral">MSK Medicine</span>
+              <span aria-hidden="true">🦴</span>
             </div>
-            <h3 class="text-base font-display font-extrabold ah-text leading-snug">
-              Lesson 2: Lower Limb SMR &amp; Peripheral Nerves (L2–S1)
-            </h3>
-            <p class="text-xs ah-muted leading-relaxed">
-              Interactive Leg SVG &bull; L2–S1 Dermatomes &amp; Myotomes &bull; Femoral, Sciatic, Tibial &amp; Peroneal Drills.
+            <h3 class="module-title">Musculoskeletal Medicine</h3>
+            <p class="module-desc">
+              OA vs RA joints, CKD &rarr; Renal Osteodystrophy domino, Hot Swollen Joint triage, CV/Systemic Red Flags &amp; SAQ/LAQ self-marking.
             </p>
           </div>
-          <div class="px-3.5 py-2.5 rounded-xl bg-black/5 dark:bg-white/5 text-center text-xs font-display font-bold ah-muted">
-            Queued for Next Build
+          <div class="module-footer">
+            <span class="module-meta">Pathology &bull; Red Flags &bull; SAQ</span>
+            <a href="msk.html" class="btn-3d btn-coral" style="padding: 9px 14px; font-size: 13px;">Open &rarr;</a>
+          </div>
+        </article>
+
+        <!-- Chiropractic Studies 3 -->
+        <article class="ah-card module-card mod-chiro">
+          <div>
+            <div class="module-head">
+              <span class="badge badge-emerald">Chiro Studies 3</span>
+              <span aria-hidden="true">🙌</span>
+            </div>
+            <h3 class="module-title">Chiropractic Studies 3</h3>
+            <p class="module-desc">
+              54-step Full Body Check (4-colour key + active recall blur), 13 Year 2 mechanics cues (SRS), 40-min exam timer &amp; Y3 technique slots.
+            </p>
+          </div>
+          <div class="module-footer">
+            <span class="module-meta">54 Steps &bull; Cues &bull; 40-Min Sim</span>
+            <a href="chiro.html" class="btn-3d btn-emerald" style="padding: 9px 14px; font-size: 13px;">Open &rarr;</a>
+          </div>
+        </article>
+
+        <!-- Written & Foundation Modules -->
+        <article class="ah-card module-card mod-written">
+          <div>
+            <div class="module-head">
+              <span class="badge badge-purple">Written &amp; Foundation</span>
+              <span aria-hidden="true">📝</span>
+            </div>
+            <h3 class="module-title">Written &amp; Foundation Modules</h3>
+            <p class="module-desc">
+              Pre-Flight Essay Scanner (word count, 1st-person, quotes, Harvard citations), Clinic Studies 3, Philosophy 3, Research 2 (PICO &amp; Bias) &amp; Behavioural Sciences (BPS &amp; Yellow Flags).
+            </p>
+          </div>
+          <div class="module-footer">
+            <span class="module-meta">Scanner &bull; PICO &bull; BPS</span>
+            <a href="written.html" class="btn-3d btn-purple" style="padding: 9px 14px; font-size: 13px;">Open &rarr;</a>
           </div>
         </article>
       </div>
     </section>
 
-    <!-- 4. YEAR 3 MODULE HUB (4 CLEAN MODULE CARDS) -->
-    <section class="space-y-3">
-      <div class="flex items-center justify-between px-1">
-        <h2 class="text-base sm:text-lg font-display font-extrabold ah-text">
-          Year 3 Module Hub
-        </h2>
-        <span class="text-xs font-semibold ah-muted">4 Dedicated Workspaces</span>
-      </div>
-
-      <div class="grid grid-cols-1 md:grid-cols-2 gap-4">
-        <!-- Card 1: Clinical Neurology -->
-        <article class="ah-card p-5 flex flex-col justify-between gap-4 border-t-4 border-t-sky-500">
-          <div class="space-y-2.5">
-            <div class="flex items-center justify-between gap-2">
-              <span class="px-2.5 py-0.5 rounded-lg text-[10px] font-display font-extrabold uppercase bg-sky-500/15 text-sky-700 dark:text-sky-300">
-                Clinical Neurology
-              </span>
-              <span class="text-lg" aria-hidden="true">🧠</span>
-            </div>
-            <h3 class="text-lg font-display font-extrabold ah-text">
-              <a href="neuro.html" class="hover:text-sky-600 dark:hover:text-sky-400 transition">Clinical Neurology</a>
-            </h3>
-            <p class="text-xs sm:text-sm ah-muted leading-relaxed">
-              SMR Screening, Cranial Nerves, Weber/Rinne, Hutchinson Pupil, Beighton, GCS, Spinal Cord, Brain Lesions &amp; 15-Min OSCE.
-            </p>
-          </div>
-
-          <div class="flex flex-wrap items-center justify-between gap-2 pt-3 border-t border-black/5 dark:border-white/10">
-            <!-- Compact Inline Quick-Link Pill to Upper Limb Visual Lesson -->
-            <a
-              href="lesson-ul.html"
-              class="px-3 py-1.5 rounded-xl bg-emerald-500/12 hover:bg-emerald-500/20 border border-emerald-500/30 text-emerald-700 dark:text-emerald-300 text-[11px] font-display font-extrabold transition flex items-center gap-1"
-            >
-              <span>✨</span>
-              <span>Upper Limb Visual Lesson</span>
-            </a>
-            <a
-              href="neuro.html"
-              class="btn-3d btn-sky px-4 py-2 text-xs"
-            >
-              Open Module &rarr;
-            </a>
-          </div>
-        </article>
-
-        <!-- Card 2: Musculoskeletal Medicine -->
-        <article class="ah-card p-5 flex flex-col justify-between gap-4 border-t-4 border-t-indigo-500">
-          <div class="space-y-2.5">
-            <div class="flex items-center justify-between gap-2">
-              <span class="px-2.5 py-0.5 rounded-lg text-[10px] font-display font-extrabold uppercase bg-indigo-500/15 text-indigo-700 dark:text-indigo-300">
-                Musculoskeletal Medicine
-              </span>
-              <span class="text-lg" aria-hidden="true">🦴</span>
-            </div>
-            <h3 class="text-lg font-display font-extrabold ah-text">
-              <a href="msk.html" class="hover:text-indigo-600 dark:hover:text-indigo-400 transition">Musculoskeletal Medicine</a>
-            </h3>
-            <p class="text-xs sm:text-sm ah-muted leading-relaxed">
-              OA vs RA Joint Cross-Sections, CKD &rarr; Renal Osteodystrophy Domino, Metabolic Bone, Systemic Red Flags &amp; SAQ/LAQ Self-Marking.
-            </p>
-          </div>
-
-          <div class="flex items-center justify-between gap-2 pt-3 border-t border-black/5 dark:border-white/10">
-            <span class="text-[11px] font-semibold ah-muted">Pathology &bull; Red Flags</span>
-            <a
-              href="msk.html"
-              class="btn-3d btn-indigo px-4 py-2 text-xs"
-            >
-              Open Module &rarr;
-            </a>
-          </div>
-        </article>
-
-        <!-- Card 3: Chiropractic Studies 3 -->
-        <article class="ah-card p-5 flex flex-col justify-between gap-4 border-t-4 border-t-emerald-500">
-          <div class="space-y-2.5">
-            <div class="flex items-center justify-between gap-2">
-              <span class="px-2.5 py-0.5 rounded-lg text-[10px] font-display font-extrabold uppercase bg-emerald-500/15 text-emerald-700 dark:text-emerald-300">
-                Chiropractic Studies 3
-              </span>
-              <span class="text-lg" aria-hidden="true">🙌</span>
-            </div>
-            <h3 class="text-lg font-display font-extrabold ah-text">
-              <a href="chiro.html" class="hover:text-emerald-600 dark:hover:text-emerald-400 transition">Chiropractic Studies 3</a>
-            </h3>
-            <p class="text-xs sm:text-sm ah-muted leading-relaxed">
-              Full Body Check 4-colour routine, Year 2 practical mechanics cues, 40-min exam simulator &amp; Year 3 technique slots.
-            </p>
-          </div>
-
-          <div class="flex items-center justify-between gap-2 pt-3 border-t border-black/5 dark:border-white/10">
-            <span class="text-[11px] font-semibold ah-muted">54 Steps &bull; 40-Min Sim</span>
-            <a
-              href="chiro.html"
-              class="btn-3d btn-emerald px-4 py-2 text-xs"
-            >
-              Open Module &rarr;
-            </a>
-          </div>
-        </article>
-
-        <!-- Card 4: Written & Foundation Modules -->
-        <article class="ah-card p-5 flex flex-col justify-between gap-4 border-t-4 border-t-purple-500">
-          <div class="space-y-2.5">
-            <div class="flex items-center justify-between gap-2">
-              <span class="px-2.5 py-0.5 rounded-lg text-[10px] font-display font-extrabold uppercase bg-purple-500/15 text-purple-700 dark:text-purple-300">
-                Written &amp; Foundation
-              </span>
-              <span class="text-lg" aria-hidden="true">📝</span>
-            </div>
-            <h3 class="text-lg font-display font-extrabold ah-text">
-              <a href="written.html" class="hover:text-purple-600 dark:hover:text-purple-400 transition">Written &amp; Foundation Modules</a>
-            </h3>
-            <p class="text-xs sm:text-sm ah-muted leading-relaxed">
-              Clinic Studies 3, Philosophy 3, Research 2, Behavioural Sciences, Pre-Flight Essay Scanner &amp; Weighted Rubric Auditor.
-            </p>
-          </div>
-
-          <div class="flex items-center justify-between gap-2 pt-3 border-t border-black/5 dark:border-white/10">
-            <span class="text-[11px] font-semibold ah-muted">Essay Scanner &bull; PICO &bull; BPS</span>
-            <a
-              href="written.html"
-              class="btn-3d btn-neutral px-4 py-2 text-xs"
-            >
-              Open Module &rarr;
-            </a>
-          </div>
-        </article>
-      </div>
-    </section>
   </main>
 
   <!-- =========================================================================
-       MOBILE THUMB-ZONE BOTTOM NAVIGATION BAR (< 768px)
+       8. MOBILE THUMB-ZONE BOTTOM NAVIGATION BAR (<= 768px)
        ========================================================================= -->
-  <nav class="md:hidden fixed bottom-0 inset-x-0 z-40 ah-glass border-t px-2 py-1.5" aria-label="Mobile Navigation">
-    <div class="grid grid-cols-4 gap-1 max-w-md mx-auto">
-      <button
-        type="button"
-        onclick="window.scrollTo({top:0,behavior:'smooth'});"
-        class="py-1.5 px-1 rounded-xl flex flex-col items-center justify-center gap-0.5 text-emerald-600 dark:text-emerald-400 font-display font-extrabold"
-      >
-        <span class="text-base leading-none">🏠</span>
-        <span class="text-[10px]">Home</span>
+  <nav class="mobile-nav" aria-label="Mobile Bottom Navigation">
+    <div class="mobile-nav-grid">
+      <button type="button" class="mnav-btn primary" onclick="scrollToTop()">
+        <span class="mnav-icon">🏠</span>
+        <span>Home</span>
       </button>
-
-      <button
-        type="button"
-        onclick="focusSearch()"
-        class="py-1.5 px-1 rounded-xl flex flex-col items-center justify-center gap-0.5 ah-muted font-display font-bold hover:ah-text"
-      >
-        <span class="text-base leading-none">🔍</span>
-        <span class="text-[10px]">Search</span>
+      <button type="button" class="mnav-btn" onclick="scrollToLessons()">
+        <span class="mnav-icon">🎯</span>
+        <span>Lessons</span>
       </button>
-
-      <button
-        type="button"
-        onclick="openMixModal()"
-        class="py-1.5 px-1 rounded-xl flex flex-col items-center justify-center gap-0.5 text-indigo-600 dark:text-indigo-400 font-display font-bold"
-      >
-        <span class="text-base leading-none">⚡</span>
-        <span class="text-[10px]">5-Min Mix</span>
+      <button type="button" class="mnav-btn" onclick="openMixModal()">
+        <span class="mnav-icon">⚡</span>
+        <span>5-Min Mix</span>
       </button>
-
-      <a
-        href="lesson-ul.html"
-        class="py-1.5 px-1 rounded-xl flex flex-col items-center justify-center gap-0.5 ah-muted font-display font-bold hover:text-emerald-600"
-      >
-        <span class="text-base leading-none">🎯</span>
-        <span class="text-[10px]">Lessons</span>
-      </a>
+      <button type="button" class="mnav-btn" onclick="openSyncModal()">
+        <span class="mnav-icon">🔄</span>
+        <span>Sync</span>
+      </button>
     </div>
   </nav>
 
   <!-- =========================================================================
-       QUICK 5-MINUTE MIX MODAL (INTERLEAVED 5-QUESTION WARM-UP)
+       6. QUICK 5-MINUTE MIX MODAL
        ========================================================================= -->
-  <div id="mix-modal" class="hidden fixed inset-0 z-50 bg-black/65 backdrop-blur-xs flex items-center justify-center p-3.5" role="dialog" aria-modal="true" aria-label="Quick 5-Min Mix">
-    <div id="mix-modal-content" class="w-full max-w-lg ah-card overflow-hidden max-h-[90vh] flex flex-col pop-in"></div>
+  <div id="mix-modal" class="modal-backdrop" role="dialog" aria-modal="true" aria-label="Quick 5-Minute Mix">
+    <div id="mix-box" class="modal-box"></div>
   </div>
 
   <!-- =========================================================================
-       PHONE <-> LAPTOP PROGRESS SYNC MODAL
+       7. PHONE <-> LAPTOP PROGRESS SYNC MODAL
        ========================================================================= -->
-  <div id="sync-modal" class="hidden fixed inset-0 z-50 bg-black/65 backdrop-blur-xs flex items-center justify-center p-3.5" role="dialog" aria-modal="true" aria-label="Progress Sync">
-    <div class="w-full max-w-lg ah-card overflow-hidden max-h-[90vh] flex flex-col pop-in">
-      <div class="px-5 py-4 border-b border-black/10 dark:border-white/10 flex items-center justify-between">
+  <div id="sync-modal" class="modal-backdrop" role="dialog" aria-modal="true" aria-label="Phone and Laptop Progress Sync">
+    <div class="modal-box">
+      <div class="modal-header">
         <div>
-          <h3 class="text-base font-display font-extrabold ah-text">🔄 Phone &harr; Laptop Progress Sync</h3>
-          <p class="text-[11px] ah-muted">Private local sync for <code class="font-mono">mchiro_srs_v4</code> &amp; theme.</p>
+          <h3 style="font-size: 16px; font-weight: 800;">🔄 Phone &harr; Laptop Sync</h3>
+          <p style="font-size: 11.5px; color: var(--text-muted); margin-top: 2px;">
+            Transfers SRS (<span class="mono">mchiro_srs_v4</span>), Lessons &amp; Theme privately.
+          </p>
         </div>
-        <button type="button" onclick="closeSyncModal()" class="w-8 h-8 rounded-xl bg-black/5 dark:bg-white/10 ah-muted hover:ah-text font-extrabold text-lg leading-none">&times;</button>
+        <button type="button" class="modal-close" onclick="closeSyncModal()" aria-label="Close Sync Modal">&times;</button>
       </div>
 
-      <div class="p-5 overflow-y-auto space-y-5">
+      <div class="modal-body">
         <!-- Export -->
-        <div class="space-y-2.5">
-          <div class="flex items-center justify-between gap-2">
-            <span class="text-xs font-display font-extrabold uppercase tracking-wider text-emerald-600 dark:text-emerald-400">1. Export From This Device</span>
-            <button type="button" onclick="copySyncCode()" class="btn-3d btn-emerald px-3.5 py-2 text-xs">
+        <div style="display: flex; flex-direction: column; gap: 8px;">
+          <div style="display: flex; align-items: center; justify-content: space-between; gap: 8px; flex-wrap: wrap;">
+            <span class="badge badge-emerald">1. Export This Device</span>
+            <button type="button" class="btn-3d btn-emerald" style="padding: 8px 13px; font-size: 12.5px;" onclick="copySyncCode()">
               📋 Copy Sync Code
             </button>
           </div>
-          <textarea
-            id="sync-export-box"
-            rows="3"
-            readonly
-            class="w-full p-3 rounded-2xl ah-card-alt text-[11px] font-mono ah-text break-all focus:outline-none"
-          ></textarea>
+          <textarea id="sync-export" class="sync-textarea mono" rows="3" readonly aria-label="Exported Sync Code"></textarea>
         </div>
 
-        <!-- Import -->
-        <div class="space-y-2.5 pt-4 border-t border-black/10 dark:border-white/10">
-          <span class="block text-xs font-display font-extrabold uppercase tracking-wider text-indigo-600 dark:text-indigo-400">2. Restore On This Device</span>
+        <!-- Restore -->
+        <div style="display: flex; flex-direction: column; gap: 8px; padding-top: 12px; border-top: 1px solid var(--border-soft);">
+          <span class="badge badge-blue" style="align-self: flex-start;">2. Restore From Other Device</span>
           <textarea
-            id="sync-import-box"
+            id="sync-import"
+            class="sync-textarea mono"
             rows="3"
-            placeholder="Paste sync code copied from your other device..."
-            class="w-full p-3 rounded-2xl ah-card-alt text-[11px] font-mono ah-text focus:outline-none focus:ring-2 focus:ring-indigo-500"
+            placeholder="Paste sync code copied from your phone or laptop..."
+            aria-label="Paste Sync Code"
           ></textarea>
-          <div class="flex justify-end">
-            <button type="button" onclick="restoreSyncCode()" class="btn-3d btn-indigo px-5 py-2.5 text-xs">
-              Restore Progress
-            </button>
-          </div>
+          <button type="button" class="btn-3d btn-blue btn-full" onclick="restoreSyncCode()">
+            Restore Progress
+          </button>
         </div>
       </div>
     </div>
@@ -601,11 +1297,28 @@
 
   <script>
     // =========================================================================
-    // 1. PERSISTENT LIGHT / DARK MODE ('mchiro_theme') & TOASTS
+    // 1. SAFE STORAGE & THEME PERSISTENCE ('mchiro_theme')
     // =========================================================================
+    function safeGet(key) {
+      try { return localStorage.getItem(key); } catch (e) { return null; }
+    }
+
+    function safeSet(key, value) {
+      try { localStorage.setItem(key, value); } catch (e) {}
+    }
+
+    function safeParseJSON(raw, fallback) {
+      if (!raw) return fallback;
+      try {
+        const parsed = JSON.parse(raw);
+        return parsed && typeof parsed === 'object' ? parsed : fallback;
+      } catch (e) {
+        return fallback;
+      }
+    }
+
     function initTheme() {
-      let saved = null;
-      try { saved = localStorage.getItem('mchiro_theme'); } catch (e) {}
+      const saved = safeGet('mchiro_theme');
       const prefersDark = window.matchMedia && window.matchMedia('(prefers-color-scheme: dark)').matches;
       const isDark = saved ? (saved === 'dark' || saved === '"dark"') : prefersDark;
       applyTheme(isDark);
@@ -613,7 +1326,7 @@
 
     function applyTheme(isDark) {
       document.documentElement.classList.toggle('dark', isDark);
-      try { localStorage.setItem('mchiro_theme', isDark ? 'dark' : 'light'); } catch (e) {}
+      safeSet('mchiro_theme', isDark ? 'dark' : 'light');
       const btn = document.getElementById('theme-toggle-btn');
       if (btn) btn.textContent = isDark ? '☀️' : '🌙';
     }
@@ -622,380 +1335,569 @@
       applyTheme(!document.documentElement.classList.contains('dark'));
     }
 
-    function showToast(msg, tone = 'default') {
-      const container = document.getElementById('toast-container');
-      const tones = {
-        default: 'bg-[#1C1C1E] dark:bg-[#F2F2F7] text-[#F2F2F7] dark:text-[#1C1C1E]',
-        emerald: 'bg-emerald-600 text-white',
-        rose: 'bg-rose-600 text-white',
-        amber: 'bg-amber-500 text-white',
-      };
+    function showToast(msg, tone) {
+      const wrap = document.getElementById('toast-wrap');
+      if (!wrap) return;
       const el = document.createElement('div');
-      el.className = `pointer-events-auto px-4 py-2.5 rounded-2xl shadow-lg text-xs sm:text-sm font-display font-bold transition-all duration-300 ${tones[tone] || tones.default}`;
+      el.className = 'toast' + (tone ? ' ' + tone : '');
       el.textContent = msg;
-      container.appendChild(el);
+      wrap.appendChild(el);
       setTimeout(() => {
-        el.classList.add('opacity-0', 'translate-y-2');
-        setTimeout(() => el.remove(), 300);
+        el.style.opacity = '0';
+        el.style.transform = 'translateY(8px)';
+        setTimeout(() => el.remove(), 260);
       }, 2300);
     }
 
-    function copyTextSafe(text, successMsg) {
-      try {
-        const ta = document.createElement('textarea');
-        ta.value = text;
-        ta.style.position = 'fixed';
-        ta.style.opacity = '0';
-        document.body.appendChild(ta);
-        ta.focus();
-        ta.select();
-        document.execCommand('copy');
-        document.body.removeChild(ta);
-        showToast(successMsg || 'Copied!', 'emerald');
-      } catch (e) {
-        showToast('Could not copy automatically — please select and copy manually.', 'amber');
-      }
+    // =========================================================================
+    // 2. LIVE DASHBOARD STATS & VISUAL LESSON CARDS ('mchiro_lessons_v1' & 'mchiro_srs_v4')
+    // =========================================================================
+    function getLessonState() {
+      const data = safeParseJSON(safeGet('mchiro_lessons_v1'), {});
+      const ulDone = Boolean(data.ul && data.ul.completed);
+      const llDone = Boolean(data.ll && data.ll.completed);
+      const ulXp = ulDone ? (Number(data.ul.xp) || 120) : 0;
+      const llXp = llDone ? (Number(data.ll.xp) || 120) : 0;
+      return {
+        ulDone,
+        llDone,
+        ulXp,
+        llXp,
+        completedCount: (ulDone ? 1 : 0) + (llDone ? 1 : 0),
+        totalXp: ulXp + llXp,
+      };
     }
 
-    // =========================================================================
-    // 2. LIVE COUNTDOWN (JAN 25, 2027) & LEITNER STATS ('mchiro_srs_v4')
-    // =========================================================================
-    function updateCountdown() {
-      const target = new Date('2027-01-25T09:00:00Z');
-      const now = new Date();
-      const days = Math.max(0, Math.ceil((target - now) / 86400000));
-      const pill = document.getElementById('countdown-pill');
-      if (!pill) return;
-      pill.textContent = days > 0 ? `${days} days to Year 3 (Jan 25, 2027)` : 'Year 3 Term Active';
-    }
-
-    function updateLeitnerStats() {
-      let due = 0;
-      let shaky = 0;
-      let solid = 0;
+    function getSrsStats() {
+      const data = safeParseJSON(safeGet('mchiro_srs_v4'), {});
       const now = Date.now();
+      let due = 0;
+      let solid = 0;
 
-      try {
-        const raw = localStorage.getItem('mchiro_srs_v4');
-        if (raw) {
-          const data = JSON.parse(raw);
-          if (data && typeof data === 'object') {
-            Object.values(data).forEach((rec) => {
-              if (!rec || typeof rec !== 'object') return;
-              const dueTime = rec.dueAt !== undefined ? rec.dueAt : (rec.nextDue !== undefined ? rec.nextDue : 0);
-              const box = rec.box || (rec.level === 2 ? 'solid' : rec.level === 1 ? 'shaky' : 'again');
-              if (now >= dueTime || box === 'again') {
-                due++;
-              } else if (box === 'shaky') {
-                shaky++;
-              } else if (box === 'solid') {
-                solid++;
-              }
-            });
-          }
+      Object.values(data).forEach((rec) => {
+        if (!rec || typeof rec !== 'object') return;
+        const dueAt = rec.dueAt !== undefined ? Number(rec.dueAt) : (rec.nextDue !== undefined ? Number(rec.nextDue) : 0);
+        const box = rec.box || (rec.level === 2 ? 'solid' : rec.level === 1 ? 'shaky' : 'again');
+        if (now >= dueAt || box === 'again') {
+          due++;
+        } else if (box === 'solid') {
+          solid++;
         }
-      } catch (e) {
-        // Safely fallback to zeros if storage is unavailable
-      }
+      });
 
-      document.getElementById('stat-due').textContent = String(due);
-      document.getElementById('stat-shaky').textContent = String(shaky);
-      document.getElementById('stat-solid').textContent = String(solid);
+      return { due, solid };
+    }
+
+    function renderDashboardStats() {
+      // 1) Live countdown to Jan 25, 2027
+      const start = new Date('2027-01-25T09:00:00Z');
+      const daysLeft = Math.max(0, Math.ceil((start.getTime() - Date.now()) / 86400000));
+      document.getElementById('stat-days').textContent = String(daysLeft);
+
+      // 2) SRS stats
+      const srs = getSrsStats();
+      document.getElementById('stat-due').textContent = String(srs.due);
+      document.getElementById('stat-solid').textContent = String(srs.solid);
+
+      // 3) Lesson XP & Progress
+      const ls = getLessonState();
+      document.getElementById('header-xp').textContent = `${ls.totalXp} XP`;
+      document.getElementById('stat-xp').textContent = `${ls.totalXp}`;
+
+      const pill = document.getElementById('lessons-progress-pill');
+      pill.textContent = `${ls.completedCount} / 2 Completed`;
+      pill.className = ls.completedCount === 2 ? 'badge badge-emerald' : 'badge badge-blue';
+
+      // 4) Render 3 Visual Lesson Cards
+      const grid = document.getElementById('lessons-grid');
+      grid.innerHTML = `
+        <!-- Lesson 1: Upper Limb -->
+        <article class="ah-card lesson-card ${ls.ulDone ? 'is-completed' : 'is-live'}">
+          <div class="lesson-top">
+            <div style="display:flex;align-items:center;justify-content:space-between;gap:8px;">
+              ${ls.ulDone
+                ? `<span class="badge badge-emerald">✓ Completed &bull; +${ls.ulXp} XP</span>`
+                : `<span class="badge badge-blue">Visual Lesson &bull; 5 min</span>`
+              }
+            </div>
+            <h3 class="lesson-title">Lesson 1: Upper Limb SMR &amp; Peripheral Nerves (C5–T1)</h3>
+            <p class="lesson-desc">Sculpted 5-finger arm SVG &bull; Spotlight isolation &bull; 12-step Mistake Loop</p>
+          </div>
+          <a href="lesson-ul.html" class="btn-3d ${ls.ulDone ? 'btn-emerald' : 'btn-blue'} btn-full">
+            ${ls.ulDone ? 'Review Lesson &rarr;' : 'Start Lesson 1 &rarr;'}
+          </a>
+        </article>
+
+        <!-- Lesson 2: Lower Limb (NOW LIVE & ACTIVATED!) -->
+        <article class="ah-card lesson-card ${ls.llDone ? 'is-completed' : 'is-live'}">
+          <div class="lesson-top">
+            <div style="display:flex;align-items:center;justify-content:space-between;gap:8px;">
+              ${ls.llDone
+                ? `<span class="badge badge-emerald">✓ Completed &bull; +${ls.llXp} XP</span>`
+                : `<span class="badge badge-emerald">NEW &bull; Live Now &bull; 5 min</span>`
+              }
+            </div>
+            <h3 class="lesson-title">Lesson 2: Lower Limb SMR &amp; Peripheral Nerves (L2–S1)</h3>
+            <p class="lesson-desc">Sculpted 5-toe leg &amp; sole SVG &bull; Spotlight isolation &bull; 12-step Mistake Loop</p>
+          </div>
+          <a href="lesson-ll.html" class="btn-3d btn-emerald btn-full">
+            ${ls.llDone ? 'Review Lesson &rarr;' : 'Start Lesson 2 &rarr;'}
+          </a>
+        </article>
+
+        <!-- Lesson 3: Cranial Nerves (Coming Next) -->
+        <article class="ah-card lesson-card is-coming">
+          <div class="lesson-top">
+            <div style="display:flex;align-items:center;justify-content:space-between;gap:8px;">
+              <span class="badge badge-muted">Coming Next</span>
+            </div>
+            <h3 class="lesson-title">Lesson 3: Cranial Nerves (I–XII) &amp; Eye/Face Lab</h3>
+            <p class="lesson-desc">CN V (V1–V3), CN VII UMN vs LMN, H-Test &amp; Hutchinson Pupil visuals</p>
+          </div>
+          <button type="button" class="btn-3d btn-outline btn-full" disabled>
+            In Development
+          </button>
+        </article>
+      `;
     }
 
     // =========================================================================
-    // 3. GLOBAL INSTANT SEARCH INDEX (46 HIGH-YIELD YEAR 3 TERMS)
+    // 3. GLOBAL INSTANT SEARCH INDEX (55 HIGH-YIELD YEAR 3 TERMS)
     // =========================================================================
     const SEARCH_INDEX = [
-      // Interactive Upper Limb Visual Lesson (lesson-ul.html)
-      { title: 'Lesson 1: Upper Limb SMR & Peripheral Nerves (Interactive SVG)', mod: 'Visual Lesson', href: 'lesson-ul.html', color: 'emerald', keys: 'lesson upper limb visual svg arm c5 c6 c7 c8 t1 radial median ulnar axillary' },
-      { title: 'C5 Dermatome, Myotome (Biceps/Deltoid) & Biceps Reflex', mod: 'Visual Lesson', href: 'lesson-ul.html', color: 'emerald', keys: 'c5 lateral upper arm biceps deltoid shoulder abduction elbow flexion reflex' },
-      { title: 'C6 Dermatome (Thumb & Index), Wrist Extensors & Brachioradialis', mod: 'Visual Lesson', href: 'lesson-ul.html', color: 'emerald', keys: 'c6 lateral forearm thumb index 1st finger wrist extensors biceps brachioradialis' },
-      { title: 'C7 Dermatome (Middle Finger), Triceps & Wrist Flexors', mod: 'Visual Lesson', href: 'lesson-ul.html', color: 'emerald', keys: 'c7 middle finger triceps wrist flexors elbow extension reflex' },
-      { title: 'C8 Dermatome (Ring & Little) & Flexor Digitorum Profundus', mod: 'Visual Lesson', href: 'lesson-ul.html', color: 'emerald', keys: 'c8 ring 4th little 5th finger flexor digitorum profundus fdp dip joint' },
-      { title: 'T1 Dermatome (Medial Forearm) & Interossei (5th Abduction)', mod: 'Visual Lesson', href: 'lesson-ul.html', color: 'emerald', keys: 't1 medial wrist medial elbow forearm interossei 5th finger abduction' },
-      { title: 'Radial Nerve (Posterior Arm/Dorsum & EXTENSORS)', mod: 'Visual Lesson', href: 'lesson-ul.html', color: 'emerald', keys: 'radial nerve wrist drop extensors posterior arm forearm dorsum lateral 2/3' },
-      { title: 'Median Nerve (Palmar Lateral 2/3 & FLEXORS / Opposition)', mod: 'Visual Lesson', href: 'lesson-ul.html', color: 'emerald', keys: 'median nerve palmar lateral 2/3 wrist flexors thumb opposition thenar carpal tunnel' },
-      { title: 'Ulnar & Axillary Nerves (FCU / Military Patch)', mod: 'Visual Lesson', href: 'lesson-ul.html', color: 'emerald', keys: 'ulnar axillary nerve fcu flexor carpi ulnaris medial hand military patch deltoid teres minor' },
+      // Lesson 1: Upper Limb (lesson-ul.html)
+      { title: 'Lesson 1: Upper Limb SMR & Peripheral Nerves (C5–T1)', mod: 'Visual Lesson 1', cls: 'badge-emerald', href: 'lesson-ul.html', keys: 'upper limb lesson 1 svg arm spotlight c5 c6 c7 c8 t1' },
+      { title: 'C5 Dermatome, Myotome (Biceps/Deltoid) & Biceps Reflex', mod: 'Lesson 1', cls: 'badge-emerald', href: 'lesson-ul.html', keys: 'c5 lateral upper arm biceps deltoid shoulder abduction elbow flexion reflex' },
+      { title: 'C6 Dermatome (Thumb/Index), Wrist Extensors & Brachioradialis', mod: 'Lesson 1', cls: 'badge-emerald', href: 'lesson-ul.html', keys: 'c6 lateral forearm thumb index 1st finger wrist extensors biceps brachioradialis' },
+      { title: 'C7 Dermatome (Middle Finger), Triceps & Wrist Flexors', mod: 'Lesson 1', cls: 'badge-emerald', href: 'lesson-ul.html', keys: 'c7 middle finger triceps wrist flexors elbow extension reflex' },
+      { title: 'C8 Dermatome (Ring/Little) & Flexor Digitorum Profundus (DIP)', mod: 'Lesson 1', cls: 'badge-emerald', href: 'lesson-ul.html', keys: 'c8 ring 4th little 5th finger flexor digitorum profundus fdp dip joint' },
+      { title: 'T1 Dermatome (Medial Forearm) & Interossei (5th Abduction)', mod: 'Lesson 1', cls: 'badge-emerald', href: 'lesson-ul.html', keys: 't1 medial wrist medial elbow forearm interossei 5th finger abduction' },
+      { title: 'Axillary Nerve ("Military Patch", Deltoid & Teres Minor)', mod: 'Lesson 1', cls: 'badge-emerald', href: 'lesson-ul.html', keys: 'axillary nerve military patch deltoid teres minor shoulder' },
+      { title: 'Radial Nerve (Posterior Arm/Dorsum & EXTENSORS — Wrist Drop)', mod: 'Lesson 1', cls: 'badge-emerald', href: 'lesson-ul.html', keys: 'radial nerve extensors wrist drop posterior arm forearm dorsum lateral 2/3' },
+      { title: 'Median Nerve (Palmar Lateral 2/3 & Wrist FLEXORS / Opposition)', mod: 'Lesson 1', cls: 'badge-emerald', href: 'lesson-ul.html', keys: 'median nerve palmar lateral 2/3 flexors thumb opposition thenar carpal tunnel' },
+      { title: 'Ulnar Nerve (Medial Hand, FCU & Intrinsic Hand Muscles)', mod: 'Lesson 1', cls: 'badge-emerald', href: 'lesson-ul.html', keys: 'ulnar nerve fcu flexor carpi ulnaris medial hand intrinsic fingers' },
+
+      // Lesson 2: Lower Limb (lesson-ll.html)
+      { title: 'Lesson 2: Lower Limb SMR & Peripheral Nerves (L2–S1)', mod: 'Visual Lesson 2', cls: 'badge-emerald', href: 'lesson-ll.html', keys: 'lower limb lesson 2 svg leg foot toes sole spotlight l2 l3 l4 l5 s1' },
+      { title: 'L2 Dermatome & Hip Flexors (Iliopsoas, Sartorius, Pectineus)', mod: 'Lesson 2', cls: 'badge-emerald', href: 'lesson-ll.html', keys: 'l2 anterior upper thigh hip flexion iliopsoas sartorius pectineus no reflex' },
+      { title: 'L3 Dermatome (Ant. Lower Thigh) & Quadriceps', mod: 'Lesson 2', cls: 'badge-emerald', href: 'lesson-ll.html', keys: 'l3 anterior lower thigh knee extension quadriceps patellar' },
+      { title: 'L4 Dermatome (Medial Shin), Tibialis Anterior & Patellar Reflex', mod: 'Lesson 2', cls: 'badge-emerald', href: 'lesson-ll.html', keys: 'l4 medial lower leg ankle tibialis anterior dorsiflexion heel walk patellar 1+ 4+' },
+      { title: 'L5 Dermatome (Dorsum/Hallux), EHL & NO Standard Reflex', mod: 'Lesson 2', cls: 'badge-emerald', href: 'lesson-ll.html', keys: 'l5 lateral lower leg dorsum foot hallux extensor hallucis longus ehl no reflex' },
+      { title: 'S1 Dermatome (Post. Calf/Lat. Foot), Gastroc/Soleus & Achilles', mod: 'Lesson 2', cls: 'badge-emerald', href: 'lesson-ll.html', keys: 's1 lateral foot posterior calf gastrocnemius soleus plantarflexion toe walk achilles 1+ 4+' },
+      { title: 'Femoral Nerve (Ant. Thigh, Saphenous Strip, Quads/Iliopsoas)', mod: 'Lesson 2', cls: 'badge-emerald', href: 'lesson-ll.html', keys: 'femoral nerve saphenous anterior thigh medial leg hip flexors quadriceps' },
+      { title: 'Lateral Cutaneous Nerve of Thigh (LFCN — Purely Sensory)', mod: 'Lesson 2', cls: 'badge-emerald', href: 'lesson-ll.html', keys: 'lfcn lateral cutaneous thigh purely sensory meralgia paraesthetica' },
+      { title: 'Obturator Nerve (Medial Thigh & Hip Adductors)', mod: 'Lesson 2', cls: 'badge-emerald', href: 'lesson-ll.html', keys: 'obturator nerve medial thigh hip adductors' },
+      { title: 'Sciatic Nerve (Posterior Thigh & Hamstrings — Splits at Knee)', mod: 'Lesson 2', cls: 'badge-emerald', href: 'lesson-ll.html', keys: 'sciatic nerve posterior thigh hamstrings splits tibial fibular' },
+      { title: 'Tibial Nerve (Sole of Foot, Plantarflexors & Toe Walk)', mod: 'Lesson 2', cls: 'badge-emerald', href: 'lesson-ll.html', keys: 'tibial nerve sole plantar foot gastrocnemius soleus achilles toe walk' },
+      { title: 'Fibular (Peroneal) Nerve (Dorsum of Foot, Foot Drop & Heel Walk)', mod: 'Lesson 2', cls: 'badge-emerald', href: 'lesson-ll.html', keys: 'fibular peroneal nerve foot drop steppage dorsum foot tibialis anterior heel walk' },
 
       // Clinical Neurology (neuro.html)
-      { title: 'L2–S1 Lower Limb SMR (Dermatomes, Myotomes & Reflexes)', mod: 'Clinical Neurology', href: 'neuro.html', color: 'sky', keys: 'l2 l3 l4 l5 s1 lower limb iliopsoas quadriceps tibialis anterior ehl extensor hallucis longus gastrocnemius soleus patellar achilles' },
-      { title: 'Lower Limb Peripheral Nerves (Femoral, Sciatic, Tibial, Fibular)', mod: 'Clinical Neurology', href: 'neuro.html', color: 'sky', keys: 'femoral lateral cutaneous obturator sciatic tibial fibular peroneal foot drop' },
-      { title: 'Cranial Nerves I–XII (CN V V1/V2/V3 & CN VII UMN vs LMN)', mod: 'Clinical Neurology', href: 'neuro.html', color: 'sky', keys: 'cranial nerves cn i ii iii iv v vi vii viii ix x xi xii trigeminal facial bells palsy forehead spared h test jaw jerk' },
-      { title: 'Weber’s & Rinne’s Tuning Fork Simulator (512 Hz)', mod: 'Clinical Neurology', href: 'neuro.html', color: 'sky', keys: 'weber rinne 512hz conductive sensorineural hearing lateralise ac bc' },
-      { title: 'Hutchinson Pupil 4-Stage Stepper (Cerebral Compression)', mod: 'Clinical Neurology', href: 'neuro.html', color: 'sky', keys: 'hutchinson pupil raised icp cn iii miosis mydriasis blown uncal herniation' },
-      { title: 'Beighton Scale (Hypermobility 0–9 Calculator)', mod: 'Clinical Neurology', href: 'neuro.html', color: 'sky', keys: 'beighton scale hypermobility 0 9 elbow knee thumb little finger' },
-      { title: 'Glasgow Coma Scale (GCS 3–15 Calculator)', mod: 'Clinical Neurology', href: 'neuro.html', color: 'sky', keys: 'gcs glasgow coma scale eye verbal motor trauma consciousness' },
-      { title: 'Dix-Hallpike (BPPV) vs. Fitz-Ritson’s (Cervicogenic Dizziness)', mod: 'Clinical Neurology', href: 'neuro.html', color: 'sky', keys: 'dix hallpike bppv vertigo nystagmus fitz ritson cervicogenic dizziness' },
-      { title: 'CAD Screening (Carotid & Vertebral 5Ds & 3Ns)', mod: 'Clinical Neurology', href: 'neuro.html', color: 'sky', keys: 'cad cervical arterial dysfunction 5ds 3ns diplopia dysarthria dysphagia drop attacks' },
-      { title: 'Agraphesthesia & Astereognosis (Parietal Lobe)', mod: 'Clinical Neurology', href: 'neuro.html', color: 'sky', keys: 'agraphesthesia astereognosis parietal lobe cortical sensory palm coin' },
-      { title: 'Left Hemispatial Neglect / Sensory Inattention (Right Parietal)', mod: 'Clinical Neurology', href: 'neuro.html', color: 'sky', keys: 'hemispatial neglect sensory inattention extinction right parietal ppc' },
-      { title: "Broca's, Wernicke's & Conduction Aphasia", mod: 'Clinical Neurology', href: 'neuro.html', color: 'sky', keys: 'broca wernicke conduction aphasia arcuate fasciculus speech' },
-      { title: 'Spinal Cord Cross-Section (DCML, Spinothalamic & CST)', mod: 'Clinical Neurology', href: 'neuro.html', color: 'sky', keys: 'spinal cord dcml dorsal column spinothalamic stt corticospinal cst umn lmn vibration 128hz proprioception babinski hoffmann' },
-      { title: '15-Minute Neuro OSCE Simulator & 8-Section Checklist', mod: 'Clinical Neurology', href: 'neuro.html', color: 'sky', keys: 'osce 15 minute timer cerebral balance coordination cerebellar romberg grading scales' },
+      { title: 'Cranial Nerves I–XII (CN V V1/V2/V3 & CN VII UMN vs LMN)', mod: 'Clinical Neuro', cls: 'badge-blue', href: 'neuro.html', keys: 'cranial nerves cn i ii iii iv v vi vii viii ix x xi xii trigeminal facial bells palsy forehead spared jaw jerk' },
+      { title: 'Weber’s & Rinne’s Hearing Simulator (512 Hz)', mod: 'Clinical Neuro', cls: 'badge-blue', href: 'neuro.html', keys: 'weber rinne 512hz conductive sensorineural hearing lateralise ac bc' },
+      { title: 'Hutchinson Pupil 4-Stage Stepper (Cerebral Compression)', mod: 'Clinical Neuro', cls: 'badge-blue', href: 'neuro.html', keys: 'hutchinson pupil raised icp cn iii miosis mydriasis blown uncal herniation' },
+      { title: 'Beighton Scale (Hypermobility 0–9 Calculator)', mod: 'Clinical Neuro', cls: 'badge-blue', href: 'neuro.html', keys: 'beighton scale hypermobility 0 9 elbow knee thumb little finger' },
+      { title: 'Glasgow Coma Scale (GCS 3–15 Calculator)', mod: 'Clinical Neuro', cls: 'badge-blue', href: 'neuro.html', keys: 'gcs glasgow coma scale eye verbal motor trauma consciousness' },
+      { title: 'Dix-Hallpike (BPPV) vs. Fitz-Ritson’s (Cervicogenic Dizziness)', mod: 'Clinical Neuro', cls: 'badge-blue', href: 'neuro.html', keys: 'dix hallpike bppv vertigo nystagmus fitz ritson cervicogenic dizziness' },
+      { title: 'CAD Screening (Carotid & Vertebral 5Ds & 3Ns)', mod: 'Clinical Neuro', cls: 'badge-blue', href: 'neuro.html', keys: 'cad cervical arterial dysfunction 5ds 3ns diplopia dysarthria dysphagia drop attacks' },
+      { title: 'UMN Signs: Babinski, Chaddock, Hoffmann’s & Ankle Clonus', mod: 'Clinical Neuro', cls: 'badge-blue', href: 'neuro.html', keys: 'babinski chaddock hoffmann clonus umn spasticity pronator drift' },
+      { title: 'Spinal Cord Cross-Section (DCML, Spinothalamic & CST)', mod: 'Clinical Neuro', cls: 'badge-blue', href: 'neuro.html', keys: 'spinal cord dcml dorsal column spinothalamic stt corticospinal cst vibration 128hz proprioception' },
+      { title: 'Cortical Localisation: Broca’s, Wernicke’s, Neglect & Agraphesthesia', mod: 'Clinical Neuro', cls: 'badge-blue', href: 'neuro.html', keys: 'broca wernicke arcuate fasciculus hemispatial neglect right parietal agraphesthesia astereognosis fusiform' },
+      { title: '15-Minute Neuro OSCE Timer & 8-Section Testing Overview', mod: 'Clinical Neuro', cls: 'badge-blue', href: 'neuro.html', keys: 'osce 15 minute timer cerebellar romberg tandem gait grading scales' },
 
       // Musculoskeletal Medicine (msk.html)
-      { title: 'OA vs. RA Joint Cross-Section, Cytokines & DMARDs', mod: 'MSK Medicine', href: 'msk.html', color: 'indigo', keys: 'oa ra osteoarthritis rheumatoid arthritis cartilage osteophyte pannus synovitis loss tnf il1 il6 dmards' },
-      { title: 'CKD → Renal Osteodystrophy 5-Step Domino', mod: 'MSK Medicine', href: 'msk.html', color: 'indigo', keys: 'ckd renal osteodystrophy phosphate vitamin d calcitriol hypocalcaemia secondary hyperparathyroidism pth' },
-      { title: 'Hot Swollen Joint: Gout vs. Septic Arthritis Triage', mod: 'MSK Medicine', href: 'msk.html', color: 'indigo', keys: 'gout pseudogout cppd septic arthritis hot swollen joint podagra msu crystals fever emergency' },
-      { title: "Metabolic Bone: Osteoporosis, Osteopenia, Osteomalacia & Paget's", mod: 'MSK Medicine', href: 'msk.html', color: 'indigo', keys: 'osteoporosis osteopenia osteomalacia pagets dexa t score alp looser zones' },
-      { title: 'Cauda Equina Syndrome (CES) Urgent Red Flags', mod: 'MSK Medicine', href: 'msk.html', color: 'indigo', keys: 'cauda equina ces saddle anaesthesia bladder bowel bilateral sciatica emergency mri' },
-      { title: 'ACS Spectrum: Stable/Unstable Angina, NSTEMI & STEMI', mod: 'MSK Medicine', href: 'msk.html', color: 'indigo', keys: 'acs angina nstemi stemi troponin nitric oxide plaque rupture chest pain 999' },
-      { title: 'Hypertension Urgent-Referral Thresholds (≥180/120)', mod: 'MSK Medicine', href: 'msk.html', color: 'indigo', keys: 'hypertension bp 180 120 accelerated papilloedema emergency' },
-      { title: 'Addisonian (Adrenal) Crisis & Electrolyte Triad', mod: 'MSK Medicine', href: 'msk.html', color: 'indigo', keys: 'addisonian adrenal crisis cortisol hypotension hyponatraemia hyperkalaemia hypoglycaemia hydrocortisone' },
-      { title: 'Tumour Grading vs. Staging (TNM) & Spinal Metastases', mod: 'MSK Medicine', href: 'msk.html', color: 'indigo', keys: 'tumour grading staging tnm metastases cancer night pain weight loss' },
-      { title: "Crohn's Disease vs. Ulcerative Colitis (IBD)", mod: 'MSK Medicine', href: 'msk.html', color: 'indigo', keys: 'crohns ulcerative colitis ibd skip lesions transmural mucosal bloody diarrhoea' },
-      { title: 'SAQ / LAQ Active-Recall Self-Marking Practice', mod: 'MSK Medicine', href: 'msk.html', color: 'indigo', keys: 'saq laq short long answer self marking practice exam' },
+      { title: 'OA vs. RA Joint Cross-Section, Cytokines (TNF-α/IL-1/IL-6) & DMARDs', mod: 'MSK Medicine', cls: 'badge-coral', href: 'msk.html', keys: 'oa ra osteoarthritis rheumatoid arthritis cartilage osteophyte pannus synovitis loss morning stiffness dmards' },
+      { title: 'CKD → Renal Osteodystrophy 5-Step Domino Pathway', mod: 'MSK Medicine', cls: 'badge-coral', href: 'msk.html', keys: 'ckd renal osteodystrophy phosphate vitamin d calcitriol hypocalcaemia secondary hyperparathyroidism pth' },
+      { title: 'Hot Swollen Joint Triage: Septic Arthritis vs. Acute Gout', mod: 'MSK Medicine', cls: 'badge-coral', href: 'msk.html', keys: 'hot swollen joint septic arthritis gout pseudogout cppd podagra msu crystals fever emergency' },
+      { title: 'Metabolic Bone: Osteoporosis, Osteopenia, Osteomalacia & Paget’s', mod: 'MSK Medicine', cls: 'badge-coral', href: 'msk.html', keys: 'osteoporosis osteopenia osteomalacia pagets dexa t score alp looser zones' },
+      { title: 'ACS Spectrum: Stable/Unstable Angina, NSTEMI & STEMI', mod: 'MSK Medicine', cls: 'badge-coral', href: 'msk.html', keys: 'acs angina nstemi stemi troponin nitric oxide plaque rupture chest pain 999' },
+      { title: 'Hypertension Urgent-Referral Thresholds (≥180/120)', mod: 'MSK Medicine', cls: 'badge-coral', href: 'msk.html', keys: 'hypertension bp 180 120 accelerated papilloedema emergency' },
+      { title: 'Addisonian (Adrenal) Crisis & Electrolyte Triad', mod: 'MSK Medicine', cls: 'badge-coral', href: 'msk.html', keys: 'addisonian adrenal crisis cortisol hypotension hyponatraemia hyperkalaemia hypoglycaemia' },
+      { title: 'Cauda Equina Syndrome (CES) Red Flags & Same-Day MRI', mod: 'MSK Medicine', cls: 'badge-coral', href: 'msk.html', keys: 'cauda equina ces saddle anaesthesia bladder bowel bilateral sciatica emergency mri' },
+      { title: 'Tumour Grading vs. Staging (TNM) & Spinal Metastases', mod: 'MSK Medicine', cls: 'badge-coral', href: 'msk.html', keys: 'tumour grading staging tnm metastases cancer night pain weight loss' },
+      { title: 'Crohn’s Disease vs. Ulcerative Colitis (IBD)', mod: 'MSK Medicine', cls: 'badge-coral', href: 'msk.html', keys: 'crohns ulcerative colitis ibd skip lesions transmural mucosal bloody diarrhoea' },
+      { title: 'MSK SAQ / LAQ Point-by-Point Self-Marking', mod: 'MSK Medicine', cls: 'badge-coral', href: 'msk.html', keys: 'saq laq short long answer self marking exam practice' },
 
       // Chiropractic Studies 3 (chiro.html)
-      { title: '54-Step Full Body Check (4-Colour Key Routine)', mod: 'Chiro Studies 3', href: 'chiro.html', color: 'teal', keys: 'full body check routine 54 steps blue red green pink bench patient practitioner action' },
-      { title: 'Atlas Palpation & Adjustment (Elbow Stability Cue)', mod: 'Chiro Studies 3', href: 'chiro.html', color: 'teal', keys: 'atlas adjustment ttr horse stance elbow accuracy mastoid jaw' },
-      { title: 'Cervical Spine Palpation & Strikes (Nail 2)', mod: 'Chiro Studies 3', href: 'chiro.html', color: 'teal', keys: 'cervical strikes caterpillar nail 2 outer foot anterior head' },
-      { title: 'Pelvic Screening & Adjustments: Rotation, Tilt & Torsion I/II', mod: 'Chiro Studies 3', href: 'chiro.html', color: 'teal', keys: 'pelvic rotation posterior tilt chin tuck sternum torsion 1 2 male female nail 3' },
-      { title: '1st Rib & Posterior Rib Adjustments (Top Priority Cue)', mod: 'Chiro Studies 3', href: 'chiro.html', color: 'teal', keys: '1st rib posterior ribs superman follow through curled nail hand rugby ball' },
-      { title: 'Prone Spine Palpation in Threes, Double Transfer & SIJ/PSIS', mod: 'Chiro Studies 3', href: 'chiro.html', color: 'teal', keys: 'prone spine palpation threes even fingers roll on off double transfer sij psis clavicle' },
-      { title: '40-Minute Chiropractic Practical Exam Simulator', mod: 'Chiro Studies 3', href: 'chiro.html', color: 'teal', keys: '40 min practical exam simulator timer random technique drill' },
+      { title: '54-Step McTimoney Full Body Check (4-Colour Key Routine)', mod: 'Chiro 3', cls: 'badge-emerald', href: 'chiro.html', keys: 'mctimoney full body check routine 54 steps blue red green pink bench patient practitioner' },
+      { title: 'Atlas Palpation & Adjustment (Anteriority Side & Elbow Cue)', mod: 'Chiro 3', cls: 'badge-emerald', href: 'chiro.html', keys: 'atlas adjustment anteriority ttr horse stance elbow accuracy mastoid jaw' },
+      { title: 'Cervical Spine Caterpillar Palpation & Strikes (Nail 2)', mod: 'Chiro 3', cls: 'badge-emerald', href: 'chiro.html', keys: 'cervical strikes caterpillar nail 2 outer foot anterior head' },
+      { title: 'Pelvic Adjustments: Rotation, Tilt (Chin Tuck) & Torsion I / II', mod: 'Chiro 3', cls: 'badge-emerald', href: 'chiro.html', keys: 'pelvic rotation posterior tilt chin tuck sternum torsion 1 2 male female nail 3' },
+      { title: '1st Rib (Superman Follow-Through) & Posterior Rib Adjustments', mod: 'Chiro 3', cls: 'badge-emerald', href: 'chiro.html', keys: '1st rib posterior ribs superman follow through curled nail hand rugby ball' },
+      { title: 'Prone Spine Palpation in Threes, Double Transfer & SIJ/PSIS', mod: 'Chiro 3', cls: 'badge-emerald', href: 'chiro.html', keys: 'prone spine palpation threes even fingers roll on off double transfer sij psis clavicle' },
+      { title: '40-Minute Chiropractic Practical Exam Simulator', mod: 'Chiro 3', cls: 'badge-emerald', href: 'chiro.html', keys: '40 min practical exam simulator timer random technique drill' },
 
       // Written & Foundation Modules (written.html)
-      { title: 'Pre-Flight Essay Scanner & Strict Marking Prompt', mod: 'Written & Found.', href: 'written.html', color: 'purple', keys: 'pre flight essay scanner word count 10 percent first person voice direct quotes citation density' },
-      { title: 'Harvard Referencing & Weighted Rubric Auditor', mod: 'Written & Found.', href: 'written.html', color: 'purple', keys: 'harvard referencing reference list bibliography page numbers p pp rubric auditor clinic studies philosophy research' },
-      { title: "Clinic Studies 3: Borton's Framework & 70%+ Critical Evaluation", mod: 'Written & Found.', href: 'written.html', color: 'purple', keys: 'clinic studies borton what so what now what critical evaluation description 70' },
-      { title: 'Research 2: PICO Builder, Study Design & Biostats SRS', mod: 'Written & Found.', href: 'written.html', color: 'purple', keys: 'research 2 pico population intervention comparison outcome rct cohort case control bias snnout sppin nnt' },
-      { title: 'Behavioural Sciences: BPS Model, Yellow Flags (ABCDEFW) & MI', mod: 'Written & Found.', href: 'written.html', color: 'purple', keys: 'behavioural sciences biopsychosocial bps yellow flags abcdefw fear avoidance self efficacy motivational interviewing' },
+      { title: 'Pre-Flight Essay Scanner (Word Count, 1st-Person, Quotes, Harvard)', mod: 'Written & Found.', cls: 'badge-purple', href: 'written.html', keys: 'pre flight essay scanner word count 10 percent first person voice direct quotes citation density harvard' },
+      { title: 'Clinic Studies 3: Borton’s Framework & 70%+ Critical Evaluation', mod: 'Written & Found.', cls: 'badge-purple', href: 'written.html', keys: 'clinic studies borton what so what now what critical evaluation description 70 rubric' },
+      { title: 'Research 2: PICO Builder, Study Design & Bias Matrix', mod: 'Written & Found.', cls: 'badge-purple', href: 'written.html', keys: 'research 2 pico population intervention comparison outcome rct cohort case control bias snnout sppin nnt' },
+      { title: 'Behavioural Sciences: Biopsychosocial (BPS) Model & Yellow Flags', mod: 'Written & Found.', cls: 'badge-purple', href: 'written.html', keys: 'behavioural sciences biopsychosocial bps yellow flags abcdefw fear avoidance self efficacy motivational interviewing' },
+      { title: 'Philosophy 3: Vitalism vs Materialism, Popper & 4 Pillars of Ethics', mod: 'Written & Found.', cls: 'badge-purple', href: 'written.html', keys: 'philosophy 3 vitalism materialism holism reductionism popper falsifiability evidence informed ethics' },
     ];
 
-    function focusSearch() {
-      const inp = document.getElementById('global-search-input');
-      if (inp) {
-        inp.scrollIntoView({ behavior: 'smooth', block: 'center' });
-        setTimeout(() => inp.focus(), 180);
-      }
-    }
-
-    function clearSearch() {
-      const inp = document.getElementById('global-search-input');
-      if (inp) inp.value = '';
-      handleSearch('');
-    }
-
-    function handleSearch(rawQuery) {
-      const q = (rawQuery || '').trim().toLowerCase();
-      const box = document.getElementById('search-results');
-      const clr = document.getElementById('search-clear-btn');
+    function handleSearch(raw) {
+      const q = (raw || '').trim().toLowerCase();
+      const resBox = document.getElementById('search-results');
+      const clearBtn = document.getElementById('search-clear');
 
       if (!q) {
-        box.classList.add('hidden');
-        box.innerHTML = '';
-        clr.classList.add('hidden');
+        resBox.classList.remove('visible');
+        resBox.innerHTML = '';
+        clearBtn.classList.remove('visible');
         return;
       }
 
-      clr.classList.remove('hidden');
-      const matches = SEARCH_INDEX.filter(
+      clearBtn.classList.add('visible');
+      const hits = SEARCH_INDEX.filter(
         (item) =>
           item.title.toLowerCase().includes(q) ||
           item.mod.toLowerCase().includes(q) ||
           item.keys.toLowerCase().includes(q)
       ).slice(0, 10);
 
-      box.classList.remove('hidden');
+      resBox.classList.add('visible');
 
-      if (!matches.length) {
-        box.innerHTML = `
-          <div class="ah-card p-4 text-center text-xs sm:text-sm ah-muted">
-            No topics matched "<strong>${q.replace(/</g, '&lt;')}</strong>". Try <em>C6</em>, <em>Radial</em>, <em>CKD</em>, <em>Atlas</em>, or <em>PICO</em>.
+      if (!hits.length) {
+        const safeQ = q.replace(/</g, '&lt;').replace(/>/g, '&gt;');
+        resBox.innerHTML = `
+          <div style="padding:16px;text-align:center;font-size:13px;color:var(--text-muted);">
+            No matches for "<strong>${safeQ}</strong>". Try <em>L5</em>, <em>Radial</em>, <em>CKD</em>, <em>Atlas</em>, or <em>PICO</em>.
           </div>
         `;
         return;
       }
 
-      box.innerHTML = `
-        <div class="ah-card divide-y divide-black/5 dark:divide-white/10 overflow-hidden">
-          ${matches.map((m) => `
-            <a href="${m.href}" class="flex items-center justify-between gap-3 px-4 py-3 hover:bg-black/5 dark:hover:bg-white/5 transition">
-              <div class="min-w-0">
-                <p class="text-xs sm:text-sm font-display font-extrabold ah-text truncate">${m.title}</p>
-                <span class="inline-block mt-0.5 px-2 py-0.5 rounded-md text-[10px] font-display font-bold bg-${m.color}-500/15 text-${m.color}-700 dark:text-${m.color}-300">${m.mod}</span>
-              </div>
-              <span class="text-xs font-display font-extrabold text-emerald-600 dark:text-emerald-400 shrink-0">Open &rarr;</span>
-            </a>
-          `).join('')}
-        </div>
-      `;
+      resBox.innerHTML = hits.map((h) => `
+        <a href="${h.href}" class="search-row">
+          <div style="min-width:0;">
+            <div class="search-row-title">${h.title}</div>
+            <div class="search-row-meta">
+              <span class="badge ${h.cls}">${h.mod}</span>
+            </div>
+          </div>
+          <span class="search-go">Open &rarr;</span>
+        </a>
+      `).join('');
+    }
+
+    function clearSearch() {
+      const inp = document.getElementById('global-search');
+      if (inp) {
+        inp.value = '';
+        inp.focus();
+      }
+      handleSearch('');
     }
 
     // =========================================================================
-    // 4. QUICK 5-MIN MIX (20-QUESTION INTERLEAVED BANK + GREEN/RED BANNERS)
+    // 4. QUICK 5-MINUTE MIX MODAL (20-QUESTION INTERLEAVED CLINICAL BANK)
     // =========================================================================
     const MIX_BANK = [
-      { cat: 'Clinical Neuro', q: 'Name the specific muscles, dermatome, and reflex for the C6 nerve root.', a: 'Dermatome: Lateral forearm, thumb & 1st (index) finger. Specific Muscles: Wrist extensors & Biceps. Reflex: Brachioradialis (0–4).' },
-      { cat: 'Clinical Neuro', q: 'Radial vs. Median Nerve Trap: Which innervates elbow/wrist EXTENSORS and which innervates most wrist FLEXORS?', a: 'Radial = Elbow & wrist EXTENSORS (dorsum lateral 2/3 hand; lesion = wrist drop). Median = Most wrist FLEXORS & thumb opposition (palmar lateral 2/3 hand).' },
-      { cat: 'Clinical Neuro', q: 'Which specific muscle must you name for the C8 myotome (not just the action)?', a: 'Flexor digitorum profundus (flexing the distal phalanx / DIP joint of the 3rd finger).' },
-      { cat: 'Clinical Neuro', q: 'Name the exact myotome muscles for L4, L5, and S1 plus the reflexes.', a: 'L4 = Tibialis anterior (Patellar reflex, heel walk). L5 = Extensor hallucis longus (no reflex). S1 = Gastrocnemius & Soleus (Achilles reflex, toe walk).' },
-      { cat: 'Clinical Neuro', q: 'A patient has intact light touch but cannot recognise a number traced on their palm (eyes closed). Name the sign & lesion site.', a: 'Agraphesthesia — Contralateral Parietal Lobe (somatosensory association cortex).' },
-      { cat: 'Clinical Neuro', q: 'Which hemisphere and cortical region cause Left Hemispatial Neglect (sensory extinction)?', a: 'Right Posterior Parietal Cortex (Right Parietal = Left Neglect).' },
-      { cat: 'Clinical Neuro', q: 'In Left Conductive hearing loss, where does Weber’s lateralise and what is Left Rinne’s?', a: 'Weber’s lateralises to the LEFT (affected) ear; Left Rinne’s is NEGATIVE (BC > AC).' },
-      { cat: 'Clinical Neuro', q: 'State the 4-stage progression of Hutchinson pupil in rising intracranial pressure (ICP).', a: '1) Ipsilateral constriction -> 2) Ipsilateral fixed dilation (999 emergency!) -> 3) Contralateral constriction -> 4) Bilateral fixed dilated pupils.' },
-      { cat: 'MSK Medicine', q: 'Recite the 5-step domino linking Chronic Kidney Disease (CKD) to Renal Osteodystrophy.', a: 'CKD (↓ GFR) → Phosphate retention (↑ PO₄) + ↓ active Vitamin D (calcitriol) → Hypocalcaemia (↓ Ca²⁺) → Secondary Hyperparathyroidism (↑ PTH) → Osteoclast bone resorption (Renal Osteodystrophy).' },
-      { cat: 'MSK Medicine', q: 'Name the 3 key pro-inflammatory cytokines in RA and why DMARDs are started early.', a: 'TNF-α, IL-1, and IL-6. Early DMARDs (e.g. methotrexate) halt pannus-mediated irreversible bone erosion, whereas NSAIDs only mask symptoms.' },
-      { cat: 'MSK Medicine', q: 'Differentiate Osteoporosis, Osteomalacia, and Paget’s Disease on routine bloods (Ca²⁺, PO₄, ALP).', a: 'Osteoporosis: All NORMAL (DEXA T ≤ -2.5). Osteomalacia: ↓/N Ca²⁺, ↓ PO₄, ↑ ALP, ↑ PTH. Paget’s: Markedly isolated ↑↑ ALP with normal Ca²⁺ & PO₄.' },
-      { cat: 'MSK Medicine', q: 'How do Gout and Pseudogout crystals differ under polarised light microscopy?', a: 'Gout = Monosodium urate (MSU): NEEDLE-shaped, NEGATIVELY birefringent. Pseudogout (CPPD) = RHOMBOID-shaped, POSITIVELY birefringent.' },
-      { cat: 'Red Flags', q: 'A patient presents with a hot, acutely swollen knee, fever (38.5°C), and severe pain on ANY passive ROM. Immediate action?', a: 'Urgent SAME-DAY A&E referral to rule out Septic Arthritis (joint aspiration before IV antibiotics). Never assume gout!' },
-      { cat: 'Red Flags', q: 'State the classic triad of Cauda Equina Syndrome (CES) demanding immediate A&E referral.', a: 'Saddle anaesthesia (S2–S4), new bladder/bowel dysfunction (retention/incontinence), and bilateral sciatica / progressive lower limb motor weakness.' },
-      { cat: 'Red Flags', q: 'Differentiate Unstable Angina, NSTEMI, and STEMI by troponin and ECG.', a: 'Unstable Angina: Normal troponin. NSTEMI: ↑ Troponin + ST depression / T-inversion. STEMI: ↑↑ Troponin + ST elevation (complete occlusion — 999 emergency!).' },
-      { cat: 'Red Flags', q: 'What is the classic metabolic triad of an Addisonian (Adrenal) Crisis?', a: 'Hyponatraemia (↓ Na⁺), Hyperkalaemia (↑ K⁺), and Hypoglycaemia (↓ glucose) with severe hypotension/shock → immediate 999 IV hydrocortisone.' },
-      { cat: 'Chiro 3', q: 'What is the key Year 2 practical cue for the Atlas adjustment?', a: 'Do NOT adjust or shift your elbows after hand placement — lock your angle first so accuracy stays sharp alongside good speed.' },
-      { cat: 'Chiro 3', q: 'What are the two key cues for the Inferior Pelvic Tilt adjustment?', a: '1) Ask the patient to TUCK THEIR CHIN. 2) Drop lower into the adjustment so your sternum aligns with (not superior to) the ischium.' },
-      { cat: 'Chiro 3', q: 'What is the top-priority practical cue for the 1st Rib & Posterior Rib adjustments?', a: 'Keep the nail hand crisp and flat on 1st rib (avoid curling before adjustment); keep posterior rib palpations slightly more medial along the rugby-ball curve.' },
-      { cat: 'Chiro 3', q: 'What are the two key cues for Prone Spinal Palpation & Double Transfers?', a: 'Keep palpating fingers strictly EVEN on SPs, and ROLL on/off double transfers (never come off) while maintaining fencing stance.' },
+      {
+        cat: 'Upper Limb SMR', badge: 'badge-blue',
+        q: 'Which specific muscle must you name for the C8 myotome (not just "grip")?',
+        opts: ['Flexor digitorum profundus (DIP joint)', 'Interossei (5th finger abduction)', 'Brachioradialis', 'Flexor carpi ulnaris'],
+        ans: 0,
+        pearl: 'C8 tests Flexor digitorum profundus (distal phalanx / DIP flexion of the 3rd finger). Interossei is T1!',
+      },
+      {
+        cat: 'Upper Limb Trap', badge: 'badge-coral',
+        q: 'Avoid the "Ext / flexion confusion" trap: What does the Radial nerve innervate?',
+        opts: ['Elbow & wrist EXTENSORS (lesion = wrist drop)', 'Most wrist FLEXORS & thumb opposition', 'Intrinsic hand muscles & FCU', 'Deltoid & teres minor only'],
+        ans: 0,
+        pearl: 'Radial = posterior arm/forearm & EXTENSORS. Median = palmar lateral 2/3 & most wrist FLEXORS.',
+      },
+      {
+        cat: 'Upper Limb SMR', badge: 'badge-blue',
+        q: 'Which reflex and grading scale correspond to the C6 nerve root?',
+        opts: ['Brachioradialis reflex (graded 0–4)', 'Biceps reflex (graded 0–4)', 'Brachioradialis reflex (graded 1+–4+)', 'Triceps reflex (graded 0–4)'],
+        ans: 0,
+        pearl: 'C6 = Wrist extensors & Biceps myotome, Brachioradialis reflex, graded 0–4 (Upper Limb scale).',
+      },
+      {
+        cat: 'Upper Limb SMR', badge: 'badge-blue',
+        q: 'Where do you test the T1 dermatome, and which muscle is the T1 myotome?',
+        opts: ['Medial forearm (medial wrist to elbow); Interossei', 'Ring & little fingers; Flexor digitorum profundus', 'Lateral forearm & thumb; Wrist extensors', 'Middle finger; Triceps'],
+        ans: 0,
+        pearl: 'T1 sensation is medial wrist to medial elbow (NOT pinky skin — that is C8!). T1 motor = Interossei (5th finger abduction).',
+      },
+      {
+        cat: 'Lower Limb Trap', badge: 'badge-coral',
+        q: 'Which nerve root tests Extensor Hallucis Longus (EHL) and has NO standard reflex?',
+        opts: ['L5', 'L4', 'S1', 'L3'],
+        ans: 0,
+        pearl: 'L5 = lateral shin, dorsum of foot & hallux; Extensor hallucis longus (EHL); NO standard deep tendon reflex.',
+      },
+      {
+        cat: 'Lower Limb SMR', badge: 'badge-blue',
+        q: 'What grading scale is used for Lower Limb Reflexes (Patellar L4 & Achilles S1)?',
+        opts: ['1+ to 4+ (with 0 = absent)', '0 to 4', '1 to 5 (MRC)', '0 to 2'],
+        ans: 0,
+        pearl: 'McTimoney Year 3 distinction: Upper Limb reflexes = 0–4; Lower Limb reflexes = 1+ to 4+; Myotomes = 1–5; Sensation = 0–2.',
+      },
+      {
+        cat: 'Lower Limb Periph', badge: 'badge-blue',
+        q: 'A patient has foot drop (unable to heel walk) and dorsal foot numbness. Which nerve is injured?',
+        opts: ['Fibular (Peroneal) nerve', 'Tibial nerve', 'Femoral nerve', 'Lateral cutaneous nerve of thigh'],
+        ans: 0,
+        pearl: 'Fibular (Peroneal) = Foot UP (Tibialis anterior & toe extensors) + distal lateral leg & dorsum of foot.',
+      },
+      {
+        cat: 'Lower Limb Trap', badge: 'badge-coral',
+        q: 'Which lower limb peripheral nerve is PURELY SENSORY (zero motor muscles to test)?',
+        opts: ['Lateral cutaneous nerve of the thigh (LFCN)', 'Obturator nerve', 'Femoral nerve', 'Tibial nerve'],
+        ans: 0,
+        pearl: 'LFCN supplies lateral thigh skin only (meralgia paraesthetica) — never demonstrate a strength test for it!',
+      },
+      {
+        cat: 'Cranial Nerves', badge: 'badge-purple',
+        q: 'In an Upper Motor Neuron (UMN) lesion of CN VII (e.g. stroke), why is the forehead spared?',
+        opts: ['Upper facial muscles receive bilateral cortical innervation', 'Frontalis is innervated by CN V (Trigeminal)', 'Bell’s palsy always spares the forehead', 'CN VII only supplies the lower face'],
+        ans: 0,
+        pearl: 'UMN CN VII lesion spares the forehead (bilateral cortical input); LMN (Bell’s palsy) paralyses the entire ipsilateral hemiface.',
+      },
+      {
+        cat: 'Cranial Nerves', badge: 'badge-purple',
+        q: 'In Left Conductive hearing loss, where does Weber’s lateralise and what is Left Rinne’s?',
+        opts: ['Weber to LEFT (affected); Left Rinne NEGATIVE (BC > AC)', 'Weber to RIGHT (healthy); Left Rinne POSITIVE (AC > BC)', 'Weber midline; Left Rinne NEGATIVE', 'Weber to LEFT; Left Rinne POSITIVE (AC > BC)'],
+        ans: 0,
+        pearl: 'Conductive loss lateralises Weber to the AFFECTED ear, and Rinne is negative (Bone > Air) on that side.',
+      },
+      {
+        cat: 'Neuro Red Flag', badge: 'badge-coral',
+        q: 'What is Stage 2 of the Hutchinson pupil progression in rising intracranial pressure (ICP)?',
+        opts: ['Ipsilateral fixed, dilated pupil ("blown pupil") — 999 emergency', 'Bilateral pinpoint pupils', 'Contralateral fixed dilation first', 'Normal reactive pupils bilaterally'],
+        ans: 0,
+        pearl: 'Hutchinson stages: 1) Ipsi constriction → 2) Ipsi fixed dilation (CN III compression) → 3) Contra constriction → 4) Bilateral fixed dilation.',
+      },
+      {
+        cat: 'Cortical Neuro', badge: 'badge-purple',
+        q: 'A patient ignores the LEFT side during bilateral simultaneous touch/vision testing. Lesion site?',
+        opts: ['Right Posterior Parietal Cortex (Right Parietal = Left Neglect)', 'Left Frontal Lobe (Broca’s area)', 'Left Temporal Lobe (Wernicke’s area)', 'Right Cerebellar Hemisphere'],
+        ans: 0,
+        pearl: 'Right Posterior Parietal Cortex lesions produce contralateral LEFT hemispatial neglect / sensory extinction.',
+      },
+      {
+        cat: 'MSK Medicine', badge: 'badge-amber',
+        q: 'In CKD → Renal Osteodystrophy, what directly triggers Secondary Hyperparathyroidism (↑ PTH)?',
+        opts: ['Hypocalcaemia from ↓ active Vitamin D (calcitriol) + phosphate retention', 'Excessive dietary calcium intake', 'Overproduction of calcitriol by the failing kidney', 'Isolated elevated alkaline phosphatase (ALP)'],
+        ans: 0,
+        pearl: 'CKD → ↑ PO₄ + ↓ 1α-hydroxylase (↓ calcitriol) → ↓ Ca²⁺ → ↑ PTH → osteoclast bone resorption (fragility / HVT red flag!).',
+      },
+      {
+        cat: 'MSK Medicine', badge: 'badge-amber',
+        q: 'How does morning stiffness typically differentiate Osteoarthritis (OA) from Rheumatoid Arthritis (RA)?',
+        opts: ['OA < 30 minutes (worse end of day) vs. RA > 60 minutes (improves with gentle movement)', 'OA > 60 minutes vs. RA < 15 minutes', 'Both always exceed 2 hours', 'Neither causes morning stiffness'],
+        ans: 0,
+        pearl: 'RA = inflammatory synovitis (TNF-α, IL-1, IL-6) causing prolonged morning stiffness (>60 min) & symmetric MCP/PIP/wrist swelling.',
+      },
+      {
+        cat: 'MSK Red Flag', badge: 'badge-coral',
+        q: 'A 62-year-old has an acutely hot, swollen knee, fever (38.5°C) & severe pain on ANY passive ROM. Immediate action?',
+        opts: ['Urgent SAME-DAY A&E referral to rule out Septic Arthritis', 'Prescribe ice & re-book in 1 week for gout', 'Perform gentle knee mobilisation first', 'Treat as routine OA flare'],
+        ans: 0,
+        pearl: 'Hot swollen joint + fever/systemic malaise = Septic Arthritis emergency → immediate A&E for joint aspiration before IV antibiotics.',
+      },
+      {
+        cat: 'Systemic Red Flag', badge: 'badge-coral',
+        q: 'Which classic triad defines an acute Addisonian (Adrenal) Crisis requiring 999 IV hydrocortisone?',
+        opts: ['Hyponatraemia (↓ Na⁺), Hyperkalaemia (↑ K⁺) & Hypoglycaemia + shock', 'Hypernatraemia, Hypokalaemia & Hypertension', 'Isolated ↑↑ ALP with normal Ca²⁺ & PO₄', 'ST elevation with normal troponin'],
+        ans: 0,
+        pearl: 'Acute cortisol/aldosterone failure causes severe hypotension, ↓ Na⁺, ↑ K⁺, and ↓ glucose → emergency 999 transfer.',
+      },
+      {
+        cat: 'Chiro Studies 3', badge: 'badge-emerald',
+        q: 'In the McTimoney Full Body Check, which shoulder does the patient lie on for the Side-Lying Atlas adjustment?',
+        opts: ['The Anterior Atlas side', 'The Posterior Atlas side', 'Always the Left shoulder', 'Always the Right shoulder'],
+        ans: 0,
+        pearl: 'Palpate Atlas seated for Anteriority — the patient lies on the Anterior Atlas shoulder. Lock elbows before adjusting!',
+      },
+      {
+        cat: 'Chiro Studies 3', badge: 'badge-emerald',
+        q: 'What is the signature follow-through and top-priority hand cue for the Prone 1st Rib adjustment?',
+        opts: ['"Superman" follow-through to the side; keep nail hand crisp & flat (avoid curling)', 'Block thrust with zero follow-through', 'Swallow follow-through from the sternum', 'Horse stance at 45° along the rugby-ball curve'],
+        ans: 0,
+        pearl: '1st Rib (Step 49): Kneel at Px head, nail elbow down, palp elbow up, strike with "Superman" follow-through & crisp flat nail hand!',
+      },
+      {
+        cat: 'Chiro Studies 3', badge: 'badge-emerald',
+        q: 'What are the two Year 2 assessor cues to remember for the Inferior Pelvic Tilt adjustment?',
+        opts: ['Ask patient to TUCK CHIN & drop lower so sternum aligns with ischium', 'Keep sternum superior to ischium & extend patient’s chin', 'Use a block thrust with no follow-through', 'Stand in a narrow fencing stance under the stool'],
+        ans: 0,
+        pearl: 'Inferior Pelvic Tilt (Step 17): Tuck chin + drop lower into the kneeling adjustment so sternum is NOT superior to the ischium.',
+      },
+      {
+        cat: 'Written & Research', badge: 'badge-purple',
+        q: 'In McTimoney written assignments, what is required for EVERY direct quote and for the final reference section?',
+        opts: ['Page number (p./pp.) in the citation & heading titled "Reference List" (not Bibliography)', 'Year only & heading titled "Bibliography"', 'First-person voice & blog citations', 'New references introduced in the conclusion'],
+        ans: 0,
+        pearl: 'McTimoney Harvard rule: Every direct quote needs p./pp., always title it "Reference List", and add zero new content in the conclusion.',
+      },
     ];
 
     const mix = {
       deck: [],
       idx: 0,
-      revealed: false,
-      feedback: null, // null | 'correct' | 'wrong'
-      gotIt: 0,
-      drillAgain: 0,
+      picked: null,
+      score: 0,
       done: false,
     };
 
+    function shuffle(arr) {
+      const copy = arr.slice();
+      for (let i = copy.length - 1; i > 0; i--) {
+        const j = Math.floor(Math.random() * (i + 1));
+        const tmp = copy[i];
+        copy[i] = copy[j];
+        copy[j] = tmp;
+      }
+      return copy;
+    }
+
     function openMixModal() {
-      mix.deck = [...MIX_BANK].sort(() => Math.random() - 0.5).slice(0, 5);
+      // Pick 5 random questions and shuffle each question's options while tracking the correct answer
+      mix.deck = shuffle(MIX_BANK).slice(0, 5).map((item) => {
+        const tagged = item.opts.map((text, idx) => ({ text, isCorrect: idx === item.ans }));
+        const mixed = shuffle(tagged);
+        return {
+          cat: item.cat,
+          badge: item.badge,
+          q: item.q,
+          opts: mixed.map((o) => o.text),
+          ans: mixed.findIndex((o) => o.isCorrect),
+          pearl: item.pearl,
+        };
+      });
       mix.idx = 0;
-      mix.revealed = false;
-      mix.feedback = null;
-      mix.gotIt = 0;
-      mix.drillAgain = 0;
+      mix.picked = null;
+      mix.score = 0;
       mix.done = false;
-      document.getElementById('mix-modal').classList.remove('hidden');
+
+      document.getElementById('mix-modal').classList.add('open');
       renderMixModal();
     }
 
     function closeMixModal() {
-      document.getElementById('mix-modal').classList.add('hidden');
+      document.getElementById('mix-modal').classList.remove('open');
     }
 
-    function markMixResult(isCorrect) {
-      if (mix.feedback) return;
-      mix.feedback = isCorrect ? 'correct' : 'wrong';
-      if (isCorrect) mix.gotIt++;
-      else mix.drillAgain++;
+    function pickMixOption(optIdx) {
+      if (mix.picked !== null) return;
+      mix.picked = optIdx;
+      const cur = mix.deck[mix.idx];
+      if (optIdx === cur.ans) mix.score++;
       renderMixModal();
     }
 
-    function nextMixQuestion() {
+    function nextMixStep() {
       if (mix.idx + 1 >= mix.deck.length) {
         mix.done = true;
       } else {
         mix.idx++;
-        mix.revealed = false;
-        mix.feedback = null;
+        mix.picked = null;
       }
       renderMixModal();
     }
 
     function renderMixModal() {
-      const container = document.getElementById('mix-modal-content');
+      const box = document.getElementById('mix-box');
+      if (!box) return;
 
       if (mix.done) {
-        const pct = Math.round((mix.gotIt / mix.deck.length) * 100);
-        container.innerHTML = `
-          <div class="p-6 text-center space-y-4">
-            <div class="w-14 h-14 mx-auto rounded-2xl bg-emerald-500 text-white text-2xl flex items-center justify-center shadow-sm">⚡</div>
-            <span class="inline-block px-3 py-1 rounded-xl text-[11px] font-display font-extrabold uppercase bg-emerald-500/15 text-emerald-700 dark:text-emerald-300">
-              5-Min Mix Complete
-            </span>
-            <h3 class="text-3xl font-display font-extrabold ah-text">${mix.gotIt} / 5 (${pct}%)</h3>
-            <p class="text-xs sm:text-sm ah-muted">
-              ${mix.gotIt >= 4 ? 'Sharp cross-module recall — ready for clinic!' : 'Solid warm-up — jump into the visual lesson or module deck for any missed topics.'}
+        const pct = Math.round((mix.score / mix.deck.length) * 100);
+        box.innerHTML = `
+          <div class="modal-header">
+            <span class="badge badge-emerald">5-Min Mix Complete</span>
+            <button type="button" class="modal-close" onclick="closeMixModal()" aria-label="Close">&times;</button>
+          </div>
+          <div class="modal-body" style="text-align:center; padding: 26px 20px;">
+            <div style="width:58px;height:58px;margin:0 auto;border-radius:18px;background:var(--emerald);color:#fff;font-size:28px;display:flex;align-items:center;justify-content:center;">⚡</div>
+            <h3 style="font-size:28px;font-weight:800;letter-spacing:-0.02em;">${mix.score} / ${mix.deck.length} (${pct}%)</h3>
+            <p style="font-size:13.5px;color:var(--text-muted);max-width:360px;margin:0 auto;">
+              ${mix.score >= 4
+                ? 'Sharp cross-module recall — your exam reflexes are firing fast!'
+                : 'Great interleaved warm-up — jump into Lesson 1 or Lesson 2 to lock in any tricky traps.'}
             </p>
-            <div class="flex flex-col sm:flex-row justify-center gap-2.5 pt-2">
-              <button type="button" onclick="openMixModal()" class="btn-3d btn-indigo px-5 py-3 text-xs">Play Another 5</button>
-              <button type="button" onclick="closeMixModal()" class="btn-3d btn-neutral px-5 py-3 text-xs">Done</button>
+            <div style="display:flex;flex-direction:column;gap:10px;margin-top:8px;">
+              <button type="button" class="btn-3d btn-indigo btn-full" onclick="openMixModal()">⚡ Run Another 5-Min Mix</button>
+              <button type="button" class="btn-3d btn-outline btn-full" onclick="closeMixModal()">Back to Dashboard</button>
             </div>
           </div>
         `;
         return;
       }
 
-      const item = mix.deck[mix.idx];
-      const progressPct = Math.round(((mix.idx + (mix.feedback ? 1 : 0)) / mix.deck.length) * 100);
+      const cur = mix.deck[mix.idx];
+      const answered = mix.picked !== null;
+      const isRight = answered && mix.picked === cur.ans;
+      const pct = Math.max(12, Math.round(((mix.idx + (answered ? 1 : 0)) / mix.deck.length) * 100));
+      const letters = ['A', 'B', 'C', 'D'];
 
-      container.innerHTML = `
-        <!-- Modal Header + Progress Bar -->
-        <div class="px-5 py-4 border-b border-black/10 dark:border-white/10 space-y-2.5">
-          <div class="flex items-center justify-between gap-2">
-            <div class="flex items-center gap-2">
-              <span class="px-2.5 py-0.5 rounded-lg text-[11px] font-display font-extrabold bg-indigo-500/15 text-indigo-700 dark:text-indigo-300">${item.cat}</span>
-              <span class="text-xs font-display font-bold ah-muted">Q${mix.idx + 1} / 5</span>
+      box.innerHTML = `
+        <div class="modal-header" style="flex-direction:column;align-items:stretch;gap:10px;">
+          <div style="display:flex;align-items:center;justify-content:space-between;gap:8px;">
+            <div style="display:flex;align-items:center;gap:8px;">
+              <span class="badge ${cur.badge}">${cur.cat}</span>
+              <span class="mono" style="font-size:12px;font-weight:800;color:var(--text-muted);">${mix.idx + 1} / ${mix.deck.length}</span>
             </div>
-            <button type="button" onclick="closeMixModal()" class="w-8 h-8 rounded-xl bg-black/5 dark:bg-white/10 ah-muted hover:ah-text font-extrabold text-lg leading-none">&times;</button>
+            <button type="button" class="modal-close" onclick="closeMixModal()" aria-label="Close">&times;</button>
           </div>
-          <div class="w-full h-2.5 rounded-full bg-black/10 dark:bg-white/10 overflow-hidden">
-            <div class="h-full rounded-full bg-emerald-500 transition-all duration-300" style="width:${Math.max(10, progressPct)}%"></div>
+          <div class="duo-bar-track">
+            <div class="duo-bar-fill" style="width:${pct}%"></div>
           </div>
         </div>
 
-        <!-- Question Body -->
-        <div class="p-5 overflow-y-auto space-y-4">
-          <p class="text-base font-display font-extrabold ah-text leading-snug">${item.q}</p>
+        <div class="modal-body">
+          <p class="mix-q-text">${cur.q}</p>
 
-          ${!mix.revealed ? `
-            <button
-              type="button"
-              onclick="mix.revealed=true; renderMixModal();"
-              class="btn-3d btn-sky w-full py-3.5 text-sm"
-            >Reveal Model Answer</button>
-          ` : `
-            <div class="p-4 rounded-2xl ah-card-alt text-xs sm:text-sm ah-text leading-relaxed space-y-1">
-              <span class="block text-[10px] font-display font-extrabold uppercase tracking-wider text-sky-600 dark:text-sky-400">Model Answer</span>
-              <p>${item.a}</p>
-            </div>
+          <div class="choice-list">
+            ${cur.opts.map((txt, i) => {
+              let cls = '';
+              if (answered) {
+                if (i === cur.ans) cls = 'is-correct';
+                else if (i === mix.picked && !isRight) cls = 'is-wrong';
+              }
+              return `
+                <button
+                  type="button"
+                  class="choice-btn ${cls}"
+                  ${answered ? 'disabled' : ''}
+                  onclick="pickMixOption(${i})"
+                >
+                  <span class="choice-key">${letters[i]}</span>
+                  <span>${txt}</span>
+                </button>
+              `;
+            }).join('')}
+          </div>
+        </div>
 
-            ${!mix.feedback ? `
-              <div class="grid grid-cols-2 gap-3">
-                <button type="button" onclick="markMixResult(false)" class="btn-3d btn-rose py-3 text-xs">↺ Missed It</button>
-                <button type="button" onclick="markMixResult(true)" class="btn-3d btn-emerald py-3 text-xs">✓ Nailed It</button>
+        ${answered ? `
+          <div class="mix-feedback ${isRight ? 'correct' : 'wrong'}">
+            <div class="fb-head">
+              <span class="fb-dot ${isRight ? 'correct' : 'wrong'}">${isRight ? '✓' : '✕'}</span>
+              <div>
+                <p class="fb-title ${isRight ? 'correct' : 'wrong'}">${isRight ? 'Spot on!' : 'Watch the Clinical Pearl'}</p>
+                <p class="fb-pearl">${cur.pearl}</p>
               </div>
-            ` : ''}
-          `}
-        </div>
-
-        <!-- Instant Green / Red Feedback Banner -->
-        ${mix.feedback === 'correct' ? `
-          <div class="pop-in px-5 py-4 bg-emerald-50 dark:bg-[#092920] border-t-2 border-emerald-400 dark:border-emerald-700 flex items-center justify-between gap-3">
-            <div class="flex items-center gap-2.5">
-              <span class="w-7 h-7 rounded-full bg-emerald-500 text-white font-extrabold flex items-center justify-center shrink-0 text-sm">✓</span>
-              <span class="text-sm font-display font-extrabold text-emerald-800 dark:text-emerald-300">Spot on! Great recall.</span>
             </div>
-            <button type="button" onclick="nextMixQuestion()" class="btn-3d btn-emerald px-4 py-2 text-xs shrink-0">Continue &rarr;</button>
-          </div>
-        ` : ''}
-
-        ${mix.feedback === 'wrong' ? `
-          <div class="pop-in px-5 py-4 bg-rose-50 dark:bg-[#2b0f18] border-t-2 border-rose-400 dark:border-rose-700 flex items-center justify-between gap-3">
-            <div class="flex items-center gap-2.5">
-              <span class="w-7 h-7 rounded-full bg-rose-500 text-white font-extrabold flex items-center justify-center shrink-0 text-sm">!</span>
-              <span class="text-sm font-display font-extrabold text-rose-800 dark:text-rose-300">Flagged — revisit this card today.</span>
-            </div>
-            <button type="button" onclick="nextMixQuestion()" class="btn-3d btn-rose px-4 py-2 text-xs shrink-0">Continue &rarr;</button>
+            <button type="button" class="btn-3d ${isRight ? 'btn-emerald' : 'btn-coral'} btn-full" onclick="nextMixStep()">
+              ${mix.idx + 1 >= mix.deck.length ? 'Finish Mix &rarr;' : 'Continue &rarr;'}
+            </button>
           </div>
         ` : ''}
       `;
     }
 
     // =========================================================================
-    // 5. PHONE <-> LAPTOP PROGRESS SYNC (BASE64: mchiro_srs_v4 & mchiro_theme)
+    // 5. PHONE <-> LAPTOP PROGRESS SYNC MODAL (BASE64)
     // =========================================================================
-    function generateSyncCode() {
+    function buildSyncCode() {
       try {
-        const payload = {};
-        const targetKeys = ['mchiro_srs_v4', 'mchiro_theme'];
-        targetKeys.forEach((k) => {
-          const val = localStorage.getItem(k);
-          if (val !== null) payload[k] = val;
-        });
+        const payload = {
+          srs: safeGet('mchiro_srs_v4'),
+          lessons: safeGet('mchiro_lessons_v1'),
+          theme: safeGet('mchiro_theme'),
+        };
         return btoa(unescape(encodeURIComponent(JSON.stringify(payload))));
       } catch (e) {
         return '';
@@ -1003,58 +1905,117 @@
     }
 
     function openSyncModal() {
-      document.getElementById('sync-export-box').value = generateSyncCode();
-      document.getElementById('sync-import-box').value = '';
-      document.getElementById('sync-modal').classList.remove('hidden');
+      document.getElementById('sync-export').value = buildSyncCode();
+      document.getElementById('sync-import').value = '';
+      document.getElementById('sync-modal').classList.add('open');
     }
 
     function closeSyncModal() {
-      document.getElementById('sync-modal').classList.add('hidden');
+      document.getElementById('sync-modal').classList.remove('open');
     }
 
     function copySyncCode() {
-      const code = document.getElementById('sync-export-box').value;
+      const code = document.getElementById('sync-export').value;
       if (!code) {
-        showToast('No saved progress found to export yet.', 'amber');
+        showToast('No progress to export yet.', 'amber');
         return;
       }
-      copyTextSafe(code, 'Sync code copied! Paste it on your other device.');
+      try {
+        const ta = document.createElement('textarea');
+        ta.value = code;
+        ta.style.position = 'fixed';
+        ta.style.opacity = '0';
+        document.body.appendChild(ta);
+        ta.focus();
+        ta.select();
+        document.execCommand('copy');
+        document.body.removeChild(ta);
+        showToast('Sync code copied! Paste on your other device.', 'emerald');
+      } catch (e) {
+        showToast('Please select and copy the code manually.', 'amber');
+      }
     }
 
     function restoreSyncCode() {
-      const raw = (document.getElementById('sync-import-box').value || '').trim();
+      const raw = (document.getElementById('sync-import').value || '').trim();
       if (!raw) {
         showToast('Paste a sync code first.', 'amber');
         return;
       }
-      try {
-        const parsed = JSON.parse(decodeURIComponent(escape(atob(raw))));
-        if (!parsed || typeof parsed !== 'object') throw new Error('Invalid sync format');
 
-        const allowed = ['mchiro_srs_v4', 'mchiro_theme'];
-        let restored = 0;
-        allowed.forEach((k) => {
-          if (typeof parsed[k] === 'string') {
-            localStorage.setItem(k, parsed[k]);
-            restored++;
-          }
-        });
+      try {
+        const decoded = JSON.parse(decodeURIComponent(escape(atob(raw))));
+        if (!decoded || typeof decoded !== 'object') {
+          throw new Error('Invalid payload');
+        }
+
+        let count = 0;
+
+        // Validate and restore SRS
+        if (typeof decoded.srs === 'string') {
+          JSON.parse(decoded.srs); // Verify valid JSON
+          safeSet('mchiro_srs_v4', decoded.srs);
+          count++;
+        } else if (typeof decoded.mchiro_srs_v4 === 'string') {
+          // Backwards compatibility with older sync codes
+          JSON.parse(decoded.mchiro_srs_v4);
+          safeSet('mchiro_srs_v4', decoded.mchiro_srs_v4);
+          count++;
+        }
+
+        // Validate and restore Visual Lessons
+        if (typeof decoded.lessons === 'string') {
+          JSON.parse(decoded.lessons); // Verify valid JSON
+          safeSet('mchiro_lessons_v1', decoded.lessons);
+          count++;
+        }
+
+        // Restore Theme
+        const themeVal = decoded.theme || decoded.mchiro_theme;
+        if (themeVal === 'dark' || themeVal === 'light') {
+          safeSet('mchiro_theme', themeVal);
+          count++;
+        }
+
+        if (count === 0) {
+          showToast('Sync code contained no restorable progress.', 'amber');
+          return;
+        }
 
         initTheme();
-        updateLeitnerStats();
+        renderDashboardStats();
         closeSyncModal();
-        showToast(`Progress restored (${restored} key${restored === 1 ? '' : 's'} synced)!`, 'emerald');
+        showToast('Progress restored & dashboard updated!', 'emerald');
       } catch (e) {
-        showToast('Invalid sync code — please check you copied the full text.', 'rose');
+        showToast('Invalid sync code — check you copied the full text.', 'coral');
       }
     }
 
     // =========================================================================
-    // 6. INITIALISE HOME DASHBOARD
+    // 6. MOBILE NAVIGATION HELPERS & MODAL BACKDROP DISMISS
+    // =========================================================================
+    function scrollToTop() {
+      window.scrollTo({ top: 0, behavior: 'smooth' });
+    }
+
+    function scrollToLessons() {
+      const el = document.getElementById('lessons-section');
+      if (el) el.scrollIntoView({ behavior: 'smooth', block: 'start' });
+    }
+
+    // Close modals when clicking outside the modal box
+    document.getElementById('mix-modal').addEventListener('click', function (e) {
+      if (e.target === this) closeMixModal();
+    });
+    document.getElementById('sync-modal').addEventListener('click', function (e) {
+      if (e.target === this) closeSyncModal();
+    });
+
+    // =========================================================================
+    // 7. INITIALISE HUB
     // =========================================================================
     initTheme();
-    updateCountdown();
-    updateLeitnerStats();
+    renderDashboardStats();
   </script>
 </body>
 </html>
