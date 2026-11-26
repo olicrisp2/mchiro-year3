@@ -1,0 +1,2119 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover" />
+  <title>Year 3 Planner &amp; Scaffolding – MChiro Year 3 Hub</title>
+
+  <style>
+    /* =========================================================================
+       1. DESIGN TOKENS: APPLE HEALTH MINIMALIST × DUOLINGO TACTILE 3D
+       Zero external CDNs — pure system font stack & inline SVGs.
+       ========================================================================= */
+    :root {
+      --bg-page: #F2F2F7;
+      --bg-card: #FFFFFF;
+      --bg-subtle: #EAEAF0;
+      --bg-input: #F8FAFC;
+      --bg-glass: rgba(242, 242, 247, 0.88);
+      --border-soft: rgba(15, 23, 42, 0.10);
+      --border-strong: rgba(15, 23, 42, 0.20);
+      --text-main: #0F172A;
+      --text-muted: #475569;
+      --shadow-card: 0 2px 12px rgba(15, 23, 42, 0.05), 0 1px 2px rgba(15, 23, 42, 0.03);
+
+      /* Semantic Module & Status Colours */
+      --blue: #2563EB;
+      --blue-dark: #1D4ED8;
+      --blue-soft: rgba(37, 99, 235, 0.11);
+      --blue-border: rgba(37, 99, 235, 0.30);
+
+      --coral: #DC2626;
+      --coral-dark: #991B1B;
+      --coral-soft: rgba(220, 38, 38, 0.10);
+      --coral-border: rgba(220, 38, 38, 0.30);
+
+      --emerald: #059669;
+      --emerald-dark: #047857;
+      --emerald-soft: rgba(5, 150, 105, 0.11);
+      --emerald-border: rgba(5, 150, 105, 0.30);
+
+      --amber: #D97706;
+      --amber-dark: #92400E;
+      --amber-soft: rgba(217, 119, 6, 0.12);
+      --amber-border: rgba(217, 119, 6, 0.32);
+
+      --purple: #7C3AED;
+      --purple-dark: #5B21B6;
+      --purple-soft: rgba(124, 58, 237, 0.11);
+      --purple-border: rgba(124, 58, 237, 0.30);
+
+      --indigo: #4F46E5;
+      --indigo-dark: #3730A3;
+      --indigo-soft: rgba(79, 70, 229, 0.11);
+      --indigo-border: rgba(79, 70, 229, 0.30);
+
+      --teal: #0D9488;
+      --teal-dark: #0F766E;
+      --teal-soft: rgba(13, 148, 136, 0.11);
+      --teal-border: rgba(13, 148, 136, 0.30);
+    }
+
+    .dark {
+      --bg-page: #090D16;
+      --bg-card: #131B2E;
+      --bg-subtle: #1E293B;
+      --bg-input: #0F172A;
+      --bg-glass: rgba(9, 13, 22, 0.90);
+      --border-soft: rgba(248, 250, 252, 0.11);
+      --border-strong: rgba(248, 250, 252, 0.22);
+      --text-main: #F8FAFC;
+      --text-muted: #94A3B8;
+      --shadow-card: 0 4px 18px rgba(0, 0, 0, 0.48);
+
+      --blue-soft: rgba(59, 130, 246, 0.18);
+      --blue-border: rgba(96, 165, 250, 0.42);
+      --coral-soft: rgba(239, 68, 68, 0.19);
+      --coral-border: rgba(248, 113, 113, 0.42);
+      --emerald-soft: rgba(16, 185, 129, 0.18);
+      --emerald-border: rgba(52, 211, 153, 0.40);
+      --amber-soft: rgba(245, 158, 11, 0.20);
+      --amber-border: rgba(251, 191, 36, 0.42);
+      --purple-soft: rgba(139, 92, 246, 0.20);
+      --purple-border: rgba(167, 139, 250, 0.42);
+      --indigo-soft: rgba(99, 102, 241, 0.20);
+      --indigo-border: rgba(129, 140, 248, 0.42);
+      --teal-soft: rgba(20, 184, 166, 0.18);
+      --teal-border: rgba(45, 212, 191, 0.40);
+    }
+
+    /* =========================================================================
+       2. BASE RESET & TYPOGRAPHY
+       ========================================================================= */
+    *, *::before, *::after { box-sizing: border-box; }
+    html { scroll-behavior: smooth; }
+
+    body {
+      margin: 0;
+      min-height: 100vh;
+      background-color: var(--bg-page);
+      color: var(--text-main);
+      font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif;
+      line-height: 1.48;
+      overflow-x: hidden;
+      -webkit-font-smoothing: antialiased;
+      -webkit-tap-highlight-color: transparent;
+      transition: background-color 0.2s ease, color 0.2s ease;
+      padding-bottom: 96px;
+    }
+
+    @media (min-width: 769px) {
+      body { padding-bottom: 52px; }
+    }
+
+    h1, h2, h3, h4, p { margin: 0; }
+    a { color: inherit; text-decoration: none; }
+    button, input, select, textarea { font-family: inherit; }
+
+    .mono {
+      font-family: ui-monospace, SFMono-Regular, Menlo, Monaco, Consolas, monospace;
+      letter-spacing: -0.02em;
+    }
+
+    .container {
+      width: 100%;
+      max-width: 1020px;
+      margin: 0 auto;
+      padding: 0 14px;
+    }
+
+    @media (min-width: 640px) {
+      .container { padding: 0 22px; }
+    }
+
+    /* =========================================================================
+       3. STICKY FROSTED-GLASS HEADER & SEGMENTED TAB BAR
+       ========================================================================= */
+    .top-header {
+      position: sticky;
+      top: 0;
+      z-index: 40;
+      background: var(--bg-glass);
+      backdrop-filter: blur(18px);
+      -webkit-backdrop-filter: blur(18px);
+      border-bottom: 1px solid var(--border-soft);
+    }
+
+    .header-inner {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      gap: 8px;
+      padding-top: 10px;
+      padding-bottom: 10px;
+    }
+
+    .header-left {
+      display: flex;
+      align-items: center;
+      gap: 10px;
+      min-width: 0;
+    }
+
+    .back-btn {
+      display: inline-flex;
+      align-items: center;
+      gap: 4px;
+      min-height: 36px;
+      padding: 6px 11px;
+      border-radius: 12px;
+      background: var(--bg-subtle);
+      color: var(--text-main);
+      font-size: 12.5px;
+      font-weight: 800;
+      flex-shrink: 0;
+      transition: background-color 0.14s ease;
+    }
+    .back-btn:hover { background: var(--border-strong); }
+
+    .title-wrap { min-width: 0; }
+    .page-title {
+      font-size: 15.5px;
+      font-weight: 800;
+      letter-spacing: -0.02em;
+      white-space: nowrap;
+      overflow: hidden;
+      text-overflow: ellipsis;
+    }
+    .page-sub {
+      font-size: 11px;
+      font-weight: 600;
+      color: var(--text-muted);
+      display: none;
+    }
+    @media (min-width: 560px) {
+      .page-sub { display: block; }
+    }
+
+    .header-right {
+      display: flex;
+      align-items: center;
+      gap: 7px;
+      flex-shrink: 0;
+    }
+
+    .countdown-pill {
+      display: inline-flex;
+      align-items: center;
+      gap: 5px;
+      min-height: 36px;
+      padding: 5px 11px;
+      border-radius: 12px;
+      background: var(--indigo-soft);
+      border: 1.5px solid var(--indigo-border);
+      color: var(--indigo);
+      font-size: 12px;
+      font-weight: 800;
+      font-variant-numeric: tabular-nums;
+      white-space: nowrap;
+    }
+    .dark .countdown-pill { color: #A5B4FC; }
+
+    .theme-btn {
+      width: 36px;
+      height: 36px;
+      border-radius: 12px;
+      border: 1px solid var(--border-soft);
+      background: var(--bg-card);
+      color: var(--text-main);
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      cursor: pointer;
+      transition: border-color 0.14s ease;
+    }
+    .theme-btn:hover { border-color: var(--blue); }
+
+    .tabs-bar-wrap {
+      padding-bottom: 10px;
+      overflow-x: auto;
+      -ms-overflow-style: none;
+      scrollbar-width: none;
+    }
+    .tabs-bar-wrap::-webkit-scrollbar { display: none; }
+
+    .seg-track {
+      display: flex;
+      gap: 5px;
+      padding: 4px;
+      border-radius: 14px;
+      background: var(--bg-subtle);
+      border: 1px solid var(--border-soft);
+      min-width: max-content;
+    }
+    @media (min-width: 680px) {
+      .seg-track {
+        display: grid;
+        grid-template-columns: repeat(4, 1fr);
+        min-width: 0;
+      }
+    }
+
+    .seg-btn {
+      border: none;
+      background: transparent;
+      color: var(--text-muted);
+      min-height: 38px;
+      padding: 8px 12px;
+      border-radius: 11px;
+      font-size: 12.5px;
+      font-weight: 800;
+      cursor: pointer;
+      white-space: nowrap;
+      transition: all 0.15s ease;
+      text-align: center;
+    }
+    .seg-btn.active {
+      background: var(--bg-card);
+      color: var(--text-main);
+      box-shadow: 0 2px 8px rgba(0, 0, 0, 0.09);
+    }
+
+    /* =========================================================================
+       4. CARDS, TACTILE 3D BUTTONS, INPUTS & BADGES
+       ========================================================================= */
+    .main-stack {
+      display: flex;
+      flex-direction: column;
+      gap: 16px;
+      padding-top: 16px;
+    }
+
+    .ah-card {
+      background: var(--bg-card);
+      border: 1px solid var(--border-soft);
+      border-radius: 18px;
+      box-shadow: var(--shadow-card);
+    }
+
+    .ah-card-alt {
+      background: var(--bg-subtle);
+      border: 1px solid var(--border-soft);
+      border-radius: 14px;
+    }
+
+    .pad-card { padding: 16px; }
+    @media (min-width: 640px) {
+      .pad-card { padding: 20px; }
+    }
+
+    .stack { display: flex; flex-direction: column; gap: 14px; }
+    .stack-sm { display: flex; flex-direction: column; gap: 10px; }
+
+    .flex-between {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      gap: 10px;
+      flex-wrap: wrap;
+    }
+
+    .grid-2 {
+      display: grid;
+      grid-template-columns: 1fr;
+      gap: 12px;
+    }
+    @media (min-width: 680px) {
+      .grid-2 { grid-template-columns: 1fr 1fr; }
+    }
+
+    .grid-3 {
+      display: grid;
+      grid-template-columns: 1fr;
+      gap: 10px;
+    }
+    @media (min-width: 640px) {
+      .grid-3 { grid-template-columns: repeat(3, 1fr); }
+    }
+
+    /* Tactile Duolingo-style 3D Buttons (box-shadow: 0 4px 0 + active press) */
+    .btn-3d {
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      gap: 7px;
+      min-height: 44px;
+      padding: 10px 16px;
+      border-radius: 14px;
+      border: none;
+      font-size: 13.5px;
+      font-weight: 800;
+      cursor: pointer;
+      user-select: none;
+      text-align: center;
+      transition: transform 0.08s ease, box-shadow 0.08s ease, filter 0.14s ease;
+    }
+    .btn-3d:hover:not(:disabled) { filter: brightness(1.06); }
+    .btn-3d:active:not(:disabled) {
+      transform: translateY(3px);
+      box-shadow: 0 1px 0 rgba(0, 0, 0, 0.25) !important;
+    }
+    .btn-3d.sm {
+      min-height: 36px;
+      padding: 7px 12px;
+      font-size: 12.5px;
+      border-radius: 12px;
+    }
+    .btn-full { width: 100%; }
+
+    .btn-blue { background: var(--blue); color: #FFFFFF; box-shadow: 0 4px 0 var(--blue-dark); }
+    .btn-emerald { background: var(--emerald); color: #FFFFFF; box-shadow: 0 4px 0 var(--emerald-dark); }
+    .btn-indigo { background: var(--indigo); color: #FFFFFF; box-shadow: 0 4px 0 var(--indigo-dark); }
+    .btn-coral { background: var(--coral); color: #FFFFFF; box-shadow: 0 4px 0 var(--coral-dark); }
+    .btn-amber { background: var(--amber); color: #FFFFFF; box-shadow: 0 4px 0 var(--amber-dark); }
+    .btn-neutral {
+      background: var(--bg-subtle);
+      color: var(--text-main);
+      border: 1px solid var(--border-soft);
+      box-shadow: 0 4px 0 var(--border-strong);
+    }
+
+    .badge {
+      display: inline-flex;
+      align-items: center;
+      gap: 4px;
+      padding: 4px 10px;
+      border-radius: 999px;
+      font-size: 11px;
+      font-weight: 800;
+      letter-spacing: 0.015em;
+      white-space: nowrap;
+    }
+    .badge-blue { background: var(--blue-soft); color: var(--blue-dark); border: 1px solid var(--blue-border); }
+    .dark .badge-blue { color: #93C5FD; }
+    .badge-coral { background: var(--coral-soft); color: var(--coral-dark); border: 1px solid var(--coral-border); }
+    .dark .badge-coral { color: #FCA5A5; }
+    .badge-emerald { background: var(--emerald-soft); color: var(--emerald-dark); border: 1px solid var(--emerald-border); }
+    .dark .badge-emerald { color: #6EE7B7; }
+    .badge-amber { background: var(--amber-soft); color: var(--amber-dark); border: 1px solid var(--amber-border); }
+    .dark .badge-amber { color: #FDE68A; }
+    .badge-purple { background: var(--purple-soft); color: var(--purple-dark); border: 1px solid var(--purple-border); }
+    .dark .badge-purple { color: #DDD6FE; }
+    .badge-indigo { background: var(--indigo-soft); color: var(--indigo-dark); border: 1px solid var(--indigo-border); }
+    .dark .badge-indigo { color: #C7D2FE; }
+    .badge-teal { background: var(--teal-soft); color: var(--teal-dark); border: 1px solid var(--teal-border); }
+    .dark .badge-teal { color: #5EEAD4; }
+    .badge-muted { background: var(--bg-subtle); color: var(--text-muted); border: 1px solid var(--border-soft); }
+
+    /* Form Controls (14px rounded corners, crisp focus ring) */
+    .field-label {
+      display: block;
+      font-size: 11px;
+      font-weight: 800;
+      text-transform: uppercase;
+      letter-spacing: 0.04em;
+      color: var(--text-muted);
+      margin-bottom: 5px;
+    }
+
+    .input, .select, .textarea {
+      width: 100%;
+      padding: 10px 12px;
+      border-radius: 14px;
+      border: 1.5px solid var(--border-soft);
+      background: var(--bg-input);
+      color: var(--text-main);
+      font-size: 13.5px;
+      font-weight: 500;
+      transition: border-color 0.14s ease, box-shadow 0.14s ease;
+    }
+    .input, .select { min-height: 42px; }
+    .textarea { resize: vertical; line-height: 1.45; }
+    .input:focus, .select:focus, .textarea:focus {
+      outline: none;
+      border-color: var(--blue);
+      box-shadow: 0 0 0 3px var(--blue-soft);
+    }
+
+    .progress-track {
+      width: 100%;
+      height: 10px;
+      border-radius: 999px;
+      background: var(--bg-subtle);
+      overflow: hidden;
+    }
+    .progress-fill {
+      height: 100%;
+      border-radius: 999px;
+      transition: width 0.35s cubic-bezier(0.22, 1, 0.36, 1);
+    }
+
+    /* Filter Chips */
+    .chip-row {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 7px;
+    }
+    .chip {
+      min-height: 36px;
+      padding: 6px 12px;
+      border-radius: 12px;
+      border: 1.5px solid var(--border-soft);
+      background: var(--bg-card);
+      color: var(--text-main);
+      font-size: 12px;
+      font-weight: 800;
+      cursor: pointer;
+      transition: all 0.14s ease;
+    }
+    .chip:hover { border-color: var(--blue); }
+    .chip.active {
+      background: var(--blue);
+      border-color: var(--blue);
+      color: #FFFFFF;
+    }
+
+    /* =========================================================================
+       5. TAB-SPECIFIC COMPONENTS (MODULES, ASSESSMENTS, PREP, WEEKLY)
+       ========================================================================= */
+    .stat-tile {
+      padding: 14px;
+      border-radius: 16px;
+      border: 1px solid var(--border-soft);
+      background: var(--bg-card);
+      box-shadow: var(--shadow-card);
+      display: flex;
+      flex-direction: column;
+      gap: 4px;
+    }
+    .stat-num {
+      font-size: 24px;
+      font-weight: 800;
+      letter-spacing: -0.03em;
+      font-variant-numeric: tabular-nums;
+    }
+    .stat-lbl {
+      font-size: 11.5px;
+      font-weight: 700;
+      color: var(--text-muted);
+    }
+
+    /* Module Vault Accordion Card */
+    .mod-card {
+      overflow: hidden;
+      border-left-width: 5px;
+      border-left-style: solid;
+      transition: border-color 0.15s ease;
+    }
+    .mod-trigger {
+      width: 100%;
+      padding: 15px 16px;
+      border: none;
+      background: transparent;
+      color: var(--text-main);
+      text-align: left;
+      cursor: pointer;
+      display: flex;
+      flex-direction: column;
+      gap: 10px;
+    }
+    .mod-body {
+      padding: 16px;
+      border-top: 1px solid var(--border-soft);
+      display: flex;
+      flex-direction: column;
+      gap: 16px;
+    }
+    .sub-block {
+      padding: 14px;
+      border-radius: 14px;
+      background: var(--bg-subtle);
+      border: 1px solid var(--border-soft);
+      display: flex;
+      flex-direction: column;
+      gap: 10px;
+    }
+    .sub-block-title {
+      font-size: 12px;
+      font-weight: 800;
+      text-transform: uppercase;
+      letter-spacing: 0.04em;
+      color: var(--text-muted);
+    }
+
+    /* Checklist Row */
+    .check-item {
+      display: flex;
+      align-items: flex-start;
+      justify-content: space-between;
+      gap: 10px;
+      padding: 9px 11px;
+      border-radius: 12px;
+      background: var(--bg-card);
+      border: 1px solid var(--border-soft);
+    }
+    .check-label {
+      display: flex;
+      align-items: flex-start;
+      gap: 10px;
+      flex: 1;
+      min-width: 0;
+      cursor: pointer;
+      font-size: 13.5px;
+      font-weight: 600;
+    }
+    .check-label input[type="checkbox"] {
+      width: 19px;
+      height: 19px;
+      margin-top: 1px;
+      accent-color: var(--emerald);
+      flex-shrink: 0;
+      cursor: pointer;
+    }
+    .check-done {
+      text-decoration: line-through;
+      color: var(--text-muted);
+    }
+    .icon-del {
+      width: 30px;
+      height: 30px;
+      border-radius: 9px;
+      border: none;
+      background: transparent;
+      color: var(--text-muted);
+      font-size: 16px;
+      font-weight: 800;
+      cursor: pointer;
+      flex-shrink: 0;
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      transition: background-color 0.12s ease, color 0.12s ease;
+    }
+    .icon-del:hover {
+      background: var(--coral-soft);
+      color: var(--coral);
+    }
+
+    .inline-add {
+      display: flex;
+      gap: 8px;
+      align-items: stretch;
+    }
+    .inline-add .input { flex: 1; min-width: 0; }
+
+    /* Assessment Card */
+    .assess-card {
+      padding: 16px;
+      border-left-width: 5px;
+      border-left-style: solid;
+      display: flex;
+      flex-direction: column;
+      gap: 12px;
+    }
+    .assess-controls {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 8px;
+      padding-top: 10px;
+      border-top: 1px solid var(--border-soft);
+    }
+    @media (min-width: 640px) {
+      .assess-controls { grid-template-columns: 1.3fr 1fr auto auto; align-items: end; }
+    }
+
+    /* Weekly Routine Grid */
+    .week-grid {
+      display: grid;
+      grid-template-columns: 1fr;
+      gap: 10px;
+    }
+    @media (min-width: 720px) {
+      .week-grid { grid-template-columns: repeat(2, 1fr); }
+    }
+    .day-card {
+      padding: 14px;
+      border-radius: 16px;
+      background: var(--bg-card);
+      border: 1px solid var(--border-soft);
+      box-shadow: var(--shadow-card);
+      display: flex;
+      flex-direction: column;
+      gap: 8px;
+    }
+
+    /* Custom Confirmation Modal (replaces native confirm()) */
+    .modal-backdrop {
+      position: fixed;
+      inset: 0;
+      z-index: 70;
+      background: rgba(0, 0, 0, 0.60);
+      backdrop-filter: blur(5px);
+      -webkit-backdrop-filter: blur(5px);
+      display: none;
+      align-items: center;
+      justify-content: center;
+      padding: 16px;
+    }
+    .modal-backdrop.open { display: flex; }
+    .modal-box {
+      width: 100%;
+      max-width: 420px;
+      background: var(--bg-card);
+      border: 1px solid var(--border-soft);
+      border-radius: 20px;
+      padding: 20px;
+      box-shadow: 0 20px 50px rgba(0, 0, 0, 0.35);
+      display: flex;
+      flex-direction: column;
+      gap: 14px;
+    }
+
+    /* =========================================================================
+       6. FIXED MOBILE BOTTOM NAVIGATION (6 LINKS) & TOASTS
+       ========================================================================= */
+    .mobile-nav {
+      position: fixed;
+      bottom: 0;
+      left: 0;
+      right: 0;
+      z-index: 45;
+      background: var(--bg-glass);
+      backdrop-filter: blur(18px);
+      -webkit-backdrop-filter: blur(18px);
+      border-top: 1px solid var(--border-soft);
+      padding: 6px 6px calc(6px + env(safe-area-inset-bottom, 0px));
+    }
+    @media (min-width: 769px) {
+      .mobile-nav { display: none; }
+    }
+
+    .mobile-nav-grid {
+      max-width: 540px;
+      margin: 0 auto;
+      display: grid;
+      grid-template-columns: repeat(6, 1fr);
+      gap: 2px;
+    }
+
+    .mnav-link {
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+      gap: 2px;
+      padding: 6px 2px;
+      border-radius: 11px;
+      color: var(--text-muted);
+      font-size: 9.5px;
+      font-weight: 700;
+      text-align: center;
+      transition: background-color 0.14s ease, color 0.14s ease;
+    }
+    .mnav-link.active {
+      color: var(--blue);
+      background: var(--blue-soft);
+      font-weight: 800;
+    }
+
+    .toast-wrap {
+      position: fixed;
+      bottom: 88px;
+      right: 14px;
+      z-index: 80;
+      display: flex;
+      flex-direction: column;
+      gap: 8px;
+      pointer-events: none;
+    }
+    @media (min-width: 769px) {
+      .toast-wrap { bottom: 20px; right: 20px; }
+    }
+    .toast {
+      pointer-events: auto;
+      padding: 9px 14px;
+      border-radius: 13px;
+      font-size: 12.5px;
+      font-weight: 800;
+      box-shadow: 0 8px 24px rgba(0, 0, 0, 0.22);
+      background: var(--text-main);
+      color: var(--bg-card);
+      transition: opacity 0.25s ease, transform 0.25s ease;
+    }
+    .toast.emerald { background: var(--emerald); color: #FFFFFF; }
+    .toast.amber { background: var(--amber); color: #FFFFFF; }
+    .toast.coral { background: var(--coral); color: #FFFFFF; }
+  </style>
+</head>
+<body>
+
+  <!-- Toast Container (Zero alert/confirm used) -->
+  <div id="toast-wrap" class="toast-wrap" aria-live="polite"></div>
+
+  <!-- =========================================================================
+       STICKY FROSTED-GLASS HEADER & 4-TAB SEGMENTED BAR
+       ========================================================================= -->
+  <header class="top-header">
+    <div class="container">
+      <div class="header-inner">
+        <div class="header-left">
+          <a href="index.html" class="back-btn" aria-label="Back to MChiro Year 3 Hub">&larr; Hub</a>
+          <div class="title-wrap">
+            <h1 class="page-title">Year 3 Planner &amp; Scaffolding</h1>
+            <p class="page-sub">McTimoney College &bull; Modules, Deadlines, Bridging &amp; Weekly Routine</p>
+          </div>
+        </div>
+
+        <div class="header-right">
+          <div class="countdown-pill" title="Countdown to Year 3 Start (25 Jan 2027)">
+            <span id="y3-countdown">-- days to Y3</span>
+          </div>
+          <button
+            type="button"
+            id="theme-toggle-btn"
+            class="theme-btn"
+            onclick="toggleTheme()"
+            aria-label="Toggle Light or Dark Mode"
+          ></button>
+        </div>
+      </div>
+
+      <!-- Sticky 4-Tab Bar -->
+      <nav class="tabs-bar-wrap" aria-label="Planner Sections">
+        <div id="segmented-tabs" class="seg-track" role="tablist"></div>
+      </nav>
+    </div>
+  </header>
+
+  <!-- =========================================================================
+       MAIN APP ROOT
+       ========================================================================= -->
+  <main class="container main-stack">
+    <div id="app-root"></div>
+  </main>
+
+  <!-- =========================================================================
+       CUSTOM RESET CONFIRMATION MODAL (NO NATIVE confirm())
+       ========================================================================= -->
+  <div id="reset-modal" class="modal-backdrop" role="dialog" aria-modal="true" aria-label="Confirm Reset Templates">
+    <div class="modal-box">
+      <span class="badge badge-coral" style="align-self:flex-start;">Safety Confirmation</span>
+      <h3 style="font-size:17px;font-weight:800;">Reset Planner to Default Templates?</h3>
+      <p style="font-size:13.5px;color:var(--text-muted);">
+        This will restore the default 7 module vaults, 4 template assessments, pre-term bridging checklist, and weekly routine. Consider downloading a <strong>.json backup</strong> first if you have entered handbook dates.
+      </p>
+      <div class="grid-2" style="gap:8px;margin-top:4px;">
+        <button type="button" class="btn-3d btn-neutral" onclick="closeResetModal()">Cancel</button>
+        <button type="button" class="btn-3d btn-coral" onclick="confirmResetDefaults()">Yes, Reset All</button>
+      </div>
+    </div>
+  </div>
+
+  <!-- =========================================================================
+       FIXED MOBILE BOTTOM NAVIGATION BAR (6 LINKS)
+       ========================================================================= -->
+  <nav class="mobile-nav" aria-label="Mobile Hub Navigation">
+    <div class="mobile-nav-grid">
+      <a href="index.html" class="mnav-link">
+        <svg width="17" height="17" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.1" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="m3 9 9-7 9 7v11a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2z"/><polyline points="9 22 9 12 15 12 15 22"/></svg>
+        <span>Home</span>
+      </a>
+      <a href="neuro.html" class="mnav-link">
+        <svg width="17" height="17" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.1" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M9.5 2A2.5 2.5 0 0 1 12 4.5v15a2.5 2.5 0 0 1-4.96.44 2.5 2.5 0 0 1-2.96-3.08 3 3 0 0 1-.34-5.58 2.5 2.5 0 0 1 1.32-4.24 2.5 2.5 0 0 1 1.98-3A2.5 2.5 0 0 1 9.5 2Z"/><path d="M14.5 2A2.5 2.5 0 0 0 12 4.5v15a2.5 2.5 0 0 0 4.96.44 2.5 2.5 0 0 0 2.96-3.08 3 3 0 0 0 .34-5.58 2.5 2.5 0 0 0-1.32-4.24 2.5 2.5 0 0 0-1.98-3A2.5 2.5 0 0 0 14.5 2Z"/></svg>
+        <span>Neuro</span>
+      </a>
+      <a href="msk.html" class="mnav-link">
+        <svg width="17" height="17" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.1" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M17 10c.7-.7 1.69 0 2.5 0a2.5 2.5 0 1 0 0-5 .5.5 0 0 1-.5-.5 2.5 2.5 0 1 0-5 0c0 .81.7 1.8 0 2.5l-7 7c-.7.7-1.69 0-2.5 0a2.5 2.5 0 0 0 0 5c.28 0 .5.22.5.5a2.5 2.5 0 1 0 5 0c0-.81-.7-1.8 0-2.5Z"/></svg>
+        <span>MSK</span>
+      </a>
+      <a href="chiro.html" class="mnav-link">
+        <svg width="17" height="17" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.1" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M18 11V6a2 2 0 0 0-2-2 2 2 0 0 0-2 2"/><path d="M14 10V4a2 2 0 0 0-2-2 2 2 0 0 0-2 2v2"/><path d="M10 10.5V6a2 2 0 0 0-2-2 2 2 0 0 0-2 2v8"/><path d="M18 8a2 2 0 1 1 4 0v6a8 8 0 0 1-8 8h-2c-2.8 0-4.5-.86-5.99-2.34l-3.6-3.6a2 2 0 0 1 2.83-2.82L7 15"/></svg>
+        <span>Chiro</span>
+      </a>
+      <a href="written.html" class="mnav-link">
+        <svg width="17" height="17" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.1" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M14.5 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V7.5L14.5 2z"/><polyline points="14 2 14 8 20 8"/></svg>
+        <span>Written</span>
+      </a>
+      <a href="planner.html" class="mnav-link active" aria-current="page">
+        <svg width="17" height="17" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.1" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><rect x="3" y="4" width="18" height="18" rx="2"/><line x1="16" y1="2" x2="16" y2="6"/><line x1="8" y1="2" x2="8" y2="6"/><line x1="3" y1="10" x2="21" y2="10"/></svg>
+        <span>Planner</span>
+      </a>
+    </div>
+  </nav>
+
+  <script>
+    // =========================================================================
+    // 1. CONSTANTS, THEME SYNC ('mchiro_theme') & SAFE STORAGE ('mchiro_planner_v1')
+    // =========================================================================
+    const STORAGE_KEY = 'mchiro_planner_v1';
+
+    const SUN_SVG = `<svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.1" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><circle cx="12" cy="12" r="4"/><path d="M12 2v2"/><path d="M12 20v2"/><path d="m4.93 4.93 1.41 1.41"/><path d="m17.66 17.66 1.41 1.41"/><path d="M2 12h2"/><path d="M20 12h2"/><path d="m6.34 17.66-1.41 1.41"/><path d="m19.07 4.93-1.41 1.41"/></svg>`;
+    const MOON_SVG = `<svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.1" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M12 3a6 6 0 0 0 9 9 9 9 0 1 1-9-9Z"/></svg>`;
+
+    function esc(str) {
+      return String(str == null ? '' : str)
+        .replace(/&/g, '&amp;')
+        .replace(/</g, '&lt;')
+        .replace(/>/g, '&gt;')
+        .replace(/"/g, '&quot;')
+        .replace(/'/g, '&#39;');
+    }
+
+    function uid(prefix) {
+      return `${prefix}_${Date.now().toString(36)}_${Math.random().toString(36).slice(2, 6)}`;
+    }
+
+    function initTheme() {
+      let saved = null;
+      try { saved = localStorage.getItem('mchiro_theme'); } catch (e) {}
+      const prefersDark = window.matchMedia && window.matchMedia('(prefers-color-scheme: dark)').matches;
+      const isDark = saved ? (saved === 'dark' || saved === '"dark"') : prefersDark;
+      applyTheme(isDark);
+    }
+
+    function applyTheme(isDark) {
+      document.documentElement.classList.toggle('dark', isDark);
+      try { localStorage.setItem('mchiro_theme', isDark ? 'dark' : 'light'); } catch (e) {}
+      const btn = document.getElementById('theme-toggle-btn');
+      if (btn) btn.innerHTML = isDark ? SUN_SVG : MOON_SVG;
+    }
+
+    function toggleTheme() {
+      applyTheme(!document.documentElement.classList.contains('dark'));
+    }
+
+    let saveToastTimer = null;
+    function showToast(msg, tone) {
+      const wrap = document.getElementById('toast-wrap');
+      if (!wrap) return;
+      const el = document.createElement('div');
+      el.className = 'toast' + (tone ? ' ' + tone : '');
+      el.textContent = msg;
+      wrap.appendChild(el);
+      setTimeout(() => {
+        el.style.opacity = '0';
+        el.style.transform = 'translateY(8px)';
+        setTimeout(() => el.remove(), 250);
+      }, 2100);
+    }
+
+    function flashSaved() {
+      clearTimeout(saveToastTimer);
+      saveToastTimer = setTimeout(() => {
+        showToast('✓ Saved', 'emerald');
+      }, 550);
+    }
+
+    function copyTextSafe(text, okMsg) {
+      try {
+        const ta = document.createElement('textarea');
+        ta.value = text;
+        ta.style.position = 'fixed';
+        ta.style.opacity = '0';
+        document.body.appendChild(ta);
+        ta.focus();
+        ta.select();
+        document.execCommand('copy');
+        document.body.removeChild(ta);
+        showToast(okMsg || 'Copied!', 'emerald');
+      } catch (e) {
+        showToast('Copy failed — please select and copy manually.', 'amber');
+      }
+    }
+
+    // =========================================================================
+    // 2. DEFAULT YEAR 3 SCAFFOLDING DATA (7 MODULES, 4 TEMPLATES, PREP, WEEKLY)
+    // =========================================================================
+    function createDefaultData() {
+      return {
+        version: 1,
+        modules: [
+          {
+            id: 'neuro',
+            name: 'Clinical Neurology',
+            color: '#2563EB',
+            badgeCls: 'badge-blue',
+            baseline: 'Y2 Neuro: 82%',
+            target: 'Maintain 80%+',
+            link: 'neuro.html',
+            leader: '',
+            breakdown: '',
+            handbookNotes: '',
+            scratchpad: '',
+            topics: [
+              { id: 'n1', text: 'CNS & PNS Bedside Exam Flow', done: false },
+              { id: 'n2', text: 'Cranial Nerves I–XII & Red Flags', done: false },
+              { id: 'n3', text: 'UMN vs. LMN Lesion Localisation', done: false },
+              { id: 'n4', text: 'Upper & Lower Limb SMR (Dermatomes/Myotomes/Reflexes)', done: false },
+              { id: 'n5', text: 'Special Tests (CAD, Hutchinson, Dix-Hallpike, Beighton)', done: false },
+            ],
+            readings: [
+              { id: 'nr1', text: 'Fuller, G. Neurological Examination Made Easy (Core reference)', done: false },
+            ],
+          },
+          {
+            id: 'msk',
+            name: 'Musculoskeletal Medicine',
+            color: '#DC2626',
+            badgeCls: 'badge-coral',
+            baseline: 'Y2 BMS: 52% → 66%',
+            target: 'Priority 1 Lift (70%+)',
+            link: 'msk.html',
+            leader: '',
+            breakdown: '',
+            handbookNotes: '',
+            scratchpad: '',
+            topics: [
+              { id: 'm1', text: 'OA vs. RA Mechanisms & Differentials', done: false },
+              { id: 'm2', text: 'Metabolic Bone Disease (Osteoporosis, Osteomalacia, Paget\'s, Gout)', done: false },
+              { id: 'm3', text: 'Systemic & Renal Red Flags (CKD → Renal Osteodystrophy)', done: false },
+              { id: 'm4', text: 'Orthopaedic Special Tests (Cervical, Lumbar, Extremities)', done: false },
+              { id: 'm5', text: 'Imaging Fundamentals & Management Pathways', done: false },
+            ],
+            readings: [],
+          },
+          {
+            id: 'chiro3',
+            name: 'Chiropractic Studies 3',
+            color: '#059669',
+            badgeCls: 'badge-emerald',
+            baseline: 'Y2 Chiro II: 78%',
+            target: 'Refine 80%+',
+            link: 'chiro.html',
+            leader: '',
+            breakdown: '',
+            handbookNotes: '',
+            scratchpad: '',
+            topics: [
+              { id: 'c1', text: 'Full Body Check Flow & Timing', done: false },
+              { id: 'c2', text: 'Advanced McTimoney Adjustments & Rechecks', done: false },
+              { id: 'c3', text: 'Diversified Technique Integration', done: false },
+              { id: 'c4', text: 'Clinical Reasoning & Biomechanics', done: false },
+              { id: 'c5', text: 'Year 2 Feedback Fixes (Stance, Elbow Height, Crisp Strikes)', done: false },
+            ],
+            readings: [],
+          },
+          {
+            id: 'clinic3',
+            name: 'Clinic Studies 3',
+            color: '#D97706',
+            badgeCls: 'badge-amber',
+            baseline: 'Y2 Clinic II: 64%',
+            target: 'Priority Lift (70%+)',
+            link: 'written.html',
+            leader: '',
+            breakdown: '',
+            handbookNotes: '',
+            scratchpad: '',
+            topics: [
+              { id: 'cl1', text: 'Structured Case History Taking (SOCRATES & Red/Yellow Flags)', done: false },
+              { id: 'cl2', text: 'Physical, Orthopaedic & Neuro Exam Integration', done: false },
+              { id: 'cl3', text: 'Clinical Documentation & SOAP Notes', done: false },
+              { id: 'cl4', text: 'OSCE & Pre-Clinic Readiness', done: false },
+              { id: 'cl5', text: 'Critical Reflective Writing (Borton\'s Framework, 3rd Person)', done: false },
+            ],
+            readings: [],
+          },
+          {
+            id: 'research2',
+            name: 'Research 2',
+            color: '#7C3AED',
+            badgeCls: 'badge-purple',
+            baseline: 'Y2 Research I: 78%',
+            target: 'Maintain 75%+',
+            link: 'written.html',
+            leader: '',
+            breakdown: '',
+            handbookNotes: '',
+            scratchpad: '',
+            topics: [
+              { id: 'r1', text: 'Research Methodology & Study Designs', done: false },
+              { id: 'r2', text: 'Critical Appraisal & Bias Assessment', done: false },
+              { id: 'r3', text: 'Biostatistics Fundamentals', done: false },
+              { id: 'r4', text: 'PICO & Literature Search Strategy', done: false },
+              { id: 'r5', text: 'Final-Year Research Project / Dissertation Prep', done: false },
+            ],
+            readings: [],
+          },
+          {
+            id: 'phil3',
+            name: 'Philosophy 3',
+            color: '#4F46E5',
+            badgeCls: 'badge-indigo',
+            baseline: 'Y2 Phil II: 72%',
+            target: '75%+',
+            link: 'written.html',
+            leader: '',
+            breakdown: '',
+            handbookNotes: '',
+            scratchpad: '',
+            topics: [
+              { id: 'p1', text: 'Contemporary Chiropractic Philosophy', done: false },
+              { id: 'p2', text: 'Evidence-Informed Practice & Clinical Tensions', done: false },
+              { id: 'p3', text: 'Scope of Practice & Professional Identity', done: false },
+              { id: 'p4', text: 'Ethical Reasoning & GCC Standards', done: false },
+            ],
+            readings: [],
+          },
+          {
+            id: 'behav',
+            name: 'Behavioural Sciences',
+            color: '#0D9488',
+            badgeCls: 'badge-teal',
+            baseline: 'New Y3 Module',
+            target: '70%+',
+            link: 'written.html',
+            leader: '',
+            breakdown: '',
+            handbookNotes: '',
+            scratchpad: '',
+            topics: [
+              { id: 'b1', text: 'Psychology of Pain & Fear-Avoidance', done: false },
+              { id: 'b2', text: 'Biopsychosocial (BPS) Model & Psychosocial Flags', done: false },
+              { id: 'b3', text: 'Patient Communication & Motivational Interviewing', done: false },
+              { id: 'b4', text: 'Adherence & Health Behaviour Change', done: false },
+            ],
+            readings: [],
+          },
+        ],
+
+        assessments: [
+          {
+            id: 'as_1',
+            title: 'Clinic Studies 3 — Reflective / Pre-Clinic Assignment [Edit date from handbook]',
+            moduleId: 'clinic3',
+            type: 'Essay / Written',
+            dueDate: '2027-04-30',
+            weight: 50,
+            targetGrade: 72,
+            actualGrade: '',
+            status: 'Not Started',
+            notes: 'Strict 3rd-person voice, Borton\'s framework, high peer-reviewed citation density, Reference List (not Bibliography).',
+            isTemplate: true,
+          },
+          {
+            id: 'as_2',
+            title: 'Clinical Neurology — Practical OSCE [Edit date]',
+            moduleId: 'neuro',
+            type: 'Practical / OSCE',
+            dueDate: '2027-06-15',
+            weight: 60,
+            targetGrade: 82,
+            actualGrade: '',
+            status: 'Not Started',
+            notes: '15-min exam: name exact myotome muscles, UL 0–4 vs LL 1+–4+ reflexes, CN VII non-motor functions.',
+            isTemplate: true,
+          },
+          {
+            id: 'as_3',
+            title: 'MSK Medicine — Written Exam [Edit date]',
+            moduleId: 'msk',
+            type: 'Written Exam',
+            dueDate: '2027-06-22',
+            weight: 70,
+            targetGrade: 70,
+            actualGrade: '',
+            status: 'Not Started',
+            notes: 'Priority 1 lift: OA vs RA mechanisms, CKD → renal osteodystrophy, red flags & special tests.',
+            isTemplate: true,
+          },
+          {
+            id: 'as_4',
+            title: 'Research 2 — Critical Appraisal / Proposal [Edit date]',
+            moduleId: 'research2',
+            type: 'Portfolio / Case',
+            dueDate: '2027-05-20',
+            weight: 100,
+            targetGrade: 78,
+            actualGrade: '',
+            status: 'Not Started',
+            notes: 'PICO framing, study design bias critique, Harvard page numbers on direct quotes.',
+            isTemplate: true,
+          },
+        ],
+
+        prepTasks: [
+          // Priority 1 — MSK & BMS Weak Spots
+          { id: 'pr_1', cat: 'p1', text: 'Review Renal Osteodystrophy pathway (CKD → ↑PO4 / ↓Vit D → ↓Ca → 2° Hyperparathyroidism)', done: false, custom: false },
+          { id: 'pr_2', cat: 'p1', text: 'Drill OA vs. RA mechanisms (Cartilage/Osteophytes vs. Synovitis/Pannus, TNF-α/IL-1/IL-6, DMARDs)', done: false, custom: false },
+          { id: 'pr_3', cat: 'p1', text: 'Compare Metabolic Bone Diseases (Osteoporosis vs. Osteomalacia vs. Paget\'s vs. Gout/Septic Arthritis)', done: false, custom: false },
+          { id: 'pr_4', cat: 'p1', text: 'Refresh CV Urgent Referral Thresholds (Stable vs. Unstable Angina, STEMI/NSTEMI, HTN crisis)', done: false, custom: false },
+          { id: 'pr_5', cat: 'p1', text: 'Review BMS Pharmacology & GI gaps (β2/cAMP, Steroids/Montelukast, Crohn\'s vs. UC, Addisonian crisis)', done: false, custom: false },
+
+          // Priority 2 — Clinical Neurology Momentum
+          { id: 'pr_6', cat: 'p2', text: 'Complete Visual Lesson 1: Upper Limb SMR (lesson-ul.html)', done: false, custom: false, link: 'lesson-ul.html' },
+          { id: 'pr_7', cat: 'p2', text: 'Complete Visual Lesson 2: Lower Limb SMR (lesson-ll.html)', done: false, custom: false, link: 'lesson-ll.html' },
+          { id: 'pr_8', cat: 'p2', text: 'Complete Visual Lesson 3: Cranial Nerves & Eye/Face Lab (lesson-cn.html)', done: false, custom: false, link: 'lesson-cn.html' },
+          { id: 'pr_9', cat: 'p2', text: 'Run 15-Minute Neuro OSCE Timer & 8-Section Testing Overview (neuro.html)', done: false, custom: false, link: 'neuro.html' },
+          { id: 'pr_10', cat: 'p2', text: 'Refresh Cortical Localisation nuances (Prefrontal, Fusiform gyrus, Arcuate fasciculus, Right parietal neglect)', done: false, custom: false, link: 'neuro.html' },
+
+          // Priority 3 — Written & Clinic Studies Lift
+          { id: 'pr_11', cat: 'p3', text: 'Review Tutor Feedback Rules: Zero 1st-person voice unless permitted; Reference List (not Bibliography)', done: false, custom: false, link: 'written.html' },
+          { id: 'pr_12', cat: 'p3', text: 'Practice upgrading Description → Critical Evaluation (Borton\'s Framework in written.html)', done: false, custom: false, link: 'written.html' },
+          { id: 'pr_13', cat: 'p3', text: 'Check Harvard referencing rules & page numbers for direct quotes', done: false, custom: false, link: 'written.html' },
+
+          // Admin & January Handbook Uploads
+          { id: 'pr_14', cat: 'p4', text: 'Import / save Year 3 Module Handbooks & Module Leaders into Module Vault', done: false, custom: false },
+          { id: 'pr_15', cat: 'p4', text: 'Enter confirmed Assessment Deadlines & Weightings into Assessment Tracker', done: false, custom: false },
+          { id: 'pr_16', cat: 'p4', text: 'Add core Reading Lists & textbooks per module', done: false, custom: false },
+          { id: 'pr_17', cat: 'p4', text: 'Set up Term-Time Weekly Study Routine in Weekly tab', done: false, custom: false },
+        ],
+
+        weekly: [
+          { day: 'Monday', tag: 'Lectures + SRS', morning: 'College lectures / core reading', afternoon: 'Consolidate lecture notes into Module Vault', evening: '10m Leitner SRS flashcards' },
+          { day: 'Tuesday', tag: 'Practical Bench', morning: 'Chiropractic Studies 3 bench practice', afternoon: 'Year 2 feedback fixes (stance, elbows, strikes)', evening: 'Quick 5-Min Mix warm-up' },
+          { day: 'Wednesday', tag: 'MSK / BMS Focus', morning: 'MSK Medicine pathology & red flags', afternoon: 'SAQ / LAQ active recall practice', evening: '10m Leitner SRS flashcards' },
+          { day: 'Thursday', tag: 'Written & Research', morning: 'Research 2 critical appraisal / PICO', afternoon: 'Essay drafting & Pre-Flight Scanner audit', evening: 'Light reading list catch-up' },
+          { day: 'Friday', tag: 'Neuro OSCE Drill', morning: 'Clinical Neurology bedside exam flow', afternoon: '15-Min Neuro OSCE timer + CN / SMR drill', evening: 'Plan next week\'s priorities' },
+          { day: 'Saturday', tag: 'Visual Lessons', morning: 'Interactive Visual Lessons (UL / LL / CN)', afternoon: 'Consolidate weak spots & case history prep', evening: 'Off / Recharge' },
+          { day: 'Sunday', tag: 'Rest & Preview', morning: 'Rest & recovery', afternoon: 'Light preview of upcoming week\'s lectures', evening: 'Check Assessment Tracker deadlines' },
+        ],
+      };
+    }
+
+    function loadPlannerData() {
+      try {
+        const raw = localStorage.getItem(STORAGE_KEY);
+        if (!raw) return createDefaultData();
+        const parsed = JSON.parse(raw);
+        const def = createDefaultData();
+        if (!parsed || typeof parsed !== 'object') return def;
+        return {
+          version: 1,
+          modules: Array.isArray(parsed.modules) && parsed.modules.length ? parsed.modules : def.modules,
+          assessments: Array.isArray(parsed.assessments) ? parsed.assessments : def.assessments,
+          prepTasks: Array.isArray(parsed.prepTasks) ? parsed.prepTasks : def.prepTasks,
+          weekly: Array.isArray(parsed.weekly) && parsed.weekly.length === 7 ? parsed.weekly : def.weekly,
+        };
+      } catch (e) {
+        return createDefaultData();
+      }
+    }
+
+    function savePlannerData(silentToast) {
+      try {
+        localStorage.setItem(STORAGE_KEY, JSON.stringify(planner));
+        if (!silentToast) flashSaved();
+      } catch (e) {
+        showToast('Storage full or blocked — download a JSON backup.', 'coral');
+      }
+    }
+
+    // =========================================================================
+    // 3. APP STATE & HEADER COUNTDOWN
+    // =========================================================================
+    let planner = loadPlannerData();
+
+    const ui = {
+      activeTab: 'modules', // 'modules' | 'assessments' | 'prep' | 'weekly'
+      openModules: { neuro: true },
+      assessFilterStatus: 'All', // 'All' | 'Upcoming' | 'In Progress' | 'Graded'
+      assessFilterMod: 'all',
+      showAssessForm: false,
+      editingAssessId: null,
+      prepNewCat: 'p1',
+    };
+
+    const TABS = [
+      { id: 'modules', label: '📚 Modules (7)' },
+      { id: 'assessments', label: '📅 Assessments' },
+      { id: 'prep', label: '🚀 Pre-Term Prep' },
+      { id: 'weekly', label: '🗓️ Weekly & Backup' },
+    ];
+
+    const PREP_CATS = [
+      { id: 'p1', title: 'Priority 1 — MSK & BMS Weak Spots', badge: 'badge-coral', accent: '#DC2626' },
+      { id: 'p2', title: 'Priority 2 — Clinical Neurology Momentum', badge: 'badge-blue', accent: '#2563EB' },
+      { id: 'p3', title: 'Priority 3 — Written & Clinic Studies Lift (64% → 70%+)', badge: 'badge-amber', accent: '#D97706' },
+      { id: 'p4', title: 'Admin & January Handbook Uploads', badge: 'badge-emerald', accent: '#059669' },
+    ];
+
+    const ASSESS_TYPES = ['Essay / Written', 'Practical / OSCE', 'Written Exam', 'Portfolio / Case', 'Presentation'];
+    const ASSESS_STATUSES = ['Not Started', 'In Progress', 'Submitted', 'Graded'];
+
+    function updateCountdown() {
+      const target = new Date('2027-01-25T09:00:00Z');
+      const days = Math.max(0, Math.ceil((target.getTime() - Date.now()) / 86400000));
+      const el = document.getElementById('y3-countdown');
+      if (el) el.textContent = `${days} days to Y3`;
+    }
+
+    function setTab(id) {
+      ui.activeTab = id;
+      renderTabs();
+      renderApp();
+      window.scrollTo({ top: 0, behavior: 'smooth' });
+    }
+
+    function renderTabs() {
+      document.getElementById('segmented-tabs').innerHTML = TABS.map((t) => `
+        <button
+          type="button"
+          role="tab"
+          aria-selected="${ui.activeTab === t.id}"
+          class="seg-btn ${ui.activeTab === t.id ? 'active' : ''}"
+          onclick="setTab('${t.id}')"
+        >${t.label}</button>
+      `).join('');
+    }
+
+    function renderApp() {
+      const root = document.getElementById('app-root');
+      if (ui.activeTab === 'modules') root.innerHTML = renderModulesTab();
+      else if (ui.activeTab === 'assessments') root.innerHTML = renderAssessmentsTab();
+      else if (ui.activeTab === 'prep') root.innerHTML = renderPrepTab();
+      else root.innerHTML = renderWeeklyBackupTab();
+    }
+
+    // =========================================================================
+    // 4. TAB 1: MODULE VAULT (7 OFFICIAL YEAR 3 MODULES)
+    // =========================================================================
+    function getModuleById(id) {
+      return planner.modules.find((m) => m.id === id);
+    }
+
+    function toggleModuleCard(id) {
+      ui.openModules[id] = !ui.openModules[id];
+      renderApp();
+    }
+
+    function updateModuleField(modId, field, value) {
+      const m = getModuleById(modId);
+      if (!m) return;
+      m[field] = value;
+      savePlannerData(false);
+    }
+
+    function toggleModuleItem(modId, listKey, itemId) {
+      const m = getModuleById(modId);
+      if (!m) return;
+      const item = m[listKey].find((x) => x.id === itemId);
+      if (item) {
+        item.done = !item.done;
+        savePlannerData(false);
+        renderApp();
+      }
+    }
+
+    function deleteModuleItem(modId, listKey, itemId) {
+      const m = getModuleById(modId);
+      if (!m) return;
+      m[listKey] = m[listKey].filter((x) => x.id !== itemId);
+      savePlannerData(false);
+      renderApp();
+    }
+
+    function addModuleItem(modId, listKey, inputId) {
+      const inp = document.getElementById(inputId);
+      if (!inp) return;
+      const text = inp.value.trim();
+      if (!text) {
+        showToast('Enter text first.', 'amber');
+        return;
+      }
+      const m = getModuleById(modId);
+      if (!m) return;
+      m[listKey].push({ id: uid(listKey === 'topics' ? 'tp' : 'rd'), text, done: false });
+      savePlannerData(false);
+      renderApp();
+    }
+
+    function renderModulesTab() {
+      const totalTopics = planner.modules.reduce((acc, m) => acc + m.topics.length, 0);
+      const doneTopics = planner.modules.reduce((acc, m) => acc + m.topics.filter((t) => t.done).length, 0);
+      const totalReadings = planner.modules.reduce((acc, m) => acc + m.readings.length, 0);
+      const doneReadings = planner.modules.reduce((acc, m) => acc + m.readings.filter((r) => r.done).length, 0);
+      const overallPct = totalTopics ? Math.round((doneTopics / totalTopics) * 100) : 0;
+
+      return `
+        <div class="stack">
+          <!-- Summary Strip -->
+          <section class="grid-3">
+            <div class="stat-tile">
+              <span class="stat-lbl">Syllabus Topics Covered</span>
+              <span class="stat-num" style="color:var(--blue);">${doneTopics} / ${totalTopics}</span>
+              <div class="progress-track" style="margin-top:4px;">
+                <div class="progress-fill" style="width:${overallPct}%;background:var(--blue);"></div>
+              </div>
+            </div>
+            <div class="stat-tile">
+              <span class="stat-lbl">Reading List Logged</span>
+              <span class="stat-num" style="color:var(--emerald);">${totalReadings}</span>
+              <span class="stat-lbl">${doneReadings} marked read</span>
+            </div>
+            <div class="stat-tile">
+              <span class="stat-lbl">Year 3 Modules Ready</span>
+              <span class="stat-num" style="color:var(--indigo);">7 / 7</span>
+              <span class="stat-lbl">Tap any module to edit</span>
+            </div>
+          </section>
+
+          <!-- 7 Module Accordion Cards -->
+          <section class="stack-sm">
+            ${planner.modules.map((m) => {
+              const isOpen = !!ui.openModules[m.id];
+              const mTotal = m.topics.length;
+              const mDone = m.topics.filter((t) => t.done).length;
+              const mPct = mTotal ? Math.round((mDone / mTotal) * 100) : 0;
+
+              return `
+                <article class="ah-card mod-card" style="border-left-color:${m.color};">
+                  <button type="button" class="mod-trigger" onclick="toggleModuleCard('${m.id}')" aria-expanded="${isOpen}">
+                    <div class="flex-between" style="width:100%;">
+                      <div style="display:flex;flex-direction:column;gap:5px;min-width:0;">
+                        <div style="display:flex;align-items:center;gap:8px;flex-wrap:wrap;">
+                          <h2 style="font-size:16.5px;font-weight:800;letter-spacing:-0.015em;">${esc(m.name)}</h2>
+                          <span class="badge ${m.badgeCls}">${esc(m.baseline)}</span>
+                          <span class="badge badge-muted">${esc(m.target)}</span>
+                        </div>
+                        <div style="display:flex;align-items:center;gap:10px;font-size:12px;font-weight:700;color:var(--text-muted);flex-wrap:wrap;">
+                          <span>${mDone}/${mTotal} topics (${mPct}%)</span>
+                          <span>&bull;</span>
+                          <span>${m.readings.length} readings</span>
+                          ${m.leader ? `<span>&bull; Leader: ${esc(m.leader)}</span>` : ''}
+                        </div>
+                      </div>
+
+                      <div style="display:flex;align-items:center;gap:8px;flex-shrink:0;">
+                        <a
+                          href="${esc(m.link)}"
+                          onclick="event.stopPropagation();"
+                          class="badge ${m.badgeCls}"
+                          style="padding:6px 11px;font-size:11.5px;"
+                          title="Open ${esc(m.name)} Revision Hub"
+                        >Open Hub &rarr;</a>
+                        <span style="font-size:13px;font-weight:800;color:var(--text-muted);">${isOpen ? '▲' : '▼'}</span>
+                      </div>
+                    </div>
+
+                    <div class="progress-track" style="height:7px;">
+                      <div class="progress-fill" style="width:${mPct}%;background:${m.color};"></div>
+                    </div>
+                  </button>
+
+                  ${isOpen ? `
+                    <div class="mod-body">
+                      <!-- 1. Handbook Quick-Slots -->
+                      <div class="sub-block">
+                        <span class="sub-block-title">1. Handbook Quick-Slots</span>
+                        <div class="grid-2">
+                          <div>
+                            <label class="field-label" for="ldr_${m.id}">Module Leader</label>
+                            <input
+                              id="ldr_${m.id}"
+                              type="text"
+                              class="input"
+                              placeholder="e.g. Dr. Smith"
+                              value="${esc(m.leader)}"
+                              oninput="updateModuleField('${m.id}','leader',this.value)"
+                            />
+                          </div>
+                          <div>
+                            <label class="field-label" for="brk_${m.id}">Assessment Breakdown</label>
+                            <input
+                              id="brk_${m.id}"
+                              type="text"
+                              class="input"
+                              placeholder="e.g. 60% OSCE / 40% Written"
+                              value="${esc(m.breakdown)}"
+                              oninput="updateModuleField('${m.id}','breakdown',this.value)"
+                            />
+                          </div>
+                        </div>
+                        <div>
+                          <label class="field-label" for="hbn_${m.id}">Key Handbook Notes / Room / Portal Link</label>
+                          <input
+                            id="hbn_${m.id}"
+                            type="text"
+                            class="input"
+                            placeholder="e.g. Moodle link, clinic room, handbook page refs..."
+                            value="${esc(m.handbookNotes)}"
+                            oninput="updateModuleField('${m.id}','handbookNotes',this.value)"
+                          />
+                        </div>
+                      </div>
+
+                      <!-- 2. Syllabus & Lecture Checklist -->
+                      <div class="sub-block">
+                        <div class="flex-between">
+                          <span class="sub-block-title">2. Syllabus &amp; Lecture Checklist</span>
+                          <span class="mono" style="font-size:11.5px;font-weight:800;color:var(--text-muted);">${mDone}/${mTotal}</span>
+                        </div>
+                        <div class="stack-sm" style="gap:7px;">
+                          ${m.topics.length ? m.topics.map((tp) => `
+                            <div class="check-item">
+                              <label class="check-label">
+                                <input type="checkbox" ${tp.done ? 'checked' : ''} onchange="toggleModuleItem('${m.id}','topics','${tp.id}')" />
+                                <span class="${tp.done ? 'check-done' : ''}">${esc(tp.text)}</span>
+                              </label>
+                              <button type="button" class="icon-del" aria-label="Delete topic" onclick="deleteModuleItem('${m.id}','topics','${tp.id}')">&times;</button>
+                            </div>
+                          `).join('') : `<p style="font-size:12.5px;color:var(--text-muted);">No topics yet — add your first lecture below.</p>`}
+                        </div>
+                        <div class="inline-add">
+                          <input
+                            id="add_tp_${m.id}"
+                            type="text"
+                            class="input"
+                            placeholder="Add lecture or syllabus topic..."
+                            onkeydown="if(event.key==='Enter'){event.preventDefault();addModuleItem('${m.id}','topics','add_tp_${m.id}');}"
+                          />
+                          <button type="button" class="btn-3d btn-blue sm" onclick="addModuleItem('${m.id}','topics','add_tp_${m.id}')">+ Add Topic</button>
+                        </div>
+                      </div>
+
+                      <!-- 3. Reading List & Sources Slot -->
+                      <div class="sub-block">
+                        <span class="sub-block-title">3. Reading List &amp; Sources Slot</span>
+                        <div class="stack-sm" style="gap:7px;">
+                          ${m.readings.length ? m.readings.map((rd) => `
+                            <div class="check-item">
+                              <label class="check-label">
+                                <input type="checkbox" ${rd.done ? 'checked' : ''} onchange="toggleModuleItem('${m.id}','readings','${rd.id}')" />
+                                <span class="${rd.done ? 'check-done' : ''}">${esc(rd.text)}</span>
+                              </label>
+                              <button type="button" class="icon-del" aria-label="Delete reading" onclick="deleteModuleItem('${m.id}','readings','${rd.id}')">&times;</button>
+                            </div>
+                          `).join('') : `<p style="font-size:12.5px;color:var(--text-muted);">Add core textbooks, NICE guidelines, or Harvard journal papers here.</p>`}
+                        </div>
+                        <div class="inline-add">
+                          <input
+                            id="add_rd_${m.id}"
+                            type="text"
+                            class="input"
+                            placeholder="Add textbook, guideline, or Harvard paper..."
+                            onkeydown="if(event.key==='Enter'){event.preventDefault();addModuleItem('${m.id}','readings','add_rd_${m.id}');}"
+                          />
+                          <button type="button" class="btn-3d btn-emerald sm" onclick="addModuleItem('${m.id}','readings','add_rd_${m.id}')">+ Add Reading</button>
+                        </div>
+                      </div>
+
+                      <!-- 4. Module Scratchpad -->
+                      <div class="sub-block">
+                        <span class="sub-block-title">4. Module Scratchpad (Auto-Saves)</span>
+                        <textarea
+                          rows="3"
+                          class="textarea"
+                          placeholder="Lecturer tips, exam hints, tutor feedback reminders..."
+                          oninput="updateModuleField('${m.id}','scratchpad',this.value)"
+                        >${esc(m.scratchpad)}</textarea>
+                      </div>
+                    </div>
+                  ` : ''}
+                </article>
+              `;
+            }).join('')}
+          </section>
+        </div>
+      `;
+    }
+
+    // =========================================================================
+    // 5. TAB 2: ASSESSMENT & GRADE TRACKER
+    // =========================================================================
+    function getCountdownBadge(a) {
+      if (a.status === 'Graded') return { text: '✓ Graded', cls: 'badge-emerald' };
+      if (a.status === 'Submitted') return { text: '✓ Submitted', cls: 'badge-blue' };
+      if (!a.dueDate) return { text: 'No Date Set', cls: 'badge-muted' };
+
+      const today = new Date();
+      today.setHours(0, 0, 0, 0);
+      const due = new Date(a.dueDate + 'T00:00:00');
+      const diff = Math.round((due.getTime() - today.getTime()) / 86400000);
+
+      if (diff < 0) return { text: `Overdue (${Math.abs(diff)}d)`, cls: 'badge-coral' };
+      if (diff === 0) return { text: 'Due Today!', cls: 'badge-coral' };
+      if (diff <= 14) return { text: `Due Soon! (${diff}d)`, cls: 'badge-amber' };
+      return { text: `In ${diff} days`, cls: 'badge-indigo' };
+    }
+
+    function openAddAssessmentForm(editId) {
+      ui.editingAssessId = editId || null;
+      ui.showAssessForm = true;
+      renderApp();
+    }
+
+    function closeAssessmentForm() {
+      ui.showAssessForm = false;
+      ui.editingAssessId = null;
+      renderApp();
+    }
+
+    function saveAssessmentForm(e) {
+      e.preventDefault();
+      const title = (document.getElementById('af_title').value || '').trim();
+      if (!title) {
+        showToast('Please enter an assessment title.', 'amber');
+        return;
+      }
+
+      const payload = {
+        id: ui.editingAssessId || uid('as'),
+        title,
+        moduleId: document.getElementById('af_mod').value,
+        type: document.getElementById('af_type').value,
+        dueDate: document.getElementById('af_due').value,
+        weight: parseFloat(document.getElementById('af_weight').value) || 0,
+        targetGrade: parseFloat(document.getElementById('af_target').value) || 70,
+        actualGrade: document.getElementById('af_actual').value.trim(),
+        status: document.getElementById('af_status').value,
+        notes: document.getElementById('af_notes').value.trim(),
+        isTemplate: false,
+      };
+
+      if (ui.editingAssessId) {
+        const idx = planner.assessments.findIndex((x) => x.id === ui.editingAssessId);
+        if (idx >= 0) planner.assessments[idx] = payload;
+      } else {
+        planner.assessments.unshift(payload);
+      }
+
+      ui.showAssessForm = false;
+      ui.editingAssessId = null;
+      savePlannerData(true);
+      showToast('Assessment saved!', 'emerald');
+      renderApp();
+    }
+
+    function deleteAssessment(id) {
+      planner.assessments = planner.assessments.filter((a) => a.id !== id);
+      savePlannerData(false);
+      renderApp();
+    }
+
+    function quickUpdateAssessment(id, field, value) {
+      const a = planner.assessments.find((x) => x.id === id);
+      if (!a) return;
+      a[field] = value;
+      if (field === 'actualGrade' && value.trim() !== '' && a.status !== 'Graded') {
+        a.status = 'Graded';
+      }
+      savePlannerData(false);
+      renderApp();
+    }
+
+    function renderAssessmentsTab() {
+      const all = planner.assessments;
+      const upcomingCount = all.filter((a) => a.status === 'Not Started' || a.status === 'In Progress').length;
+      const doneCount = all.filter((a) => a.status === 'Submitted' || a.status === 'Graded').length;
+
+      // Dynamic Weighted Year 3 Average (from assessments with Weighting % > 0 & numeric Actual Grade %)
+      let weightedSum = 0;
+      let totalWeight = 0;
+      all.forEach((a) => {
+        const w = parseFloat(a.weight);
+        const g = parseFloat(a.actualGrade);
+        if (!isNaN(w) && w > 0 && !isNaN(g) && a.actualGrade !== '') {
+          weightedSum += w * g;
+          totalWeight += w;
+        }
+      });
+      const hasAvg = totalWeight > 0;
+      const avgStr = hasAvg ? `${(weightedSum / totalWeight).toFixed(1)}%` : '—';
+
+      // Filter & Sort by due date
+      const filtered = all.filter((a) => {
+        if (ui.assessFilterMod !== 'all' && a.moduleId !== ui.assessFilterMod) return false;
+        if (ui.assessFilterStatus === 'Upcoming') return a.status === 'Not Started' || a.status === 'In Progress';
+        if (ui.assessFilterStatus === 'In Progress') return a.status === 'In Progress';
+        if (ui.assessFilterStatus === 'Graded') return a.status === 'Graded';
+        return true;
+      }).slice().sort((a, b) => (a.dueDate || '9999-12-31').localeCompare(b.dueDate || '9999-12-31'));
+
+      const editItem = ui.editingAssessId ? all.find((x) => x.id === ui.editingAssessId) : null;
+
+      return `
+        <div class="stack">
+          <!-- Top Dashboard Cards -->
+          <section class="grid-3">
+            <div class="stat-tile">
+              <span class="stat-lbl">Upcoming Deadlines</span>
+              <span class="stat-num" style="color:var(--amber);">${upcomingCount}</span>
+              <span class="stat-lbl">Not started / In progress</span>
+            </div>
+            <div class="stat-tile">
+              <span class="stat-lbl">Completed</span>
+              <span class="stat-num" style="color:var(--emerald);">${doneCount}</span>
+              <span class="stat-lbl">Submitted or graded</span>
+            </div>
+            <div class="stat-tile">
+              <span class="stat-lbl">Weighted Y3 Average</span>
+              <span class="stat-num" style="color:var(--indigo);">${avgStr}</span>
+              <span class="stat-lbl">${hasAvg ? `Across ${totalWeight}% weight` : 'Enter actual grades to calculate'}</span>
+            </div>
+          </section>
+
+          <!-- Toolbar: Filter Pills + Add Assessment Button -->
+          <section class="ah-card pad-card stack-sm">
+            <div class="flex-between">
+              <div class="chip-row">
+                ${['All', 'Upcoming', 'In Progress', 'Graded'].map((st) => `
+                  <button type="button" class="chip ${ui.assessFilterStatus === st ? 'active' : ''}" onclick="ui.assessFilterStatus='${st}'; renderApp();">${st}</button>
+                `).join('')}
+              </div>
+
+              <button type="button" class="btn-3d btn-blue sm" onclick="${ui.showAssessForm ? 'closeAssessmentForm()' : 'openAddAssessmentForm(null)'}">
+                ${ui.showAssessForm ? 'Close Form' : '+ Add Assessment'}
+              </button>
+            </div>
+
+            <div style="display:flex;align-items:center;gap:8px;flex-wrap:wrap;">
+              <span class="field-label" style="margin:0;">Filter Module:</span>
+              <select class="select" style="max-width:240px;min-height:36px;padding:6px 10px;font-size:12.5px;" onchange="ui.assessFilterMod=this.value; renderApp();">
+                <option value="all" ${ui.assessFilterMod === 'all' ? 'selected' : ''}>All 7 Modules</option>
+                ${planner.modules.map((m) => `<option value="${m.id}" ${ui.assessFilterMod === m.id ? 'selected' : ''}>${esc(m.name)}</option>`).join('')}
+              </select>
+            </div>
+
+            <!-- Collapsible Add / Edit Assessment Form -->
+            ${ui.showAssessForm ? `
+              <form onsubmit="saveAssessmentForm(event)" class="sub-block" style="margin-top:6px;">
+                <div class="flex-between">
+                  <span class="sub-block-title">${editItem ? 'Edit Assessment' : 'New Year 3 Assessment'}</span>
+                  <button type="button" class="icon-del" onclick="closeAssessmentForm()" aria-label="Close form">&times;</button>
+                </div>
+
+                <div>
+                  <label class="field-label" for="af_title">Assessment Title</label>
+                  <input id="af_title" type="text" class="input" required placeholder="e.g. Philosophy 3 Ethics Essay (2,000 words)" value="${esc(editItem ? editItem.title : '')}" />
+                </div>
+
+                <div class="grid-2">
+                  <div>
+                    <label class="field-label" for="af_mod">Module</label>
+                    <select id="af_mod" class="select">
+                      ${planner.modules.map((m) => `<option value="${m.id}" ${editItem && editItem.moduleId === m.id ? 'selected' : ''}>${esc(m.name)}</option>`).join('')}
+                    </select>
+                  </div>
+                  <div>
+                    <label class="field-label" for="af_type">Assessment Type</label>
+                    <select id="af_type" class="select">
+                      ${ASSESS_TYPES.map((t) => `<option value="${t}" ${editItem && editItem.type === t ? 'selected' : ''}>${t}</option>`).join('')}
+                    </select>
+                  </div>
+                </div>
+
+                <div class="grid-3">
+                  <div>
+                    <label class="field-label" for="af_due">Due Date</label>
+                    <input id="af_due" type="date" class="input" value="${esc(editItem ? editItem.dueDate : '')}" />
+                  </div>
+                  <div>
+                    <label class="field-label" for="af_weight">Weighting (%)</label>
+                    <input id="af_weight" type="number" min="0" max="100" step="1" class="input" placeholder="e.g. 50" value="${esc(editItem ? editItem.weight : 50)}" />
+                  </div>
+                  <div>
+                    <label class="field-label" for="af_status">Status</label>
+                    <select id="af_status" class="select">
+                      ${ASSESS_STATUSES.map((s) => `<option value="${s}" ${editItem && editItem.status === s ? 'selected' : ''}>${s}</option>`).join('')}
+                    </select>
+                  </div>
+                </div>
+
+                <div class="grid-2">
+                  <div>
+                    <label class="field-label" for="af_target">Target Grade (%)</label>
+                    <input id="af_target" type="number" min="0" max="100" step="1" class="input" placeholder="e.g. 72" value="${esc(editItem ? editItem.targetGrade : 72)}" />
+                  </div>
+                  <div>
+                    <label class="field-label" for="af_actual">Actual Grade % (Optional)</label>
+                    <input id="af_actual" type="number" min="0" max="100" step="0.5" class="input" placeholder="Leave blank until graded" value="${esc(editItem ? editItem.actualGrade : '')}" />
+                  </div>
+                </div>
+
+                <div>
+                  <label class="field-label" for="af_notes">Quick Notes (Word count ±10%, rubric reminders)</label>
+                  <textarea id="af_notes" rows="2" class="textarea" placeholder="e.g. 2,000 words ±10%, 3rd person, Harvard page numbers...">${esc(editItem ? editItem.notes : '')}</textarea>
+                </div>
+
+                <div class="grid-2">
+                  <button type="button" class="btn-3d btn-neutral" onclick="closeAssessmentForm()">Cancel</button>
+                  <button type="submit" class="btn-3d btn-emerald">${editItem ? 'Update Assessment' : 'Save Assessment'}</button>
+                </div>
+              </form>
+            ` : ''}
+          </section>
+
+          <!-- Assessment Cards List -->
+          <section class="stack-sm">
+            ${filtered.length ? filtered.map((a) => {
+              const mod = getModuleById(a.moduleId) || planner.modules[0];
+              const cd = getCountdownBadge(a);
+              return `
+                <article class="ah-card assess-card" style="border-left-color:${mod.color};">
+                  <div class="flex-between">
+                    <div style="display:flex;align-items:center;gap:6px;flex-wrap:wrap;">
+                      <span class="badge ${mod.badgeCls}">${esc(mod.name)}</span>
+                      <span class="badge badge-muted">${esc(a.type)}</span>
+                      ${a.isTemplate ? `<span class="badge badge-amber">Template</span>` : ''}
+                    </div>
+                    <span class="badge ${cd.cls}">${cd.text}</span>
+                  </div>
+
+                  <div>
+                    <h3 style="font-size:15.5px;font-weight:800;line-height:1.32;">${esc(a.title)}</h3>
+                    <div style="display:flex;gap:12px;flex-wrap:wrap;margin-top:5px;font-size:12px;font-weight:700;color:var(--text-muted);">
+                      <span>📅 Due: <strong style="color:var(--text-main);">${a.dueDate ? esc(a.dueDate) : 'TBC'}</strong></span>
+                      <span>⚖️ Weight: <strong style="color:var(--text-main);">${esc(a.weight)}%</strong></span>
+                      <span>🎯 Target: <strong style="color:var(--text-main);">${esc(a.targetGrade)}%</strong></span>
+                    </div>
+                    ${a.notes ? `<p style="font-size:12.5px;color:var(--text-muted);margin-top:6px;">${esc(a.notes)}</p>` : ''}
+                  </div>
+
+                  <!-- Inline Quick-Update Controls -->
+                  <div class="assess-controls">
+                    <div>
+                      <label class="field-label" style="margin-bottom:3px;">Status</label>
+                      <select class="select" style="min-height:36px;padding:6px 10px;font-size:12.5px;" onchange="quickUpdateAssessment('${a.id}','status',this.value)">
+                        ${ASSESS_STATUSES.map((s) => `<option value="${s}" ${a.status === s ? 'selected' : ''}>${s}</option>`).join('')}
+                      </select>
+                    </div>
+                    <div>
+                      <label class="field-label" style="margin-bottom:3px;">Actual Grade %</label>
+                      <input
+                        type="number"
+                        min="0"
+                        max="100"
+                        step="0.5"
+                        class="input"
+                        style="min-height:36px;padding:6px 10px;font-size:12.5px;"
+                        placeholder="e.g. 74"
+                        value="${esc(a.actualGrade)}"
+                        onchange="quickUpdateAssessment('${a.id}','actualGrade',this.value)"
+                      />
+                    </div>
+                    <button type="button" class="btn-3d btn-neutral sm" onclick="openAddAssessmentForm('${a.id}')">Edit</button>
+                    <button type="button" class="btn-3d btn-coral sm" onclick="deleteAssessment('${a.id}')">Delete</button>
+                  </div>
+                </article>
+              `;
+            }).join('') : `
+              <div class="ah-card pad-card" style="text-align:center;">
+                <p style="font-size:14px;font-weight:700;color:var(--text-muted);">No assessments match this filter. Tap "+ Add Assessment" above to add one.</p>
+              </div>
+            `}
+          </section>
+        </div>
+      `;
+    }
+
+    // =========================================================================
+    // 6. TAB 3: PRE-TERM PREP & BRIDGING CHECKLIST
+    // =========================================================================
+    function togglePrepTask(id) {
+      const t = planner.prepTasks.find((x) => x.id === id);
+      if (!t) return;
+      t.done = !t.done;
+      savePlannerData(false);
+      renderApp();
+    }
+
+    function deletePrepTask(id) {
+      planner.prepTasks = planner.prepTasks.filter((x) => x.id !== id);
+      savePlannerData(false);
+      renderApp();
+    }
+
+    function addCustomPrepTask(e) {
+      e.preventDefault();
+      const cat = document.getElementById('prep_cat').value;
+      const inp = document.getElementById('prep_text');
+      const text = (inp.value || '').trim();
+      if (!text) {
+        showToast('Enter a prep task first.', 'amber');
+        return;
+      }
+      planner.prepTasks.push({ id: uid('pr'), cat, text, done: false, custom: true });
+      ui.prepNewCat = cat;
+      savePlannerData(false);
+      renderApp();
+    }
+
+    function renderPrepTab() {
+      const total = planner.prepTasks.length;
+      const done = planner.prepTasks.filter((t) => t.done).length;
+      const pct = total ? Math.round((done / total) * 100) : 0;
+
+      let milestone = { text: 'Warming Up', cls: 'badge-blue' };
+      if (pct >= 100) milestone = { text: '🏆 100% Year 3 Ready!', cls: 'badge-emerald' };
+      else if (pct >= 75) milestone = { text: '🔥 Almost Clinic-Ready!', cls: 'badge-emerald' };
+      else if (pct >= 50) milestone = { text: '⚡ Halfway Milestone!', cls: 'badge-amber' };
+      else if (pct >= 25) milestone = { text: '🚀 Strong Momentum!', cls: 'badge-indigo' };
+
+      return `
+        <div class="stack">
+          <!-- Year 3 Readiness Progress Card -->
+          <section class="ah-card pad-card stack-sm">
+            <div class="flex-between">
+              <div>
+                <span class="field-label" style="margin:0;">Pre-Term Bridging Progress</span>
+                <h2 style="font-size:22px;font-weight:800;margin-top:2px;">Year 3 Readiness Score: ${pct}% Ready</h2>
+              </div>
+              <span class="badge ${milestone.cls}" style="font-size:12px;padding:6px 12px;">${milestone.text}</span>
+            </div>
+
+            <div class="progress-track" style="height:14px;">
+              <div class="progress-fill" style="width:${pct}%;background:linear-gradient(90deg, var(--blue), var(--emerald));"></div>
+            </div>
+
+            <p style="font-size:12.5px;font-weight:600;color:var(--text-muted);">
+              ${done} of ${total} bridging &amp; January onboarding tasks completed. Tailored directly from your Year 1–2 handoff.
+            </p>
+          </section>
+
+          <!-- Add Custom Prep Task Form -->
+          <section class="ah-card pad-card">
+            <form onsubmit="addCustomPrepTask(event)" class="stack-sm">
+              <span class="sub-block-title">+ Add Custom Prep Task</span>
+              <div class="grid-2" style="align-items:stretch;">
+                <select id="prep_cat" class="select">
+                  ${PREP_CATS.map((c) => `<option value="${c.id}" ${ui.prepNewCat === c.id ? 'selected' : ''}>${esc(c.title)}</option>`).join('')}
+                </select>
+                <div class="inline-add">
+                  <input id="prep_text" type="text" class="input" placeholder="e.g. Print Year 3 timetable..." />
+                  <button type="submit" class="btn-3d btn-emerald sm">+ Add</button>
+                </div>
+              </div>
+            </form>
+          </section>
+
+          <!-- 4 Colour-Coded Bridging Categories -->
+          ${PREP_CATS.map((cat) => {
+            const items = planner.prepTasks.filter((t) => t.cat === cat.id);
+            const cDone = items.filter((t) => t.done).length;
+            return `
+              <section class="ah-card pad-card stack-sm" style="border-top:4px solid ${cat.accent};">
+                <div class="flex-between">
+                  <h3 style="font-size:15.5px;font-weight:800;">${esc(cat.title)}</h3>
+                  <span class="badge ${cat.badge} mono">${cDone} / ${items.length}</span>
+                </div>
+
+                <div class="stack-sm" style="gap:7px;">
+                  ${items.map((t) => `
+                    <div class="check-item">
+                      <label class="check-label">
+                        <input type="checkbox" ${t.done ? 'checked' : ''} onchange="togglePrepTask('${t.id}')" />
+                        <span class="${t.done ? 'check-done' : ''}">${esc(t.text)}</span>
+                      </label>
+                      <div style="display:flex;align-items:center;gap:4px;flex-shrink:0;">
+                        ${t.link ? `<a href="${esc(t.link)}" class="badge ${cat.badge}" style="font-size:10.5px;">Open &rarr;</a>` : ''}
+                        ${t.custom ? `<button type="button" class="icon-del" aria-label="Delete custom task" onclick="deletePrepTask('${t.id}')">&times;</button>` : ''}
+                      </div>
+                    </div>
+                  `).join('')}
+                </div>
+              </section>
+            `;
+          }).join('')}
+        </div>
+      `;
+    }
+
+    // =========================================================================
+    // 7. TAB 4: WEEKLY STUDY TEMPLATE & BACKUP / SYNC
+    // =========================================================================
+    function updateWeeklyField(dayIdx, field, value) {
+      if (!planner.weekly[dayIdx]) return;
+      planner.weekly[dayIdx][field] = value;
+      savePlannerData(false);
+    }
+
+    function encodePlannerBase64() {
+      try {
+        return btoa(unescape(encodeURIComponent(JSON.stringify(planner))));
+      } catch (e) {
+        return '';
+      }
+    }
+
+    function copyPlannerSyncCode() {
+      const code = encodePlannerBase64();
+      if (!code) {
+        showToast('Could not generate sync code.', 'coral');
+        return;
+      }
+      copyTextSafe(code, 'Planner Base64 sync code copied!');
+    }
+
+    function importPlannerSyncCode() {
+      const ta = document.getElementById('planner-sync-import');
+      const raw = (ta ? ta.value : '').trim();
+      if (!raw) {
+        showToast('Paste a sync code first.', 'amber');
+        return;
+      }
+      try {
+        const decoded = JSON.parse(decodeURIComponent(escape(atob(raw))));
+        if (!decoded || !Array.isArray(decoded.modules)) throw new Error('Invalid');
+        planner = Object.assign(createDefaultData(), decoded);
+        savePlannerData(true);
+        showToast('✓ Planner restored from sync code!', 'emerald');
+        renderApp();
+      } catch (e) {
+        showToast('Invalid sync code — check you copied the full text.', 'coral');
+      }
+    }
+
+    function downloadJsonBackup() {
+      try {
+        const blob = new Blob([JSON.stringify(planner, null, 2)], { type: 'application/json' });
+        const url = URL.createObjectURL(blob);
+        const a = document.createElement('a');
+        const dateTag = new Date().toISOString().slice(0, 10);
+        a.href = url;
+        a.download = `mchiro-year3-planner-${dateTag}.json`;
+        document.body.appendChild(a);
+        a.click();
+        document.body.removeChild(a);
+        URL.revokeObjectURL(url);
+        showToast('Downloaded JSON backup!', 'emerald');
+      } catch (e) {
+        showToast('Could not download file — use Copy Sync Code instead.', 'amber');
+      }
+    }
+
+    function handleJsonFileUpload(input) {
+      const file = input && input.files && input.files[0];
+      if (!file) return;
+      const reader = new FileReader();
+      reader.onload = function (ev) {
+        try {
+          const parsed = JSON.parse(ev.target.result);
+          if (!parsed || !Array.isArray(parsed.modules)) throw new Error('Invalid');
+          planner = Object.assign(createDefaultData(), parsed);
+          savePlannerData(true);
+          showToast('✓ JSON backup imported!', 'emerald');
+          renderApp();
+        } catch (err) {
+          showToast('Invalid JSON backup file.', 'coral');
+        }
+      };
+      reader.readAsText(file);
+    }
+
+    function openResetModal() {
+      document.getElementById('reset-modal').classList.add('open');
+    }
+
+    function closeResetModal() {
+      document.getElementById('reset-modal').classList.remove('open');
+    }
+
+    function confirmResetDefaults() {
+      planner = createDefaultData();
+      savePlannerData(true);
+      closeResetModal();
+      showToast('Planner reset to default templates.', 'amber');
+      renderApp();
+    }
+
+    function renderWeeklyBackupTab() {
+      const syncCode = encodePlannerBase64();
+
+      return `
+        <div class="stack">
+          <!-- 1. Term-Time Weekly Routine Builder -->
+          <section class="ah-card pad-card stack-sm">
+            <div class="flex-between">
+              <div>
+                <span class="badge badge-indigo">Auto-Saving Routine</span>
+                <h2 style="font-size:18px;font-weight:800;margin-top:4px;">Term-Time Weekly Study Template</h2>
+                <p style="font-size:12.5px;color:var(--text-muted);margin-top:2px;">Edit any day's focus tag or Morning / Afternoon / Evening block — changes save instantly.</p>
+              </div>
+            </div>
+
+            <div class="week-grid">
+              ${planner.weekly.map((d, idx) => `
+                <article class="day-card">
+                  <div class="flex-between">
+                    <h3 style="font-size:15px;font-weight:800;">${esc(d.day)}</h3>
+                    <input
+                      type="text"
+                      class="input"
+                      style="max-width:165px;min-height:32px;padding:4px 9px;font-size:11.5px;font-weight:800;"
+                      value="${esc(d.tag)}"
+                      aria-label="${esc(d.day)} Focus Tag"
+                      oninput="updateWeeklyField(${idx},'tag',this.value)"
+                    />
+                  </div>
+                  <div>
+                    <label class="field-label" style="margin-bottom:2px;">Morning</label>
+                    <input type="text" class="input" style="min-height:36px;padding:6px 10px;font-size:12.5px;" value="${esc(d.morning)}" oninput="updateWeeklyField(${idx},'morning',this.value)" />
+                  </div>
+                  <div>
+                    <label class="field-label" style="margin-bottom:2px;">Afternoon</label>
+                    <input type="text" class="input" style="min-height:36px;padding:6px 10px;font-size:12.5px;" value="${esc(d.afternoon)}" oninput="updateWeeklyField(${idx},'afternoon',this.value)" />
+                  </div>
+                  <div>
+                    <label class="field-label" style="margin-bottom:2px;">Evening</label>
+                    <input type="text" class="input" style="min-height:36px;padding:6px 10px;font-size:12.5px;" value="${esc(d.evening)}" oninput="updateWeeklyField(${idx},'evening',this.value)" />
+                  </div>
+                </article>
+              `).join('')}
+            </div>
+          </section>
+
+          <!-- 2. Data Backup & Phone <-> Laptop Sync Card -->
+          <section class="ah-card pad-card stack">
+            <div>
+              <span class="badge badge-emerald">Local Private Storage &bull; <span class="mono">mchiro_planner_v1</span></span>
+              <h2 style="font-size:18px;font-weight:800;margin-top:5px;">Data Backup &amp; Phone &harr; Laptop Sync</h2>
+              <p style="font-size:13px;color:var(--text-muted);margin-top:3px;">
+                All planner data lives privately inside your browser. Copy a sync code or download a <code>.json</code> file to transfer between your phone and laptop.
+              </p>
+            </div>
+
+            <!-- Base64 Sync Code -->
+            <div class="sub-block">
+              <div class="flex-between">
+                <span class="sub-block-title">1. Base64 Sync Code</span>
+                <button type="button" class="btn-3d btn-emerald sm" onclick="copyPlannerSyncCode()">📋 Copy Base64 Sync Code</button>
+              </div>
+              <textarea rows="2" class="textarea mono" style="font-size:11px;word-break:break-all;" readonly aria-label="Exported Base64 Sync Code">${esc(syncCode)}</textarea>
+
+              <label class="field-label" for="planner-sync-import" style="margin-top:6px;">Paste Sync Code to Import</label>
+              <textarea id="planner-sync-import" rows="2" class="textarea mono" style="font-size:11px;" placeholder="Paste Base64 sync code copied from your other device..."></textarea>
+              <button type="button" class="btn-3d btn-blue btn-full" onclick="importPlannerSyncCode()">Restore from Sync Code</button>
+            </div>
+
+            <!-- JSON File Backup & Restore -->
+            <div class="sub-block">
+              <span class="sub-block-title">2. File Backup (.json)</span>
+              <div class="grid-2">
+                <button type="button" class="btn-3d btn-indigo btn-full" onclick="downloadJsonBackup()">⬇ Download .json Backup</button>
+                <label class="btn-3d btn-neutral btn-full" style="cursor:pointer;">
+                  <span>⬆ Import .json Backup</span>
+                  <input type="file" accept="application/json,.json" style="display:none;" onchange="handleJsonFileUpload(this)" />
+                </label>
+              </div>
+            </div>
+
+            <!-- Danger Zone: Reset Templates -->
+            <div class="sub-block" style="border-color:var(--coral-border);">
+              <div class="flex-between">
+                <div>
+                  <span class="sub-block-title" style="color:var(--coral);">Reset Scaffolding</span>
+                  <p style="font-size:12.5px;color:var(--text-muted);margin-top:2px;">Restore all 7 modules, 4 template assessments, prep tasks, and weekly routine to defaults.</p>
+                </div>
+                <button type="button" class="btn-3d btn-coral sm" onclick="openResetModal()">Reset Templates to Default</button>
+              </div>
+            </div>
+          </section>
+        </div>
+      `;
+    }
+
+    // =========================================================================
+    // 8. INITIALISE APP
+    // =========================================================================
+    document.getElementById('reset-modal').addEventListener('click', function (e) {
+      if (e.target === this) closeResetModal();
+    });
+
+    initTheme();
+    updateCountdown();
+    renderTabs();
+    renderApp();
+  </script>
+</body>
+</html>
