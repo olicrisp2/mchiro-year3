@@ -38,10 +38,10 @@
       --sem-purple-soft: rgba(139, 92, 246, 0.12);
       --sem-purple-border: rgba(139, 92, 246, 0.32);
 
-      --sem-red: #ef4444;
-      --sem-red-dark: #b91c1c;
-      --sem-red-soft: rgba(239, 68, 68, 0.11);
-      --sem-red-border: rgba(239, 68, 68, 0.34);
+      --sem-coral: #ef4444;
+      --sem-coral-dark: #b91c1c;
+      --sem-coral-soft: rgba(239, 68, 68, 0.11);
+      --sem-coral-border: rgba(239, 68, 68, 0.34);
 
       --sem-amber: #f59e0b;
       --sem-amber-dark: #b45309;
@@ -53,14 +53,16 @@
       --svg-limb-base: #e6ecf4;
       --svg-limb-quiz: #dfe7f2;
       --svg-limb-quiz-hover: #cbd6e6;
-      --svg-outline: #263449;
-      --svg-landmark: rgba(38, 52, 73, 0.42);
+      --svg-outline: #1e293b;
+      --svg-focus-stroke: #0f172a;
+      --svg-landmark: rgba(30, 41, 59, 0.48);
       --svg-divider: #475569;
       --svg-label-bg: #ffffff;
       --svg-label-text: #0f172a;
+
       --drawer-correct-bg: #ecfdf5;
       --drawer-wrong-bg: #fef2f2;
-      --shadow-card: 0 2px 10px rgba(15, 23, 42, 0.04);
+      --shadow-card: 0 2px 10px rgba(15, 23, 42, 0.045);
     }
 
     .dark {
@@ -79,8 +81,8 @@
       --sem-emerald-border: rgba(52, 211, 153, 0.36);
       --sem-purple-soft: rgba(139, 92, 246, 0.2);
       --sem-purple-border: rgba(167, 139, 250, 0.38);
-      --sem-red-soft: rgba(239, 68, 68, 0.2);
-      --sem-red-border: rgba(248, 113, 113, 0.4);
+      --sem-coral-soft: rgba(239, 68, 68, 0.2);
+      --sem-coral-border: rgba(248, 113, 113, 0.4);
       --sem-amber-soft: rgba(245, 158, 11, 0.2);
       --sem-amber-border: rgba(251, 191, 36, 0.4);
 
@@ -88,21 +90,22 @@
       --svg-limb-base: #1e293b;
       --svg-limb-quiz: #23324d;
       --svg-limb-quiz-hover: #304569;
-      --svg-outline: #cbd5e1;
-      --svg-landmark: rgba(203, 213, 225, 0.42);
+      --svg-outline: #e2e8f0;
+      --svg-focus-stroke: #ffffff;
+      --svg-landmark: rgba(226, 232, 240, 0.48);
       --svg-divider: #94a3b8;
       --svg-label-bg: #0f172a;
       --svg-label-text: #f8fafc;
+
       --drawer-correct-bg: #08291f;
       --drawer-wrong-bg: #2c1018;
-      --shadow-card: 0 4px 18px rgba(0, 0, 0, 0.35);
+      --shadow-card: 0 4px 18px rgba(0, 0, 0, 0.38);
     }
 
     /* =========================================================================
        2. BASE RESET & TYPOGRAPHY
        ========================================================================= */
     *, *::before, *::after { box-sizing: border-box; }
-
     html { scroll-behavior: smooth; }
 
     body {
@@ -123,13 +126,12 @@
       font-family: 'Plus Jakarta Sans', system-ui, -apple-system, sans-serif;
       margin: 0;
     }
-
     p { margin: 0; }
     a { color: inherit; text-decoration: none; }
     button { font-family: inherit; }
 
     /* =========================================================================
-       3. STICKY HEADER & DUOLINGO PROGRESS BAR
+       3. STICKY TOP BAR & DUOLINGO ANIMATED PROGRESS BAR
        ========================================================================= */
     .top-header {
       position: sticky;
@@ -186,10 +188,10 @@
       border: none;
       background: transparent;
       color: var(--text-muted);
-      padding: 5px 11px;
+      padding: 5px 12px;
       border-radius: 9px;
       font-family: 'Plus Jakarta Sans', sans-serif;
-      font-size: 11px;
+      font-size: 11.5px;
       font-weight: 800;
       cursor: pointer;
       transition: all 0.15s ease;
@@ -271,7 +273,7 @@
       right: 6px;
       height: 3px;
       border-radius: 999px;
-      background: rgba(255, 255, 255, 0.42);
+      background: rgba(255, 255, 255, 0.45);
     }
 
     .progress-label {
@@ -284,14 +286,14 @@
     }
 
     /* =========================================================================
-       4. MAIN LAYOUT, CARDS & BADGES
+       4. MAIN LAYOUT, CARDS, PILLS & SEMANTIC BOXES
        ========================================================================= */
     .app-main {
       flex: 1;
       width: 100%;
       max-width: 560px;
       margin: 0 auto;
-      padding: 16px 14px 144px;
+      padding: 16px 14px 146px;
     }
 
     .stack { display: flex; flex-direction: column; gap: 14px; }
@@ -304,15 +306,21 @@
       box-shadow: var(--shadow-card);
     }
 
-    .svg-card {
-      padding: 12px;
-    }
+    .svg-card { padding: 12px; }
 
     .info-card {
       padding: 16px;
       display: flex;
       flex-direction: column;
       gap: 10px;
+    }
+
+    .flex-between {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      gap: 8px;
+      flex-wrap: wrap;
     }
 
     .step-badge {
@@ -333,8 +341,8 @@
     .dark .badge-emerald { color: #34d399; }
     .badge-purple { background: var(--sem-purple-soft); color: var(--sem-purple); }
     .dark .badge-purple { color: #c4b5fd; }
-    .badge-red { background: var(--sem-red-soft); color: var(--sem-red); border: 1px solid var(--sem-red-border); }
-    .dark .badge-red { color: #fca5a5; }
+    .badge-coral { background: var(--sem-coral-soft); color: var(--sem-coral); border: 1px solid var(--sem-coral-border); }
+    .dark .badge-coral { color: #fca5a5; }
     .badge-amber { background: var(--sem-amber-soft); color: var(--sem-amber-dark); border: 1px solid var(--sem-amber-border); }
     .dark .badge-amber { color: #fcd34d; }
 
@@ -358,19 +366,17 @@
       margin-top: 4px;
     }
 
-    /* Quick Selector Pills */
+    /* Zone Pills & Reset Pill */
     .pill-row {
       display: flex;
       flex-wrap: wrap;
       gap: 7px;
     }
-
     .pill-grid-3 {
       display: grid;
       grid-template-columns: repeat(3, 1fr);
       gap: 7px;
     }
-
     .pill-grid-2 {
       display: grid;
       grid-template-columns: repeat(2, 1fr);
@@ -399,7 +405,31 @@
       color: #ffffff;
     }
 
-    /* Semantic Info Boxes */
+    .reset-pill {
+      display: inline-flex;
+      align-items: center;
+      gap: 5px;
+      padding: 6px 12px;
+      border-radius: 999px;
+      border: 1.5px solid var(--border-strong);
+      background: var(--bg-subtle);
+      color: var(--text-main);
+      font-family: 'Plus Jakarta Sans', sans-serif;
+      font-size: 11.5px;
+      font-weight: 800;
+      cursor: pointer;
+      transition: all 0.14s ease;
+    }
+    .reset-pill:hover {
+      border-color: var(--sem-blue);
+      color: var(--sem-blue);
+    }
+    .reset-pill.is-all {
+      opacity: 0.55;
+      cursor: default;
+    }
+
+    /* Semantic Info Cards */
     .sem-box {
       padding: 11px 13px;
       border-radius: 14px;
@@ -432,11 +462,10 @@
     .sem-amber .sem-box-label { color: var(--sem-amber-dark); }
     .dark .sem-amber .sem-box-label { color: #fbbf24; }
 
-    .sem-red { background: var(--sem-red-soft); border-color: var(--sem-red-border); }
-    .sem-red .sem-box-label { color: var(--sem-red); }
-    .dark .sem-red .sem-box-label { color: #f87171; }
+    .sem-coral { background: var(--sem-coral-soft); border-color: var(--sem-coral-border); }
+    .sem-coral .sem-box-label { color: var(--sem-coral); }
+    .dark .sem-coral .sem-box-label { color: #f87171; }
 
-    /* Mini Highlight Cards (Step 4 L4/L5/S1) */
     .mini-grid-3 {
       display: grid;
       grid-template-columns: repeat(3, 1fr);
@@ -463,7 +492,7 @@
     }
 
     /* =========================================================================
-       5. TACTILE 3D DUOLINGO BUTTONS & CHUNKY CHOICE CARDS
+       5. CHUNKY 3D BUTTONS & MULTIPLE-CHOICE CARDS
        ========================================================================= */
     .btn-3d {
       display: inline-flex;
@@ -507,13 +536,13 @@
     }
     .btn-blue:hover:not(:disabled) { background: #1d4ed8; }
 
-    .btn-red {
-      background: var(--sem-red);
+    .btn-coral {
+      background: var(--sem-coral);
       color: #ffffff;
-      border: 2px solid var(--sem-red);
-      border-bottom: 4px solid var(--sem-red-dark);
+      border: 2px solid var(--sem-coral);
+      border-bottom: 4px solid var(--sem-coral-dark);
     }
-    .btn-red:hover:not(:disabled) { background: #dc2626; }
+    .btn-coral:hover:not(:disabled) { background: #dc2626; }
 
     .btn-neutral {
       background: var(--bg-card);
@@ -592,18 +621,18 @@
     }
 
     .choice-wrong {
-      border-color: var(--sem-red) !important;
-      border-bottom-color: var(--sem-red-dark) !important;
-      background: var(--sem-red-soft) !important;
+      border-color: var(--sem-coral) !important;
+      border-bottom-color: var(--sem-coral-dark) !important;
+      background: var(--sem-coral-soft) !important;
     }
     .choice-wrong .choice-letter {
-      background: var(--sem-red);
-      border-color: var(--sem-red);
+      background: var(--sem-coral);
+      border-color: var(--sem-coral);
       color: #ffffff;
     }
 
     /* =========================================================================
-       6. INTERACTIVE SVG ANATOMY STYLING
+       6. INTERACTIVE SVG SPOTLIGHT / FADE-OTHERS ISOLATION ENGINE
        ========================================================================= */
     .anatomy-svg {
       display: block;
@@ -616,35 +645,67 @@
 
     .leg-zone {
       cursor: pointer;
-      transition: fill 0.16s ease, fill-opacity 0.16s ease, opacity 0.16s ease, filter 0.16s ease;
+      transition: opacity 0.22s ease, filter 0.22s ease, fill 0.18s ease, stroke-width 0.18s ease;
     }
-    .leg-zone:hover { filter: brightness(1.07); }
+    .leg-zone:hover {
+      filter: brightness(1.07);
+    }
 
-    .leg-zone-quiz { fill: var(--svg-limb-quiz); }
-    .leg-zone-quiz:hover { fill: var(--svg-limb-quiz-hover); }
+    .zone-label {
+      transition: opacity 0.22s ease, filter 0.22s ease;
+    }
 
-    .leg-zone-selected {
+    /* Quiz neutral base */
+    .leg-zone-quiz {
+      fill: var(--svg-limb-quiz);
+    }
+    .leg-zone-quiz:hover {
+      fill: var(--svg-limb-quiz-hover);
+    }
+
+    /* SPOTLIGHT / FADE-OTHERS RULE:
+       When SVG has .has-selection, all unselected zones fade to opacity 0.16 & saturate(0.25),
+       and unselected zone labels fade to opacity 0.25. Outer contour & landmarks stay 100% crisp! */
+    .anatomy-svg.has-selection .leg-zone:not(.is-active):not(.is-correct):not(.is-wrong) {
+      opacity: 0.16;
+      filter: saturate(0.25);
+    }
+    .anatomy-svg.has-selection .zone-label:not(.is-active) {
+      opacity: 0.25;
+    }
+
+    /* Active Spotlighted Zone (Teach / Explore / Quiz selection) */
+    .leg-zone.is-active {
+      opacity: 1 !important;
+      stroke: var(--svg-focus-stroke);
+      stroke-width: 2.2px;
+      filter: drop-shadow(0 0 8px rgba(15, 23, 42, 0.28));
+    }
+    .dark .leg-zone.is-active {
+      filter: drop-shadow(0 0 10px rgba(248, 250, 252, 0.36));
+    }
+
+    .leg-zone.is-quiz-selected {
       fill: var(--sem-blue) !important;
-      fill-opacity: 0.84 !important;
-      filter: drop-shadow(0 0 7px rgba(37, 99, 235, 0.55));
+      fill-opacity: 0.9 !important;
     }
 
-    .leg-zone-correct {
+    .leg-zone.is-correct {
+      opacity: 1 !important;
       fill: var(--sem-emerald) !important;
-      fill-opacity: 0.9 !important;
+      fill-opacity: 0.92 !important;
+      stroke: var(--svg-focus-stroke);
+      stroke-width: 2.2px;
       animation: pulseGreen 0.65s ease-in-out 2;
     }
 
-    .leg-zone-wrong {
-      fill: var(--sem-red) !important;
-      fill-opacity: 0.86 !important;
+    .leg-zone.is-wrong {
+      opacity: 1 !important;
+      fill: var(--sem-coral) !important;
+      fill-opacity: 0.88 !important;
+      stroke: var(--svg-focus-stroke);
+      stroke-width: 2px;
     }
-
-    .leg-zone-inspected {
-      filter: drop-shadow(0 0 8px rgba(37, 99, 235, 0.45));
-    }
-
-    .leg-zone-dim { opacity: 0.25; }
 
     @keyframes pulseGreen {
       0%, 100% { filter: drop-shadow(0 0 0 rgba(16, 185, 129, 0)); }
@@ -652,7 +713,7 @@
     }
 
     /* =========================================================================
-       7. FIXED BOTTOM ACTION / FEEDBACK DRAWER & ANIMATIONS
+       7. FIXED BOTTOM ACTION / FEEDBACK DRAWER & EXPLORE CONTROLS
        ========================================================================= */
     .bottom-drawer-wrap {
       position: fixed;
@@ -684,7 +745,7 @@
     }
     .drawer-feedback.wrong {
       background: var(--drawer-wrong-bg);
-      border-top-color: var(--sem-red);
+      border-top-color: var(--sem-coral);
     }
 
     .drawer-inner {
@@ -715,7 +776,7 @@
       flex-shrink: 0;
     }
     .fb-icon.correct { background: var(--sem-emerald); }
-    .fb-icon.wrong { background: var(--sem-red); }
+    .fb-icon.wrong { background: var(--sem-coral); }
 
     .fb-title {
       font-family: 'Plus Jakarta Sans', sans-serif;
@@ -724,7 +785,7 @@
     }
     .fb-title.correct { color: var(--sem-emerald-dark); }
     .dark .fb-title.correct { color: #34d399; }
-    .fb-title.wrong { color: var(--sem-red-dark); }
+    .fb-title.wrong { color: var(--sem-coral-dark); }
     .dark .fb-title.wrong { color: #fca5a5; }
 
     .fb-msg {
@@ -740,7 +801,6 @@
       color: var(--text-muted);
     }
 
-    /* Explore Lab Segmented Toggle & Collapsible Drawer */
     .sub-seg {
       display: grid;
       grid-template-columns: 1fr 1fr;
@@ -783,9 +843,8 @@
     }
 
     .accordion-body {
-      padding: 0 16px 16px;
+      padding: 12px 16px 16px;
       border-top: 1px solid var(--border-card);
-      padding-top: 12px;
       display: flex;
       flex-direction: column;
       gap: 10px;
@@ -842,7 +901,6 @@
       overflow: hidden;
       pointer-events: none;
     }
-
     .confetti-piece {
       position: absolute;
       top: -12px;
@@ -856,7 +914,6 @@
       from { transform: translateY(100%); opacity: 0.7; }
       to { transform: translateY(0); opacity: 1; }
     }
-
     @keyframes stepIn {
       from { opacity: 0; transform: translateY(7px); }
       to { opacity: 1; transform: translateY(0); }
@@ -866,14 +923,6 @@
     @keyframes confettiFall {
       0% { transform: translateY(-20px) rotate(0deg); opacity: 1; }
       100% { transform: translateY(400px) rotate(540deg); opacity: 0; }
-    }
-
-    .flex-between {
-      display: flex;
-      align-items: center;
-      justify-content: space-between;
-      gap: 8px;
-      flex-wrap: wrap;
     }
   </style>
 </head>
@@ -892,7 +941,7 @@
 
         <div class="mode-switch" role="tablist" aria-label="Lesson or Explore Mode">
           <button type="button" id="mode-btn-lesson" class="mode-btn active" onclick="setAppMode('lesson')">Lesson</button>
-          <button type="button" id="mode-btn-explore" class="mode-btn" onclick="setAppMode('explore')">Explore Lab</button>
+          <button type="button" id="mode-btn-explore" class="mode-btn" onclick="setAppMode('explore')">Explore</button>
         </div>
 
         <div class="header-right">
@@ -914,7 +963,7 @@
   </header>
 
   <!-- =========================================================================
-       MAIN CONTENT
+       MAIN APP CONTAINER
        ========================================================================= -->
   <main id="app-main" class="app-main"></main>
 
@@ -925,7 +974,7 @@
 
   <script>
     // =========================================================================
-    // 1. PERSISTENT LIGHT / DARK THEME ('mchiro_theme')
+    // 1. PERSISTENT LIGHT / DARK THEME ('mchiro_theme') & LESSON SAVE ('mchiro_lessons_v1')
     // =========================================================================
     function initTheme() {
       let saved = null;
@@ -944,6 +993,23 @@
 
     function toggleTheme() {
       applyTheme(!document.documentElement.classList.contains('dark'));
+    }
+
+    function saveLessonCompletion() {
+      try {
+        const raw = localStorage.getItem('mchiro_lessons_v1');
+        const existing = raw ? JSON.parse(raw) : {};
+        const merged = Object.assign({}, existing && typeof existing === 'object' ? existing : {}, {
+          ll: {
+            completed: true,
+            xp: 120,
+            updatedAt: Date.now(),
+          },
+        });
+        localStorage.setItem('mchiro_lessons_v1', JSON.stringify(merged));
+      } catch (e) {
+        // Safely ignore storage restrictions
+      }
     }
 
     // =========================================================================
@@ -984,7 +1050,7 @@
         color: '#10b981',
         badgeCls: 'badge-emerald',
         hook: 'Medial Shin & Heel Walk',
-        sensation: 'Medial aspect of lower leg, medial malleolus & medial border of foot.',
+        sensation: 'Medial aspect of lower leg, medial malleolus & medial ankle.',
         myotome: 'Tibialis anterior',
         action: 'Ankle dorsiflexion (supine or heel walking)',
         reflex: 'Patellar reflex (graded 1+ to 4+)',
@@ -998,7 +1064,7 @@
         color: '#8b5cf6',
         badgeCls: 'badge-purple',
         hook: 'High-Five with Big Toe',
-        sensation: 'Lateral aspect of lower leg, dorsum (top) of foot & hallux (big toe).',
+        sensation: 'Lateral lower leg, dorsum (top) of foot & hallux (big toe).',
         myotome: 'Extensor hallucis longus (EHL)',
         action: 'Hallux (big toe) extension',
         reflex: 'No reflex',
@@ -1035,7 +1101,7 @@
         muscles: 'Hip flexors (Iliopsoas) & Knee extensors (Quadriceps)',
         actions: 'Hip flexion & knee extension.',
         reflexGait: 'Patellar reflex (1+–4+); knee buckling if weak.',
-        analogy: 'Front of the thigh that drops a sensory tail (saphenous) down the inner shin to the ankle.',
+        analogy: 'Front of the thigh that drops a sensory saphenous tail down the inner shin to the ankle.',
         trap: 'Do not forget its sensory saphenous branch continuing down the medial shin & ankle!',
       },
       lfcn: {
@@ -1092,7 +1158,7 @@
         badgeCls: 'badge-purple',
         hook: 'Toes Down & Sole of Foot',
         sensation: 'Skin of SOLE (plantar surface) of the foot (plus posterior calf reference).',
-        muscles: 'Gastrocnemius, Soleus & intrinsic/deep plantarflexors of foot',
+        muscles: 'Gastrocnemius, Soleus & deep plantarflexors of foot',
         actions: 'Ankle plantarflexion (toe walking) & metatarsal/toe flexion.',
         reflexGait: 'Achilles reflex (1+–4+) & Toe walking.',
         analogy: 'Tibial = Toes down (gas pedal) & Sole of the foot.',
@@ -1104,7 +1170,7 @@
         shortName: 'Fibular',
         roots: 'L4–S2',
         color: '#ef4444',
-        badgeCls: 'badge-red',
+        badgeCls: 'badge-coral',
         hook: 'Foot UP (Dorsum & Heel Walk)',
         sensation: 'Distal lateral lower leg and DORSUM (top) of foot.',
         muscles: 'Tibialis anterior & toe extensors (EHL, EDL)',
@@ -1124,24 +1190,24 @@
         type: 'teach_thigh',
         badge: 'Visual Teach',
         title: 'The Barber-Pole Thigh (L2–L3)',
-        subtitle: 'L2 and L3 sweep diagonally lateral-to-medial across the front of the thigh. Tap L2 or L3 on the leg.',
+        subtitle: 'Tap L2 or L3 on the sculpted leg to spotlight each diagonal anterior thigh band.',
         focusZones: ['L2', 'L3'],
       },
       {
         id: 'll_2',
         type: 'quiz_derm',
         badge: 'Tap the Leg',
-        prompt: 'Tap where you test the <strong>L2 dermatome</strong> (lateral-to-medial anterior upper thigh).',
+        prompt: 'Tap where you test the <strong>L2 dermatome</strong> (lateral to medial anterior upper thigh).',
         target: 'L2',
         correctMsg: 'L2 sweeps diagonally across the upper anterior thigh — "Lift your knee to tie your shoe".',
-        wrongMsg: 'L2 is the diagonal upper anterior thigh band (lateral-to-medial), highlighted in green above.',
+        wrongMsg: 'L2 is the diagonal upper anterior thigh band (lateral to medial), spotlighted in green above.',
       },
       {
         id: 'll_3',
         type: 'choice',
         badge: '⚠️ Assessor Trap',
         isTrap: true,
-        prompt: 'Your examiner asks for the <strong>L2 myotome</strong>. What must you state to get full credit?',
+        prompt: 'Your examiner asks for the <strong>L2 myotome</strong>. What must you state for full marks?',
         options: [
           { id: 'a', text: 'Hip flexion — iliopsoas, sartorius & pectineus' },
           { id: 'b', text: 'Just hip flexion' },
@@ -1156,18 +1222,18 @@
         id: 'll_4',
         type: 'teach_shin',
         badge: 'Visual Teach',
-        title: 'Shin, Sculpted Foot & Reflexes (L4, L5, S1)',
-        subtitle: 'Notice how L4 hugs the medial shin/border, L5 sweeps onto the dorsum & big toe, and S1 takes the lateral edge, heel & calf.',
+        title: 'Shin, 5-Toe Foot & Reflexes (L4, L5, S1)',
+        subtitle: 'Tap L4, L5, or S1 to isolate each territory and fade the rest of the leg.',
         focusZones: ['L4', 'L5', 'S1'],
       },
       {
         id: 'll_5',
         type: 'quiz_derm',
         badge: 'Tap the Leg',
-        prompt: 'Tap the <strong>L4 dermatome</strong> (medial lower leg, medial malleolus & medial border).',
+        prompt: 'Tap the <strong>L4 dermatome</strong> (medial lower leg & medial ankle).',
         target: 'L4',
-        correctMsg: 'L4 runs down the medial shin to the medial malleolus — paired with Tibialis anterior & Patellar reflex!',
-        wrongMsg: 'L4 is on the MEDIAL aspect of the lower leg down to the medial ankle (highlighted in green).',
+        correctMsg: 'L4 runs down the medial shin to the medial ankle — paired with Tibialis anterior & Patellar reflex!',
+        wrongMsg: 'L4 is on the MEDIAL aspect of the lower leg down to the medial ankle (spotlighted in green).',
       },
       {
         id: 'll_6',
@@ -1175,8 +1241,8 @@
         badge: 'Tap the Leg',
         prompt: 'Tap the <strong>L5 dermatome</strong> (lateral lower leg, dorsum of foot & hallux).',
         target: 'L5',
-        correctMsg: 'L5 sweeps down the lateral shin across the dorsum (top) of the foot to the big toe!',
-        wrongMsg: 'L5 covers the LATERAL lower leg, DORSUM of the foot & hallux (highlighted in green).',
+        correctMsg: 'L5 sweeps down the lateral shin across the dorsum (top) of the foot to the hallux!',
+        wrongMsg: 'L5 covers the LATERAL lower leg, DORSUM of the foot & hallux (spotlighted in green).',
       },
       {
         id: 'll_7',
@@ -1199,7 +1265,7 @@
         type: 'choice',
         badge: '⚠️ Grading Scale Trap',
         isTrap: true,
-        prompt: 'How are <strong>Lower Limb Reflexes</strong> (Patellar L4 & Achilles S1) graded in Year 3, and what is the <strong>sensory sequence & scale</strong>?',
+        prompt: 'How are <strong>Lower Limb Reflexes</strong> (Patellar L4 & Achilles S1) graded, and what is the <strong>sensory sequence & scale</strong>?',
         options: [
           { id: 'a', text: 'Reflexes 1+ to 4+; Sensation 0–2 (Soft R/L/compare → Sharp R/L/compare → Discriminate)' },
           { id: 'b', text: 'Reflexes 0 to 4; Sensation 1 to 5' },
@@ -1215,7 +1281,7 @@
         type: 'teach_periph',
         badge: 'Visual Teach',
         title: 'Lower Limb Peripheral Nerves — The Big Split',
-        subtitle: 'Tap any of the 6 peripheral nerves across the Anterior Leg, Posterior Leg & Plantar Sole.',
+        subtitle: 'Tap any of the 6 nerves across the Anterior Leg, Posterior Leg & Plantar Sole to spotlight it.',
       },
       {
         id: 'll_10',
@@ -1224,7 +1290,7 @@
         prompt: 'Tap the sensory zone of the <strong>Fibular (Peroneal) nerve</strong> (distal lateral lower leg & dorsum of foot).',
         target: 'fibular',
         correctMsg: 'Fibular (Peroneal) supplies the distal lateral lower leg & dorsum of the foot — pulling the Foot UP!',
-        wrongMsg: 'Look at the anterior distal lateral lower leg & dorsum of the foot (highlighted in green) — that is Fibular (Peroneal).',
+        wrongMsg: 'Look at the anterior distal lateral lower leg & dorsum of the foot (spotlighted in green) — that is Fibular (Peroneal).',
       },
       {
         id: 'll_11',
@@ -1284,6 +1350,7 @@
       firstTryCorrect: 0,
       seenQuizSteps: {},
 
+      // Free Explore Lab state (null = Show All Zones; string = spotlighted zone)
       exploreTab: 'derm', // 'derm' | 'periph'
       exploreDerm: 'L4',
       explorePeriph: 'fibular',
@@ -1298,11 +1365,11 @@
     }
 
     // =========================================================================
-    // 5. SHARPENED SCULPTED ANATOMICAL LEG & 5-TOE FOOT SVGs (<clipPath>)
+    // 5. SCULPTED ANATOMICAL LEG & 5-TOE FOOT SVGs WITH SPOTLIGHT ISOLATION
     // =========================================================================
 
     /**
-     * Sculpted Anterior Right Leg + Foot with 5 individually contoured graduated toes
+     * Sculpted Anterior Right Leg + Ankle + Foot with 5 individually contoured graduated toes
      * (Lateral on viewer-LEFT, Medial / Hallux on viewer-RIGHT).
      */
     const SCULPTED_ANT_LEG_PATH = `
@@ -1338,26 +1405,22 @@
     `;
 
     /**
-     * Sculpted Anterior Right Leg landmark lines (patella arc, tibial crest, malleoli, toe clefts & toenails).
+     * Anterior Right Leg Landmarks (Patella, Tibial Crest, Malleoli, 5 Toe Clefts & Nails)
+     * Always rendered ABOVE colour zones at 100% crispness.
      */
     const ANT_LEG_LANDMARKS = `
-      <!-- Subtle Patella Contour -->
-      <path d="M 78,180 C 85,174 99,174 105,180 C 107,188 102,197 92,198 C 82,197 76,188 78,180 Z" fill="none" stroke="var(--svg-landmark)" stroke-width="1.2" />
-      <!-- Subtle Tibial Crest -->
-      <path d="M 92,208 C 91,246 89,292 88,334" fill="none" stroke="var(--svg-landmark)" stroke-width="1.1" stroke-linecap="round" stroke-dasharray="2 3" />
-      <!-- Medial & Lateral Malleoli Ticks -->
-      <path d="M 111,346 C 114,350 114,354 111,358" fill="none" stroke="var(--svg-landmark)" stroke-width="1.2" stroke-linecap="round" />
-      <path d="M 68,350 C 65,354 65,358 68,361" fill="none" stroke="var(--svg-landmark)" stroke-width="1.2" stroke-linecap="round" />
-      <!-- Crisp Interdigital Cleft Lines & Subtle Nail Arcs -->
-      <path d="M 105,397 L 105,404 M 86,398 L 86,404 M 69,396 L 69,403 M 54,394 L 54,399" fill="none" stroke="var(--svg-outline)" stroke-width="1.25" stroke-linecap="round" />
+      <path d="M 78,180 C 85,174 99,174 105,180 C 107,188 102,197 92,198 C 82,197 76,188 78,180 Z" fill="none" stroke="var(--svg-landmark)" stroke-width="1.25" />
+      <path d="M 92,208 C 91,246 89,292 88,334" fill="none" stroke="var(--svg-landmark)" stroke-width="1.15" stroke-linecap="round" stroke-dasharray="2 3" />
+      <path d="M 111,346 C 114,350 114,354 111,358" fill="none" stroke="var(--svg-landmark)" stroke-width="1.25" stroke-linecap="round" />
+      <path d="M 68,350 C 65,354 65,358 68,361" fill="none" stroke="var(--svg-landmark)" stroke-width="1.25" stroke-linecap="round" />
+      <path d="M 105,397 L 105,404 M 86,398 L 86,404 M 69,396 L 69,403 M 54,394 L 54,399" fill="none" stroke="var(--svg-outline)" stroke-width="1.3" stroke-linecap="round" />
       <path d="M 114,413 Q 119,416 123,413" fill="none" stroke="var(--svg-landmark)" stroke-width="1.1" stroke-linecap="round" />
       <path d="M 91,416 Q 94,418 97,416" fill="none" stroke="var(--svg-landmark)" stroke-width="1" stroke-linecap="round" />
       <path d="M 73,414 Q 76,416 79,414" fill="none" stroke="var(--svg-landmark)" stroke-width="1" stroke-linecap="round" />
     `;
 
     /**
-     * Sculpted Posterior Right Calf & Heel (Medial on viewer-LEFT, Lateral on viewer-RIGHT)
-     * Positioned at x=212..292, y=194..422 for Dermatome view.
+     * Sculpted Posterior Right Calf & Heel (for Dermatome S1 inset)
      */
     const SCULPTED_POST_CALF_PATH = `
       M 224,196
@@ -1373,8 +1436,7 @@
     `;
 
     /**
-     * Sculpted Plantar Sole of Right Foot with 5 graduated toes (Hallux on viewer-LEFT/Medial,
-     * 5th Toe on viewer-RIGHT/Lateral) — positioned at x=304..370, y=268..420.
+     * Sculpted 5-Toe Plantar Sole of Right Foot (Hallux medial/LEFT, 5th toe lateral/RIGHT)
      */
     const SCULPTED_PLANTAR_SOLE_PATH = `
       M 314,304
@@ -1399,7 +1461,7 @@
     `;
 
     /**
-     * Sculpted Full Posterior Right Leg for Peripheral Nerves view (x=196..292, y=26..422).
+     * Sculpted Full Posterior Right Leg (for Peripheral Nerves: Sciatic + Tibial)
      */
     const SCULPTED_FULL_POST_LEG_PATH = `
       M 214,28
@@ -1419,36 +1481,39 @@
     `;
 
     /**
-     * 1. Dermatome Leg SVG (Anterior Right Leg + Posterior Calf/Heel + Plantar Sole)
+     * 1. Dermatome Leg SVG with Spotlight / Fade-Others Isolation
      */
-    function buildDermatomeLegSVG(mode, activeZone, feedbackState, focusZones) {
+    function buildDermatomeLegSVG(mode, activeZone, feedbackState) {
       const isQuiz = mode === 'quiz';
       const uid = isQuiz ? 'dq' : 'dt';
+      const hasSel = isQuiz
+        ? Boolean(feedbackState && (feedbackState.selected || feedbackState.checked))
+        : Boolean(activeZone);
 
       function zProps(zId) {
         const col = DERMATOME_DATA[zId].color;
         if (!isQuiz) {
-          const isSel = activeZone === zId;
-          const isDim = focusZones && !focusZones.includes(zId);
-          return `fill="${col}" fill-opacity="${isSel ? '0.92' : '0.72'}" class="leg-zone ${isSel ? 'leg-zone-inspected' : ''} ${isDim ? 'leg-zone-dim' : ''}"`;
+          const isAct = activeZone === zId;
+          return `fill="${col}" fill-opacity="${isAct ? '0.94' : '0.82'}" class="leg-zone ${isAct ? 'is-active' : ''}"`;
         }
         if (feedbackState && feedbackState.checked) {
-          if (zId === feedbackState.correctTarget) return `class="leg-zone leg-zone-correct"`;
-          if (zId === feedbackState.selected && !feedbackState.isCorrect) return `class="leg-zone leg-zone-wrong"`;
-          return `class="leg-zone leg-zone-quiz" fill-opacity="0.55"`;
+          if (zId === feedbackState.correctTarget) return `class="leg-zone is-correct"`;
+          if (zId === feedbackState.selected && !feedbackState.isCorrect) return `class="leg-zone is-wrong"`;
+          return `class="leg-zone leg-zone-quiz"`;
         }
         if (feedbackState && feedbackState.selected === zId) {
-          return `class="leg-zone leg-zone-selected"`;
+          return `class="leg-zone is-active is-quiz-selected"`;
         }
         return `class="leg-zone leg-zone-quiz"`;
       }
 
+      const lblCls = (zId) => `zone-label ${activeZone === zId ? 'is-active' : ''}`;
       const tap = (zId) => isQuiz
         ? `onclick="selectQuizZone('${zId}')"`
         : `onclick="inspectDermZone('${zId}')"`;
 
       return `
-        <svg viewBox="0 0 390 442" class="anatomy-svg" role="img" aria-label="Sculpted Right Leg Dermatome Map L2 to S1">
+        <svg viewBox="0 0 390 442" class="anatomy-svg ${hasSel ? 'has-selection' : ''}" role="img" aria-label="Sculpted Right Leg Dermatome Map L2 to S1">
           <defs>
             <clipPath id="${uid}_ant_clip"><path d="${SCULPTED_ANT_LEG_PATH}" /></clipPath>
             <clipPath id="${uid}_post_clip"><path d="${SCULPTED_POST_CALF_PATH}" /></clipPath>
@@ -1458,7 +1523,7 @@
           <!-- Clean Canvas -->
           <rect x="0" y="0" width="390" height="442" rx="20" fill="var(--svg-bg)" />
 
-          <!-- Crisp View Titles -->
+          <!-- View Titles -->
           <text x="92" y="15" text-anchor="middle" fill="var(--text-muted)" font-size="9" font-weight="800" letter-spacing="0.06em">ANTERIOR RIGHT LEG</text>
           <text x="252" y="182" text-anchor="middle" fill="var(--text-muted)" font-size="8.5" font-weight="800" letter-spacing="0.05em">POST. CALF</text>
           <text x="342" y="264" text-anchor="middle" fill="var(--text-muted)" font-size="8.5" font-weight="800" letter-spacing="0.05em">SOLE</text>
@@ -1468,92 +1533,80 @@
           <!-- ==================== ANTERIOR RIGHT LEG ==================== -->
           <path d="${SCULPTED_ANT_LEG_PATH}" fill="var(--svg-limb-base)" />
           <g clip-path="url(#${uid}_ant_clip)">
-            <!-- L2: Diagonal barber-pole upper anterior thigh -->
             <path ${tap('L2')} ${zProps('L2')} d="M 30,12 L 156,12 L 156,118 L 30,82 Z" />
-
-            <!-- L3: Diagonal lower anterior thigh & knee -->
             <path ${tap('L3')} ${zProps('L3')} d="M 30,82 L 156,118 L 156,210 L 30,184 Z" />
-
-            <!-- L4: Medial lower leg, medial malleolus & medial border of foot -->
             <path ${tap('L4')} ${zProps('L4')} d="M 88,196 L 156,210 L 156,374 L 112,374 C 102,332 92,268 88,196 Z" />
-
-            <!-- L5: Lateral lower leg, dorsum of foot & hallux (toes 1–4) -->
             <path ${tap('L5')} ${zProps('L5')} d="M 30,184 L 88,196 C 92,268 102,332 112,374 L 144,374 L 144,430 L 58,430 L 60,362 L 30,362 Z" />
-
-            <!-- S1: Lateral border of foot (5th toe) -->
             <path ${tap('S1')} ${zProps('S1')} d="M 28,362 L 60,362 L 58,430 L 28,430 Z" />
 
-            <!-- Internal Zone Boundary Lines -->
+            <!-- Crisp Zone Boundary Lines -->
             <path d="M 38,85 L 142,115" fill="none" stroke="var(--svg-divider)" stroke-width="1.5" stroke-dasharray="${isQuiz ? '4 2.5' : 'none'}" pointer-events="none" />
             <path d="M 46,188 L 130,206" fill="none" stroke="var(--svg-divider)" stroke-width="1.5" stroke-dasharray="${isQuiz ? '4 2.5' : 'none'}" pointer-events="none" />
             <path d="M 88,196 C 92,268 102,332 112,374 L 128,374" fill="none" stroke="var(--svg-divider)" stroke-width="1.5" stroke-dasharray="${isQuiz ? '4 2.5' : 'none'}" pointer-events="none" />
             <path d="M 60,362 L 57,412" fill="none" stroke="var(--svg-divider)" stroke-width="1.4" stroke-dasharray="${isQuiz ? '4 2.5' : 'none'}" pointer-events="none" />
           </g>
 
-          <!-- Razor-Sharp Outline + Anatomical Landmarks ON TOP -->
+          <!-- Full-Crispness Outer Contour & Landmarks ABOVE Colour Zones -->
           <path d="${SCULPTED_ANT_LEG_PATH}" fill="none" stroke="var(--svg-outline)" stroke-width="2" stroke-linejoin="round" stroke-linecap="round" pointer-events="none" />
           <g pointer-events="none">${ANT_LEG_LANDMARKS}</g>
 
           <!-- ==================== POSTERIOR CALF & HEEL ==================== -->
           <path d="${SCULPTED_POST_CALF_PATH}" fill="var(--svg-limb-base)" />
           <g clip-path="url(#${uid}_post_clip)">
-            <!-- Inner medial edge (L4) -->
             <path ${tap('L4')} ${zProps('L4')} d="M 204,188 L 236,188 L 238,364 L 204,364 Z" />
-            <!-- S1: Posterior calf & heel -->
             <path ${tap('S1')} ${zProps('S1')} d="M 236,188 L 300,188 L 300,428 L 204,428 L 204,364 L 238,364 Z" />
             <path d="M 236,192 L 238,364" fill="none" stroke="var(--svg-divider)" stroke-width="1.4" stroke-dasharray="${isQuiz ? '3 2' : 'none'}" pointer-events="none" />
           </g>
           <path d="${SCULPTED_POST_CALF_PATH}" fill="none" stroke="var(--svg-outline)" stroke-width="2" stroke-linejoin="round" stroke-linecap="round" pointer-events="none" />
-          <!-- Achilles Tendon Contour -->
-          <path d="M 244,322 L 243,372 M 257,322 L 258,372" fill="none" stroke="var(--svg-landmark)" stroke-width="1.1" stroke-linecap="round" pointer-events="none" />
+          <path d="M 244,322 L 243,372 M 257,322 L 258,372" fill="none" stroke="var(--svg-landmark)" stroke-width="1.15" stroke-linecap="round" pointer-events="none" />
 
           <!-- ==================== SCULPTED 5-TOE PLANTAR SOLE ==================== -->
           <path d="${SCULPTED_PLANTAR_SOLE_PATH}" fill="var(--svg-limb-base)" />
           <g clip-path="url(#${uid}_sole_clip)">
-            <!-- L5: Medial/central forefoot & hallux -->
             <path ${tap('L5')} ${zProps('L5')} d="M 304,268 L 350,268 L 346,368 L 304,368 Z" />
-            <!-- S1: Lateral sole border, 5th toe & heel -->
             <path ${tap('S1')} ${zProps('S1')} d="M 350,268 L 386,268 L 386,426 L 304,426 L 304,368 L 346,368 Z" />
             <path d="M 350,276 L 346,368 L 316,368" fill="none" stroke="var(--svg-divider)" stroke-width="1.3" stroke-dasharray="${isQuiz ? '3 2' : 'none'}" pointer-events="none" />
           </g>
-          <path d="${SCULPTED_PLANTAR_SOLE_PATH}" fill="none" stroke="var(--svg-outline)" stroke-width="1.9" stroke-linejoin="round" stroke-linecap="round" pointer-events="none" />
-          <!-- Plantar Toe Cleft Accents -->
-          <path d="M 332,295 L 332,301 M 349,296 L 349,302 M 362,301 L 362,307" fill="none" stroke="var(--svg-outline)" stroke-width="1.1" stroke-linecap="round" pointer-events="none" />
+          <path d="${SCULPTED_PLANTAR_SOLE_PATH}" fill="none" stroke="var(--svg-outline)" stroke-width="1.95" stroke-linejoin="round" stroke-linecap="round" pointer-events="none" />
+          <path d="M 332,295 L 332,301 M 349,296 L 349,302 M 362,301 L 362,307" fill="none" stroke="var(--svg-outline)" stroke-width="1.15" stroke-linecap="round" pointer-events="none" />
 
-          <!-- ==================== CALLOUT LABELS (TEACH / EXPLORE) ==================== -->
+          <!-- ==================== ZONE CALLOUT LABELS (FADE TO 0.25 WHEN UNSELECTED) ==================== -->
           ${!isQuiz ? `
             <g pointer-events="none">
-              <!-- L2 -->
-              <line x1="112" y1="62" x2="210" y2="48" stroke="#2563eb" stroke-width="1.8" />
-              <circle cx="112" cy="62" r="3.5" fill="#2563eb" />
-              <rect x="210" y="32" width="154" height="32" rx="10" fill="var(--svg-label-bg)" stroke="#2563eb" stroke-width="1.9" />
-              <text x="287" y="46" text-anchor="middle" fill="#2563eb" font-size="11" font-weight="800">L2</text>
-              <text x="287" y="58" text-anchor="middle" fill="var(--text-muted)" font-size="8.2" font-weight="700">Ant. Upper Thigh</text>
+              <g class="${lblCls('L2')}">
+                <line x1="112" y1="62" x2="210" y2="48" stroke="#2563eb" stroke-width="1.8" />
+                <circle cx="112" cy="62" r="3.5" fill="#2563eb" />
+                <rect x="210" y="32" width="154" height="32" rx="10" fill="var(--svg-label-bg)" stroke="#2563eb" stroke-width="1.9" />
+                <text x="287" y="46" text-anchor="middle" fill="#2563eb" font-size="11" font-weight="800">L2</text>
+                <text x="287" y="58" text-anchor="middle" fill="var(--text-muted)" font-size="8.2" font-weight="700">Ant. Upper Thigh</text>
+              </g>
 
-              <!-- L3 -->
-              <line x1="110" y1="142" x2="210" y2="112" stroke="#0891b2" stroke-width="1.8" />
-              <circle cx="110" cy="142" r="3.5" fill="#0891b2" />
-              <rect x="210" y="96" width="154" height="32" rx="10" fill="var(--svg-label-bg)" stroke="#0891b2" stroke-width="1.9" />
-              <text x="287" y="110" text-anchor="middle" fill="#0891b2" font-size="11" font-weight="800">L3</text>
-              <text x="287" y="122" text-anchor="middle" fill="var(--text-muted)" font-size="8.2" font-weight="700">Ant. Lower Thigh</text>
+              <g class="${lblCls('L3')}">
+                <line x1="110" y1="142" x2="210" y2="112" stroke="#0891b2" stroke-width="1.8" />
+                <circle cx="110" cy="142" r="3.5" fill="#0891b2" />
+                <rect x="210" y="96" width="154" height="32" rx="10" fill="var(--svg-label-bg)" stroke="#0891b2" stroke-width="1.9" />
+                <text x="287" y="110" text-anchor="middle" fill="#0891b2" font-size="11" font-weight="800">L3</text>
+                <text x="287" y="122" text-anchor="middle" fill="var(--text-muted)" font-size="8.2" font-weight="700">Ant. Lower Thigh</text>
+              </g>
 
-              <!-- L4 Pill -->
-              <rect x="130" y="274" width="70" height="26" rx="9" fill="#10b981" />
-              <text x="165" y="286" text-anchor="middle" fill="#ffffff" font-size="10" font-weight="800">L4</text>
-              <text x="165" y="296" text-anchor="middle" fill="#d1fae5" font-size="7.5" font-weight="700">Med. Shin</text>
+              <g class="${lblCls('L4')}">
+                <rect x="130" y="274" width="70" height="26" rx="9" fill="#10b981" />
+                <text x="165" y="286" text-anchor="middle" fill="#ffffff" font-size="10" font-weight="800">L4</text>
+                <text x="165" y="296" text-anchor="middle" fill="#d1fae5" font-size="7.5" font-weight="700">Med. Shin</text>
+              </g>
 
-              <!-- L5 Pill -->
-              <rect x="10" y="316" width="66" height="24" rx="8" fill="#8b5cf6" />
-              <text x="43" y="331" text-anchor="middle" fill="#ffffff" font-size="9.2" font-weight="800">L5 Dorsum</text>
+              <g class="${lblCls('L5')}">
+                <rect x="10" y="316" width="66" height="24" rx="8" fill="#8b5cf6" />
+                <text x="43" y="331" text-anchor="middle" fill="#ffffff" font-size="9.2" font-weight="800">L5 Dorsum</text>
+              </g>
 
-              <!-- S1 Pill on Calf -->
-              <rect x="223" y="266" width="62" height="28" rx="9" fill="#f59e0b" />
-              <text x="254" y="279" text-anchor="middle" fill="#ffffff" font-size="10.5" font-weight="800">S1</text>
-              <text x="254" y="289" text-anchor="middle" fill="#fef3c7" font-size="7.5" font-weight="700">Post. Calf</text>
-
-              <!-- S1 Heel Tag -->
-              <rect x="318" y="378" width="44" height="19" rx="7" fill="#f59e0b" stroke="#ffffff" stroke-width="1.1" />
-              <text x="340" y="391" text-anchor="middle" fill="#ffffff" font-size="9" font-weight="800">S1</text>
+              <g class="${lblCls('S1')}">
+                <rect x="223" y="266" width="62" height="28" rx="9" fill="#f59e0b" />
+                <text x="254" y="279" text-anchor="middle" fill="#ffffff" font-size="10.5" font-weight="800">S1</text>
+                <text x="254" y="289" text-anchor="middle" fill="#fef3c7" font-size="7.5" font-weight="700">Post. Calf</text>
+                <rect x="318" y="378" width="44" height="19" rx="7" fill="#f59e0b" stroke="#ffffff" stroke-width="1.1" />
+                <text x="340" y="391" text-anchor="middle" fill="#ffffff" font-size="9" font-weight="800">S1</text>
+              </g>
             </g>
           ` : `
             <g pointer-events="none">
@@ -1567,35 +1620,39 @@
     }
 
     /**
-     * 2. Peripheral Nerve Leg SVG (Anterior Leg + Posterior Leg + 5-Toe Plantar Sole Inset)
+     * 2. Peripheral Nerve Leg SVG with Spotlight / Fade-Others Isolation
      */
     function buildPeripheralLegSVG(mode, activeNerve, feedbackState) {
       const isQuiz = mode === 'quiz';
       const uid = isQuiz ? 'pq' : 'pt';
+      const hasSel = isQuiz
+        ? Boolean(feedbackState && (feedbackState.selected || feedbackState.checked))
+        : Boolean(activeNerve);
 
       function pProps(nId) {
         const col = PERIPHERAL_DATA[nId].color;
         if (!isQuiz) {
-          const isSel = activeNerve === nId;
-          return `fill="${col}" fill-opacity="${isSel ? '0.92' : '0.72'}" class="leg-zone ${isSel ? 'leg-zone-inspected' : ''}"`;
+          const isAct = activeNerve === nId;
+          return `fill="${col}" fill-opacity="${isAct ? '0.94' : '0.82'}" class="leg-zone ${isAct ? 'is-active' : ''}"`;
         }
         if (feedbackState && feedbackState.checked) {
-          if (nId === feedbackState.correctTarget) return `class="leg-zone leg-zone-correct"`;
-          if (nId === feedbackState.selected && !feedbackState.isCorrect) return `class="leg-zone leg-zone-wrong"`;
-          return `class="leg-zone leg-zone-quiz" fill-opacity="0.55"`;
+          if (nId === feedbackState.correctTarget) return `class="leg-zone is-correct"`;
+          if (nId === feedbackState.selected && !feedbackState.isCorrect) return `class="leg-zone is-wrong"`;
+          return `class="leg-zone leg-zone-quiz"`;
         }
         if (feedbackState && feedbackState.selected === nId) {
-          return `class="leg-zone leg-zone-selected"`;
+          return `class="leg-zone is-active is-quiz-selected"`;
         }
         return `class="leg-zone leg-zone-quiz"`;
       }
 
+      const lblCls = (nId) => `zone-label ${activeNerve === nId ? 'is-active' : ''}`;
       const tap = (nId) => isQuiz
         ? `onclick="selectQuizZone('${nId}')"`
         : `onclick="inspectPeriphZone('${nId}')"`;
 
       return `
-        <svg viewBox="0 0 390 442" class="anatomy-svg" role="img" aria-label="Sculpted Anterior and Posterior Lower Limb Peripheral Nerves">
+        <svg viewBox="0 0 390 442" class="anatomy-svg ${hasSel ? 'has-selection' : ''}" role="img" aria-label="Sculpted Anterior and Posterior Lower Limb Peripheral Nerves">
           <defs>
             <clipPath id="${uid}_ant_clip"><path d="${SCULPTED_ANT_LEG_PATH}" /></clipPath>
             <clipPath id="${uid}_post_clip"><path d="${SCULPTED_FULL_POST_LEG_PATH}" /></clipPath>
@@ -1614,16 +1671,9 @@
           <!-- ==================== ANTERIOR RIGHT LEG ==================== -->
           <path d="${SCULPTED_ANT_LEG_PATH}" fill="var(--svg-limb-base)" />
           <g clip-path="url(#${uid}_ant_clip)">
-            <!-- LFCN: Lateral thigh strip -->
             <path ${tap('lfcn')} ${pProps('lfcn')} d="M 32,20 L 72,20 C 70,82 68,134 66,174 L 32,174 Z" />
-
-            <!-- Obturator: Medial upper-to-mid thigh -->
             <path ${tap('obturator')} ${pProps('obturator')} d="M 110,20 L 154,20 L 154,152 L 108,152 Z" />
-
-            <!-- Femoral: Anterior/medial thigh + Saphenous medial shin/ankle strip -->
             <path ${tap('femoral')} ${pProps('femoral')} d="M 72,20 L 110,20 L 108,152 L 154,152 L 154,368 L 98,368 L 90,214 L 44,214 L 44,174 L 66,174 Z" />
-
-            <!-- Fibular (Peroneal): Distal lateral lower leg + dorsum of foot -->
             <path ${tap('fibular')} ${pProps('fibular')} d="M 28,214 L 90,214 L 98,368 L 142,368 L 142,430 L 28,430 Z" />
 
             <!-- Internal Dividers -->
@@ -1637,47 +1687,55 @@
           <!-- ==================== POSTERIOR RIGHT LEG ==================== -->
           <path d="${SCULPTED_FULL_POST_LEG_PATH}" fill="var(--svg-limb-base)" />
           <g clip-path="url(#${uid}_post_clip)">
-            <!-- Sciatic: Posterior thigh -->
             <path ${tap('sciatic')} ${pProps('sciatic')} d="M 190,18 L 306,18 L 306,196 L 190,196 Z" />
-            <!-- Tibial: Posterior calf & heel reference -->
             <path ${tap('tibial')} ${pProps('tibial')} d="M 190,196 L 306,196 L 306,428 L 190,428 Z" />
             <line x1="210" y1="196" x2="288" y2="196" stroke="var(--svg-divider)" stroke-width="1.5" stroke-dasharray="${isQuiz ? '3 2' : 'none'}" pointer-events="none" />
           </g>
           <path d="${SCULPTED_FULL_POST_LEG_PATH}" fill="none" stroke="var(--svg-outline)" stroke-width="2" stroke-linejoin="round" stroke-linecap="round" pointer-events="none" />
-          <!-- Posterior Popliteal Crease & Achilles -->
-          <path d="M 228,196 Q 248,200 268,196 M 241,322 L 240,374 M 254,322 L 255,374" fill="none" stroke="var(--svg-landmark)" stroke-width="1.1" stroke-linecap="round" pointer-events="none" />
+          <path d="M 228,196 Q 248,200 268,196 M 241,322 L 240,374 M 254,322 L 255,374" fill="none" stroke="var(--svg-landmark)" stroke-width="1.15" stroke-linecap="round" pointer-events="none" />
 
           <!-- ==================== SCULPTED 5-TOE PLANTAR SOLE (TIBIAL) ==================== -->
           <path d="${SCULPTED_PLANTAR_SOLE_PATH}" fill="var(--svg-limb-base)" />
           <g clip-path="url(#${uid}_sole_clip)">
             <rect ${tap('tibial')} ${pProps('tibial')} x="304" y="268" width="80" height="158" />
           </g>
-          <path d="${SCULPTED_PLANTAR_SOLE_PATH}" fill="none" stroke="var(--svg-outline)" stroke-width="1.9" stroke-linejoin="round" stroke-linecap="round" pointer-events="none" />
-          <path d="M 332,295 L 332,301 M 349,296 L 349,302 M 362,301 L 362,307" fill="none" stroke="var(--svg-outline)" stroke-width="1.1" stroke-linecap="round" pointer-events="none" />
+          <path d="${SCULPTED_PLANTAR_SOLE_PATH}" fill="none" stroke="var(--svg-outline)" stroke-width="1.95" stroke-linejoin="round" stroke-linecap="round" pointer-events="none" />
+          <path d="M 332,295 L 332,301 M 349,296 L 349,302 M 362,301 L 362,307" fill="none" stroke="var(--svg-outline)" stroke-width="1.15" stroke-linecap="round" pointer-events="none" />
 
-          <!-- ==================== CALLOUT PILLS (TEACH / EXPLORE) ==================== -->
+          <!-- ==================== CALLOUT PILLS (FADE TO 0.25 WHEN UNSELECTED) ==================== -->
           ${!isQuiz ? `
             <g pointer-events="none">
-              <rect x="6" y="74" width="52" height="22" rx="7" fill="#0891b2" />
-              <text x="32" y="88" text-anchor="middle" fill="#ffffff" font-size="8.5" font-weight="800">LFCN</text>
+              <g class="${lblCls('lfcn')}">
+                <rect x="6" y="74" width="52" height="22" rx="7" fill="#0891b2" />
+                <text x="32" y="88" text-anchor="middle" fill="#ffffff" font-size="8.5" font-weight="800">LFCN</text>
+              </g>
 
-              <rect x="116" y="66" width="54" height="22" rx="7" fill="#10b981" />
-              <text x="143" y="80" text-anchor="middle" fill="#ffffff" font-size="8.2" font-weight="800">OBTUR.</text>
+              <g class="${lblCls('obturator')}">
+                <rect x="116" y="66" width="54" height="22" rx="7" fill="#10b981" />
+                <text x="143" y="80" text-anchor="middle" fill="#ffffff" font-size="8.2" font-weight="800">OBTUR.</text>
+              </g>
 
-              <rect x="54" y="160" width="76" height="23" rx="8" fill="#2563eb" />
-              <text x="92" y="175" text-anchor="middle" fill="#ffffff" font-size="9.2" font-weight="800">FEMORAL</text>
+              <g class="${lblCls('femoral')}">
+                <rect x="54" y="160" width="76" height="23" rx="8" fill="#2563eb" />
+                <text x="92" y="175" text-anchor="middle" fill="#ffffff" font-size="9.2" font-weight="800">FEMORAL</text>
+              </g>
 
-              <rect x="14" y="294" width="74" height="23" rx="8" fill="#ef4444" />
-              <text x="51" y="309" text-anchor="middle" fill="#ffffff" font-size="9.2" font-weight="800">FIBULAR</text>
+              <g class="${lblCls('fibular')}">
+                <rect x="14" y="294" width="74" height="23" rx="8" fill="#ef4444" />
+                <text x="51" y="309" text-anchor="middle" fill="#ffffff" font-size="9.2" font-weight="800">FIBULAR</text>
+              </g>
 
-              <rect x="212" y="96" width="72" height="23" rx="8" fill="#f59e0b" />
-              <text x="248" y="111" text-anchor="middle" fill="#ffffff" font-size="9.2" font-weight="800">SCIATIC</text>
+              <g class="${lblCls('sciatic')}">
+                <rect x="212" y="96" width="72" height="23" rx="8" fill="#f59e0b" />
+                <text x="248" y="111" text-anchor="middle" fill="#ffffff" font-size="9.2" font-weight="800">SCIATIC</text>
+              </g>
 
-              <rect x="214" y="270" width="68" height="23" rx="8" fill="#8b5cf6" />
-              <text x="248" y="285" text-anchor="middle" fill="#ffffff" font-size="9.2" font-weight="800">TIBIAL</text>
-
-              <rect x="315" y="340" width="52" height="20" rx="7" fill="#8b5cf6" stroke="#ffffff" stroke-width="1.2" />
-              <text x="341" y="353" text-anchor="middle" fill="#ffffff" font-size="8.5" font-weight="800">TIBIAL</text>
+              <g class="${lblCls('tibial')}">
+                <rect x="214" y="270" width="68" height="23" rx="8" fill="#8b5cf6" />
+                <text x="248" y="285" text-anchor="middle" fill="#ffffff" font-size="9.2" font-weight="800">TIBIAL</text>
+                <rect x="315" y="340" width="52" height="20" rx="7" fill="#8b5cf6" stroke="#ffffff" stroke-width="1.2" />
+                <text x="341" y="353" text-anchor="middle" fill="#ffffff" font-size="8.5" font-weight="800">TIBIAL</text>
+              </g>
             </g>
           ` : `
             <g pointer-events="none">
@@ -1691,7 +1749,7 @@
     }
 
     // =========================================================================
-    // 6. INTERACTION HANDLERS
+    // 6. INTERACTION HANDLERS (SPOTLIGHT TOGGLE, QUIZ & MISTAKE REPLAY LOOP)
     // =========================================================================
     function setAppMode(mode) {
       state.appMode = mode;
@@ -1699,21 +1757,34 @@
       window.scrollTo({ top: 0, behavior: 'smooth' });
     }
 
+    // Tapping an already-selected zone in Explore mode un-isolates (shows all zones)
     function inspectDermZone(zId) {
-      if (state.appMode === 'explore') state.exploreDerm = zId;
-      else state.teachSelectedDerm = zId;
+      if (state.appMode === 'explore') {
+        state.exploreDerm = state.exploreDerm === zId ? null : zId;
+      } else {
+        state.teachSelectedDerm = state.teachSelectedDerm === zId ? null : zId;
+      }
       renderAll();
     }
 
     function inspectPeriphZone(nId) {
-      if (state.appMode === 'explore') state.explorePeriph = nId;
-      else state.teachSelectedPeriph = nId;
+      if (state.appMode === 'explore') {
+        state.explorePeriph = state.explorePeriph === nId ? null : nId;
+      } else {
+        state.teachSelectedPeriph = state.teachSelectedPeriph === nId ? null : nId;
+      }
+      renderAll();
+    }
+
+    function resetExploreSelection() {
+      if (state.exploreTab === 'derm') state.exploreDerm = null;
+      else state.explorePeriph = null;
       renderAll();
     }
 
     function selectQuizZone(zId) {
       if (state.checked) return;
-      state.selectedAnswer = zId;
+      state.selectedAnswer = state.selectedAnswer === zId ? null : zId;
       renderAll();
     }
 
@@ -1761,6 +1832,12 @@
       renderAll();
     }
 
+    function finishLesson() {
+      state.completed = true;
+      state.xp = 120;
+      saveLessonCompletion();
+    }
+
     function continueLesson() {
       const step = getCurrentStep();
       if (step && step.type.startsWith('teach_')) {
@@ -1782,13 +1859,13 @@
           state.inMistakeReplay = true;
           state.mistakeCursor = 0;
         } else {
-          state.completed = true;
+          finishLesson();
         }
       } else {
         if (state.mistakeCursor + 1 < state.mistakeQueue.length) {
           state.mistakeCursor++;
         } else {
-          state.completed = true;
+          finishLesson();
         }
       }
 
@@ -1886,7 +1963,7 @@
         : '';
 
       if (step.type === 'teach_thigh' || step.type === 'teach_shin') {
-        const z = DERMATOME_DATA[state.teachSelectedDerm] || DERMATOME_DATA[step.focusZones[0]];
+        const z = state.teachSelectedDerm ? DERMATOME_DATA[state.teachSelectedDerm] : null;
         return `
           <div class="stack step-enter">
             <div>
@@ -1902,7 +1979,7 @@
             </div>
 
             <div class="card svg-card">
-              ${buildDermatomeLegSVG('teach', state.teachSelectedDerm, null, step.focusZones)}
+              ${buildDermatomeLegSVG('teach', state.teachSelectedDerm, null)}
             </div>
 
             ${step.type === 'teach_shin' ? `
@@ -1911,7 +1988,7 @@
                   <strong>L4</strong>
                   <span>Heel Walk &bull; Patellar</span>
                 </div>
-                <div class="mini-tile sem-red">
+                <div class="mini-tile sem-coral">
                   <strong>L5</strong>
                   <span>Big Toe &bull; NO Reflex</span>
                 </div>
@@ -1922,34 +1999,40 @@
               </div>
             ` : ''}
 
-            <div class="card info-card">
-              <div class="flex-between">
-                <span class="step-badge ${z.badgeCls}">${z.name}</span>
-                <span style="font-size:12px;font-weight:700;color:var(--text-muted);">${z.hook}</span>
+            ${z ? `
+              <div class="card info-card">
+                <div class="flex-between">
+                  <span class="step-badge ${z.badgeCls}">${z.name}</span>
+                  <span style="font-size:12px;font-weight:700;color:var(--text-muted);">${z.hook}</span>
+                </div>
+                <div class="sem-box sem-blue">
+                  <span class="sem-box-label">Sensation</span>
+                  <p>${z.sensation}</p>
+                </div>
+                <div class="sem-box sem-emerald">
+                  <span class="sem-box-label">Myotome (Specific Muscles)</span>
+                  <p><strong>${z.myotome}</strong> (${z.action})</p>
+                </div>
+                <div class="sem-box sem-purple">
+                  <span class="sem-box-label">Reflex</span>
+                  <p><strong>${z.reflex}</strong></p>
+                </div>
+                <div class="sem-box sem-amber">
+                  <span class="sem-box-label">💡 Visual Hook</span>
+                  <p>${z.analogy}</p>
+                </div>
               </div>
-              <div class="sem-box sem-blue">
-                <span class="sem-box-label">Sensation</span>
-                <p>${z.sensation}</p>
+            ` : `
+              <div class="card info-card" style="text-align:center;">
+                <p class="hint-text">All zones visible — tap any zone on the leg to spotlight its SMR details.</p>
               </div>
-              <div class="sem-box sem-emerald">
-                <span class="sem-box-label">Myotome (Specific Muscles)</span>
-                <p><strong>${z.myotome}</strong> (${z.action})</p>
-              </div>
-              <div class="sem-box sem-purple">
-                <span class="sem-box-label">Reflex</span>
-                <p><strong>${z.reflex}</strong></p>
-              </div>
-              <div class="sem-box sem-amber">
-                <span class="sem-box-label">💡 Visual Analogy</span>
-                <p>${z.analogy}</p>
-              </div>
-            </div>
+            `}
           </div>
         `;
       }
 
       if (step.type === 'teach_periph') {
-        const p = PERIPHERAL_DATA[state.teachSelectedPeriph] || PERIPHERAL_DATA.fibular;
+        const p = state.teachSelectedPeriph ? PERIPHERAL_DATA[state.teachSelectedPeriph] : null;
         const keys = ['femoral', 'lfcn', 'obturator', 'sciatic', 'tibial', 'fibular'];
         return `
           <div class="stack step-enter">
@@ -1969,24 +2052,30 @@
               ${buildPeripheralLegSVG('teach', state.teachSelectedPeriph, null)}
             </div>
 
-            <div class="card info-card">
-              <div class="flex-between">
-                <span class="step-badge ${p.badgeCls}">${p.name}</span>
-                <span style="font-size:12px;font-weight:700;color:var(--text-muted);">${p.roots}</span>
+            ${p ? `
+              <div class="card info-card">
+                <div class="flex-between">
+                  <span class="step-badge ${p.badgeCls}">${p.name}</span>
+                  <span style="font-size:12px;font-weight:700;color:var(--text-muted);">${p.roots}</span>
+                </div>
+                <div class="sem-box sem-blue">
+                  <span class="sem-box-label">Sensation</span>
+                  <p>${p.sensation}</p>
+                </div>
+                <div class="sem-box sem-emerald">
+                  <span class="sem-box-label">Motor Supply</span>
+                  <p><strong>${p.muscles}</strong> — ${p.actions}</p>
+                </div>
+                <div class="sem-box sem-coral">
+                  <span class="sem-box-label">⚠️ Assessor Trap</span>
+                  <p><strong>${p.trap}</strong></p>
+                </div>
               </div>
-              <div class="sem-box sem-blue">
-                <span class="sem-box-label">Sensation</span>
-                <p>${p.sensation}</p>
+            ` : `
+              <div class="card info-card" style="text-align:center;">
+                <p class="hint-text">All peripheral nerves visible — tap any nerve on the leg to spotlight it.</p>
               </div>
-              <div class="sem-box sem-emerald">
-                <span class="sem-box-label">Motor Supply</span>
-                <p><strong>${p.muscles}</strong> — ${p.actions}</p>
-              </div>
-              <div class="sem-box sem-red">
-                <span class="sem-box-label">⚠️ Assessor Trap</span>
-                <p><strong>${p.trap}</strong></p>
-              </div>
-            </div>
+            `}
           </div>
         `;
       }
@@ -2008,15 +2097,15 @@
 
             <div class="card svg-card">
               ${step.type === 'quiz_derm'
-                ? buildDermatomeLegSVG('quiz', null, fb, null)
+                ? buildDermatomeLegSVG('quiz', null, fb)
                 : buildPeripheralLegSVG('quiz', null, fb)}
             </div>
 
             <p class="hint-text">
               ${state.selectedAnswer && !state.checked
-                ? 'Zone highlighted — tap <strong>CHECK</strong> below to confirm!'
+                ? 'Zone spotlighted — tap <strong>CHECK</strong> below to confirm!'
                 : !state.checked
-                  ? 'Tap directly on the anatomical region above.'
+                  ? 'Tap directly on the anatomical zone above.'
                   : ''}
             </p>
           </div>
@@ -2028,7 +2117,7 @@
           <div class="stack step-enter">
             <div>
               ${mistakeBanner}
-              <span class="step-badge ${step.isTrap ? 'badge-red' : 'badge-blue'}">${step.badge}</span>
+              <span class="step-badge ${step.isTrap ? 'badge-coral' : 'badge-blue'}">${step.badge}</span>
               <h2 class="step-prompt">${step.prompt}</h2>
             </div>
 
@@ -2108,36 +2197,48 @@
                 <p class="fb-msg">${step.wrongMsg}</p>
               </div>
             </div>
-            <button type="button" class="btn-3d btn-red" onclick="continueLesson()">GOT IT</button>
+            <button type="button" class="btn-3d btn-coral" onclick="continueLesson()">CONTINUE</button>
           </div>
         </div>
       `;
     }
 
     // =========================================================================
-    // 10. FREE EXPLORE ANATOMY LAB
+    // 10. FREE EXPLORE ANATOMY LAB (WITH SPOTLIGHT + 'SHOW ALL ZONES' RESET)
     // =========================================================================
     function renderExploreLab() {
       const isDerm = state.exploreTab === 'derm';
-      const item = isDerm
-        ? (DERMATOME_DATA[state.exploreDerm] || DERMATOME_DATA.L4)
-        : (PERIPHERAL_DATA[state.explorePeriph] || PERIPHERAL_DATA.fibular);
+      const activeId = isDerm ? state.exploreDerm : state.explorePeriph;
+      const item = activeId
+        ? (isDerm ? DERMATOME_DATA[activeId] : PERIPHERAL_DATA[activeId])
+        : null;
 
       return `
         <div class="stack step-enter">
-          <div>
-            <span class="step-badge badge-blue">Free Explore Anatomy Lab</span>
-            <h2 class="step-title">Tap Any Lower Limb Zone</h2>
+          <div class="flex-between">
+            <div>
+              <span class="step-badge badge-blue">Free Explore Anatomy Lab</span>
+              <h2 class="step-title">Tap Any Zone to Spotlight</h2>
+            </div>
+            <button
+              type="button"
+              class="reset-pill ${activeId ? '' : 'is-all'}"
+              ${activeId ? '' : 'disabled'}
+              onclick="resetExploreSelection()"
+            >
+              <span>👁️</span>
+              <span>Show All Zones</span>
+            </button>
           </div>
 
           <div class="sub-seg">
             <button type="button" class="sub-seg-btn ${isDerm ? 'active' : ''}" onclick="state.exploreTab='derm'; renderAll();">Dermatomes (L2–S1)</button>
-            <button type="button" class="sub-seg-btn ${!isDerm ? 'active' : ''}" onclick="state.exploreTab='periph'; renderAll();">Peripheral Nerves (6)</button>
+            <button type="button" class="sub-seg-btn ${!isDerm ? 'active' : ''}" onclick="state.exploreTab='periph'; renderAll();">Peripheral Nerves</button>
           </div>
 
           <div class="card svg-card">
             ${isDerm
-              ? buildDermatomeLegSVG('teach', state.exploreDerm, null, null)
+              ? buildDermatomeLegSVG('teach', state.exploreDerm, null)
               : buildPeripheralLegSVG('teach', state.explorePeriph, null)}
           </div>
 
@@ -2152,41 +2253,48 @@
             }
           </div>
 
-          <article class="card info-card">
-            <div class="flex-between">
-              <div style="display:flex;align-items:center;gap:8px;flex-wrap:wrap;">
-                <span class="step-badge ${item.badgeCls}">${item.name}</span>
-                ${item.roots ? `<span style="font-size:12px;font-weight:700;color:var(--text-muted);">${item.roots}</span>` : ''}
+          ${item ? `
+            <article class="card info-card">
+              <div class="flex-between">
+                <div style="display:flex;align-items:center;gap:8px;flex-wrap:wrap;">
+                  <span class="step-badge ${item.badgeCls}">${item.name}</span>
+                  ${item.roots ? `<span style="font-size:12px;font-weight:700;color:var(--text-muted);">${item.roots}</span>` : ''}
+                </div>
+                <span style="font-size:11.5px;font-weight:700;color:var(--text-muted);">Tap zone again to un-isolate</span>
               </div>
-              <span style="font-size:12px;font-weight:700;color:var(--text-muted);">${item.hook}</span>
-            </div>
 
-            <div class="sem-box sem-blue">
-              <span class="sem-box-label">Sensation</span>
-              <p>${item.sensation}</p>
-            </div>
+              <div class="sem-box sem-blue">
+                <span class="sem-box-label">Sensation</span>
+                <p>${item.sensation}</p>
+              </div>
 
-            <div class="sem-box sem-emerald">
-              <span class="sem-box-label">${isDerm ? 'Myotome (Specific Muscles)' : 'Muscles & Actions'}</span>
-              <p><strong>${isDerm ? item.myotome : item.muscles}</strong></p>
-              <p style="font-size:12.5px;color:var(--text-muted);margin-top:2px;">${isDerm ? item.action : item.actions}</p>
-            </div>
+              <div class="sem-box sem-emerald">
+                <span class="sem-box-label">${isDerm ? 'Myotome (Specific Muscles)' : 'Muscles & Actions'}</span>
+                <p><strong>${isDerm ? item.myotome : item.muscles}</strong></p>
+                <p style="font-size:12.5px;color:var(--text-muted);margin-top:2px;">${isDerm ? item.action : item.actions}</p>
+              </div>
 
-            <div class="sem-box sem-purple">
-              <span class="sem-box-label">Reflex &amp; Gait Screen</span>
-              <p><strong>${isDerm ? `${item.reflex} • ${item.gait}` : item.reflexGait}</strong></p>
-            </div>
+              <div class="sem-box sem-purple">
+                <span class="sem-box-label">Reflex &amp; Gait</span>
+                <p><strong>${isDerm ? `${item.reflex} • ${item.gait}` : item.reflexGait}</strong></p>
+              </div>
 
-            <div class="sem-box sem-amber">
-              <span class="sem-box-label">💡 Visual Analogy</span>
-              <p>${item.analogy}</p>
-            </div>
+              <div class="sem-box sem-amber">
+                <span class="sem-box-label">💡 Visual Hook</span>
+                <p>${item.analogy}</p>
+              </div>
 
-            <div class="sem-box sem-red">
-              <span class="sem-box-label">⚠️ Assessor Trap</span>
-              <p><strong>${item.trap}</strong></p>
-            </div>
-          </article>
+              <div class="sem-box sem-coral">
+                <span class="sem-box-label">⚠️ Assessor Trap</span>
+                <p><strong>${item.trap}</strong></p>
+              </div>
+            </article>
+          ` : `
+            <article class="card info-card" style="text-align:center;">
+              <p class="font-display" style="font-size:14.5px;font-weight:800;">Showing All ${isDerm ? 'L2–S1 Dermatomes' : 'Lower Limb Peripheral Nerves'}</p>
+              <p class="hint-text">Tap any coloured territory on the sculpted leg above to isolate it, fade the others, and inspect its clinical breakdown.</p>
+            </article>
+          `}
 
           <!-- Collapsible Exam Sequence & Grading Scales Drawer -->
           <section class="card">
@@ -2202,7 +2310,7 @@
               <div class="accordion-body">
                 <div class="sem-box sem-blue">
                   <span class="sem-box-label">Sensory Sequence &amp; Scale (0–2)</span>
-                  <p><strong>Soft (R, L, compare) &rarr; Sharp (R, L, compare) &rarr; Discriminate as required</strong></p>
+                  <p><strong>Soft (R, L, compare) &rarr; Sharp (R, L, compare) &rarr; Discriminate</strong></p>
                   <p style="margin-top:4px;font-size:12.5px;color:var(--text-muted);"><strong>2:</strong> Normal &bull; <strong>1:</strong> Altered / Impaired &bull; <strong>0:</strong> Absent</p>
                 </div>
 
@@ -2225,7 +2333,7 @@
     }
 
     // =========================================================================
-    // 11. CELEBRATION COMPLETION SCREEN + CONFETTI
+    // 11. CELEBRATION COMPLETION SCREEN (+120 XP & SAVED TO mchiro_lessons_v1)
     // =========================================================================
     function renderCelebrationScreen() {
       const acc = state.firstTryTotal > 0
@@ -2240,13 +2348,13 @@
             <div class="trophy-badge">🏆</div>
             <div><span class="step-badge badge-emerald">Lesson 2 Complete!</span></div>
             <h2 class="font-display" style="font-size:26px;font-weight:800;">Lower Limb Mastered</h2>
-            <p class="step-sub">You nailed L2–S1 dermatomes, specific myotomes, 1+–4+ reflexes, and all 6 lower limb peripheral nerves.</p>
+            <p class="step-sub">Saved to your Revision Hub progress. You cleared L2–S1 dermatomes, specific myotomes, 1+–4+ reflexes, and all 6 lower limb peripheral nerves.</p>
           </div>
 
           <div style="position:relative;z-index:2;" class="stat-grid">
             <div class="stat-box sem-amber">
               <span class="sem-box-label">XP Earned</span>
-              <span class="stat-val" style="color:var(--sem-amber);">+${state.xp} XP</span>
+              <span class="stat-val" style="color:var(--sem-amber);">+120 XP</span>
             </div>
             <div class="stat-box sem-emerald">
               <span class="sem-box-label">First-Try Accuracy</span>
@@ -2263,10 +2371,9 @@
           </div>
 
           <div style="position:relative;z-index:2;" class="stack-sm">
-            <button type="button" class="btn-3d btn-emerald" onclick="replayLesson()">↺ REPLAY LESSON</button>
-            <button type="button" class="btn-3d btn-blue" onclick="setAppMode('explore')">🔬 OPEN EXPLORE LAB</button>
-            <a href="neuro.html" class="btn-3d btn-neutral">&larr; BACK TO NEURO HUB</a>
-            <a href="index.html" class="btn-3d btn-neutral">🏠 HOME DASHBOARD</a>
+            <button type="button" class="btn-3d btn-emerald" onclick="replayLesson()">↺ PRACTICE AGAIN</button>
+            <button type="button" class="btn-3d btn-blue" onclick="setAppMode('explore')">🔬 EXPLORE ANATOMY LAB</button>
+            <a href="index.html" class="btn-3d btn-neutral">&larr; BACK TO HUB</a>
           </div>
         </div>
       `;
