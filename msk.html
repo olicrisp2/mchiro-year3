@@ -1,193 +1,895 @@
 <!DOCTYPE html>
-<html lang="en" class="scroll-smooth">
+<html lang="en">
 <head>
   <meta charset="UTF-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>MChiro Year 3 – Musculoskeletal Medicine</title>
-
-  <!-- Google Font: Inter -->
-  <link rel="preconnect" href="https://fonts.googleapis.com" />
-  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
-  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap" rel="stylesheet" />
-
-  <!-- Tailwind CSS -->
-  <script src="https://cdn.tailwindcss.com"></script>
-  <script>
-    tailwind.config = {
-      darkMode: 'class',
-      theme: {
-        extend: {
-          fontFamily: {
-            sans: ['Inter', 'system-ui', '-apple-system', 'sans-serif'],
-          },
-        },
-      },
-    };
-  </script>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover" />
+  <title>Musculoskeletal Medicine – MChiro Year 3 Hub</title>
 
   <style>
-    /* Clinical Light & Dark Mode Design Tokens */
+    /* =========================================================================
+       1. DESIGN TOKENS: APPLE HEALTH MINIMALIST × DUOLINGO TACTILE 3D
+       Zero external CDNs — pure system font stack & inline SVG anatomy.
+       ========================================================================= */
     :root {
-      --svg-bg: #f8fafc;
-      --svg-bone: #e2e8f0;
-      --svg-bone-inner: #f1f5f9;
+      --bg-page: #F2F2F7;
+      --bg-card: #FFFFFF;
+      --bg-subtle: #EAEAF0;
+      --bg-input: #F8FAFC;
+      --bg-glass: rgba(242, 242, 247, 0.90);
+      --border-card: #E2E8F0;
+      --border-strong: #CBD5E1;
+      --text-main: #0F172A;
+      --text-muted: #475569;
+      --shadow-card: 0 2px 12px rgba(15, 23, 42, 0.05), 0 1px 2px rgba(15, 23, 42, 0.03);
+
+      /* Semantic Cognitive Colour-Coding */
+      --coral: #E11D48;
+      --coral-dark: #9F1239;
+      --coral-soft: rgba(225, 29, 72, 0.10);
+      --coral-border: rgba(225, 29, 72, 0.32);
+
+      --blue: #2563EB;
+      --blue-dark: #1D4ED8;
+      --blue-soft: rgba(37, 99, 235, 0.10);
+      --blue-border: rgba(37, 99, 235, 0.30);
+
+      --purple: #7C3AED;
+      --purple-dark: #5B21B6;
+      --purple-soft: rgba(124, 58, 237, 0.10);
+      --purple-border: rgba(124, 58, 237, 0.30);
+
+      --emerald: #059669;
+      --emerald-dark: #047857;
+      --emerald-soft: rgba(5, 150, 105, 0.11);
+      --emerald-border: rgba(5, 150, 105, 0.32);
+
+      --amber: #D97706;
+      --amber-dark: #92400E;
+      --amber-soft: rgba(217, 119, 6, 0.12);
+      --amber-border: rgba(217, 119, 6, 0.36);
+
+      /* SVG Tokens */
+      --svg-bg: #F8FAFC;
+      --svg-bone: #F1F5F9;
       --svg-bone-stroke: #475569;
-      --svg-capsule: #94a3b8;
-      --svg-cartilage: #38bdf8;
-      --svg-cartilage-stroke: #0284c7;
-      --svg-synovium: #f43f5e;
-      --svg-pannus: #be123c;
-      --svg-effusion: #fda4af;
-      --svg-osteophyte: #f59e0b;
-      --svg-sclerosis: #64748b;
-      --svg-text: #0f172a;
-      --svg-muted: #64748b;
+      --svg-cartilage: #38BDF8;
+      --svg-capsule: #94A3B8;
     }
 
     .dark {
-      --svg-bg: #0f172a;
-      --svg-bone: #334155;
-      --svg-bone-inner: #1e293b;
-      --svg-bone-stroke: #cbd5e1;
-      --svg-capsule: #64748b;
-      --svg-cartilage: #0ea5e9;
-      --svg-cartilage-stroke: #7dd3fc;
-      --svg-synovium: #fb7185;
-      --svg-pannus: #f43f5e;
-      --svg-effusion: #e11d48;
-      --svg-osteophyte: #fbbf24;
-      --svg-sclerosis: #94a3b8;
-      --svg-text: #f8fafc;
-      --svg-muted: #94a3b8;
+      --bg-page: #090D16;
+      --bg-card: #131B2E;
+      --bg-subtle: #1E293B;
+      --bg-input: #0F172A;
+      --bg-glass: rgba(9, 13, 22, 0.90);
+      --border-card: #26344F;
+      --border-strong: #3D5073;
+      --text-main: #F8FAFC;
+      --text-muted: #94A3B8;
+      --shadow-card: 0 4px 18px rgba(0, 0, 0, 0.46);
+
+      --coral-soft: rgba(225, 29, 72, 0.22);
+      --coral-border: rgba(251, 113, 133, 0.44);
+
+      --blue-soft: rgba(37, 99, 235, 0.22);
+      --blue-border: rgba(96, 165, 250, 0.44);
+
+      --purple-soft: rgba(124, 58, 237, 0.22);
+      --purple-border: rgba(167, 139, 250, 0.44);
+
+      --emerald-soft: rgba(5, 150, 105, 0.22);
+      --emerald-border: rgba(52, 211, 153, 0.42);
+
+      --amber-soft: rgba(217, 119, 6, 0.22);
+      --amber-border: rgba(251, 191, 36, 0.44);
+
+      --svg-bg: #0F172A;
+      --svg-bone: #1E293B;
+      --svg-bone-stroke: #CBD5E1;
+      --svg-cartilage: #38BDF8;
+      --svg-capsule: #64748B;
     }
 
-    .no-scrollbar::-webkit-scrollbar { display: none; }
-    .no-scrollbar { -ms-overflow-style: none; scrollbar-width: none; }
+    /* =========================================================================
+       2. BASE RESET & TYPOGRAPHY
+       ========================================================================= */
+    *, *::before, *::after { box-sizing: border-box; }
+    html { scroll-behavior: smooth; }
 
-    /* Interactive SVG Hotspot Styling */
-    .svg-hotspot {
+    body {
+      margin: 0;
+      min-height: 100vh;
+      background-color: var(--bg-page);
+      color: var(--text-main);
+      font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif;
+      line-height: 1.48;
+      overflow-x: hidden;
+      -webkit-font-smoothing: antialiased;
+      -webkit-tap-highlight-color: transparent;
+      transition: background-color 0.2s ease, color 0.2s ease;
+    }
+
+    h1, h2, h3, h4, p { margin: 0; }
+    a { color: inherit; text-decoration: none; }
+    button, input, select, textarea { font-family: inherit; }
+
+    .mono {
+      font-family: ui-monospace, SFMono-Regular, Menlo, Monaco, Consolas, monospace;
+      letter-spacing: -0.02em;
+    }
+
+    /* CRITICAL ZERO-STROKE SVG TEXT GUARDRAIL */
+    svg text {
+      stroke: none !important;
+      paint-order: fill;
+      pointer-events: none;
+    }
+
+    .container {
+      width: 100%;
+      max-width: 980px;
+      margin: 0 auto;
+      padding: 0 12px;
+    }
+    @media (min-width: 640px) {
+      .container { padding: 0 22px; }
+    }
+
+    .main-stack {
+      display: flex;
+      flex-direction: column;
+      gap: 16px;
+      padding-top: 16px;
+      padding-bottom: 108px;
+    }
+    @media (min-width: 769px) {
+      .main-stack { padding-bottom: 54px; }
+    }
+
+    /* =========================================================================
+       3. STICKY FROSTED-GLASS HEADER & 4-TAB SEGMENTED BAR
+       ========================================================================= */
+    .top-header {
+      position: sticky;
+      top: 0;
+      z-index: 40;
+      background: var(--bg-glass);
+      backdrop-filter: blur(18px);
+      -webkit-backdrop-filter: blur(18px);
+      border-bottom: 1px solid var(--border-card);
+    }
+
+    .header-inner {
+      display: grid;
+      grid-template-columns: auto 1fr auto;
+      align-items: center;
+      gap: 10px;
+      padding-top: 10px;
+      padding-bottom: 10px;
+    }
+
+    .back-btn {
+      display: inline-flex;
+      align-items: center;
+      gap: 4px;
+      min-height: 36px;
+      padding: 6px 11px;
+      border-radius: 12px;
+      background: var(--bg-subtle);
+      color: var(--text-main);
+      font-size: 12.5px;
+      font-weight: 800;
+      transition: background-color 0.14s ease;
+    }
+    .back-btn:hover { background: var(--border-strong); }
+
+    .header-center {
+      text-align: center;
+      min-width: 0;
+    }
+    .page-title {
+      font-size: 15.5px;
+      font-weight: 800;
+      letter-spacing: -0.02em;
+      white-space: nowrap;
+      overflow: hidden;
+      text-overflow: ellipsis;
+    }
+    .page-sub {
+      font-size: 11px;
+      font-weight: 600;
+      color: var(--text-muted);
+      white-space: nowrap;
+      overflow: hidden;
+      text-overflow: ellipsis;
+    }
+
+    .theme-btn {
+      width: 36px;
+      height: 36px;
+      border-radius: 12px;
+      border: 1px solid var(--border-card);
+      background: var(--bg-card);
+      color: var(--text-main);
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
       cursor: pointer;
-      transition: opacity 0.16s ease, filter 0.16s ease, stroke-width 0.16s ease;
+      transition: border-color 0.14s ease;
     }
-    .svg-hotspot:hover {
-      filter: brightness(1.12);
+    .theme-btn:hover { border-color: var(--blue); }
+
+    .tabs-scroll {
+      padding-bottom: 10px;
+      overflow-x: auto;
+      -ms-overflow-style: none;
+      scrollbar-width: none;
     }
-    .svg-hotspot-active {
-      stroke: var(--svg-text) !important;
-      stroke-width: 2.8px !important;
-      filter: drop-shadow(0 0 8px rgba(13, 148, 136, 0.65));
+    .tabs-scroll::-webkit-scrollbar { display: none; }
+
+    .seg-track {
+      display: flex;
+      gap: 4px;
+      padding: 4px;
+      border-radius: 14px;
+      background: var(--bg-subtle);
+      border: 1px solid var(--border-card);
+      min-width: max-content;
+    }
+    @media (min-width: 680px) {
+      .seg-track {
+        display: grid;
+        grid-template-columns: repeat(4, 1fr);
+        min-width: 0;
+      }
     }
 
-    /* Active Recall Blur Effect */
-    .recall-blurred {
-      filter: blur(6px);
-      opacity: 0.6;
+    .seg-btn {
+      border: none;
+      background: transparent;
+      color: var(--text-muted);
+      min-height: 38px;
+      padding: 7px 12px;
+      border-radius: 11px;
+      font-size: 12.5px;
+      font-weight: 800;
+      cursor: pointer;
+      white-space: nowrap;
+      transition: all 0.15s ease;
+      text-align: center;
+    }
+    .seg-btn.active {
+      background: var(--bg-card);
+      color: var(--text-main);
+      box-shadow: 0 2px 8px rgba(0, 0, 0, 0.09);
+    }
+
+    /* =========================================================================
+       4. SHARED SURFACES, SEMANTIC BOXES, INPUTS & TACTILE 3D BUTTONS
+       ========================================================================= */
+    .ah-card {
+      background: var(--bg-card);
+      border: 1px solid var(--border-card);
+      border-radius: 20px;
+      box-shadow: var(--shadow-card);
+    }
+    .ah-card-alt {
+      background: var(--bg-subtle);
+      border: 1px solid var(--border-card);
+      border-radius: 14px;
+    }
+    .pad-card { padding: 15px; }
+    @media (min-width: 640px) {
+      .pad-card { padding: 20px; }
+    }
+
+    .stack { display: flex; flex-direction: column; gap: 14px; }
+    .stack-sm { display: flex; flex-direction: column; gap: 10px; }
+
+    .flex-between {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      gap: 8px;
+      flex-wrap: wrap;
+    }
+
+    .grid-2 {
+      display: grid;
+      grid-template-columns: 1fr;
+      gap: 10px;
+    }
+    @media (min-width: 640px) {
+      .grid-2 { grid-template-columns: 1fr 1fr; }
+    }
+
+    .grid-3 {
+      display: grid;
+      grid-template-columns: 1fr;
+      gap: 10px;
+    }
+    @media (min-width: 580px) {
+      .grid-3 { grid-template-columns: repeat(3, 1fr); }
+    }
+
+    .grid-3-compact {
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap: 8px;
+    }
+
+    /* Badges */
+    .badge {
+      display: inline-flex;
+      align-items: center;
+      gap: 4px;
+      padding: 4px 10px;
+      border-radius: 999px;
+      font-size: 11px;
+      font-weight: 800;
+      letter-spacing: 0.015em;
+      white-space: nowrap;
+    }
+    .badge-coral { background: var(--coral-soft); color: var(--coral-dark); border: 1px solid var(--coral-border); }
+    .dark .badge-coral { color: #FDA4AF; }
+    .badge-blue { background: var(--blue-soft); color: var(--blue-dark); border: 1px solid var(--blue-border); }
+    .dark .badge-blue { color: #93C5FD; }
+    .badge-purple { background: var(--purple-soft); color: var(--purple-dark); border: 1px solid var(--purple-border); }
+    .dark .badge-purple { color: #DDD6FE; }
+    .badge-emerald { background: var(--emerald-soft); color: var(--emerald-dark); border: 1px solid var(--emerald-border); }
+    .dark .badge-emerald { color: #6EE7B7; }
+    .badge-amber { background: var(--amber-soft); color: var(--amber-dark); border: 1px solid var(--amber-border); }
+    .dark .badge-amber { color: #FDE68A; }
+    .badge-muted { background: var(--bg-subtle); color: var(--text-muted); border: 1px solid var(--border-card); }
+
+    /* Semantic Info Boxes */
+    .sem-box {
+      padding: 12px 14px;
+      border-radius: 14px;
+      font-size: 13.5px;
+      border: 1.5px solid transparent;
+    }
+    .sem-label {
+      display: block;
+      font-size: 10.5px;
+      font-weight: 800;
+      text-transform: uppercase;
+      letter-spacing: 0.05em;
+      margin-bottom: 4px;
+    }
+    .sem-coral { background: var(--coral-soft); border-color: var(--coral-border); }
+    .sem-coral .sem-label { color: var(--coral-dark); }
+    .dark .sem-coral .sem-label { color: #FDA4AF; }
+
+    .sem-blue { background: var(--blue-soft); border-color: var(--blue-border); }
+    .sem-blue .sem-label { color: var(--blue-dark); }
+    .dark .sem-blue .sem-label { color: #93C5FD; }
+
+    .sem-purple { background: var(--purple-soft); border-color: var(--purple-border); }
+    .sem-purple .sem-label { color: var(--purple-dark); }
+    .dark .sem-purple .sem-label { color: #DDD6FE; }
+
+    .sem-emerald { background: var(--emerald-soft); border-color: var(--emerald-border); }
+    .sem-emerald .sem-label { color: var(--emerald-dark); }
+    .dark .sem-emerald .sem-label { color: #6EE7B7; }
+
+    .sem-amber { background: var(--amber-soft); border-color: var(--amber-border); }
+    .sem-amber .sem-label { color: var(--amber-dark); }
+    .dark .sem-amber .sem-label { color: #FDE68A; }
+
+    /* Tactile Duolingo 3D Buttons */
+    .btn-3d {
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      gap: 7px;
+      min-height: 44px;
+      padding: 10px 15px;
+      border-radius: 15px;
+      font-size: 13.5px;
+      font-weight: 800;
+      cursor: pointer;
       user-select: none;
+      text-align: center;
+      transition: transform 0.08s ease, border-bottom-width 0.08s ease, filter 0.14s ease, opacity 0.14s ease;
+    }
+    .btn-3d:hover:not(:disabled) { filter: brightness(1.06); }
+    .btn-3d:active:not(:disabled) {
+      transform: translateY(2px);
+      border-bottom-width: 2px !important;
+    }
+    .btn-3d:disabled { opacity: 0.42; cursor: not-allowed; }
+    .btn-3d.sm {
+      min-height: 36px;
+      padding: 6px 12px;
+      font-size: 12px;
+      border-radius: 12px;
+    }
+    .btn-full { width: 100%; }
+
+    .btn-coral { background: var(--coral); color: #FFFFFF; border: 2px solid var(--coral); border-bottom: 4px solid var(--coral-dark); }
+    .btn-blue { background: var(--blue); color: #FFFFFF; border: 2px solid var(--blue); border-bottom: 4px solid var(--blue-dark); }
+    .btn-purple { background: var(--purple); color: #FFFFFF; border: 2px solid var(--purple); border-bottom: 4px solid var(--purple-dark); }
+    .btn-emerald { background: var(--emerald); color: #FFFFFF; border: 2px solid var(--emerald); border-bottom: 4px solid var(--emerald-dark); }
+    .btn-amber { background: var(--amber); color: #FFFFFF; border: 2px solid var(--amber); border-bottom: 4px solid var(--amber-dark); }
+    .btn-neutral {
+      background: var(--bg-card);
+      color: var(--text-main);
+      border: 2px solid var(--border-card);
+      border-bottom: 4px solid var(--border-strong);
+    }
+
+    /* Selectable Tactile Choice / Pill Buttons */
+    .pill-btn {
+      min-height: 40px;
+      padding: 8px 11px;
+      border-radius: 13px;
+      border: 2px solid var(--border-card);
+      border-bottom: 3.5px solid var(--border-strong);
+      background: var(--bg-card);
+      color: var(--text-main);
+      font-size: 12.5px;
+      font-weight: 800;
       cursor: pointer;
-      transition: filter 0.18s ease, opacity 0.18s ease;
+      transition: transform 0.07s ease, border-color 0.14s ease, background-color 0.14s ease;
+      text-align: center;
     }
-    .recall-blurred:hover {
-      opacity: 0.85;
+    .pill-btn:hover:not(:disabled) { border-color: var(--blue); }
+    .pill-btn:active:not(:disabled) { transform: translateY(1.5px); border-bottom-width: 2px; }
+    .pill-btn:disabled { cursor: default; }
+
+    .pill-btn.active-coral { background: var(--coral); border-color: var(--coral); border-bottom-color: var(--coral-dark); color: #FFFFFF; }
+    .pill-btn.active-blue { background: var(--blue); border-color: var(--blue); border-bottom-color: var(--blue-dark); color: #FFFFFF; }
+    .pill-btn.active-purple { background: var(--purple); border-color: var(--purple); border-bottom-color: var(--purple-dark); color: #FFFFFF; }
+    .pill-btn.active-emerald { background: var(--emerald); border-color: var(--emerald); border-bottom-color: var(--emerald-dark); color: #FFFFFF; }
+    .pill-btn.active-amber { background: var(--amber); border-color: var(--amber); border-bottom-color: var(--amber-dark); color: #FFFFFF; }
+
+    .choice-card {
+      width: 100%;
+      min-height: 48px;
+      padding: 11px 13px;
+      border-radius: 14px;
+      border: 2px solid var(--border-card);
+      border-bottom: 4px solid var(--border-strong);
+      background: var(--bg-card);
+      color: var(--text-main);
+      text-align: left;
+      display: flex;
+      align-items: center;
+      gap: 10px;
+      font-size: 13.5px;
+      font-weight: 700;
+      cursor: pointer;
+      transition: all 0.12s ease;
     }
+    .choice-card:hover:not(:disabled) { border-color: var(--blue); background: var(--blue-soft); }
+    .choice-card:active:not(:disabled) { transform: translateY(2px); border-bottom-width: 2px; }
+    .choice-card:disabled { cursor: default; }
+
+    .choice-key {
+      width: 26px;
+      height: 26px;
+      border-radius: 8px;
+      background: var(--bg-subtle);
+      border: 1px solid var(--border-card);
+      font-size: 11px;
+      font-weight: 800;
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      flex-shrink: 0;
+    }
+    .choice-card.is-selected { border-color: var(--blue); border-bottom-color: var(--blue-dark); background: var(--blue-soft); }
+    .choice-card.is-selected .choice-key { background: var(--blue); border-color: var(--blue); color: #FFFFFF; }
+    .choice-card.is-correct { border-color: var(--emerald); border-bottom-color: var(--emerald-dark); background: var(--emerald-soft); }
+    .choice-card.is-correct .choice-key { background: var(--emerald); border-color: var(--emerald); color: #FFFFFF; }
+    .choice-card.is-wrong { border-color: var(--coral); border-bottom-color: var(--coral-dark); background: var(--coral-soft); }
+    .choice-card.is-wrong .choice-key { background: var(--coral); border-color: var(--coral); color: #FFFFFF; }
+
+    /* Form Controls */
+    .field-label {
+      display: block;
+      font-size: 11px;
+      font-weight: 800;
+      text-transform: uppercase;
+      letter-spacing: 0.04em;
+      color: var(--text-muted);
+      margin-bottom: 5px;
+    }
+    .input, .select, .textarea {
+      width: 100%;
+      padding: 10px 12px;
+      border-radius: 13px;
+      border: 1.5px solid var(--border-card);
+      background: var(--bg-input);
+      color: var(--text-main);
+      font-size: 13.5px;
+      transition: border-color 0.14s ease, box-shadow 0.14s ease;
+    }
+    .input, .select { min-height: 42px; }
+    .textarea { resize: vertical; line-height: 1.45; }
+    .input:focus, .select:focus, .textarea:focus {
+      outline: none;
+      border-color: var(--blue);
+      box-shadow: 0 0 0 3px var(--blue-soft);
+    }
+
+    /* =========================================================================
+       5. TAB-SPECIFIC COMPONENTS (DIAGNOSTICS, SCT, JOINT SVG, DOMINO, VAULT)
+       ========================================================================= */
+    .stat-tile {
+      padding: 12px 10px;
+      border-radius: 16px;
+      border: 1.5px solid var(--border-card);
+      background: var(--bg-card);
+      box-shadow: var(--shadow-card);
+      text-align: center;
+      display: flex;
+      flex-direction: column;
+      gap: 2px;
+    }
+    .stat-tile.ok { background: var(--emerald-soft); border-color: var(--emerald-border); }
+    .stat-tile.warn { background: var(--amber-soft); border-color: var(--amber-border); }
+    .stat-tile.risk { background: var(--coral-soft); border-color: var(--coral-border); }
+    .stat-num {
+      font-size: 19px;
+      font-weight: 800;
+      font-variant-numeric: tabular-nums;
+      letter-spacing: -0.02em;
+    }
+    .stat-lbl {
+      font-size: 10.5px;
+      font-weight: 800;
+      color: var(--text-muted);
+      text-transform: uppercase;
+      letter-spacing: 0.03em;
+    }
+
+    /* SCT 5-Button Scale */
+    .sct-grid {
+      display: grid;
+      grid-template-columns: repeat(5, 1fr);
+      gap: 6px;
+    }
+    .sct-btn {
+      min-height: 54px;
+      padding: 6px 4px;
+      border-radius: 13px;
+      border: 2px solid var(--border-card);
+      border-bottom: 4px solid var(--border-strong);
+      background: var(--bg-card);
+      color: var(--text-main);
+      cursor: pointer;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+      gap: 2px;
+      transition: all 0.12s ease;
+    }
+    .sct-btn:hover:not(:disabled) { border-color: var(--purple); background: var(--purple-soft); }
+    .sct-btn:active:not(:disabled) { transform: translateY(2px); border-bottom-width: 2px; }
+    .sct-btn .sct-v { font-size: 15px; font-weight: 800; }
+    .sct-btn .sct-t { font-size: 9px; font-weight: 700; color: var(--text-muted); line-height: 1.1; text-align: center; }
+    .sct-btn.is-correct { background: var(--emerald); border-color: var(--emerald); border-bottom-color: var(--emerald-dark); color: #FFFFFF; }
+    .sct-btn.is-correct .sct-t { color: #ECFDF5; }
+    .sct-btn.is-wrong { background: var(--coral); border-color: var(--coral); border-bottom-color: var(--coral-dark); color: #FFFFFF; }
+    .sct-btn.is-wrong .sct-t { color: #FFE4E6; }
+
+    /* Joint SVG Spotlight / Fade-Others */
+    .joint-svg {
+      display: block;
+      width: 100%;
+      max-width: 560px;
+      height: auto;
+      margin: 0 auto;
+      user-select: none;
+    }
+    .joint-col {
+      cursor: pointer;
+      transition: opacity 0.22s ease, filter 0.22s ease;
+    }
+    .joint-svg.has-sel .joint-col:not(.is-active) {
+      opacity: 0.20;
+      filter: saturate(0.30);
+    }
+    .joint-col.is-active {
+      opacity: 1 !important;
+    }
+
+    /* Domino Chain Slots & Tiles */
+    .domino-slot {
+      display: flex;
+      align-items: center;
+      gap: 10px;
+      padding: 10px 12px;
+      border-radius: 14px;
+      border: 1.5px dashed var(--border-strong);
+      background: var(--bg-subtle);
+      min-height: 46px;
+      transition: all 0.18s ease;
+    }
+    .domino-slot.filled {
+      border-style: solid;
+      border-color: var(--emerald);
+      background: var(--emerald-soft);
+    }
+    .domino-num {
+      width: 26px;
+      height: 26px;
+      border-radius: 8px;
+      background: var(--bg-card);
+      border: 1.5px solid var(--border-strong);
+      font-size: 12px;
+      font-weight: 800;
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      flex-shrink: 0;
+    }
+    .domino-slot.filled .domino-num {
+      background: var(--emerald);
+      border-color: var(--emerald);
+      color: #FFFFFF;
+    }
+
+    .domino-tile {
+      width: 100%;
+      padding: 11px 13px;
+      border-radius: 14px;
+      border: 2px solid var(--purple-border);
+      border-bottom: 4px solid var(--purple);
+      background: var(--bg-card);
+      color: var(--text-main);
+      text-align: left;
+      font-size: 13px;
+      font-weight: 700;
+      cursor: pointer;
+      transition: transform 0.08s ease, background-color 0.14s ease;
+    }
+    .domino-tile:hover { background: var(--purple-soft); }
+    .domino-tile:active { transform: translateY(2px); border-bottom-width: 2px; }
+    .domino-tile.shake {
+      border-color: var(--coral);
+      border-bottom-color: var(--coral-dark);
+      background: var(--coral-soft);
+      animation: shakeX 0.32s ease;
+    }
+
+    @keyframes shakeX {
+      0%, 100% { transform: translateX(0); }
+      25% { transform: translateX(-6px); }
+      75% { transform: translateX(6px); }
+    }
+
+    /* Accordion & Checklists */
+    .acc-btn {
+      width: 100%;
+      padding: 14px 16px;
+      border: none;
+      background: transparent;
+      color: var(--text-main);
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      gap: 10px;
+      cursor: pointer;
+      text-align: left;
+    }
+    .chk-row {
+      display: flex;
+      align-items: flex-start;
+      gap: 10px;
+      padding: 8px 10px;
+      border-radius: 12px;
+      cursor: pointer;
+      transition: background-color 0.12s ease;
+    }
+    .chk-row:hover { background: var(--bg-subtle); }
+    .chk-row input[type="checkbox"] {
+      width: 18px;
+      height: 18px;
+      margin-top: 2px;
+      accent-color: var(--blue);
+      flex-shrink: 0;
+      cursor: pointer;
+    }
+
+    .icon-del {
+      width: 30px;
+      height: 30px;
+      border-radius: 9px;
+      border: none;
+      background: transparent;
+      color: var(--text-muted);
+      font-size: 17px;
+      font-weight: 800;
+      cursor: pointer;
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      flex-shrink: 0;
+    }
+    .icon-del:hover { background: var(--coral-soft); color: var(--coral); }
+
+    /* =========================================================================
+       6. FIXED MOBILE BOTTOM NAVIGATION BAR (6 LINKS) & TOASTS
+       ========================================================================= */
+    .mobile-nav {
+      position: fixed;
+      bottom: 0;
+      left: 0;
+      right: 0;
+      z-index: 45;
+      background: var(--bg-glass);
+      backdrop-filter: blur(18px);
+      -webkit-backdrop-filter: blur(18px);
+      border-top: 1px solid var(--border-card);
+      padding: 6px 6px calc(6px + env(safe-area-inset-bottom, 0px));
+    }
+    @media (min-width: 769px) {
+      .mobile-nav { display: none; }
+    }
+
+    .mobile-nav-grid {
+      max-width: 540px;
+      margin: 0 auto;
+      display: grid;
+      grid-template-columns: repeat(6, 1fr);
+      gap: 2px;
+    }
+
+    .mnav-link {
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+      gap: 2px;
+      padding: 6px 2px;
+      border-radius: 11px;
+      color: var(--text-muted);
+      font-size: 9.5px;
+      font-weight: 700;
+      text-align: center;
+    }
+    .mnav-link.active {
+      color: var(--coral);
+      background: var(--coral-soft);
+      font-weight: 800;
+    }
+
+    .toast-wrap {
+      position: fixed;
+      bottom: 88px;
+      right: 14px;
+      z-index: 80;
+      display: flex;
+      flex-direction: column;
+      gap: 8px;
+      pointer-events: none;
+    }
+    @media (min-width: 769px) {
+      .toast-wrap { bottom: 20px; right: 20px; }
+    }
+    .toast {
+      pointer-events: auto;
+      padding: 10px 15px;
+      border-radius: 14px;
+      font-size: 12.5px;
+      font-weight: 800;
+      box-shadow: 0 8px 24px rgba(0, 0, 0, 0.24);
+      background: var(--text-main);
+      color: var(--bg-card);
+      transition: opacity 0.25s ease, transform 0.25s ease;
+    }
+    .toast.emerald { background: var(--emerald); color: #FFFFFF; }
+    .toast.amber { background: var(--amber); color: #FFFFFF; }
+    .toast.coral { background: var(--coral); color: #FFFFFF; }
   </style>
 </head>
-<body class="bg-slate-50 text-slate-900 dark:bg-slate-950 dark:text-slate-100 font-sans antialiased transition-colors duration-200 overflow-x-hidden selection:bg-teal-200 dark:selection:bg-teal-800">
+<body>
 
-  <!-- Toast Notification Container -->
-  <div id="toast-container" class="fixed bottom-20 md:bottom-5 right-4 z-50 flex flex-col gap-2 pointer-events-none"></div>
+  <!-- Toast Container (Zero alert/confirm used) -->
+  <div id="toast-wrap" class="toast-wrap" aria-live="polite"></div>
 
-  <!-- Sticky Top Header -->
-  <header class="sticky top-0 z-40 bg-white/95 dark:bg-slate-900/95 backdrop-blur border-b border-slate-200 dark:border-slate-800">
-    <div class="max-w-5xl mx-auto px-3 sm:px-4 py-2.5 flex items-center justify-between gap-2">
-      <!-- Left: Back to Hub + Title -->
-      <div class="flex items-center gap-2.5 min-w-0">
-        <a
-          href="index.html"
-          class="px-3 py-2 rounded-xl bg-slate-100 dark:bg-slate-800 hover:bg-slate-200 dark:hover:bg-slate-700 text-slate-700 dark:text-slate-200 text-xs font-extrabold transition shrink-0 flex items-center gap-1"
-          aria-label="Return to MChiro Year 3 Hub"
-        >
-          <span>&larr;</span>
-          <span>Hub</span>
-        </a>
-        <div class="min-w-0">
-          <h1 class="text-sm sm:text-base font-extrabold tracking-tight text-slate-900 dark:text-white truncate">
-            Musculoskeletal Medicine
-          </h1>
-          <p class="text-[11px] font-semibold text-slate-500 dark:text-slate-400 truncate">
-            OA/RA &bull; Bone &amp; Renal &bull; Red Flags &bull; SAQ/LAQ
-          </p>
+  <!-- =========================================================================
+       STICKY FROSTED-GLASS HEADER & 4-TAB SEGMENTED BAR
+       ========================================================================= -->
+  <header class="top-header">
+    <div class="container">
+      <div class="header-inner">
+        <a href="index.html" class="back-btn" aria-label="Back to MChiro Year 3 Hub">&larr; Hub</a>
+
+        <div class="header-center">
+          <h1 class="page-title">Musculoskeletal Medicine</h1>
+          <p class="page-sub">BMS 52&rarr;66% &bull; Year 3 Transfer Engine</p>
         </div>
-      </div>
-
-      <!-- Right: Due Pill (Filter Toggle) + Theme Toggle -->
-      <div class="flex items-center gap-1.5 sm:gap-2 shrink-0">
-        <button
-          type="button"
-          id="due-filter-btn"
-          onclick="toggleDueOnly()"
-          class="px-2.5 sm:px-3 py-2 rounded-xl text-[11px] sm:text-xs font-bold border transition flex items-center gap-1.5"
-          title="Filter cards to show only items Due Today"
-        >
-          <span id="due-dot" class="w-2 h-2 rounded-full"></span>
-          <span class="hidden sm:inline">Due Today:</span>
-          <span class="sm:hidden">Due:</span>
-          <span id="due-count-badge" class="px-1.5 py-0.5 rounded-md text-[10px] font-extrabold">0</span>
-        </button>
 
         <button
           type="button"
           id="theme-toggle-btn"
+          class="theme-btn"
           onclick="toggleTheme()"
           aria-label="Toggle Light or Dark Mode"
-          class="p-2.5 rounded-xl bg-slate-100 dark:bg-slate-800 text-slate-700 dark:text-amber-300 hover:bg-slate-200 dark:hover:bg-slate-700 transition"
         ></button>
       </div>
-    </div>
 
-    <!-- Desktop Top Tab Bar (Hidden on Mobile) -->
-    <nav class="hidden md:block max-w-5xl mx-auto px-4 pb-2.5" aria-label="Musculoskeletal Medicine Tabs">
-      <div id="desktop-tabs" class="grid grid-cols-4 gap-1.5 p-1 rounded-2xl bg-slate-100 dark:bg-slate-800/80"></div>
-    </nav>
+      <!-- 4-Tab Segmented Navigation Bar -->
+      <nav class="tabs-scroll" aria-label="Musculoskeletal Medicine Sections">
+        <div id="segmented-tabs" class="seg-track" role="tablist"></div>
+      </nav>
+    </div>
   </header>
 
-  <!-- Main Content -->
-  <main class="max-w-5xl mx-auto px-3 sm:px-4 py-5 pb-24 md:pb-14">
-    <!-- Active Due-Only Filter Banner -->
-    <div id="due-only-banner" class="hidden mb-4 px-4 py-2.5 rounded-2xl bg-amber-50 dark:bg-amber-950/50 border border-amber-300 dark:border-amber-800/70 text-xs sm:text-sm text-amber-900 dark:text-amber-200 flex items-center justify-between gap-3">
-      <span><strong>Due Today Only ON:</strong> Showing only revision cards &amp; questions scheduled for review today.</span>
-      <button type="button" onclick="toggleDueOnly()" class="shrink-0 font-bold underline">Show All</button>
-    </div>
-
-    <!-- Dynamic View Root -->
+  <!-- =========================================================================
+       MAIN APP ROOT
+       ========================================================================= -->
+  <main class="container main-stack">
     <div id="app-root"></div>
   </main>
 
-  <!-- Mobile Fixed Bottom Thumb-Zone Navigation Bar -->
-  <nav class="md:hidden fixed bottom-0 inset-x-0 z-40 bg-white/95 dark:bg-slate-900/95 backdrop-blur border-t border-slate-200 dark:border-slate-800 px-2 py-1.5" aria-label="Mobile Navigation">
-    <div id="mobile-bottom-tabs" class="grid grid-cols-4 gap-1 max-w-md mx-auto"></div>
+  <!-- =========================================================================
+       FIXED MOBILE BOTTOM NAVIGATION BAR (6 LINKS)
+       ========================================================================= -->
+  <nav class="mobile-nav" aria-label="Mobile Hub Navigation">
+    <div class="mobile-nav-grid">
+      <a href="index.html" class="mnav-link">
+        <span style="font-size:15px;">🏠</span>
+        <span>Hub</span>
+      </a>
+      <a href="neuro.html" class="mnav-link">
+        <span style="font-size:15px;">🧠</span>
+        <span>Neuro</span>
+      </a>
+      <a href="msk.html" class="mnav-link active" aria-current="page">
+        <span style="font-size:15px;">🦴</span>
+        <span>MSK</span>
+      </a>
+      <a href="chiro.html" class="mnav-link">
+        <span style="font-size:15px;">🙌</span>
+        <span>Chiro</span>
+      </a>
+      <a href="written.html" class="mnav-link">
+        <span style="font-size:15px;">📝</span>
+        <span>Written</span>
+      </a>
+      <a href="planner.html" class="mnav-link">
+        <span style="font-size:15px;">📅</span>
+        <span>Plan</span>
+      </a>
+    </div>
   </nav>
 
   <script>
     // =========================================================================
-    // 1. SAFE STORAGE, THEME SYNC ('mchiro_theme') & LEITNER SRS ('mchiro_srs_v1')
+    // 1. SAFE STORAGE, THEME SYNC ('mchiro_theme') & TOASTS
     // =========================================================================
     const DAY_MS = 86400000;
+    const SUN_SVG = `<svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.1" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="4"/><path d="M12 2v2"/><path d="M12 20v2"/><path d="m4.93 4.93 1.41 1.41"/><path d="m17.66 17.66 1.41 1.41"/><path d="M2 12h2"/><path d="M20 12h2"/><path d="m6.34 17.66-1.41 1.41"/><path d="m19.07 4.93-1.41 1.41"/></svg>`;
+    const MOON_SVG = `<svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.1" stroke-linecap="round" stroke-linejoin="round"><path d="M12 3a6 6 0 0 0 9 9 9 9 0 1 1-9-9Z"/></svg>`;
 
-    function loadStore(key, fallback) {
+    function esc(str) {
+      return String(str == null ? '' : str)
+        .replace(/&/g, '&amp;')
+        .replace(/</g, '&lt;')
+        .replace(/>/g, '&gt;')
+        .replace(/"/g, '&quot;')
+        .replace(/'/g, '&#39;');
+    }
+
+    function loadJSON(key, fallback) {
       try {
         const raw = localStorage.getItem(key);
-        return raw ? JSON.parse(raw) : fallback;
+        if (!raw) return fallback;
+        const parsed = JSON.parse(raw);
+        return parsed !== null && parsed !== undefined ? parsed : fallback;
       } catch (e) {
         return fallback;
       }
     }
 
-    function saveStore(key, val) {
-      try {
-        localStorage.setItem(key, JSON.stringify(val));
-      } catch (e) {
-        // Ignore storage quota or private-mode restrictions safely
-      }
+    function saveJSON(key, val) {
+      try { localStorage.setItem(key, JSON.stringify(val)); } catch (e) {}
     }
 
     function initTheme() {
@@ -202,952 +904,1195 @@
       document.documentElement.classList.toggle('dark', isDark);
       try { localStorage.setItem('mchiro_theme', isDark ? 'dark' : 'light'); } catch (e) {}
       const btn = document.getElementById('theme-toggle-btn');
-      if (btn) {
-        btn.innerHTML = isDark
-          ? `<svg class="w-4 h-4" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" d="M12 3v2.25m6.364.386l-1.591 1.591M21 12h-2.25m-.386 6.364l-1.591-1.591M12 18.75V21m-4.773-4.227l-1.591 1.591M5.25 12H3m4.227-4.773L5.636 5.636M15.75 12a3.75 3.75 0 11-7.5 0 3.75 3.75 0 017.5 0z"/></svg>`
-          : `<svg class="w-4 h-4" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" d="M21.752 15.002A9.718 9.718 0 0118 15.75c-5.385 0-9.75-4.365-9.75-9.75 0-1.33.266-2.597.748-3.752A9.753 9.753 0 003 11.25C3 16.635 7.365 21 12.75 21a9.753 9.753 0 009.002-5.998z"/></svg>`;
-      }
+      if (btn) btn.innerHTML = isDark ? SUN_SVG : MOON_SVG;
     }
 
     function toggleTheme() {
       applyTheme(!document.documentElement.classList.contains('dark'));
     }
 
-    function showToast(msg, type = 'info') {
-      const container = document.getElementById('toast-container');
-      const palette = {
-        info: 'bg-slate-900 dark:bg-slate-100 text-white dark:text-slate-900',
-        success: 'bg-emerald-600 text-white',
-        warn: 'bg-amber-600 text-white',
-      };
+    function showToast(msg, tone) {
+      const wrap = document.getElementById('toast-wrap');
+      if (!wrap) return;
       const el = document.createElement('div');
-      el.className = `pointer-events-auto px-4 py-2.5 rounded-xl shadow-lg text-xs sm:text-sm font-semibold transition-all duration-300 ${palette[type] || palette.info}`;
+      el.className = 'toast' + (tone ? ' ' + tone : '');
       el.textContent = msg;
-      container.appendChild(el);
+      wrap.appendChild(el);
       setTimeout(() => {
-        el.classList.add('opacity-0', 'translate-y-2');
-        setTimeout(() => el.remove(), 300);
+        el.style.opacity = '0';
+        el.style.transform = 'translateY(8px)';
+        setTimeout(() => el.remove(), 250);
       }, 2200);
     }
 
-    // =========================================================================
-    // 2. CLINICAL DATA
-    // =========================================================================
-
-    // --- TAB 1: OA vs RA JOINT HOTSPOTS & CYTOKINES ---
-    const JOINT_HOTSPOTS = {
-      oa_cartilage: {
-        side: 'OA',
-        badge: 'Degenerative',
-        title: 'Thinning & Fibrillated Articular Cartilage',
-        detail: 'Mechanical wear and proteoglycan loss cause progressive hyaline cartilage fissuring, fibrillation, and focal denudation down to bone.',
-        clinical: 'Produces joint crepitus and deep aching pain worse on weight-bearing / end of day.',
-      },
-      oa_space: {
-        side: 'OA',
-        badge: 'Radiographic (LOSS)',
-        title: 'Asymmetric Narrowed Joint Space',
-        detail: 'Loss of articular cartilage reduces the radiolucent gap between opposing epiphyses, typically worst in the weight-bearing compartment (e.g. medial knee).',
-        clinical: 'First letter of the OA X-ray mnemonic: L-O-S-S (Loss of joint space).',
-      },
-      oa_sclerosis: {
-        side: 'OA',
-        badge: 'Radiographic (LOSS)',
-        title: 'Subchondral Sclerosis & Subchondral Cysts',
-        detail: 'Increased mechanical load on exposed bone triggers reactive subchondral bone thickening (eburnation/sclerosis) and synovial fluid intrusion forming subchondral cysts (geodes).',
-        clinical: 'Appears as bright white (dense) bone margins directly beneath the worn joint surface.',
-      },
-      oa_osteophyte: {
-        side: 'OA',
-        badge: 'Radiographic (LOSS)',
-        title: 'Marginal Osteophytes (Bone Spurs)',
-        detail: 'Compensatory fibrocartilage and bony outgrowths at the joint margins attempting to redistribute mechanical load.',
-        clinical: 'Palpable hard bony enlargements: Heberden’s nodes (DIP) & Bouchard’s nodes (PIP).',
-      },
-      ra_synovium: {
-        side: 'RA',
-        badge: 'Autoimmune',
-        title: 'Hypertrophied Inflamed Synovium (Synovitis)',
-        detail: 'Autoimmune T-cell, B-cell, and macrophage infiltration transforms the thin synovial lining into a thick, hypervascular, boggy inflammatory tissue.',
-        clinical: 'Feels warm, soft, and "boggy" on palpation — drives prolonged morning stiffness (>60 min).',
-      },
-      ra_pannus: {
-        side: 'RA',
-        badge: 'Destructive Core',
-        title: 'Invasive Pannus Tissue',
-        detail: 'Proliferative inflammatory granulation tissue creeps across the articular surface, secreting matrix metalloproteinases (MMPs) that actively digest cartilage and underlying bone.',
-        clinical: 'Primary driver of irreversible joint destruction and deformity if DMARDs are delayed.',
-      },
-      ra_erosion: {
-        side: 'RA',
-        badge: 'Radiographic',
-        title: 'Marginal Bone Erosions',
-        detail: 'RANKL-activated osteoclasts at the bare area (synovium-bone junction) carve out punched-out cortical defects alongside periarticular osteopenia.',
-        clinical: 'Early DMARD initiation aims specifically to prevent these irreversible erosions.',
-      },
-      ra_effusion: {
-        side: 'RA',
-        badge: 'Inflammatory',
-        title: 'Inflammatory Effusion & Capsule Swelling',
-        detail: 'Increased vascular permeability floods the joint cavity with neutrophil- and cytokine-rich synovial fluid, distending the fibrous capsule.',
-        clinical: 'Produces symmetric fusiform soft-tissue swelling around MCP, PIP, and wrist joints.',
-      },
-    };
-
-    const RA_PILLS = {
-      tnf: {
-        label: 'TNF-α',
-        title: 'Tumour Necrosis Factor-alpha (TNF-α)',
-        body: 'Master pro-inflammatory cytokine in RA. Drives synovial hypertrophy, endothelial activation, pannus invasion, and osteoclast-mediated bone erosion. Key target for anti-TNF biologics (e.g. adalimumab, etanercept).',
-      },
-      il1: {
-        label: 'IL-1',
-        title: 'Interleukin-1 (IL-1)',
-        body: 'Works synergistically with TNF-α to stimulate chondrocytes and synovial fibroblasts to release matrix metalloproteinases (MMPs), accelerating hyaline cartilage breakdown.',
-      },
-      il6: {
-        label: 'IL-6',
-        title: 'Interleukin-6 (IL-6)',
-        body: 'Drives systemic RA manifestations: hepatic acute-phase response (↑ CRP, ↑ ESR), fatigue, low-grade fever, and anaemia of chronic disease (via hepcidin).',
-      },
-      dmard: {
-        label: 'DMARD Rationale',
-        title: 'Why Early DMARDs Beat NSAIDs Alone',
-        body: 'NSAIDs and short-term steroids only suppress pain/swelling symptomatically while silent pannus erosion continues. Conventional DMARDs (e.g. methotrexate) and biologics modify the upstream immune cascade early to halt irreversible joint destruction.',
-      },
-    };
-
-    const OARA_TABLE = [
-      {
-        feature: 'Pathogenesis',
-        oa: 'Mechanical/degenerative articular cartilage breakdown, subchondral sclerosis & marginal osteophytes.',
-        ra: 'Systemic autoimmune synovitis (TNF-α, IL-1, IL-6) → invasive pannus eroding cartilage & bone.',
-      },
-      {
-        feature: 'Joint Distribution',
-        oa: 'Asymmetric; weight-bearing (hips, knees, spine) + DIP, PIP, 1st CMC (thumb base).',
-        ra: 'Symmetric polyarthritis; small joints of hands/feet (MCP, PIP, wrists, MTP). Spares DIPs.',
-      },
-      {
-        feature: 'Morning Stiffness',
-        oa: 'Short (< 30 minutes); pain worsens with activity / end of day, relieved by rest.',
-        ra: 'Prolonged (> 60 minutes); stiffness improves with gentle movement throughout the day.',
-      },
-      {
-        feature: 'Systemic & Labs',
-        oa: 'No systemic features. Normal ESR & CRP. RF / anti-CCP negative.',
-        ra: 'Fatigue, low-grade fever, weight loss, anaemia. ↑ ESR, ↑ CRP, +RF and/or +anti-CCP.',
-      },
-      {
-        feature: 'X-Ray Features',
-        oa: 'LOSS: Loss of joint space (asymmetric), Osteophytes, Subchondral sclerosis, Subchondral cysts.',
-        ra: 'Soft-tissue swelling, periarticular osteopenia, uniform joint space loss, marginal erosions.',
-      },
-    ];
-
-    // --- TAB 2: CKD DOMINO STEPS & METABOLIC BONE CARDS ---
-    const CKD_DOMINOES = [
-      {
-        step: 1,
-        badge: 'Step 1 • Primary Insult',
-        color: 'slate',
-        title: 'Chronic Kidney Disease (↓ GFR / Nephron Loss)',
-        sub: 'Progressive loss of functional nephrons impairs renal excretion and endocrine vitamin D activation.',
-      },
-      {
-        step: 2,
-        badge: 'Step 2 • Dual Renal Failure',
-        color: 'sky',
-        title: 'Phosphate Retention (↑ PO₄) + ↓ 1α-Hydroxylase (↓ Active Vitamin D / Calcitriol)',
-        sub: 'Failing kidneys fail to excrete phosphate AND cannot convert 25(OH)D into active 1,25(OH)₂D (calcitriol).',
-      },
-      {
-        step: 3,
-        badge: 'Step 3 • Serum Calcium Drop',
-        color: 'indigo',
-        title: '↓ Gut Ca²⁺ Absorption & Ca–PO₄ Binding → Hypocalcaemia (↓ Ca²⁺)',
-        sub: 'Low calcitriol cuts intestinal calcium uptake while retained phosphate binds free serum calcium.',
-      },
-      {
-        step: 4,
-        badge: 'Step 4 • Endocrine Compensation',
-        color: 'amber',
-        title: 'Parathyroid Gland Stimulation → Secondary Hyperparathyroidism (↑ PTH)',
-        sub: 'Low serum Ca²⁺ (plus high PO₄ & low Vit D) chronically stimulates parathyroid hormone secretion.',
-      },
-      {
-        step: 5,
-        badge: 'Step 5 • MSK Red Flag Outcome',
-        color: 'rose',
-        title: 'Increased Osteoclast Bone Resorption → Renal Osteodystrophy',
-        sub: 'Sustained high PTH strips mineral from bone → deep bone pain, fragility, fractures (HVT manipulation contraindication!).',
-      },
-    ];
-
-    const BONE_CARDS = [
-      {
-        id: 'msk_osteoporosis',
-        cat: 'Metabolic',
-        title: 'Osteoporosis',
-        tag: 'DEXA T ≤ -2.5',
-        tagColor: 'amber',
-        summary: 'Reduced bone mass (quantity) with NORMAL mineralisation (quality).',
-        bullets: [
-          'Pathology: Osteoclast resorption exceeds osteoblast formation → thin trabeculae & porous cortex.',
-          'Clinical: Silent until fragility fracture (neck of femur/hip, distal radius/Colles, vertebral wedge).',
-          'Bloods: Serum Ca²⁺, PO₄, ALP, and PTH are all NORMAL.',
-          'Chiro Red Flag: Avoid HVT manipulation over osteoporotic spine/ribs; screen FRAX & steroid history.',
-        ],
-      },
-      {
-        id: 'msk_osteopenia',
-        cat: 'Metabolic',
-        title: 'Osteopenia',
-        tag: 'DEXA T -1.0 to -2.5',
-        tagColor: 'sky',
-        summary: 'Moderately reduced bone mineral density — precursor stage to osteoporosis.',
-        bullets: [
-          'DEXA T-score: Between -1.0 and -2.5 standard deviations below young adult mean.',
-          'Bloods: Normal Ca²⁺, PO₄, and ALP (rule out secondary causes if unexpected).',
-          'Management: Weight-bearing & resistance exercise, adequate Vitamin D & dietary Ca²⁺, smoking/alcohol reduction, FRAX risk assessment.',
-        ],
-      },
-      {
-        id: 'msk_osteomalacia',
-        cat: 'Metabolic',
-        title: 'Osteomalacia',
-        tag: 'Defective Mineralisation',
-        tagColor: 'violet',
-        summary: 'Soft bones caused by inadequate mineralisation of osteoid (severe Vitamin D deficiency).',
-        bullets: [
-          'Clinical: Diffuse bone pain/tenderness, proximal muscle weakness (waddling gait, difficulty rising from chair).',
-          'Bloods: ↓ (or low-normal) Ca²⁺, ↓ PO₄, ↑ ALP, ↑ PTH (secondary hyperparathyroidism).',
-          'X-Ray: Looser zones (translucent pseudofracture bands perpendicular to cortex, e.g. pubic rami, femoral neck).',
-        ],
-      },
-      {
-        id: 'msk_paget',
-        cat: 'Metabolic',
-        title: "Paget's Disease of Bone",
-        tag: 'Isolated ↑↑ ALP',
-        tagColor: 'indigo',
-        summary: 'Focal, disorganised bone remodelling: chaotic osteoclast resorption → weak woven mosaic bone.',
-        bullets: [
-          'Clinical: Deep aching bone pain, warm skin over affected bone (hypervascular), bowing of tibia/femur, skull enlargement → CN VIII sensorineural deafness.',
-          'Bloods: Markedly isolated ↑↑ ALP with NORMAL Ca²⁺ and NORMAL PO₄.',
-          'Complications: Pathological fractures, high-output cardiac failure, rare osteosarcoma (<1%).',
-        ],
-      },
-      {
-        id: 'msk_gout_pseudogout',
-        cat: 'Crystal',
-        title: 'Gout vs. Pseudogout (CPPD)',
-        tag: 'Crystal Arthropathy',
-        tagColor: 'rose',
-        summary: 'Differentiated definitively by synovial fluid polarised light microscopy.',
-        bullets: [
-          'Gout: Monosodium urate (MSU) crystals — NEEDLE-shaped, NEGATIVELY birefringent. Classic 1st MTP (podagra), tophi, hyperuricaemia.',
-          'Pseudogout: Calcium pyrophosphate dihydrate (CPPD) — RHOMBOID-shaped, POSITIVELY birefringent. Classic knee/wrist; chondrocalcinosis (calcified cartilage) on X-ray.',
-          'Acute Gout Rx: NSAIDs or colchicine (steroids if renal impairment). Prophylaxis: Allopurinol (xanthine oxidase inhibitor — start after flare settles).',
-        ],
-      },
-    ];
-
-    // --- TAB 3: SYSTEMIC & CV RED FLAGS ---
-    const RED_FLAG_CARDS = [
-      {
-        id: 'msk_rf_acs',
-        cat: 'Cardiovascular',
-        title: 'Acute Coronary Syndrome (ACS) & Angina Spectrum',
-        urgency: '999 Emergency (STEMI / Unstable)',
-        color: 'rose',
-        isAcs: true,
-      },
-      {
-        id: 'msk_rf_htn',
-        cat: 'Cardiovascular',
-        title: 'Hypertension Urgent-Referral Thresholds',
-        urgency: 'Same-Day / 999 if ≥180/120 + End-Organ',
-        color: 'rose',
-        points: [
-          'Stage 1 Hypertension: Clinic BP ≥ 140/90 mmHg (ABPM/HBPM ≥ 135/85) → lifestyle + CV risk review.',
-          'Stage 2 Hypertension: Clinic BP ≥ 160/100 mmHg (ABPM/HBPM ≥ 150/95) → GP medication review.',
-          'Severe / Urgent Same-Day Referral: BP ≥ 180/120 mmHg with retinal haemorrhage or papilloedema (accelerated HTN), acute chest pain, neurological signs, or life-threatening end-organ damage = Hypertensive Emergency → 999 / A&E immediately.',
-        ],
-      },
-      {
-        id: 'msk_rf_addison',
-        cat: 'Endocrine/GI',
-        title: 'Addisonian (Adrenal) Crisis',
-        urgency: '999 Emergency — IV Hydrocortisone',
-        color: 'amber',
-        points: [
-          'Cause: Acute severe cortisol & aldosterone deficiency — triggered by infection, trauma/stress, or abrupt withdrawal of long-term corticosteroids.',
-          'Red Flag Presentation: Severe hypotension / shock (unresponsive to fluids alone), vomiting, acute abdominal pain, confusion/drowsiness.',
-          'Classic Metabolic Pattern: Hyponatraemia (↓ Na⁺), Hyperkalaemia (↑ K⁺), Hypoglycaemia (↓ glucose).',
-          'Action: Immediate 999 emergency transfer for IV hydrocortisone + IV 0.9% saline + glucose.',
-        ],
-      },
-      {
-        id: 'msk_rf_tumour',
-        cat: 'Oncology/Spine',
-        title: 'Tumour Grading vs. Staging & Spinal Mets Red Flags',
-        urgency: 'Urgent 2-Week / Same-Day Oncology Pathway',
-        color: 'purple',
-        points: [
-          'Grading (Microscopic): Histological differentiation on biopsy — G1 (well-differentiated, resembles normal tissue) to G4 (poorly differentiated / anaplastic, aggressive).',
-          'Staging (Anatomical): Extent of anatomical spread — TNM system (T = primary Tumour size/depth, N = regional lymph Nodes, M = distant Metastases).',
-          'Spinal Metastases Red Flags: Past history of cancer (especially Breast, Prostate, Lung, Kidney, Thyroid), unexplained weight loss, constant progressive night pain unrelieved by rest, new-onset back pain age >50.',
-        ],
-      },
-      {
-        id: 'msk_rf_ibd',
-        cat: 'Endocrine/GI',
-        title: "Crohn's Disease vs. Ulcerative Colitis (IBD)",
-        urgency: 'Systemic / Spondyloarthropathy Link',
-        color: 'indigo',
-        isIbd: true,
-      },
-      {
-        id: 'msk_rf_ces',
-        cat: 'Oncology/Spine',
-        title: 'Cauda Equina Syndrome (CES) Urgent Triage',
-        urgency: 'IMMEDIATE A&E / Same-Day MRI',
-        color: 'rose',
-        points: [
-          'Saddle Anaesthesia: Numbness or altered sensation around perineum, buttocks, and inner thighs (S2–S4).',
-          'Bladder & Bowel Dysfunction: New urinary retention, overflow incontinence, loss of bladder fullness sensation, or faecal incontinence.',
-          'Neurological & Sexual Signs: Bilateral sciatica / progressive lower limb motor weakness, new sexual dysfunction.',
-          'Action: Emergency same-day A&E referral for urgent MRI & surgical decompression (prevent permanent sphincter/nerve damage).',
-        ],
-      },
-    ];
-
-    // --- TAB 4: SAQ / LAQ ACTIVE-RECALL SELF-MARKING ---
-    const SAQ_LIST = [
-      {
-        id: 'msk_saq_1',
-        marks: 6,
-        title: 'Pathophysiology & Clinical Differentiation of OA vs. RA',
-        prompt: 'Compare the underlying pathophysiology and clinical presentation of Osteoarthritis (OA) and Rheumatoid Arthritis (RA), including key inflammatory cytokines and the rationale for early DMARD therapy in RA.',
-        criteria: [
-          'OA pathophysiology: Mechanical/degenerative articular cartilage breakdown with subchondral sclerosis, cysts & marginal osteophytes.',
-          'RA pathophysiology: Systemic autoimmune synovitis leading to invasive pannus tissue that erodes cartilage and bone.',
-          'Key RA cytokines named: TNF-α, IL-1, and IL-6 driving synovial inflammation, MMPs, and systemic features.',
-          'Joint distribution contrast: OA asymmetric/weight-bearing + DIP/PIP/1st CMC vs. RA symmetric MCP/PIP/wrists (sparing DIPs).',
-          'Stiffness & lab contrast: OA <30 min stiffness & normal ESR/CRP vs. RA >60 min stiffness & ↑ESR/CRP, +RF/anti-CCP.',
-          'DMARD rationale: Early DMARDs (e.g. methotrexate) modify the immune cascade to prevent irreversible pannus erosion, whereas NSAIDs only mask symptoms.',
-        ],
-      },
-      {
-        id: 'msk_saq_2',
-        marks: 6,
-        title: 'Chronic Kidney Disease (CKD) → Renal Osteodystrophy',
-        prompt: 'Outline the step-by-step pathophysiological cascade linking Chronic Kidney Disease (CKD) to Renal Osteodystrophy, and state why this is a critical red flag in chiropractic practice.',
-        criteria: [
-          'CKD reduces GFR / functional nephron mass.',
-          'Impaired renal phosphate excretion leads to phosphate retention (hyperphosphataemia / ↑ PO₄).',
-          'Loss of renal 1α-hydroxylase reduces activation of Vitamin D (↓ calcitriol / 1,25(OH)₂D).',
-          'Low calcitriol decreases gut Ca²⁺ absorption and retained phosphate binds serum Ca²⁺ → hypocalcaemia (↓ Ca²⁺).',
-          'Hypocalcaemia triggers chronic parathyroid stimulation → secondary hyperparathyroidism (↑ PTH).',
-          'Sustained ↑ PTH drives osteoclast bone resorption → renal osteodystrophy (bone fragility / fracture risk — contraindication to HVT manipulation).',
-        ],
-      },
-      {
-        id: 'msk_saq_3',
-        marks: 4,
-        title: 'Urgent Triage: Hot, Swollen, Painful Knee',
-        prompt: 'A 62-year-old presents with an acutely hot, swollen, severely painful knee. Explain how you triage Septic Arthritis vs. Gout and state your immediate management.',
-        criteria: [
-          'Screen immediately for septic arthritis red flags: fever/rigors, systemic malaise, immunosuppression, prosthetic joint, severe pain on ANY passive ROM.',
-          'If any septic flag (or any clinical doubt) → urgent SAME-DAY A&E referral for joint aspiration (before IV antibiotics) to prevent rapid cartilage destruction.',
-          'Gout clues if afebrile/systemically well: sudden severe night onset, 1st MTP podagra history, tophi, ↑ serum urate.',
-          'Definitive confirmation: Polarised microscopy shows negatively birefringent needle-shaped MSU crystals in gout (vs. Gram stain/culture in septic arthritis).',
-        ],
-      },
-      {
-        id: 'msk_saq_4',
-        marks: 6,
-        title: 'ACS Pathophysiology & Angina / MI Spectrum',
-        prompt: 'Explain the role of endothelial dysfunction and plaque rupture in Acute Coronary Syndrome (ACS), and differentiate Unstable Angina, NSTEMI, and STEMI.',
-        criteria: [
-          'Endothelial dysfunction reduces Nitric Oxide (NO) bioavailability → impaired vasodilation, inflammation, and vulnerable lipid-rich atherosclerotic plaque.',
-          'Fibrous cap rupture exposes thrombogenic core → acute platelet aggregation and thrombus formation.',
-          'Unstable Angina: Rest/crescendo chest pain from non-occlusive thrombus; NO myocardial necrosis (normal troponin).',
-          'NSTEMI: Partial coronary occlusion causing subendocardial ischaemia/necrosis → ↑ Troponin + ST depression / T-wave inversion.',
-          'STEMI: Complete coronary occlusion causing full-thickness transmural infarction → ↑↑ Troponin + ST-segment elevation.',
-          'Emergency action: Suspected ACS/STEMI requires immediate 999 ambulance transfer for urgent reperfusion (PCI).',
-        ],
-      },
-      {
-        id: 'msk_saq_5',
-        marks: 4,
-        title: 'Metabolic Bone Bloods & Imaging Differentiation',
-        prompt: "Differentiate Osteoporosis, Osteomalacia, and Paget's Disease of Bone using routine biochemistry (Ca²⁺, PO₄, ALP, PTH) and DEXA/radiographic findings.",
-        criteria: [
-          'Osteoporosis: Normal Ca²⁺, PO₄, ALP, and PTH; diagnosed via DEXA T-score ≤ -2.5 (reduced bone mass, normal mineralisation).',
-          'Osteomalacia: ↓/low-normal Ca²⁺, ↓ PO₄, ↑ ALP, and ↑ PTH (secondary hyperparathyroidism from Vit D deficiency).',
-          'Osteomalacia imaging: Looser zones (pseudofractures) on X-ray.',
-          "Paget's Disease: Markedly isolated ↑↑ ALP with normal Ca²⁺ and PO₄; X-ray shows thickened, sclerotic, bowed/enlarged bone.",
-        ],
-      },
-      {
-        id: 'msk_saq_6',
-        marks: 4,
-        title: 'Tumour Grading vs. Staging & Spinal Metastases',
-        prompt: 'Distinguish between tumour grading and tumour staging, and list four key red flags for spinal bone metastases in a patient presenting with back pain.',
-        criteria: [
-          'Grading: Histological assessment of cellular differentiation on biopsy (G1 well-differentiated to G4 poorly differentiated/anaplastic).',
-          'Staging: Anatomical extent of tumour spread using the TNM system (Tumour size, regional Nodes, distant Metastases).',
-          'Metastasis red flags (1st pair): Past history of cancer (breast, prostate, lung, kidney, thyroid) AND unexplained weight loss.',
-          'Metastasis red flags (2nd pair): Constant progressive night pain unrelieved by rest AND new-onset back pain age >50.',
-        ],
-      },
-    ];
-
-    // All trackable Leitner SRS IDs in msk.html
-    const ALL_SRS_IDS = [
-      'msk_oa_ra',
-      'msk_ckd_domino',
-      ...BONE_CARDS.map((c) => c.id),
-      ...RED_FLAG_CARDS.map((c) => c.id),
-      ...SAQ_LIST.map((q) => q.id),
-    ];
-
-    // =========================================================================
-    // 3. STATE MANAGEMENT
-    // =========================================================================
-    const state = {
-      activeTab: 'oara', // 'oara' | 'bone' | 'redflags' | 'saq'
-      dueOnly: false,
-      srs: loadStore('mchiro_srs_v1', {}),
-
-      // Tab 1: OA vs RA
-      selectedHotspot: 'ra_pannus',
-      selectedPill: 'tnf',
-      tableBlur: false,
-
-      // Tab 2: Bone & Renal
-      dominoTestMode: false,
-      revealedDominoes: {},
-      triageChoice: null, // null | 'yes' | 'no'
-      boneFilter: 'All', // 'All' | 'Metabolic' | 'Crystal'
-      openBoneAcc: { msk_osteoporosis: true },
-
-      // Tab 3: Red Flags
-      rfFilter: 'All', // 'All' | 'Cardiovascular' | 'Endocrine/GI' | 'Oncology/Spine'
-
-      // Tab 4: SAQ / LAQ
-      saqDrafts: {},
-      saqRevealed: {},
-      saqChecks: {},
-    };
-
-    // --- Leitner SRS Engine ('mchiro_srs_v1': { level: 0|1|2, nextDue: timestamp }) ---
-    function isCardDue(id) {
-      const rec = state.srs[id];
-      if (!rec) return true;
-      return Date.now() >= rec.nextDue;
+    function shuffle(arr) {
+      const a = arr.slice();
+      for (let i = a.length - 1; i > 0; i--) {
+        const j = Math.floor(Math.random() * (i + 1));
+        const t = a[i]; a[i] = a[j]; a[j] = t;
+      }
+      return a;
     }
 
-    function rateCard(id, level) {
-      const days = level === 0 ? 0 : level === 1 ? 2 : 7;
-      state.srs[id] = {
-        level: level,
-        nextDue: Date.now() + days * DAY_MS,
-      };
-      saveStore('mchiro_srs_v1', state.srs);
-      updateDueHeaderUI();
-      const labels = ['Queued for Today (Again)', 'Scheduled in 2 Days (Shaky)', 'Scheduled in 7 Days (Solid)'];
-      showToast(labels[level], level === 2 ? 'success' : level === 1 ? 'info' : 'warn');
+    // =========================================================================
+    // 2. TAB 1 DATA: 12 CONTEXT-BLIND CLINICAL VIGNETTES & SCT TWISTS
+    //    (Zero system/module label displayed prior to lock-in!)
+    // =========================================================================
+    const VIGNETTES = [
+      {
+        id: 'msk_vig_1',
+        systemTag: 'MSK / Infection Red Flag',
+        rootCauseTag: 'knowledge_gap',
+        isRedFlag: true,
+        stem: 'A 64-year-old male presents with an acutely hot, tense, swollen, and agonising right knee that started 18 hours ago. He is unable to weight-bear, has a temperature of 38.6°C, and refuses even 5° of passive knee flexion.',
+        triageCorrect: '999',
+        diffCorrect: 'septic',
+        diffs: [
+          { id: 'septic', label: 'Septic Arthritis' },
+          { id: 'gout', label: 'Acute Gout Flare' },
+          { id: 'oa', label: 'Osteoarthritis Flare' },
+          { id: 'baker', label: 'Ruptured Baker’s Cyst' },
+        ],
+        pearl: 'An acutely hot, swollen single joint with systemic fever (38.6°C) and severe pain on minimal passive ROM is Septic Arthritis until proven otherwise — immediate same-day A&E for joint aspiration & IV antibiotics to prevent irreversible cartilage destruction.',
+        sctHypothesis: 'Septic Arthritis',
+        sctTwist: 'Joint aspirate reveals negatively birefringent needle-shaped monosodium urate (MSU) crystals on polarised microscopy, Gram stain is negative, the patient is actually afebrile, and the flare is centred on the 1st MTP joint.',
+        sctCorrect: -2,
+        sctRationale: '(-2 Strongly Ruled Out for Septic / Shifts to Gout): Negatively birefringent needle-shaped MSU crystals at the 1st MTP (podagra) without fever/bacteria confirm Acute Gout rather than Septic Arthritis.',
+      },
+      {
+        id: 'msk_vig_2',
+        systemTag: 'Renal / Systemic BMS',
+        rootCauseTag: 'knowledge_gap',
+        isRedFlag: false,
+        stem: 'A 58-year-old patient with longstanding poorly controlled Type 2 diabetes and hypertension attends with diffuse deep bone ache, proximal lower-limb muscle weakness, worsening fatigue, and a recent GP note mentioning low eGFR.',
+        triageCorrect: 'gp',
+        diffCorrect: 'renal_osteo',
+        diffs: [
+          { id: 'renal_osteo', label: 'CKD → Renal Osteodystrophy' },
+          { id: 'oa', label: 'Mechanical Lumbar Osteoarthritis' },
+          { id: 'pmr', label: 'Polymyalgia Rheumatica' },
+          { id: 'fibro', label: 'Fibromyalgia' },
+        ],
+        pearl: 'Chronic kidney disease impairs phosphate excretion and renal 1α-hydroxylase activation of Vitamin D → hypocalcaemia → secondary hyperparathyroidism → high-turnover osteoclast bone resorption (structural fragility; avoid HVT!).',
+        sctHypothesis: 'CKD-Induced Renal Osteodystrophy',
+        sctTwist: 'Urgent GP blood panel returns elevated serum phosphate, low active 1,25(OH)₂ Vitamin D (calcitriol), low serum calcium, and markedly raised Parathyroid Hormone (PTH).',
+        sctCorrect: 2,
+        sctRationale: '(+2 Strongly Confirms): High PO₄ + low active Vitamin D + low Ca²⁺ + raised PTH is the textbook biochemical cascade of secondary hyperparathyroidism driving Renal Osteodystrophy.',
+      },
+      {
+        id: 'msk_vig_3',
+        systemTag: 'Inflammatory Rheumatology',
+        rootCauseTag: 'knowledge_gap',
+        isRedFlag: false,
+        stem: 'A 42-year-old female reports a 10-week history of progressive, bilateral aching and boggy swelling across her hands and wrists, accompanied by mild fatigue and low-grade malaise.',
+        triageCorrect: 'gp',
+        diffCorrect: 'ra',
+        diffs: [
+          { id: 'ra', label: 'Rheumatoid Arthritis (RA)' },
+          { id: 'oa', label: 'Hand Osteoarthritis (OA)' },
+          { id: 'cts', label: 'Bilateral Carpal Tunnel Only' },
+          { id: 'gout', label: 'Polyarticular Gout' },
+        ],
+        pearl: 'Symmetric bilateral small-joint synovitis lasting >6 weeks warrants urgent GP / Rheumatology referral for early DMARD therapy (e.g., methotrexate) within the therapeutic window to prevent erosive pannus destruction.',
+        sctHypothesis: 'Rheumatoid Arthritis (RA)',
+        sctTwist: 'On questioning, her morning stiffness lasts 90 minutes before easing with movement; examination confirms symmetric MCP and PIP joint swelling while DIP joints are completely spared.',
+        sctCorrect: 2,
+        sctRationale: '(+2 Strongly Confirms): Morning stiffness >60 minutes + symmetric MCP/PIP synovitis with DIP sparing is classic RA (unlike OA which hits DIPs/Heberden nodes with <30 min stiffness).',
+      },
+      {
+        id: 'msk_vig_4',
+        systemTag: 'Degenerative MSK',
+        rootCauseTag: 'knowledge_gap',
+        isRedFlag: false,
+        stem: 'A 68-year-old retired builder presents with a 2-year history of gradual right hip and knee pain that worsens at the end of the day after prolonged walking and eases with rest. Examination reveals hard, bony nodules at the DIP joints of both hands and mild knee crepitus.',
+        triageCorrect: 'chiro',
+        diffCorrect: 'oa',
+        diffs: [
+          { id: 'oa', label: 'Osteoarthritis (OA)' },
+          { id: 'ra', label: 'Rheumatoid Arthritis (RA)' },
+          { id: 'septic', label: 'Septic Arthritis' },
+          { id: 'paget', label: 'Paget’s Disease of Bone' },
+        ],
+        pearl: 'Load-related mechanical joint pain worse at the end of the day with bony DIP enlargement (Heberden’s nodes) and zero systemic red flags fits Osteoarthritis — appropriate for conservative chiropractic care, graded exercise, and self-management.',
+        sctHypothesis: 'Osteoarthritis (OA)',
+        sctTwist: 'Morning stiffness lasts only 15 minutes, and a prior standing knee X-ray demonstrates asymmetric joint space narrowing, marginal osteophytes, subchondral sclerosis, and subchondral cysts.',
+        sctCorrect: 2,
+        sctRationale: '(+2 Strongly Confirms): <30 min morning stiffness + classic LOSS radiographic signs (Loss of joint space, Osteophytes, Subchondral sclerosis, Subchondral cysts) confirm OA.',
+      },
+      {
+        id: 'msk_vig_5',
+        systemTag: 'Cardiovascular Red Flag',
+        rootCauseTag: 'knowledge_gap',
+        isRedFlag: true,
+        stem: 'A 59-year-old male smoker arrives for a routine shoulder appointment complaining of sudden central crushing chest tightness radiating to his left jaw and inner arm, accompanied by sweating (diaphoresis) and nausea.',
+        triageCorrect: '999',
+        diffCorrect: 'acs',
+        diffs: [
+          { id: 'acs', label: 'Acute Coronary Syndrome / STEMI' },
+          { id: 'costoch', label: 'Costochondritis' },
+          { id: 'gord', label: 'Reflux Oesophagitis (GORD)' },
+          { id: 't4', label: 'Thoracic Facet Referral' },
+        ],
+        pearl: 'Central crushing chest pain radiating to jaw/left arm with autonomic features (diaphoresis, nausea) is an Acute Coronary Syndrome emergency — stop all MSK assessment and call 999 immediately.',
+        sctHypothesis: 'ST-Elevation Myocardial Infarction (STEMI)',
+        sctTwist: 'Paramedic 12-lead ECG reveals ST-segment elevation in leads II, III, and aVF; pain persists >20 minutes at rest and hospital bloods show elevated cardiac troponin.',
+        sctCorrect: 2,
+        sctRationale: '(+2 Strongly Confirms): Persistent rest pain >20 min + ST elevation + raised troponin confirms transmural myocardial necrosis (STEMI) from acute coronary plaque rupture and thrombosis.',
+      },
+      {
+        id: 'msk_vig_6',
+        systemTag: 'Cardiovascular Red Flag',
+        rootCauseTag: 'knowledge_gap',
+        isRedFlag: true,
+        stem: 'A 61-year-old male presents with a severe new-onset occipital headache and blurred vision since waking. You check his blood pressure twice at rest and record 196/122 mmHg.',
+        triageCorrect: '999',
+        diffCorrect: 'htn_emerg',
+        diffs: [
+          { id: 'htn_emerg', label: 'Malignant / Severe Hypertensive Emergency' },
+          { id: 'cg_ha', label: 'Cervicogenic Headache' },
+          { id: 'migraine', label: 'Classic Migraine with Aura' },
+          { id: 'tension', label: 'Tension-Type Headache' },
+        ],
+        pearl: 'BP ≥180/120 mmHg WITH signs of acute target-organ damage (blurred vision, severe headache, chest pain, neuro deficit) is a Hypertensive Emergency requiring immediate same-day A&E referral — never perform cervical HVT!',
+        sctHypothesis: 'Hypertensive Emergency (Accelerated Hypertension)',
+        sctTwist: 'Ophthalmoscopic examination at A&E reveals bilateral papilloedema and flame-shaped retinal haemorrhages.',
+        sctCorrect: 2,
+        sctRationale: '(+2 Strongly Confirms): BP ≥180/120 mmHg accompanied by retinal haemorrhages and papilloedema (Grade IV hypertensive retinopathy) definitively confirms a life-threatening Hypertensive Emergency.',
+      },
+      {
+        id: 'msk_vig_7',
+        systemTag: 'Endocrine Red Flag',
+        rootCauseTag: 'knowledge_gap',
+        isRedFlag: true,
+        stem: 'A 36-year-old female recovering from a recent viral gastroenteritis attends with profound exhaustion, dizziness on standing, abdominal pain, a resting BP of 84/52 mmHg, and noticeable dark hyperpigmentation in her palmar creases and buccal mucosa.',
+        triageCorrect: '999',
+        diffCorrect: 'addison',
+        diffs: [
+          { id: 'addison', label: 'Addisonian (Adrenal) Crisis' },
+          { id: 'pots', label: 'Benign Postural Hypotension' },
+          { id: 'anaemia', label: 'Iron-Deficiency Anaemia' },
+          { id: 'hypothyroid', label: 'Hypothyroidism' },
+        ],
+        pearl: 'Severe hypotension (84/52) + acute physiological stress (viral GI bug) + hyperpigmentation (↑ ACTH/MSH) signals an Addisonian Crisis — immediate 999 emergency for IV hydrocortisone and IV fluids.',
+        sctHypothesis: 'Addisonian (Acute Adrenal) Crisis',
+        sctTwist: 'Emergency bloods show hyponatraemia (↓ Na⁺), hyperkalaemia (↑ K⁺), and hypoglycaemia (↓ glucose).',
+        sctCorrect: 2,
+        sctRationale: '(+2 Strongly Confirms): Loss of aldosterone causes renal Na⁺ loss & K⁺ retention (↓ Na⁺, ↑ K⁺), while loss of cortisol causes hypoglycaemia and refractory shock.',
+      },
+      {
+        id: 'msk_vig_8',
+        systemTag: 'Metabolic Bone Disease',
+        rootCauseTag: 'knowledge_gap',
+        isRedFlag: false,
+        stem: 'A 71-year-old male reports a deep, dull, constant ache in his right pelvis and bowed anterior tibia that persists at rest. He casually mentions his flat caps no longer fit and his hearing has gradually worsened over the last year.',
+        triageCorrect: 'gp',
+        diffCorrect: 'paget',
+        diffs: [
+          { id: 'paget', label: 'Paget’s Disease of Bone' },
+          { id: 'osteo', label: 'Primary Osteoporosis' },
+          { id: 'oa', label: 'Hip Osteoarthritis' },
+          { id: 'spinal_sten', label: 'Lumbar Spinal Stenosis' },
+        ],
+        pearl: 'Disorganised osteoclast resorption + chaotic woven bone remodelling enlarges skull/pelvis/tibia (increasing hat size, CN VIII compression hearing loss, bowing) — refer to GP for bloods/imaging; avoid forceful HVT over involved weakened bone.',
+        sctHypothesis: 'Paget’s Disease of Bone',
+        sctTwist: 'Blood tests reveal a markedly elevated serum Alkaline Phosphatase (ALP) with completely normal serum calcium and phosphate levels.',
+        sctCorrect: 2,
+        sctRationale: '(+2 Strongly Confirms): Isolated markedly elevated ALP (reflecting frantic osteoblastic bone turnover) with normal Ca²⁺ and PO₄ is the classic biochemical hallmark of Paget’s Disease.',
+      },
+      {
+        id: 'msk_vig_9',
+        systemTag: 'Metabolic Bone Disease',
+        rootCauseTag: 'knowledge_gap',
+        isRedFlag: false,
+        stem: 'A 48-year-old woman with minimal sunlight exposure presents with diffuse aching across her ribs, pelvis, and thighs, difficulty rising from a low chair due to proximal muscle weakness, and a noticeable waddling gait.',
+        triageCorrect: 'gp',
+        diffCorrect: 'osteomalacia',
+        diffs: [
+          { id: 'osteomalacia', label: 'Osteomalacia (Vitamin D Deficiency)' },
+          { id: 'osteoporosis', label: 'Uncomplicated Osteoporosis' },
+          { id: 'ra', label: 'Rheumatoid Arthritis' },
+          { id: 'sciatica', label: 'L5 Radiculopathy' },
+        ],
+        pearl: 'Unlike Osteoporosis (which is usually painless until fracture), Osteomalacia causes defective osteoid mineralisation → soft painful bones, proximal myopathy, and waddling gait — refer to GP for Vitamin D / bone profile.',
+        sctHypothesis: 'Osteomalacia',
+        sctTwist: 'GP bloods show severely low 25(OH) Vitamin D, low-normal calcium, raised PTH, and raised ALP; pelvic X-ray reveals bilateral translucent Looser pseudofracture zones.',
+        sctCorrect: 2,
+        sctRationale: '(+2 Strongly Confirms): Low Vitamin D + secondary ↑ PTH + Looser’s zones (insufficiency pseudofractures) definitively confirm Osteomalacia.',
+      },
+      {
+        id: 'msk_vig_10',
+        systemTag: 'GI / Spondyloarthropathy',
+        rootCauseTag: 'knowledge_gap',
+        isRedFlag: false,
+        stem: 'A 27-year-old patient presents with alternating sacroiliac joint pain, chronic crampy abdominal pain, unintentional weight loss, recurrent mouth (aphthous) ulcers, and episodic non-bloody diarrhoea.',
+        triageCorrect: 'gp',
+        diffCorrect: 'crohn',
+        diffs: [
+          { id: 'crohn', label: 'Crohn’s Disease (IBD + Enteropathic SIJ)' },
+          { id: 'ibs', label: 'Irritable Bowel Syndrome (IBS)' },
+          { id: 'mech_sij', label: 'Mechanical SIJ Dysfunction' },
+          { id: 'ulcer', label: 'Peptic Ulcer Disease' },
+        ],
+        pearl: 'Chronic diarrhoea + weight loss + oral ulcers + inflammatory SIJ pain points to Inflammatory Bowel Disease (Crohn’s can affect mouth-to-anus with transmural skip lesions) — refer to GP/Gastroenterology.',
+        sctHypothesis: 'Crohn’s Disease',
+        sctTwist: 'Colonoscopy reveals strictly continuous, superficial mucosal inflammation beginning at the rectum and extending proximally with bloody diarrhoea, crypt abscesses, and zero skip lesions.',
+        sctCorrect: -2,
+        sctRationale: '(-2 Rules Out Crohn’s / Shifts to Ulcerative Colitis): Continuous mucosal-only inflammation starting at the rectum with bloody diarrhoea and no skip lesions is diagnostic of Ulcerative Colitis, NOT Crohn’s.',
+      },
+      {
+        id: 'msk_vig_11',
+        systemTag: 'Neurological Red Flag',
+        rootCauseTag: 'retrieval_slip',
+        isRedFlag: true,
+        stem: 'A 45-year-old warehouse worker develops acute severe central low back pain after lifting a heavy pallet, followed within hours by shooting leg pain and tingling radiating down BOTH legs below the knees.',
+        triageCorrect: '999',
+        diffCorrect: 'ces',
+        diffs: [
+          { id: 'ces', label: 'Cauda Equina Syndrome (CES)' },
+          { id: 'piriformis', label: 'Bilateral Piriformis Syndrome' },
+          { id: 'facet', label: 'Acute Lumbar Facet Lock' },
+          { id: 'strain', label: 'Lumbar Erector Spinae Strain' },
+        ],
+        pearl: 'Acute severe LBP with new bilateral sciatica must trigger immediate Cauda Equina screening (saddle sensation, bladder/bowel control, sexual function) — same-day A&E for emergency MRI and surgical decompression.',
+        sctHypothesis: 'Cauda Equina Syndrome (CES)',
+        sctTwist: 'On direct questioning, the patient admits numbness around the perineum ("saddle area") when wiping and painless inability to pass urine since this morning.',
+        sctCorrect: 2,
+        sctRationale: '(+2 Strongly Confirms): Saddle anaesthesia (S2–S4) + painless urinary retention is a neurosurgical emergency (CES-R) requiring immediate 999 / A&E transfer.',
+      },
+      {
+        id: 'msk_vig_12',
+        systemTag: 'Renal / Systemic BMS',
+        rootCauseTag: 'knowledge_gap',
+        isRedFlag: false,
+        stem: 'A 34-year-old patient attending for mid-back ache mentions waking up for the past 2 weeks with puffy eyes (periorbital oedema), pitting swelling around both ankles, and noticeably frothy urine.',
+        triageCorrect: 'gp',
+        diffCorrect: 'nephrotic',
+        diffs: [
+          { id: 'nephrotic', label: 'Nephrotic Syndrome' },
+          { id: 'nephritic', label: 'Acute Nephritic Syndrome' },
+          { id: 'dvt', label: 'Bilateral DVT' },
+          { id: 'venous', label: 'Benign Venous Insufficiency' },
+        ],
+        pearl: 'Periorbital + pitting ankle oedema with frothy urine indicates heavy proteinuria from glomerular podocyte damage — refer promptly to GP for urine dipstick, ACR, and renal bloods.',
+        sctHypothesis: 'Nephrotic Syndrome',
+        sctTwist: 'GP investigations confirm heavy proteinuria (>3.5 g/day), hypoalbuminaemia, hyperlipidaemia, normal BP, and completely absent haematuria.',
+        sctCorrect: 2,
+        sctRationale: '(+2 Strongly Confirms): Classic Nephrotic triad = heavy proteinuria (>3.5g/day) + hypoalbuminaemia (↓ oncotic pressure → oedema) + hyperlipidaemia, WITHOUT haematuria/hypertension (which characterise Nephritic syndrome).',
+      },
+    ];
+
+    const TRIAGE_OPTIONS = [
+      { id: '999', label: '🚨 Immediate 999 / A&E', activeCls: 'active-coral' },
+      { id: 'gp', label: '🩺 Urgent GP / Bloods', activeCls: 'active-purple' },
+      { id: 'chiro', label: '🤲 Conservative / Chiro', activeCls: 'active-emerald' },
+    ];
+
+    const SCT_OPTIONS = [
+      { val: -2, label: 'Strongly\nRuled Out' },
+      { val: -1, label: 'Less\nLikely' },
+      { val: 0, label: 'No\nChange' },
+      { val: 1, label: 'More\nLikely' },
+      { val: 2, label: 'Strongly\nConfirms' },
+    ];
+
+    // =========================================================================
+    // 3. TAB 2 DATA: OA vs. RA JOINT SVG & 5 CAUSAL DOMINO CHAINS
+    // =========================================================================
+    const JOINT_INFO = {
+      healthy: {
+        id: 'healthy', title: 'Healthy Synovial Joint', badge: 'Baseline Anatomy', badgeCls: 'badge-emerald',
+        pathology: 'Smooth, intact hyaline articular cartilage; clear uniform joint space; thin non-inflamed synovial membrane; normal subchondral bone.',
+        mechanism: 'Balanced chondrocyte turnover and lubricating synovial fluid cushion compressive joint loads smoothly.',
+        joints: 'Full pain-free range of motion across load-bearing and small peripheral joints.',
+        stiffness: 'None — smooth initiation of movement after rest.',
+        xrayMgmt: 'Normal symmetric joint space & crisp cortical margins. Maintain via regular loading & mobility.',
+      },
+      oa: {
+        id: 'oa', title: 'Osteoarthritis (OA)', badge: 'Degenerative / Mechanical', badgeCls: 'badge-blue',
+        pathology: 'Focal articular cartilage fibrillation & thinning, asymmetric joint-space narrowing, marginal osteophytes, subchondral sclerosis & cysts.',
+        mechanism: 'Mechanical wear & altered chondrocyte repair (metalloproteinases outpace matrix synthesis) — NOT primary autoimmune synovitis.',
+        joints: 'Asymmetric load-bearing joints (hip, knee, spine), 1st CMC, DIP (Heberden’s nodes) & PIP (Bouchard’s nodes).',
+        stiffness: 'Morning stiffness < 30 minutes; pain worsens with weight-bearing / end of day and eases with rest.',
+        xrayMgmt: 'X-ray LOSS (Loss of space, Osteophytes, Subchondral sclerosis, Subchondral cysts). Manage with exercise, weight/load management & conservative MSK care.',
+      },
+      ra: {
+        id: 'ra', title: 'Rheumatoid Arthritis (RA)', badge: 'Autoimmune Synovitis', badgeCls: 'badge-coral',
+        pathology: 'Inflamed hypertrophic synovium forms invasive vascular PANNUS that erodes articular cartilage & marginal subchondral bone (periarticular osteopenia).',
+        mechanism: 'Autoimmune T/B-cell activation (RF, Anti-CCP) drives pro-inflammatory cytokines (TNF-α, IL-1, IL-6) → osteoclast bone erosion & systemic inflammation.',
+        joints: 'Symmetric bilateral small joints: MCP, PIP, wrists & MTP — classically SPARES DIP joints! Watch Cervical C1–C2 (ADI >3mm) instability!',
+        stiffness: 'Morning stiffness > 60 minutes that improves with gentle movement; systemic fatigue/malaise.',
+        xrayMgmt: 'Urgent GP/Rheumatology referral for early DMARDs (methotrexate) / biologics (anti-TNF) to halt irreversible joint destruction. Caution: screen C1–C2 before cervical HVT!',
+      },
+    };
+
+    const DOMINO_CHAINS = [
+      {
+        id: 'ckd_rod',
+        title: '1. CKD → Renal Osteodystrophy',
+        badge: 'Renal BMS • 5 Steps',
+        steps: [
+          'Chronic Kidney Disease (↓ GFR & nephron loss)',
+          'Phosphate retention (↑ PO₄) + ↓ renal 1α-hydroxylase activation of Vitamin D',
+          'Reduced intestinal calcium absorption → Hypocalcaemia (↓ Ca²⁺)',
+          'Parathyroid glands compensate → Secondary Hyperparathyroidism (↑ PTH)',
+          'Excess PTH stimulates osteoclasts → Bone resorption & fragility (Renal Osteodystrophy)',
+        ],
+        takeaway: 'Clinical Takeaway: Always screen longstanding CKD patients for bone fragility before applying forceful HVT!',
+      },
+      {
+        id: 'ra_pannus',
+        title: '2. RA Synovitis & Pannus Erosion',
+        badge: 'Rheumatology • 5 Steps',
+        steps: [
+          'Genetic susceptibility + environmental trigger → Autoantibodies (RF / Anti-CCP)',
+          'Immune complex & T-cell activation inside the synovial membrane',
+          'Macrophages release pro-inflammatory cytokines (TNF-α, IL-1, IL-6)',
+          'Synovial hyperplasia & angiogenesis form invasive vascular Pannus tissue',
+          'Pannus + activated osteoclasts erode cartilage & marginal bone → Joint deformity',
+        ],
+        takeaway: 'Clinical Takeaway: Early DMARDs/biologics block this cytokine cascade BEFORE pannus permanently destroys the joint.',
+      },
+      {
+        id: 'acs_stemi',
+        title: '3. Atherosclerosis → ACS / STEMI',
+        badge: 'Cardiovascular • 5 Steps',
+        steps: [
+          'Endothelial dysfunction (↓ Nitric Oxide) allows LDL infiltration & oxidation',
+          'Macrophages engulf oxidised LDL → Foam cells & lipid-rich atherosclerotic plaque',
+          'Thin fibrous cap ruptures, exposing thrombogenic core to circulating platelets',
+          'Acute platelet aggregation & fibrin thrombus occludes the coronary lumen',
+          'Transmural myocardial ischaemia (>20 min) → Necrosis (ST elevation + ↑ Troponin)',
+        ],
+        takeaway: 'Clinical Takeaway: Crushing chest/jaw/arm pain + diaphoresis + nausea = immediate 999 emergency.',
+      },
+      {
+        id: 'asthma_b2',
+        title: '4. Asthma IgE Cascade & β₂ Rescue',
+        badge: 'Pharmacology • 5 Steps',
+        steps: [
+          'Allergen cross-links IgE antibodies bound to airway mast cells (Type I hypersensitivity)',
+          'Mast cell degranulation releases histamine & leukotrienes → Bronchospasm + oedema',
+          'Inhaled β₂-agonist (Salbutamol) binds bronchial smooth-muscle β₂ receptors',
+          'Gs-protein activates adenylyl cyclase → Intracellular cAMP increases',
+          '↑ cAMP drives smooth-muscle relaxation & rapid bronchodilation (rescue relief)',
+        ],
+        takeaway: 'Clinical Takeaway: β₂ agonists (↑ cAMP) give rapid rescue; inhaled steroids/montelukast suppress chronic airway inflammation.',
+      },
+      {
+        id: 'addison_crisis',
+        title: '5. Addisonian (Adrenal) Crisis',
+        badge: 'Endocrine • 4 Steps',
+        steps: [
+          'Primary adrenal cortex destruction → Deficiency of Cortisol & Aldosterone',
+          'Acute physiological stress (infection/trauma) spikes metabolic demand',
+          'Loss of aldosterone → Renal Na⁺/water wasting (↓ Na⁺) & K⁺ retention (↑ K⁺)',
+          'Loss of cortisol → Hypoglycaemia + loss of vascular tone → Refractory shock (999)',
+        ],
+        takeaway: 'Clinical Takeaway: Hypotension + palmar hyperpigmentation + recent illness = immediate 999 for IV hydrocortisone.',
+      },
+    ];
+
+    // =========================================================================
+    // 4. TAB 3 DATA: 14 BMS BOTTLENECK ACTIVE-RECALL CARDS (mchiro_srs_v4)
+    // =========================================================================
+    const BMS_SRS_CARDS = [
+      { id: 'msk_bms_1', cat: 'Renal', rootCause: 'knowledge_gap', q: 'Nephrotic vs. Nephritic Syndrome — Key Differentials', a: 'NEPHROTIC: Podocyte leak → massive proteinuria (>3.5g/day), hypoalbuminaemia, severe oedema (periorbital/ankle), hyperlipidaemia, frothy urine (NO haematuria). NEPHRITIC: Glomerular inflammation → haematuria (red cell casts / cola urine), hypertension, oliguria, mild proteinuria.' },
+      { id: 'msk_bms_2', cat: 'Renal', rootCause: 'knowledge_gap', q: 'AKI (Pre-renal / ATN / Post-renal) vs. CKD', a: 'AKI = rapid hours/days drop in GFR (↑ creatinine, ↓ urine output); Pre-renal (hypoperfusion), Intrinsic (Acute Tubular Necrosis from ischaemia/nephrotoxins), Post-renal (obstruction). CKD = irreversible nephron loss >3 months (eGFR <60) causing anaemia (↓ EPO) & renal osteodystrophy.' },
+      { id: 'msk_bms_3', cat: 'Renal', rootCause: 'knowledge_gap', q: 'RAAS Cascade (Renin–Angiotensin–Aldosterone)', a: '↓ Renal perfusion / ↓ Na⁺ at macula densa → JG cells release Renin → Angiotensinogen → Angiotensin I → ACE (lungs) → Angiotensin II → (1) Systemic vasoconstriction (↑ BP), (2) Aldosterone (Na⁺/H₂O retention, K⁺ excretion), (3) ADH release.' },
+      { id: 'msk_bms_4', cat: 'Renal Bone', rootCause: 'knowledge_gap', q: 'CKD → Renal Osteodystrophy Mechanism', a: 'Failing kidneys retain phosphate (↑ PO₄) and fail to activate Vitamin D (↓ calcitriol) → ↓ gut Ca²⁺ absorption → Hypocalcaemia → Secondary Hyperparathyroidism (↑ PTH) → osteoclast bone resorption & structural fragility.' },
+      { id: 'msk_bms_5', cat: 'MSK', rootCause: 'knowledge_gap', q: 'OA vs. RA Cytokines, Joints & DMARD Rationale', a: 'OA: Mechanical cartilage wear, osteophytes, <30 min morning stiffness, asymmetric weight-bearing + DIPs. RA: Autoimmune synovitis/pannus driven by TNF-α, IL-1, IL-6; >60 min morning stiffness; symmetric MCP/PIP (spares DIPs). Early DMARDs (methotrexate) suppress immune proliferation to prevent permanent bone erosion.' },
+      { id: 'msk_bms_6', cat: 'Metabolic Bone', rootCause: 'knowledge_gap', q: 'Osteoporosis vs. Osteomalacia vs. Paget’s (Labs & Features)', a: 'OSTEOPOROSIS: Low bone mass (DEXA T ≤ −2.5), NORMAL Ca²⁺/PO₄/ALP, painless until fragility fracture. OSTEOMALACIA: Poor osteoid mineralisation (↓ Vit D, ↓/N Ca²⁺, ↑ PTH, ↑ ALP), bone pain, waddling gait, Looser zones. PAGET’S: Disorganised woven bone, ISOLATED markedly ↑ ALP (normal Ca²⁺/PO₄), bowed tibia, hat size ↑, hearing loss.' },
+      { id: 'msk_bms_7', cat: 'Red Flag', rootCause: 'retrieval_slip', q: 'Acute Gout vs. Septic Arthritis (Differentiation & Action)', a: 'GOUT: Negatively birefringent needle-shaped MSU crystals, classic 1st MTP (podagra), usually afebrile. SEPTIC ARTHRITIS: Hot, swollen single joint (knee) + FEVER + refusal of passive ROM → IMMEDIATE same-day A&E for joint aspiration & IV antibiotics.' },
+      { id: 'msk_bms_8', cat: 'Cardiovascular', rootCause: 'knowledge_gap', q: 'Stable Angina vs. Unstable Angina vs. NSTEMI vs. STEMI', a: 'STABLE: Predictable exertional ischaemia, eases with rest/GTN. UNSTABLE: Rest/crescendo pain (plaque rupture), normal troponin (999!). NSTEMI: Subendocardial necrosis, ↑ troponin, ST depression/T-inversion. STEMI: Transmural occlusion, ↑ troponin + ST elevation (999!).' },
+      { id: 'msk_bms_9', cat: 'Cardiovascular', rootCause: 'retrieval_slip', q: 'Hypertension Urgent Referral Thresholds (NICE)', a: 'Stage 1: ≥140/90; Stage 2: ≥160/100. SEVERE / CRISIS: ≥180/120 mmHg → Same-day A&E / 999 if ANY target-organ damage (papilloedema, retinal haemorrhage, chest pain, severe headache, neuro deficit); urgent GP review if asymptomatic.' },
+      { id: 'msk_bms_10', cat: 'Pharmacology', rootCause: 'knowledge_gap', q: 'Asthma Drugs: β₂ Agonists vs. Inhaled Steroids vs. Montelukast', a: 'β₂ AGONISTS (Salbutamol): Bind β₂ → ↑ cAMP → smooth-muscle relaxation (rapid rescue bronchodilation). INHALED STEROIDS: Inhibit inflammatory gene transcription & cytokines (preventer). MONTELUKAST: Leukotriene receptor antagonist blocking bronchoconstriction & mucus.' },
+      { id: 'msk_bms_11', cat: 'Neoplasia', rootCause: 'knowledge_gap', q: 'Chemotherapy: Growth Fraction vs. Fractional Cell Kill', a: 'GROWTH FRACTION: Proportion of tumour cells actively dividing (high-growth-fraction tumours are more chemosensitive to cell-cycle-specific drugs). FRACTIONAL CELL KILL: Each chemo cycle kills a fixed percentage (e.g., 99%), NOT a fixed number of cells → requires repeated spaced cycles.' },
+      { id: 'msk_bms_12', cat: 'GI', rootCause: 'knowledge_gap', q: "Crohn's Disease vs. Ulcerative Colitis (Key Differences)", a: 'CROHN’S: Mouth-to-anus, transmural (full thickness → fistulae/strictures), patchy "skip lesions", cobblestone mucosa, non-bloody diarrhoea common. ULCERATIVE COLITIS: Continuous mucosal-only inflammation starting at the rectum, bloody diarrhoea, crypt abscesses, NO skip lesions.' },
+      { id: 'msk_bms_13', cat: 'Microbiology', rootCause: 'knowledge_gap', q: 'Gram-Negative Endotoxin vs. AMR Conjugation', a: 'ENDOTOXIN: Lipopolysaccharide (LPS) component of Gram-negative outer cell wall released on bacterial lysis → triggers massive cytokine storm & septic shock. CONJUGATION: Horizontal gene transfer of resistance plasmids directly between bacteria via a sex pilus (major driver of AMR).' },
+      { id: 'msk_bms_14', cat: 'Neoplasia', rootCause: 'retrieval_slip', q: 'Tumour Grading vs. Tumour Staging (TNM)', a: 'GRADING (G1–G4): Histological differentiation under microscope (how abnormal/anaplastic the cells look). STAGING (TNM): Anatomical extent/spread — T (Primary tumour size/invasion), N (Regional lymph nodes), M (Distant metastases — strongest predictor of prognosis).' },
+    ];
+
+    // =========================================================================
+    // 5. TAB 4 DATA: ABCS X-RAY, CERVICAL VIEWS, IR(ME)R & ORTHO VAULT
+    // =========================================================================
+    const ABCS_SECTIONS = [
+      {
+        id: 'abcs',
+        title: 'Systematic ABCS X-Ray Interpretation',
+        badge: 'Core Framework',
+        items: [
+          'A — Alignment: Check anterior/posterior vertebral body lines, spinolaminar line & ADI (>3 mm in adults = RA transverse ligament / C1–C2 instability RED FLAG!)',
+          'B — Bone: Trace every cortical outline for fractures, lytic/blastic metastases, osteopenia, Paget’s cortical thickening or Looser zones',
+          'C — Cartilage: Assess disc height & joint-space uniformity (asymmetric narrowing + osteophytes in OA vs. uniform loss + marginal erosions in RA)',
+          'S — Soft Tissues: Screen prevertebral soft-tissue swelling (C2 >7 mm, C6 >22 mm = trauma/infection), joint effusions & vascular calcifications',
+        ],
+      },
+      {
+        id: 'cx_views',
+        title: 'Cervical Spine Radiographic Views',
+        badge: '5 Standard Views',
+        items: [
+          'Lateral View: Best for alignment (4 contour lines), ADI (<3 mm adult), disc heights & prevertebral soft tissue',
+          'AP Lower Cervical (C3–C7): Evaluates uncovertebral joints, lateral masses, spinous process alignment & cervical ribs',
+          'AP Open Mouth (APOM): Isolates C1 lateral masses & C2 odontoid peg (dens) — screens Jefferson burst & dens fractures',
+          'Oblique Views (L & R): Opens intervertebral foramina (IVFs) to inspect osteophytic foraminal encroachment',
+          'Flexion / Extension Views: Dynamic screen for ligamentous instability (e.g., RA atlantoaxial subluxation) — NEVER perform in acute trauma!',
+        ],
+      },
+      {
+        id: 'irmer',
+        title: 'IR(ME)R Radiation Safety Principles',
+        badge: 'UK Legal Duty',
+        items: [
+          'Justification: Expected clinical benefit must outweigh ionising radiation risk; imaging must genuinely change patient management',
+          'Optimisation (ALARP): Keep radiation dose As Low As Reasonably Practicable (proper kVp/mAs, tight collimation, avoid repeat exposures)',
+          'Limitation: Respect statutory dose limits & pregnancy screening (10-day / 28-day rule) before pelvic/lumbar exposures',
+        ],
+      },
+    ];
+
+    const DEFAULT_ORTHO_VAULT = [
+      { id: 'ov_1', region: 'Cervical', name: "Spurling's Foraminal Compression", positive: 'Radicular arm pain reproducing patient symptoms (cervical nerve root compression)', note: 'High specificity (SpPIn) for cervical radiculopathy; screen CAD/instability first.', isTemplate: true },
+      { id: 'ov_2', region: 'Cervical', name: 'Cervical Distraction Test', positive: 'Relief / reduction of radicular arm pain during gentle axial traction', note: 'Complements Spurling’s in Wainner’s clinical prediction rule for cervical radiculopathy.', isTemplate: true },
+      { id: 'ov_3', region: 'Lumbar', name: 'Straight Leg Raise (SLR) & Slump Test', positive: 'Reproducible radicular leg pain below knee between 30°–70° (enhanced by ankle dorsiflexion)', note: 'Crossed SLR (well-leg raise) has very high specificity for lumbar disc herniation.', isTemplate: true },
+      { id: 'ov_4', region: 'Shoulder', name: 'Hawkins-Kennedy & Empty Can (Jobe)', positive: 'Subacromial / anterior-lateral shoulder pain (rotator cuff / supraspinatus tendinopathy)', note: 'Cluster with Painful Arc (60°–120°) & resisted external rotation for better diagnostic accuracy.', isTemplate: true },
+      { id: 'ov_5', region: 'Hip', name: 'FABER (Patrick) & FADIR Tests', positive: 'Groin pain = intra-articular hip / FAI (FADIR); posterior SIJ pain = SIJ provocation (FABER)', note: 'Always specify exact pain location (groin vs. posterior SIJ) when documenting.', isTemplate: true },
+      { id: 'ov_6', region: 'Knee', name: 'Lachman & McMurray Tests', positive: 'Lachman: soft/absent end-feel & ↑ anterior tibial translation (ACL). McMurray: painful joint-line click (meniscus).', note: 'Rule out hot swollen septic joint or Ottawa Knee fracture criteria before special testing.', isTemplate: true },
+    ];
+
+    const REGIONS = ['Cervical', 'Lumbar', 'Shoulder', 'Hip', 'Knee'];
+
+    // =========================================================================
+    // 6. APPLICATION STATE
+    // =========================================================================
+    function initDominoState() {
+      const obj = {};
+      DOMINO_CHAINS.forEach((c) => {
+        obj[c.id] = {
+          placed: [],
+          pool: shuffle(c.steps.map((text, idx) => ({ idx, text }))),
+          wrongTileIdx: null,
+        };
+      });
+      return obj;
+    }
+
+    const state = {
+      activeTab: 'vignettes', // 'vignettes' | 'domino' | 'srs' | 'ortho'
+
+      // Tab 1: Context-Blind Vignettes & SCT
+      vigIdx: 0,
+      seenVigIds: {},
+      selTriage: null,
+      selDiff: null,
+      selConf: null, // 'guess' | 'unsure' | 'certain'
+      vigLocked: false,
+      vigResult: null,
+      sctPicked: null,
+      showProtocol: false,
+
+      // Tab 2: Joint SVG & Domino Chains
+      jointSel: 'ra', // 'healthy' | 'oa' | 'ra' | null
+      activeChainId: 'ckd_rod',
+      domino: initDominoState(),
+
+      // Tab 3: BMS Recall SRS
+      srs: loadJSON('mchiro_srs_v4', {}),
+      srsIdx: 0,
+      srsDueOnly: false,
+      srsConf: null,
+      srsRevealed: false,
+
+      // Tab 4: Ortho & Imaging
+      openAbcs: { abcs: true },
+      checkedAbcs: loadJSON('mchiro_msk_abcs_v1', {}),
+      orthoRegion: 'Cervical',
+      orthoVault: loadJSON('mchiro_msk_vault_v1', DEFAULT_ORTHO_VAULT),
+      showAddOrtho: false,
+    };
+
+    // Ensure orthoVault is always a valid array
+    if (!Array.isArray(state.orthoVault)) {
+      state.orthoVault = DEFAULT_ORTHO_VAULT.slice();
+    }
+
+    // =========================================================================
+    // 7. TELEMETRY HELPERS ('mchiro_diag_v1' & 'mchiro_srs_v4')
+    // =========================================================================
+    function appendDiagTelemetry(entry) {
+      const raw = loadJSON('mchiro_diag_v1', []);
+      const arr = Array.isArray(raw) ? raw : [];
+      arr.push(entry);
+      if (arr.length > 600) arr.splice(0, arr.length - 600);
+      saveJSON('mchiro_diag_v1', arr);
+    }
+
+    function getMskVignetteMetrics() {
+      const raw = loadJSON('mchiro_diag_v1', []);
+      const arr = Array.isArray(raw) ? raw : [];
+      const mskVigs = arr.filter((e) => e && e.source === 'msk' && typeof e.id === 'string' && e.id.indexOf('msk_vig_') === 0);
+
+      const total = mskVigs.length;
+      const correctCount = mskVigs.filter((e) => e.correct).length;
+      const blindPct = total > 0 ? Math.round((correctCount / total) * 100) : 0;
+
+      const redFlags = mskVigs.filter((e) => e.isRedFlag);
+      const rfCorrect = redFlags.filter((e) => e.triageCorrect !== undefined ? e.triageCorrect : e.correct).length;
+      const rfPct = redFlags.length > 0 ? `${Math.round((rfCorrect / redFlags.length) * 100)}%` : '—';
+      const rfOk = redFlags.length === 0 || rfCorrect === redFlags.length;
+
+      const allMsk = arr.filter((e) => e && e.source === 'msk');
+      const highConfErrors = allMsk.filter((e) => e.confidence === 'certain' && !e.correct).length;
+
+      return { total, correctCount, blindPct, rfPct, rfOk, rfTotal: redFlags.length, highConfErrors };
+    }
+
+    // =========================================================================
+    // 8. TAB 1 HANDLERS (VIGNETTES & SCT)
+    // =========================================================================
+    function selectCaseIndex(idx) {
+      state.vigIdx = idx;
+      state.selTriage = null;
+      state.selDiff = null;
+      state.selConf = null;
+      state.vigLocked = false;
+      state.vigResult = null;
+      state.sctPicked = null;
       renderApp();
     }
 
-    function getDueCount() {
-      return ALL_SRS_IDS.filter((id) => isCardDue(id)).length;
+    function nextRandomUnseenCase() {
+      const unseen = VIGNETTES.map((v, i) => ({ v, i })).filter((x) => !state.seenVigIds[x.v.id] && x.i !== state.vigIdx);
+      let pickIdx;
+      if (unseen.length > 0) {
+        pickIdx = unseen[Math.floor(Math.random() * unseen.length)].i;
+      } else {
+        state.seenVigIds = {};
+        const pool = VIGNETTES.map((_, i) => i).filter((i) => i !== state.vigIdx);
+        pickIdx = pool[Math.floor(Math.random() * pool.length)];
+        showToast('All 12 cases cycled — reshuffling unseen deck!', 'emerald');
+      }
+      selectCaseIndex(pickIdx);
+      window.scrollTo({ top: 0, behavior: 'smooth' });
     }
 
-    function updateDueHeaderUI() {
-      const due = getDueCount();
-      const btn = document.getElementById('due-filter-btn');
-      const dot = document.getElementById('due-dot');
-      const badge = document.getElementById('due-count-badge');
-      const banner = document.getElementById('due-only-banner');
+    function lockInVignette() {
+      if (!state.selTriage || !state.selDiff || !state.selConf || state.vigLocked) return;
+      const v = VIGNETTES[state.vigIdx];
+      const triageOk = state.selTriage === v.triageCorrect;
+      const diffOk = state.selDiff === v.diffCorrect;
+      const bothOk = triageOk && diffOk;
 
-      if (badge) badge.textContent = String(due);
-      if (btn && dot && banner) {
-        if (state.dueOnly) {
-          btn.className = 'px-2.5 sm:px-3 py-2 rounded-xl text-[11px] sm:text-xs font-bold border transition flex items-center gap-1.5 bg-amber-500 text-white border-amber-500 shadow-xs';
-          dot.className = 'w-2 h-2 rounded-full bg-white animate-pulse';
-          badge.className = 'px-1.5 py-0.5 rounded-md text-[10px] font-extrabold bg-white/25 text-white';
-          banner.classList.remove('hidden');
-        } else {
-          btn.className = 'px-2.5 sm:px-3 py-2 rounded-xl text-[11px] sm:text-xs font-bold border transition flex items-center gap-1.5 bg-slate-100 dark:bg-slate-800 text-slate-700 dark:text-slate-200 border-slate-200 dark:border-slate-700 hover:border-amber-400';
-          dot.className = due > 0 ? 'w-2 h-2 rounded-full bg-amber-500' : 'w-2 h-2 rounded-full bg-emerald-500';
-          badge.className = due > 0
-            ? 'px-1.5 py-0.5 rounded-md text-[10px] font-extrabold bg-amber-100 dark:bg-amber-950 text-amber-800 dark:text-amber-300'
-            : 'px-1.5 py-0.5 rounded-md text-[10px] font-extrabold bg-emerald-100 dark:bg-emerald-950 text-emerald-700 dark:text-emerald-300';
-          banner.classList.add('hidden');
+      state.vigLocked = true;
+      state.seenVigIds[v.id] = true;
+      state.vigResult = { triageOk, diffOk, bothOk };
+
+      appendDiagTelemetry({
+        id: v.id,
+        source: 'msk',
+        rootCauseTag: v.rootCauseTag,
+        confidence: state.selConf,
+        correct: bothOk,
+        triageCorrect: triageOk,
+        isRedFlag: v.isRedFlag,
+        timestamp: Date.now(),
+      });
+
+      if (!bothOk && state.selConf === 'certain') {
+        showToast('High-Confidence Error logged! Review rationale below.', 'coral');
+      } else if (bothOk) {
+        showToast('✓ Triage & Differential locked — now complete the SCT twist!', 'emerald');
+      } else {
+        showToast('Review the clinical pearl, then test the SCT twist.', 'amber');
+      }
+      renderApp();
+    }
+
+    function pickSctValue(val) {
+      if (state.sctPicked !== null) return;
+      state.sctPicked = val;
+      const v = VIGNETTES[state.vigIdx];
+      if (val === v.sctCorrect) {
+        showToast('✓ Exact Script Concordance match!', 'emerald');
+      } else {
+        showToast('Check the expert SCT rationale below.', 'amber');
+      }
+      renderApp();
+    }
+
+    // =========================================================================
+    // 9. TAB 2 HANDLERS (DOMINO CHAIN BUILDER)
+    // =========================================================================
+    function tapDominoTile(chainId, tileIdx) {
+      const chain = DOMINO_CHAINS.find((c) => c.id === chainId);
+      const ds = state.domino[chainId];
+      if (!chain || !ds) return;
+
+      const expectedIdx = ds.placed.length;
+      if (tileIdx === expectedIdx) {
+        ds.placed.push(chain.steps[tileIdx]);
+        ds.pool = ds.pool.filter((t) => t.idx !== tileIdx);
+        ds.wrongTileIdx = null;
+        if (ds.placed.length === chain.steps.length) {
+          showToast('✓ Causal Domino Chain Complete!', 'emerald');
         }
+        renderApp();
+      } else {
+        ds.wrongTileIdx = tileIdx;
+        showToast(`Not step ${expectedIdx + 1} — think what happens next physiologically!`, 'coral');
+        renderApp();
+        setTimeout(() => {
+          if (state.domino[chainId]) {
+            state.domino[chainId].wrongTileIdx = null;
+            renderApp();
+          }
+        }, 420);
       }
     }
 
-    function toggleDueOnly() {
-      state.dueOnly = !state.dueOnly;
-      updateDueHeaderUI();
+    function resetDominoChain(chainId) {
+      const chain = DOMINO_CHAINS.find((c) => c.id === chainId);
+      if (!chain) return;
+      state.domino[chainId] = {
+        placed: [],
+        pool: shuffle(chain.steps.map((text, idx) => ({ idx, text }))),
+        wrongTileIdx: null,
+      };
       renderApp();
     }
 
-    function renderSrsBar(id) {
-      const rec = state.srs[id];
-      const lvl = rec !== undefined ? rec.level : null;
-      return `
-        <div class="flex flex-wrap items-center gap-1.5">
-          <button type="button" onclick="event.stopPropagation(); rateCard('${id}', 0);" class="flex-1 sm:flex-none px-2.5 py-1.5 rounded-xl text-[11px] font-bold border transition ${lvl === 0 ? 'bg-rose-600 text-white border-rose-600' : 'bg-rose-50/70 dark:bg-rose-950/30 text-rose-700 dark:text-rose-300 border-rose-200 dark:border-rose-800/60 hover:bg-rose-100'}">Again (Today)</button>
-          <button type="button" onclick="event.stopPropagation(); rateCard('${id}', 1);" class="flex-1 sm:flex-none px-2.5 py-1.5 rounded-xl text-[11px] font-bold border transition ${lvl === 1 ? 'bg-amber-500 text-white border-amber-500' : 'bg-amber-50/70 dark:bg-amber-950/30 text-amber-800 dark:text-amber-300 border-amber-200 dark:border-amber-800/60 hover:bg-amber-100'}">Shaky (2d)</button>
-          <button type="button" onclick="event.stopPropagation(); rateCard('${id}', 2);" class="flex-1 sm:flex-none px-2.5 py-1.5 rounded-xl text-[11px] font-bold border transition ${lvl === 2 ? 'bg-emerald-600 text-white border-emerald-600' : 'bg-emerald-50/70 dark:bg-emerald-950/30 text-emerald-700 dark:text-emerald-300 border-emerald-200 dark:border-emerald-800/60 hover:bg-emerald-100'}">Solid (7d)</button>
-        </div>
-      `;
+    // =========================================================================
+    // 10. TAB 3 HANDLERS (CONFIDENCE-WEIGHTED LEITNER SRS)
+    // =========================================================================
+    function getSrsDeck() {
+      if (!state.srsDueOnly) return BMS_SRS_CARDS;
+      const now = Date.now();
+      const due = BMS_SRS_CARDS.filter((c) => {
+        const rec = state.srs[c.id];
+        if (!rec) return true;
+        return (typeof rec.box === 'number' && rec.box <= 1) || !rec.dueAt || now >= rec.dueAt;
+      });
+      return due.length ? due : BMS_SRS_CARDS;
+    }
+
+    function gradeBmsSrs(cardId, gotIt) {
+      const card = BMS_SRS_CARDS.find((c) => c.id === cardId);
+      if (!card) return;
+
+      // Reload latest mchiro_srs_v4 so we NEVER overwrite neuro/written keys
+      const latestSrs = loadJSON('mchiro_srs_v4', {});
+      const cur = latestSrs[cardId] || { box: 1 };
+      let nextBox = typeof cur.box === 'number' ? cur.box : 1;
+      let days = 0;
+
+      if (!gotIt) {
+        nextBox = 1;
+        days = 0;
+      } else {
+        nextBox = Math.min(5, nextBox + 1);
+        days = [0, 1, 3, 7, 14, 30][nextBox];
+      }
+
+      latestSrs[cardId] = { box: nextBox, dueAt: Date.now() + days * DAY_MS };
+      saveJSON('mchiro_srs_v4', latestSrs);
+      state.srs = latestSrs;
+
+      appendDiagTelemetry({
+        id: cardId,
+        source: 'msk',
+        rootCauseTag: card.rootCause,
+        confidence: state.srsConf || 'unsure',
+        correct: gotIt,
+        isRedFlag: card.cat === 'Red Flag',
+        timestamp: Date.now(),
+      });
+
+      if (!gotIt && state.srsConf === 'certain') {
+        showToast('High-Confidence Error logged (Box 1)', 'coral');
+      } else if (!gotIt) {
+        showToast('Reset to Box 1 — Due Today', 'amber');
+      } else {
+        showToast(`Promoted to Box ${nextBox} (${days}d)`, 'emerald');
+      }
+
+      state.srsConf = null;
+      state.srsRevealed = false;
+      state.srsIdx = (state.srsIdx + 1) % getSrsDeck().length;
+      renderApp();
     }
 
     // =========================================================================
-    // 4. NAVIGATION TABS (DESKTOP TOP + MOBILE FIXED BOTTOM)
+    // 11. TAB 4 HANDLERS (ORTHO SPECIAL TESTS VAULT)
+    // =========================================================================
+    function addOrthoVaultItem(e) {
+      e.preventDefault();
+      const region = document.getElementById('ov_region').value;
+      const name = (document.getElementById('ov_name').value || '').trim();
+      const positive = (document.getElementById('ov_pos').value || '').trim();
+      const note = (document.getElementById('ov_note').value || '').trim();
+
+      if (!name || !positive) {
+        showToast('Enter a Test Name and Positive Sign first.', 'amber');
+        return;
+      }
+
+      state.orthoVault.unshift({
+        id: 'ov_' + Date.now().toString(36),
+        region,
+        name,
+        positive,
+        note,
+        isTemplate: false,
+      });
+      saveJSON('mchiro_msk_vault_v1', state.orthoVault);
+      state.orthoRegion = region;
+      state.showAddOrtho = false;
+      showToast('✓ Saved to Ortho & Imaging Vault!', 'emerald');
+      renderApp();
+    }
+
+    function deleteOrthoVaultItem(id) {
+      state.orthoVault = state.orthoVault.filter((x) => x.id !== id);
+      saveJSON('mchiro_msk_vault_v1', state.orthoVault);
+      showToast('Item removed.', 'amber');
+      renderApp();
+    }
+
+    // =========================================================================
+    // 12. NAVIGATION & MAIN ROUTER
     // =========================================================================
     const TABS = [
-      { id: 'oara', label: 'OA vs RA', sub: 'Joint Pathology', icon: '🦴' },
-      { id: 'bone', label: 'Bone & Renal', sub: 'Metabolic & CKD', icon: '🧪' },
-      { id: 'redflags', label: 'Red Flags', sub: 'CV, Systemic & CES', icon: '🚨' },
-      { id: 'saq', label: 'SAQ / LAQ', sub: 'Self-Marking', icon: '📝' },
+      { id: 'vignettes', label: '🎯 Vignettes & SCT' },
+      { id: 'domino', label: '⛓️ Domino Chains' },
+      { id: 'srs', label: '🧠 BMS Recall (SRS)' },
+      { id: 'ortho', label: '🦴 Ortho & Imaging' },
     ];
 
-    function setTab(tabId) {
-      state.activeTab = tabId;
+    function setTab(id) {
+      state.activeTab = id;
       renderTabs();
       renderApp();
       window.scrollTo({ top: 0, behavior: 'smooth' });
     }
 
     function renderTabs() {
-      document.getElementById('desktop-tabs').innerHTML = TABS.map((t) => {
-        const active = state.activeTab === t.id;
-        return `
-          <button
-            type="button"
-            onclick="setTab('${t.id}')"
-            class="px-3 py-2 rounded-xl text-xs sm:text-sm font-bold transition flex items-center justify-center gap-1.5 ${
-              active
-                ? 'bg-white dark:bg-slate-900 text-teal-700 dark:text-teal-300 shadow-xs'
-                : 'text-slate-600 dark:text-slate-400 hover:text-slate-900 dark:hover:text-white'
-            }"
-          >
-            <span>${t.icon}</span>
-            <span>${t.label}</span>
-          </button>
-        `;
-      }).join('');
-
-      document.getElementById('mobile-bottom-tabs').innerHTML = TABS.map((t) => {
-        const active = state.activeTab === t.id;
-        return `
-          <button
-            type="button"
-            onclick="setTab('${t.id}')"
-            class="py-1.5 px-1 rounded-xl flex flex-col items-center justify-center gap-0.5 transition ${
-              active
-                ? 'bg-teal-50 dark:bg-teal-950/60 text-teal-700 dark:text-teal-300 font-extrabold'
-                : 'text-slate-500 dark:text-slate-400 font-semibold'
-            }"
-          >
-            <span class="text-base leading-none">${t.icon}</span>
-            <span class="text-[10px] leading-tight truncate">${t.label}</span>
-          </button>
-        `;
-      }).join('');
+      document.getElementById('segmented-tabs').innerHTML = TABS.map((t) => `
+        <button
+          type="button"
+          role="tab"
+          aria-selected="${state.activeTab === t.id}"
+          class="seg-btn ${state.activeTab === t.id ? 'active' : ''}"
+          onclick="setTab('${t.id}')"
+        >${t.label}</button>
+      `).join('');
     }
 
     function renderApp() {
       const root = document.getElementById('app-root');
-      if (state.activeTab === 'oara') root.innerHTML = renderOaRaTab();
-      else if (state.activeTab === 'bone') root.innerHTML = renderBoneRenalTab();
-      else if (state.activeTab === 'redflags') root.innerHTML = renderRedFlagsTab();
-      else root.innerHTML = renderSaqTab();
+      if (state.activeTab === 'vignettes') root.innerHTML = renderTabVignettes();
+      else if (state.activeTab === 'domino') root.innerHTML = renderTabDomino();
+      else if (state.activeTab === 'srs') root.innerHTML = renderTabSrs();
+      else root.innerHTML = renderTabOrtho();
     }
 
     // =========================================================================
-    // 5. TAB 1: OA vs RA & JOINT PATHOLOGY
+    // 13. RENDER TAB 1 — CONTEXT-BLIND VIGNETTES & SCT
     // =========================================================================
-    function renderOaRaTab() {
-      if (state.dueOnly && !isCardDue('msk_oa_ra')) {
-        return `
-          <div class="p-8 text-center rounded-3xl bg-white dark:bg-slate-900 border border-slate-200 dark:border-slate-800 space-y-2">
-            <p class="text-base font-extrabold text-emerald-600 dark:text-emerald-400">OA vs RA is Scheduled!</p>
-            <p class="text-xs sm:text-sm text-slate-500">This board is not due today. Tap "Show All" above to review it anyway.</p>
-          </div>
-        `;
-      }
-
-      const hs = JOINT_HOTSPOTS[state.selectedHotspot] || JOINT_HOTSPOTS.ra_pannus;
-      const pill = RA_PILLS[state.selectedPill] || RA_PILLS.tnf;
-      const hCls = (id) => `svg-hotspot ${state.selectedHotspot === id ? 'svg-hotspot-active' : ''}`;
-      const blurCls = state.tableBlur ? 'recall-blurred' : '';
+    function renderTabVignettes() {
+      const m = getMskVignetteMetrics();
+      const v = VIGNETTES[state.vigIdx];
+      const canLock = Boolean(state.selTriage && state.selDiff && state.selConf && !state.vigLocked);
+      const letters = ['A', 'B', 'C', 'D'];
 
       return `
-        <div class="space-y-5">
-          <!-- Interactive Side-by-Side OA vs RA Joint Cross-Section -->
-          <section class="rounded-3xl bg-white dark:bg-slate-900 border border-slate-200 dark:border-slate-800 p-4 sm:p-6 space-y-4">
-            <div class="flex flex-wrap items-start justify-between gap-3">
-              <div>
-                <span class="px-2.5 py-0.5 rounded-lg text-[10px] font-extrabold uppercase bg-teal-100 dark:bg-teal-950 text-teal-800 dark:text-teal-300">Tap Hotspots to Inspect</span>
-                <h2 class="text-lg sm:text-xl font-extrabold text-slate-900 dark:text-white mt-1">OA vs. RA Synovial Joint Cross-Section</h2>
-              </div>
-              ${renderSrsBar('msk_oa_ra')}
+        <div class="stack">
+          <!-- Top Diagnostic Strip (3 Compact Cards) -->
+          <section class="grid-3-compact">
+            <div class="stat-tile ${m.total > 0 ? (m.blindPct >= 80 ? 'ok' : 'warn') : ''}">
+              <span class="stat-lbl">Blind Accuracy</span>
+              <span class="stat-num mono">${m.blindPct}%</span>
+              <span class="mono" style="font-size:11px;color:var(--text-muted);">(${m.correctCount}/${m.total})</span>
             </div>
 
-            <!-- Dual Anatomical SVGs -->
-            <div class="grid grid-cols-1 md:grid-cols-2 gap-4">
-              <!-- OA JOINT SVG -->
-              <div class="rounded-2xl bg-sky-50/50 dark:bg-sky-950/20 border border-sky-200/80 dark:border-sky-900/60 p-3">
-                <p class="text-center text-xs font-extrabold uppercase tracking-wider text-sky-700 dark:text-sky-300 mb-2">Osteoarthritis (OA)</p>
-                <svg viewBox="0 0 300 240" class="w-full max-w-[300px] mx-auto h-auto" role="img" aria-label="Osteoarthritis Joint Cross-Section">
-                  <rect x="0" y="0" width="300" height="240" rx="16" fill="var(--svg-bg)" />
-
-                  <!-- Fibrous Joint Capsule -->
-                  <path d="M 76,56 C 52,102 52,138 76,184 M 224,56 C 248,102 248,138 224,184" fill="none" stroke="var(--svg-capsule)" stroke-width="4" stroke-linecap="round" />
-
-                  <!-- Upper Epiphysis (Bone) -->
-                  <path d="M 102,10 L 198,10 L 202,64 C 208,94 184,112 150,112 C 116,112 92,94 98,64 Z" fill="var(--svg-bone)" stroke="var(--svg-bone-stroke)" stroke-width="2" />
-                  <!-- Lower Epiphysis (Bone) -->
-                  <path d="M 102,230 L 198,230 L 202,166 C 208,136 184,122 150,122 C 116,122 92,136 98,166 Z" fill="var(--svg-bone)" stroke="var(--svg-bone-stroke)" stroke-width="2" />
-
-                  <!-- CLICKABLE: Narrowed Asymmetric Joint Space -->
-                  <path onclick="state.selectedHotspot='oa_space'; renderApp();" class="${hCls('oa_space')}" d="M 96,112 C 122,117 178,116 204,110 L 204,122 C 178,121 122,123 96,126 Z" fill="#0ea5e9" fill-opacity="0.22" stroke="#0284c7" stroke-width="1.2" stroke-dasharray="3 2" />
-
-                  <!-- CLICKABLE: Subchondral Sclerosis & Cysts -->
-                  <g onclick="state.selectedHotspot='oa_sclerosis'; renderApp();" class="${hCls('oa_sclerosis')}">
-                    <path d="M 108,88 C 126,100 174,100 192,88 L 184,74 C 168,84 132,84 116,74 Z" fill="var(--svg-sclerosis)" fill-opacity="0.82" stroke="var(--svg-bone-stroke)" stroke-width="1.3" />
-                    <circle cx="136" cy="84" r="5" fill="var(--svg-bg)" stroke="var(--svg-bone-stroke)" stroke-width="1.2" />
-                    <circle cx="164" cy="86" r="4" fill="var(--svg-bg)" stroke="var(--svg-bone-stroke)" stroke-width="1.2" />
-                  </g>
-
-                  <!-- CLICKABLE: Thinning / Fibrillated Cartilage -->
-                  <g onclick="state.selectedHotspot='oa_cartilage'; renderApp();" class="${hCls('oa_cartilage')}">
-                    <path d="M 98,100 C 118,112 134,112 145,104 L 152,110 L 160,104 C 172,112 186,112 202,100 L 200,108 C 180,117 120,117 100,108 Z" fill="var(--svg-cartilage)" stroke="var(--svg-cartilage-stroke)" stroke-width="1.2" />
-                    <path d="M 100,130 C 124,122 176,122 200,130 L 200,136 C 176,129 124,129 100,136 Z" fill="var(--svg-cartilage)" stroke="var(--svg-cartilage-stroke)" stroke-width="1.2" />
-                  </g>
-
-                  <!-- CLICKABLE: Marginal Osteophytes -->
-                  <g onclick="state.selectedHotspot='oa_osteophyte'; renderApp();" class="${hCls('oa_osteophyte')}">
-                    <path d="M 198,88 L 234,104 L 198,112 Z" fill="var(--svg-osteophyte)" stroke="var(--svg-bone-stroke)" stroke-width="1.5" />
-                    <path d="M 102,148 L 66,132 L 102,124 Z" fill="var(--svg-osteophyte)" stroke="var(--svg-bone-stroke)" stroke-width="1.5" />
-                  </g>
-
-                  <!-- Crisp Diagram Labels -->
-                  <text x="150" y="56" text-anchor="middle" fill="var(--svg-text)" font-size="9.5" font-weight="800" pointer-events="none">Sclerosis &amp; Cysts</text>
-                  <text x="242" y="96" text-anchor="middle" fill="#d97706" font-size="9" font-weight="800" pointer-events="none">Osteophyte</text>
-                  <text x="150" y="164" text-anchor="middle" fill="#0284c7" font-size="9.5" font-weight="800" pointer-events="none">Thin Cartilage &amp; Narrow Space</text>
-                </svg>
-              </div>
-
-              <!-- RA JOINT SVG -->
-              <div class="rounded-2xl bg-rose-50/50 dark:bg-rose-950/20 border border-rose-200/80 dark:border-rose-900/60 p-3">
-                <p class="text-center text-xs font-extrabold uppercase tracking-wider text-rose-700 dark:text-rose-300 mb-2">Rheumatoid Arthritis (RA)</p>
-                <svg viewBox="0 0 300 240" class="w-full max-w-[300px] mx-auto h-auto" role="img" aria-label="Rheumatoid Arthritis Joint Cross-Section">
-                  <rect x="0" y="0" width="300" height="240" rx="16" fill="var(--svg-bg)" />
-
-                  <!-- CLICKABLE: Swollen Distended Capsule & Inflammatory Effusion -->
-                  <ellipse onclick="state.selectedHotspot='ra_effusion'; renderApp();" class="${hCls('ra_effusion')}" cx="150" cy="120" rx="108" ry="66" fill="var(--svg-effusion)" fill-opacity="0.24" stroke="var(--svg-synovium)" stroke-width="3" />
-
-                  <!-- Upper Epiphysis -->
-                  <path d="M 102,10 L 198,10 L 202,68 C 208,96 184,112 150,112 C 116,112 92,96 98,68 Z" fill="var(--svg-bone)" stroke="var(--svg-bone-stroke)" stroke-width="2" />
-                  <!-- Lower Epiphysis -->
-                  <path d="M 102,230 L 198,230 L 202,172 C 208,144 184,128 150,128 C 116,128 92,144 98,172 Z" fill="var(--svg-bone)" stroke="var(--svg-bone-stroke)" stroke-width="2" />
-
-                  <!-- Eroded Articular Cartilage -->
-                  <path d="M 102,104 C 122,114 178,114 198,104 L 196,112 C 176,118 124,118 104,112 Z" fill="var(--svg-cartilage)" fill-opacity="0.65" />
-                  <path d="M 104,132 C 124,124 176,124 196,132 L 198,140 C 178,132 122,132 102,140 Z" fill="var(--svg-cartilage)" fill-opacity="0.65" />
-
-                  <!-- CLICKABLE: Hypertrophied Inflamed Synovium (Synovitis) -->
-                  <path onclick="state.selectedHotspot='ra_synovium'; renderApp();" class="${hCls('ra_synovium')}" d="M 54,94 C 42,118 52,150 86,154 L 94,128 L 88,92 Z" fill="var(--svg-synovium)" fill-opacity="0.88" stroke="#9f1239" stroke-width="1.4" />
-
-                  <!-- CLICKABLE: Invasive Pannus Tissue -->
-                  <path onclick="state.selectedHotspot='ra_pannus'; renderApp();" class="${hCls('ra_pannus')}" d="M 212,92 C 236,102 238,136 212,148 L 154,128 L 154,112 Z" fill="var(--svg-pannus)" fill-opacity="0.92" stroke="#881337" stroke-width="1.4" />
-
-                  <!-- CLICKABLE: Marginal Bone Erosions -->
-                  <g onclick="state.selectedHotspot='ra_erosion'; renderApp();" class="${hCls('ra_erosion')}">
-                    <circle cx="98" cy="100" r="10" fill="#881337" stroke="#ffffff" stroke-width="1.6" />
-                    <circle cx="202" cy="142" r="10" fill="#881337" stroke="#ffffff" stroke-width="1.6" />
-                  </g>
-
-                  <!-- Crisp Diagram Labels -->
-                  <text x="68" y="74" text-anchor="middle" fill="#e11d48" font-size="9.5" font-weight="800" pointer-events="none">Synovitis</text>
-                  <text x="248" y="122" text-anchor="middle" fill="#be123c" font-size="9.5" font-weight="800" pointer-events="none">Pannus</text>
-                  <text x="150" y="198" text-anchor="middle" fill="#e11d48" font-size="9.5" font-weight="800" pointer-events="none">Effusion &amp; Marginal Erosions</text>
-                </svg>
-              </div>
+            <div class="stat-tile ${m.rfTotal > 0 ? (m.rfOk ? 'ok' : 'risk') : ''}">
+              <span class="stat-lbl">Red-Flag Triage</span>
+              <span class="stat-num mono">${m.rfPct}</span>
+              <span style="font-size:10.5px;color:var(--text-muted);font-weight:700;">Target: 100%</span>
             </div>
 
-            <!-- Quick Hotspot Selector Pills -->
-            <div class="flex flex-wrap justify-center gap-1.5">
-              ${Object.entries(JOINT_HOTSPOTS).map(([id, obj]) => `
-                <button
-                  type="button"
-                  onclick="state.selectedHotspot='${id}'; renderApp();"
-                  class="px-2.5 py-1.5 rounded-xl text-[11px] font-bold border transition ${
-                    state.selectedHotspot === id
-                      ? (obj.side === 'OA' ? 'bg-sky-600 text-white border-sky-600' : 'bg-rose-600 text-white border-rose-600')
-                      : 'bg-slate-50 dark:bg-slate-800 text-slate-700 dark:text-slate-300 border-slate-200 dark:border-slate-700'
-                  }"
-                >${obj.side}: ${obj.title.split(' ')[0]} ${obj.title.split(' ')[1] || ''}</button>
-              `).join('')}
-            </div>
-
-            <!-- Pinned Clinical Info Card Directly Below SVG -->
-            <div class="rounded-2xl p-4 border-2 space-y-1.5 ${hs.side === 'OA' ? 'bg-sky-50/60 dark:bg-sky-950/30 border-sky-200 dark:border-sky-800/70' : 'bg-rose-50/60 dark:bg-rose-950/30 border-rose-200 dark:border-rose-800/70'}">
-              <div class="flex flex-wrap items-center justify-between gap-2">
-                <h3 class="text-sm sm:text-base font-extrabold text-slate-900 dark:text-white">${hs.side}: ${hs.title}</h3>
-                <span class="px-2.5 py-0.5 rounded-lg text-[10px] font-extrabold uppercase ${hs.side === 'OA' ? 'bg-sky-600 text-white' : 'bg-rose-600 text-white'}">${hs.badge}</span>
-              </div>
-              <p class="text-xs sm:text-sm text-slate-700 dark:text-slate-200 leading-relaxed">${hs.detail}</p>
-              <p class="text-xs font-bold ${hs.side === 'OA' ? 'text-sky-800 dark:text-sky-300' : 'text-rose-800 dark:text-rose-300'}">Clinical Pearl: ${hs.clinical}</p>
+            <div class="stat-tile ${m.highConfErrors > 0 ? 'risk' : 'ok'}">
+              <span class="stat-lbl">High-Conf Errors</span>
+              <span class="stat-num mono" style="color:${m.highConfErrors > 0 ? 'var(--coral)' : 'var(--emerald)'};">${m.highConfErrors}</span>
+              <span style="font-size:10.5px;color:var(--text-muted);font-weight:700;">Certain + Wrong</span>
             </div>
           </section>
 
-          <!-- RA Cytokine & DMARD Quick Pills -->
-          <section class="rounded-3xl bg-white dark:bg-slate-900 border border-slate-200 dark:border-slate-800 p-4 sm:p-5 space-y-3">
-            <div class="flex flex-wrap items-center justify-between gap-2">
-              <h3 class="text-sm sm:text-base font-extrabold text-slate-900 dark:text-white">RA Inflammatory Mediators &amp; DMARD Rationale</h3>
-              <div class="flex flex-wrap gap-1.5">
-                ${Object.entries(RA_PILLS).map(([id, p]) => `
-                  <button
-                    type="button"
-                    onclick="state.selectedPill='${id}'; renderApp();"
-                    class="px-3 py-1.5 rounded-xl text-xs font-extrabold border transition ${
-                      state.selectedPill === id
-                        ? 'bg-rose-600 text-white border-rose-600 shadow-xs'
-                        : 'bg-rose-50/70 dark:bg-rose-950/30 text-rose-700 dark:text-rose-300 border-rose-200 dark:border-rose-800/60 hover:border-rose-400'
-                    }"
-                  >${p.label}</button>
-                `).join('')}
+          <!-- Filter / Shuffle Bar + 14-Day Delayed Transfer Protocol Drawer -->
+          <section class="ah-card pad-card stack-sm">
+            <div class="flex-between">
+              <div style="display:flex;align-items:center;gap:8px;flex-wrap:wrap;">
+                <span class="badge badge-blue mono">Case ${state.vigIdx + 1} of ${VIGNETTES.length}</span>
+                <button type="button" class="pill-btn" style="min-height:34px;padding:4px 10px;font-size:11.5px;" onclick="state.showProtocol=!state.showProtocol; renderApp();">
+                  📋 14-Day Transfer Protocol ${state.showProtocol ? '▲' : '▼'}
+                </button>
               </div>
-            </div>
-            <div class="p-3.5 rounded-2xl bg-slate-50 dark:bg-slate-800/60 border border-slate-200 dark:border-slate-700 space-y-1">
-              <h4 class="text-xs sm:text-sm font-extrabold text-rose-700 dark:text-rose-300">${pill.title}</h4>
-              <p class="text-xs sm:text-sm text-slate-700 dark:text-slate-200 leading-relaxed">${pill.body}</p>
-            </div>
-          </section>
 
-          <!-- Compact OA vs RA Comparison Table with Active Recall Blur -->
-          <section class="rounded-3xl bg-white dark:bg-slate-900 border border-slate-200 dark:border-slate-800 overflow-hidden">
-            <div class="px-4 sm:px-5 py-3.5 border-b border-slate-200 dark:border-slate-800 flex flex-wrap items-center justify-between gap-2">
-              <div>
-                <h3 class="text-sm sm:text-base font-extrabold text-slate-900 dark:text-white">OA vs. RA Rapid Comparison</h3>
-                <p class="text-[11px] text-slate-500 dark:text-slate-400">Tap any blurred cell to unblur and verify recall.</p>
-              </div>
-              <button
-                type="button"
-                onclick="state.tableBlur=!state.tableBlur; renderApp();"
-                class="px-3.5 py-2 rounded-xl text-xs font-extrabold border transition ${
-                  state.tableBlur
-                    ? 'bg-indigo-600 text-white border-indigo-600 shadow-xs'
-                    : 'bg-indigo-50 dark:bg-indigo-950/40 text-indigo-700 dark:text-indigo-300 border-indigo-200 dark:border-indigo-800/60'
-                }"
-              >
-                ${state.tableBlur ? '👁 Blur Answers: ON' : '🧠 Active Recall (Blur Answers)'}
+              <button type="button" class="btn-3d btn-blue sm" onclick="nextRandomUnseenCase()">
+                🔀 Next Random Unseen &rarr;
               </button>
             </div>
-            <div class="overflow-x-auto">
-              <table class="w-full text-left border-collapse min-w-[560px] text-xs sm:text-sm">
-                <thead>
-                  <tr class="bg-slate-50 dark:bg-slate-800/70 border-b border-slate-200 dark:border-slate-800">
-                    <th class="p-3 font-extrabold text-slate-500 w-36">Feature</th>
-                    <th class="p-3 font-extrabold text-sky-700 dark:text-sky-300">Osteoarthritis (OA)</th>
-                    <th class="p-3 font-extrabold text-rose-700 dark:text-rose-300">Rheumatoid Arthritis (RA)</th>
-                  </tr>
-                </thead>
-                <tbody class="divide-y divide-slate-200 dark:divide-slate-800">
-                  ${OARA_TABLE.map((row) => `
-                    <tr>
-                      <td class="p-3 font-extrabold text-slate-900 dark:text-white align-top">${row.feature}</td>
-                      <td class="p-3 text-slate-700 dark:text-slate-200 align-top">
-                        <span onclick="this.classList.remove('recall-blurred')" class="${blurCls} block rounded">${row.oa}</span>
-                      </td>
-                      <td class="p-3 text-slate-700 dark:text-slate-200 align-top">
-                        <span onclick="this.classList.remove('recall-blurred')" class="${blurCls} block rounded">${row.ra}</span>
-                      </td>
-                    </tr>
-                  `).join('')}
-                </tbody>
-              </table>
-            </div>
+
+            ${state.showProtocol ? `
+              <div class="sem-box sem-purple stack-sm" style="gap:6px;">
+                <span class="sem-label">External Verification Protocol (14-Day Delayed Transfer)</span>
+                <p style="font-size:12.5px;">
+                  <strong>Why Context-Blind?</strong> Module labels create an illusion of competence. Here, MSK, Renal, Cardiovascular, Endocrine, GI &amp; Neuro cases are mixed with zero system tags until you lock in.
+                </p>
+                <p style="font-size:12.5px;">
+                  <strong>Objective Pass Threshold:</strong> After a 14-day delay on unseen mixed-system vignettes, score <strong>&ge;80% overall blind accuracy</strong> and <strong>100% on urgent Red-Flag referrals</strong> (Septic Arthritis, STEMI, HTN Emergency, Addisonian Crisis, Cauda Equina) with <strong>&lt;10% High-Confidence Errors</strong>.
+                </p>
+              </div>
+            ` : ''}
           </section>
+
+          <!-- Main Vignette Card (Zero System Tag Until Locked!) -->
+          <article class="ah-card pad-card stack">
+            <div class="flex-between">
+              <span class="badge ${state.vigLocked ? (v.isRedFlag ? 'badge-coral' : 'badge-purple') : 'badge-muted'}">
+                ${state.vigLocked ? `Revealed System: ${v.systemTag}` : 'Context-Blind Clinical Presentation'}
+              </span>
+              <div style="display:flex;gap:5px;">
+                <button type="button" class="pill-btn" style="min-height:30px;padding:3px 9px;font-size:11px;" onclick="selectCaseIndex((state.vigIdx - 1 + VIGNETTES.length) % VIGNETTES.length)">&larr;</button>
+                <button type="button" class="pill-btn" style="min-height:30px;padding:3px 9px;font-size:11px;" onclick="selectCaseIndex((state.vigIdx + 1) % VIGNETTES.length)">&rarr;</button>
+              </div>
+            </div>
+
+            <!-- Clinical Stem -->
+            <div class="ah-card-alt pad-card" style="font-size:15px;font-weight:600;line-height:1.55;">
+              ${esc(v.stem)}
+            </div>
+
+            <!-- STEP 1A: Triage Action -->
+            <div class="stack-sm">
+              <span class="field-label" style="margin:0;">1. Select Clinical Triage Action</span>
+              <div class="grid-3">
+                ${TRIAGE_OPTIONS.map((t) => {
+                  let cls = '';
+                  if (state.vigLocked) {
+                    if (t.id === v.triageCorrect) cls = 'active-emerald';
+                    else if (t.id === state.selTriage) cls = 'active-coral';
+                  } else if (state.selTriage === t.id) {
+                    cls = t.activeCls;
+                  }
+                  return `
+                    <button
+                      type="button"
+                      class="pill-btn ${cls}"
+                      ${state.vigLocked ? 'disabled' : ''}
+                      onclick="state.selTriage='${t.id}'; renderApp();"
+                    >${t.label}</button>
+                  `;
+                }).join('')}
+              </div>
+            </div>
+
+            <!-- STEP 1B: Top Differential -->
+            <div class="stack-sm">
+              <span class="field-label" style="margin:0;">2. Select Top Differential Diagnosis</span>
+              <div class="grid-2">
+                ${v.diffs.map((d, idx) => {
+                  let cls = '';
+                  if (state.vigLocked) {
+                    if (d.id === v.diffCorrect) cls = 'is-correct';
+                    else if (d.id === state.selDiff) cls = 'is-wrong';
+                  } else if (state.selDiff === d.id) {
+                    cls = 'is-selected';
+                  }
+                  return `
+                    <button
+                      type="button"
+                      class="choice-card ${cls}"
+                      ${state.vigLocked ? 'disabled' : ''}
+                      onclick="state.selDiff='${d.id}'; renderApp();"
+                    >
+                      <span class="choice-key">${letters[idx]}</span>
+                      <span>${esc(d.label)}</span>
+                    </button>
+                  `;
+                }).join('')}
+              </div>
+            </div>
+
+            <!-- STEP 1C: Confidence Calibration Pill & Lock-In -->
+            ${!state.vigLocked ? `
+              <div class="stack-sm" style="padding-top:6px;border-top:1px solid var(--border-card);">
+                <span class="field-label" style="margin:0;">3. Rate Your Certainty Before Locking In</span>
+                <div class="grid-3-compact">
+                  <button type="button" class="pill-btn ${state.selConf === 'guess' ? 'active-coral' : ''}" onclick="state.selConf='guess'; renderApp();">🎲 Guess</button>
+                  <button type="button" class="pill-btn ${state.selConf === 'unsure' ? 'active-amber' : ''}" onclick="state.selConf='unsure'; renderApp();">🤔 Unsure</button>
+                  <button type="button" class="pill-btn ${state.selConf === 'certain' ? 'active-emerald' : ''}" onclick="state.selConf='certain'; renderApp();">🎯 Certain</button>
+                </div>
+                <button type="button" class="btn-3d btn-blue btn-full" ${canLock ? '' : 'disabled'} onclick="lockInVignette()">
+                  🔒 Lock In Triage &amp; Differential
+                </button>
+              </div>
+            ` : `
+              <!-- STEP 2A: Immediate Feedback + Clinical Pearl -->
+              <div class="sem-box ${state.vigResult.bothOk ? 'sem-emerald' : 'sem-coral'} stack-sm" style="gap:6px;">
+                <div class="flex-between">
+                  <span class="sem-label" style="margin:0;">
+                    ${state.vigResult.bothOk
+                      ? '✓ Spot On — Triage & Differential Accurate'
+                      : (!state.vigResult.triageOk && v.isRedFlag
+                          ? '🚨 CRITICAL RED-FLAG TRIAGE MISS!'
+                          : '✕ Review Triage / Differential Gap')}
+                  </span>
+                  ${!state.vigResult.bothOk && state.selConf === 'certain'
+                    ? `<span class="badge badge-amber">⚠ High-Conf Error Logged</span>`
+                    : `<span class="badge badge-muted">Conf: ${state.selConf}</span>`}
+                </div>
+                <p><strong>Clinical Pearl:</strong> ${esc(v.pearl)}</p>
+              </div>
+
+              <!-- STEP 2B: Script Concordance Twist (SCT) -->
+              <div class="ah-card-alt pad-card stack-sm" style="border:1.5px solid var(--purple-border);">
+                <div class="flex-between">
+                  <span class="badge badge-purple">Step 2 &bull; Script Concordance Twist (SCT)</span>
+                  <span style="font-size:11.5px;font-weight:800;color:var(--text-muted);">Hypothesis: ${esc(v.sctHypothesis)}</span>
+                </div>
+
+                <p style="font-size:14px;font-weight:700;line-height:1.46;">
+                  <strong style="color:var(--purple);">New Finding:</strong> ${esc(v.sctTwist)}
+                </p>
+
+                <span class="field-label" style="margin:0;">How does this new finding shift your hypothesis of <em>${esc(v.sctHypothesis)}</em>?</span>
+
+                <div class="sct-grid">
+                  ${SCT_OPTIONS.map((opt) => {
+                    let cls = '';
+                    if (state.sctPicked !== null) {
+                      if (opt.val === v.sctCorrect) cls = 'is-correct';
+                      else if (opt.val === state.sctPicked) cls = 'is-wrong';
+                    }
+                    return `
+                      <button
+                        type="button"
+                        class="sct-btn ${cls}"
+                        ${state.sctPicked !== null ? 'disabled' : ''}
+                        onclick="pickSctValue(${opt.val})"
+                      >
+                        <span class="sct-v mono">${opt.val > 0 ? '+' + opt.val : opt.val}</span>
+                        <span class="sct-t">${opt.label.replace('\n', '<br>')}</span>
+                      </button>
+                    `;
+                  }).join('')}
+                </div>
+
+                ${state.sctPicked !== null ? `
+                  <div class="sem-box ${state.sctPicked === v.sctCorrect ? 'sem-emerald' : 'sem-amber'}">
+                    <span class="sem-label">Expert SCT Rationale</span>
+                    <p>${esc(v.sctRationale)}</p>
+                  </div>
+                  <button type="button" class="btn-3d btn-emerald btn-full" onclick="nextRandomUnseenCase()">
+                    Next Random Unseen Case &rarr;
+                  </button>
+                ` : ''}
+              </div>
+            `}
+          </article>
         </div>
       `;
     }
 
     // =========================================================================
-    // 6. TAB 2: METABOLIC BONE & RENAL PATHWAY
+    // 14. RENDER TAB 2 — INTERACTIVE JOINT SVG & CAUSAL DOMINO CHAINS
     // =========================================================================
-    function renderBoneRenalTab() {
-      const showDomino = !state.dueOnly || isCardDue('msk_ckd_domino');
-      const filteredBones = BONE_CARDS.filter((c) => {
-        if (state.dueOnly && !isCardDue(c.id)) return false;
-        return state.boneFilter === 'All' || c.cat === state.boneFilter;
-      });
+    function buildJointComparisonSVG() {
+      const sel = state.jointSel;
+      const cCls = (id) => `joint-col ${sel === id ? 'is-active' : ''}`;
+      const tap = (id) => `state.jointSel=state.jointSel==='${id}'?null:'${id}'; renderApp();`;
 
       return `
-        <div class="space-y-6">
-          <!-- 1. CKD -> RENAL OSTEODYSTROPHY VISUAL DOMINO FLOWCHART -->
-          ${showDomino ? `
-            <section class="rounded-3xl bg-white dark:bg-slate-900 border border-slate-200 dark:border-slate-800 p-4 sm:p-6 space-y-4">
-              <div class="flex flex-wrap items-start justify-between gap-3">
-                <div>
-                  <span class="px-2.5 py-0.5 rounded-lg text-[10px] font-extrabold uppercase bg-indigo-100 dark:bg-indigo-950 text-indigo-800 dark:text-indigo-300">Highest BMS Priority</span>
-                  <h2 class="text-lg sm:text-xl font-extrabold text-slate-900 dark:text-white mt-1">CKD &rarr; Renal Osteodystrophy Domino</h2>
-                </div>
-                <div class="flex flex-wrap items-center gap-2">
-                  <button
-                    type="button"
-                    onclick="state.dominoTestMode=!state.dominoTestMode; state.revealedDominoes={}; renderApp();"
-                    class="px-3.5 py-2 rounded-xl text-xs font-extrabold border transition ${
-                      state.dominoTestMode
-                        ? 'bg-indigo-600 text-white border-indigo-600'
-                        : 'bg-indigo-50 dark:bg-indigo-950/40 text-indigo-700 dark:text-indigo-300 border-indigo-200 dark:border-indigo-800'
-                    }"
-                  >${state.dominoTestMode ? 'Exit Test Mode' : '🧠 Test Yourself (Hide Steps)'}</button>
-                </div>
-              </div>
+        <svg viewBox="0 0 540 250" class="joint-svg ${sel ? 'has-sel' : ''}" role="img" aria-label="Healthy vs Osteoarthritis vs Rheumatoid Arthritis Joint Anatomy">
+          <rect x="0" y="0" width="540" height="250" rx="18" fill="var(--svg-bg)" />
 
-              <!-- 5 Connected Domino Steps -->
-              <div class="max-w-2xl mx-auto space-y-1">
-                ${CKD_DOMINOES.map((d, idx) => {
-                  const isHidden = state.dominoTestMode && d.step > 1 && !state.revealedDominoes[d.step];
-                  return `
-                    <button
-                      type="button"
-                      onclick="if(state.dominoTestMode && ${d.step} > 1){ state.revealedDominoes[${d.step}]=!state.revealedDominoes[${d.step}]; renderApp(); }"
-                      class="w-full text-left p-3.5 sm:p-4 rounded-2xl border-2 transition ${
-                        isHidden
-                          ? 'bg-slate-100 dark:bg-slate-800/80 border-dashed border-slate-300 dark:border-slate-600 hover:border-indigo-400'
-                          : `bg-${d.color}-50/70 dark:bg-${d.color}-950/30 border-${d.color}-300 dark:border-${d.color}-800/80`
-                      }"
-                    >
-                      <span class="block text-[10px] font-extrabold uppercase tracking-wider ${isHidden ? 'text-slate-400' : `text-${d.color}-700 dark:text-${d.color}-300`}">${d.badge}</span>
-                      ${isHidden ? `
-                        <p class="mt-1 text-xs sm:text-sm font-bold text-slate-500 dark:text-slate-400">Tap to reveal Step ${d.step} and verify your chain...</p>
-                      ` : `
-                        <h3 class="text-sm sm:text-base font-extrabold text-slate-900 dark:text-white mt-0.5">${d.title}</h3>
-                        <p class="text-xs sm:text-sm text-slate-600 dark:text-slate-300 mt-0.5">${d.sub}</p>
-                      `}
-                    </button>
-                    ${idx < CKD_DOMINOES.length - 1 ? `<div class="text-center text-slate-400 font-extrabold text-base leading-none py-0.5">&darr;</div>` : ''}
-                  `;
-                }).join('')}
-              </div>
+          <!-- ==================== 1. HEALTHY JOINT ==================== -->
+          <g onclick="${tap('healthy')}" class="${cCls('healthy')}">
+            <rect x="12" y="12" width="164" height="226" rx="16" fill="var(--bg-card)" stroke="${sel === 'healthy' ? '#059669' : 'var(--border-card)'}" stroke-width="${sel === 'healthy' ? '3' : '1.6'}" />
+            <!-- Capsule -->
+            <path d="M 52,78 C 36,105 36,145 52,172 M 136,78 C 152,105 152,145 136,172" fill="none" stroke="#059669" stroke-width="3" stroke-linecap="round" />
+            <!-- Upper Bone + Smooth Cartilage -->
+            <path d="M 68,54 L 68,94 C 68,110 120,110 120,94 L 120,54 Z" fill="var(--svg-bone)" stroke="var(--svg-bone-stroke)" stroke-width="2" />
+            <path d="M 68,98 C 78,112 110,112 120,98 L 120,105 C 110,119 78,119 68,105 Z" fill="#38BDF8" />
+            <!-- Lower Bone + Smooth Cartilage -->
+            <path d="M 68,196 L 68,156 C 68,140 120,140 120,156 L 120,196 Z" fill="var(--svg-bone)" stroke="var(--svg-bone-stroke)" stroke-width="2" />
+            <path d="M 68,152 C 78,138 110,138 120,152 L 120,145 C 110,131 78,131 68,145 Z" fill="#38BDF8" />
+            <!-- Solid High-Contrast Pill Label -->
+            <rect x="30" y="20" width="128" height="24" rx="8" fill="#059669" />
+            <text x="94" y="36" text-anchor="middle" fill="#FFFFFF" font-size="10.5" font-weight="800">HEALTHY JOINT</text>
+            <rect x="26" y="204" width="136" height="24" rx="8" fill="#FFFFFF" stroke="#CBD5E1" stroke-width="1.3" />
+            <text x="94" y="219.5" text-anchor="middle" fill="#0F172A" font-size="9.2" font-weight="800">Smooth Cartilage</text>
+          </g>
 
-              <div class="pt-2 border-t border-slate-100 dark:border-slate-800 flex flex-wrap items-center justify-between gap-2">
-                <span class="text-xs font-bold text-slate-500">Rate your recall of this 5-step pathway:</span>
-                ${renderSrsBar('msk_ckd_domino')}
-              </div>
-            </section>
-          ` : ''}
+          <!-- ==================== 2. OSTEOARTHRITIS (OA) ==================== -->
+          <g onclick="${tap('oa')}" class="${cCls('oa')}">
+            <rect x="188" y="12" width="164" height="226" rx="16" fill="var(--bg-card)" stroke="${sel === 'oa' ? '#2563EB' : 'var(--border-card)'}" stroke-width="${sel === 'oa' ? '3' : '1.6'}" />
+            <!-- Capsule -->
+            <path d="M 228,78 C 214,105 214,145 228,172 M 312,78 C 326,105 326,145 312,172" fill="none" stroke="#2563EB" stroke-width="3" stroke-linecap="round" />
+            <!-- Upper Bone with Marginal Osteophytes + Sclerosis -->
+            <path d="M 244,54 L 244,98 L 232,110 L 248,113 C 260,118 282,118 292,113 L 308,110 L 296,98 L 296,54 Z" fill="var(--svg-bone)" stroke="var(--svg-bone-stroke)" stroke-width="2" />
+            <!-- Thinning Jagged Cartilage -->
+            <path d="M 248,112 L 258,116 L 266,112 L 278,117 L 292,113" fill="none" stroke="#38BDF8" stroke-width="2.5" stroke-dasharray="6 3" />
+            <!-- Subchondral Cyst -->
+            <circle cx="278" cy="96" r="5" fill="#93C5FD" stroke="#1D4ED8" stroke-width="1.3" />
+            <!-- Lower Bone Narrowed Space + Osteophyte Spur -->
+            <path d="M 244,196 L 244,144 L 233,134 L 249,130 C 262,126 282,126 293,130 L 307,134 L 296,144 L 296,196 Z" fill="var(--svg-bone)" stroke="var(--svg-bone-stroke)" stroke-width="2" />
+            <path d="M 250,130 L 262,127 L 274,131 L 290,128" fill="none" stroke="#38BDF8" stroke-width="2.5" stroke-dasharray="5 3" />
+            <!-- Solid High-Contrast Pill Label -->
+            <rect x="206" y="20" width="128" height="24" rx="8" fill="#2563EB" />
+            <text x="270" y="36" text-anchor="middle" fill="#FFFFFF" font-size="10.2" font-weight="800">OSTEOARTHRITIS (OA)</text>
+            <rect x="200" y="204" width="140" height="24" rx="8" fill="#FFFFFF" stroke="#CBD5E1" stroke-width="1.3" />
+            <text x="270" y="219.5" text-anchor="middle" fill="#0F172A" font-size="9" font-weight="800">Osteophytes • ↓ Space</text>
+          </g>
 
-          <!-- 2. INTERACTIVE 'HOT SWOLLEN JOINT' YES/NO RED FLAG TRIAGE TREE -->
-          <section class="rounded-3xl bg-white dark:bg-slate-900 border-2 border-rose-200 dark:border-rose-900/70 p-4 sm:p-6 space-y-4">
-            <div class="flex flex-wrap items-center justify-between gap-2">
+          <!-- ==================== 3. RHEUMATOID ARTHRITIS (RA) ==================== -->
+          <g onclick="${tap('ra')}" class="${cCls('ra')}">
+            <rect x="364" y="12" width="164" height="226" rx="16" fill="var(--bg-card)" stroke="${sel === 'ra' ? '#E11D48' : 'var(--border-card)'}" stroke-width="${sel === 'ra' ? '3' : '1.6'}" />
+            <!-- Swollen Inflamed Capsule -->
+            <path d="M 402,74 C 378,105 378,145 402,176 M 490,74 C 514,105 514,145 490,176" fill="none" stroke="#E11D48" stroke-width="4.5" stroke-linecap="round" />
+            <!-- Invasive Red Synovitis / Pannus Fill -->
+            <path d="M 404,96 C 386,112 386,138 404,154 L 424,144 L 424,106 Z" fill="#E11D48" fill-opacity="0.72" />
+            <path d="M 488,96 C 506,112 506,138 488,154 L 468,144 L 468,106 Z" fill="#E11D48" fill-opacity="0.72" />
+            <!-- Upper Bone with Marginal Erosions -->
+            <path d="M 420,54 L 420,96 L 428,104 L 422,110 C 436,117 456,117 470,110 L 464,104 L 472,96 L 472,54 Z" fill="var(--svg-bone)" stroke="var(--svg-bone-stroke)" stroke-width="2" />
+            <!-- Lower Bone with Marginal Erosions -->
+            <path d="M 420,196 L 420,154 L 428,146 L 422,140 C 436,133 456,133 470,140 L 464,146 L 472,154 L 472,196 Z" fill="var(--svg-bone)" stroke="var(--svg-bone-stroke)" stroke-width="2" />
+            <!-- Pannus Bridges Eroding Joint -->
+            <path d="M 418,118 Q 446,125 474,118 L 474,132 Q 446,125 418,132 Z" fill="#E11D48" fill-opacity="0.55" />
+            <!-- Solid High-Contrast Pill Label -->
+            <rect x="380" y="20" width="132" height="24" rx="8" fill="#E11D48" />
+            <text x="446" y="36" text-anchor="middle" fill="#FFFFFF" font-size="10.2" font-weight="800">RHEUMATOID (RA)</text>
+            <rect x="376" y="204" width="140" height="24" rx="8" fill="#FFFFFF" stroke="#CBD5E1" stroke-width="1.3" />
+            <text x="446" y="219.5" text-anchor="middle" fill="#0F172A" font-size="9" font-weight="800">Pannus • Synovitis</text>
+          </g>
+        </svg>
+      `;
+    }
+
+    function renderTabDomino() {
+      const j = state.jointSel ? JOINT_INFO[state.jointSel] : null;
+      const chain = DOMINO_CHAINS.find((c) => c.id === state.activeChainId) || DOMINO_CHAINS[0];
+      const ds = state.domino[chain.id];
+      const isComplete = ds.placed.length === chain.steps.length;
+
+      return `
+        <div class="stack">
+          <!-- Part A: Interactive Healthy vs OA vs RA Joint SVG -->
+          <section class="ah-card pad-card stack-sm">
+            <div class="flex-between">
               <div>
-                <span class="px-2.5 py-0.5 rounded-lg text-[10px] font-extrabold uppercase bg-rose-600 text-white">Acute Monoarthritis Triage</span>
-                <h2 class="text-lg sm:text-xl font-extrabold text-slate-900 dark:text-white mt-1">Hot Swollen Joint: Septic Arthritis vs. Gout</h2>
+                <span class="badge badge-blue">Spotlight / Fade-Others Joint Lab</span>
+                <h2 style="font-size:17.5px;font-weight:800;margin-top:4px;">Healthy vs. Osteoarthritis (OA) vs. Rheumatoid Arthritis (RA)</h2>
               </div>
-              ${state.triageChoice ? `<button type="button" onclick="state.triageChoice=null; renderApp();" class="text-xs font-bold underline text-slate-500">Reset Tree</button>` : ''}
+              <button type="button" class="pill-btn" style="min-height:34px;padding:4px 11px;font-size:11.5px;" onclick="state.jointSel=null; renderApp();" ${state.jointSel ? '' : 'style="opacity:0.45;"'}>👁️ Show All</button>
             </div>
 
-            <!-- Root Decision Box -->
-            <div class="p-4 rounded-2xl bg-slate-50 dark:bg-slate-800/70 border border-slate-200 dark:border-slate-700 text-center space-y-3">
-              <p class="text-sm sm:text-base font-extrabold text-slate-900 dark:text-white">
-                Acute monoarthritis + fever, systemic malaise, immunosuppression, prosthetic joint, or severe pain on ANY passive ROM?
-              </p>
-              <div class="flex justify-center gap-3">
-                <button type="button" onclick="state.triageChoice='yes'; renderApp();" class="px-6 py-2.5 rounded-xl text-xs sm:text-sm font-extrabold transition ${state.triageChoice==='yes' ? 'bg-rose-600 text-white shadow-md scale-105' : 'bg-rose-100 dark:bg-rose-950/60 text-rose-800 dark:text-rose-200 hover:bg-rose-200'}">YES &rarr;</button>
-                <button type="button" onclick="state.triageChoice='no'; renderApp();" class="px-6 py-2.5 rounded-xl text-xs sm:text-sm font-extrabold transition ${state.triageChoice==='no' ? 'bg-amber-500 text-white shadow-md scale-105' : 'bg-amber-100 dark:bg-amber-950/60 text-amber-900 dark:text-amber-200 hover:bg-amber-200'}">NO &rarr;</button>
-              </div>
+            <div class="ah-card-alt" style="padding:10px;">
+              ${buildJointComparisonSVG()}
             </div>
 
-            <!-- Branch Outcomes -->
-            <div class="grid grid-cols-1 md:grid-cols-2 gap-3.5">
-              <div class="p-4 rounded-2xl border-2 transition ${state.triageChoice === 'no' ? 'opacity-45 border-slate-200 dark:border-slate-800 bg-slate-50 dark:bg-slate-900' : 'bg-rose-600 text-white border-rose-700 shadow-sm'}">
-                <span class="inline-block px-2 py-0.5 rounded-md text-[10px] font-extrabold uppercase bg-white/20 mb-1.5">YES &rarr; A&amp;E SAME DAY</span>
-                <h3 class="text-base font-extrabold">Suspected Septic Arthritis</h3>
-                <p class="text-xs sm:text-sm mt-1 opacity-95 leading-relaxed">
-                  <strong>Medical Emergency:</strong> Refer to A&amp;E immediately for urgent joint aspiration (Gram stain &amp; culture) <em>before</em> IV antibiotics. Rapid irreversible cartilage destruction occurs within hours.
-                </p>
-              </div>
-              <div class="p-4 rounded-2xl border-2 transition ${state.triageChoice === 'yes' ? 'opacity-45 border-slate-200 dark:border-slate-800 bg-slate-50 dark:bg-slate-900' : 'bg-amber-50 dark:bg-amber-950/35 border-amber-300 dark:border-amber-800 text-amber-950 dark:text-amber-100'}">
-                <span class="inline-block px-2 py-0.5 rounded-md text-[10px] font-extrabold uppercase bg-amber-200 dark:bg-amber-900 text-amber-900 dark:text-amber-200 mb-1.5">NO (Afebrile / Podagra)</span>
-                <h3 class="text-base font-extrabold">Consider Acute Gout</h3>
-                <p class="text-xs sm:text-sm mt-1 leading-relaxed">
-                  Sudden severe night pain, 1st MTP (podagra), tophi, ↑ urate. Negatively birefringent needle-shaped MSU crystals. Rx: NSAIDs/colchicine acute; allopurinol prophylaxis. <strong>Still refer/investigate if ANY doubt!</strong>
-                </p>
-              </div>
+            <div class="grid-3-compact">
+              <button type="button" class="pill-btn ${state.jointSel === 'healthy' ? 'active-emerald' : ''}" onclick="state.jointSel='healthy'; renderApp();">Healthy</button>
+              <button type="button" class="pill-btn ${state.jointSel === 'oa' ? 'active-blue' : ''}" onclick="state.jointSel='oa'; renderApp();">Osteoarthritis (OA)</button>
+              <button type="button" class="pill-btn ${state.jointSel === 'ra' ? 'active-coral' : ''}" onclick="state.jointSel='ra'; renderApp();">Rheumatoid (RA)</button>
             </div>
+
+            ${j ? `
+              <article class="ah-card-alt pad-card stack-sm">
+                <div class="flex-between">
+                  <h3 style="font-size:16px;font-weight:800;">${j.title}</h3>
+                  <span class="badge ${j.badgeCls}">${j.badge}</span>
+                </div>
+                <div class="grid-2">
+                  <div class="sem-box sem-blue"><span class="sem-label">Pathology</span><p>${j.pathology}</p></div>
+                  <div class="sem-box sem-purple"><span class="sem-label">Cytokines / Mechanism</span><p>${j.mechanism}</p></div>
+                  <div class="sem-box sem-amber"><span class="sem-label">Joints Affected</span><p>${j.joints}</p></div>
+                  <div class="sem-box sem-coral"><span class="sem-label">Morning Stiffness</span><p><strong>${j.stiffness}</strong></p></div>
+                </div>
+                <div class="sem-box sem-emerald">
+                  <span class="sem-label">X-Ray &amp; Management</span>
+                  <p>${j.xrayMgmt}</p>
+                </div>
+              </article>
+            ` : `
+              <div class="ah-card-alt pad-card" style="text-align:center;">
+                <p style="font-size:13px;font-weight:700;color:var(--text-muted);">Tap Healthy, OA, or RA on the diagram above to spotlight its pathology, cytokines &amp; clinical differentiation.</p>
+              </div>
+            `}
           </section>
 
-          <!-- 3. FILTERABLE METABOLIC BONE & CRYSTAL DISEASE ACCORDIONS -->
-          <section class="space-y-3">
-            <div class="flex flex-wrap items-center justify-between gap-2 px-1">
-              <h2 class="text-base sm:text-lg font-extrabold text-slate-900 dark:text-white">Metabolic Bone &amp; Crystal Diseases</h2>
-              <div class="flex gap-1.5">
-                ${['All', 'Metabolic', 'Crystal'].map((f) => `
-                  <button
-                    type="button"
-                    onclick="state.boneFilter='${f}'; renderApp();"
-                    class="px-3 py-1.5 rounded-xl text-xs font-bold border transition ${
-                      state.boneFilter === f
-                        ? 'bg-teal-600 text-white border-teal-600'
-                        : 'bg-white dark:bg-slate-900 text-slate-700 dark:text-slate-300 border-slate-200 dark:border-slate-800'
-                    }"
-                  >${f}</button>
-                `).join('')}
+          <!-- Part B: Tap-to-Order Causal Domino Chain Builder -->
+          <section class="ah-card pad-card stack">
+            <div class="flex-between">
+              <div>
+                <span class="badge badge-purple">Active Mechanism Sequencing</span>
+                <h2 style="font-size:17.5px;font-weight:800;margin-top:4px;">Causal Domino Chain Builder (5 BMS Pathways)</h2>
               </div>
+              <button type="button" class="btn-3d btn-neutral sm" onclick="resetDominoChain('${chain.id}')">↺ Reset Chain</button>
             </div>
 
-            ${filteredBones.length ? `
-              <div class="space-y-2.5">
-                ${filteredBones.map((c) => {
-                  const isOpen = !!state.openBoneAcc[c.id];
-                  return `
-                    <article class="rounded-2xl bg-white dark:bg-slate-900 border border-slate-200 dark:border-slate-800 overflow-hidden">
-                      <button
-                        type="button"
-                        onclick="state.openBoneAcc['${c.id}']=!state.openBoneAcc['${c.id}']; renderApp();"
-                        class="w-full px-4 py-3.5 flex items-center justify-between gap-3 text-left hover:bg-slate-50 dark:hover:bg-slate-800/40 transition"
-                      >
-                        <div class="min-w-0">
-                          <div class="flex flex-wrap items-center gap-2">
-                            <h3 class="text-sm sm:text-base font-extrabold text-slate-900 dark:text-white">${c.title}</h3>
-                            <span class="px-2 py-0.5 rounded-lg text-[10px] font-extrabold bg-${c.tagColor}-100 dark:bg-${c.tagColor}-950/60 text-${c.tagColor}-800 dark:text-${c.tagColor}-300">${c.tag}</span>
-                          </div>
-                          <p class="text-xs text-slate-500 dark:text-slate-400 mt-0.5 truncate">${c.summary}</p>
-                        </div>
-                        <span class="text-xs font-bold text-slate-400 shrink-0">${isOpen ? '▲' : '▼'}</span>
-                      </button>
+            <!-- 5 Selectable Chain Pills -->
+            <div style="display:flex;flex-wrap:wrap;gap:7px;">
+              ${DOMINO_CHAINS.map((c) => {
+                const done = state.domino[c.id].placed.length === c.steps.length;
+                return `
+                  <button
+                    type="button"
+                    class="pill-btn ${state.activeChainId === c.id ? 'active-purple' : ''}"
+                    style="min-height:36px;padding:6px 11px;font-size:11.5px;"
+                    onclick="state.activeChainId='${c.id}'; renderApp();"
+                  >${done ? '✓ ' : ''}${c.title}</button>
+                `;
+              }).join('')}
+            </div>
 
-                      ${isOpen ? `
-                        <div class="px-4 pb-4 pt-2 border-t border-slate-100 dark:border-slate-800 space-y-3">
-                          <ul class="list-disc pl-5 space-y-1.5 text-xs sm:text-sm text-slate-700 dark:text-slate-200">
-                            ${c.bullets.map((b) => `<li>${b}</li>`).join('')}
-                          </ul>
-                          <div class="pt-2 border-t border-slate-100 dark:border-slate-800">
-                            ${renderSrsBar(c.id)}
-                          </div>
-                        </div>
-                      ` : ''}
-                    </article>
-                  `;
-                }).join('')}
+            <!-- Numbered Target Slots -->
+            <div class="stack-sm">
+              <div class="flex-between">
+                <span class="field-label" style="margin:0;">${chain.title}</span>
+                <span class="badge ${isComplete ? 'badge-emerald' : 'badge-purple'} mono">${ds.placed.length} / ${chain.steps.length} Steps</span>
+              </div>
+
+              ${chain.steps.map((_, i) => {
+                const filledText = ds.placed[i];
+                return `
+                  <div class="domino-slot ${filledText ? 'filled' : ''}">
+                    <span class="domino-num mono">${i + 1}</span>
+                    <span style="font-size:13.5px;font-weight:${filledText ? '700' : '600'};color:${filledText ? 'var(--text-main)' : 'var(--text-muted)'};">
+                      ${filledText ? esc(filledText) : `Tap step ${i + 1} from the tiles below...`}
+                    </span>
+                  </div>
+                `;
+              }).join('')}
+            </div>
+
+            <!-- Shuffled Step Pool or Completion Pearl -->
+            ${isComplete ? `
+              <div class="sem-box sem-emerald stack-sm">
+                <span class="sem-label">✓ Pathway Mastered!</span>
+                <p style="font-weight:700;">${esc(chain.takeaway)}</p>
+                <button type="button" class="btn-3d btn-emerald sm" style="align-self:flex-start;" onclick="resetDominoChain('${chain.id}')">Practice Again ↺</button>
               </div>
             ` : `
-              <div class="p-8 text-center rounded-3xl bg-white dark:bg-slate-900 border border-slate-200 dark:border-slate-800 text-sm text-slate-500">
-                All metabolic bone &amp; crystal cards are scheduled — none due today!
+              <div class="stack-sm">
+                <span class="field-label" style="margin:0;">Tap the Next Physiological Step (Step ${ds.placed.length + 1}):</span>
+                ${ds.pool.map((tile) => `
+                  <button
+                    type="button"
+                    class="domino-tile ${ds.wrongTileIdx === tile.idx ? 'shake' : ''}"
+                    onclick="tapDominoTile('${chain.id}', ${tile.idx})"
+                  >${esc(tile.text)}</button>
+                `).join('')}
               </div>
             `}
           </section>
@@ -1156,249 +2101,237 @@
     }
 
     // =========================================================================
-    // 7. TAB 3: SYSTEMIC & CV RED FLAGS (BMS BRIDGE)
+    // 15. RENDER TAB 3 — BMS BOTTLENECK ACTIVE RECALL (LEITNER SRS)
     // =========================================================================
-    function renderRedFlagsTab() {
-      const filters = ['All', 'Cardiovascular', 'Endocrine/GI', 'Oncology/Spine'];
-      const list = RED_FLAG_CARDS.filter((c) => {
-        if (state.dueOnly && !isCardDue(c.id)) return false;
-        return state.rfFilter === 'All' || c.cat === state.rfFilter;
+    function renderTabSrs() {
+      const now = Date.now();
+      let dueCount = 0;
+      let masteredCount = 0;
+      BMS_SRS_CARDS.forEach((c) => {
+        const rec = state.srs[c.id];
+        if (!rec || (typeof rec.box === 'number' && rec.box <= 1) || !rec.dueAt || now >= rec.dueAt) dueCount++;
+        if (rec && typeof rec.box === 'number' && rec.box >= 4) masteredCount++;
       });
 
-      return `
-        <div class="space-y-4">
-          <!-- Filter Pills -->
-          <div class="flex flex-wrap items-center justify-between gap-2">
-            <h2 class="text-base sm:text-lg font-extrabold text-slate-900 dark:text-white px-1">Systemic &amp; Cardiovascular Red Flags</h2>
-            <div class="flex flex-wrap gap-1.5">
-              ${filters.map((f) => `
-                <button
-                  type="button"
-                  onclick="state.rfFilter='${f}'; renderApp();"
-                  class="px-3 py-1.5 rounded-xl text-xs font-bold border transition ${
-                    state.rfFilter === f
-                      ? 'bg-rose-600 text-white border-rose-600 shadow-xs'
-                      : 'bg-white dark:bg-slate-900 text-slate-700 dark:text-slate-300 border-slate-200 dark:border-slate-800 hover:border-rose-400'
-                  }"
-                >${f}</button>
-              `).join('')}
-            </div>
-          </div>
+      const deck = getSrsDeck();
+      const safeIdx = state.srsIdx % deck.length;
+      const card = deck[safeIdx];
+      const rec = state.srs[card.id] || { box: 1 };
+      const boxNum = typeof rec.box === 'number' ? rec.box : 1;
 
-          ${!list.length ? `
-            <div class="p-8 text-center rounded-3xl bg-white dark:bg-slate-900 border border-slate-200 dark:border-slate-800 text-sm text-slate-500">
-              All red flag cards are scheduled — none due today!
+      return `
+        <div class="stack">
+          <!-- Due / Mastered Summary Bar -->
+          <section class="grid-3-compact">
+            <div class="stat-tile ${dueCount > 0 ? 'warn' : 'ok'}">
+              <span class="stat-lbl">Due Now</span>
+              <span class="stat-num mono">${dueCount}</span>
             </div>
-          ` : `
-            <div class="space-y-4">
-              ${list.map((c) => {
-                if (c.isAcs) return renderAcsCard(c);
-                if (c.isIbd) return renderIbdCard(c);
+            <div class="stat-tile ok">
+              <span class="stat-lbl">Mastered (4–5)</span>
+              <span class="stat-num mono">${masteredCount}</span>
+            </div>
+            <div class="stat-tile">
+              <span class="stat-lbl">BMS Deck</span>
+              <span class="stat-num mono">${BMS_SRS_CARDS.length}</span>
+            </div>
+          </section>
+
+          <!-- Confidence-Weighted Active-Recall Card -->
+          <section class="ah-card pad-card stack">
+            <div class="flex-between">
+              <div>
+                <span class="badge badge-purple mono">mchiro_srs_v4 &bull; mchiro_diag_v1</span>
+                <h2 style="font-size:17.5px;font-weight:800;margin-top:4px;">BMS Bottleneck Active Recall</h2>
+              </div>
+              <button
+                type="button"
+                class="pill-btn ${state.srsDueOnly ? 'active-purple' : ''}"
+                style="min-height:34px;padding:4px 11px;font-size:11.5px;"
+                onclick="state.srsDueOnly=!state.srsDueOnly; state.srsIdx=0; state.srsConf=null; state.srsRevealed=false; renderApp();"
+              >${state.srsDueOnly ? 'Due Only' : 'All 14 Cards'}</button>
+            </div>
+
+            <article class="ah-card-alt pad-card stack">
+              <div class="flex-between">
+                <span class="badge ${card.cat === 'Red Flag' ? 'badge-coral' : 'badge-purple'}">${card.cat}</span>
+                <span class="badge badge-amber mono">Card ${safeIdx + 1}/${deck.length} &bull; Box ${boxNum}/5</span>
+              </div>
+
+              <h3 style="font-size:18.5px;font-weight:800;line-height:1.32;">${esc(card.q)}</h3>
+
+              ${!state.srsRevealed ? `
+                <div class="stack-sm">
+                  <span class="field-label" style="margin:0;">1. Speak the mechanism / clinical values aloud, then rate confidence:</span>
+                  <div class="grid-3-compact">
+                    <button type="button" class="pill-btn ${state.srsConf === 'guess' ? 'active-coral' : ''}" onclick="state.srsConf='guess'; renderApp();">🎲 Guess</button>
+                    <button type="button" class="pill-btn ${state.srsConf === 'unsure' ? 'active-amber' : ''}" onclick="state.srsConf='unsure'; renderApp();">🤔 Unsure</button>
+                    <button type="button" class="pill-btn ${state.srsConf === 'certain' ? 'active-emerald' : ''}" onclick="state.srsConf='certain'; renderApp();">🎯 Certain</button>
+                  </div>
+                  <button type="button" class="btn-3d btn-blue btn-full" ${state.srsConf ? '' : 'disabled'} onclick="state.srsRevealed=true; renderApp();">
+                    ${state.srsConf ? 'Reveal Model Answer &rarr;' : 'Select Confidence Pill First'}
+                  </button>
+                </div>
+              ` : `
+                <div class="sem-box sem-emerald">
+                  <span class="sem-label">Model Answer</span>
+                  <p style="font-weight:600;line-height:1.5;">${esc(card.a)}</p>
+                </div>
+
+                <div class="stack-sm">
+                  <span class="field-label" style="margin:0;">2. Self-Grade Honestly (Confidence was: <strong style="color:var(--text-main);">${state.srsConf}</strong>):</span>
+                  <div class="grid-2">
+                    <button type="button" class="btn-3d btn-coral btn-full" onclick="gradeBmsSrs('${card.id}', false)">✕ Missed (Reset to Box 1)</button>
+                    <button type="button" class="btn-3d btn-emerald btn-full" onclick="gradeBmsSrs('${card.id}', true)">✓ Got It (Promote Box)</button>
+                  </div>
+                </div>
+              `}
+            </article>
+          </section>
+        </div>
+      `;
+    }
+
+    // =========================================================================
+    // 16. RENDER TAB 4 — YEAR 3 ORTHO SPECIAL TESTS & IMAGING SCAFFOLDING
+    // =========================================================================
+    function renderTabOrtho() {
+      const regionTests = state.orthoVault.filter((t) => t.region === state.orthoRegion);
+
+      return `
+        <div class="stack">
+          <!-- Part A: Systematic ABCS X-Ray, Cervical Views & IR(ME)R -->
+          <section class="ah-card pad-card stack-sm">
+            <div class="flex-between">
+              <div>
+                <span class="badge badge-blue">Radiology Fundamentals</span>
+                <h2 style="font-size:17.5px;font-weight:800;margin-top:4px;">Systematic ABCS X-Ray, Cervical Views &amp; IR(ME)R</h2>
+              </div>
+              <button type="button" class="pill-btn" style="min-height:32px;padding:4px 10px;font-size:11px;" onclick="state.checkedAbcs={}; saveJSON('mchiro_msk_abcs_v1',{}); showToast('ABCS checklist reset'); renderApp();">Reset</button>
+            </div>
+
+            <div class="stack-sm">
+              ${ABCS_SECTIONS.map((sec) => {
+                const open = !!state.openAbcs[sec.id];
+                const done = sec.items.filter((_, i) => state.checkedAbcs[`${sec.id}_${i}`]).length;
                 return `
-                  <article class="rounded-3xl bg-white dark:bg-slate-900 border-2 border-${c.color}-200 dark:border-${c.color}-900/60 p-4 sm:p-5 space-y-3">
-                    <div class="flex flex-wrap items-start justify-between gap-2">
-                      <div>
-                        <span class="text-[10px] font-extrabold uppercase text-${c.color}-600 dark:text-${c.color}-400">${c.cat}</span>
-                        <h3 class="text-base sm:text-lg font-extrabold text-slate-900 dark:text-white">${c.title}</h3>
+                  <article class="ah-card-alt" style="overflow:hidden;">
+                    <button type="button" class="acc-btn" onclick="state.openAbcs['${sec.id}']=!state.openAbcs['${sec.id}']; renderApp();">
+                      <div style="display:flex;align-items:center;gap:8px;flex-wrap:wrap;">
+                        <strong style="font-size:14px;">${sec.title}</strong>
+                        <span class="badge badge-blue">${sec.badge}</span>
                       </div>
-                      <span class="px-2.5 py-1 rounded-xl text-[11px] font-extrabold bg-${c.color}-100 dark:bg-${c.color}-950 text-${c.color}-800 dark:text-${c.color}-300">${c.urgency}</span>
-                    </div>
-                    <ul class="list-disc pl-5 space-y-1.5 text-xs sm:text-sm text-slate-700 dark:text-slate-200">
-                      ${c.points.map((pt) => `<li>${pt}</li>`).join('')}
-                    </ul>
-                    <div class="pt-2 border-t border-slate-100 dark:border-slate-800">
-                      ${renderSrsBar(c.id)}
-                    </div>
+                      <span class="mono" style="font-size:12px;font-weight:800;color:var(--text-muted);">${done}/${sec.items.length} ${open ? '▲' : '▼'}</span>
+                    </button>
+                    ${open ? `
+                      <div style="border-top:1px solid var(--border-card);padding:6px;">
+                        ${sec.items.map((txt, i) => {
+                          const k = `${sec.id}_${i}`;
+                          const chk = !!state.checkedAbcs[k];
+                          return `
+                            <label class="chk-row">
+                              <input type="checkbox" ${chk ? 'checked' : ''} onchange="state.checkedAbcs['${k}']=!state.checkedAbcs['${k}']; saveJSON('mchiro_msk_abcs_v1', state.checkedAbcs); renderApp();" />
+                              <span style="font-size:13px;${chk ? 'text-decoration:line-through;color:var(--text-muted);' : ''}">${esc(txt)}</span>
+                            </label>
+                          `;
+                        }).join('')}
+                      </div>
+                    ` : ''}
                   </article>
                 `;
               }).join('')}
             </div>
-          `}
-        </div>
-      `;
-    }
+          </section>
 
-    function renderAcsCard(c) {
-      const stages = [
-        { name: 'Stable Angina', bg: 'bg-sky-50 dark:bg-sky-950/30 border-sky-200 dark:border-sky-800', text: 'Exertional pain relieved by rest/GTN. Fixed plaque. Normal troponin.' },
-        { name: 'Unstable Angina', bg: 'bg-amber-50 dark:bg-amber-950/30 border-amber-300 dark:border-amber-800', text: 'Rest/crescendo pain. Plaque rupture + non-occlusive thrombus. Normal troponin.' },
-        { name: 'NSTEMI', bg: 'bg-orange-50 dark:bg-orange-950/35 border-orange-300 dark:border-orange-800', text: 'Partial occlusion → subendocardial ischaemia. ↑ Troponin; ST depression / T-inversion.' },
-        { name: 'STEMI (999!)', bg: 'bg-rose-600 text-white border-rose-700', text: 'Complete occlusion → transmural infarction. ↑↑ Troponin; ST elevation → 999 immediate PCI.' },
-      ];
-      return `
-        <article class="rounded-3xl bg-white dark:bg-slate-900 border-2 border-rose-200 dark:border-rose-900/60 p-4 sm:p-5 space-y-3.5">
-          <div class="flex flex-wrap items-start justify-between gap-2">
-            <div>
-              <span class="text-[10px] font-extrabold uppercase text-rose-600 dark:text-rose-400">Cardiovascular</span>
-              <h3 class="text-base sm:text-lg font-extrabold text-slate-900 dark:text-white">${c.title}</h3>
-            </div>
-            <span class="px-2.5 py-1 rounded-xl text-[11px] font-extrabold bg-rose-600 text-white">${c.urgency}</span>
-          </div>
-
-          <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-2.5">
-            ${stages.map((st) => `
-              <div class="p-3 rounded-2xl border ${st.bg} space-y-1">
-                <h4 class="text-xs font-extrabold">${st.name}</h4>
-                <p class="text-[11px] leading-snug opacity-95">${st.text}</p>
+          <!-- Part B: Editable Year 3 Orthopaedic Special Tests Vault -->
+          <section class="ah-card pad-card stack">
+            <div class="flex-between">
+              <div>
+                <span class="badge badge-emerald mono">mchiro_msk_vault_v1 &bull; Jan 2027 Ready</span>
+                <h2 style="font-size:17.5px;font-weight:800;margin-top:4px;">Year 3 Orthopaedic Special Tests Vault</h2>
               </div>
-            `).join('')}
-          </div>
-
-          <div class="p-3 rounded-xl bg-slate-50 dark:bg-slate-800/60 border border-slate-200 dark:border-slate-700 text-xs sm:text-sm text-slate-700 dark:text-slate-200">
-            <strong>Endothelial Dysfunction Mechanism:</strong> Reduced Nitric Oxide (↓ NO) bioavailability impairs vasodilation and promotes inflammation, lipid oxidation, and vulnerable atherosclerotic plaque formation.
-          </div>
-
-          <div class="pt-2 border-t border-slate-100 dark:border-slate-800">
-            ${renderSrsBar(c.id)}
-          </div>
-        </article>
-      `;
-    }
-
-    function renderIbdCard(c) {
-      return `
-        <article class="rounded-3xl bg-white dark:bg-slate-900 border-2 border-indigo-200 dark:border-indigo-900/60 p-4 sm:p-5 space-y-3.5">
-          <div class="flex flex-wrap items-start justify-between gap-2">
-            <div>
-              <span class="text-[10px] font-extrabold uppercase text-indigo-600 dark:text-indigo-400">Endocrine / GI Differential</span>
-              <h3 class="text-base sm:text-lg font-extrabold text-slate-900 dark:text-white">${c.title}</h3>
+              <button type="button" class="btn-3d btn-blue sm" onclick="state.showAddOrtho=!state.showAddOrtho; renderApp();">
+                ${state.showAddOrtho ? 'Close Form' : '+ Add Test / Imaging Pearl'}
+              </button>
             </div>
-            <span class="px-2.5 py-1 rounded-xl text-[11px] font-extrabold bg-indigo-100 dark:bg-indigo-950 text-indigo-800 dark:text-indigo-300">${c.urgency}</span>
-          </div>
 
-          <div class="grid grid-cols-1 sm:grid-cols-2 gap-3 text-xs sm:text-sm">
-            <div class="p-3.5 rounded-2xl bg-teal-50/60 dark:bg-teal-950/25 border border-teal-200 dark:border-teal-800/70 space-y-2">
-              <h4 class="font-extrabold text-teal-800 dark:text-teal-300">Crohn's Disease</h4>
-              <div class="flex flex-wrap gap-1.5 text-[11px] font-bold">
-                <span class="px-2 py-1 rounded-lg bg-white dark:bg-slate-900 border border-teal-200 dark:border-teal-800">Mouth to Anus</span>
-                <span class="px-2 py-1 rounded-lg bg-white dark:bg-slate-900 border border-teal-200 dark:border-teal-800">Skip Lesions</span>
-                <span class="px-2 py-1 rounded-lg bg-white dark:bg-slate-900 border border-teal-200 dark:border-teal-800">Transmural</span>
-                <span class="px-2 py-1 rounded-lg bg-white dark:bg-slate-900 border border-teal-200 dark:border-teal-800">Non-caseating Granulomas</span>
-                <span class="px-2 py-1 rounded-lg bg-white dark:bg-slate-900 border border-teal-200 dark:border-teal-800">Fistulae &amp; Strictures</span>
-              </div>
-            </div>
-            <div class="p-3.5 rounded-2xl bg-indigo-50/60 dark:bg-indigo-950/25 border border-indigo-200 dark:border-indigo-800/70 space-y-2">
-              <h4 class="font-extrabold text-indigo-800 dark:text-indigo-300">Ulcerative Colitis (UC)</h4>
-              <div class="flex flex-wrap gap-1.5 text-[11px] font-bold">
-                <span class="px-2 py-1 rounded-lg bg-white dark:bg-slate-900 border border-indigo-200 dark:border-indigo-800">Colon &amp; Rectum Only</span>
-                <span class="px-2 py-1 rounded-lg bg-white dark:bg-slate-900 border border-indigo-200 dark:border-indigo-800">Continuous from Rectum</span>
-                <span class="px-2 py-1 rounded-lg bg-white dark:bg-slate-900 border border-indigo-200 dark:border-indigo-800">Mucosal / Submucosal</span>
-                <span class="px-2 py-1 rounded-lg bg-white dark:bg-slate-900 border border-indigo-200 dark:border-indigo-800">Bloody Diarrhoea</span>
-                <span class="px-2 py-1 rounded-lg bg-white dark:bg-slate-900 border border-indigo-200 dark:border-indigo-800">Toxic Megacolon Risk</span>
-              </div>
-            </div>
-          </div>
-
-          <div class="pt-2 border-t border-slate-100 dark:border-slate-800">
-            ${renderSrsBar(c.id)}
-          </div>
-        </article>
-      `;
-    }
-
-    // =========================================================================
-    // 8. TAB 4: SAQ / LAQ ACTIVE-RECALL SELF-MARKING
-    // =========================================================================
-    function toggleSaqCheck(qId, idx) {
-      if (!state.saqChecks[qId]) state.saqChecks[qId] = {};
-      state.saqChecks[qId][idx] = !state.saqChecks[qId][idx];
-      renderApp();
-    }
-
-    function renderSaqTab() {
-      const list = SAQ_LIST.filter((q) => !state.dueOnly || isCardDue(q.id));
-
-      if (!list.length) {
-        return `
-          <div class="p-8 text-center rounded-3xl bg-white dark:bg-slate-900 border border-slate-200 dark:border-slate-800 text-sm text-slate-500">
-            All 6 SAQ/LAQ questions are scheduled — none due today!
-          </div>
-        `;
-      }
-
-      return `
-        <div class="max-w-3xl mx-auto space-y-5">
-          <div class="px-1">
-            <h2 class="text-lg font-extrabold text-slate-900 dark:text-white">SAQ / LAQ Active-Recall Self-Marking</h2>
-            <p class="text-xs sm:text-sm text-slate-500 dark:text-slate-400">Draft bullet points or speak your answer aloud first, then reveal the point-by-point mark scheme to score yourself.</p>
-          </div>
-
-          ${list.map((q, qNum) => {
-            const revealed = !!state.saqRevealed[q.id];
-            const checks = state.saqChecks[q.id] || {};
-            const scored = q.criteria.filter((_, i) => checks[i]).length;
-            const pct = Math.round((scored / q.marks) * 100);
-            const scoreCls = pct >= 70
-              ? 'bg-emerald-100 dark:bg-emerald-950 text-emerald-800 dark:text-emerald-300'
-              : pct >= 50
-                ? 'bg-amber-100 dark:bg-amber-950 text-amber-800 dark:text-amber-300'
-                : 'bg-slate-100 dark:bg-slate-800 text-slate-700 dark:text-slate-300';
-
-            return `
-              <article class="rounded-3xl bg-white dark:bg-slate-900 border border-slate-200 dark:border-slate-800 p-4 sm:p-5 space-y-3.5">
-                <div class="flex flex-wrap items-center justify-between gap-2">
-                  <div class="flex items-center gap-2">
-                    <span class="px-2.5 py-0.5 rounded-lg text-[11px] font-extrabold bg-indigo-100 dark:bg-indigo-950 text-indigo-800 dark:text-indigo-300">Q${qNum + 1} &bull; ${q.marks} Marks</span>
-                    <h3 class="text-sm sm:text-base font-extrabold text-slate-900 dark:text-white">${q.title}</h3>
+            <!-- Add Form -->
+            ${state.showAddOrtho ? `
+              <form onsubmit="addOrthoVaultItem(event)" class="ah-card-alt pad-card stack-sm">
+                <div class="grid-2">
+                  <div>
+                    <label class="field-label" for="ov_region">Body Region</label>
+                    <select id="ov_region" class="select">
+                      ${REGIONS.map((r) => `<option value="${r}" ${state.orthoRegion === r ? 'selected' : ''}>${r}</option>`).join('')}
+                    </select>
                   </div>
-                  ${revealed ? `<span class="px-3 py-1 rounded-xl text-xs font-extrabold ${scoreCls}">${scored} / ${q.marks} marks — ${pct}%</span>` : ''}
+                  <div>
+                    <label class="field-label" for="ov_name">Test / Imaging Pearl Name</label>
+                    <input id="ov_name" type="text" class="input" required placeholder="e.g. Thessaly Test (20° flexion)" />
+                  </div>
                 </div>
+                <div>
+                  <label class="field-label" for="ov_pos">Positive Sign / Target Structure</label>
+                  <input id="ov_pos" type="text" class="input" required placeholder="e.g. Joint-line pain or catching (meniscal tear)" />
+                </div>
+                <div>
+                  <label class="field-label" for="ov_note">Clinical Note / Sensitivity &amp; Specificity</label>
+                  <textarea id="ov_note" rows="2" class="textarea" placeholder="Handbook notes, examiner cues, or red-flag precautions..."></textarea>
+                </div>
+                <div class="grid-2">
+                  <button type="button" class="btn-3d btn-neutral" onclick="state.showAddOrtho=false; renderApp();">Cancel</button>
+                  <button type="submit" class="btn-3d btn-emerald">Save to Vault</button>
+                </div>
+              </form>
+            ` : ''}
 
-                <p class="text-xs sm:text-sm font-semibold text-slate-800 dark:text-slate-200 leading-relaxed">${q.prompt}</p>
-
-                <textarea
-                  rows="3"
-                  placeholder="Jot key points or say aloud before revealing..."
-                  oninput="state.saqDrafts['${q.id}']=this.value"
-                  class="w-full p-3 rounded-2xl bg-slate-50 dark:bg-slate-800/70 border border-slate-200 dark:border-slate-700 text-xs sm:text-sm text-slate-900 dark:text-white focus:outline-none focus:ring-2 focus:ring-teal-500"
-                >${state.saqDrafts[q.id] || ''}</textarea>
-
-                ${!revealed ? `
+            <!-- 5 Region Filter Pills -->
+            <div style="display:flex;flex-wrap:wrap;gap:7px;">
+              ${REGIONS.map((r) => {
+                const cnt = state.orthoVault.filter((x) => x.region === r).length;
+                return `
                   <button
                     type="button"
-                    onclick="state.saqRevealed['${q.id}']=true; renderApp();"
-                    class="w-full py-3 rounded-2xl bg-teal-600 hover:bg-teal-700 text-white text-xs sm:text-sm font-extrabold transition shadow-xs"
-                  >Reveal Mark Scheme (${q.marks} Criteria)</button>
-                ` : `
-                  <div class="space-y-2.5 pt-1">
-                    <div class="flex items-center justify-between">
-                      <span class="text-[11px] font-extrabold uppercase tracking-wider text-teal-600 dark:text-teal-400">Tick Each 1-Mark Point You Covered:</span>
-                      <button type="button" onclick="state.saqRevealed['${q.id}']=false; renderApp();" class="text-xs font-bold text-slate-400 underline">Hide</button>
-                    </div>
-                    <div class="rounded-2xl border border-slate-200 dark:border-slate-800 divide-y divide-slate-100 dark:divide-slate-800">
-                      ${q.criteria.map((pt, i) => `
-                        <label class="flex items-start gap-3 p-3 cursor-pointer hover:bg-slate-50 dark:hover:bg-slate-800/40">
-                          <input
-                            type="checkbox"
-                            ${checks[i] ? 'checked' : ''}
-                            onchange="toggleSaqCheck('${q.id}', ${i})"
-                            class="mt-0.5 w-4 h-4 accent-emerald-600 rounded shrink-0"
-                          />
-                          <span class="text-xs sm:text-sm ${checks[i] ? 'text-emerald-800 dark:text-emerald-300 font-semibold' : 'text-slate-700 dark:text-slate-200'}">
-                            <strong class="text-slate-400 mr-1">[1m]</strong>${pt}
-                          </span>
-                        </label>
-                      `).join('')}
-                    </div>
+                    class="pill-btn ${state.orthoRegion === r ? 'active-blue' : ''}"
+                    style="min-height:36px;padding:6px 12px;font-size:12px;"
+                    onclick="state.orthoRegion='${r}'; renderApp();"
+                  >${r} (${cnt})</button>
+                `;
+              }).join('')}
+            </div>
 
-                    <div class="pt-2 border-t border-slate-100 dark:border-slate-800 flex flex-wrap items-center justify-between gap-2">
-                      <span class="text-xs font-bold text-slate-500">Schedule next review:</span>
-                      ${renderSrsBar(q.id)}
+            <!-- Region Cards List -->
+            <div class="stack-sm">
+              ${regionTests.length ? regionTests.map((t) => `
+                <article class="ah-card-alt pad-card stack-sm" style="border-left:4px solid var(--blue);">
+                  <div class="flex-between">
+                    <div style="display:flex;align-items:center;gap:7px;flex-wrap:wrap;">
+                      <h3 style="font-size:15px;font-weight:800;">${esc(t.name)}</h3>
+                      ${t.isTemplate ? `<span class="badge badge-amber">Template</span>` : `<span class="badge badge-emerald">Custom</span>`}
                     </div>
+                    <button type="button" class="icon-del" aria-label="Delete test" onclick="deleteOrthoVaultItem('${t.id}')">&times;</button>
                   </div>
-                `}
-              </article>
-            `;
-          }).join('')}
+                  <div class="sem-box sem-blue">
+                    <span class="sem-label">Positive Sign / Structure</span>
+                    <p><strong>${esc(t.positive)}</strong></p>
+                  </div>
+                  ${t.note ? `<p style="font-size:12.5px;color:var(--text-muted);">${esc(t.note)}</p>` : ''}
+                </article>
+              `).join('') : `
+                <div class="ah-card-alt pad-card" style="text-align:center;">
+                  <p style="font-size:13px;font-weight:700;color:var(--text-muted);">No tests logged for ${state.orthoRegion} yet. Tap "+ Add Test / Imaging Pearl" above.</p>
+                </div>
+              `}
+            </div>
+          </section>
         </div>
       `;
     }
 
     // =========================================================================
-    // 9. INITIALISE APP
+    // 17. INITIALISE
     // =========================================================================
     initTheme();
-    updateDueHeaderUI();
     renderTabs();
     renderApp();
   </script>
