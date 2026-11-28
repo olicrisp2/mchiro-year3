@@ -1,133 +1,904 @@
 <!DOCTYPE html>
-<html lang="en" class="scroll-smooth">
+<html lang="en">
 <head>
   <meta charset="UTF-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover" />
   <title>Chiropractic Studies 3 – MChiro Year 3 Hub</title>
 
-  <!-- Google Font: Inter -->
-  <link rel="preconnect" href="https://fonts.googleapis.com" />
-  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
-  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap" rel="stylesheet" />
-
-  <!-- Tailwind CSS -->
-  <script src="https://cdn.tailwindcss.com"></script>
-  <script>
-    tailwind.config = {
-      darkMode: 'class',
-      theme: {
-        extend: {
-          fontFamily: {
-            sans: ['Inter', 'system-ui', '-apple-system', 'sans-serif'],
-          },
-        },
-      },
-    };
-  </script>
-
   <style>
-    /* Hide scrollbars cleanly on horizontal pill bars */
-    .no-scrollbar::-webkit-scrollbar { display: none; }
-    .no-scrollbar { -ms-overflow-style: none; scrollbar-width: none; }
+    /* =========================================================================
+       1. DESIGN TOKENS: APPLE HEALTH MINIMALIST × DUOLINGO TACTILE 3D
+       Zero external CDNs — pure system typography & self-contained styling.
+       ========================================================================= */
+    :root {
+      --bg-page: #F2F2F7;
+      --bg-card: #FFFFFF;
+      --bg-subtle: #EAEAF0;
+      --bg-input: #F8FAFC;
+      --bg-glass: rgba(242, 242, 247, 0.90);
+      --border-card: #E2E8F0;
+      --border-strong: #CBD5E1;
+      --text-main: #0F172A;
+      --text-muted: #475569;
+      --shadow-card: 0 2px 12px rgba(15, 23, 42, 0.05), 0 1px 2px rgba(15, 23, 42, 0.03);
 
-    /* Active-recall blur effect for Pink (Action) layer */
-    .pink-blurred {
-      filter: blur(6px);
-      opacity: 0.65;
-      user-select: none;
+      /* Semantic & 4-Colour McTimoney Protocol Key */
+      --blue: #2563EB;
+      --blue-dark: #1D4ED8;
+      --blue-soft: rgba(37, 99, 235, 0.10);
+      --blue-border: rgba(37, 99, 235, 0.30);
+
+      --red: #DC2626;
+      --red-dark: #991B1B;
+      --red-soft: rgba(220, 38, 38, 0.10);
+      --red-border: rgba(220, 38, 38, 0.32);
+
+      --emerald: #059669;
+      --emerald-dark: #047857;
+      --emerald-soft: rgba(5, 150, 105, 0.11);
+      --emerald-border: rgba(5, 150, 105, 0.32);
+
+      --pink: #DB2777;
+      --pink-dark: #9D174D;
+      --pink-soft: rgba(219, 39, 119, 0.10);
+      --pink-border: rgba(219, 39, 119, 0.32);
+
+      --amber: #D97706;
+      --amber-dark: #92400E;
+      --amber-soft: rgba(217, 119, 6, 0.12);
+      --amber-border: rgba(217, 119, 6, 0.36);
+
+      --purple: #7C3AED;
+      --purple-dark: #5B21B6;
+      --purple-soft: rgba(124, 58, 237, 0.10);
+      --purple-border: rgba(124, 58, 237, 0.30);
+    }
+
+    .dark {
+      --bg-page: #090D16;
+      --bg-card: #131B2E;
+      --bg-subtle: #1E293B;
+      --bg-input: #0F172A;
+      --bg-glass: rgba(9, 13, 22, 0.90);
+      --border-card: #26344F;
+      --border-strong: #3D5073;
+      --text-main: #F8FAFC;
+      --text-muted: #94A3B8;
+      --shadow-card: 0 4px 18px rgba(0, 0, 0, 0.46);
+
+      --blue-soft: rgba(37, 99, 235, 0.22);
+      --blue-border: rgba(96, 165, 250, 0.42);
+      --red-soft: rgba(220, 38, 38, 0.22);
+      --red-border: rgba(248, 113, 113, 0.44);
+      --emerald-soft: rgba(5, 150, 105, 0.22);
+      --emerald-border: rgba(52, 211, 153, 0.42);
+      --pink-soft: rgba(219, 39, 119, 0.22);
+      --pink-border: rgba(244, 114, 182, 0.44);
+      --amber-soft: rgba(217, 119, 6, 0.22);
+      --amber-border: rgba(251, 191, 36, 0.44);
+      --purple-soft: rgba(124, 58, 237, 0.22);
+      --purple-border: rgba(167, 139, 250, 0.44);
+    }
+
+    /* =========================================================================
+       2. BASE RESET & SYSTEM TYPOGRAPHY
+       ========================================================================= */
+    *, *::before, *::after { box-sizing: border-box; }
+    html { scroll-behavior: smooth; }
+
+    body {
+      margin: 0;
+      min-height: 100vh;
+      background-color: var(--bg-page);
+      color: var(--text-main);
+      font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif;
+      line-height: 1.48;
+      overflow-x: hidden;
+      -webkit-font-smoothing: antialiased;
+      -webkit-tap-highlight-color: transparent;
+      transition: background-color 0.2s ease, color 0.2s ease;
+    }
+
+    h1, h2, h3, h4, p { margin: 0; }
+    a { color: inherit; text-decoration: none; }
+    button, input, select, textarea { font-family: inherit; }
+
+    .mono {
+      font-family: ui-monospace, SFMono-Regular, Menlo, Monaco, Consolas, monospace;
+      letter-spacing: -0.02em;
+      font-variant-numeric: tabular-nums;
+    }
+
+    .container {
+      width: 100%;
+      max-width: 980px;
+      margin: 0 auto;
+      padding: 0 12px;
+    }
+    @media (min-width: 640px) {
+      .container { padding: 0 22px; }
+    }
+
+    .main-stack {
+      display: flex;
+      flex-direction: column;
+      gap: 16px;
+      padding-top: 16px;
+      padding-bottom: 108px;
+    }
+    @media (min-width: 769px) {
+      .main-stack { padding-bottom: 54px; }
+    }
+
+    /* =========================================================================
+       3. STICKY FROSTED-GLASS HEADER & 4-TAB SEGMENTED BAR
+       ========================================================================= */
+    .top-header {
+      position: sticky;
+      top: 0;
+      z-index: 40;
+      background: var(--bg-glass);
+      backdrop-filter: blur(18px);
+      -webkit-backdrop-filter: blur(18px);
+      border-bottom: 1px solid var(--border-card);
+    }
+
+    .header-inner {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      gap: 8px;
+      padding-top: 10px;
+      padding-bottom: 10px;
+    }
+
+    .header-left {
+      display: flex;
+      align-items: center;
+      gap: 8px;
+      min-width: 0;
+    }
+
+    .back-btn {
+      display: inline-flex;
+      align-items: center;
+      gap: 4px;
+      min-height: 36px;
+      padding: 6px 10px;
+      border-radius: 12px;
+      background: var(--bg-subtle);
+      color: var(--text-main);
+      font-size: 12.5px;
+      font-weight: 800;
+      flex-shrink: 0;
+      transition: background-color 0.14s ease;
+    }
+    .back-btn:hover { background: var(--border-strong); }
+
+    .title-wrap { min-width: 0; }
+    .page-title {
+      font-size: 15.5px;
+      font-weight: 800;
+      letter-spacing: -0.02em;
+      white-space: nowrap;
+      overflow: hidden;
+      text-overflow: ellipsis;
+    }
+    .page-sub {
+      font-size: 11px;
+      font-weight: 600;
+      color: var(--text-muted);
+      display: none;
+    }
+    @media (min-width: 560px) {
+      .page-sub { display: block; }
+    }
+
+    .header-right {
+      display: flex;
+      align-items: center;
+      gap: 6px;
+      flex-shrink: 0;
+    }
+
+    .baseline-pill {
+      display: inline-flex;
+      align-items: center;
+      gap: 4px;
+      min-height: 34px;
+      padding: 5px 9px;
+      border-radius: 11px;
+      background: var(--emerald-soft);
+      border: 1.5px solid var(--emerald-border);
+      color: var(--emerald-dark);
+      font-size: 11px;
+      font-weight: 800;
+      white-space: nowrap;
+    }
+    .dark .baseline-pill { color: #6EE7B7; }
+
+    .theme-btn {
+      width: 36px;
+      height: 36px;
+      border-radius: 12px;
+      border: 1px solid var(--border-card);
+      background: var(--bg-card);
+      color: var(--text-main);
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
       cursor: pointer;
+      transition: border-color 0.14s ease;
+    }
+    .theme-btn:hover { border-color: var(--emerald); }
+
+    .tabs-scroll {
+      padding-bottom: 10px;
+      overflow-x: auto;
+      -ms-overflow-style: none;
+      scrollbar-width: none;
+    }
+    .tabs-scroll::-webkit-scrollbar { display: none; }
+
+    .seg-track {
+      display: flex;
+      gap: 4px;
+      padding: 4px;
+      border-radius: 14px;
+      background: var(--bg-subtle);
+      border: 1px solid var(--border-card);
+      min-width: max-content;
+    }
+    @media (min-width: 680px) {
+      .seg-track {
+        display: grid;
+        grid-template-columns: repeat(4, 1fr);
+        min-width: 0;
+      }
+    }
+
+    .seg-btn {
+      border: none;
+      background: transparent;
+      color: var(--text-muted);
+      min-height: 38px;
+      padding: 7px 12px;
+      border-radius: 11px;
+      font-size: 12.5px;
+      font-weight: 800;
+      cursor: pointer;
+      white-space: nowrap;
+      transition: all 0.15s ease;
+      text-align: center;
+    }
+    .seg-btn.active {
+      background: var(--bg-card);
+      color: var(--text-main);
+      box-shadow: 0 2px 8px rgba(0, 0, 0, 0.09);
+    }
+
+    /* =========================================================================
+       4. SHARED SURFACES, BADGES, SEMANTIC BOXES & TACTILE 3D BUTTONS
+       ========================================================================= */
+    .ah-card {
+      background: var(--bg-card);
+      border: 1px solid var(--border-card);
+      border-radius: 20px;
+      box-shadow: var(--shadow-card);
+    }
+    .ah-card-alt {
+      background: var(--bg-subtle);
+      border: 1px solid var(--border-card);
+      border-radius: 14px;
+    }
+    .pad-card { padding: 15px; }
+    @media (min-width: 640px) {
+      .pad-card { padding: 20px; }
+    }
+
+    .stack { display: flex; flex-direction: column; gap: 14px; }
+    .stack-sm { display: flex; flex-direction: column; gap: 10px; }
+
+    .flex-between {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      gap: 8px;
+      flex-wrap: wrap;
+    }
+
+    .grid-2 {
+      display: grid;
+      grid-template-columns: 1fr;
+      gap: 10px;
+    }
+    @media (min-width: 640px) {
+      .grid-2 { grid-template-columns: 1fr 1fr; }
+    }
+
+    .grid-3-compact {
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap: 8px;
+    }
+
+    .grid-4 {
+      display: grid;
+      grid-template-columns: repeat(2, 1fr);
+      gap: 8px;
+    }
+    @media (min-width: 680px) {
+      .grid-4 { grid-template-columns: repeat(4, 1fr); }
+    }
+
+    /* Badges */
+    .badge {
+      display: inline-flex;
+      align-items: center;
+      gap: 4px;
+      padding: 4px 10px;
+      border-radius: 999px;
+      font-size: 11px;
+      font-weight: 800;
+      letter-spacing: 0.015em;
+      white-space: nowrap;
+    }
+    .badge-blue { background: var(--blue-soft); color: var(--blue-dark); border: 1px solid var(--blue-border); }
+    .dark .badge-blue { color: #93C5FD; }
+    .badge-red { background: var(--red-soft); color: var(--red-dark); border: 1px solid var(--red-border); }
+    .dark .badge-red { color: #FCA5A5; }
+    .badge-emerald { background: var(--emerald-soft); color: var(--emerald-dark); border: 1px solid var(--emerald-border); }
+    .dark .badge-emerald { color: #6EE7B7; }
+    .badge-pink { background: var(--pink-soft); color: var(--pink-dark); border: 1px solid var(--pink-border); }
+    .dark .badge-pink { color: #F9A8D4; }
+    .badge-amber { background: var(--amber-soft); color: var(--amber-dark); border: 1px solid var(--amber-border); }
+    .dark .badge-amber { color: #FDE68A; }
+    .badge-purple { background: var(--purple-soft); color: var(--purple-dark); border: 1px solid var(--purple-border); }
+    .dark .badge-purple { color: #DDD6FE; }
+    .badge-muted { background: var(--bg-subtle); color: var(--text-muted); border: 1px solid var(--border-card); }
+
+    /* Semantic Info Boxes */
+    .sem-box {
+      padding: 12px 14px;
+      border-radius: 14px;
+      font-size: 13.5px;
+      border: 1.5px solid transparent;
+    }
+    .sem-label {
+      display: block;
+      font-size: 10.5px;
+      font-weight: 800;
+      text-transform: uppercase;
+      letter-spacing: 0.05em;
+      margin-bottom: 4px;
+    }
+    .sem-blue { background: var(--blue-soft); border-color: var(--blue-border); }
+    .sem-blue .sem-label { color: var(--blue-dark); }
+    .dark .sem-blue .sem-label { color: #93C5FD; }
+
+    .sem-red { background: var(--red-soft); border-color: var(--red-border); }
+    .sem-red .sem-label { color: var(--red-dark); }
+    .dark .sem-red .sem-label { color: #FCA5A5; }
+
+    .sem-emerald { background: var(--emerald-soft); border-color: var(--emerald-border); }
+    .sem-emerald .sem-label { color: var(--emerald-dark); }
+    .dark .sem-emerald .sem-label { color: #6EE7B7; }
+
+    .sem-pink { background: var(--pink-soft); border-color: var(--pink-border); }
+    .sem-pink .sem-label { color: var(--pink-dark); }
+    .dark .sem-pink .sem-label { color: #F9A8D4; }
+
+    .sem-amber { background: var(--amber-soft); border-color: var(--amber-border); }
+    .sem-amber .sem-label { color: var(--amber-dark); }
+    .dark .sem-amber .sem-label { color: #FDE68A; }
+
+    .sem-purple { background: var(--purple-soft); border-color: var(--purple-border); }
+    .sem-purple .sem-label { color: var(--purple-dark); }
+    .dark .sem-purple .sem-label { color: #DDD6FE; }
+
+    /* Duolingo Tactile 3D Buttons */
+    .btn-3d {
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      gap: 7px;
+      min-height: 44px;
+      padding: 10px 15px;
+      border-radius: 15px;
+      font-size: 13.5px;
+      font-weight: 800;
+      cursor: pointer;
+      user-select: none;
+      text-align: center;
+      transition: transform 0.08s ease, border-bottom-width 0.08s ease, filter 0.14s ease, opacity 0.14s ease;
+    }
+    .btn-3d:hover:not(:disabled) { filter: brightness(1.06); }
+    .btn-3d:active:not(:disabled) {
+      transform: translateY(2px);
+      border-bottom-width: 2px !important;
+    }
+    .btn-3d:disabled { opacity: 0.42; cursor: not-allowed; }
+    .btn-3d.sm {
+      min-height: 36px;
+      padding: 6px 12px;
+      font-size: 12px;
+      border-radius: 12px;
+    }
+    .btn-full { width: 100%; }
+
+    .btn-emerald { background: var(--emerald); color: #FFFFFF; border: 2px solid var(--emerald); border-bottom: 4px solid var(--emerald-dark); }
+    .btn-blue { background: var(--blue); color: #FFFFFF; border: 2px solid var(--blue); border-bottom: 4px solid var(--blue-dark); }
+    .btn-red { background: var(--red); color: #FFFFFF; border: 2px solid var(--red); border-bottom: 4px solid var(--red-dark); }
+    .btn-amber { background: var(--amber); color: #FFFFFF; border: 2px solid var(--amber); border-bottom: 4px solid var(--amber-dark); }
+    .btn-purple { background: var(--purple); color: #FFFFFF; border: 2px solid var(--purple); border-bottom: 4px solid var(--purple-dark); }
+    .btn-neutral {
+      background: var(--bg-card);
+      color: var(--text-main);
+      border: 2px solid var(--border-card);
+      border-bottom: 4px solid var(--border-strong);
+    }
+
+    /* Tactile Filter & Confidence Pills */
+    .pill-btn {
+      min-height: 38px;
+      padding: 7px 11px;
+      border-radius: 12px;
+      border: 2px solid var(--border-card);
+      border-bottom: 3.5px solid var(--border-strong);
+      background: var(--bg-card);
+      color: var(--text-main);
+      font-size: 12px;
+      font-weight: 800;
+      cursor: pointer;
+      transition: transform 0.07s ease, border-color 0.14s ease, background-color 0.14s ease;
+      text-align: center;
+    }
+    .pill-btn:hover:not(:disabled) { border-color: var(--emerald); }
+    .pill-btn:active:not(:disabled) { transform: translateY(1.5px); border-bottom-width: 2px; }
+    .pill-btn.active-emerald { background: var(--emerald); border-color: var(--emerald); border-bottom-color: var(--emerald-dark); color: #FFFFFF; }
+    .pill-btn.active-blue { background: var(--blue); border-color: var(--blue); border-bottom-color: var(--blue-dark); color: #FFFFFF; }
+    .pill-btn.active-red { background: var(--red); border-color: var(--red); border-bottom-color: var(--red-dark); color: #FFFFFF; }
+    .pill-btn.active-amber { background: var(--amber); border-color: var(--amber); border-bottom-color: var(--amber-dark); color: #FFFFFF; }
+    .pill-btn.active-pink { background: var(--pink); border-color: var(--pink); border-bottom-color: var(--pink-dark); color: #FFFFFF; }
+
+    /* Form Controls */
+    .field-label {
+      display: block;
+      font-size: 11px;
+      font-weight: 800;
+      text-transform: uppercase;
+      letter-spacing: 0.04em;
+      color: var(--text-muted);
+      margin-bottom: 5px;
+    }
+    .input, .select, .textarea {
+      width: 100%;
+      padding: 10px 12px;
+      border-radius: 13px;
+      border: 1.5px solid var(--border-card);
+      background: var(--bg-input);
+      color: var(--text-main);
+      font-size: 13.5px;
+      transition: border-color 0.14s ease, box-shadow 0.14s ease;
+    }
+    .input, .select { min-height: 42px; }
+    .textarea { resize: vertical; line-height: 1.45; }
+    .input:focus, .select:focus, .textarea:focus {
+      outline: none;
+      border-color: var(--emerald);
+      box-shadow: 0 0 0 3px var(--emerald-soft);
+    }
+
+    /* =========================================================================
+       5. TAB-SPECIFIC COMPONENTS (INTERRUPTER, 4-COLOUR FLOW, MOCK, VAULT)
+       ========================================================================= */
+    .stat-tile {
+      padding: 12px 10px;
+      border-radius: 16px;
+      border: 1.5px solid var(--border-card);
+      background: var(--bg-card);
+      box-shadow: var(--shadow-card);
+      text-align: center;
+      display: flex;
+      flex-direction: column;
+      gap: 2px;
+    }
+    .stat-tile.ok { background: var(--emerald-soft); border-color: var(--emerald-border); }
+    .stat-tile.warn { background: var(--amber-soft); border-color: var(--amber-border); }
+    .stat-tile.risk { background: var(--red-soft); border-color: var(--red-border); }
+    .stat-num {
+      font-size: 19px;
+      font-weight: 800;
+      letter-spacing: -0.02em;
+    }
+    .stat-lbl {
+      font-size: 10px;
+      font-weight: 800;
+      color: var(--text-muted);
+      text-transform: uppercase;
+      letter-spacing: 0.03em;
+    }
+
+    /* Reading Terminology Table & Blur Cells */
+    .trap-table {
+      width: 100%;
+      border-collapse: collapse;
+      font-size: 13px;
+    }
+    .trap-table th {
+      text-align: left;
+      padding: 9px 10px;
+      font-size: 10.5px;
+      font-weight: 800;
+      text-transform: uppercase;
+      letter-spacing: 0.04em;
+      color: var(--text-muted);
+      border-bottom: 1.5px solid var(--border-card);
+    }
+    .trap-table td {
+      padding: 9px 10px;
+      border-bottom: 1px solid var(--border-card);
+      vertical-align: middle;
+    }
+    .trap-table tr:last-child td { border-bottom: none; }
+
+    .blur-cell {
+      display: inline-block;
+      padding: 3px 8px;
+      border-radius: 8px;
       transition: filter 0.18s ease, opacity 0.18s ease;
     }
-    .pink-blurred:hover {
-      opacity: 0.88;
+    .blur-cell.is-blurred {
+      filter: blur(7px);
+      opacity: 0.48;
+      cursor: pointer;
+      user-select: none;
     }
+    .blur-cell.is-blurred:hover {
+      filter: blur(3px);
+    }
+
+    /* 4-Colour McTimoney Protocol Step Card */
+    .flow-step {
+      padding: 14px;
+      border-radius: 18px;
+      background: var(--bg-card);
+      border: 1px solid var(--border-card);
+      box-shadow: var(--shadow-card);
+      display: flex;
+      flex-direction: column;
+      gap: 9px;
+    }
+    .flow-grid {
+      display: grid;
+      grid-template-columns: 1fr;
+      gap: 7px;
+    }
+    @media (min-width: 680px) {
+      .flow-grid { grid-template-columns: 1fr 1fr; }
+    }
+    .flow-cell {
+      padding: 9px 11px;
+      border-radius: 12px;
+      border-left-width: 4px;
+      border-left-style: solid;
+      font-size: 12.5px;
+      line-height: 1.42;
+    }
+    .fc-blue { background: var(--blue-soft); border-left-color: var(--blue); }
+    .fc-red { background: var(--red-soft); border-left-color: var(--red); }
+    .fc-green { background: var(--emerald-soft); border-left-color: var(--emerald); }
+    .fc-pink { background: var(--pink-soft); border-left-color: var(--pink); }
+
+    .fc-tag {
+      display: block;
+      font-size: 10px;
+      font-weight: 800;
+      text-transform: uppercase;
+      letter-spacing: 0.04em;
+      margin-bottom: 2px;
+    }
+    .fc-blue .fc-tag { color: var(--blue-dark); }
+    .dark .fc-blue .fc-tag { color: #93C5FD; }
+    .fc-red .fc-tag { color: var(--red-dark); }
+    .dark .fc-red .fc-tag { color: #FCA5A5; }
+    .fc-green .fc-tag { color: var(--emerald-dark); }
+    .dark .fc-green .fc-tag { color: #6EE7B7; }
+    .fc-pink .fc-tag { color: var(--pink-dark); }
+    .dark .fc-pink .fc-tag { color: #F9A8D4; }
+
+    .pink-hidden {
+      filter: blur(7px);
+      opacity: 0.45;
+      cursor: pointer;
+      user-select: none;
+      transition: filter 0.16s ease, opacity 0.16s ease;
+    }
+
+    /* Mock Grader Controls */
+    .pf-row {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      gap: 10px;
+      padding: 10px 12px;
+      border-radius: 13px;
+      background: var(--bg-subtle);
+      border: 1px solid var(--border-card);
+    }
+    .score-row {
+      padding: 12px 13px;
+      border-radius: 14px;
+      background: var(--bg-subtle);
+      border: 1px solid var(--border-card);
+      display: flex;
+      flex-direction: column;
+      gap: 8px;
+    }
+    .stepper-wrap {
+      display: flex;
+      align-items: center;
+      gap: 10px;
+    }
+    .stepper-btn {
+      width: 34px;
+      height: 34px;
+      border-radius: 10px;
+      border: 1.5px solid var(--border-strong);
+      background: var(--bg-card);
+      color: var(--text-main);
+      font-size: 16px;
+      font-weight: 800;
+      cursor: pointer;
+      flex-shrink: 0;
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+    }
+    .stepper-btn:hover { border-color: var(--emerald); }
+    .score-slider {
+      flex: 1;
+      accent-color: var(--emerald);
+      cursor: pointer;
+    }
+
+    .chk-row {
+      display: flex;
+      align-items: flex-start;
+      gap: 10px;
+      padding: 8px 10px;
+      border-radius: 12px;
+      cursor: pointer;
+      transition: background-color 0.12s ease;
+    }
+    .chk-row:hover { background: var(--bg-subtle); }
+    .chk-row input[type="checkbox"] {
+      width: 18px;
+      height: 18px;
+      margin-top: 2px;
+      accent-color: var(--red);
+      flex-shrink: 0;
+      cursor: pointer;
+    }
+
+    .acc-btn {
+      width: 100%;
+      padding: 14px 16px;
+      border: none;
+      background: transparent;
+      color: var(--text-main);
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      gap: 10px;
+      cursor: pointer;
+      text-align: left;
+    }
+
+    .icon-del {
+      width: 30px;
+      height: 30px;
+      border-radius: 9px;
+      border: none;
+      background: transparent;
+      color: var(--text-muted);
+      font-size: 17px;
+      font-weight: 800;
+      cursor: pointer;
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      flex-shrink: 0;
+    }
+    .icon-del:hover { background: var(--red-soft); color: var(--red); }
+
+    /* =========================================================================
+       6. FIXED MOBILE BOTTOM NAVIGATION (6 ITEMS) & TOASTS
+       ========================================================================= */
+    .mobile-nav {
+      position: fixed;
+      bottom: 0;
+      left: 0;
+      right: 0;
+      z-index: 45;
+      background: var(--bg-glass);
+      backdrop-filter: blur(18px);
+      -webkit-backdrop-filter: blur(18px);
+      border-top: 1px solid var(--border-card);
+      padding: 6px 6px calc(6px + env(safe-area-inset-bottom, 0px));
+    }
+    @media (min-width: 769px) {
+      .mobile-nav { display: none; }
+    }
+
+    .mobile-nav-grid {
+      max-width: 540px;
+      margin: 0 auto;
+      display: grid;
+      grid-template-columns: repeat(6, 1fr);
+      gap: 2px;
+    }
+
+    .mnav-link {
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+      gap: 2px;
+      padding: 6px 2px;
+      border-radius: 11px;
+      color: var(--text-muted);
+      font-size: 9.5px;
+      font-weight: 700;
+      text-align: center;
+    }
+    .mnav-link.active {
+      color: var(--emerald);
+      background: var(--emerald-soft);
+      font-weight: 800;
+    }
+
+    .toast-wrap {
+      position: fixed;
+      bottom: 88px;
+      right: 14px;
+      z-index: 80;
+      display: flex;
+      flex-direction: column;
+      gap: 8px;
+      pointer-events: none;
+    }
+    @media (min-width: 769px) {
+      .toast-wrap { bottom: 20px; right: 20px; }
+    }
+    .toast {
+      pointer-events: auto;
+      padding: 10px 15px;
+      border-radius: 14px;
+      font-size: 12.5px;
+      font-weight: 800;
+      box-shadow: 0 8px 24px rgba(0, 0, 0, 0.24);
+      background: var(--text-main);
+      color: var(--bg-card);
+      transition: opacity 0.25s ease, transform 0.25s ease;
+    }
+    .toast.emerald { background: var(--emerald); color: #FFFFFF; }
+    .toast.amber { background: var(--amber); color: #FFFFFF; }
+    .toast.red { background: var(--red); color: #FFFFFF; }
   </style>
 </head>
-<body class="bg-slate-50 text-slate-900 dark:bg-slate-950 dark:text-slate-100 font-sans antialiased transition-colors duration-200 overflow-x-hidden selection:bg-teal-200 dark:selection:bg-teal-800">
+<body>
 
-  <!-- Toast Notification Container (no alert/confirm used) -->
-  <div id="toast-container" class="fixed bottom-4 right-4 z-50 flex flex-col gap-2 pointer-events-none"></div>
+  <!-- Toast Container (No alert/confirm) -->
+  <div id="toast-wrap" class="toast-wrap" aria-live="polite"></div>
 
-  <!-- Sticky Top Header -->
-  <header class="sticky top-0 z-40 bg-white/95 dark:bg-slate-900/95 backdrop-blur border-b border-slate-200 dark:border-slate-800">
-    <div class="max-w-5xl mx-auto px-3 sm:px-4 py-2.5 flex items-center justify-between gap-2">
-      <!-- Left: Back to Hub + Title -->
-      <div class="flex items-center gap-2.5 min-w-0">
-        <a
-          href="index.html"
-          class="px-3 py-2 rounded-xl bg-slate-100 dark:bg-slate-800 hover:bg-slate-200 dark:hover:bg-slate-700 text-slate-700 dark:text-slate-200 text-xs font-extrabold transition shrink-0 flex items-center gap-1"
-          aria-label="Return to MChiro Year 3 Hub"
-        >
-          <span>&larr;</span>
-          <span>Hub</span>
-        </a>
-        <div class="min-w-0">
-          <h1 class="text-sm sm:text-base font-extrabold tracking-tight text-slate-900 dark:text-white truncate">
-            Chiropractic Studies 3
-          </h1>
-          <p class="text-[11px] font-semibold text-slate-500 dark:text-slate-400 truncate">
-            Full Body Check &bull; Practical Cues &bull; Y3 Ready
-          </p>
+  <!-- =========================================================================
+       STICKY FROSTED-GLASS HEADER & 4-TAB SEGMENTED BAR
+       ========================================================================= -->
+  <header class="top-header">
+    <div class="container">
+      <div class="header-inner">
+        <div class="header-left">
+          <a href="index.html" class="back-btn" aria-label="Back to MChiro Year 3 Hub">&larr; Hub</a>
+          <div class="title-wrap">
+            <h1 class="page-title">Chiropractic Studies 3</h1>
+            <p class="page-sub">McTimoney Full-Body &bull; 22-Mark Interrupter &bull; 40-Min Mock</p>
+          </div>
+        </div>
+
+        <div class="header-right">
+          <span class="baseline-pill mono" title="Year 2 Practical Baseline to Year 3 Target">78/100 &rarr; 85+</span>
+          <button
+            type="button"
+            id="theme-toggle-btn"
+            class="theme-btn"
+            onclick="toggleTheme()"
+            aria-label="Toggle Light or Dark Mode"
+          ></button>
         </div>
       </div>
 
-      <!-- Right: Due Counter Pill + Light/Dark Mode Toggle -->
-      <div class="flex items-center gap-2 shrink-0">
-        <button
-          type="button"
-          onclick="setActiveTab('cues')"
-          class="hidden sm:inline-flex items-center gap-1.5 px-3 py-2 rounded-xl bg-amber-50 dark:bg-amber-950/50 border border-amber-200 dark:border-amber-800/70 text-amber-800 dark:text-amber-300 text-xs font-bold transition hover:border-amber-400"
-          title="Jump to Y2 Cues due for review"
-        >
-          <span id="header-due-dot" class="w-2 h-2 rounded-full bg-amber-500"></span>
-          <span id="header-due-label">Cues Due: 0</span>
-        </button>
-
-        <button
-          type="button"
-          id="theme-toggle-btn"
-          onclick="toggleTheme()"
-          aria-label="Toggle Light or Dark Mode"
-          class="p-2.5 rounded-xl bg-slate-100 dark:bg-slate-800 text-slate-700 dark:text-amber-300 hover:bg-slate-200 dark:hover:bg-slate-700 transition"
-        ></button>
-      </div>
+      <!-- 4-Tab Segmented Navigation -->
+      <nav class="tabs-scroll" aria-label="Chiropractic Studies 3 Sections">
+        <div id="segmented-tabs" class="seg-track" role="tablist"></div>
+      </nav>
     </div>
-
-    <!-- Mobile-Friendly 4-View Tab Bar -->
-    <nav class="max-w-5xl mx-auto px-3 sm:px-4 pb-2.5 overflow-x-auto no-scrollbar" aria-label="Chiropractic Studies Views">
-      <div id="tab-bar" class="flex items-center gap-1.5 min-w-max"></div>
-    </nav>
   </header>
 
-  <!-- Main App Root -->
-  <main id="app-root" class="max-w-5xl mx-auto px-3 sm:px-4 py-5 pb-16"></main>
+  <!-- =========================================================================
+       MAIN APP ROOT
+       ========================================================================= -->
+  <main class="container main-stack">
+    <div id="app-root"></div>
+  </main>
+
+  <!-- =========================================================================
+       FIXED MOBILE BOTTOM NAVIGATION BAR (6 LINKS)
+       ========================================================================= -->
+  <nav class="mobile-nav" aria-label="Mobile Hub Navigation">
+    <div class="mobile-nav-grid">
+      <a href="index.html" class="mnav-link">
+        <span style="font-size:15px;">🏠</span>
+        <span>Home</span>
+      </a>
+      <a href="neuro.html" class="mnav-link">
+        <span style="font-size:15px;">🧠</span>
+        <span>Neuro</span>
+      </a>
+      <a href="msk.html" class="mnav-link">
+        <span style="font-size:15px;">🦴</span>
+        <span>MSK</span>
+      </a>
+      <a href="chiro.html" class="mnav-link active" aria-current="page">
+        <span style="font-size:15px;">🙌</span>
+        <span>Chiro</span>
+      </a>
+      <a href="written.html" class="mnav-link">
+        <span style="font-size:15px;">📝</span>
+        <span>Written</span>
+      </a>
+      <a href="planner.html" class="mnav-link">
+        <span style="font-size:15px;">📅</span>
+        <span>Planner</span>
+      </a>
+    </div>
+  </nav>
 
   <script>
     // =========================================================================
-    // 1. SAFE LOCALSTORAGE & THEME SYNC (key: 'mchiro_theme')
+    // 1. SAFE STORAGE, THEME SYNC ('mchiro_theme'), TELEMETRY & TOASTS
     // =========================================================================
-    function loadStore(key, fallback) {
+    const DAY_MS = 86400000;
+    const SUN_SVG = `<svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.1" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="4"/><path d="M12 2v2"/><path d="M12 20v2"/><path d="m4.93 4.93 1.41 1.41"/><path d="m17.66 17.66 1.41 1.41"/><path d="M2 12h2"/><path d="M20 12h2"/><path d="m6.34 17.66-1.41 1.41"/><path d="m19.07 4.93-1.41 1.41"/></svg>`;
+    const MOON_SVG = `<svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.1" stroke-linecap="round" stroke-linejoin="round"><path d="M12 3a6 6 0 0 0 9 9 9 9 0 1 1-9-9Z"/></svg>`;
+
+    function esc(str) {
+      return String(str == null ? '' : str)
+        .replace(/&/g, '&amp;')
+        .replace(/</g, '&lt;')
+        .replace(/>/g, '&gt;')
+        .replace(/"/g, '&quot;')
+        .replace(/'/g, '&#39;');
+    }
+
+    function loadJSON(key, fallback) {
       try {
         const raw = localStorage.getItem(key);
-        return raw ? JSON.parse(raw) : fallback;
+        if (!raw) return fallback;
+        const parsed = JSON.parse(raw);
+        return parsed !== null && parsed !== undefined ? parsed : fallback;
       } catch (e) {
         return fallback;
       }
     }
 
-    function saveStore(key, val) {
-      try {
-        localStorage.setItem(key, JSON.stringify(val));
-      } catch (e) {
-        // Ignore storage quota or private-mode restrictions safely
-      }
+    function saveJSON(key, val) {
+      try { localStorage.setItem(key, JSON.stringify(val)); } catch (e) {}
     }
 
     function initTheme() {
       let saved = null;
-      try {
-        saved = localStorage.getItem('mchiro_theme');
-      } catch (e) {}
+      try { saved = localStorage.getItem('mchiro_theme'); } catch (e) {}
       const prefersDark = window.matchMedia && window.matchMedia('(prefers-color-scheme: dark)').matches;
       const isDark = saved ? (saved === 'dark' || saved === '"dark"') : prefersDark;
       applyTheme(isDark);
@@ -135,963 +906,559 @@
 
     function applyTheme(isDark) {
       document.documentElement.classList.toggle('dark', isDark);
-      try {
-        localStorage.setItem('mchiro_theme', isDark ? 'dark' : 'light');
-      } catch (e) {}
+      try { localStorage.setItem('mchiro_theme', isDark ? 'dark' : 'light'); } catch (e) {}
       const btn = document.getElementById('theme-toggle-btn');
-      if (btn) {
-        btn.innerHTML = isDark
-          ? `<svg class="w-4 h-4" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" d="M12 3v2.25m6.364.386l-1.591 1.591M21 12h-2.25m-.386 6.364l-1.591-1.591M12 18.75V21m-4.773-4.227l-1.591 1.591M5.25 12H3m4.227-4.773L5.636 5.636M15.75 12a3.75 3.75 0 11-7.5 0 3.75 3.75 0 017.5 0z"/></svg>`
-          : `<svg class="w-4 h-4" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" d="M21.752 15.002A9.718 9.718 0 0118 15.75c-5.385 0-9.75-4.365-9.75-9.75 0-1.33.266-2.597.748-3.752A9.753 9.753 0 003 11.25C3 16.635 7.365 21 12.75 21a9.753 9.753 0 009.002-5.998z"/></svg>`;
-      }
+      if (btn) btn.innerHTML = isDark ? SUN_SVG : MOON_SVG;
     }
 
     function toggleTheme() {
       applyTheme(!document.documentElement.classList.contains('dark'));
     }
 
-    function showToast(msg, type = 'info') {
-      const container = document.getElementById('toast-container');
-      const styles = {
-        info: 'bg-slate-900 dark:bg-slate-100 text-white dark:text-slate-900',
-        success: 'bg-emerald-600 text-white',
-        warn: 'bg-amber-600 text-white',
-      };
+    function showToast(msg, tone) {
+      const wrap = document.getElementById('toast-wrap');
+      if (!wrap) return;
       const el = document.createElement('div');
-      el.className = `pointer-events-auto px-4 py-2.5 rounded-xl shadow-lg text-xs sm:text-sm font-semibold transition-all duration-300 ${styles[type] || styles.info}`;
+      el.className = 'toast' + (tone ? ' ' + tone : '');
       el.textContent = msg;
-      container.appendChild(el);
+      wrap.appendChild(el);
       setTimeout(() => {
-        el.classList.add('opacity-0', 'translate-y-2');
-        setTimeout(() => el.remove(), 300);
+        el.style.opacity = '0';
+        el.style.transform = 'translateY(8px)';
+        setTimeout(() => el.remove(), 250);
       }, 2200);
     }
 
+    // Safely read & append to mchiro_diag_v1 supporting both array and { events: [] }
+    function readDiagEvents() {
+      const d = loadJSON('mchiro_diag_v1', []);
+      if (Array.isArray(d)) return d;
+      if (d && Array.isArray(d.events)) return d.events;
+      return [];
+    }
+
+    function appendDiagEvent(evt) {
+      try {
+        const raw = loadJSON('mchiro_diag_v1', null);
+        if (raw && !Array.isArray(raw) && Array.isArray(raw.events)) {
+          raw.events.push(evt);
+          if (raw.events.length > 600) raw.events.splice(0, raw.events.length - 600);
+          saveJSON('mchiro_diag_v1', raw);
+        } else {
+          const arr = Array.isArray(raw) ? raw : [];
+          arr.push(evt);
+          if (arr.length > 600) arr.splice(0, arr.length - 600);
+          saveJSON('mchiro_diag_v1', arr);
+        }
+      } catch (e) {}
+    }
+
     // =========================================================================
-    // 2. PHASES & COMPLETE 54-STEP FULL BODY CHECK ROUTINE
+    // 2. TAB 1 DATA: 14 SPOKEN SETUP INTERRUPTER TRAPS & READING TABLE
     // =========================================================================
-    const PHASES = [
-      { id: 'all', label: 'All (54)' },
-      { id: 'p1', label: '1. Seated Start' },
-      { id: 'p2', label: '2. Side-Lying Cx' },
-      { id: 'p3', label: '3. Supine Pelvis/Legs' },
-      { id: 'p4', label: '4. Foot Mobs' },
-      { id: 'p5', label: '5. Upper Limb Mobs', phaseCue: 'Assessor Cue (Upper Limb Mobs): Watch your head and neck position during all upper limb mobilisations.' },
-      { id: 'p6', label: '6. Facials/Clav/Ant Ribs' },
-      { id: 'p7', label: '7. Prone & Massage' },
-      { id: 'p8', label: '8. Seated Finish' },
-    ];
-
-    const ROUTINE_STEPS = [
-      // Phase 1: Seated Start
+    const INTERRUPTER_TRAPS = [
       {
-        num: 1, phase: 'p1', title: 'Tuning into Patient',
-        blue: 'Footrest if required; head stool pressed to top of bench, largest square cushion on top (covered with tissue).',
-        red: 'Sat at very end of bench, back of knees touching edge, facing away from practitioner.',
-        green: 'Behind patient.',
-        pink: 'Inform patient in advance of hand placement. Hands flat on the shoulders.',
+        id: 'chiro_trap_1',
+        station: 'Atlas (R)',
+        category: 'scored',
+        lossBadge: '-2 marks • 8/10',
+        rootCause: 'psychomotor',
+        rootLabel: 'Psychomotor Habit',
+        note: 'Adjusted your elbows after hand placement so lost a little accuracy.',
+        fix: 'Set horse stance & elbow alignment BEFORE final single transfer to TTR—never re-adjust elbows after hand placement.',
+        quickCheck: 'Side-lying on Anterior Atlas shoulder, chin lifted. Horse Stance. Single transfer to TTR. Re-palpate.',
       },
       {
-        num: 2, phase: 'p1', title: 'Palpate Atlas (Seated)',
-        blue: 'Unchanged.',
-        red: 'Ask patient to raise their chin.',
-        green: 'Behind patient.',
-        pink: 'Index finger on Mastoid Process, Ring finger on Angle of Jaw, Palpation finger on Atlas. Feel for Anteriority (Px lies on this side). Ask Px to slowly turn head Left, Centre, then Right.',
+        id: 'chiro_trap_2',
+        station: 'Cervical Spine C5 (R)',
+        category: 'scored',
+        lossBadge: '-3 marks • 7/10',
+        rootCause: 'psychomotor',
+        rootLabel: 'Psychomotor Habit',
+        note: 'Need outer foot under nail hand. Needed a little crisper strike with patient on (R) side.',
+        fix: 'Very narrow fencing stance with OUTER foot directly under the nail hand; deliver a crisp Nail 2 strike especially on the Right side.',
+        quickCheck: 'Side-lying, quarter-turn headrest, chin lifted for strike. One foot under stool (very narrow fencing). Nail 2 strike.',
       },
       {
-        num: 3, phase: 'p1', title: 'Palpate Cervical Spine (Seated)',
-        blue: 'Unchanged.',
-        red: 'Chin tilted down.',
-        green: 'Side of bench, lateral to patient.',
-        pink: 'Take forehead weight into one hand (do not cover eyes/eyebrows), identify Inion. Caterpillar motion (lift palp, move index, move ring, drop palp) C2 process by process to C7.',
-        cue: { severity: 'amber', text: 'Assessor Cue: Watch patient posture — head was very anterior for Cx palpation.' },
+        id: 'chiro_trap_3',
+        station: 'Rotation Palpation & Adjustment (L)',
+        category: 'scored',
+        lossBadge: '-2 marks • 8/10',
+        rootCause: 'interference',
+        rootLabel: 'Terminology Slip',
+        note: "Said (L) 'inferior' for reading. Relax shoulders a little more for a crisper adjustment.",
+        fix: "Call out POSTERIORITY (never 'inferior'—that is Tilt!). Straight arms, sternum aligned, RELAX shoulders for a crisp 3rd rotation.",
+        quickCheck: 'Supine. Fencing stance at side of bed. Lift pelvis, fingers on PSIS, spare hand on opposite anterior pelvis: 2 small + 3rd large rotation.',
       },
       {
-        num: 4, phase: 'p1', title: 'Spinal Sweep, Iliac Crest & PSIS',
-        blue: 'Unchanged.',
-        red: 'Unchanged.',
-        green: 'Return to standing behind patient in squat position.',
-        pink: 'Butterfly hands T1 down either side of spine to sacrum. Side of index finger on Iliac Crest (Inferiority). Sweep inwards with palpation finger to locate PSIS (Superiority).',
-      },
-
-      // Phase 2: Side-Lying Cervical
-      {
-        num: 5, phase: 'p2', title: 'Move to Side-Lying',
-        blue: 'Tuck footrest under bench after moving patient.',
-        red: 'Lie on Anterior Atlas shoulder, head on large cushion, legs curled on top of each other, bench arm tucked to waist, outside arm along side.',
-        green: 'Follow behind patient; use hands to guide preferred positioning.',
-        pink: 'Check middle of bench, straight line of spine, and nose facing out.',
+        id: 'chiro_trap_4',
+        station: 'Tilt Palpation & Adjustment (L)',
+        category: 'scored',
+        lossBadge: '-2 marks • 8/10',
+        rootCause: 'psychomotor',
+        rootLabel: 'Psychomotor Habit',
+        note: 'Need to get patient to tuck chin. Need to be lower into the adjustment, sternum was superior to ischium.',
+        fix: 'Cue patient to TUCK CHIN; kneel lower beside bench so your STERNUM is level with the ischium for the ischial thrust + follow through.',
+        quickCheck: 'Side-lying (large cushion against shoulder, bottom leg straight, top leg bent & foot tucked behind knee). Kneel beside bench -> Ischial thrust + follow through.',
       },
       {
-        num: 6, phase: 'p2', title: 'Palpate Atlas (Side)',
-        blue: 'Unchanged.',
-        red: 'Ask patient to lift chin (hand signal to guide).',
-        green: 'Stand feet together facing patient’s feet, in front of their face.',
-        pink: 'Ring finger on Mastoid, Index finger on Angle of Jaw, Palpation finger on Atlas.',
+        id: 'chiro_trap_5',
+        station: 'Torsion I Palpation & Adjustment (L)',
+        category: 'scored',
+        lossBadge: '-2 marks • 8/10',
+        rootCause: 'psychomotor',
+        rootLabel: 'Psychomotor Habit',
+        note: 'Female - make sure px foot is flat on the bench. Male - bent leg was a little inferior on bench.',
+        fix: 'Female (same side): ensure px FOOT IS FLAT on bench. Male (opposite side): bring bent leg higher/across midline, not inferior. 20–40 block thrust (no follow through).',
+        quickCheck: 'Supine. Sweep Iliac Crest to ASIS for Superiority. Fencing stance. Cup knee, find biting point -> 20–40 block thrust (NO follow through).',
       },
       {
-        num: 7, phase: 'p2', title: 'Atlas Adjustment',
-        blue: 'Unchanged.',
-        red: 'Ask patient to lift chin (hand signal to guide).',
-        green: 'Horse Stance.',
-        pink: 'Single transfer to TTR. Re-palpate.',
-        cue: { severity: 'amber', text: 'Assessor Cue (8/10): Do NOT adjust elbows after hand placement — loses accuracy. Keep good adjustment speed.' },
+        id: 'chiro_trap_6',
+        station: 'Torsion II Adjustment',
+        category: 'scored',
+        lossBadge: '-2 marks • 8/10',
+        rootCause: 'psychomotor',
+        rootLabel: 'Psychomotor Habit',
+        note: 'Adjusting arm - elbow was a little high so lost squeeze movement.',
+        fix: 'Horse stance, forearm flat on bench, Nail 3 contact—keep adjusting ELBOW LOW so you raise body and drop into a true SQUEEZE movement.',
+        quickCheck: 'Supine. Horse stance at side of bed. Superior side leg on yours, cephalad hand supports opposite Ilium (fingers down). Forearm on bench, Nail 3.',
       },
       {
-        num: 8, phase: 'p2', title: 'Palpate Cervical Spine (Side)',
-        blue: 'Add a quarter turn to headrest so patient keeps contact with better neck access.',
-        red: 'Ask patient to bring chin toward chest (hand signal).',
-        green: 'Stand feet together facing top of bench, in front of their face.',
-        pink: 'Caterpillar motion feeling as before with palpation finger from C2 to C7.',
+        id: 'chiro_trap_7',
+        station: 'Spine — Palpation & Double Transfer',
+        category: 'scored',
+        lossBadge: '-4 marks • 16/20',
+        rootCause: 'psychomotor',
+        rootLabel: 'Psychomotor Habit',
+        note: 'Make sure palpating fingers are even on palpation, (L) was always slightly superior on SPs. Make sure to not come off a double transfer, roll on/off.',
+        fix: 'Check both palpating fingers are level on SPs (drop left finger slightly). During TP double transfer, ROLL on/off—never lift off contact.',
+        quickCheck: 'Prone. Fencing stance. Palpate in threes (T1-2-3 to Sacrum). One finger SP + other posterior TP -> double transfer to pronated chiro hand (TTR).',
       },
       {
-        num: 9, phase: 'p2', title: 'Cervical Strikes',
-        blue: 'Unchanged.',
-        red: 'Ask patient to lift chin (hand signal).',
-        green: 'One foot under the stool — very narrow fencing stance.',
-        pink: 'Nail 2 — strike and repeat as many times as needed.',
-        cue: { severity: 'red', text: 'Assessor Cue (7/10): Outer foot must be under nail hand; keep strike crisp especially with Px on R side.' },
-      },
-
-      // Phase 3: Supine Pelvis & Lower Limb
-      {
-        num: 10, phase: 'p3', title: 'Move to Supine',
-        blue: 'Swap large head cushion for small (if needed); taller Px may need head stool so feet stay fully on bench.',
-        red: 'Roll toward practitioner onto back (shorter Px move down so whole body is on bench).',
-        green: 'Stand behind patient so they don’t fall off.',
-        pink: 'Guide movement clearly with hand signals.',
+        id: 'chiro_trap_8',
+        station: 'Spine — (R) Lumbar Stance',
+        category: 'scored',
+        lossBadge: '-4 marks section • 16/20',
+        rootCause: 'psychomotor',
+        rootLabel: 'Psychomotor Habit',
+        note: 'Just before (R) Lumbar adjustment went into horse stance.',
+        fix: 'Stay strictly in FENCING STANCE along the side of the bench for all prone spinal palpations and lumbar adjustments—do not drift into horse stance.',
+        quickCheck: 'Prone. Maintain Fencing Stance for Prone Sweep, Palpation in Threes, Thoracic/Lumbar TTR, Sacrum, Coccyx & SIJ.',
       },
       {
-        num: 11, phase: 'p3', title: 'Leg Swing',
-        blue: 'Unchanged.',
-        red: 'Hands on abdomen.',
-        green: 'Horse squat at end of bench.',
-        pink: 'Cup ankles with palms, small tug to check body moves with you. Lift feet slightly (calves stay on bench), sweep edge-to-edge getting smaller. Check alignment from nose down.',
+        id: 'chiro_trap_9',
+        station: 'PSIS (SIJ) Adjustment',
+        category: 'scored',
+        lossBadge: '-2 marks • 8/10',
+        rootCause: 'psychomotor',
+        rootLabel: 'Psychomotor Habit',
+        note: 'Body needs to be lower & sternum more in line with the adjustment. Take more of the slack.',
+        fix: 'Drop body LOWER, align sternum directly with the line of drive from opposite shoulder, and take FULL slack before block thrust with follow through.',
+        quickCheck: 'Prone. Locate Superior PSIS. Move to opposite shoulder -> Double transfer, move nail hand to Iliac Crest, check leg motion -> Block thrust + follow through.',
       },
       {
-        num: 12, phase: 'p3', title: 'Apparent Leg Length',
-        blue: 'Unchanged.',
-        red: 'Unchanged.',
-        green: 'Horse squat at end of bench.',
-        pink: 'Place thumbs beneath Medial Malleoli; closer to practitioner = longer leg. Call it out!',
+        id: 'chiro_trap_10',
+        station: 'Posterior Ribs & 1st Rib',
+        category: 'scored',
+        lossBadge: '-2 marks • 3/5',
+        rootCause: 'psychomotor',
+        rootLabel: 'Psychomotor Habit',
+        note: 'Watch nail hand position in first rib - became v. curved before adjustment. Some of the rib palpations were a little lateral.',
+        fix: "Keep 1st rib nail hand STRAIGHT/flat (elbow to ground, palpation elbow to sky, Superman follow-through). Keep posterior rib palpations on the medial 'rugby ball' angle, not too lateral.",
+        quickCheck: '1st Rib: Kneel at head, Superiority, Superman follow-through. Post Ribs: 45° horse stance, cephalad hand along rugby ball -> single transfer straight strike.',
       },
       {
-        num: 13, phase: 'p3', title: 'Pubic Symphysis Palpation',
-        blue: 'Unchanged.',
-        red: 'Unchanged.',
-        green: 'Fencing stance beside bench.',
-        pink: 'Ask patient to locate it first with both palpation fingers, then transfer on.',
+        id: 'chiro_trap_11',
+        station: 'Shoulder Adjustments (Mobs)',
+        category: 'scored',
+        lossBadge: '-1 mark • 4/5',
+        rootCause: 'psychomotor',
+        rootLabel: 'Psychomotor Habit',
+        note: 'Need to be a little more medial for the first, more lateral for the second.',
+        fix: 'Accordion squeeze cupping medial clavicle & spine of scapula: 1st squeeze MORE MEDIAL, 2nd squeeze MORE LATERAL.',
+        quickCheck: 'Seated with palms up, foot stool at end of bench. Horse stance, elbows out -> slow accordion squeeze x2 each side.',
       },
       {
-        num: 14, phase: 'p3', title: 'Pelvic Screening (Rotation)',
-        blue: 'Unchanged.',
-        red: 'Unchanged.',
-        green: 'Fencing stance at side of bench.',
-        pink: 'Ask consent. Cup under pelvis with palms, work around pressing against surface feeling for L/R Posteriority (closer to bench).',
-        cue: { severity: 'amber', text: 'Assessor Cue: Say "posterior", NOT "inferior" for rotation reading!' },
+        id: 'chiro_trap_12',
+        station: 'Initial Sitting Assessment',
+        category: 'pf',
+        lossBadge: 'P/F Watch',
+        rootCause: 'psychomotor',
+        rootLabel: 'Psychomotor Habit',
+        note: "Patient's head v. anterior for Cx palpation.",
+        fix: 'Support forehead (not covering eyes/brows) and guide chin gently tilted down without letting the head jut anteriorly.',
+        quickCheck: 'Seated at bench end. Stand lateral to px. Support forehead, identify Inion, Caterpillar C2 to C7.',
       },
       {
-        num: 15, phase: 'p3', title: 'Posterior Pelvic Rotation Adjustment',
-        blue: 'Unchanged.',
-        red: 'Unchanged.',
-        green: 'Fencing stance at side (switch sides if needed depending on Posteriority).',
-        pink: 'Keep palp hand on, lift pelvis with other hand, slide palp hand under to PSIS, spare hand on other anterior pelvis. Straight arms, sternum in line, 2 small rotations + 3rd large adjustment. Lower & rescreen from Leg Swing.',
-        cue: { severity: 'amber', text: 'Assessor Cue (8/10): Relax shoulders slightly more for a crisper adjustment.' },
+        id: 'chiro_trap_13',
+        station: 'Upper Extremity Mobilisations',
+        category: 'pf',
+        lossBadge: 'P/F Watch',
+        rootCause: 'psychomotor',
+        rootLabel: 'Psychomotor Habit',
+        note: 'Watch your head and neck position during these mobs.',
+        fix: 'Maintain neutral cervical posture and deep fencing stance—do not crane your neck over the arm.',
+        quickCheck: 'Supine, arm relaxed. Deep/modified fencing stance: Shoulder, Elbow 90°, Radial Head, R/U Seesaw, Wrist, Carpals, Metacarpals, Fingers.',
       },
       {
-        num: 16, phase: 'p3', title: 'Pelvic Screening (Tilt)',
-        blue: 'Unchanged.',
-        red: 'Unchanged.',
-        green: 'Fencing stance at side of bench.',
-        pink: 'Edge of index fingers on Iliac Crest feeling for Inferiority (which side is lower).',
-      },
-      {
-        num: 17, phase: 'p3', title: 'Inferior Pelvic Tilt Adjustment',
-        blue: 'Large cushion right up against Px shoulder.',
-        red: 'Side-lying, adjustment side facing upward. Bottom leg completely straight, top leg bent with foot tucked behind knee. Top arm holds onto bench.',
-        green: 'Kneeling beside bench (knee closest to bench on floor).',
-        pink: 'Ischial thrust setup, hands on sitting bone — move with adjustment & finish with follow through. Leg swing & re-palpate.',
-        cue: { severity: 'amber', text: 'Assessor Cue (8/10): Get Px to tuck chin! Drop lower into adjustment — sternum must not be superior to ischium.' },
-      },
-      {
-        num: 18, phase: 'p3', title: 'Pelvic Screening (Torsion)',
-        blue: 'Switch back to small cushion.',
-        red: 'Roll patient supine again.',
-        green: 'Fencing stance at side of bench.',
-        pink: 'Sweep from Iliac Crest to ASIS with palpation finger looking for Superiority (angled more toward head).',
-      },
-      {
-        num: 19, phase: 'p3', title: 'Superior Torsion 1 Adjustment',
-        blue: 'Unchanged.',
-        red: 'Unchanged.',
-        green: 'Fencing stance at side of bench.',
-        pink: 'Females: adjust same side. Males: adjust opposite side, bring knee over midline. Cup knee, find "biting point" of femur in acetabulum. 20–40 block thrust (no follow through).',
-        cue: { severity: 'amber', text: 'Assessor Cue (8/10): Female: ensure Px foot is flat on bench. Male: don’t let bent leg sit too inferior on bench.' },
-      },
-      {
-        num: 20, phase: 'p3', title: 'Superior Torsion 2 Adjustment',
-        blue: 'Unchanged.',
-        red: 'Unchanged.',
-        green: 'Horse stance at side of bench.',
-        pink: 'Rest Px superior side leg on yours. Head-side hand on opposite Ilium for support (fingers pointing down). Forearm on bench, Nail 3 contact. Raise body then drop as you squeeze in.',
-        cue: { severity: 'amber', text: 'Assessor Cue (8/10): Keep adjusting arm elbow lower so you don’t lose the squeeze movement.' },
-      },
-      {
-        num: 21, phase: 'p3', title: 'Greater Trochanter Palpation',
-        blue: 'Unchanged.',
-        red: 'Ask patient to "windscreen wiper" their feet.',
-        green: 'Fencing stance at side of bench.',
-        pink: 'Feel for Anteriority (adjust this side). Gentle push against Trochanter should move Px foot.',
-      },
-      {
-        num: 22, phase: 'p3', title: 'Greater Trochanter Adjustment',
-        blue: 'Unchanged.',
-        red: 'Still, hands on abdomen — ask them to move toward practitioner.',
-        green: 'Feet shoulder-width apart, knees against bench. Get all the way over.',
-        pink: 'Transfer onto Nail 4, spot adjustment bringing hammer hand from sternum, strike straight down to bench. Recheck.',
-      },
-      {
-        num: 23, phase: 'p3', title: 'Fibula Head Palpation',
-        blue: 'Unchanged.',
-        red: 'Unchanged.',
-        green: 'Horse stance at end of bench.',
-        pink: 'Palpation finger on Tibial Tuberosity -> transfer to thumb -> palpation finger moves to Fibula Head looking for Anteriority (adjust this side).',
-      },
-      {
-        num: 24, phase: 'p3', title: 'Fibula Head Adjustment',
-        blue: 'Unchanged.',
-        red: 'Bent knee, foot tucked into their calf.',
-        green: 'Fencing stance on opposite side of bench.',
-        pink: 'Guide knee bend, re-palpate, double transfer with chiro hand & pronate. Tilt slightly at shoulders so hammer hand comes from above, spot from sternum, strike toward Px keeping thigh contact. Recheck.',
-      },
-
-      // Phase 4: Foot Mobilisations
-      {
-        num: 25, phase: 'p4', title: 'Peroneal Trochlea',
-        blue: 'Unchanged.',
-        red: 'Legs flat on bench.',
-        green: 'Horse squat at end of bench.',
-        pink: 'Locate Peroneal Trochlea on each foot with palpation finger, checking for prominence (this side gets more during scissors).',
-      },
-      {
-        num: 26, phase: 'p4', title: 'Heel Rotations',
-        blue: 'Unchanged.',
-        red: 'Separate patient’s legs (make intention clear & appropriate).',
-        green: 'Horse squat at end of bench.',
-        pink: 'Support Achilles Tendon with one hand, grip Calcaneus. Rotate 3x inwards, 3x outwards, distract heel. Knuckles stay in contact with bench.',
-      },
-      {
-        num: 27, phase: 'p4', title: 'Scissors',
-        blue: 'Unchanged.',
-        red: 'Unchanged.',
-        green: 'Horse squat at end of bench.',
-        pink: 'Cup underside of Medial Malleolus with both Hypothenar Eminences (Nail 3), fingers meet at Achilles. Elbows wide, pec squeeze. Move medial hand posteriorly, 2nd pec squeeze.',
-      },
-      {
-        num: 28, phase: 'p4', title: 'Foot Rotation',
-        blue: 'Unchanged.',
-        red: 'Unchanged.',
-        green: 'Kneeling at end of bench.',
-        pink: 'Hold Calcaneus in one hand; other fingers on dorsum of foot, thumb on ball. Rotate 3x in, 3x out.',
-      },
-      {
-        num: 29, phase: 'p4', title: 'Washing Machine',
-        blue: 'Unchanged.',
-        red: 'Unchanged.',
-        green: 'Kneeling at end of bench.',
-        pink: 'Link fingers on dorsum of foot, thumbs on plantar surface. Take foot to full range, rotate 3x in, 3x out.',
-      },
-      {
-        num: 30, phase: 'p4', title: 'Not a Chinese Burn',
-        blue: 'Unchanged.',
-        red: 'Unchanged.',
-        green: 'Kneeling at end of bench.',
-        pink: 'Ankle hand supports, bring other hand up to tarsals. Take foot to full range, rotate 3x in, 3x out.',
-      },
-      {
-        num: 31, phase: 'p4', title: 'Tarsal Counter Mobilisation',
-        blue: 'Unchanged.',
-        red: 'Unchanged.',
-        green: 'Kneeling at end of bench.',
-        pink: 'KitKat motion (thumbs on plantar surface) on Tarsals 1-2, 2-3, 3-4, 4-5.',
-      },
-      {
-        num: 32, phase: 'p4', title: 'Toe Flexion & Extension',
-        blue: 'Unchanged.',
-        red: 'Unchanged.',
-        green: 'Kneeling at end of bench.',
-        pink: 'Fingers stacked one hand on top of other, thumbs supporting. Flex then extend toes 3x.',
-      },
-      {
-        num: 33, phase: 'p4', title: 'Toe Distraction',
-        blue: 'Unchanged.',
-        red: 'Unchanged.',
-        green: 'Return to horse stance.',
-        pink: 'Support each joint with thumb, wiggle then distract each toe (big to little).',
-      },
-      {
-        num: 34, phase: 'p4', title: 'Foot Strokes & Repeat',
-        blue: 'Unchanged.',
-        red: 'Unchanged.',
-        green: 'Unchanged.',
-        pink: '6 strokes up foot toward leg, 7th big stroke down. Repeat on other foot. *Sanitise hands before moving on.*',
-      },
-
-      // Phase 5: Upper Limb Mobilisations
-      {
-        num: 35, phase: 'p5', title: 'Shoulder Distraction',
-        blue: 'Unchanged.',
-        red: 'One arm extended, relaxed for mobilisation.',
-        green: 'Deep fencing stance to one side of bench.',
-        pink: 'Take wrist like a handshake, stabilise shoulder with other hand, keep arm close to bench. Wiggle then distract arm.',
-        cue: { severity: 'amber', text: 'Assessor Cue (Upper Limb Mobs): Watch your head and neck position during these mobilisations.' },
-      },
-      {
-        num: 36, phase: 'p5', title: 'Elbow Distraction',
-        blue: 'Unchanged.',
-        red: 'Unchanged.',
-        green: 'Modified fencing stance to one side of bench.',
-        pink: 'Keep wrist hold, bring arm to 90°, place other hand over inner elbow (thumb to inside). Wiggle then distract elbow.',
-      },
-      {
-        num: 37, phase: 'p5', title: 'Radial Head',
-        blue: 'Unchanged.',
-        red: 'Unchanged.',
-        green: 'Deep fencing stance to one side of bench.',
-        pink: 'Keep wrist hold; on other hand place fingertips on Ulna and thumb on Radial Head. Twist wrist 3x inwards, 3x outwards.',
-      },
-      {
-        num: 38, phase: 'p5', title: 'Radius/Ulna Counter Mob (Interosseous)',
-        blue: 'Unchanged.',
-        red: 'Unchanged.',
-        green: 'Fencing stance to one side of bench.',
-        pink: 'Using both thumbs, mobilise Radius and Ulna in a seesaw motion.',
-      },
-      {
-        num: 39, phase: 'p5', title: 'Wrist Flexion & Extension',
-        blue: 'Unchanged.',
-        red: 'Unchanged.',
-        green: 'Fencing stance to one side of bench.',
-        pink: 'Pinch distal Radius (thumb on top); other hand fingers on palm, thumb on dorsum. Extend wrist up 3x, flex down 3x. Move thumb to distal Ulna and repeat.',
-      },
-      {
-        num: 40, phase: 'p5', title: 'Carpals, Metacarpals & Fingers',
-        blue: 'Unchanged.',
-        red: 'Unchanged.',
-        green: 'Fencing stance (then switch sides of bench).',
-        pink: 'Mobilise proximal then distal carpals -> KitKat metacarpals -> thumb mid-shaft metacarpal, grasp end phalanx, wiggle & distract all fingers. Repeat opposite arm.',
-      },
-
-      // Phase 6: Facials, Clavicle & Anterior Ribs
-      {
-        num: 41, phase: 'p6', title: 'Facial Palpations (Zygoma, Temporal, Frontal)',
-        blue: 'Remove small head cushion.',
-        red: 'Unchanged.',
-        green: 'Deep horse stance at top of bench.',
-        pink: 'Palpate down on both sides looking for superiority (Zygoma, then Temporal, then Frontal).',
-      },
-      {
-        num: 42, phase: 'p6', title: 'Facial Palpations (Lacrimals & Nasal)',
-        blue: 'Unchanged.',
-        red: 'Unchanged.',
-        green: 'Fencing at side (Lacrimals) -> Deep horse at side (Nasal).',
-        pink: 'Lacrimals: demo on yourself first (DO NOT use palpation finger — no cross-contamination), feel prominence/direction. Nasal: glide palpation finger across bridge for anteriority.',
-        cue: { severity: 'amber', text: 'Assessor Cue (Facials): Don’t rush your explanation of lacrimals.' },
-      },
-      {
-        num: 43, phase: 'p6', title: 'Clavicle Palpation & Adjustment',
-        blue: 'Remove small cushion -> Move head stool for adjustment.',
-        red: 'Hands on abdomen.',
-        green: 'Deep horse at top -> One knee forward on anterior/superior side.',
-        pink: 'Palpate medial 2/3 for Ant/Sup. Adjust: palm creases (by thumbs) on clavicles, fingers extended away from breast tissue, elbows relaxed, rock forward, extend without locking, block thrust inf/post — keep contact. Recheck.',
-        cue: { severity: 'amber', text: 'Assessor Cue (Clavicle): Keep it a true block thrust — avoid a slight follow-through after adjustment.' },
-      },
-      {
-        num: 44, phase: 'p6', title: 'Anterior Ribs (Comparative, Non-Comp & Adjust)',
-        blue: 'Unchanged.',
-        red: 'Hands by their sides.',
-        green: 'Fencing (Comp) -> Deep horse at 30° angle at top of bench (Non-Comp & Adjust).',
-        pink: 'Butterfly ribs 1–10 looking at Px for tenderness -> Head-side hand palpates (L=L, R=R) for anteriority -> Single transfer, pronated chiro hand, strike from sternum with Swallow Follow Through. Repeat other side.',
-      },
-
-      // Phase 7: Prone, Spine, Ribs & Massage
-      {
-        num: 45, phase: 'p7', title: 'Move to Prone',
-        blue: 'Lower head stool slightly & pull away (cover with tissue); large square cushion on floor for arms; foot cushion ready for ankles.',
-        red: 'Roll away onto front, forehead on head stool (chin gap), shoulders at bench edge, arms on floor cushion.',
-        green: 'Stand behind patient.',
-        pink: 'Use palm to check shoulder position; have patient raise then lower legs for foot cushion placement.',
-      },
-      {
-        num: 46, phase: 'p7', title: 'Prone Spinal Sweep & Palpation in Threes',
-        blue: 'Foot cushion in place.',
-        red: 'Prone.',
-        green: 'Fencing stance at side of bench.',
-        pink: '(Ask consent to undo bra if female). Butterfly sweep T1 to sacrum & post pelvis -> Butterfly palpation in threes (palp finger angled) squeezing T1-2-3, T2-3-4... to Sacrum for rotation.',
-        cue: { severity: 'red', text: 'Assessor Cue (Spine 16/20): Keep palpating fingers EVEN — L finger tended to sit slightly superior on SPs.' },
-      },
-      {
-        num: 47, phase: 'p7', title: 'Spinal, Sacral & Coccyx Adjustments',
-        blue: 'Unchanged.',
-        red: 'Unchanged.',
-        green: 'Fencing stance at side of bench.',
-        pink: 'Spine: 1 palp on SP, other on posterior TP, double transfer pronated TTR. Sacrum: posterior side, double transfer TTR. Coccyx: ant/post/lat, adjust with TTR or Post Rib.',
-        cue: { severity: 'red', text: 'Assessor Cue (Spine 16/20): Do NOT come off a double transfer — roll on/off! Keep fencing stance (don’t switch to horse stance before R lumbar adjustment).' },
-      },
-      {
-        num: 48, phase: 'p7', title: 'SIJ / PSIS Palpation & Adjustment',
-        blue: 'Unchanged.',
-        red: 'Unchanged.',
-        green: 'Fencing -> Move to Px shoulder on OPPOSITE side.',
-        pink: 'Locate PSIS superiority. Adjust from opposite side: double transfer, move nail hand up to Iliac Crest, check leg movement, block thrust with follow through.',
-        cue: { severity: 'amber', text: 'Assessor Cue (PSIS 8/10): Body LOWER & sternum more in line with adjustment; take more of the slack.' },
-      },
-      {
-        num: 49, phase: 'p7', title: '1st Rib Palpation & Adjustment',
-        blue: 'Unchanged.',
-        red: 'Can ask patient to lift & turn head for better feel.',
-        green: 'Fencing (palp) -> Kneeling at Px head (adjust).',
-        pink: 'Slide up/over Traps with palpation finger for superiority. Adjust: nail-hand elbow toward ground, palp-hand elbow to sky, chiro hand strike & "Superman" follow through to side.',
-        cue: { severity: 'red', text: 'Assessor Cue (3/5 — TOP PRIORITY): Watch nail hand position — became very curled before adjustment! Keep it crisp and flat.' },
-      },
-      {
-        num: 50, phase: 'p7', title: 'Posterior Rib Palpation & Adjustment',
-        blue: 'Unchanged.',
-        red: 'Unchanged.',
-        green: 'Horse stance at 45° angle.',
-        pink: 'Head-side hand palpates along "rugby ball shape" for prominence -> single transfer to chiro hand, pronate, strike from sternum in a straight line.',
-        cue: { severity: 'red', text: 'Assessor Cue (3/5 — TOP PRIORITY): Watch medial-lateral alignment — some rib palpations were a little too lateral.' },
-      },
-      {
-        num: 51, phase: 'p7', title: 'Final Spinal Sweep & Massage (1–5)',
-        blue: 'Unchanged.',
-        red: 'Unchanged.',
-        green: 'Fencing stance at side (keep hand on sacrum between Herring Bone & Spinal Stroke).',
-        pink: 'Final sweep T1–Sacrum/IC/PSIS. 1) 3x Heel Circles to feet; 2) 3x Scrubs (closed fist, thumb out); 3) 3x Herring Bone (constant contact); 4) 5x Spinal Strokes (4th waits on sacrum, 5th sweeps to feet); 5) 6th Spinal Stroke (both palms to feet).',
-      },
-
-      // Phase 8: Seated Finish & Recheck
-      {
-        num: 52, phase: 'p8', title: 'Return to Sitting & Shoulder Mobs',
-        blue: 'Remove foot cushion, footrest ready -> Foot stool at end of bench.',
-        red: 'Slowly onto hands & knees -> Seated, palms facing up.',
-        green: 'Follow behind -> Horse stance, elbows out.',
-        pink: 'Heel of hand cups medial clavicle & spine of scapula; slow accordion squeeze (1st medial, 2nd more lateral). Repeat other side.',
-        cue: { severity: 'red', text: 'Assessor Cue (Shoulder 4/5): Be a little more medial on the 1st squeeze, and more lateral on the 2nd.' },
-      },
-      {
-        num: 53, phase: 'p8', title: 'Occipital & Parietal Palpation',
-        blue: 'Foot stool back on side of bench.',
-        red: 'Sat at very end of bench, inside of knees touching edge, facing away.',
-        green: 'Stand behind patient.',
-        pink: 'Palpate up/down to occipital ridge bilaterally for inferiority. Place hands on top of head like a hat/pyramid for Parietal inferiority.',
-      },
-      {
-        num: 54, phase: 'p8', title: 'Rechecking',
-        blue: 'Unchanged.',
-        red: 'Unchanged.',
-        green: 'Stand behind patient.',
-        pink: 'Repeat stages 1 through 5.',
+        id: 'chiro_trap_14',
+        station: 'Facials (Lacrimals) & Clavicle',
+        category: 'pf',
+        lossBadge: 'P/F Watch',
+        rootCause: 'psychomotor',
+        rootLabel: 'Psychomotor Habit',
+        note: "Don't rush explanation of lacrimals. Clavicle: Block thrust - did a slight follow through after adjustment.",
+        fix: 'Slow down lacrimals explanation (demo on self first, NEVER use palpation finger). Clavicle = strict BLOCK THRUST keeping contact—ZERO follow through.',
+        quickCheck: 'Lacrimals: Fencing at side, self-demo no palp finger. Clavicle: Deep horse (Ant/Sup), one knee forward -> palm crease block thrust, keep contact.',
       },
     ];
 
-    // =========================================================================
-    // 3. VIEW 2 DATA: 13 YEAR 2 PRACTICAL MECHANICS CUES (SPACED REPETITION)
-    // =========================================================================
-    const Y2_CUES = [
-      // High Priority
-      { id: 'cue_1st_rib', priority: 'high', title: '1st Rib & Posterior Ribs', score: '3/5', stepRef: 'Steps 49–50', cue: 'Keep nail hand crisp and flat (avoid curling before adjustment). Keep posterior rib palpations slightly more medial along the rugby-ball curve.' },
-      { id: 'cue_cervical', priority: 'high', title: 'Cervical Spine Strikes', score: '7/10', stepRef: 'Steps 3 & 9', cue: 'Place outer foot directly under the nail hand; deliver a crisper strike especially with patient on their R side. Watch anterior head posture during seated Cx palpation.' },
-      { id: 'cue_shoulder', priority: 'high', title: 'Shoulder Mobilisations', score: '4/5', stepRef: 'Step 52', cue: 'Start slightly more MEDIAL on the 1st accordion squeeze and move further LATERAL on the 2nd squeeze.' },
-      { id: 'cue_spine', priority: 'high', title: 'Prone Spine Palpation & Double Transfer', score: '16/20', stepRef: 'Steps 46–47', cue: 'Keep palpating fingers strictly EVEN (L finger tended slightly superior on SPs). Roll on/off double transfers—never come off! Stay in fencing stance (don’t slip into horse stance before R lumbar).' },
-
-      // Refine to 9-10/10
-      { id: 'cue_atlas', priority: 'refine', title: 'Atlas Adjustment', score: '8/10', stepRef: 'Step 7', cue: 'Do NOT shift or adjust your elbows after hand placement—lock your angle first so accuracy stays sharp alongside your good speed.' },
-      { id: 'cue_rotation', priority: 'refine', title: 'Pelvic Rotation Palpation & Adjustment', score: '8/10', stepRef: 'Steps 14–15', cue: 'Call out "POSTERIOR" (never "inferior") for rotation reading. Relax shoulders slightly more for a crisper 3rd rotation adjustment.' },
-      { id: 'cue_tilt', priority: 'refine', title: 'Inferior Pelvic Tilt Adjustment', score: '8/10', stepRef: 'Step 17', cue: 'Ask patient to tuck their chin! Drop your body lower into the adjustment so your sternum is aligned with—not superior to—the ischium.' },
-      { id: 'cue_torsion1', priority: 'refine', title: 'Superior Torsion I Adjustment', score: '8/10', stepRef: 'Step 19', cue: 'Female variation: ensure patient’s foot is completely flat on the bench. Male variation: don’t let the bent leg sit too inferior on the bench.' },
-      { id: 'cue_torsion2', priority: 'refine', title: 'Superior Torsion II Adjustment', score: '8/10', stepRef: 'Step 20', cue: 'Keep your adjusting arm elbow slightly lower so you maintain full mechanical leverage for the squeeze movement.' },
-      { id: 'cue_psis', priority: 'refine', title: 'SIJ / PSIS Adjustment', score: '8/10', stepRef: 'Step 48', cue: 'Drop body lower and align sternum squarely with the line of adjustment; take up more tissue slack before the block thrust.' },
-      { id: 'cue_clavicle', priority: 'refine', title: 'Clavicle Block Thrust', score: 'P/F', stepRef: 'Step 43', cue: 'Deliver a pure block thrust and hold contact—avoid adding a slight follow-through after the adjustment.' },
-      { id: 'cue_ul_mobs', priority: 'refine', title: 'Upper Limb Mobilisations Posture', score: 'P/F', stepRef: 'Steps 35–40', cue: 'Maintain neutral practitioner head and neck posture throughout upper limb mobilisations (don’t crane forward).' },
-      { id: 'cue_facials', priority: 'refine', title: 'Facial Palpations (Lacrimals)', score: 'P/F', stepRef: 'Step 42', cue: 'Slow down and explain the lacrimal palpation clearly while demonstrating on yourself first (no palpation finger / no cross-contamination).' },
+    const READING_TABLE = [
+      { check: 'Atlas (Seated & Side-Lying)', reading: 'Anteriority', note: 'Px lies on Anterior Atlas shoulder' },
+      { check: 'Pelvic Rotation (Supine)', reading: 'Posteriority', note: '⚠️ TRAP: NEVER say Inferior!' },
+      { check: 'Pelvic Tilt / Iliac Crest', reading: 'Inferiority', note: 'Which crest sits lower' },
+      { check: 'Pelvic Torsion / ASIS', reading: 'Superiority', note: 'Angled closer to head' },
+      { check: 'PSIS / SIJ (Seated & Prone)', reading: 'Superiority', note: 'Adjust from opposite shoulder' },
+      { check: 'Greater Trochanter / Fibula Head', reading: 'Anteriority', note: 'Adjust anterior side' },
+      { check: 'Clavicle (Medial 2/3)', reading: 'Anteriority &/or Superiority', note: 'Block thrust — zero follow through' },
+      { check: 'Anterior Ribs (Non-Comp) & Nasal', reading: 'Anteriority', note: 'Swallow follow through on Ant Ribs' },
+      { check: '1st Rib / Zygoma / Temporal / Frontal', reading: 'Superiority', note: 'Straight nail hand on 1st Rib' },
+      { check: 'Occiput & Parietals (Seated)', reading: 'Inferiority', note: 'Palpate ridge / hat-pyramid' },
+      { check: 'Sacrum (Prone)', reading: 'Posteriority', note: 'Double transfer -> TTR' },
     ];
 
     // =========================================================================
-    // 4. APPLICATION STATE
+    // 3. TAB 2 DATA: COMPLETE 4-COLOUR MCTIMONEY FULL-BODY PROTOCOL (5 PHASES)
     // =========================================================================
+    const PROTOCOL_PHASES = [
+      { id: 'all', label: 'All Phases' },
+      { id: 'sitting', label: '1. Sitting' },
+      { id: 'sidelying', label: '2. Side-Lying' },
+      { id: 'supine', label: '3. Supine' },
+      { id: 'prone', label: '4. Prone' },
+      { id: 'return', label: '5. Return & Recheck' },
+    ];
+
+    const PROTOCOL_STEPS = [
+      // PHASE 1: SITTING
+      { phase: 'sitting', title: '1. Tuning into the Patient', bench: 'Footrest (if required); head stool pressed to top of bench; largest square cushion on top (covered with tissue).', px: 'Sat at very end of bench, back of knees touching edge, facing away from practitioner.', prac: 'Behind the patient.', action: 'Inform patient in advance of hand placement. Hands flat on the shoulders.', warn: null },
+      { phase: 'sitting', title: '2. Palpate the Atlas (Seated)', bench: 'Unchanged.', px: 'Ask them to raise their chin; slowly turn head Left, Centre, Right for better feel.', prac: 'Behind the patient.', action: 'Index finger on Mastoid Process, Ring finger on Angle of Jaw, Palpation finger on Atlas -> Feeling for ANTERIORITY (px will lie on this side).', warn: null },
+      { phase: 'sitting', title: '3. Palpate the Cervical Spine (Seated)', bench: 'Unchanged.', px: 'Chin tilted gently down (avoid anterior head jut).', prac: 'To the side of the bench, lateral to the patient.', action: 'Take weight of forehead into one hand (not covering eyes/eyebrows). Identify Inion. Caterpillar motion (lift palp -> move index -> move ring -> drop palp) C2 down to C7.', warn: "P/F Watch: Patient's head was very anterior for Cx palpation." },
+      { phase: 'sitting', title: '4. Spinal Sweep, Iliac Crest & PSIS', bench: 'Unchanged.', px: 'Unchanged.', prac: 'Return behind the patient in squat position.', action: 'Butterfly hands from T1 down either side of spine to sacrum. Side of index finger checks Iliac Crest (INFERIORITY). Sweep inwards to palpation finger on PSIS (SUPERIORITY).', warn: null },
+
+      // PHASE 2: SIDE-LYING
+      { phase: 'sidelying', title: '5. Move Patient into Side-Lying', bench: 'Tuck footrest under bench after moving patient.', px: 'Lying on shoulder of ANTERIOR Atlas side; head on large cushion; legs curled on top of each other; bottom arm tucked to waist; top arm resting along side.', prac: 'Follow at back of patient; use hands to guide shoulder placement.', action: 'Check px is in middle of bench, spine line straight, and nose facing straight out.', warn: null },
+      { phase: 'sidelying', title: '6. Side-Lying Atlas Palpation & Adjustment', bench: 'Unchanged.', px: 'Lift chin (use hand signal to guide).', prac: 'Palp: feet together facing px feet in front of face. Adjust: HORSE STANCE.', action: 'Ring finger Mastoid, Index Angle of Jaw, Palpation Atlas. Set elbows BEFORE hand placement -> Single transfer to TTR. Re-palpate.', warn: '-2 marks (8/10): Adjusted elbows after hand placement -> lost accuracy!' },
+      { phase: 'sidelying', title: '7. Side-Lying Cervical Palpation & Strikes', bench: 'Quarter-turn headrest so px keeps contact with better neck access.', px: 'Palp: chin to chest. Strike: lift chin (hand signals).', prac: 'Palp: feet together facing top of bench. Strike: ONE FOOT UNDER STOOL (very narrow fencing stance).', action: 'Caterpillar C2–C7. Strike: OUTER foot under nail hand, crisp Nail 2 strike as needed.', warn: '-3 marks (7/10): Outer foot under nail hand + crisper strike on Right side!' },
+
+      // PHASE 3: SUPINE
+      { phase: 'supine', title: '8. Move Patient to Supine Position', bench: 'Swap large cushion for small cushion once situated (taller px keep head on stool so feet stay on bench).', px: 'Roll toward practitioner onto back; shorter px move down fully onto bench.', prac: 'Stand behind patient so they cannot fall off.', action: 'Guide smoothly with hand signals.', warn: null },
+      { phase: 'supine', title: '9. Leg Swing & Apparent Leg Length', bench: 'Unchanged.', px: 'Hands resting on abdomen.', prac: 'Horse Squat at the end of the bench.', action: 'Cup ankles, small tug to confirm whole-body motion; raise feet barely (calves stay on bench); large sweeps getting smaller to align nose down. Thumbs beneath Medial Malleoli -> CALL OUT longer leg!', warn: null },
+      { phase: 'supine', title: '10. Pubic Symphysis Palpation', bench: 'Unchanged.', px: 'Unchanged.', prac: 'Fencing stance beside the bench.', action: 'Ask patient to locate it first with both palpation fingers, then transfer onto contact.', warn: null },
+      { phase: 'supine', title: '11. Pelvic Screening & Adjustment (Rotation)', bench: 'Unchanged.', px: 'Unchanged (gain consent to touch pelvis).', prac: 'Fencing stance at side of bed (switch sides for Posteriority).', action: 'Cup under & around pelvis for POSTERIORITY (closer to bench). Lift pelvis, slide palpation fingers to PSIS, spare hand on opposite anterior pelvis. Straight arms, sternum aligned, RELAX shoulders: 2 small + 3rd large rotation. Rescreen from Leg Swing.', warn: "-2 marks (8/10): Said 'inferior' instead of POSTERIORITY + relax shoulders!" },
+      { phase: 'supine', title: '12. Pelvic Screening & Adjustment (Tilt)', bench: 'Large cushion right up against px shoulder for adjustment.', px: 'Screen supine -> Adjust side-lying (inferior side UP, bottom leg straight, top leg bent & foot behind knee, top arm holding bench, CHIN TUCKED).', prac: 'Screen: Fencing. Adjust: KNEELING beside bench (inner knee on floor) — LOW body, sternum level with ischium.', action: 'Edge of index fingers on Iliac Crest for INFERIORITY. Ischial thrust setup on sitting bone -> move with adjustment + follow through. Leg swing & re-palpate.', warn: '-2 marks (8/10): Cue CHIN TUCK + drop sternum level with ischium!' },
+      { phase: 'supine', title: '13. Pelvic Torsion Screening & Torsion I', bench: 'Switch back to small head cushion.', px: 'Roll supine again. Female: foot FLAT on bench. Male: bent leg higher/across midline.', prac: 'Fencing stance at side of bed.', action: 'Sweep Iliac Crest to ASIS for SUPERIORITY. Female = same side; Male = opposite side across midline. Cup knee, find biting point -> 20–40 BLOCK THRUST (NO follow through).', warn: '-2 marks (8/10): Female foot flat on bench; Male bent leg not inferior!' },
+      { phase: 'supine', title: '14. Superior Torsion II Adjustment', bench: 'Unchanged.', px: 'Supine; superior-side leg resting on practitioner’s leg.', prac: 'HORSE STANCE at side of bed.', action: 'Cephalad hand supports opposite Ilium (fingers down). Forearm on bench, Nail 3 contact, KEEP ELBOW LOW -> raise body and drop into true SQUEEZE.', warn: '-2 marks (8/10): Adjusting arm elbow too high -> lost squeeze!' },
+      { phase: 'supine', title: '15. Greater Trochanter Palpation & Adjustment', bench: 'Unchanged.', px: 'Palp: windscreen-wiper feet. Adjust: still, hands on abdomen, move toward practitioner.', prac: 'Palp: Fencing. Adjust: Feet shoulder-width, knees against bench, get ALL THE WAY OVER.', action: 'Feel for ANTERIORITY (push gently to see foot move). Transfer to Nail 4, spot from sternum, strike straight down to bench. Recheck.', warn: null },
+      { phase: 'supine', title: '16. Fibula Head Palpation & Adjustment', bench: 'Unchanged.', px: 'Palp: flat. Adjust: bent knee, foot tucked into calf.', prac: 'Palp: Horse at end. Adjust: Fencing stance on OPPOSITE side of bench.', action: 'Tibial tuberosity -> thumb -> Fibula head for ANTERIORITY. Re-palpate on opposite side, double transfer chiro hand & pronate, tilt shoulders, strike from sternum toward px keeping thigh contact. Recheck.', warn: null },
+      { phase: 'supine', title: '17. Lower Extremity Mobilisations (Foot Sequence)', bench: 'Unchanged.', px: 'Legs flat & separated appropriately (state intention clearly).', prac: 'Horse Squat (Peroneal Trochlea, Heel Rot, Scissors, Toe Distraction, Strokes) & Kneeling (Foot Rot, Washing Machine, Not a Chinese Burn, Tarsal KitKat, Toe Flex/Ext).', action: '1) Peroneal Trochlea prominence -> 2) Heel Rot x3 in/out + distract (knuckles on bench) -> 3) Scissors (Nail 3 pec squeeze x2) -> 4) Foot Rot x3 -> 5) Washing Machine x3 -> 6) Not a Chinese Burn x3 -> 7) Tarsal KitKat (1-2 to 4-5) -> 8) Toe Flex/Ext x3 -> 9) Toe Distraction -> 10) 6 strokes up + 7th down. Repeat other foot & SANITISE HANDS!', warn: null },
+      { phase: 'supine', title: '18. Upper Extremity Mobilisations', bench: 'Unchanged.', px: 'One arm extended & relaxed.', prac: 'Deep / modified fencing stance at side of bench (KEEP HEAD & NECK NEUTRAL).', action: '1) Shoulder Distraction (handshake) -> 2) Elbow 90° Distraction -> 3) Radial Head (3x in/out) -> 4) Radius/Ulna Seesaw -> 5) Wrist Flex/Ext x3 (Radius & Ulna) -> 6) Carpals (prox -> distal) -> 7) Metacarpals KitKat -> 8) Finger Distraction. Repeat opposite side.', warn: 'P/F Watch: Watch your head & neck position during upper limb mobs!' },
+      { phase: 'supine', title: '19. Facial Bone Palpation (Zygoma, Temporal, Frontal, Lacrimals, Nasal)', bench: 'Remove small head cushion.', px: 'Supine.', prac: 'Zygoma/Temporal/Frontal: Deep horse at head. Lacrimals: Fencing at side. Nasal: Deep horse at side.', action: 'Zygoma, Temporal, Frontal: palpate down both sides for SUPERIORITY. Lacrimals: DEMO ON SELF FIRST (DON’T rush, NO palpation finger — no cross-contamination). Nasal: glide bridge for ANTERIORITY.', warn: "P/F Watch: Don't rush explanation of lacrimals!" },
+      { phase: 'supine', title: '20. Clavicle Palpation & Adjustment', bench: 'Remove small head cushion; move head stool for adjustment.', px: 'Hands on abdomen.', prac: 'Palp: Deep horse at top. Adjust: One knee forward on Anterior/Superior side.', action: 'Medial 2/3 for ANTERIORITY &/or SUPERIORITY. Palm crease by thumbs against clavicle, fingers extended away (no breast tissue cupping), elbows relaxed -> strict BLOCK THRUST (inf/post), KEEP CONTACT (zero follow through). Recheck.', warn: 'P/F Watch: Strict BLOCK THRUST — did a slight follow through!' },
+      { phase: 'supine', title: '21. Anterior Ribs (Comparative, Non-Comp & Adjustment)', bench: 'Unchanged.', px: 'Hands by their sides.', prac: 'Comp: Fencing. Non-Comp & Adjust: Deep horse at 30° angle at top of bench.', action: 'Comp: Butterfly ribs 1–10 watching px for tenderness. Non-Comp: cephalad hand (L hand = L side) for ANTERIORITY. Single transfer pronated chiro hand -> strike from sternum with SWALLOW FOLLOW THROUGH (avoids breast tissue). Repeat other side.', warn: null },
+
+      // PHASE 4: PRONE
+      { phase: 'prone', title: '22. Move Patient to Prone Position', bench: 'Lower head stool slightly & pull away (tissue); large cushion on floor for arms; foot cushion ready for ankles.', px: 'Roll away onto front; forehead on stool (chin space clear); shoulders at edge; arms on floor cushion; raise/lower legs for ankle cushion.', prac: 'Stand behind patient; guide shoulder placement with palm.', action: 'Confirm comfort, alignment & foot cushion placement.', warn: null },
+      { phase: 'prone', title: '23. Prone Spinal Sweep & Palpation in Threes', bench: 'Foot cushion under ankles.', px: 'Prone (ask female patient consent to undo bra).', prac: 'FENCING STANCE at side of bench (keep palpating fingers EVEN!).', action: 'Butterfly sweep T1 to sacrum + posterior pelvis check. Angled palpation fingers squeeze either side in threes: T1-2-3 -> T2-3-4 -> all the way to Sacrum for rotation.', warn: '-4 marks (16/20): Keep palpating fingers EVEN ((L) was slightly superior on SPs)!' },
+      { phase: 'prone', title: '24. Prone Spinal, Sacral & Coccyx Adjustments', bench: 'Unchanged.', px: 'Prone.', prac: 'STAY IN FENCING STANCE (do NOT drift into horse stance before R Lumbar!).', action: 'Spine: 1 finger SP + other posterior TP -> Double transfer (ROLL on/off, never lift off!) to pronated chiro hand for TTR. Sacrum: Posteriority -> double transfer TTR. Coccyx: Ant/Post/Lat -> TTR or Post Rib.', warn: '-4 marks (16/20): Roll on/off double transfer + stay in FENCING stance before (R) Lumbar!' },
+      { phase: 'prone', title: '25. SIJ / PSIS Palpation & Adjustment', bench: 'Unchanged.', px: 'Prone.', prac: 'Fencing stance; move to OPPOSITE shoulder — DROP BODY LOWER & align sternum with line of drive.', action: 'Locate SUPERIOR PSIS. Opposite shoulder -> Double transfer, move nail hand up to Iliac Crest, check leg movement, TAKE FULL SLACK -> Block thrust with follow through.', warn: '-2 marks (8/10): Body lower, sternum in line & take MORE slack!' },
+      { phase: 'prone', title: '26. 1st Rib Palpation & Adjustment', bench: 'Unchanged.', px: 'Prone (can lift & turn head for better palpation feel).', prac: 'Palp: Fencing. Adjust: KNEELING at px head.', action: 'Slide over Traps for SUPERIORITY. Adjust: KEEP NAIL HAND STRAIGHT/FLAT (elbow to ground, palpation elbow to sky) -> Chiro strike + SUPERMAN follow through to side.', warn: '-2 marks (3/5): Watch 1st rib nail hand — became very curved!' },
+      { phase: 'prone', title: '27. Posterior Ribs & Final Spinal Sweep', bench: 'Unchanged.', px: 'Prone.', prac: 'Post Ribs: Horse stance at 45° angle. Final Sweep: Fencing stance.', action: "Palpate with cephalad hand along medial 'rugby ball' shape (not too lateral) -> single transfer pronated chiro hand, straight strike from sternum. Final sweep T1 to Sacrum, Iliac Crest & PSIS.", warn: '-2 marks (3/5): Some posterior rib palpations were a little lateral!' },
+      { phase: 'prone', title: '28. Massage Sequence (1–5)', bench: 'Unchanged.', px: 'Prone.', prac: 'Fencing stance at side of bench (adjust depth to patient).', action: '1) Heel Circles x3 (inward along spine -> sacrum -> feet). 2) Scrubs x3 (closed fist, thumb out -> sweep off side). 3) Herring Bone x3 (little finger start, constant contact). 4) 5 Spinal Strokes (keep 1 hand on sacrum, 4th+5th sweep to feet). 5) 6th Double Palm Stroke to feet.', warn: null },
+
+      // PHASE 5: RETURN & RECHECK
+      { phase: 'return', title: '29. Return Patient to Sitting Position', bench: 'Remove foot cushion; footrest ready as needed.', px: 'Slowly come onto hands & knees and return to original seated position at end of bench.', prac: 'Stand behind patient and follow as they move.', action: 'Ensure safe transition and posture.', warn: null },
+      { phase: 'return', title: '30. Shoulder Mobilisations (Accordion)', bench: 'Foot stool at end of bench.', px: 'Sat with palms facing UP.', prac: 'Horse stance, elbows out.', action: 'Heel of hand cups medial clavicle & spine of scapula -> slow accordion squeeze: 1st MORE MEDIAL, 2nd MORE LATERAL. Repeat other side.', warn: '-1 mark (4/5): 1st squeeze more medial, 2nd more lateral!' },
+      { phase: 'return', title: '31. Occipital, Parietal Palpation & Recheck', bench: 'Foot stool back on side of bench.', px: 'Sat at very end of bench, inside of knees touching edge, facing away.', prac: 'Stand behind the patient.', action: 'Occiput: palpate up/down to ridge for INFERIORITY. Parietals: hands on top of head (hat/pyramid) for INFERIORITY. Recheck Stages 1–5.', warn: null },
+    ];
+
+    // =========================================================================
+    // 4. TAB 3 DATA: 40-MINUTE LIVE MOCK GRADER (CHARLEY'S OFFICIAL SHEET)
+    // =========================================================================
+    const MOCK_SEC1 = [
+      { id: 'pf1', label: 'Initial Sitting Assessment' },
+      { id: 'pf2', label: 'Femur & Fibula Head Adjustment' },
+      { id: 'pf3', label: 'Mobilisation of the Lower Extremity' },
+      { id: 'pf4', label: 'Mobilisation of the Upper Extremity' },
+      { id: 'pf5', label: 'Facials (Palpation & Lacrimals Explanation)' },
+      { id: 'pf6', label: 'Clavicle (Block Thrust)' },
+      { id: 'pf7', label: 'Anterior Ribs (Sternochondral)' },
+      { id: 'pf8', label: 'Massage (1–5)' },
+      { id: 'pf9', label: 'Cranial Palpations (Occiput & Parietal)' },
+      { id: 'pf10', label: 'Terminology, Explanations & Communication' },
+    ];
+
+    const MOCK_SEC2 = [
+      { id: 's1', label: 'Atlas', max: 10, y2: 8 },
+      { id: 's2', label: 'Cervical Spine', max: 10, y2: 7 },
+      { id: 's3', label: 'Rotation Palpation & Adjustment', max: 10, y2: 8 },
+      { id: 's4', label: 'Tilt Palpation & Adjustment', max: 10, y2: 8 },
+      { id: 's5', label: 'Torsion I Palpation & Adjustment', max: 10, y2: 8 },
+      { id: 's6', label: 'Torsion II Adjustment', max: 10, y2: 8 },
+      { id: 's7', label: 'Spine (Palp, Transfers & Adjustments)', max: 20, y2: 16 },
+      { id: 's8', label: 'PSIS (SIJ)', max: 10, y2: 8 },
+      { id: 's9', label: 'Posterior Ribs & 1st Rib', max: 5, y2: 3 },
+      { id: 's10', label: 'Shoulder Adjustments', max: 5, y2: 4 },
+    ];
+
+    const HABIT_CHECKS = [
+      'Atlas: Re-adjusted elbows after hand placement',
+      'Cervical C5 (R): Outer foot not under nail hand / soft strike',
+      "Rotation: Said 'inferior' instead of POSTERIORITY / tense shoulders",
+      'Tilt: Forgot chin tuck or sternum superior to ischium',
+      'Torsion I: Female foot not flat / Male bent leg too inferior',
+      'Torsion II: Adjusting elbow too high (lost squeeze)',
+      'Spine: Uneven palpating fingers / lifted off double transfer',
+      'Spine: Drifted into horse stance before (R) Lumbar',
+      'PSIS: Body too high / sternum misaligned / insufficient slack',
+      '1st Rib / Post Ribs / Shoulders: Curved nail hand / too lateral / medial-lateral order',
+    ];
+
+    // =========================================================================
+    // 5. TAB 4 DATA: 8 CONFIDENCE-WEIGHTED SRS CARDS & YEAR 3 VAULT DEFAULTS
+    // =========================================================================
+    const CHIRO_SRS_CARDS = [
+      { id: 'chiro_srs_1', rootCause: 'interference', tag: 'Terminology', q: 'Exact Readings: Pelvic Rotation vs. Tilt vs. Torsion vs. PSIS', a: 'Pelvic Rotation = POSTERIORITY (never inferior!). Pelvic Tilt / Iliac Crest = INFERIORITY. Pelvic Torsion / ASIS = SUPERIORITY. PSIS / SIJ = SUPERIORITY.' },
+      { id: 'chiro_srs_2', rootCause: 'psychomotor', tag: 'Thrust Rules', q: 'Strict Block Thrust (NO Follow-Through) vs. Follow-Through Adjustments', a: 'BLOCK THRUST (NO follow-through): Torsion I (20–40 block thrust) and Clavicle (keep contact after adjustment!). FOLLOW-THROUGH: Pelvic Tilt (ischial), PSIS/SIJ (block thrust + follow through), Anterior Ribs (Swallow), 1st Rib (Superman).' },
+      { id: 'chiro_srs_3', rootCause: 'psychomotor', tag: 'Pelvis', q: 'Torsion I Male vs. Female Variation & Exact Patient Positioning', a: 'FEMALE: Adjust on SAME side — ensure patient FOOT IS FLAT on the bench. MALE: Adjust on OPPOSITE side — bring bent leg higher/across midline (not inferior). Cup knee, find acetabular biting point -> 20–40 block thrust.' },
+      { id: 'chiro_srs_4', rootCause: 'psychomotor', tag: 'Spine & Ribs', q: 'Prone Spine Double Transfer & Stance Discipline', a: 'Stay strictly in FENCING STANCE for all prone spinal palpation & lumbar adjustments (never horse stance!). Keep palpating fingers level on SPs, and ROLL on/off during TP double transfer—never lift off contact.' },
+      { id: 'chiro_srs_5', rootCause: 'psychomotor', tag: '1st Rib', q: '1st Rib Setup, Nail Hand & Follow-Through Cues', a: 'Feel for SUPERIORITY over Traps. Kneel at px head. Keep nail hand STRAIGHT/FLAT (do not curl!), nail hand elbow toward ground, palpation elbow to sky -> strike with SUPERMAN follow-through to the side.' },
+      { id: 'chiro_srs_6', rootCause: 'psychomotor', tag: 'Safety & Consent', q: '4 Mandatory Consent & Hygiene Gates in the Full-Body Check', a: '1) Gain explicit consent before Pelvic Rotation & Pubic Symphysis (px locates first). 2) SANITISE HANDS after Foot Mobs before Upper Limb Mobs. 3) Lacrimals: demo on self first, NEVER use palpation finger (no cross-contamination). 4) Ask female px consent to undo bra when prone; avoid breast tissue on Clavicle & Anterior Ribs (Swallow follow-through).' },
+      { id: 'chiro_srs_7', rootCause: 'interference', tag: 'Side-Lying', q: 'Atlas Anteriority Side-Lying & Cervical Strike Stance', a: 'Patient lies on the ANTERIOR Atlas shoulder. Atlas: HORSE STANCE, set elbows BEFORE final single transfer to TTR. Cervical Strikes: Quarter-turn headrest, VERY NARROW FENCING STANCE with OUTER foot directly under nail hand, crisp Nail 2 strike.' },
+      { id: 'chiro_srs_8', rootCause: 'psychomotor', tag: 'Height & Drive', q: 'Sternum Line-of-Drive Fixes for Tilt & PSIS', a: 'Pelvic Tilt: Cue CHIN TUCK, kneel lower so sternum is level with ischium. PSIS (SIJ): Move to opposite shoulder, drop body LOWER so sternum aligns with line of drive, and take FULL slack before block thrust + follow through.' },
+    ];
+
+    const VAULT_SECTIONS = [
+      { id: 'adv_mctimoney', title: 'Advanced McTimoney & Modified Setups', badge: 'badge-emerald' },
+      { id: 'diversified', title: 'Diversified HVLA & Biomechanics Integration', badge: 'badge-blue' },
+      { id: 'contraindications', title: 'Contraindications & Red-Flag Modification Rules', badge: 'badge-red' },
+      { id: 'reasoning', title: 'Clinical Reasoning & Treatment Planning Notes', badge: 'badge-purple' },
+    ];
+
+    const DEFAULT_VAULT_NOTES = [
+      { id: 'cv_1', section: 'adv_mctimoney', title: 'Elderly / Fragile Bone Modification', body: 'Replace forceful HVLA with gentle McTimoney toggle/mobilisations; screen CKD renal osteodystrophy, osteoporosis & Paget’s before any rib or spinal thrust.', isTemplate: true },
+      { id: 'cv_2', section: 'diversified', title: 'Year 3 Diversified HVLA Slot [Jan 2027]', body: 'Ready for Year 3 Diversified contact points, line-of-drive vectors, tissue pull, and end-feel cavitation notes once handbook releases.', isTemplate: true },
+      { id: 'cv_3', section: 'contraindications', title: 'Absolute Cervical HVT Contraindications', body: 'Suspected CAD (5Ds/3Ns), RA atlantoaxial instability (ADI >3mm), acute fracture/trauma, severe hypertension (≥180/120 with target-organ symptoms), myelopathy.', isTemplate: true },
+      { id: 'cv_4', section: 'reasoning', title: 'Re-Palpation & Outcome Tracking', body: 'Always re-palpate immediately after adjustment to confirm mechanical change, and tie care plans to functional patient goals (BPS model).', isTemplate: true },
+    ];
+
+    // =========================================================================
+    // 6. APPLICATION STATE
+    // =========================================================================
+    function buildInitialSec1() {
+      const o = {};
+      MOCK_SEC1.forEach((s) => { o[s.id] = 'pass'; });
+      return o;
+    }
+    function buildInitialSec2() {
+      const o = {};
+      MOCK_SEC2.forEach((s) => { o[s.id] = s.y2; });
+      return o;
+    }
+
     const state = {
-      activeTab: 'routine', // 'routine' | 'cues' | 'practical' | 'y3'
+      activeTab: 'interrupter', // 'interrupter' | 'flow' | 'mock' | 'vault'
 
-      // View 1: Full Routine
-      layers: { blue: true, red: true, green: true, pink: true },
-      blurPink: false,
-      search: '',
-      phase: 'all',
-      expanded: { 1: true, 7: true, 49: true },
-      allExpanded: false,
-      checkedSteps: loadStore('mchiro_chiro_checked', {}),
+      // Tab 1: 22-Mark Setup Interrupter
+      trapFilter: 'all', // 'all' | 'scored' | 'pf' | 'slips'
+      trapIdx: 0,
+      slippedIds: {},
+      trapConf: null, // 'guess' | 'unsure' | 'certain'
+      trapRevealed: false,
+      spokenSecs: 15,
+      spokenRunning: false,
+      blurReadings: false,
+      revealedReadings: {},
 
-      // View 2: Y2 Cues & Leitner Spaced Repetition
-      srs: loadStore('mchiro_chiro_srs', {}),
-      cuesDueOnly: false,
+      // Tab 2: 4-Colour Full-Body Flow
+      flowPhase: 'all',
+      hidePink: false,
+      revealedPink: {},
 
-      // View 3: 40-Min Practical Simulator
-      timerDuration: 2400, // 40:00 default
-      timerRemaining: 2400,
-      timerRunning: false,
-      drillPhase: 'all',
-      drillStepNum: 49,
-      drillRevealed: false,
-      drillChecks: { blue: false, red: false, green: false, pink: false, cue: false },
-      drillPassCount: 0,
-      drillAgainCount: 0,
+      // Tab 3: 40-Min Live Mock Grader
+      mockSecs: 2400,
+      mockRunning: false,
+      sec1: buildInitialSec1(),
+      sec2: buildInitialSec2(),
+      recurredHabits: {},
+      mockHistory: loadJSON('mchiro_chiro_mocks_v1', []),
+
+      // Tab 4: Vault & Technique SRS
+      srs: loadJSON('mchiro_srs_v4', {}),
+      srsIdx: 0,
+      srsConf: null,
+      srsRevealed: false,
+      openVault: { adv_mctimoney: true, contraindications: true },
+      vaultNotes: loadJSON('mchiro_chiro_vault_v1', DEFAULT_VAULT_NOTES),
+      showAddVault: false,
     };
 
-    let timerInterval = null;
+    if (!Array.isArray(state.mockHistory)) state.mockHistory = [];
+    if (!Array.isArray(state.vaultNotes)) state.vaultNotes = DEFAULT_VAULT_NOTES.slice();
+
+    let spokenTimerId = null;
+    let mockTimerId = null;
 
     // =========================================================================
-    // 5. SPACED REPETITION ENGINE (key: 'mchiro_chiro_srs')
+    // 7. TAB 1 HANDLERS (INTERRUPTER, 15s TIMER & TELEMETRY)
     // =========================================================================
-    function isCueDue(id) {
-      const rec = state.srs[id];
-      if (!rec) return true;
-      return Date.now() >= rec.dueAt;
+    function getFilteredTraps() {
+      if (state.trapFilter === 'scored') return INTERRUPTER_TRAPS.filter((t) => t.category === 'scored');
+      if (state.trapFilter === 'pf') return INTERRUPTER_TRAPS.filter((t) => t.category === 'pf');
+      if (state.trapFilter === 'slips') {
+        const list = INTERRUPTER_TRAPS.filter((t) => state.slippedIds[t.id]);
+        return list.length ? list : INTERRUPTER_TRAPS;
+      }
+      return INTERRUPTER_TRAPS;
     }
 
-    function setCueLeitner(id, box) {
-      const DAY = 86400000;
-      const offset = box === 'again' ? 0 : box === 'shaky' ? 2 * DAY : 7 * DAY;
-      state.srs[id] = { box, dueAt: Date.now() + offset };
-      saveStore('mchiro_chiro_srs', state.srs);
-      updateDueHeader();
-      const msg = box === 'again' ? 'Queued for Today' : box === 'shaky' ? 'Scheduled in 2 Days' : 'Scheduled in 7 Days';
-      showToast(msg, box === 'solid' ? 'success' : box === 'shaky' ? 'info' : 'warn');
+    function stopSpokenTimer() {
+      if (spokenTimerId) clearInterval(spokenTimerId);
+      spokenTimerId = null;
+      state.spokenRunning = false;
+    }
+
+    function toggleSpokenTimer() {
+      if (state.spokenRunning) {
+        stopSpokenTimer();
+        renderApp();
+        return;
+      }
+      if (state.spokenSecs <= 0) state.spokenSecs = 15;
+      state.spokenRunning = true;
+      spokenTimerId = setInterval(() => {
+        if (state.spokenSecs > 0) {
+          state.spokenSecs--;
+          const el = document.getElementById('spoken-clock');
+          if (el) {
+            el.textContent = `${state.spokenSecs}s`;
+            el.style.color = state.spokenSecs <= 5 ? 'var(--red)' : 'var(--text-main)';
+          }
+        } else {
+          stopSpokenTimer();
+          showToast('15s up — rate confidence & reveal!', 'amber');
+          renderApp();
+        }
+      }, 1000);
       renderApp();
     }
 
-    function getCueStats() {
-      const total = Y2_CUES.length;
-      const due = Y2_CUES.filter((c) => isCueDue(c.id)).length;
-      const shaky = Y2_CUES.filter((c) => state.srs[c.id] && state.srs[c.id].box === 'shaky' && !isCueDue(c.id)).length;
-      const solid = Y2_CUES.filter((c) => state.srs[c.id] && state.srs[c.id].box === 'solid' && !isCueDue(c.id)).length;
-      return { total, due, shaky, solid };
-    }
-
-    function updateDueHeader() {
-      const { due } = getCueStats();
-      const lbl = document.getElementById('header-due-label');
-      const dot = document.getElementById('header-due-dot');
-      if (lbl) lbl.textContent = `Cues Due: ${due}`;
-      if (dot) dot.className = `w-2 h-2 rounded-full ${due > 0 ? 'bg-amber-500' : 'bg-emerald-500'}`;
-    }
-
-    // =========================================================================
-    // 6. TAB NAVIGATION & RENDER ROUTER
-    // =========================================================================
-    function setActiveTab(tab) {
-      state.activeTab = tab;
-      renderTabBar();
-      renderApp();
-      window.scrollTo({ top: 0, behavior: 'smooth' });
-    }
-
-    function renderTabBar() {
-      const { due } = getCueStats();
-      const tabs = [
-        { id: 'routine', label: '1. Full Routine' },
-        { id: 'cues', label: '2. Y2 Cues & Focus', badge: due > 0 ? String(due) : null },
-        { id: 'practical', label: '3. 40-Min Practical' },
-        { id: 'y3', label: '4. Y3 Slots' },
-      ];
-      document.getElementById('tab-bar').innerHTML = tabs.map((t) => {
-        const active = state.activeTab === t.id;
-        return `
-          <button
-            type="button"
-            onclick="setActiveTab('${t.id}')"
-            class="px-3.5 py-2 rounded-xl text-xs sm:text-sm font-bold transition whitespace-nowrap flex items-center gap-1.5 ${
-              active
-                ? 'bg-teal-600 text-white shadow-xs'
-                : 'bg-slate-100 dark:bg-slate-800 text-slate-700 dark:text-slate-300 hover:bg-slate-200 dark:hover:bg-slate-700'
-            }"
-          >
-            <span>${t.label}</span>
-            ${t.badge ? `<span class="px-1.5 py-0.5 rounded-md text-[10px] font-extrabold ${active ? 'bg-white/25 text-white' : 'bg-amber-100 dark:bg-amber-950 text-amber-800 dark:text-amber-300'}">${t.badge}</span>` : ''}
-          </button>
-        `;
-      }).join('');
-    }
-
-    function renderApp() {
-      const root = document.getElementById('app-root');
-      if (state.activeTab === 'routine') root.innerHTML = renderRoutineView();
-      else if (state.activeTab === 'cues') root.innerHTML = renderCuesView();
-      else if (state.activeTab === 'practical') root.innerHTML = renderPracticalView();
-      else root.innerHTML = renderY3SlotsView();
-    }
-
-    // =========================================================================
-    // 7. VIEW 1: FULL ROUTINE (54 STEPS + 4-COLOUR KEY + BLUR PINK + PROGRESS)
-    // =========================================================================
-    function toggleLayer(layer) {
-      state.layers[layer] = !state.layers[layer];
+    function resetSpokenTimer() {
+      stopSpokenTimer();
+      state.spokenSecs = 15;
       renderApp();
     }
 
-    function toggleExpandAll() {
-      state.allExpanded = !state.allExpanded;
-      ROUTINE_STEPS.forEach((s) => {
-        state.expanded[s.num] = state.allExpanded;
-      });
+    function setTrapFilter(f) {
+      if (f === 'slips' && Object.keys(state.slippedIds).length === 0) {
+        showToast('No slips queued yet — nice work!', 'emerald');
+        return;
+      }
+      stopSpokenTimer();
+      state.trapFilter = f;
+      state.trapIdx = 0;
+      state.trapConf = null;
+      state.trapRevealed = false;
+      state.spokenSecs = 15;
       renderApp();
     }
 
-    function toggleStepCheck(num) {
-      state.checkedSteps[num] = !state.checkedSteps[num];
-      saveStore('mchiro_chiro_checked', state.checkedSteps);
+    function stepTrap(delta) {
+      stopSpokenTimer();
+      const list = getFilteredTraps();
+      state.trapIdx = (state.trapIdx + delta + list.length) % list.length;
+      state.trapConf = null;
+      state.trapRevealed = false;
+      state.spokenSecs = 15;
       renderApp();
     }
 
-    function resetRoutineChecks() {
-      state.checkedSteps = {};
-      saveStore('mchiro_chiro_checked', {});
-      showToast('Routine checklist reset', 'info');
-      renderApp();
-    }
+    function gradeInterrupter(trapId, nailed) {
+      const trap = INTERRUPTER_TRAPS.find((t) => t.id === trapId);
+      if (!trap) return;
+      stopSpokenTimer();
 
-    function renderRoutineView() {
-      const checkedCount = ROUTINE_STEPS.filter((s) => state.checkedSteps[s.num]).length;
-      const pct = Math.round((checkedCount / ROUTINE_STEPS.length) * 100);
-      const q = state.search.trim().toLowerCase();
-
-      const filtered = ROUTINE_STEPS.filter((s) => {
-        const matchPhase = state.phase === 'all' || s.phase === state.phase;
-        const matchQ = !q ||
-          s.title.toLowerCase().includes(q) ||
-          s.blue.toLowerCase().includes(q) ||
-          s.red.toLowerCase().includes(q) ||
-          s.green.toLowerCase().includes(q) ||
-          s.pink.toLowerCase().includes(q) ||
-          (s.cue && s.cue.text.toLowerCase().includes(q));
-        return matchPhase && matchQ;
+      appendDiagEvent({
+        id: trap.id,
+        module: 'chiro',
+        source: 'chiro',
+        rootCause: trap.rootCause,
+        rootCauseTag: trap.rootCause,
+        confidence: state.trapConf || 'unsure',
+        correct: nailed,
+        label: trap.station,
+        ts: Date.now(),
+        timestamp: Date.now(),
       });
 
-      const activePhaseObj = PHASES.find((p) => p.id === state.phase);
+      if (nailed) {
+        delete state.slippedIds[trap.id];
+        showToast('✓ Clean setup logged!', 'emerald');
+      } else {
+        state.slippedIds[trap.id] = true;
+        if (state.trapConf === 'certain') {
+          showToast('High-Confidence Slip logged & queued for replay!', 'red');
+        } else {
+          showToast('Queued in Slips Only for Mistake Replay.', 'amber');
+        }
+      }
 
-      return `
-        <div class="space-y-4">
-          <!-- 4-Colour Key & Active Recall Controls -->
-          <div class="rounded-3xl bg-white dark:bg-slate-900 border border-slate-200 dark:border-slate-800 p-4 space-y-3">
-            <div class="flex flex-wrap items-center justify-between gap-2">
-              <span class="text-xs font-extrabold uppercase tracking-wider text-slate-400">4-Colour Key (Tap to Show / Hide Layer)</span>
-              <button
-                type="button"
-                onclick="state.blurPink=!state.blurPink; renderApp();"
-                class="px-3 py-1.5 rounded-xl text-xs font-extrabold border transition flex items-center gap-1.5 ${
-                  state.blurPink
-                    ? 'bg-pink-600 text-white border-pink-600 shadow-xs'
-                    : 'bg-pink-50 dark:bg-pink-950/40 text-pink-700 dark:text-pink-300 border-pink-200 dark:border-pink-800/70 hover:border-pink-400'
-                }"
-              >
-                <span>${state.blurPink ? '👁 Pink Blurred (Tap to Reveal)' : '🧠 Blur Pink (Test Action)'}</span>
-              </button>
-            </div>
-
-            <div class="grid grid-cols-2 sm:grid-cols-4 gap-2">
-              <button type="button" onclick="toggleLayer('blue')" class="px-3 py-2 rounded-xl text-xs font-bold border-2 text-left transition flex items-center justify-between ${state.layers.blue ? 'bg-blue-50 dark:bg-blue-950/40 border-blue-400 dark:border-blue-700 text-blue-800 dark:text-blue-200' : 'bg-slate-50 dark:bg-slate-800/40 border-slate-200 dark:border-slate-800 text-slate-400 line-through'}">
-                <span>Bench Set Up</span>
-                <span class="w-2.5 h-2.5 rounded-full bg-blue-500"></span>
-              </button>
-              <button type="button" onclick="toggleLayer('red')" class="px-3 py-2 rounded-xl text-xs font-bold border-2 text-left transition flex items-center justify-between ${state.layers.red ? 'bg-red-50 dark:bg-red-950/40 border-red-400 dark:border-red-700 text-red-800 dark:text-red-200' : 'bg-slate-50 dark:bg-slate-800/40 border-slate-200 dark:border-slate-800 text-slate-400 line-through'}">
-                <span>Patient Position</span>
-                <span class="w-2.5 h-2.5 rounded-full bg-red-500"></span>
-              </button>
-              <button type="button" onclick="toggleLayer('green')" class="px-3 py-2 rounded-xl text-xs font-bold border-2 text-left transition flex items-center justify-between ${state.layers.green ? 'bg-emerald-50 dark:bg-emerald-950/40 border-emerald-400 dark:border-emerald-700 text-emerald-800 dark:text-emerald-200' : 'bg-slate-50 dark:bg-slate-800/40 border-slate-200 dark:border-slate-800 text-slate-400 line-through'}">
-                <span>Practitioner Pos.</span>
-                <span class="w-2.5 h-2.5 rounded-full bg-emerald-500"></span>
-              </button>
-              <button type="button" onclick="toggleLayer('pink')" class="px-3 py-2 rounded-xl text-xs font-bold border-2 text-left transition flex items-center justify-between ${state.layers.pink ? 'bg-pink-50 dark:bg-pink-950/40 border-pink-400 dark:border-pink-700 text-pink-800 dark:text-pink-200' : 'bg-slate-50 dark:bg-slate-800/40 border-slate-200 dark:border-slate-800 text-slate-400 line-through'}">
-                <span>Hand / Action</span>
-                <span class="w-2.5 h-2.5 rounded-full bg-pink-500"></span>
-              </button>
-            </div>
-          </div>
-
-          <!-- Progress Bar + Search + Expand/Collapse -->
-          <div class="rounded-3xl bg-white dark:bg-slate-900 border border-slate-200 dark:border-slate-800 p-4 space-y-3">
-            <div class="flex flex-wrap items-center justify-between gap-2">
-              <div class="text-xs sm:text-sm font-extrabold text-slate-900 dark:text-white">
-                Practice Progress: <span class="text-teal-600 dark:text-teal-400">${checkedCount} / 54</span> steps checked (${pct}%)
-              </div>
-              <div class="flex items-center gap-2">
-                <button type="button" onclick="toggleExpandAll()" class="px-3 py-1.5 rounded-xl bg-slate-100 dark:bg-slate-800 hover:bg-slate-200 dark:hover:bg-slate-700 text-xs font-bold text-slate-700 dark:text-slate-200 transition">
-                  ${state.allExpanded ? 'Collapse All' : 'Expand All'}
-                </button>
-                <button type="button" onclick="resetRoutineChecks()" class="px-3 py-1.5 rounded-xl bg-slate-100 dark:bg-slate-800 hover:bg-rose-100 dark:hover:bg-rose-950/50 text-xs font-bold text-slate-600 dark:text-slate-300 transition">
-                  Reset
-                </button>
-              </div>
-            </div>
-            <div class="w-full h-2 rounded-full bg-slate-200 dark:bg-slate-800 overflow-hidden">
-              <div class="h-full bg-gradient-to-r from-teal-500 to-emerald-500 transition-all duration-300" style="width:${pct}%"></div>
-            </div>
-
-            <!-- Instant Search -->
-            <input
-              type="search"
-              value="${state.search.replace(/"/g, '&quot;')}"
-              oninput="state.search=this.value; renderApp();"
-              placeholder="Search any step, landmark, stance, or cue (e.g. Atlas, Torsion, 1st rib, Nail 3)..."
-              class="w-full px-3.5 py-2.5 rounded-xl bg-slate-50 dark:bg-slate-800 border border-slate-200 dark:border-slate-700 text-xs sm:text-sm text-slate-900 dark:text-white focus:outline-none focus:ring-2 focus:ring-teal-500"
-            />
-
-            <!-- Horizontal Phase Filter Pills -->
-            <div class="overflow-x-auto no-scrollbar -mx-1 px-1">
-              <div class="flex items-center gap-1.5 min-w-max">
-                ${PHASES.map((p) => `
-                  <button
-                    type="button"
-                    onclick="state.phase='${p.id}'; renderApp();"
-                    class="px-3 py-1.5 rounded-xl text-xs font-bold transition whitespace-nowrap ${
-                      state.phase === p.id
-                        ? 'bg-slate-900 dark:bg-white text-white dark:text-slate-900'
-                        : 'bg-slate-100 dark:bg-slate-800 text-slate-600 dark:text-slate-300 hover:bg-slate-200 dark:hover:bg-slate-700'
-                    }"
-                  >${p.label}</button>
-                `).join('')}
-              </div>
-            </div>
-          </div>
-
-          ${activePhaseObj && activePhaseObj.phaseCue ? `
-            <div class="p-3.5 rounded-2xl bg-amber-50 dark:bg-amber-950/40 border border-amber-300 dark:border-amber-800 text-xs sm:text-sm font-bold text-amber-900 dark:text-amber-200">
-              ⚠ ${activePhaseObj.phaseCue}
-            </div>
-          ` : ''}
-
-          <!-- 54-Step Accordion List -->
-          <div class="space-y-2.5">
-            ${filtered.length ? filtered.map((s) => renderRoutineCard(s)).join('') : `
-              <div class="p-8 text-center rounded-3xl bg-white dark:bg-slate-900 border border-slate-200 dark:border-slate-800 text-sm text-slate-500">
-                No routine steps match "${state.search}".
-              </div>
-            `}
-          </div>
-        </div>
-      `;
+      const list = getFilteredTraps();
+      state.trapIdx = (state.trapIdx + 1) % list.length;
+      state.trapConf = null;
+      state.trapRevealed = false;
+      state.spokenSecs = 15;
+      renderApp();
     }
 
-    function renderRoutineCard(s) {
-      const isOpen = !!state.expanded[s.num] || state.search.trim().length > 0;
-      const isChecked = !!state.checkedSteps[s.num];
-      const phaseName = (PHASES.find((p) => p.id === s.phase) || {}).label || '';
-      const hasCue = !!s.cue;
-
-      return `
-        <article class="rounded-2xl bg-white dark:bg-slate-900 border ${isChecked ? 'border-emerald-300 dark:border-emerald-800/70' : 'border-slate-200 dark:border-slate-800'} overflow-hidden transition">
-          <!-- Card Header Row -->
-          <div class="flex items-center gap-2.5 px-3.5 py-3">
-            <input
-              type="checkbox"
-              aria-label="Mark step ${s.num} complete"
-              ${isChecked ? 'checked' : ''}
-              onchange="toggleStepCheck(${s.num})"
-              class="w-5 h-5 accent-teal-600 rounded cursor-pointer shrink-0"
-            />
-            <button
-              type="button"
-              onclick="state.expanded[${s.num}]=!state.expanded[${s.num}]; renderApp();"
-              class="flex-1 min-w-0 flex items-center justify-between gap-2 text-left py-0.5"
-            >
-              <div class="min-w-0">
-                <div class="flex flex-wrap items-center gap-1.5">
-                  <span class="px-1.5 py-0.5 rounded-md text-[10px] font-extrabold bg-slate-100 dark:bg-slate-800 text-slate-500 dark:text-slate-400">#${s.num}</span>
-                  <h3 class="text-xs sm:text-sm font-extrabold ${isChecked ? 'line-through text-slate-400 dark:text-slate-500' : 'text-slate-900 dark:text-white'} truncate">${s.title}</h3>
-                  ${hasCue ? `<span class="px-1.5 py-0.5 rounded-md text-[10px] font-extrabold ${s.cue.severity === 'red' ? 'bg-rose-100 dark:bg-rose-950/70 text-rose-700 dark:text-rose-300' : 'bg-amber-100 dark:bg-amber-950/70 text-amber-800 dark:text-amber-300'}">★ Cue</span>` : ''}
-                </div>
-                <span class="text-[10px] font-semibold text-slate-400">${phaseName}</span>
-              </div>
-              <span class="text-xs font-bold text-slate-400 shrink-0">${isOpen ? '▲' : '▼'}</span>
-            </button>
-          </div>
-
-          <!-- Expanded 4-Colour Rows -->
-          ${isOpen ? `
-            <div class="px-3.5 pb-3.5 pt-1 border-t border-slate-100 dark:border-slate-800/80 space-y-2 text-xs sm:text-sm">
-              ${state.layers.blue ? `
-                <div class="p-2.5 rounded-xl bg-blue-50/70 dark:bg-blue-950/25 border-l-4 border-blue-500">
-                  <span class="block text-[10px] font-extrabold uppercase tracking-wider text-blue-700 dark:text-blue-400">Bench Set Up</span>
-                  <p class="text-slate-800 dark:text-slate-200 mt-0.5">${s.blue}</p>
-                </div>
-              ` : ''}
-              ${state.layers.red ? `
-                <div class="p-2.5 rounded-xl bg-red-50/70 dark:bg-red-950/25 border-l-4 border-red-500">
-                  <span class="block text-[10px] font-extrabold uppercase tracking-wider text-red-700 dark:text-red-400">Patient Position</span>
-                  <p class="text-slate-800 dark:text-slate-200 mt-0.5">${s.red}</p>
-                </div>
-              ` : ''}
-              ${state.layers.green ? `
-                <div class="p-2.5 rounded-xl bg-emerald-50/70 dark:bg-emerald-950/25 border-l-4 border-emerald-500">
-                  <span class="block text-[10px] font-extrabold uppercase tracking-wider text-emerald-700 dark:text-emerald-400">Practitioner Position</span>
-                  <p class="text-slate-800 dark:text-slate-200 mt-0.5">${s.green}</p>
-                </div>
-              ` : ''}
-              ${state.layers.pink ? `
-                <div class="p-2.5 rounded-xl bg-pink-50/80 dark:bg-pink-950/25 border-l-4 border-pink-500">
-                  <span class="block text-[10px] font-extrabold uppercase tracking-wider text-pink-700 dark:text-pink-400">Hand Placement / Action</span>
-                  <p onclick="if(this.classList.contains('pink-blurred')) this.classList.remove('pink-blurred');" class="text-slate-900 dark:text-slate-100 font-medium mt-0.5 ${state.blurPink ? 'pink-blurred' : ''}">${s.pink}</p>
-                </div>
-              ` : ''}
-              ${hasCue ? `
-                <div class="p-2.5 rounded-xl border ${s.cue.severity === 'red' ? 'bg-rose-50 dark:bg-rose-950/40 border-rose-300 dark:border-rose-800 text-rose-900 dark:text-rose-200' : 'bg-amber-50 dark:bg-amber-950/40 border-amber-300 dark:border-amber-800 text-amber-900 dark:text-amber-200'} font-semibold text-xs">
-                  ⚠ ${s.cue.text}
-                </div>
-              ` : ''}
-            </div>
-          ` : ''}
-        </article>
-      `;
+    function getChiroDiagStats() {
+      const all = readDiagEvents().filter((e) => e && (e.module === 'chiro' || e.source === 'chiro'));
+      const total = all.length;
+      const clean = all.filter((e) => e.correct).length;
+      const rate = total > 0 ? Math.round((clean / total) * 100) : 0;
+      const highConfSlips = all.filter((e) => e.confidence === 'certain' && !e.correct).length;
+      return { total, rate, highConfSlips };
     }
 
     // =========================================================================
-    // 8. VIEW 2: Y2 CUES & FOCUS (LEITNER SPACED REPETITION)
+    // 8. TAB 3 HANDLERS (40-MIN LIVE MOCK TIMER & SAVING)
     // =========================================================================
-    function renderCuesView() {
-      const { total, due, shaky, solid } = getCueStats();
-      const visible = Y2_CUES.filter((c) => !state.cuesDueOnly || isCueDue(c.id));
-      const highList = visible.filter((c) => c.priority === 'high');
-      const refineList = visible.filter((c) => c.priority === 'refine');
-
-      return `
-        <div class="space-y-5">
-          <!-- Spaced Repetition Summary Bar -->
-          <div class="rounded-3xl bg-white dark:bg-slate-900 border border-slate-200 dark:border-slate-800 p-5 space-y-4">
-            <div class="flex flex-wrap items-center justify-between gap-3">
-              <div>
-                <span class="px-2.5 py-0.5 rounded-lg text-[10px] font-extrabold uppercase bg-amber-100 dark:bg-amber-950/60 text-amber-800 dark:text-amber-300">Y2 Practical Feedback &bull; 78% Baseline</span>
-                <h2 class="text-lg sm:text-xl font-extrabold text-slate-900 dark:text-white mt-1.5">Mechanics Cues Due Today: ${due} / ${total}</h2>
-              </div>
-              <button
-                type="button"
-                onclick="state.cuesDueOnly=!state.cuesDueOnly; renderApp();"
-                class="px-3.5 py-2 rounded-xl text-xs font-bold border transition ${
-                  state.cuesDueOnly
-                    ? 'bg-amber-500 text-white border-amber-500'
-                    : 'bg-slate-100 dark:bg-slate-800 text-slate-700 dark:text-slate-200 border-slate-200 dark:border-slate-700'
-                }"
-              >
-                ${state.cuesDueOnly ? 'Showing Due Only ✓' : 'Filter: Due Only'}
-              </button>
-            </div>
-
-            <div class="grid grid-cols-3 gap-2 text-center text-xs">
-              <div class="p-2.5 rounded-xl bg-rose-50 dark:bg-rose-950/30 border border-rose-100 dark:border-rose-900/50">
-                <span class="block text-lg font-extrabold text-rose-600 dark:text-rose-400">${due}</span>
-                <span class="font-bold text-slate-600 dark:text-slate-300">Due Today</span>
-              </div>
-              <div class="p-2.5 rounded-xl bg-amber-50 dark:bg-amber-950/30 border border-amber-100 dark:border-amber-900/50">
-                <span class="block text-lg font-extrabold text-amber-600 dark:text-amber-400">${shaky}</span>
-                <span class="font-bold text-slate-600 dark:text-slate-300">Shaky (2d)</span>
-              </div>
-              <div class="p-2.5 rounded-xl bg-emerald-50 dark:bg-emerald-950/30 border border-emerald-100 dark:border-emerald-900/50">
-                <span class="block text-lg font-extrabold text-emerald-600 dark:text-emerald-400">${solid}</span>
-                <span class="font-bold text-slate-600 dark:text-slate-300">Solid (7d)</span>
-              </div>
-            </div>
-          </div>
-
-          ${!visible.length ? `
-            <div class="p-8 text-center rounded-3xl bg-white dark:bg-slate-900 border border-slate-200 dark:border-slate-800 space-y-2">
-              <p class="text-base font-extrabold text-emerald-600 dark:text-emerald-400">All 13 Cues Scheduled!</p>
-              <p class="text-xs text-slate-500">No practical mechanics cues are due today. Tap "Showing Due Only" above to view all.</p>
-            </div>
-          ` : `
-            ${highList.length ? `
-              <section class="space-y-3">
-                <h3 class="text-xs font-extrabold uppercase tracking-wider text-rose-600 dark:text-rose-400 px-1">
-                  🔥 High Priority Fixes (Biggest Mark Gains)
-                </h3>
-                <div class="grid grid-cols-1 md:grid-cols-2 gap-3.5">
-                  ${highList.map((c) => renderCueCard(c)).join('')}
-                </div>
-              </section>
-            ` : ''}
-
-            ${refineList.length ? `
-              <section class="space-y-3">
-                <h3 class="text-xs font-extrabold uppercase tracking-wider text-amber-600 dark:text-amber-400 px-1">
-                  🎯 Refine to 9–10/10 Consistency
-                </h3>
-                <div class="grid grid-cols-1 md:grid-cols-2 gap-3.5">
-                  ${refineList.map((c) => renderCueCard(c)).join('')}
-                </div>
-              </section>
-            ` : ''}
-          `}
-        </div>
-      `;
-    }
-
-    function renderCueCard(c) {
-      const rec = state.srs[c.id];
-      const box = rec ? rec.box : null;
-      const isHigh = c.priority === 'high';
-
-      return `
-        <article class="rounded-2xl bg-white dark:bg-slate-900 border-2 ${isHigh ? 'border-rose-200 dark:border-rose-900/60' : 'border-slate-200 dark:border-slate-800'} p-4 flex flex-col justify-between gap-3">
-          <div class="space-y-2">
-            <div class="flex items-start justify-between gap-2">
-              <div>
-                <span class="text-[10px] font-bold uppercase text-slate-400">${c.stepRef}</span>
-                <h4 class="text-sm sm:text-base font-extrabold text-slate-900 dark:text-white">${c.title}</h4>
-              </div>
-              <span class="px-2.5 py-0.5 rounded-lg text-xs font-extrabold shrink-0 ${isHigh ? 'bg-rose-100 dark:bg-rose-950 text-rose-700 dark:text-rose-300' : 'bg-amber-100 dark:bg-amber-950 text-amber-800 dark:text-amber-300'}">${c.score}</span>
-            </div>
-            <p class="text-xs sm:text-sm text-slate-700 dark:text-slate-300 leading-relaxed">${c.cue}</p>
-          </div>
-
-          <div class="flex flex-wrap items-center gap-1.5 pt-2 border-t border-slate-100 dark:border-slate-800">
-            <button type="button" onclick="setCueLeitner('${c.id}','again')" class="flex-1 px-2.5 py-1.5 rounded-xl text-[11px] font-bold border transition ${box==='again' ? 'bg-rose-600 text-white border-rose-600' : 'bg-rose-50/70 dark:bg-rose-950/30 text-rose-700 dark:text-rose-300 border-rose-200 dark:border-rose-800/60 hover:bg-rose-100'}">Again (Today)</button>
-            <button type="button" onclick="setCueLeitner('${c.id}','shaky')" class="flex-1 px-2.5 py-1.5 rounded-xl text-[11px] font-bold border transition ${box==='shaky' ? 'bg-amber-500 text-white border-amber-500' : 'bg-amber-50/70 dark:bg-amber-950/30 text-amber-800 dark:text-amber-300 border-amber-200 dark:border-amber-800/60 hover:bg-amber-100'}">Shaky (2d)</button>
-            <button type="button" onclick="setCueLeitner('${c.id}','solid')" class="flex-1 px-2.5 py-1.5 rounded-xl text-[11px] font-bold border transition ${box==='solid' ? 'bg-emerald-600 text-white border-emerald-600' : 'bg-emerald-50/70 dark:bg-emerald-950/30 text-emerald-700 dark:text-emerald-300 border-emerald-200 dark:border-emerald-800/60 hover:bg-emerald-100'}">Solid (7d)</button>
-          </div>
-        </article>
-      `;
-    }
-
-    // =========================================================================
-    // 9. VIEW 3: 40-MINUTE PRACTICAL SIMULATOR
-    // =========================================================================
-    function formatClock(secs) {
+    function fmtMMSS(secs) {
       const m = Math.floor(secs / 60);
       const s = secs % 60;
       return `${String(m).padStart(2, '0')}:${String(s).padStart(2, '0')}`;
     }
 
-    function setTimerPreset(secs) {
-      clearInterval(timerInterval);
-      state.timerRunning = false;
-      state.timerDuration = secs;
-      state.timerRemaining = secs;
-      renderApp();
-    }
-
-    function togglePracticalTimer() {
-      if (state.timerRunning) {
-        clearInterval(timerInterval);
-        state.timerRunning = false;
+    function toggleMockTimer() {
+      if (state.mockRunning) {
+        clearInterval(mockTimerId);
+        mockTimerId = null;
+        state.mockRunning = false;
       } else {
-        state.timerRunning = true;
-        timerInterval = setInterval(() => {
-          if (state.timerRemaining > 0) {
-            state.timerRemaining--;
-            const el = document.getElementById('practical-clock');
-            if (el) el.textContent = formatClock(state.timerRemaining);
+        state.mockRunning = true;
+        mockTimerId = setInterval(() => {
+          if (state.mockSecs > 0) {
+            state.mockSecs--;
+            const el = document.getElementById('mock-clock');
+            if (el) {
+              el.textContent = fmtMMSS(state.mockSecs);
+              el.style.color = state.mockSecs < 300 ? 'var(--red)' : state.mockSecs < 600 ? 'var(--amber)' : 'var(--text-main)';
+            }
           } else {
-            clearInterval(timerInterval);
-            state.timerRunning = false;
-            showToast('Time up! Practical station complete.', 'warn');
+            clearInterval(mockTimerId);
+            mockTimerId = null;
+            state.mockRunning = false;
+            showToast('40:00 Live Mock Time Up!', 'red');
             renderApp();
           }
         }, 1000);
@@ -1099,209 +1466,719 @@
       renderApp();
     }
 
-    function drawRandomTechnique() {
-      const pool = ROUTINE_STEPS.filter((s) => state.drillPhase === 'all' || s.phase === state.drillPhase);
-      if (!pool.length) return;
-      const pick = pool[Math.floor(Math.random() * pool.length)];
-      state.drillStepNum = pick.num;
-      state.drillRevealed = false;
-      state.drillChecks = { blue: false, red: false, green: false, pink: false, cue: false };
+    function resetMockTimer() {
+      clearInterval(mockTimerId);
+      mockTimerId = null;
+      state.mockRunning = false;
+      state.mockSecs = 2400;
       renderApp();
     }
 
-    function renderPracticalView() {
-      const step = ROUTINE_STEPS.find((s) => s.num === state.drillStepNum) || ROUTINE_STEPS[0];
-      const phaseName = (PHASES.find((p) => p.id === step.phase) || {}).label || '';
-      const scoreKeys = step.cue ? ['blue', 'red', 'green', 'pink', 'cue'] : ['blue', 'red', 'green', 'pink'];
-      const ticked = scoreKeys.filter((k) => state.drillChecks[k]).length;
+    function adjustSec2(id, val, max) {
+      const clamped = Math.max(0, Math.min(max, parseInt(val, 10) || 0));
+      state.sec2[id] = clamped;
+      renderApp();
+    }
+
+    function saveMockAttempt() {
+      const sec1Passed = MOCK_SEC1.filter((s) => state.sec1[s.id] === 'pass').length;
+      const sec2Total = MOCK_SEC2.reduce((acc, s) => acc + (state.sec2[s.id] || 0), 0);
+      const habits = HABIT_CHECKS.filter((_, i) => state.recurredHabits['h_' + i]);
+
+      const record = {
+        id: 'mk_' + Date.now().toString(36),
+        date: new Date().toLocaleDateString('en-GB', { day: '2-digit', month: 'short', year: 'numeric' }),
+        timeRemaining: fmtMMSS(state.mockSecs),
+        sec1Passed,
+        sec2Total,
+        habitsCount: habits.length,
+        habits,
+      };
+
+      state.mockHistory.unshift(record);
+      if (state.mockHistory.length > 25) state.mockHistory.length = 25;
+      saveJSON('mchiro_chiro_mocks_v1', state.mockHistory);
+      showToast(`✓ Mock Saved: ${sec2Total}/100 (${habits.length} recurring habits)`, sec2Total >= 85 && habits.length === 0 ? 'emerald' : 'amber');
+      renderApp();
+    }
+
+    function deleteMockAttempt(id) {
+      state.mockHistory = state.mockHistory.filter((m) => m.id !== id);
+      saveJSON('mchiro_chiro_mocks_v1', state.mockHistory);
+      showToast('Mock attempt deleted.', 'amber');
+      renderApp();
+    }
+
+    // =========================================================================
+    // 9. TAB 4 HANDLERS (CONFIDENCE-WEIGHTED SRS & VAULT)
+    // =========================================================================
+    function gradeChiroSrs(cardId, grade) {
+      const card = CHIRO_SRS_CARDS.find((c) => c.id === cardId);
+      if (!card) return;
+
+      // Merge safely into mchiro_srs_v4 without overwriting other modules
+      const latest = loadJSON('mchiro_srs_v4', {});
+      const cur = latest[cardId] || { box: 1 };
+      let nextBox = typeof cur.box === 'number' ? cur.box : 1;
+      let days = 0;
+
+      if (grade === 'again') { nextBox = 1; days = 0; }
+      else if (grade === 'good') { nextBox = Math.min(5, nextBox + 1); days = [0, 1, 3, 7, 14, 30][nextBox]; }
+      else { nextBox = 5; days = 14; }
+
+      const now = Date.now();
+      const dueTs = now + days * DAY_MS;
+      latest[cardId] = {
+        box: nextBox,
+        dueAt: dueTs,
+        nextReview: dueTs,
+        lastReviewed: now,
+      };
+      saveJSON('mchiro_srs_v4', latest);
+      state.srs = latest;
+
+      const isCorrect = grade !== 'again';
+      appendDiagEvent({
+        id: cardId,
+        module: 'chiro',
+        source: 'chiro',
+        rootCause: card.rootCause,
+        rootCauseTag: card.rootCause,
+        confidence: state.srsConf || 'unsure',
+        correct: isCorrect,
+        label: card.q,
+        ts: now,
+        timestamp: now,
+      });
+
+      if (!isCorrect && state.srsConf === 'certain') {
+        showToast('High-Confidence Slip logged (Box 1)', 'red');
+      } else if (!isCorrect) {
+        showToast('Reset to Box 1 — Review Today', 'amber');
+      } else {
+        showToast(`Saved to Box ${nextBox} (${days}d)`, 'emerald');
+      }
+
+      state.srsConf = null;
+      state.srsRevealed = false;
+      state.srsIdx = (state.srsIdx + 1) % CHIRO_SRS_CARDS.length;
+      renderApp();
+    }
+
+    function addVaultNote(e) {
+      e.preventDefault();
+      const section = document.getElementById('vn_sec').value;
+      const title = (document.getElementById('vn_title').value || '').trim();
+      const body = (document.getElementById('vn_body').value || '').trim();
+      if (!title || !body) {
+        showToast('Enter a title and technique note first.', 'amber');
+        return;
+      }
+      state.vaultNotes.unshift({
+        id: 'cv_' + Date.now().toString(36),
+        section,
+        title,
+        body,
+        isTemplate: false,
+      });
+      saveJSON('mchiro_chiro_vault_v1', state.vaultNotes);
+      state.openVault[section] = true;
+      state.showAddVault = false;
+      showToast('✓ Technique note saved!', 'emerald');
+      renderApp();
+    }
+
+    function deleteVaultNote(id) {
+      state.vaultNotes = state.vaultNotes.filter((n) => n.id !== id);
+      saveJSON('mchiro_chiro_vault_v1', state.vaultNotes);
+      showToast('Note removed.', 'amber');
+      renderApp();
+    }
+
+    // =========================================================================
+    // 10. NAVIGATION & MAIN ROUTER
+    // =========================================================================
+    const TABS = [
+      { id: 'interrupter', label: '⚡ 22-Mark Interrupter' },
+      { id: 'flow', label: '🧭 Full-Body Flow' },
+      { id: 'mock', label: '⏱️ 40-Min Live Mock' },
+      { id: 'vault', label: '🦴 Y3 Vault & SRS' },
+    ];
+
+    function setTab(id) {
+      stopSpokenTimer();
+      state.activeTab = id;
+      renderTabs();
+      renderApp();
+      window.scrollTo({ top: 0, behavior: 'smooth' });
+    }
+
+    function renderTabs() {
+      document.getElementById('segmented-tabs').innerHTML = TABS.map((t) => `
+        <button
+          type="button"
+          role="tab"
+          aria-selected="${state.activeTab === t.id}"
+          class="seg-btn ${state.activeTab === t.id ? 'active' : ''}"
+          onclick="setTab('${t.id}')"
+        >${t.label}</button>
+      `).join('');
+    }
+
+    function renderApp() {
+      const root = document.getElementById('app-root');
+      if (state.activeTab === 'interrupter') root.innerHTML = renderTabInterrupter();
+      else if (state.activeTab === 'flow') root.innerHTML = renderTabFlow();
+      else if (state.activeTab === 'mock') root.innerHTML = renderTabMock();
+      else root.innerHTML = renderTabVault();
+    }
+
+    // =========================================================================
+    // 11. RENDER TAB 1 — 22-MARK SETUP INTERRUPTER
+    // =========================================================================
+    function renderTabInterrupter() {
+      const stats = getChiroDiagStats();
+      const list = getFilteredTraps();
+      const safeIdx = state.trapIdx % list.length;
+      const trap = list[safeIdx];
+      const slipCount = Object.keys(state.slippedIds).length;
 
       return `
-        <div class="max-w-3xl mx-auto space-y-4">
-          <!-- Countdown Timer Card -->
-          <div class="rounded-3xl bg-white dark:bg-slate-900 border border-slate-200 dark:border-slate-800 p-5 flex flex-wrap items-center justify-between gap-4">
-            <div>
-              <span class="text-[10px] font-extrabold uppercase tracking-wider text-teal-600 dark:text-teal-400">Practical Assessment Timer</span>
-              <div id="practical-clock" class="text-4xl font-extrabold tabular-nums text-slate-900 dark:text-white mt-0.5">${formatClock(state.timerRemaining)}</div>
-              <div class="mt-2 flex flex-wrap gap-1.5">
-                <button type="button" onclick="setTimerPreset(2400)" class="px-3 py-1.5 rounded-xl text-xs font-bold ${state.timerDuration === 2400 ? 'bg-teal-600 text-white' : 'bg-slate-100 dark:bg-slate-800 text-slate-600 dark:text-slate-300'}">40:00 Full Assessment</button>
-                <button type="button" onclick="setTimerPreset(120)" class="px-3 py-1.5 rounded-xl text-xs font-bold ${state.timerDuration === 120 ? 'bg-indigo-600 text-white' : 'bg-slate-100 dark:bg-slate-800 text-slate-600 dark:text-slate-300'}">02:00 Single Drill</button>
+        <div class="stack">
+          <!-- 1. Live Diagnostic Strip (4 Compact Cards) -->
+          <section class="grid-4">
+            <div class="stat-tile">
+              <span class="stat-lbl">Year 2 Baseline</span>
+              <span class="stat-num mono">78 / 100</span>
+            </div>
+            <div class="stat-tile">
+              <span class="stat-lbl">Drills Completed</span>
+              <span class="stat-num mono" style="color:var(--blue);">${stats.total}</span>
+            </div>
+            <div class="stat-tile ${stats.total > 0 ? (stats.rate >= 85 ? 'ok' : 'warn') : ''}">
+              <span class="stat-lbl">Clean Setup Rate</span>
+              <span class="stat-num mono">${stats.total > 0 ? stats.rate + '%' : '—'}</span>
+            </div>
+            <div class="stat-tile ${stats.highConfSlips > 0 ? 'risk' : 'ok'}">
+              <span class="stat-lbl">High-Conf Slips</span>
+              <span class="stat-num mono" style="color:${stats.highConfSlips > 0 ? 'var(--red)' : 'var(--emerald)'};">${stats.highConfSlips}</span>
+            </div>
+          </section>
+
+          <!-- 2. Spoken Pre-Adjustment Interrupter Card -->
+          <section class="ah-card pad-card stack">
+            <!-- Filter Pills -->
+            <div style="display:flex;flex-wrap:wrap;gap:6px;">
+              <button type="button" class="pill-btn ${state.trapFilter === 'all' ? 'active-emerald' : ''}" onclick="setTrapFilter('all')">All 14 Traps</button>
+              <button type="button" class="pill-btn ${state.trapFilter === 'scored' ? 'active-blue' : ''}" onclick="setTrapFilter('scored')">22-Mark Scored (11)</button>
+              <button type="button" class="pill-btn ${state.trapFilter === 'pf' ? 'active-amber' : ''}" onclick="setTrapFilter('pf')">P/F Watch-Items (3)</button>
+              <button type="button" class="pill-btn ${state.trapFilter === 'slips' ? 'active-red' : ''}" onclick="setTrapFilter('slips')">Slips Only (${slipCount})</button>
+            </div>
+
+            <!-- Station Header & 15s Spoken Countdown -->
+            <div class="ah-card-alt pad-card stack">
+              <div class="flex-between">
+                <div style="display:flex;align-items:center;gap:6px;flex-wrap:wrap;">
+                  <span class="badge ${trap.category === 'scored' ? 'badge-red' : 'badge-amber'} mono">${trap.lossBadge}</span>
+                  <span class="badge ${trap.rootCause === 'interference' ? 'badge-purple' : 'badge-blue'}">${trap.rootLabel}</span>
+                </div>
+                <div style="display:flex;align-items:center;gap:6px;">
+                  <span class="mono" style="font-size:12px;font-weight:800;color:var(--text-muted);">${safeIdx + 1} / ${list.length}</span>
+                  <button type="button" class="pill-btn" style="min-height:30px;padding:2px 8px;" onclick="stepTrap(-1)">&larr;</button>
+                  <button type="button" class="pill-btn" style="min-height:30px;padding:2px 8px;" onclick="stepTrap(1)">&rarr;</button>
+                </div>
               </div>
-            </div>
 
-            <div class="flex flex-col items-start sm:items-end gap-2">
-              <div class="flex gap-2">
-                <button type="button" onclick="togglePracticalTimer()" class="px-5 py-2.5 rounded-xl text-xs font-extrabold text-white transition ${state.timerRunning ? 'bg-amber-600 hover:bg-amber-700' : 'bg-teal-600 hover:bg-teal-700'}">
-                  ${state.timerRunning ? 'Pause' : 'Start'}
-                </button>
-                <button type="button" onclick="setTimerPreset(state.timerDuration)" class="px-4 py-2.5 rounded-xl text-xs font-bold bg-slate-100 dark:bg-slate-800 text-slate-700 dark:text-slate-200">
-                  Reset
-                </button>
+              <div class="flex-between" style="align-items:flex-end;">
+                <div>
+                  <h2 style="font-size:21px;font-weight:800;letter-spacing:-0.02em;">${esc(trap.station)}</h2>
+                  <p style="font-size:13px;color:var(--text-muted);margin-top:4px;">
+                    <em>Speak your exact setup, foot/elbow/sternum position, and verbal reading aloud BEFORE revealing.</em>
+                  </p>
+                </div>
+
+                <!-- 15-Second Spoken Timer -->
+                <div style="display:flex;align-items:center;gap:7px;flex-shrink:0;">
+                  <span id="spoken-clock" class="mono" style="font-size:22px;font-weight:800;min-width:44px;text-align:center;color:${state.spokenSecs <= 5 ? 'var(--red)' : 'var(--text-main)'};">${state.spokenSecs}s</span>
+                  <button type="button" class="btn-3d sm ${state.spokenRunning ? 'btn-amber' : 'btn-blue'}" onclick="toggleSpokenTimer()">${state.spokenRunning ? 'Pause' : '15s Go'}</button>
+                  <button type="button" class="btn-3d sm btn-neutral" onclick="resetSpokenTimer()">↺</button>
+                </div>
               </div>
-              <span class="text-xs font-bold text-slate-500">
-                Session: <span class="text-emerald-600 dark:text-emerald-400">${state.drillPassCount} Pass</span> &bull; <span class="text-rose-600 dark:text-rose-400">${state.drillAgainCount} Drill</span>
-              </span>
+
+              <!-- Step 2: Confidence Gate (Required Before Reveal) -->
+              ${!state.trapRevealed ? `
+                <div class="stack-sm" style="padding-top:8px;border-top:1px solid var(--border-card);">
+                  <span class="field-label" style="margin:0;">Rate Your Confidence Before Revealing Charley's Note:</span>
+                  <div class="grid-3-compact">
+                    <button type="button" class="pill-btn ${state.trapConf === 'guess' ? 'active-red' : ''}" onclick="state.trapConf='guess'; renderApp();">🎲 Guess</button>
+                    <button type="button" class="pill-btn ${state.trapConf === 'unsure' ? 'active-amber' : ''}" onclick="state.trapConf='unsure'; renderApp();">🤔 Unsure</button>
+                    <button type="button" class="pill-btn ${state.trapConf === 'certain' ? 'active-emerald' : ''}" onclick="state.trapConf='certain'; renderApp();">🎯 Certain</button>
+                  </div>
+                  <button type="button" class="btn-3d btn-emerald btn-full" ${state.trapConf ? '' : 'disabled'} onclick="stopSpokenTimer(); state.trapRevealed=true; renderApp();">
+                    ${state.trapConf ? "Reveal Charley's Note & Fix &rarr;" : 'Select Confidence Pill First'}
+                  </button>
+                </div>
+              ` : `
+                <!-- Step 3: Reveal & Self-Grade -->
+                <div class="stack-sm" style="padding-top:8px;border-top:1px solid var(--border-card);">
+                  <div class="sem-box sem-red">
+                    <span class="sem-label">Charley's Exact Year 2 Margin Note</span>
+                    <p style="font-style:italic;font-weight:700;">“${esc(trap.note)}”</p>
+                  </div>
+
+                  <div class="sem-box sem-emerald">
+                    <span class="sem-label">Corrective Physical / Verbal Cue</span>
+                    <p style="font-weight:700;">${esc(trap.fix)}</p>
+                  </div>
+
+                  <div class="sem-box sem-blue">
+                    <span class="sem-label">McTimoney Full-Body Quick-Check</span>
+                    <p>${esc(trap.quickCheck)}</p>
+                  </div>
+
+                  <span class="field-label" style="margin:4px 0 0;">Self-Grade Honestly (Confidence was: <strong style="color:var(--text-main);">${state.trapConf}</strong>):</span>
+                  <div class="grid-2">
+                    <button type="button" class="btn-3d btn-red btn-full" onclick="gradeInterrupter('${trap.id}', false)">✕ Slipped / Hesitated</button>
+                    <button type="button" class="btn-3d btn-emerald btn-full" onclick="gradeInterrupter('${trap.id}', true)">✓ Nailed Aloud</button>
+                  </div>
+                </div>
+              `}
             </div>
-          </div>
+          </section>
 
-          <!-- Random Technique Drawer -->
-          <div class="flex flex-wrap items-center justify-between gap-2 p-3 rounded-2xl bg-white dark:bg-slate-900 border border-slate-200 dark:border-slate-800">
-            <select
-              onchange="state.drillPhase=this.value; drawRandomTechnique();"
-              aria-label="Filter drill phase"
-              class="px-3 py-2 rounded-xl bg-slate-100 dark:bg-slate-800 text-xs font-bold text-slate-800 dark:text-slate-200 border border-slate-200 dark:border-slate-700"
-            >
-              ${PHASES.map((p) => `<option value="${p.id}" ${state.drillPhase === p.id ? 'selected' : ''}>${p.label}</option>`).join('')}
-            </select>
-            <button
-              type="button"
-              onclick="drawRandomTechnique()"
-              class="px-4 py-2 rounded-xl bg-indigo-600 hover:bg-indigo-700 text-white text-xs font-extrabold shadow-xs transition"
-            >
-              🎲 Draw Random Technique
-            </button>
-          </div>
-
-          <!-- Active Technique Prompt Card -->
-          <div class="rounded-3xl bg-white dark:bg-slate-900 border-2 border-teal-200 dark:border-teal-900/70 p-5 space-y-4">
-            <div class="flex items-center justify-between gap-2">
-              <span class="px-2.5 py-0.5 rounded-lg text-[11px] font-extrabold bg-teal-100 dark:bg-teal-950 text-teal-800 dark:text-teal-300">Step #${step.num} &bull; ${phaseName}</span>
-              ${state.drillRevealed ? `<span class="text-xs font-extrabold text-emerald-600 dark:text-emerald-400">Self-Score: ${ticked}/${scoreKeys.length}</span>` : ''}
-            </div>
-
-            <div>
-              <p class="text-xs font-bold uppercase tracking-wider text-slate-400">Examiner Prompt:</p>
-              <h3 class="text-xl sm:text-2xl font-extrabold text-slate-900 dark:text-white mt-0.5">${step.title}</h3>
-              <p class="text-xs sm:text-sm text-slate-500 dark:text-slate-400 mt-1">
-                Walk through Bench Set Up, Patient Position, Practitioner Stance, and Hand Placement/Action out loud before revealing.
-              </p>
-            </div>
-
-            ${!state.drillRevealed ? `
+          <!-- 3. Reading Terminology Trap Table -->
+          <section class="ah-card pad-card stack-sm">
+            <div class="flex-between">
+              <div>
+                <span class="badge badge-purple">Terminology Guardrail</span>
+                <h3 style="font-size:16.5px;font-weight:800;margin-top:4px;">McTimoney Reading Terminology Trap Table</h3>
+              </div>
               <button
                 type="button"
-                onclick="state.drillRevealed=true; renderApp();"
-                class="w-full py-3.5 rounded-2xl bg-teal-600 hover:bg-teal-700 text-white text-sm font-extrabold shadow-xs transition"
-              >
-                Reveal &amp; Self-Score
-              </button>
-            ` : `
-              <div class="space-y-2.5 pt-2 border-t border-slate-100 dark:border-slate-800">
-                ${renderDrillCheckRow('blue', 'Bench Set Up', step.blue, 'blue')}
-                ${renderDrillCheckRow('red', 'Patient Position', step.red, 'red')}
-                ${renderDrillCheckRow('green', 'Practitioner Stance', step.green, 'emerald')}
-                ${renderDrillCheckRow('pink', 'Hand Placement / Action', step.pink, 'pink')}
-                ${step.cue ? renderDrillCheckRow('cue', 'Assessor Cue Checked', step.cue.text, 'amber') : ''}
+                class="pill-btn ${state.blurReadings ? 'active-blue' : ''}"
+                onclick="state.blurReadings=!state.blurReadings; state.revealedReadings={}; renderApp();"
+              >${state.blurReadings ? '👁️ Show Readings' : '🙈 Blur Readings (Active Recall)'}</button>
+            </div>
 
-                <div class="grid grid-cols-2 gap-3 pt-2">
-                  <button type="button" onclick="state.drillPassCount++; drawRandomTechnique(); showToast('Marked Pass ✓', 'success');" class="py-3 rounded-xl bg-emerald-600 hover:bg-emerald-700 text-white text-xs font-extrabold transition">
-                    ✓ Pass &amp; Draw Next
-                  </button>
-                  <button type="button" onclick="state.drillAgainCount++; drawRandomTechnique(); showToast('Flagged to Drill Again ↺', 'warn');" class="py-3 rounded-xl bg-rose-600 hover:bg-rose-700 text-white text-xs font-extrabold transition">
-                    ↺ Drill Again &amp; Next
-                  </button>
+            <div style="overflow-x:auto;">
+              <table class="trap-table">
+                <thead>
+                  <tr>
+                    <th>Palpation / Check</th>
+                    <th>Exact Reading Word</th>
+                    <th>Assessor Cue</th>
+                  </tr>
+                </thead>
+                <tbody>
+                  ${READING_TABLE.map((r, i) => {
+                    const isBlur = state.blurReadings && !state.revealedReadings[i];
+                    return `
+                      <tr>
+                        <td style="font-weight:700;">${esc(r.check)}</td>
+                        <td>
+                          <span
+                            class="blur-cell ${isBlur ? 'is-blurred' : ''}"
+                            style="background:var(--emerald-soft);color:var(--emerald-dark);font-weight:800;"
+                            onclick="if(state.blurReadings){state.revealedReadings[${i}]=true; renderApp();}"
+                          >${esc(r.reading)}</span>
+                        </td>
+                        <td style="font-size:12px;color:var(--text-muted);font-weight:600;">${esc(r.note)}</td>
+                      </tr>
+                    `;
+                  }).join('')}
+                </tbody>
+              </table>
+            </div>
+          </section>
+        </div>
+      `;
+    }
+
+    // =========================================================================
+    // 12. RENDER TAB 2 — 4-COLOUR FULL-BODY FLOW
+    // =========================================================================
+    function renderTabFlow() {
+      const steps = state.flowPhase === 'all'
+        ? PROTOCOL_STEPS
+        : PROTOCOL_STEPS.filter((s) => s.phase === state.flowPhase);
+
+      return `
+        <div class="stack">
+          <!-- 4-Colour Master Key + Phase Filters + Hide Pink Toggle -->
+          <section class="ah-card pad-card stack-sm">
+            <div class="flex-between">
+              <div>
+                <h2 style="font-size:17.5px;font-weight:800;">McTimoney Full-Body Check (Start to Finish)</h2>
+                <div style="display:flex;flex-wrap:wrap;gap:6px;margin-top:6px;">
+                  <span class="badge badge-blue">Bench Set Up</span>
+                  <span class="badge badge-red">Patient Position</span>
+                  <span class="badge badge-emerald">Practitioner Position</span>
+                  <span class="badge badge-pink">Hand Placement / Action</span>
                 </div>
               </div>
+
+              <button
+                type="button"
+                class="pill-btn ${state.hidePink ? 'active-pink' : ''}"
+                onclick="state.hidePink=!state.hidePink; state.revealedPink={}; renderApp();"
+              >${state.hidePink ? '👁️ Show Pink Actions' : '🙈 Hide Pink Actions (Recall)'}</button>
+            </div>
+
+            <div style="display:flex;flex-wrap:wrap;gap:6px;padding-top:4px;">
+              ${PROTOCOL_PHASES.map((p) => `
+                <button
+                  type="button"
+                  class="pill-btn ${state.flowPhase === p.id ? 'active-emerald' : ''}"
+                  onclick="state.flowPhase='${p.id}'; renderApp();"
+                >${p.label}</button>
+              `).join('')}
+            </div>
+          </section>
+
+          <!-- Protocol Steps List -->
+          <section class="stack-sm">
+            ${steps.map((s, idx) => {
+              const pinkKey = s.phase + '_' + idx;
+              const isPinkHidden = state.hidePink && !state.revealedPink[pinkKey];
+              return `
+                <article class="flow-step">
+                  <div class="flex-between">
+                    <h3 style="font-size:15.5px;font-weight:800;">${esc(s.title)}</h3>
+                    ${s.warn ? `<span class="badge badge-red">⚠️ ${esc(s.warn)}</span>` : ''}
+                  </div>
+
+                  <div class="flow-grid">
+                    <div class="flow-cell fc-blue">
+                      <span class="fc-tag">Bench Set Up</span>
+                      <p>${esc(s.bench)}</p>
+                    </div>
+                    <div class="flow-cell fc-red">
+                      <span class="fc-tag">Patient Position</span>
+                      <p>${esc(s.px)}</p>
+                    </div>
+                    <div class="flow-cell fc-green">
+                      <span class="fc-tag">Practitioner Position</span>
+                      <p>${esc(s.prac)}</p>
+                    </div>
+                    <div
+                      class="flow-cell fc-pink"
+                      onclick="if(state.hidePink){state.revealedPink['${pinkKey}']=true; renderApp();}"
+                      style="${isPinkHidden ? 'cursor:pointer;' : ''}"
+                    >
+                      <span class="fc-tag">Hand Placement / Action ${isPinkHidden ? '(Tap to Reveal)' : ''}</span>
+                      <p class="${isPinkHidden ? 'pink-hidden' : ''}">${esc(s.action)}</p>
+                    </div>
+                  </div>
+                </article>
+              `;
+            }).join('')}
+          </section>
+        </div>
+      `;
+    }
+
+    // =========================================================================
+    // 13. RENDER TAB 3 — 40-MINUTE LIVE MOCK GRADER
+    // =========================================================================
+    function renderTabMock() {
+      const sec1Passed = MOCK_SEC1.filter((s) => state.sec1[s.id] === 'pass').length;
+      const sec2Total = MOCK_SEC2.reduce((acc, s) => acc + (state.sec2[s.id] || 0), 0);
+      const habitCount = HABIT_CHECKS.filter((_, i) => state.recurredHabits['h_' + i]).length;
+      const clockColor = state.mockSecs < 300 ? 'var(--red)' : state.mockSecs < 600 ? 'var(--amber)' : 'var(--text-main)';
+      const scoreBadge = sec2Total >= 85 ? 'badge-emerald' : sec2Total >= 78 ? 'badge-blue' : 'badge-amber';
+
+      return `
+        <div class="stack">
+          <!-- 40:00 Countdown & Live Score Banner -->
+          <section class="ah-card pad-card stack">
+            <div class="flex-between">
+              <div>
+                <span class="badge ${state.mockSecs < 300 ? 'badge-red' : state.mockSecs < 600 ? 'badge-amber' : 'badge-emerald'}">
+                  ${state.mockSecs < 300 ? '⚠️ Under 5 Minutes!' : state.mockSecs < 600 ? '⏱️ Under 10 Minutes' : '40-Minute Cold Live Mock'}
+                </span>
+                <div id="mock-clock" class="mono" style="font-size:40px;font-weight:800;margin-top:4px;color:${clockColor};">${fmtMMSS(state.mockSecs)}</div>
+              </div>
+
+              <div style="display:flex;gap:8px;flex-wrap:wrap;">
+                <button type="button" class="btn-3d ${state.mockRunning ? 'btn-amber' : 'btn-emerald'}" onclick="toggleMockTimer()">${state.mockRunning ? 'Pause' : 'Start 40:00'}</button>
+                <button type="button" class="btn-3d btn-neutral" onclick="resetMockTimer()">Reset</button>
+              </div>
+            </div>
+
+            <div class="grid-3-compact">
+              <div class="stat-tile ${sec1Passed === 10 ? 'ok' : 'warn'}">
+                <span class="stat-lbl">Section 1 (P/F)</span>
+                <span class="stat-num mono">${sec1Passed} / 10</span>
+              </div>
+              <div class="stat-tile ${sec2Total >= 85 ? 'ok' : sec2Total >= 78 ? '' : 'risk'}">
+                <span class="stat-lbl">Section 2 (/100)</span>
+                <span class="stat-num mono">${sec2Total} / 100</span>
+              </div>
+              <div class="stat-tile ${habitCount === 0 ? 'ok' : 'risk'}">
+                <span class="stat-lbl">Y2 Habit Slips</span>
+                <span class="stat-num mono">${habitCount}</span>
+              </div>
+            </div>
+
+            <div class="flex-between">
+              <span class="badge ${scoreBadge}">
+                ${sec2Total >= 85 ? '✓ Meets ≥85/100 Year 3 Target!' : sec2Total >= 78 ? 'Matches/Beats Year 2 (78/100)' : 'Below Year 2 Baseline (78/100)'}
+              </span>
+              <span style="font-size:11.5px;font-weight:700;color:var(--text-muted);">External Verification: Peer marks live with hub closed</span>
+            </div>
+          </section>
+
+          <!-- Section 1: Pass / Fail Interactive List (10 Stations) -->
+          <section class="ah-card pad-card stack-sm">
+            <div class="flex-between">
+              <h2 style="font-size:16.5px;font-weight:800;">Section 1 — Pass / Fail Competencies (10 Stations)</h2>
+              <span class="badge badge-emerald mono">${sec1Passed}/10 Pass</span>
+            </div>
+
+            <div class="grid-2">
+              ${MOCK_SEC1.map((st) => {
+                const isPass = state.sec1[st.id] === 'pass';
+                return `
+                  <div class="pf-row">
+                    <span style="font-size:13px;font-weight:700;">${esc(st.label)}</span>
+                    <div style="display:flex;gap:5px;flex-shrink:0;">
+                      <button type="button" class="pill-btn ${isPass ? 'active-emerald' : ''}" style="min-height:32px;padding:4px 9px;font-size:11px;" onclick="state.sec1['${st.id}']='pass'; renderApp();">Pass</button>
+                      <button type="button" class="pill-btn ${!isPass ? 'active-red' : ''}" style="min-height:32px;padding:4px 9px;font-size:11px;" onclick="state.sec1['${st.id}']='flag'; renderApp();">Flag</button>
+                    </div>
+                  </div>
+                `;
+              }).join('')}
+            </div>
+          </section>
+
+          <!-- Section 2: Scored /100 Interactive Steppers & Sliders -->
+          <section class="ah-card pad-card stack-sm">
+            <div class="flex-between">
+              <div>
+                <h2 style="font-size:16.5px;font-weight:800;">Section 2 — Scored Adjustments (/100)</h2>
+                <p style="font-size:12px;color:var(--text-muted);">Exact Charley mark-sheet weights with Year 2 baseline reminders.</p>
+              </div>
+              <span class="badge badge-blue mono" style="font-size:13px;">${sec2Total} / 100</span>
+            </div>
+
+            <div class="grid-2">
+              ${MOCK_SEC2.map((st) => {
+                const val = state.sec2[st.id] || 0;
+                const diff = val - st.y2;
+                return `
+                  <div class="score-row">
+                    <div class="flex-between">
+                      <strong style="font-size:13px;">${esc(st.label)}</strong>
+                      <div style="display:flex;align-items:center;gap:6px;">
+                        <span class="badge badge-muted mono">Y2: ${st.y2}/${st.max}</span>
+                        <span class="badge ${diff > 0 ? 'badge-emerald' : diff < 0 ? 'badge-red' : 'badge-blue'} mono">${val}/${st.max}</span>
+                      </div>
+                    </div>
+                    <div class="stepper-wrap">
+                      <button type="button" class="stepper-btn" onclick="adjustSec2('${st.id}', ${val - 1}, ${st.max})">&minus;</button>
+                      <input type="range" min="0" max="${st.max}" step="1" value="${val}" class="score-slider" oninput="adjustSec2('${st.id}', this.value, ${st.max})" aria-label="${esc(st.label)} score" />
+                      <button type="button" class="stepper-btn" onclick="adjustSec2('${st.id}', ${val + 1}, ${st.max})">+</button>
+                    </div>
+                  </div>
+                `;
+              }).join('')}
+            </div>
+          </section>
+
+          <!-- Zero-Recurrence Habit Check + Save Button -->
+          <section class="ah-card pad-card stack-sm">
+            <div class="flex-between">
+              <div>
+                <span class="badge ${habitCount === 0 ? 'badge-emerald' : 'badge-red'}">Zero-Recurrence Gate</span>
+                <h3 style="font-size:16px;font-weight:800;margin-top:4px;">Tick Any Year 2 Habit That Recurred During This Run</h3>
+              </div>
+            </div>
+
+            <div class="grid-2" style="gap:4px;">
+              ${HABIT_CHECKS.map((txt, i) => {
+                const k = 'h_' + i;
+                const chk = !!state.recurredHabits[k];
+                return `
+                  <label class="chk-row">
+                    <input type="checkbox" ${chk ? 'checked' : ''} onchange="state.recurredHabits['${k}']=!state.recurredHabits['${k}']; renderApp();" />
+                    <span style="font-size:12.5px;font-weight:600;color:${chk ? 'var(--red)' : 'var(--text-main)'};">${esc(txt)}</span>
+                  </label>
+                `;
+              }).join('')}
+            </div>
+
+            <button type="button" class="btn-3d btn-emerald btn-full" style="margin-top:6px;" onclick="saveMockAttempt()">
+              💾 Save Mock Attempt (${sec2Total}/100 &bull; ${habitCount} Slips)
+            </button>
+          </section>
+
+          <!-- Past Mock Attempts History -->
+          <section class="ah-card pad-card stack-sm">
+            <div class="flex-between">
+              <h3 style="font-size:16px;font-weight:800;">Saved Mock Attempts (<span class="mono">mchiro_chiro_mocks_v1</span>)</h3>
+              <span class="badge badge-muted mono">${state.mockHistory.length} logged</span>
+            </div>
+
+            ${state.mockHistory.length ? `
+              <div class="stack-sm">
+                ${state.mockHistory.map((mk) => `
+                  <article class="ah-card-alt pad-card stack-sm" style="border-left:4px solid ${mk.sec2Total >= 85 && mk.habitsCount === 0 ? 'var(--emerald)' : 'var(--amber)'};">
+                    <div class="flex-between">
+                      <div style="display:flex;align-items:center;gap:7px;flex-wrap:wrap;">
+                        <strong class="mono" style="font-size:15px;">${mk.sec2Total}/100</strong>
+                        <span class="badge badge-blue mono">Sec 1: ${mk.sec1Passed}/10</span>
+                        <span class="badge ${mk.habitsCount === 0 ? 'badge-emerald' : 'badge-red'}">${mk.habitsCount === 0 ? '✓ 0 Habit Slips' : `⚠ ${mk.habitsCount} Slips`}</span>
+                        <span style="font-size:12px;color:var(--text-muted);font-weight:700;">${esc(mk.date)} &bull; ${esc(mk.timeRemaining)} left</span>
+                      </div>
+                      <button type="button" class="icon-del" aria-label="Delete attempt" onclick="deleteMockAttempt('${mk.id}')">&times;</button>
+                    </div>
+                    ${mk.habits && mk.habits.length ? `<p style="font-size:12px;color:var(--text-muted);">Recurred: ${mk.habits.map(esc).join(' • ')}</p>` : ''}
+                  </article>
+                `).join('')}
+              </div>
+            ` : `
+              <p style="font-size:13px;color:var(--text-muted);text-align:center;padding:12px;">No mock runs saved yet. Complete a live 40-minute peer-marked run and tap Save above.</p>
             `}
-          </div>
-        </div>
-      `;
-    }
-
-    function renderDrillCheckRow(key, label, text, twColor) {
-      const checked = !!state.drillChecks[key];
-      return `
-        <label class="flex items-start gap-3 p-3 rounded-2xl bg-${twColor}-50/70 dark:bg-${twColor}-950/25 border-l-4 border-${twColor}-500 cursor-pointer">
-          <input
-            type="checkbox"
-            ${checked ? 'checked' : ''}
-            onchange="state.drillChecks['${key}']=!state.drillChecks['${key}']; renderApp();"
-            class="mt-0.5 w-5 h-5 accent-teal-600 rounded shrink-0"
-          />
-          <div class="text-xs sm:text-sm">
-            <span class="block text-[10px] font-extrabold uppercase tracking-wider text-${twColor}-700 dark:text-${twColor}-400">${label}</span>
-            <span class="${checked ? 'line-through text-slate-400' : 'text-slate-800 dark:text-slate-200 font-medium'}">${text}</span>
-          </div>
-        </label>
-      `;
-    }
-
-    // =========================================================================
-    // 10. VIEW 4: YEAR 3 TEMPLATE SLOTS (READY FOR JANUARY 2027)
-    // =========================================================================
-    function renderY3SlotsView() {
-      const slots = [
-        {
-          num: '01',
-          title: 'Advanced McTimoney Adjustments (Year 3 Additions)',
-          tag: 'McTimoney Y3',
-          desc: 'Template slot ready for new Year 3 toggle-recoil refinements, additional extremity/spinal checks, and clinical modifications.',
-          fields: ['Bench Set Up (Blue)', 'Patient Position (Red)', 'Practitioner Position (Green)', 'Hand Placement / Action (Pink)'],
-        },
-        {
-          num: '02',
-          title: 'Diversified Techniques',
-          tag: 'Diversified',
-          desc: 'Structured technique cards ready for Year 3 high-velocity low-amplitude (HVLA) adjustments.',
-          fields: ['Patient & Bench Setup', 'Contact Point & Segmental Contact', 'Line of Drive (LOD)', 'Pre-Load & Thrust Mechanics'],
-        },
-        {
-          num: '03',
-          title: 'Clinical Reasoning & Biomechanics Integration',
-          tag: 'Biomechanics',
-          desc: 'Decision pathways linking palpatory findings, motion palpation, and orthopaedic/neurological exam results to technique selection.',
-          fields: ['Motion Palpation Findings', 'Joint Coupling & Kinematics', 'Technique Selection Rationale', 'Re-Assessment Outcome Markers'],
-        },
-        {
-          num: '04',
-          title: 'Contraindications & Red Flag Pre-Adjustment Screening',
-          tag: 'Patient Safety',
-          desc: 'Quick-check safety guardrails before any cervical, thoracic, lumbar, or extremity adjustment.',
-          fields: ['Absolute Contraindications (HVT)', 'Relative Contraindications & Modifications', 'CAD / Vascular Screening', 'Osteoporosis & Renal Osteodystrophy Flags'],
-        },
-      ];
-
-      return `
-        <div class="space-y-5">
-          <!-- Helpful Workflow Banner -->
-          <div class="rounded-3xl bg-gradient-to-br from-teal-600 to-indigo-600 text-white p-5 sm:p-6 space-y-2 shadow-sm">
-            <span class="inline-block px-2.5 py-0.5 rounded-lg text-[10px] font-extrabold uppercase tracking-wider bg-white/20">Year 3 Ready &bull; Late Jan 2027</span>
-            <h2 class="text-lg sm:text-xl font-extrabold">How to Populate These Slots</h2>
-            <p class="text-xs sm:text-sm text-white/90 leading-relaxed">
-              Once your Year 3 Chiropractic Studies handbooks and technique sheets are released, simply upload them to your notebook and ask me to update <strong>chiro.html</strong>. Because this module lives in its own dedicated file, we can drop new techniques straight into these 4 slots in seconds without touching the rest of your website.
-            </p>
-          </div>
-
-          <!-- 4 Structured Template Cards -->
-          <div class="grid grid-cols-1 md:grid-cols-2 gap-4">
-            ${slots.map((slot) => `
-              <article class="rounded-3xl bg-white dark:bg-slate-900 border-2 border-dashed border-slate-300 dark:border-slate-700 p-5 flex flex-col justify-between gap-4">
-                <div class="space-y-2">
-                  <div class="flex items-center justify-between gap-2">
-                    <span class="px-2.5 py-0.5 rounded-lg text-[10px] font-extrabold uppercase bg-slate-100 dark:bg-slate-800 text-slate-600 dark:text-slate-300">${slot.tag}</span>
-                    <span class="text-xs font-extrabold text-slate-400">Slot ${slot.num}</span>
-                  </div>
-                  <h3 class="text-base font-extrabold text-slate-900 dark:text-white">${slot.title}</h3>
-                  <p class="text-xs sm:text-sm text-slate-500 dark:text-slate-400 leading-relaxed">${slot.desc}</p>
-                </div>
-                <div class="space-y-1.5 pt-2 border-t border-slate-100 dark:border-slate-800">
-                  <span class="text-[10px] font-extrabold uppercase tracking-wider text-slate-400">Ready-Made Fields</span>
-                  <div class="flex flex-wrap gap-1.5">
-                    ${slot.fields.map((f) => `<span class="px-2.5 py-1 rounded-lg bg-slate-50 dark:bg-slate-800 border border-slate-200 dark:border-slate-700 text-[11px] font-semibold text-slate-700 dark:text-slate-300">${f}</span>`).join('')}
-                  </div>
-                </div>
-              </article>
-            `).join('')}
-          </div>
+          </section>
         </div>
       `;
     }
 
     // =========================================================================
-    // 11. INITIALISE APP
+    // 14. RENDER TAB 4 — YEAR 3 VAULT & TECHNIQUE SRS
+    // =========================================================================
+    function renderTabVault() {
+      const card = CHIRO_SRS_CARDS[state.srsIdx % CHIRO_SRS_CARDS.length];
+      const rec = state.srs[card.id] || { box: 1 };
+      const boxNum = typeof rec.box === 'number' ? rec.box : 1;
+
+      return `
+        <div class="stack">
+          <!-- 1. Confidence-Weighted Technique & Reading SRS (8 Cards) -->
+          <section class="ah-card pad-card stack">
+            <div class="flex-between">
+              <div>
+                <span class="badge badge-purple mono">mchiro_srs_v4 &bull; mchiro_diag_v1</span>
+                <h2 style="font-size:17.5px;font-weight:800;margin-top:4px;">Technique &amp; Reading Active-Recall SRS (8 Cards)</h2>
+              </div>
+              <span class="badge badge-amber mono">Card ${state.srsIdx + 1}/${CHIRO_SRS_CARDS.length} &bull; Box ${boxNum}/5</span>
+            </div>
+
+            <article class="ah-card-alt pad-card stack">
+              <div class="flex-between">
+                <span class="badge badge-emerald">${esc(card.tag)}</span>
+                <span class="badge badge-muted mono">${esc(card.rootCause)}</span>
+              </div>
+
+              <h3 style="font-size:18px;font-weight:800;line-height:1.34;">${esc(card.q)}</h3>
+
+              ${!state.srsRevealed ? `
+                <div class="stack-sm">
+                  <span class="field-label" style="margin:0;">1. Speak the rule aloud, then rate confidence:</span>
+                  <div class="grid-3-compact">
+                    <button type="button" class="pill-btn ${state.srsConf === 'guess' ? 'active-red' : ''}" onclick="state.srsConf='guess'; renderApp();">🎲 Guess</button>
+                    <button type="button" class="pill-btn ${state.srsConf === 'unsure' ? 'active-amber' : ''}" onclick="state.srsConf='unsure'; renderApp();">🤔 Unsure</button>
+                    <button type="button" class="pill-btn ${state.srsConf === 'certain' ? 'active-emerald' : ''}" onclick="state.srsConf='certain'; renderApp();">🎯 Certain</button>
+                  </div>
+                  <button type="button" class="btn-3d btn-blue btn-full" ${state.srsConf ? '' : 'disabled'} onclick="state.srsRevealed=true; renderApp();">
+                    ${state.srsConf ? 'Reveal Model Rule &rarr;' : 'Select Confidence Pill First'}
+                  </button>
+                </div>
+              ` : `
+                <div class="sem-box sem-emerald">
+                  <span class="sem-label">Model Technique Rule</span>
+                  <p style="font-weight:600;line-height:1.5;">${esc(card.a)}</p>
+                </div>
+                <div class="grid-3-compact">
+                  <button type="button" class="btn-3d btn-red" onclick="gradeChiroSrs('${card.id}', 'again')">↺ Again</button>
+                  <button type="button" class="btn-3d btn-blue" onclick="gradeChiroSrs('${card.id}', 'good')">✓ Good</button>
+                  <button type="button" class="btn-3d btn-emerald" onclick="gradeChiroSrs('${card.id}', 'easy')">★ Easy</button>
+                </div>
+              `}
+            </article>
+          </section>
+
+          <!-- 2. Year 3 Chiropractic Studies 3 Scaffolding Vault -->
+          <section class="ah-card pad-card stack">
+            <div class="flex-between">
+              <div>
+                <span class="badge badge-emerald mono">mchiro_chiro_vault_v1 &bull; Jan 2027 Ready</span>
+                <h2 style="font-size:17.5px;font-weight:800;margin-top:4px;">Year 3 Diversified &amp; Biomechanics Vault</h2>
+              </div>
+              <button type="button" class="btn-3d btn-emerald sm" onclick="state.showAddVault=!state.showAddVault; renderApp();">
+                ${state.showAddVault ? 'Close Form' : '+ Add Technique Note'}
+              </button>
+            </div>
+
+            ${state.showAddVault ? `
+              <form onsubmit="addVaultNote(event)" class="ah-card-alt pad-card stack-sm">
+                <div class="grid-2">
+                  <div>
+                    <label class="field-label" for="vn_sec">Vault Section</label>
+                    <select id="vn_sec" class="select">
+                      ${VAULT_SECTIONS.map((s) => `<option value="${s.id}">${esc(s.title)}</option>`).join('')}
+                    </select>
+                  </div>
+                  <div>
+                    <label class="field-label" for="vn_title">Technique / Concept Title</label>
+                    <input id="vn_title" type="text" class="input" required placeholder="e.g. Lumbar Roll Side-Posture Setup" />
+                  </div>
+                </div>
+                <div>
+                  <label class="field-label" for="vn_body">Contact Point, Line of Drive &amp; Clinical Reasoning</label>
+                  <textarea id="vn_body" rows="3" class="textarea" required placeholder="Add Year 3 handbook cues, biomechanical vectors, or contraindications..."></textarea>
+                </div>
+                <div class="grid-2">
+                  <button type="button" class="btn-3d btn-neutral" onclick="state.showAddVault=false; renderApp();">Cancel</button>
+                  <button type="submit" class="btn-3d btn-emerald">Save Note</button>
+                </div>
+              </form>
+            ` : ''}
+
+            <div class="stack-sm">
+              ${VAULT_SECTIONS.map((sec) => {
+                const open = !!state.openVault[sec.id];
+                const items = state.vaultNotes.filter((n) => n.section === sec.id);
+                return `
+                  <article class="ah-card-alt" style="overflow:hidden;">
+                    <button type="button" class="acc-btn" onclick="state.openVault['${sec.id}']=!state.openVault['${sec.id}']; renderApp();">
+                      <div style="display:flex;align-items:center;gap:8px;flex-wrap:wrap;">
+                        <strong style="font-size:14px;">${esc(sec.title)}</strong>
+                        <span class="badge ${sec.badge} mono">${items.length}</span>
+                      </div>
+                      <span style="font-size:12px;font-weight:800;color:var(--text-muted);">${open ? '▲' : '▼'}</span>
+                    </button>
+
+                    ${open ? `
+                      <div class="stack-sm" style="padding:12px;border-top:1px solid var(--border-card);">
+                        ${items.length ? items.map((n) => `
+                          <div class="ah-card pad-card stack-sm" style="padding:12px 14px;">
+                            <div class="flex-between">
+                              <div style="display:flex;align-items:center;gap:6px;flex-wrap:wrap;">
+                                <strong style="font-size:14px;">${esc(n.title)}</strong>
+                                ${n.isTemplate ? `<span class="badge badge-amber">Template</span>` : `<span class="badge badge-emerald">Custom</span>`}
+                              </div>
+                              <button type="button" class="icon-del" aria-label="Delete note" onclick="deleteVaultNote('${n.id}')">&times;</button>
+                            </div>
+                            <p style="font-size:13px;color:var(--text-muted);">${esc(n.body)}</p>
+                          </div>
+                        `).join('') : `<p style="font-size:12.5px;color:var(--text-muted);padding:4px 6px;">No notes in this section yet.</p>`}
+                      </div>
+                    ` : ''}
+                  </article>
+                `;
+              }).join('')}
+            </div>
+          </section>
+        </div>
+      `;
+    }
+
+    // =========================================================================
+    // 15. INITIALISE
     // =========================================================================
     initTheme();
-    updateDueHeader();
-    renderTabBar();
+    renderTabs();
     renderApp();
   </script>
 </body>
