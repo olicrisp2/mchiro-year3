@@ -8,7 +8,7 @@
   <style>
     /* =========================================================================
        1. DESIGN TOKENS: APPLE HEALTH MINIMALIST × DUOLINGO TACTILE 3D
-       Zero external CDNs — pure system font stack & inline SVG icons.
+       Zero external CDNs, zero external fonts, zero external libraries.
        ========================================================================= */
     :root {
       --bg-page: #F2F2F7;
@@ -26,35 +26,35 @@
       --blue: #2563EB;
       --blue-dark: #1D4ED8;
       --blue-soft: rgba(37, 99, 235, 0.10);
-      --blue-border: rgba(37, 99, 235, 0.28);
+      --blue-border: rgba(37, 99, 235, 0.30);
+
+      --indigo: #4F46E5;
+      --indigo-dark: #3730A3;
+      --indigo-soft: rgba(79, 70, 229, 0.10);
+      --indigo-border: rgba(79, 70, 229, 0.30);
 
       --emerald: #059669;
       --emerald-dark: #047857;
       --emerald-soft: rgba(5, 150, 105, 0.11);
-      --emerald-border: rgba(5, 150, 105, 0.30);
+      --emerald-border: rgba(5, 150, 105, 0.32);
 
       --purple: #7C3AED;
       --purple-dark: #5B21B6;
       --purple-soft: rgba(124, 58, 237, 0.10);
       --purple-border: rgba(124, 58, 237, 0.30);
 
-      --indigo: #4F46E5;
-      --indigo-dark: #3730A3;
-      --indigo-soft: rgba(79, 70, 229, 0.10);
-      --indigo-border: rgba(79, 70, 229, 0.28);
-
-      --coral: #DC2626;
-      --coral-dark: #991B1B;
-      --coral-soft: rgba(220, 38, 38, 0.10);
-      --coral-border: rgba(220, 38, 38, 0.28);
+      --coral: #E11D48;
+      --coral-dark: #9F1239;
+      --coral-soft: rgba(225, 29, 72, 0.10);
+      --coral-border: rgba(225, 29, 72, 0.32);
 
       --amber: #D97706;
       --amber-dark: #92400E;
       --amber-soft: rgba(217, 119, 6, 0.12);
-      --amber-border: rgba(217, 119, 6, 0.32);
+      --amber-border: rgba(217, 119, 6, 0.36);
 
       --fb-correct-bg: #ECFDF5;
-      --fb-wrong-bg: #FEF2F2;
+      --fb-wrong-bg: #FFF1F2;
     }
 
     .dark {
@@ -69,23 +69,18 @@
       --text-muted: #94A3B8;
       --shadow-card: 0 4px 18px rgba(0, 0, 0, 0.48);
 
-      --blue-soft: rgba(59, 130, 246, 0.18);
-      --blue-border: rgba(96, 165, 250, 0.42);
-
-      --emerald-soft: rgba(16, 185, 129, 0.18);
-      --emerald-border: rgba(52, 211, 153, 0.40);
-
-      --purple-soft: rgba(139, 92, 246, 0.20);
-      --purple-border: rgba(167, 139, 250, 0.42);
-
+      --blue-soft: rgba(59, 130, 246, 0.19);
+      --blue-border: rgba(96, 165, 250, 0.44);
       --indigo-soft: rgba(99, 102, 241, 0.20);
-      --indigo-border: rgba(129, 140, 248, 0.42);
-
-      --coral-soft: rgba(239, 68, 68, 0.19);
-      --coral-border: rgba(248, 113, 113, 0.42);
-
-      --amber-soft: rgba(245, 158, 11, 0.20);
-      --amber-border: rgba(251, 191, 36, 0.42);
+      --indigo-border: rgba(129, 140, 248, 0.44);
+      --emerald-soft: rgba(16, 185, 129, 0.19);
+      --emerald-border: rgba(52, 211, 153, 0.42);
+      --purple-soft: rgba(139, 92, 246, 0.20);
+      --purple-border: rgba(167, 139, 250, 0.44);
+      --coral-soft: rgba(225, 29, 72, 0.22);
+      --coral-border: rgba(251, 113, 133, 0.44);
+      --amber-soft: rgba(245, 158, 11, 0.21);
+      --amber-border: rgba(251, 191, 36, 0.44);
 
       --fb-correct-bg: #07291A;
       --fb-wrong-bg: #2D0F18;
@@ -102,7 +97,7 @@
       min-height: 100vh;
       background-color: var(--bg-page);
       color: var(--text-main);
-      font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif;
+      font-family: -apple-system, BlinkMacSystemFont, "SF Pro Display", "Segoe UI", Roboto, sans-serif;
       line-height: 1.46;
       overflow-x: hidden;
       -webkit-font-smoothing: antialiased;
@@ -117,30 +112,28 @@
     .mono {
       font-family: ui-monospace, SFMono-Regular, Menlo, Monaco, Consolas, monospace;
       letter-spacing: -0.02em;
+      font-variant-numeric: tabular-nums;
     }
 
     .container {
       width: 100%;
-      max-width: 1020px;
+      max-width: 1040px;
       margin: 0 auto;
-      padding: 0 14px;
+      padding: 0 13px;
     }
-
     @media (min-width: 640px) {
       .container { padding: 0 22px; }
     }
 
-    /* Proper bottom padding on <main> so content is never hidden behind mobile nav */
     .main-stack {
       display: flex;
       flex-direction: column;
       gap: 20px;
-      padding-top: 16px;
-      padding-bottom: 104px;
+      padding-top: 15px;
+      padding-bottom: 108px;
     }
-
     @media (min-width: 769px) {
-      .main-stack { padding-bottom: 52px; }
+      .main-stack { padding-bottom: 56px; }
     }
 
     /* =========================================================================
@@ -160,7 +153,7 @@
       display: flex;
       align-items: center;
       justify-content: space-between;
-      gap: 10px;
+      gap: 8px;
       padding-top: 10px;
       padding-bottom: 10px;
     }
@@ -188,16 +181,18 @@
     }
 
     .brand-text { min-width: 0; }
-
+    .brand-title-row {
+      display: flex;
+      align-items: center;
+      gap: 7px;
+      flex-wrap: wrap;
+    }
     .brand-title {
       font-size: 15.5px;
       font-weight: 800;
       letter-spacing: -0.02em;
       white-space: nowrap;
-      overflow: hidden;
-      text-overflow: ellipsis;
     }
-
     .brand-sub {
       font-size: 11px;
       font-weight: 600;
@@ -205,12 +200,27 @@
       white-space: nowrap;
       overflow: hidden;
       text-overflow: ellipsis;
+      margin-top: 1px;
     }
+
+    .countdown-pill {
+      display: inline-flex;
+      align-items: center;
+      padding: 2px 8px;
+      border-radius: 999px;
+      background: var(--indigo-soft);
+      border: 1px solid var(--indigo-border);
+      color: var(--indigo);
+      font-size: 10.5px;
+      font-weight: 800;
+      white-space: nowrap;
+    }
+    .dark .countdown-pill { color: #A5B4FC; }
 
     .header-controls {
       display: flex;
       align-items: center;
-      gap: 7px;
+      gap: 6px;
       flex-shrink: 0;
     }
 
@@ -219,14 +229,13 @@
       align-items: center;
       gap: 4px;
       min-height: 36px;
-      padding: 6px 10px;
+      padding: 5px 10px;
       border-radius: 12px;
       background: var(--amber-soft);
       border: 1.5px solid var(--amber-border);
       color: var(--amber-dark);
       font-size: 12px;
       font-weight: 800;
-      font-variant-numeric: tabular-nums;
       white-space: nowrap;
     }
     .dark .xp-pill { color: #FCD34D; }
@@ -235,14 +244,14 @@
       display: inline-flex;
       align-items: center;
       justify-content: center;
-      gap: 5px;
+      gap: 4px;
       min-height: 36px;
-      padding: 0 11px;
+      padding: 0 10px;
       border-radius: 12px;
       border: 1px solid var(--border-soft);
       background: var(--bg-card);
       color: var(--text-main);
-      font-size: 12.5px;
+      font-size: 12px;
       font-weight: 800;
       cursor: pointer;
       transition: border-color 0.14s ease, background-color 0.14s ease;
@@ -252,13 +261,33 @@
     .hdr-btn.square { width: 36px; padding: 0; }
 
     /* =========================================================================
-       4. SHARED SURFACES, BADGES & DUOLINGO TACTILE 3D BUTTONS
+       4. SHARED SURFACES, BADGES, GRIDS & DUOLINGO TACTILE 3D BUTTONS
        ========================================================================= */
     .ah-card {
       background: var(--bg-card);
       border: 1px solid var(--border-soft);
       border-radius: 20px;
       box-shadow: var(--shadow-card);
+    }
+    .ah-card-alt {
+      background: var(--bg-subtle);
+      border: 1px solid var(--border-soft);
+      border-radius: 15px;
+    }
+    .pad-card { padding: 16px; }
+    @media (min-width: 640px) {
+      .pad-card { padding: 20px; }
+    }
+
+    .stack { display: flex; flex-direction: column; gap: 14px; }
+    .stack-sm { display: flex; flex-direction: column; gap: 9px; }
+
+    .flex-between {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      gap: 8px;
+      flex-wrap: wrap;
     }
 
     .section-head {
@@ -270,17 +299,44 @@
       margin-bottom: 11px;
       padding: 0 2px;
     }
-
     .section-title {
       font-size: 17.5px;
       font-weight: 800;
       letter-spacing: -0.02em;
     }
 
+    .grid-2 {
+      display: grid;
+      grid-template-columns: 1fr;
+      gap: 12px;
+    }
+    @media (min-width: 720px) {
+      .grid-2 { grid-template-columns: 1fr 1fr; }
+    }
+
+    .grid-3 {
+      display: grid;
+      grid-template-columns: 1fr;
+      gap: 12px;
+    }
+    @media (min-width: 780px) {
+      .grid-3 { grid-template-columns: repeat(3, 1fr); }
+    }
+
+    .grid-4 {
+      display: grid;
+      grid-template-columns: repeat(2, 1fr);
+      gap: 9px;
+    }
+    @media (min-width: 700px) {
+      .grid-4 { grid-template-columns: repeat(4, 1fr); }
+    }
+
+    /* Badges */
     .badge {
       display: inline-flex;
       align-items: center;
-      gap: 5px;
+      gap: 4px;
       padding: 4px 10px;
       border-radius: 999px;
       font-size: 11px;
@@ -290,19 +346,19 @@
     }
     .badge-blue { background: var(--blue-soft); color: var(--blue-dark); border: 1px solid var(--blue-border); }
     .dark .badge-blue { color: #93C5FD; }
+    .badge-indigo { background: var(--indigo-soft); color: var(--indigo-dark); border: 1px solid var(--indigo-border); }
+    .dark .badge-indigo { color: #C7D2FE; }
     .badge-emerald { background: var(--emerald-soft); color: var(--emerald-dark); border: 1px solid var(--emerald-border); }
     .dark .badge-emerald { color: #6EE7B7; }
     .badge-purple { background: var(--purple-soft); color: var(--purple-dark); border: 1px solid var(--purple-border); }
     .dark .badge-purple { color: #DDD6FE; }
-    .badge-indigo { background: var(--indigo-soft); color: var(--indigo-dark); border: 1px solid var(--indigo-border); }
-    .dark .badge-indigo { color: #C7D2FE; }
     .badge-coral { background: var(--coral-soft); color: var(--coral-dark); border: 1px solid var(--coral-border); }
-    .dark .badge-coral { color: #FCA5A5; }
+    .dark .badge-coral { color: #FDA4AF; }
     .badge-amber { background: var(--amber-soft); color: var(--amber-dark); border: 1px solid var(--amber-border); }
     .dark .badge-amber { color: #FDE68A; }
     .badge-muted { background: var(--bg-subtle); color: var(--text-muted); border: 1px solid var(--border-soft); }
 
-    /* Duolingo Tactile 3D Buttons (border-bottom: 4px solid ... depressing on :active) */
+    /* Duolingo-style Tactile 3D Buttons */
     .btn-3d {
       display: inline-flex;
       align-items: center;
@@ -310,34 +366,32 @@
       gap: 7px;
       min-height: 44px;
       padding: 10px 16px;
-      border-radius: 14px;
-      font-size: 14px;
+      border-radius: 15px;
+      font-size: 13.5px;
       font-weight: 800;
       letter-spacing: 0.01em;
       cursor: pointer;
       user-select: none;
       text-align: center;
-      transition: transform 0.08s ease, border-bottom-width 0.08s ease, filter 0.14s ease;
+      transition: transform 0.08s ease, border-bottom-width 0.08s ease, filter 0.14s ease, opacity 0.14s ease;
     }
     .btn-3d:hover:not(:disabled) { filter: brightness(1.06); }
     .btn-3d:active:not(:disabled) {
       transform: translateY(2px);
       border-bottom-width: 2px !important;
     }
+    .btn-3d:disabled { opacity: 0.42; cursor: not-allowed; }
+    .btn-3d.sm {
+      min-height: 36px;
+      padding: 6px 12px;
+      font-size: 12px;
+      border-radius: 12px;
+    }
     .btn-full { width: 100%; }
 
-    .btn-blue {
-      background: var(--blue);
-      color: #FFFFFF;
-      border: 2px solid var(--blue);
-      border-bottom: 4px solid var(--blue-dark);
-    }
-    .btn-emerald {
-      background: var(--emerald);
-      color: #FFFFFF;
-      border: 2px solid var(--emerald);
-      border-bottom: 4px solid var(--emerald-dark);
-    }
+    .btn-blue { background: var(--blue); color: #FFFFFF; border: 2px solid var(--blue); border-bottom: 4px solid var(--blue-dark); }
+    .btn-indigo { background: var(--indigo); color: #FFFFFF; border: 2px solid var(--indigo); border-bottom: 4px solid var(--indigo-dark); }
+    .btn-emerald { background: var(--emerald); color: #FFFFFF; border: 2px solid var(--emerald); border-bottom: 4px solid var(--emerald-dark); }
     .btn-emerald-soft {
       background: var(--emerald-soft);
       color: var(--emerald-dark);
@@ -345,24 +399,9 @@
       border-bottom: 4px solid var(--emerald);
     }
     .dark .btn-emerald-soft { color: #6EE7B7; }
-    .btn-purple {
-      background: var(--purple);
-      color: #FFFFFF;
-      border: 2px solid var(--purple);
-      border-bottom: 4px solid var(--purple-dark);
-    }
-    .btn-coral {
-      background: var(--coral);
-      color: #FFFFFF;
-      border: 2px solid var(--coral);
-      border-bottom: 4px solid var(--coral-dark);
-    }
-    .btn-amber {
-      background: var(--amber);
-      color: #FFFFFF;
-      border: 2px solid var(--amber);
-      border-bottom: 4px solid var(--amber-dark);
-    }
+    .btn-purple { background: var(--purple); color: #FFFFFF; border: 2px solid var(--purple); border-bottom: 4px solid var(--purple-dark); }
+    .btn-coral { background: var(--coral); color: #FFFFFF; border: 2px solid var(--coral); border-bottom: 4px solid var(--coral-dark); }
+    .btn-amber { background: var(--amber); color: #FFFFFF; border: 2px solid var(--amber); border-bottom: 4px solid var(--amber-dark); }
     .btn-neutral {
       background: var(--bg-subtle);
       color: var(--text-main);
@@ -370,11 +409,45 @@
       border-bottom: 4px solid var(--border-strong);
     }
 
+    /* Tactile Confidence Pills */
+    .conf-pill {
+      min-height: 40px;
+      padding: 7px 10px;
+      border-radius: 13px;
+      border: 2px solid var(--border-soft);
+      border-bottom: 3.5px solid var(--border-strong);
+      background: var(--bg-card);
+      color: var(--text-main);
+      font-size: 12.5px;
+      font-weight: 800;
+      cursor: pointer;
+      transition: transform 0.07s ease, border-color 0.14s ease, background-color 0.14s ease;
+      text-align: center;
+    }
+    .conf-pill:active:not(:disabled) { transform: translateY(1.5px); border-bottom-width: 2px; }
+    .conf-pill:disabled { cursor: default; }
+    .conf-pill.sel-coral { background: var(--coral); border-color: var(--coral); border-bottom-color: var(--coral-dark); color: #FFFFFF; }
+    .conf-pill.sel-amber { background: var(--amber); border-color: var(--amber); border-bottom-color: var(--amber-dark); color: #FFFFFF; }
+    .conf-pill.sel-emerald { background: var(--emerald); border-color: var(--emerald); border-bottom-color: var(--emerald-dark); color: #FFFFFF; }
+
+    /* Progress Bar */
+    .progress-track {
+      width: 100%;
+      height: 10px;
+      border-radius: 999px;
+      background: var(--bg-subtle);
+      overflow: hidden;
+    }
+    .progress-fill {
+      height: 100%;
+      border-radius: 999px;
+      transition: width 0.35s cubic-bezier(0.22, 1, 0.36, 1);
+    }
+
     /* =========================================================================
        5. GLOBAL INSTANT SEARCH
        ========================================================================= */
     .search-wrap { position: relative; }
-
     .search-icon {
       position: absolute;
       left: 14px;
@@ -384,12 +457,11 @@
       display: inline-flex;
       pointer-events: none;
     }
-
     .search-input {
       width: 100%;
       min-height: 48px;
       padding: 12px 44px 12px 42px;
-      border-radius: 16px;
+      border-radius: 999px;
       border: 1.5px solid var(--border-soft);
       background: var(--bg-input);
       color: var(--text-main);
@@ -404,10 +476,9 @@
       border-color: var(--blue);
       box-shadow: 0 0 0 3px var(--blue-soft);
     }
-
     .search-clear {
       position: absolute;
-      right: 10px;
+      right: 11px;
       top: 50%;
       transform: translateY(-50%);
       width: 28px;
@@ -424,240 +495,148 @@
       justify-content: center;
     }
     .search-clear.visible { display: inline-flex; }
-    .search-clear:hover { color: var(--text-main); }
-
     .search-results {
       margin-top: 8px;
       overflow: hidden;
       display: none;
+      border-radius: 18px;
     }
     .search-results.visible { display: block; }
-
     .search-row {
       display: flex;
       align-items: center;
       justify-content: space-between;
       gap: 10px;
-      padding: 11px 14px;
+      padding: 11px 15px;
       border-bottom: 1px solid var(--border-soft);
       transition: background-color 0.12s ease;
     }
     .search-row:last-child { border-bottom: none; }
     .search-row:hover { background: var(--bg-subtle); }
+    .search-row-title { font-size: 13.5px; font-weight: 700; color: var(--text-main); }
+    .search-go { font-size: 12px; font-weight: 800; color: var(--blue); flex-shrink: 0; }
 
-    .search-row-title {
-      font-size: 13.5px;
-      font-weight: 700;
-      color: var(--text-main);
+    /* =========================================================================
+       6. HERO: CONFIDENCE-WEIGHTED FAILURE-MODE TELEMETRY
+       ========================================================================= */
+    .telemetry-hero {
+      padding: 18px;
+      border: 1.5px solid var(--blue-border);
+      background: linear-gradient(155deg, var(--blue-soft), var(--bg-card) 34%, var(--bg-card) 75%, var(--coral-soft));
+      display: flex;
+      flex-direction: column;
+      gap: 15px;
     }
-    .search-row-meta {
+
+    .metric-tile {
+      padding: 12px 11px;
+      border-radius: 16px;
+      background: var(--bg-card);
+      border: 1.5px solid var(--border-soft);
+      display: flex;
+      flex-direction: column;
+      gap: 3px;
+      text-align: center;
+    }
+    .metric-tile.ok { background: var(--emerald-soft); border-color: var(--emerald-border); }
+    .metric-tile.risk { background: var(--coral-soft); border-color: var(--coral-border); }
+    .metric-tile.warn { background: var(--amber-soft); border-color: var(--amber-border); }
+    .metric-val { font-size: 20px; font-weight: 800; letter-spacing: -0.02em; }
+    .metric-lbl { font-size: 10.5px; font-weight: 800; color: var(--text-muted); text-transform: uppercase; letter-spacing: 0.03em; }
+    .metric-sub { font-size: 10.5px; font-weight: 700; color: var(--text-muted); }
+
+    /* 4 Root-Cause Breakdown Strip */
+    .rc-strip {
+      display: grid;
+      grid-template-columns: repeat(2, 1fr);
+      gap: 7px;
+    }
+    @media (min-width: 680px) {
+      .rc-strip { grid-template-columns: repeat(4, 1fr); }
+    }
+    .rc-pill {
+      padding: 8px 10px;
+      border-radius: 13px;
+      border: 1px solid var(--border-soft);
+      background: var(--bg-card);
       display: flex;
       align-items: center;
+      justify-content: space-between;
       gap: 6px;
-      margin-top: 3px;
-      flex-wrap: wrap;
-    }
-    .search-go {
-      font-size: 12px;
+      font-size: 11.5px;
       font-weight: 800;
-      color: var(--blue);
+    }
+
+    /* Top 3 High-Risk Failure Modes Cards */
+    .risk-card {
+      padding: 14px;
+      border-radius: 16px;
+      background: var(--bg-card);
+      border: 1.5px solid var(--border-soft);
+      border-left-width: 5px;
+      display: flex;
+      flex-direction: column;
+      justify-content: space-between;
+      gap: 11px;
+      box-shadow: var(--shadow-card);
+    }
+    .risk-rank {
+      width: 24px;
+      height: 24px;
+      border-radius: 8px;
+      font-size: 11.5px;
+      font-weight: 800;
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
       flex-shrink: 0;
     }
 
-    /* =========================================================================
-       6. FEATURED QUICK-LAUNCH CARD: YEAR 3 PLANNER & SCAFFOLDING
-       ========================================================================= */
-    .planner-hero {
-      padding: 18px;
-      border: 1.5px solid var(--purple-border);
-      background: linear-gradient(135deg, var(--purple-soft), var(--bg-card) 52%, var(--indigo-soft));
-      display: flex;
-      flex-direction: column;
-      gap: 14px;
-    }
-
-    .planner-top {
-      display: flex;
-      align-items: flex-start;
-      justify-content: space-between;
-      gap: 12px;
-      flex-wrap: wrap;
-    }
-
-    .planner-pills {
-      display: flex;
-      flex-wrap: wrap;
-      gap: 8px;
-    }
-
-    .planner-stat-pill {
-      display: inline-flex;
-      align-items: center;
-      gap: 6px;
-      padding: 6px 11px;
-      border-radius: 12px;
+    /* Collapsible External Verification Protocol Drawer */
+    .evp-drawer {
+      border-radius: 15px;
+      border: 1px solid var(--border-soft);
       background: var(--bg-card);
-      border: 1px solid var(--border-soft);
-      font-size: 12px;
-      font-weight: 800;
+      overflow: hidden;
+    }
+    .evp-trigger {
+      width: 100%;
+      padding: 12px 14px;
+      border: none;
+      background: transparent;
       color: var(--text-main);
-      box-shadow: 0 1px 3px rgba(15, 23, 42, 0.04);
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      gap: 10px;
+      cursor: pointer;
+      text-align: left;
+      font-size: 13px;
+      font-weight: 800;
     }
-
-    @media (min-width: 700px) {
-      .planner-bottom {
-        display: flex;
-        align-items: center;
-        justify-content: space-between;
-        gap: 14px;
-      }
-      .planner-cta { width: auto; min-width: 225px; flex-shrink: 0; }
-    }
-
-    /* =========================================================================
-       7. INTERACTIVE VISUAL LESSONS (3 CARDS)
-       ========================================================================= */
-    .lessons-grid {
+    .evp-body {
+      padding: 12px 14px 14px;
+      border-top: 1px solid var(--border-soft);
       display: grid;
       grid-template-columns: 1fr;
-      gap: 12px;
+      gap: 9px;
     }
-    @media (min-width: 780px) {
-      .lessons-grid { grid-template-columns: repeat(3, 1fr); }
+    @media (min-width: 680px) {
+      .evp-body { grid-template-columns: 1fr 1fr; }
     }
-
-    .lesson-card {
-      padding: 16px;
-      display: flex;
-      flex-direction: column;
-      justify-content: space-between;
-      gap: 14px;
-      border-width: 1.5px;
-      transition: transform 0.14s ease, border-color 0.14s ease;
-    }
-    .lesson-card:hover { transform: translateY(-2px); }
-    .lesson-card.accent-blue { border-color: var(--blue-border); }
-    .lesson-card.accent-emerald { border-color: var(--emerald-border); }
-    .lesson-card.accent-purple { border-color: var(--purple-border); }
-    .lesson-card.is-done { border-color: var(--emerald); }
-
-    .lesson-top {
-      display: flex;
-      flex-direction: column;
-      gap: 8px;
-    }
-
-    .lesson-title {
-      font-size: 15.5px;
-      font-weight: 800;
-      line-height: 1.3;
-      letter-spacing: -0.015em;
-    }
-
-    .lesson-sub {
-      font-size: 12.5px;
-      color: var(--text-muted);
-      line-height: 1.44;
-    }
-
-    /* =========================================================================
-       8. REVISION PULSE & QUICK 5-MINUTE MIX BENTO
-       ========================================================================= */
-    .pulse-bento {
-      display: grid;
-      grid-template-columns: 1fr;
-      gap: 14px;
-    }
-    @media (min-width: 740px) {
-      .pulse-bento { grid-template-columns: 1.25fr 1fr; }
-    }
-
-    .pulse-card {
-      padding: 18px;
-      display: flex;
-      flex-direction: column;
-      justify-content: space-between;
-      gap: 14px;
-    }
-
-    .countdown-row {
-      display: flex;
-      align-items: baseline;
-      justify-content: space-between;
-      gap: 8px;
-      flex-wrap: wrap;
-    }
-
-    .countdown-num {
-      font-size: 26px;
-      font-weight: 800;
-      letter-spacing: -0.03em;
-      color: var(--amber-dark);
-      font-variant-numeric: tabular-nums;
-    }
-    .dark .countdown-num { color: #FCD34D; }
-
-    .srs-grid {
-      display: grid;
-      grid-template-columns: repeat(3, 1fr);
-      gap: 8px;
-    }
-
-    .srs-tile {
-      padding: 10px 6px;
-      border-radius: 14px;
-      text-align: center;
-      border: 1px solid var(--border-soft);
+    .evp-row {
+      padding: 10px 12px;
+      border-radius: 12px;
       background: var(--bg-subtle);
-    }
-    .srs-tile.t-coral { background: var(--coral-soft); border-color: var(--coral-border); }
-    .srs-tile.t-emerald { background: var(--emerald-soft); border-color: var(--emerald-border); }
-    .srs-tile.t-blue { background: var(--blue-soft); border-color: var(--blue-border); }
-
-    .srs-val {
-      display: block;
-      font-size: 20px;
-      font-weight: 800;
-      font-variant-numeric: tabular-nums;
-    }
-    .t-coral .srs-val { color: var(--coral); }
-    .dark .t-coral .srs-val { color: #FCA5A5; }
-    .t-emerald .srs-val { color: var(--emerald-dark); }
-    .dark .t-emerald .srs-val { color: #6EE7B7; }
-    .t-blue .srs-val { color: var(--blue-dark); }
-    .dark .t-blue .srs-val { color: #93C5FD; }
-
-    .srs-lbl {
-      display: block;
-      font-size: 10.5px;
-      font-weight: 700;
-      color: var(--text-muted);
-      margin-top: 2px;
-      line-height: 1.25;
-    }
-
-    .mix-card {
-      padding: 18px;
+      border: 1px solid var(--border-soft);
       display: flex;
       flex-direction: column;
-      justify-content: space-between;
-      gap: 14px;
-      background: linear-gradient(135deg, var(--amber-soft), var(--bg-card) 58%, var(--blue-soft));
-      border: 1.5px solid var(--amber-border);
+      gap: 4px;
     }
 
     /* =========================================================================
-       9. CORE MODULE HUBS (2×2 GRID)
+       7. CORE MODULE HUBS, PLANNER CARD & VISUAL LESSONS
        ========================================================================= */
-    .modules-grid {
-      display: grid;
-      grid-template-columns: 1fr;
-      gap: 14px;
-    }
-    @media (min-width: 720px) {
-      .modules-grid { grid-template-columns: repeat(2, 1fr); }
-    }
-
     .module-card {
       padding: 18px;
       display: flex;
@@ -668,18 +647,10 @@
       transition: transform 0.14s ease;
     }
     .module-card:hover { transform: translateY(-2px); }
-
-    .mod-neuro { border-top-color: var(--blue); }
+    .mod-written { border-top-color: var(--purple); }
     .mod-msk { border-top-color: var(--coral); }
     .mod-chiro { border-top-color: var(--emerald); }
-    .mod-written { border-top-color: var(--amber); }
-
-    .mod-head {
-      display: flex;
-      align-items: flex-start;
-      justify-content: space-between;
-      gap: 10px;
-    }
+    .mod-neuro { border-top-color: var(--blue); }
 
     .mod-title {
       font-size: 16.5px;
@@ -689,7 +660,6 @@
       align-items: center;
       gap: 7px;
     }
-
     .mod-desc {
       font-size: 13px;
       color: var(--text-muted);
@@ -697,8 +667,46 @@
       line-height: 1.46;
     }
 
+    .planner-card {
+      padding: 18px;
+      border: 1.5px solid var(--indigo-border);
+      background: linear-gradient(135deg, var(--indigo-soft), var(--bg-card) 55%, var(--purple-soft));
+      display: flex;
+      flex-direction: column;
+      gap: 13px;
+    }
+    .planner-pill {
+      display: inline-flex;
+      align-items: center;
+      gap: 5px;
+      padding: 6px 11px;
+      border-radius: 11px;
+      background: var(--bg-card);
+      border: 1px solid var(--border-soft);
+      font-size: 12px;
+      font-weight: 800;
+    }
+
+    .lesson-card {
+      padding: 16px;
+      display: flex;
+      flex-direction: column;
+      justify-content: space-between;
+      gap: 13px;
+      border-width: 1.5px;
+      transition: transform 0.14s ease;
+    }
+    .lesson-card:hover { transform: translateY(-2px); }
+    .lesson-card.accent-blue { border-color: var(--blue-border); }
+    .lesson-card.accent-emerald { border-color: var(--emerald-border); }
+    .lesson-card.accent-purple { border-color: var(--purple-border); }
+    .lesson-card.is-done {
+      border-color: var(--emerald);
+      background: linear-gradient(160deg, var(--emerald-soft), var(--bg-card) 52%);
+    }
+
     /* =========================================================================
-       10. MODALS (5-MINUTE MIX & PHONE <-> LAPTOP SYNC)
+       8. MODALS (CONFIDENCE-WEIGHTED 5-MIN MIX & 9-KEY SYNC MODAL)
        ========================================================================= */
     .modal-backdrop {
       position: fixed;
@@ -710,18 +718,18 @@
       display: none;
       align-items: center;
       justify-content: center;
-      padding: 14px;
+      padding: 12px;
     }
     .modal-backdrop.open { display: flex; }
 
     .modal-box {
       width: 100%;
-      max-width: 520px;
-      max-height: 90vh;
+      max-width: 540px;
+      max-height: 92vh;
       background: var(--bg-card);
       border: 1px solid var(--border-soft);
       border-radius: 22px;
-      box-shadow: 0 20px 50px rgba(0, 0, 0, 0.35);
+      box-shadow: 0 22px 54px rgba(0, 0, 0, 0.38);
       overflow: hidden;
       display: flex;
       flex-direction: column;
@@ -729,14 +737,13 @@
     }
 
     .modal-header {
-      padding: 15px 18px;
+      padding: 14px 18px;
       border-bottom: 1px solid var(--border-soft);
       display: flex;
       align-items: center;
       justify-content: space-between;
       gap: 10px;
     }
-
     .modal-close {
       width: 32px;
       height: 32px;
@@ -755,46 +762,18 @@
     .modal-close:hover { color: var(--text-main); }
 
     .modal-body {
-      padding: 18px;
+      padding: 16px 18px;
       overflow-y: auto;
       display: flex;
       flex-direction: column;
-      gap: 14px;
-    }
-
-    .duo-bar-track {
-      width: 100%;
-      height: 12px;
-      border-radius: 999px;
-      background: var(--bg-subtle);
-      padding: 2px;
-      overflow: hidden;
-    }
-    .duo-bar-fill {
-      height: 100%;
-      border-radius: 999px;
-      background: var(--emerald);
-      transition: width 0.35s cubic-bezier(0.22, 1, 0.36, 1);
-    }
-
-    .mix-q-text {
-      font-size: 15.5px;
-      font-weight: 800;
-      line-height: 1.4;
-      letter-spacing: -0.015em;
-    }
-
-    .choice-list {
-      display: flex;
-      flex-direction: column;
-      gap: 9px;
+      gap: 13px;
     }
 
     .choice-btn {
       width: 100%;
-      min-height: 50px;
-      padding: 12px 14px;
-      border-radius: 15px;
+      min-height: 48px;
+      padding: 11px 13px;
+      border-radius: 14px;
       background: var(--bg-card);
       border: 2px solid var(--border-soft);
       border-bottom: 4px solid var(--border-strong);
@@ -802,27 +781,21 @@
       text-align: left;
       display: flex;
       align-items: center;
-      gap: 11px;
+      gap: 10px;
       cursor: pointer;
       font-size: 13.5px;
       font-weight: 600;
       line-height: 1.36;
       transition: transform 0.08s ease, border-color 0.14s ease, background-color 0.14s ease;
     }
-    .choice-btn:hover:not(:disabled) {
-      border-color: var(--blue);
-      background: var(--blue-soft);
-    }
-    .choice-btn:active:not(:disabled) {
-      transform: translateY(2px);
-      border-bottom-width: 2px;
-    }
+    .choice-btn:hover:not(:disabled) { border-color: var(--blue); background: var(--blue-soft); }
+    .choice-btn:active:not(:disabled) { transform: translateY(2px); border-bottom-width: 2px; }
     .choice-btn:disabled { cursor: default; }
 
     .choice-key {
-      width: 28px;
-      height: 28px;
-      border-radius: 9px;
+      width: 27px;
+      height: 27px;
+      border-radius: 8px;
       background: var(--bg-subtle);
       border: 1px solid var(--border-soft);
       font-size: 11.5px;
@@ -833,101 +806,55 @@
       flex-shrink: 0;
     }
 
+    .choice-btn.is-selected {
+      background: var(--blue-soft);
+      border-color: var(--blue);
+      border-bottom-color: var(--blue-dark);
+    }
+    .choice-btn.is-selected .choice-key { background: var(--blue); border-color: var(--blue); color: #FFFFFF; }
+
     .choice-btn.is-correct {
       background: var(--emerald-soft);
       border-color: var(--emerald);
       border-bottom-color: var(--emerald-dark);
     }
-    .choice-btn.is-correct .choice-key {
-      background: var(--emerald);
-      border-color: var(--emerald);
-      color: #FFFFFF;
-    }
+    .choice-btn.is-correct .choice-key { background: var(--emerald); border-color: var(--emerald); color: #FFFFFF; }
 
     .choice-btn.is-wrong {
       background: var(--coral-soft);
       border-color: var(--coral);
       border-bottom-color: var(--coral-dark);
     }
-    .choice-btn.is-wrong .choice-key {
-      background: var(--coral);
-      border-color: var(--coral);
-      color: #FFFFFF;
-    }
+    .choice-btn.is-wrong .choice-key { background: var(--coral); border-color: var(--coral); color: #FFFFFF; }
 
     .mix-feedback {
-      padding: 15px 18px;
+      padding: 14px 18px;
       border-top-width: 2.5px;
       border-top-style: solid;
       display: flex;
       flex-direction: column;
-      gap: 11px;
+      gap: 10px;
       animation: slideUp 0.2s ease-out forwards;
     }
-    .mix-feedback.correct {
-      background: var(--fb-correct-bg);
-      border-top-color: var(--emerald);
-    }
-    .mix-feedback.wrong {
-      background: var(--fb-wrong-bg);
-      border-top-color: var(--coral);
-    }
-
-    .fb-head {
-      display: flex;
-      align-items: flex-start;
-      gap: 10px;
-    }
-    .fb-dot {
-      width: 28px;
-      height: 28px;
-      border-radius: 999px;
-      color: #FFFFFF;
-      font-weight: 800;
-      font-size: 14px;
-      display: inline-flex;
-      align-items: center;
-      justify-content: center;
-      flex-shrink: 0;
-    }
-    .fb-dot.correct { background: var(--emerald); }
-    .fb-dot.wrong { background: var(--coral); }
-
-    .fb-title {
-      font-size: 14.5px;
-      font-weight: 800;
-    }
-    .fb-title.correct { color: var(--emerald-dark); }
-    .dark .fb-title.correct { color: #6EE7B7; }
-    .fb-title.wrong { color: var(--coral-dark); }
-    .dark .fb-title.wrong { color: #FCA5A5; }
-
-    .fb-pearl {
-      font-size: 13px;
-      margin-top: 2px;
-      color: var(--text-main);
-      line-height: 1.44;
-    }
+    .mix-feedback.correct { background: var(--fb-correct-bg); border-top-color: var(--emerald); }
+    .mix-feedback.wrong { background: var(--fb-wrong-bg); border-top-color: var(--coral); }
 
     .sync-textarea {
       width: 100%;
-      padding: 11px 12px;
-      border-radius: 14px;
+      padding: 10px 12px;
+      border-radius: 13px;
       border: 1.5px solid var(--border-soft);
       background: var(--bg-subtle);
       color: var(--text-main);
-      font-size: 11.5px;
+      font-size: 11px;
       line-height: 1.4;
       resize: vertical;
       word-break: break-all;
     }
-    .sync-textarea:focus {
-      outline: none;
-      border-color: var(--blue);
-    }
+    .sync-textarea:focus { outline: none; border-color: var(--blue); }
 
     /* =========================================================================
-       11. FIXED MOBILE THUMB-ZONE BOTTOM NAVIGATION BAR (6 LINKS)
+       9. FIXED 6-ITEM MOBILE BOTTOM NAVIGATION BAR & TOASTS
        ========================================================================= */
     .mobile-nav {
       position: fixed;
@@ -965,7 +892,6 @@
       font-size: 9.5px;
       font-weight: 700;
       text-align: center;
-      transition: background-color 0.14s ease, color 0.14s ease;
     }
     .mnav-link.active {
       color: var(--blue);
@@ -973,9 +899,6 @@
       font-weight: 800;
     }
 
-    /* =========================================================================
-       12. TOAST NOTIFICATIONS & ANIMATIONS
-       ========================================================================= */
     .toast-wrap {
       position: fixed;
       bottom: 88px;
@@ -989,12 +912,11 @@
     @media (min-width: 769px) {
       .toast-wrap { bottom: 20px; right: 20px; }
     }
-
     .toast {
       pointer-events: auto;
       padding: 10px 15px;
       border-radius: 14px;
-      font-size: 13px;
+      font-size: 12.5px;
       font-weight: 800;
       box-shadow: 0 8px 24px rgba(0, 0, 0, 0.24);
       background: var(--text-main);
@@ -1010,14 +932,14 @@
       to { opacity: 1; transform: scale(1) translateY(0); }
     }
     @keyframes slideUp {
-      from { opacity: 0.6; transform: translateY(14px); }
+      from { opacity: 0.6; transform: translateY(12px); }
       to { opacity: 1; transform: translateY(0); }
     }
   </style>
 </head>
 <body>
 
-  <!-- Toast Container (replaces alert/confirm) -->
+  <!-- Toast Container (Zero alert() / confirm()) -->
   <div id="toast-wrap" class="toast-wrap" aria-live="polite"></div>
 
   <!-- =========================================================================
@@ -1028,24 +950,24 @@
       <a href="index.html" class="brand" aria-label="MChiro Year 3 Hub Home">
         <div class="brand-mark">Y3</div>
         <div class="brand-text">
-          <h1 class="brand-title">MChiro Year 3 Hub</h1>
-          <p class="brand-sub">McTimoney College &bull; Jan 2027</p>
+          <div class="brand-title-row">
+            <h1 class="brand-title">MChiro Year 3 Hub</h1>
+            <span id="hdr-countdown" class="countdown-pill mono">--d to Y3</span>
+          </div>
+          <p class="brand-sub">McTimoney College &bull; Starts 25 Jan 2027</p>
         </div>
       </a>
 
       <div class="header-controls">
-        <!-- Live XP Pill (sums ul + ll + cn up to 380 XP) -->
-        <div class="xp-pill" title="Interactive Visual Lessons XP (up to 380 XP)">
+        <div class="xp-pill mono" title="Interactive Visual Lessons XP (up to 380 XP)">
           <span>⚡</span>
           <span id="header-xp">0 XP</span>
         </div>
 
-        <!-- Phone <-> Laptop Sync Button -->
-        <button type="button" class="hdr-btn" onclick="openSyncModal()" title="Phone ↔ Laptop Progress Sync">
+        <button type="button" class="hdr-btn" onclick="openSyncModal()" title="Phone ↔ Laptop 9-Key Progress Sync">
           <span>⇄ Sync</span>
         </button>
 
-        <!-- Light / Dark Mode Toggle -->
         <button
           type="button"
           id="theme-toggle-btn"
@@ -1062,7 +984,7 @@
        ========================================================================= -->
   <main class="container main-stack">
 
-    <!-- 2. GLOBAL INSTANT SEARCH BAR -->
+    <!-- 2. GLOBAL INSTANT SEARCH BAR (66+ INDEXED TOOLS & CLINICAL TOPICS) -->
     <section aria-label="Global Instant Search">
       <div class="search-wrap">
         <span class="search-icon" aria-hidden="true">
@@ -1075,8 +997,8 @@
           id="global-search"
           class="search-input"
           type="search"
-          placeholder="Search Planner, CN VII, C5–T1, OA vs RA, 1st Rib, PICO..."
-          aria-label="Search Year 3 clinical topics and tools"
+          placeholder="Search 65+ Year 3 drills, vignettes, rubrics, SVGs..."
+          aria-label="Search Year 3 clinical drills, vignettes, rubrics, and SVGs"
           oninput="handleSearch(this.value)"
         />
         <button
@@ -1090,172 +1012,40 @@
       <div id="search-results" class="ah-card search-results"></div>
     </section>
 
-    <!-- 3. FEATURED QUICK-LAUNCH CARD: YEAR 3 PLANNER & SCAFFOLDING -->
-    <section aria-label="Year 3 Planner and Scaffolding">
-      <article class="ah-card planner-hero">
-        <div class="planner-top">
-          <div>
-            <span class="badge badge-purple">New Year Ready &bull; Auto-Saving</span>
-            <h2 style="font-size:18.5px;font-weight:800;letter-spacing:-0.02em;margin-top:6px;">
-              🗓️ Year 3 Planner &amp; Scaffolding
-            </h2>
-            <p style="font-size:13px;color:var(--text-muted);margin-top:3px;">
-              Module vaults for all 7 Year 3 subjects, weighted assessment &amp; grade tracker, pre-term bridging checklist &amp; weekly routine.
-            </p>
-          </div>
-        </div>
+    <!-- 3. HERO FEATURE — CONFIDENCE-WEIGHTED FAILURE-MODE TELEMETRY -->
+    <section id="telemetry-hero-mount" aria-label="Confidence-Weighted Failure-Mode Telemetry"></section>
 
-        <div class="planner-bottom" style="display:flex;flex-direction:column;gap:12px;">
-          <div id="planner-stat-pills" class="planner-pills"></div>
-          <a href="planner.html" class="btn-3d btn-purple btn-full planner-cta">
-            Open Year 3 Planner &rarr;
-          </a>
-        </div>
-      </article>
+    <!-- 4. CORE MODULE HUBS (2×2 GRID ON DESKTOP, STACKED ON MOBILE) -->
+    <section aria-label="Core Module Hubs">
+      <div class="section-head">
+        <h2 class="section-title">Core Module Hubs</h2>
+        <span class="badge badge-muted">Ranked by Year 3 Mark-Gain ROI</span>
+      </div>
+      <div id="core-modules-grid" class="grid-2"></div>
     </section>
 
-    <!-- 4. INTERACTIVE VISUAL LESSONS (X / 3 COMPLETED) -->
-    <section id="lessons-section" aria-label="Interactive Visual Lessons">
+    <!-- 5. YEAR 3 PLANNER & SCAFFOLDING CARD -->
+    <section id="planner-card-mount" aria-label="Year 3 Planner and Scaffolding"></section>
+
+    <!-- 6. INTERACTIVE VISUAL LESSONS STRIP -->
+    <section aria-label="Interactive Visual Lessons">
       <div class="section-head">
         <h2 class="section-title">Interactive Visual Lessons</h2>
         <span id="lessons-progress-badge" class="badge badge-blue">0 / 3 Completed</span>
       </div>
-      <div id="lessons-grid" class="lessons-grid"></div>
-    </section>
-
-    <!-- 5. REVISION PULSE & QUICK 5-MINUTE MIX -->
-    <section aria-label="Revision Pulse and Quick 5-Minute Mix">
-      <div class="section-head">
-        <h2 class="section-title">Revision Pulse &amp; 5-Min Mix</h2>
-        <span class="badge badge-amber mono">Start: 25 Jan 2027</span>
-      </div>
-
-      <div class="pulse-bento">
-        <!-- Bento Card A: Countdown & Leitner SRS Pulse -->
-        <article class="ah-card pulse-card">
-          <div class="countdown-row">
-            <div>
-              <span class="badge badge-amber">Countdown to Year 3</span>
-              <div style="margin-top:6px;display:flex;align-items:baseline;gap:6px;flex-wrap:wrap;">
-                <span id="days-to-y3" class="countdown-num">--</span>
-                <span id="days-to-y3-label" style="font-size:14px;font-weight:700;color:var(--text-muted);">days remaining</span>
-              </div>
-            </div>
-            <span class="mono" style="font-size:11.5px;font-weight:800;color:var(--text-muted);">Leitner SRS</span>
-          </div>
-
-          <div class="srs-grid">
-            <div class="srs-tile t-coral">
-              <span id="srs-due" class="srs-val">0</span>
-              <span class="srs-lbl">Due Today</span>
-            </div>
-            <div class="srs-tile t-emerald">
-              <span id="srs-mastered" class="srs-val">0</span>
-              <span class="srs-lbl">Mastered (Box 4–5)</span>
-            </div>
-            <div class="srs-tile t-blue">
-              <span id="srs-total" class="srs-val">0</span>
-              <span class="srs-lbl">Total Tracked</span>
-            </div>
-          </div>
-        </article>
-
-        <!-- Bento Card B: Quick 5-Minute Mix CTA -->
-        <article class="ah-card mix-card">
-          <div>
-            <span class="badge badge-blue">Interleaved Recall</span>
-            <h3 style="font-size:17px;font-weight:800;letter-spacing:-0.02em;margin-top:8px;">Quick 5-Minute Mix</h3>
-            <p style="font-size:13px;color:var(--text-muted);margin-top:4px;">
-              5 random clinical questions across Neuro, MSK, Chiro 3 &amp; Written modules with instant 1-line clinical pearls.
-            </p>
-          </div>
-          <button type="button" class="btn-3d btn-amber btn-full" onclick="openMixModal()">
-            ⚡ Start 5-Min Mix (5 Qs)
-          </button>
-        </article>
-      </div>
-    </section>
-
-    <!-- 6. CORE MODULE HUBS (4 MODULE CARDS) -->
-    <section aria-label="Core Module Hubs">
-      <div class="section-head">
-        <h2 class="section-title">Core Module Hubs</h2>
-        <span class="badge badge-muted">4 Clinical Workspaces</span>
-      </div>
-
-      <div class="modules-grid">
-        <!-- Clinical Neurology -->
-        <article class="ah-card module-card mod-neuro">
-          <div>
-            <div class="mod-head">
-              <h3 class="mod-title"><span>🧠</span><span>Clinical Neurology</span></h3>
-              <span class="badge badge-blue">Year 2: 82%</span>
-            </div>
-            <p class="mod-desc">
-              Whole-Face CN Map, SMR Screening, Weber/Rinne &amp; Hutchinson Simulators, Spinal Cord Lesions &amp; 15-Min OSCE.
-            </p>
-          </div>
-          <a href="neuro.html" class="btn-3d btn-blue btn-full">Open Neuro Hub &rarr;</a>
-        </article>
-
-        <!-- Musculoskeletal Medicine -->
-        <article class="ah-card module-card mod-msk">
-          <div>
-            <div class="mod-head">
-              <h3 class="mod-title"><span>🦴</span><span>Musculoskeletal Medicine</span></h3>
-              <span class="badge badge-coral">Priority 1 Bridge</span>
-            </div>
-            <p class="mod-desc">
-              OA vs. RA, Metabolic Bone Disease, Renal Osteodystrophy, Red Flags &amp; Differential Tables.
-            </p>
-          </div>
-          <a href="msk.html" class="btn-3d btn-coral btn-full">Open MSK Hub &rarr;</a>
-        </article>
-
-        <!-- Chiropractic Studies 3 -->
-        <article class="ah-card module-card mod-chiro">
-          <div>
-            <div class="mod-head">
-              <h3 class="mod-title"><span>🤲</span><span>Chiropractic Studies 3</span></h3>
-              <span class="badge badge-emerald">Year 2: 78%</span>
-            </div>
-            <p class="mod-desc">
-              Full-Body McTimoney Routine, Colour-Coded Stance/Hand Steps &amp; Year 2 Practical Assessor Fixes.
-            </p>
-          </div>
-          <a href="chiro.html" class="btn-3d btn-emerald btn-full">Open Chiro 3 Hub &rarr;</a>
-        </article>
-
-        <!-- Written & Foundation -->
-        <article class="ah-card module-card mod-written">
-          <div>
-            <div class="mod-head">
-              <h3 class="mod-title"><span>✍️</span><span>Written &amp; Foundation</span></h3>
-              <span class="badge badge-amber">Clinic 3 &bull; Res 2 &bull; Phil 3 &bull; Behav</span>
-            </div>
-            <p class="mod-desc">
-              Pre-Flight Essay Scanner, Strict Rubric Auditor, PICO Builder, Study Designs &amp; BPS Triangle.
-            </p>
-          </div>
-          <a href="written.html" class="btn-3d btn-amber btn-full">Open Written Hub &rarr;</a>
-        </article>
-      </div>
+      <div id="lessons-grid" class="grid-3"></div>
     </section>
 
   </main>
 
   <!-- =========================================================================
-       8. FIXED MOBILE THUMB-ZONE BOTTOM NAVIGATION BAR (6 LINKS)
+       FIXED 6-ITEM MOBILE THUMB-ZONE BOTTOM NAVIGATION BAR
        ========================================================================= -->
   <nav class="mobile-nav" aria-label="Mobile Hub Navigation">
     <div class="mobile-nav-grid">
       <a href="index.html" class="mnav-link active" aria-current="page">
         <svg width="17" height="17" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.1" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="m3 9 9-7 9 7v11a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2z"/><polyline points="9 22 9 12 15 12 15 22"/></svg>
-        <span>Home</span>
-      </a>
-      <a href="planner.html" class="mnav-link">
-        <svg width="17" height="17" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.1" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><rect x="3" y="4" width="18" height="18" rx="2"/><line x1="16" y1="2" x2="16" y2="6"/><line x1="8" y1="2" x2="8" y2="6"/><line x1="3" y1="10" x2="21" y2="10"/></svg>
-        <span>Planner</span>
+        <span>Hub</span>
       </a>
       <a href="neuro.html" class="mnav-link">
         <svg width="17" height="17" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.1" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M9.5 2A2.5 2.5 0 0 1 12 4.5v15a2.5 2.5 0 0 1-4.96.44 2.5 2.5 0 0 1-2.96-3.08 3 3 0 0 1-.34-5.58 2.5 2.5 0 0 1 1.32-4.24 2.5 2.5 0 0 1 1.98-3A2.5 2.5 0 0 1 9.5 2Z"/><path d="M14.5 2A2.5 2.5 0 0 0 12 4.5v15a2.5 2.5 0 0 0 4.96.44 2.5 2.5 0 0 0 2.96-3.08 3 3 0 0 0 .34-5.58 2.5 2.5 0 0 0-1.32-4.24 2.5 2.5 0 0 0-1.98-3A2.5 2.5 0 0 0 14.5 2Z"/></svg>
@@ -1273,56 +1063,73 @@
         <svg width="17" height="17" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.1" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M14.5 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V7.5L14.5 2z"/><polyline points="14 2 14 8 20 8"/></svg>
         <span>Written</span>
       </a>
+      <a href="planner.html" class="mnav-link">
+        <svg width="17" height="17" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.1" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><rect x="3" y="4" width="18" height="18" rx="2"/><line x1="16" y1="2" x2="16" y2="6"/><line x1="8" y1="2" x2="8" y2="6"/><line x1="3" y1="10" x2="21" y2="10"/></svg>
+        <span>Planner</span>
+      </a>
     </div>
   </nav>
 
   <!-- =========================================================================
-       MODAL 1: QUICK 5-MINUTE MIX
+       MODAL 1: CONFIDENCE-WEIGHTED 5-MINUTE MIX
        ========================================================================= -->
-  <div id="mix-modal" class="modal-backdrop" role="dialog" aria-modal="true" aria-label="Quick 5-Minute Mix">
+  <div id="mix-modal" class="modal-backdrop" role="dialog" aria-modal="true" aria-label="Confidence-Weighted 5-Minute Mix">
     <div id="mix-box" class="modal-box"></div>
   </div>
 
   <!-- =========================================================================
-       MODAL 2: PHONE <-> LAPTOP PROGRESS SYNC (ALL 4 KEYS)
+       MODAL 2: COMPLETE PHONE <-> LAPTOP SYNC (ALL 9 HUB KEYS)
        ========================================================================= -->
-  <div id="sync-modal" class="modal-backdrop" role="dialog" aria-modal="true" aria-label="Phone and Laptop Progress Sync">
+  <div id="sync-modal" class="modal-backdrop" role="dialog" aria-modal="true" aria-label="Phone and Laptop 9-Key Progress Sync">
     <div class="modal-box">
       <div class="modal-header">
         <div>
-          <h3 style="font-size:16px;font-weight:800;">Phone &harr; Laptop Progress Sync</h3>
+          <h3 style="font-size:16px;font-weight:800;">Phone &harr; Laptop Sync (All 9 Hub Keys)</h3>
           <p style="font-size:11.5px;color:var(--text-muted);margin-top:2px;">
-            Bundles Leitner SRS, Lessons (UL/LL/CN), Year 3 Planner &amp; Theme privately.
+            Transfers Diagnostics, SRS, Lessons, Planner, Written Calibration, MSK &amp; Chiro Vaults, Mock History &amp; Theme.
           </p>
         </div>
         <button type="button" class="modal-close" onclick="closeSyncModal()" aria-label="Close Sync Modal">&times;</button>
       </div>
 
       <div class="modal-body">
-        <!-- Step 1: Export -->
-        <div style="display:flex;flex-direction:column;gap:8px;">
-          <div style="display:flex;align-items:center;justify-content:space-between;gap:8px;flex-wrap:wrap;">
-            <span class="badge badge-emerald">1. Copy From This Device</span>
-            <button type="button" class="btn-3d btn-emerald" style="min-height:36px;padding:6px 13px;font-size:12.5px;" onclick="copySyncCode()">
-              Copy Sync Code
-            </button>
+        <!-- 1. Export Base64 Sync Code -->
+        <div class="stack-sm">
+          <div class="flex-between">
+            <span class="badge badge-emerald">1. Copy Sync Code</span>
+            <button type="button" class="btn-3d btn-emerald sm" onclick="copySyncCode()">📋 Copy Sync Code</button>
           </div>
-          <textarea id="sync-export" class="sync-textarea mono" rows="3" readonly aria-label="Exported Sync Code"></textarea>
+          <textarea id="sync-export" class="sync-textarea mono" rows="3" readonly aria-label="Exported Base64 Sync Code"></textarea>
         </div>
 
-        <!-- Step 2: Import -->
-        <div style="display:flex;flex-direction:column;gap:8px;padding-top:12px;border-top:1px solid var(--border-soft);">
-          <span class="badge badge-blue" style="align-self:flex-start;">2. Restore From Another Device</span>
-          <textarea
-            id="sync-import"
-            class="sync-textarea mono"
-            rows="3"
-            placeholder="Paste sync code copied from your phone or laptop..."
-            aria-label="Paste Sync Code to Restore"
-          ></textarea>
-          <button type="button" class="btn-3d btn-blue btn-full" onclick="restoreSyncCode()">
-            Restore Progress
-          </button>
+        <!-- 2. Paste & Restore Sync Code -->
+        <div class="stack-sm" style="padding-top:10px;border-top:1px solid var(--border-soft);">
+          <span class="badge badge-blue" style="align-self:flex-start;">2. Paste &amp; Restore Sync Code</span>
+          <textarea id="sync-import" class="sync-textarea mono" rows="3" placeholder="Paste Base64 sync code from your other device..." aria-label="Paste Base64 Sync Code"></textarea>
+          <button type="button" class="btn-3d btn-blue btn-full" onclick="restoreSyncCode()">Restore From Sync Code</button>
+        </div>
+
+        <!-- 3. JSON File Backup & Import -->
+        <div class="stack-sm" style="padding-top:10px;border-top:1px solid var(--border-soft);">
+          <span class="badge badge-indigo" style="align-self:flex-start;">3. Offline .json File Backup</span>
+          <div style="display:grid;grid-template-columns:1fr 1fr;gap:8px;">
+            <button type="button" class="btn-3d btn-indigo sm btn-full" onclick="downloadJsonBackup()">⬇ Download .json</button>
+            <label class="btn-3d btn-neutral sm btn-full" style="cursor:pointer;">
+              <span>⬆ Import .json</span>
+              <input type="file" accept="application/json,.json" style="display:none;" onchange="importJsonBackup(this)" />
+            </label>
+          </div>
+        </div>
+
+        <!-- 4. Safe Clear Diagnostic Telemetry (Inline Confirmation — Zero confirm()) -->
+        <div class="stack-sm" style="padding-top:10px;border-top:1px solid var(--border-soft);">
+          <div class="flex-between">
+            <div>
+              <span class="badge badge-coral">4. Reset Telemetry Only</span>
+              <p style="font-size:11.5px;color:var(--text-muted);margin-top:3px;">Clears <span class="mono">mchiro_diag_v1</span> for a fresh 30-prompt audit (keeps SRS, lessons &amp; vaults).</p>
+            </div>
+            <div id="clear-diag-controls"></div>
+          </div>
         </div>
       </div>
     </div>
@@ -1330,8 +1137,32 @@
 
   <script>
     // =========================================================================
-    // 1. SAFE STORAGE, THEME ('mchiro_theme' — DEFAULT LIGHT) & TOASTS
+    // 1. CONSTANTS, SAFE STORAGE, THEME ('mchiro_theme') & TOASTS
     // =========================================================================
+    const SYNC_KEYS = [
+      'mchiro_diag_v1',
+      'mchiro_srs_v4',
+      'mchiro_lessons_v1',
+      'mchiro_planner_v1',
+      'mchiro_written_cal_v1',
+      'mchiro_msk_vault_v1',
+      'mchiro_chiro_mocks_v1',
+      'mchiro_chiro_vault_v1',
+      'mchiro_theme',
+    ];
+
+    const SUN_SVG = `<svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.1" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="4"/><path d="M12 2v2"/><path d="M12 20v2"/><path d="m4.93 4.93 1.41 1.41"/><path d="m17.66 17.66 1.41 1.41"/><path d="M2 12h2"/><path d="M20 12h2"/><path d="m6.34 17.66-1.41 1.41"/><path d="m19.07 4.93-1.41 1.41"/></svg>`;
+    const MOON_SVG = `<svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.1" stroke-linecap="round" stroke-linejoin="round"><path d="M12 3a6 6 0 0 0 9 9 9 9 0 1 1-9-9Z"/></svg>`;
+
+    function esc(str) {
+      return String(str == null ? '' : str)
+        .replace(/&/g, '&amp;')
+        .replace(/</g, '&lt;')
+        .replace(/>/g, '&gt;')
+        .replace(/"/g, '&quot;')
+        .replace(/'/g, '&#39;');
+    }
+
     function safeGet(key) {
       try { return localStorage.getItem(key); } catch (e) { return null; }
     }
@@ -1343,20 +1174,17 @@
     function safeJSON(raw, fallback) {
       if (!raw) return fallback;
       try {
-        const obj = JSON.parse(raw);
-        return obj && typeof obj === 'object' ? obj : fallback;
+        const parsed = JSON.parse(raw);
+        return parsed !== null && parsed !== undefined ? parsed : fallback;
       } catch (e) {
         return fallback;
       }
     }
 
-    const SUN_SVG = `<svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.1" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><circle cx="12" cy="12" r="4"/><path d="M12 2v2"/><path d="M12 20v2"/><path d="m4.93 4.93 1.41 1.41"/><path d="m17.66 17.66 1.41 1.41"/><path d="M2 12h2"/><path d="M20 12h2"/><path d="m6.34 17.66-1.41 1.41"/><path d="m19.07 4.93-1.41 1.41"/></svg>`;
-    const MOON_SVG = `<svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.1" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M12 3a6 6 0 0 0 9 9 9 9 0 1 1-9-9Z"/></svg>`;
-
     function initTheme() {
       const saved = safeGet('mchiro_theme');
-      // Default to light if not explicitly saved as dark
-      const isDark = saved === 'dark' || saved === '"dark"';
+      const prefersDark = window.matchMedia && window.matchMedia('(prefers-color-scheme: dark)').matches;
+      const isDark = saved ? (saved === 'dark' || saved === '"dark"') : prefersDark;
       applyTheme(isDark);
     }
 
@@ -1381,92 +1209,294 @@
       setTimeout(() => {
         el.style.opacity = '0';
         el.style.transform = 'translateY(8px)';
-        setTimeout(() => el.remove(), 260);
+        setTimeout(() => el.remove(), 250);
       }, 2200);
     }
 
-    // UTF-8 safe Base64 encode/decode (handles emojis & clinical symbols cleanly)
-    function encodeBase64Utf8(str) {
+    // UTF-8-safe Base64 encoding/decoding
+    function encodeBase64Utf8(jsonStr) {
+      return btoa(unescape(encodeURIComponent(jsonStr)));
+    }
+
+    function decodeBase64Utf8(b64Str) {
+      return decodeURIComponent(escape(atob(b64Str)));
+    }
+
+    // iFrame-safe clipboard copy using document.execCommand('copy')
+    function copyTextSafe(text, okMsg) {
       try {
-        if (typeof TextEncoder !== 'undefined') {
-          const bytes = new TextEncoder().encode(str);
-          let bin = '';
-          bytes.forEach((b) => { bin += String.fromCharCode(b); });
-          return btoa(bin);
-        }
-        return btoa(unescape(encodeURIComponent(str)));
+        const ta = document.createElement('textarea');
+        ta.value = text;
+        ta.style.position = 'fixed';
+        ta.style.opacity = '0';
+        document.body.appendChild(ta);
+        ta.focus();
+        ta.select();
+        document.execCommand('copy');
+        document.body.removeChild(ta);
+        showToast(okMsg || '✓ Copied!', 'emerald');
       } catch (e) {
-        return '';
+        showToast('Select and copy the text manually.', 'amber');
       }
     }
 
-    function decodeBase64Utf8(b64) {
-      const bin = atob(b64);
-      if (typeof TextDecoder !== 'undefined') {
-        const bytes = new Uint8Array(bin.length);
-        for (let i = 0; i < bin.length; i++) bytes[i] = bin.charCodeAt(i);
-        return new TextDecoder().decode(bytes);
-      }
-      return decodeURIComponent(escape(bin));
+    // =========================================================================
+    // 2. DEFENSIVE TELEMETRY PARSER ('mchiro_diag_v1') & RISK SCORING ENGINE
+    // =========================================================================
+    const uiState = {
+      showEvpDrawer: false,
+      confirmClearDiag: false,
+    };
+
+    const ROOT_CAUSE_META = {
+      knowledge_gap: { label: 'Knowledge Gap', badgeCls: 'badge-blue', border: 'var(--blue)' },
+      retrieval_slip: { label: 'Retrieval / Interference', badgeCls: 'badge-amber', border: 'var(--amber)' },
+      psychomotor: { label: 'Psychomotor / Setup', badgeCls: 'badge-coral', border: 'var(--coral)' },
+      academic_genre: { label: 'Academic Genre', badgeCls: 'badge-purple', border: 'var(--purple)' },
+    };
+
+    function normaliseRootCause(rawTag, moduleHint) {
+      const s = String(rawTag || '').toLowerCase();
+      if (s.includes('psychomotor') || s.includes('setup') || s.includes('habit') || s.includes('motor')) return 'psychomotor';
+      if (s.includes('genre') || s.includes('academic') || s.includes('essay') || s.includes('rubric')) return 'academic_genre';
+      if (s.includes('retrieval') || s.includes('interference') || s.includes('slip') || s.includes('term')) return 'retrieval_slip';
+      if (s.includes('knowledge') || s.includes('gap') || s.includes('bms')) return 'knowledge_gap';
+      const mod = String(moduleHint || '').toLowerCase();
+      if (mod.includes('chiro')) return 'psychomotor';
+      if (mod.includes('written')) return 'academic_genre';
+      return 'knowledge_gap';
     }
 
-    // =========================================================================
-    // 2. LIVE METRICS: PLANNER, LESSONS, COUNTDOWN & LEITNER SRS
-    // =========================================================================
-    function getPlannerSummary() {
-      const raw = safeGet('mchiro_planner_v1');
-      if (!raw) {
-        return {
-          modulesLabel: '7 Module Vaults',
-          assessLabel: 'Assessments: 4 Templates',
-          prepLabel: 'Pre-Term Readiness: Ready to start',
-        };
-      }
-      const data = safeJSON(raw, null);
-      if (!data) {
-        return {
-          modulesLabel: '7 Module Vaults',
-          assessLabel: 'Assessments: 4 Templates',
-          prepLabel: 'Pre-Term Readiness: Ready to start',
-        };
+    function inferModulePage(modHint, itemId, rootCause) {
+      const m = String(modHint || '').toLowerCase();
+      const id = String(itemId || '').toLowerCase();
+      if (m.includes('msk') || id.startsWith('msk_')) return { href: 'msk.html', modLabel: 'MSK Medicine' };
+      if (m.includes('chiro') || id.startsWith('chiro_')) return { href: 'chiro.html', modLabel: 'Chiro 3' };
+      if (m.includes('neuro') || id.startsWith('neuro_')) return { href: 'neuro.html', modLabel: 'Clinical Neuro' };
+      if (m.includes('written') || id.startsWith('wr_') || id.startsWith('written_')) return { href: 'written.html', modLabel: 'Written Hub' };
+      if (rootCause === 'psychomotor') return { href: 'chiro.html', modLabel: 'Chiro 3' };
+      if (rootCause === 'academic_genre') return { href: 'written.html', modLabel: 'Written Hub' };
+      return { href: 'msk.html', modLabel: 'MSK Medicine' };
+    }
+
+    function humaniseItemLabel(rawLabel, itemId) {
+      if (rawLabel && String(rawLabel).trim()) return String(rawLabel).trim();
+      const id = String(itemId || 'Clinical Item');
+      const map = {
+        msk_vig_1: 'Septic Arthritis vs. Acute Gout Triage',
+        msk_vig_2: 'CKD → Renal Osteodystrophy Pathway',
+        msk_vig_3: 'Rheumatoid Arthritis (RA) Early Synovitis',
+        msk_vig_4: 'Osteoarthritis (OA) vs. RA Differentiation',
+        msk_vig_5: 'Acute Coronary Syndrome / STEMI Emergency',
+        msk_vig_6: 'Malignant Hypertensive Emergency (≥180/120)',
+        msk_vig_7: 'Addisonian (Adrenal) Crisis Emergency',
+        msk_vig_8: "Paget's Disease of Bone (Isolated ↑ ALP)",
+        msk_vig_9: 'Osteomalacia & Looser Zones',
+        msk_vig_10: "Crohn's Disease vs. Ulcerative Colitis",
+        msk_vig_11: 'Cauda Equina Syndrome (CES) Red Flag',
+        msk_vig_12: 'Nephrotic vs. Nephritic Syndrome',
+        neuro_sp_1: 'Radial Nerve (EXTENSORS — Olivia Y2 Slip)',
+        neuro_sp_2: 'Cervical Myotomes C5–T1 (Name Exact Muscles)',
+        neuro_sp_3: 'Lower Limb Myotomes L2–S1 & 1+–4+ Reflexes',
+        neuro_sp_4: 'CN VII Facial (Taste, Salivation & Hyperacusis)',
+        neuro_sp_5: 'CN VIII Vestibulocochlear (Hearing + Balance)',
+        neuro_sp_6: 'CN II Optic (Visual Neglect & Ophthalmoscopy)',
+        neuro_sp_7: 'CN III/V Unticked Checks & LFCN Thigh',
+      };
+      if (map[id]) return map[id];
+      return id.replace(/[_-]+/g, ' ').replace(/\b\w/g, (c) => c.toUpperCase());
+    }
+
+    function formatRelativeSeen(ts) {
+      if (!ts) return 'Recently';
+      const diffHrs = (Date.now() - ts) / 3600000;
+      if (diffHrs < 1) return 'Just now';
+      if (diffHrs < 24) return 'Today';
+      const days = Math.floor(diffHrs / 24);
+      return days === 1 ? 'Yesterday' : `${days}d ago`;
+    }
+
+    /**
+     * Defensively parses mchiro_diag_v1 whether stored as:
+     * - Array of log objects
+     * - Object containing .events / .logs / .history array
+     * - Keyed map of objects
+     */
+    function parseDiagEvents() {
+      const raw = safeJSON(safeGet('mchiro_diag_v1'), null);
+      if (!raw) return [];
+
+      let list = [];
+      if (Array.isArray(raw)) {
+        list = raw;
+      } else if (typeof raw === 'object') {
+        if (Array.isArray(raw.events)) list = raw.events;
+        else if (Array.isArray(raw.logs)) list = raw.logs;
+        else if (Array.isArray(raw.history)) list = raw.history;
+        else {
+          list = Object.entries(raw).map(([k, v]) =>
+            v && typeof v === 'object' ? Object.assign({ id: k }, v) : null
+          );
+        }
       }
 
-      const modCount = Array.isArray(data.modules) && data.modules.length ? data.modules.length : 7;
+      return list
+        .filter((e) => e && typeof e === 'object')
+        .map((e, idx) => {
+          const itemId = e.itemId || e.id || `item_${idx}`;
+          const modHint = e.module || e.source || '';
+          const rawRc = e.rootCause || e.rootCauseTag || e.tag || e.category || '';
+          const rootCause = normaliseRootCause(rawRc, modHint);
+          const conf = String(e.confidence || 'unsure').toLowerCase();
+          const confidence = (conf === 'certain' || conf === 'guess' || conf === 'unsure') ? conf : 'unsure';
+          const correct = Boolean(e.correct);
+          const ts = Number(e.ts || e.timestamp || Date.now());
+          const label = humaniseItemLabel(e.label || e.title, itemId);
+          const page = inferModulePage(modHint, itemId, rootCause);
+          return {
+            itemId,
+            label,
+            module: page.modLabel,
+            href: page.href,
+            rootCause,
+            confidence,
+            correct,
+            isRedFlag: Boolean(e.isRedFlag),
+            triageCorrect: e.triageCorrect !== undefined ? Boolean(e.triageCorrect) : correct,
+            ts,
+          };
+        });
+    }
 
-      let assessLabel = 'Assessments: 4 Templates';
-      if (Array.isArray(data.assessments)) {
-        const upcoming = data.assessments.filter((a) => a && a.status !== 'Submitted' && a.status !== 'Graded').length;
-        assessLabel = `Assessments: ${upcoming} Upcoming`;
+    function appendDiagEvent(evt) {
+      const raw = safeJSON(safeGet('mchiro_diag_v1'), null);
+      if (raw && !Array.isArray(raw) && Array.isArray(raw.events)) {
+        raw.events.push(evt);
+        if (raw.events.length > 600) raw.events.splice(0, raw.events.length - 600);
+        safeSet('mchiro_diag_v1', JSON.stringify(raw));
+      } else if (raw && !Array.isArray(raw) && Array.isArray(raw.logs)) {
+        raw.logs.push(evt);
+        if (raw.logs.length > 600) raw.logs.splice(0, raw.logs.length - 600);
+        safeSet('mchiro_diag_v1', JSON.stringify(raw));
+      } else {
+        const arr = Array.isArray(raw) ? raw : [];
+        arr.push(evt);
+        if (arr.length > 600) arr.splice(0, arr.length - 600);
+        safeSet('mchiro_diag_v1', JSON.stringify(arr));
+      }
+    }
+
+    const BASELINE_BOTTLENECKS = [
+      {
+        isBaseline: true,
+        rootCause: 'academic_genre',
+        title: 'Clinic Studies II (64% → 70%+)',
+        meta: 'Baseline Priority • Run Blind Historical Calibration & Paragraph X-Ray',
+        href: 'written.html',
+      },
+      {
+        isBaseline: true,
+        rootCause: 'knowledge_gap',
+        title: 'BMS I/II Bottleneck (52% → 66%)',
+        meta: 'Baseline Priority • Drill Context-Blind Vignettes & Renal/OA-RA Domino Chains',
+        href: 'msk.html',
+      },
+      {
+        isBaseline: true,
+        rootCause: 'psychomotor',
+        title: 'Chiro Studies II (78% / 22 Lost Marks)',
+        meta: 'Baseline Priority • Run the 14-Trap Spoken Setup Interrupter',
+        href: 'chiro.html',
+      },
+    ];
+
+    function buildTelemetryModel() {
+      const events = parseDiagEvents();
+      const total = events.length;
+      const correctCount = events.filter((e) => e.correct).length;
+      const overallAcc = total > 0 ? Math.round((correctCount / total) * 100) : null;
+
+      const certainEvts = events.filter((e) => e.confidence === 'certain');
+      const highConfErrors = certainEvts.filter((e) => !e.correct).length;
+      const highConfRate = certainEvts.length > 0 ? Math.round((highConfErrors / certainEvts.length) * 100) : null;
+
+      // 4 Root-Cause error counts
+      const rcErrors = { knowledge_gap: 0, retrieval_slip: 0, psychomotor: 0, academic_genre: 0 };
+      const byItem = {};
+      const now = Date.now();
+
+      events.forEach((e) => {
+        if (!e.correct) {
+          rcErrors[e.rootCause] = (rcErrors[e.rootCause] || 0) + 1;
+          if (!byItem[e.itemId]) {
+            byItem[e.itemId] = {
+              itemId: e.itemId,
+              title: e.label,
+              rootCause: e.rootCause,
+              href: e.href,
+              hcErr: 0,
+              otherErr: 0,
+              lastTs: 0,
+            };
+          }
+          if (e.confidence === 'certain') byItem[e.itemId].hcErr++;
+          else byItem[e.itemId].otherErr++;
+          if (e.ts > byItem[e.itemId].lastTs) byItem[e.itemId].lastTs = e.ts;
+        }
+      });
+
+      // Rank logged failure modes: risk = (hcErr * 3) + (otherErr * 1.5) + recency boost
+      const rankedDynamic = Object.values(byItem)
+        .map((it) => {
+          const ageDays = Math.max(0, (now - it.lastTs) / 86400000);
+          const recencyBoost = Math.max(0, 1.5 - ageDays * 0.25);
+          const risk = it.hcErr * 3 + it.otherErr * 1.5 + recencyBoost;
+          const errParts = [];
+          if (it.hcErr > 0) errParts.push(`${it.hcErr} High-Conf Slip${it.hcErr > 1 ? 's' : ''}`);
+          if (it.otherErr > 0) errParts.push(`${it.otherErr} Miss${it.otherErr > 1 ? 'es' : ''}`);
+          errParts.push(`Last seen ${formatRelativeSeen(it.lastTs)}`);
+          return {
+            isBaseline: false,
+            rootCause: it.rootCause,
+            title: it.title,
+            meta: errParts.join(' • '),
+            href: it.href,
+            risk,
+          };
+        })
+        .sort((a, b) => b.risk - a.risk);
+
+      // Fill up to 3 slots, backfilling with Baseline Year 2 -> Year 3 Bottlenecks
+      const top3 = rankedDynamic.slice(0, 3);
+      for (let i = 0; top3.length < 3 && i < BASELINE_BOTTLENECKS.length; i++) {
+        const b = BASELINE_BOTTLENECKS[i];
+        if (!top3.some((x) => x.href === b.href && x.rootCause === b.rootCause)) {
+          top3.push(b);
+        }
+      }
+      // Guarantee 3 slots even if same href appeared
+      for (let i = 0; top3.length < 3 && i < BASELINE_BOTTLENECKS.length; i++) {
+        if (!top3.includes(BASELINE_BOTTLENECKS[i])) top3.push(BASELINE_BOTTLENECKS[i]);
       }
 
-      let prepLabel = 'Pre-Term Readiness: Ready to start';
-      if (Array.isArray(data.prepTasks) && data.prepTasks.length > 0) {
-        const done = data.prepTasks.filter((t) => t && t.done).length;
-        const pct = Math.round((done / data.prepTasks.length) * 100);
-        prepLabel = `Pre-Term Readiness: ${pct}%`;
-      }
+      // MSK Delayed Transfer Verification stats
+      const mskEvts = events.filter((e) => e.href === 'msk.html');
+      const mskAcc = mskEvts.length ? Math.round((mskEvts.filter((e) => e.correct).length / mskEvts.length) * 100) : null;
+      const mskRf = mskEvts.filter((e) => e.isRedFlag);
+      const mskRfAcc = mskRf.length ? Math.round((mskRf.filter((e) => e.triageCorrect).length / mskRf.length) * 100) : null;
 
       return {
-        modulesLabel: `${modCount} Module Vaults`,
-        assessLabel,
-        prepLabel,
+        total,
+        overallAcc,
+        certainCount: certainEvts.length,
+        highConfErrors,
+        highConfRate,
+        rcErrors,
+        top3,
+        mskCount: mskEvts.length,
+        mskAcc,
+        mskRfAcc,
       };
-    }
-
-    function getLessonsSummary() {
-      const data = safeJSON(safeGet('mchiro_lessons_v1'), {});
-      const ulDone = Boolean(data.ul && data.ul.completed);
-      const llDone = Boolean(data.ll && data.ll.completed);
-      const cnDone = Boolean(data.cn && data.cn.completed);
-
-      const ulXp = ulDone ? (Number(data.ul.xp) || 120) : 0;
-      const llXp = llDone ? (Number(data.ll.xp) || 120) : 0;
-      const cnXp = cnDone ? (Number(data.cn.xp) || 140) : 0;
-
-      const completedCount = (ulDone ? 1 : 0) + (llDone ? 1 : 0) + (cnDone ? 1 : 0);
-      const totalXp = Math.min(380, ulXp + llXp + cnXp);
-
-      return { ulDone, llDone, cnDone, completedCount, totalXp };
     }
 
     function getSrsSummary() {
@@ -1474,197 +1504,470 @@
       const entries = Object.values(data).filter((r) => r && typeof r === 'object');
       const now = Date.now();
       let due = 0;
-      let mastered = 0;
-
       entries.forEach((rec) => {
-        const dueAt = rec.dueAt !== undefined ? Number(rec.dueAt) : (rec.nextDue !== undefined ? Number(rec.nextDue) : 0);
-        const box = rec.box;
-        const lvl = rec.level;
-
-        const isMastered =
-          box === 'solid' ||
-          (typeof box === 'number' && box >= 4) ||
-          (typeof lvl === 'number' && lvl >= 2);
-
-        const isDueNow =
-          box === 'again' ||
-          (typeof box === 'number' && box <= 1) ||
-          (dueAt > 0 && now >= dueAt);
-
-        if (isDueNow) due++;
-        else if (isMastered) mastered++;
+        const dueAt = Number(rec.dueAt || rec.nextDue || rec.nextReview || 0);
+        const isDue = rec.box === 'again' || (typeof rec.box === 'number' && rec.box <= 1) || (dueAt > 0 && now >= dueAt);
+        if (isDue) due++;
       });
-
-      return { due, mastered, total: entries.length };
+      return { due, total: entries.length };
     }
 
-    function renderDashboard() {
-      // 1) Planner Quick-Launch Live Pills
-      const pl = getPlannerSummary();
-      document.getElementById('planner-stat-pills').innerHTML = `
-        <span class="planner-stat-pill">📚 ${pl.modulesLabel}</span>
-        <span class="planner-stat-pill">📅 ${pl.assessLabel}</span>
-        <span class="planner-stat-pill">🚀 ${pl.prepLabel}</span>
-      `;
+    function getLessonsSummary() {
+      const data = safeJSON(safeGet('mchiro_lessons_v1'), {});
+      const ulDone = Boolean(data.ul && data.ul.completed);
+      const llDone = Boolean(data.ll && data.ll.completed);
+      const cnDone = Boolean(data.cn && data.cn.completed);
+      const totalXp = Math.min(380,
+        (ulDone ? (Number(data.ul.xp) || 120) : 0) +
+        (llDone ? (Number(data.ll.xp) || 120) : 0) +
+        (cnDone ? (Number(data.cn.xp) || 140) : 0)
+      );
+      return {
+        ulDone, llDone, cnDone,
+        completedCount: (ulDone ? 1 : 0) + (llDone ? 1 : 0) + (cnDone ? 1 : 0),
+        totalXp,
+      };
+    }
 
-      // 2) Live XP & 3 Interactive Visual Lessons
+    function getWrittenCalSummary() {
+      const cal = safeJSON(safeGet('mchiro_written_cal_v1'), null);
+      if (!cal || typeof cal !== 'object') return { count: 0, calibratedCount: 0 };
+      const refs = { clinic2: 64, phil2: 72, res1: 78 };
+      let count = 0;
+      let calibratedCount = 0;
+      Object.entries(refs).forEach(([k, official]) => {
+        const val = cal[k] && cal[k].predicted !== undefined ? String(cal[k].predicted).trim() : '';
+        const num = parseFloat(val);
+        if (val !== '' && !isNaN(num)) {
+          count++;
+          if (Math.abs(num - official) <= 5) calibratedCount++;
+        }
+      });
+      return { count, calibratedCount };
+    }
+
+    function getChiroMocksSummary() {
+      const arr = safeJSON(safeGet('mchiro_chiro_mocks_v1'), []);
+      if (!Array.isArray(arr) || !arr.length) return { count: 0, latest: null, best: null };
+      const latest = arr[0];
+      const best = arr.reduce((m, x) => Math.max(m, Number(x.sec2Total) || 0), 0);
+      return { count: arr.length, latest, best };
+    }
+
+    function getPlannerSummary() {
+      const data = safeJSON(safeGet('mchiro_planner_v1'), null);
+      if (!data || typeof data !== 'object') {
+        return { vaults: 7, assessTxt: 'Assessments: 4 Templates', readinessPct: 0, readinessTxt: 'Pre-Term Readiness: 0%' };
+      }
+      const vaults = Array.isArray(data.modules) && data.modules.length ? data.modules.length : 7;
+      let assessTxt = 'Assessments: 4 Templates';
+      if (Array.isArray(data.assessments)) {
+        const up = data.assessments.filter((a) => a && a.status !== 'Submitted' && a.status !== 'Graded').length;
+        assessTxt = `Assessments: ${up} Upcoming`;
+      }
+      let readinessPct = 0;
+      if (Array.isArray(data.prepTasks) && data.prepTasks.length) {
+        const done = data.prepTasks.filter((t) => t && t.done).length;
+        readinessPct = Math.round((done / data.prepTasks.length) * 100);
+      }
+      return { vaults, assessTxt, readinessPct, readinessTxt: `Pre-Term Readiness: ${readinessPct}%` };
+    }
+
+    // =========================================================================
+    // 3. RENDER ENTIRE DASHBOARD
+    // =========================================================================
+    function renderDashboard() {
+      // Header Countdown & XP
+      const y3Date = new Date('2027-01-25T09:00:00Z');
+      const daysLeft = Math.max(0, Math.ceil((y3Date.getTime() - Date.now()) / 86400000));
+      const cdEl = document.getElementById('hdr-countdown');
+      if (cdEl) cdEl.textContent = daysLeft > 0 ? `${daysLeft}d to Y3` : 'Y3 Active!';
+
       const ls = getLessonsSummary();
       document.getElementById('header-xp').textContent = `${ls.totalXp} XP`;
 
-      const progBadge = document.getElementById('lessons-progress-badge');
-      progBadge.textContent = `${ls.completedCount} / 3 Completed`;
-      progBadge.className = ls.completedCount === 3 ? 'badge badge-emerald' : 'badge badge-blue';
+      const tel = buildTelemetryModel();
+      const srs = getSrsSummary();
+      const wcal = getWrittenCalSummary();
+      const cmock = getChiroMocksSummary();
+      const plan = getPlannerSummary();
+
+      // 3. HERO TELEMETRY SECTION
+      const hcCls = tel.highConfRate === null ? '' : (tel.highConfRate < 10 ? 'ok' : 'risk');
+      const hcVal = tel.highConfRate === null ? '--' : `${tel.highConfRate}%`;
+      const hcSub = tel.highConfRate === null
+        ? 'Target: <10%'
+        : (tel.highConfRate < 10 ? '✓ Calibrated (<10%)' : '⚠ Overconfident (≥10%)');
+
+      const auditReady = tel.total >= 30 && tel.highConfRate !== null && tel.highConfRate < 10;
+
+      document.getElementById('telemetry-hero-mount').innerHTML = `
+        <article class="ah-card telemetry-hero">
+          <div class="flex-between">
+            <div>
+              <span class="badge badge-blue mono">Live Telemetry &bull; mchiro_diag_v1</span>
+              <h2 style="font-size:19px;font-weight:800;letter-spacing:-0.02em;margin-top:5px;">
+                Confidence-Weighted Failure-Mode Radar
+              </h2>
+            </div>
+            <button type="button" class="btn-3d btn-amber sm" onclick="openMixModal()">
+              ⚡ Launch Confidence-Weighted 5-Min Mix
+            </button>
+          </div>
+
+          <!-- 4-Metric Calibration & Risk Strip -->
+          <div class="grid-4">
+            <div class="metric-tile ${tel.total >= 30 ? 'ok' : ''}">
+              <span class="metric-lbl">Logged Prompts</span>
+              <span class="metric-val mono" style="color:var(--blue);">${tel.total} / 30</span>
+              <span class="metric-sub">30-Prompt Audit</span>
+            </div>
+
+            <div class="metric-tile ${tel.overallAcc !== null ? (tel.overallAcc >= 80 ? 'ok' : 'warn') : ''}">
+              <span class="metric-lbl">Overall Accuracy</span>
+              <span class="metric-val mono">${tel.overallAcc !== null ? tel.overallAcc + '%' : '--'}</span>
+              <span class="metric-sub">${tel.total > 0 ? `${tel.total} graded` : 'No drills yet'}</span>
+            </div>
+
+            <div class="metric-tile ${hcCls}">
+              <span class="metric-lbl">High-Conf Error</span>
+              <span class="metric-val mono" style="color:${tel.highConfRate !== null && tel.highConfRate >= 10 ? 'var(--coral)' : 'var(--emerald)'};">${hcVal}</span>
+              <span class="metric-sub">${hcSub}</span>
+            </div>
+
+            <div class="metric-tile ${srs.due > 0 ? 'warn' : 'ok'}">
+              <span class="metric-lbl">SRS Due / Active</span>
+              <span class="metric-val mono">${srs.due} / ${srs.total}</span>
+              <span class="metric-sub">mchiro_srs_v4</span>
+            </div>
+          </div>
+
+          <!-- 4 Root-Cause Breakdown Pills -->
+          <div class="rc-strip">
+            <div class="rc-pill" style="border-left:4px solid var(--blue);">
+              <span>Knowledge Gap</span>
+              <span class="badge badge-blue mono">${tel.rcErrors.knowledge_gap}</span>
+            </div>
+            <div class="rc-pill" style="border-left:4px solid var(--amber);">
+              <span>Retrieval / Slip</span>
+              <span class="badge badge-amber mono">${tel.rcErrors.retrieval_slip}</span>
+            </div>
+            <div class="rc-pill" style="border-left:4px solid var(--coral);">
+              <span>Psychomotor</span>
+              <span class="badge badge-coral mono">${tel.rcErrors.psychomotor}</span>
+            </div>
+            <div class="rc-pill" style="border-left:4px solid var(--purple);">
+              <span>Academic Genre</span>
+              <span class="badge badge-purple mono">${tel.rcErrors.academic_genre}</span>
+            </div>
+          </div>
+
+          <!-- Top 3 High-Risk Failure Modes Queue -->
+          <div class="stack-sm">
+            <div class="flex-between">
+              <span style="font-size:12px;font-weight:800;text-transform:uppercase;letter-spacing:0.04em;color:var(--text-muted);">
+                Top 3 High-Risk Failure Modes Queue
+              </span>
+              <span style="font-size:11px;font-weight:700;color:var(--text-muted);">
+                Ranked by High-Conf Slips &times; 3 + Misses &times; 1.5
+              </span>
+            </div>
+
+            <div class="grid-3">
+              ${tel.top3.map((item, idx) => {
+                const meta = ROOT_CAUSE_META[item.rootCause] || ROOT_CAUSE_META.knowledge_gap;
+                return `
+                  <article class="risk-card" style="border-left-color:${meta.border};">
+                    <div class="stack-sm" style="gap:7px;">
+                      <div class="flex-between">
+                        <div style="display:flex;align-items:center;gap:6px;">
+                          <span class="risk-rank ${meta.badgeCls} mono">#${idx + 1}</span>
+                          <span class="badge ${meta.badgeCls}">${meta.label}</span>
+                        </div>
+                        ${item.isBaseline ? `<span class="badge badge-muted">Baseline Priority</span>` : `<span class="badge badge-coral">Live Slip</span>`}
+                      </div>
+                      <h3 style="font-size:14.5px;font-weight:800;line-height:1.3;">${esc(item.title)}</h3>
+                      <p style="font-size:12px;color:var(--text-muted);font-weight:600;">${esc(item.meta)}</p>
+                    </div>
+                    <a href="${esc(item.href)}" class="btn-3d btn-blue sm btn-full">Fix Now &rarr;</a>
+                  </article>
+                `;
+              }).join('')}
+            </div>
+          </div>
+
+          <!-- Collapsible External Verification Protocol (30-Prompt Audit) -->
+          <div class="evp-drawer">
+            <button type="button" class="evp-trigger" onclick="uiState.showEvpDrawer=!uiState.showEvpDrawer; renderDashboard();">
+              <div style="display:flex;align-items:center;gap:8px;flex-wrap:wrap;">
+                <span class="badge badge-emerald">External Verification Protocol</span>
+                <span>30-Prompt Audit &amp; Objective Pass Gates</span>
+              </div>
+              <span style="font-size:12px;color:var(--text-muted);">${uiState.showEvpDrawer ? '▲' : '▼'}</span>
+            </button>
+
+            ${uiState.showEvpDrawer ? `
+              <div class="evp-body">
+                <div class="evp-row">
+                  <div class="flex-between">
+                    <strong style="font-size:12.5px;">1. Written Blind Calibration</strong>
+                    <span class="badge ${wcal.calibratedCount >= 1 ? 'badge-emerald' : 'badge-muted'} mono">
+                      ${wcal.count > 0 ? `${wcal.calibratedCount}/${wcal.count} within ±5%` : 'Not logged'}
+                    </span>
+                  </div>
+                  <p style="font-size:11.5px;color:var(--text-muted);">Verify Y2 scripts (64% / 72% / 78%) within ±5% in <a href="written.html" style="color:var(--blue);font-weight:700;">written.html</a>.</p>
+                </div>
+
+                <div class="evp-row">
+                  <div class="flex-between">
+                    <strong style="font-size:12.5px;">2. MSK 14-Day Delayed Transfer</strong>
+                    <span class="badge ${tel.mskAcc !== null && tel.mskAcc >= 80 && (tel.mskRfAcc === null || tel.mskRfAcc === 100) ? 'badge-emerald' : 'badge-amber'} mono">
+                      ${tel.mskAcc !== null ? `${tel.mskAcc}% • RF ${tel.mskRfAcc !== null ? tel.mskRfAcc + '%' : '—'}` : 'Target ≥80% / 100% RF'}
+                    </span>
+                  </div>
+                  <p style="font-size:11.5px;color:var(--text-muted);">≥80% unseen blind accuracy &amp; 100% urgent Red-Flag triage in <a href="msk.html" style="color:var(--blue);font-weight:700;">msk.html</a>.</p>
+                </div>
+
+                <div class="evp-row">
+                  <div class="flex-between">
+                    <strong style="font-size:12.5px;">3. Chiro Cold Peer-Mock</strong>
+                    <span class="badge ${cmock.best !== null && cmock.best >= 85 ? 'badge-emerald' : 'badge-muted'} mono">
+                      ${cmock.count > 0 ? `Best: ${cmock.best}/100` : 'Target ≥85/100'}
+                    </span>
+                  </div>
+                  <p style="font-size:11.5px;color:var(--text-muted);">≥85/100 with 0 recurring Y2 habits on Charley's sheet in <a href="chiro.html" style="color:var(--blue);font-weight:700;">chiro.html</a>.</p>
+                </div>
+
+                <div class="evp-row">
+                  <div class="flex-between">
+                    <strong style="font-size:12.5px;">4. Calibration Gap (30 Prompts)</strong>
+                    <span class="badge ${auditReady ? 'badge-emerald' : 'badge-blue'} mono">
+                      ${tel.total}/30 &bull; HC ${hcVal}
+                    </span>
+                  </div>
+                  <p style="font-size:11.5px;color:var(--text-muted);">Keep High-Confidence Error Rate strictly &lt;10% across 30+ mixed prompts.</p>
+                </div>
+              </div>
+            ` : ''}
+          </div>
+        </article>
+      `;
+
+      // 4. CORE MODULE HUBS (2×2 GRID)
+      document.getElementById('core-modules-grid').innerHTML = `
+        <!-- Written & Foundation -->
+        <article class="ah-card module-card mod-written">
+          <div>
+            <div class="flex-between">
+              <h3 class="mod-title"><span>📝</span><span>Written &amp; Foundation</span></h3>
+              <span class="badge badge-purple">Clinic II 64% &bull; Phil II 72% &bull; Res I 78%</span>
+            </div>
+            <p class="mod-desc">
+              Calibrated Essay Auditor, Paragraph X-Ray, Few-Shot Anti-Inflation Prompt, Clinic 3 (64%&rarr;70%+), PICO/PECO &amp; BPS Triangle.
+            </p>
+            ${wcal.count > 0 ? `
+              <div style="margin-top:8px;">
+                <span class="badge badge-emerald mono">✓ Blind Calibration: ${wcal.calibratedCount}/${wcal.count} within ±5%</span>
+              </div>
+            ` : ''}
+          </div>
+          <a href="written.html" class="btn-3d btn-purple btn-full">Open Written Hub &rarr;</a>
+        </article>
+
+        <!-- MSK Medicine & BMS -->
+        <article class="ah-card module-card mod-msk">
+          <div>
+            <div class="flex-between">
+              <h3 class="mod-title"><span>🦴</span><span>MSK Medicine &amp; BMS</span></h3>
+              <span class="badge badge-coral">BMS I 52% &rarr; II 66% &bull; Top Bottleneck</span>
+            </div>
+            <p class="mod-desc">
+              12 Context-Blind Vignettes &amp; SCT, Healthy vs. OA vs. RA Joint SVG, 5 Causal Domino Chains, 14 BMS SRS Cards &amp; Ortho/ABCS Vault.
+            </p>
+          </div>
+          <a href="msk.html" class="btn-3d btn-coral btn-full">Open MSK Hub &rarr;</a>
+        </article>
+
+        <!-- Chiropractic Studies 3 -->
+        <article class="ah-card module-card mod-chiro">
+          <div>
+            <div class="flex-between">
+              <h3 class="mod-title"><span>🙌</span><span>Chiropractic Studies 3</span></h3>
+              <span class="badge badge-emerald">Chiro II 78% &bull; 22 Marks to Recover</span>
+            </div>
+            <p class="mod-desc">
+              14-Trap Spoken Setup Interrupter, Reading Terminology Table, 4-Colour McTimoney Full-Body Flow &amp; 40-Min Live Mock Grader.
+            </p>
+            ${cmock.latest ? `
+              <div style="margin-top:8px;">
+                <span class="badge ${cmock.latest.sec2Total >= 85 ? 'badge-emerald' : 'badge-amber'} mono">
+                  Latest Mock: ${cmock.latest.sec2Total}/100 (${cmock.latest.habitsCount} slips)
+                </span>
+              </div>
+            ` : ''}
+          </div>
+          <a href="chiro.html" class="btn-3d btn-emerald btn-full">Open Chiro 3 Hub &rarr;</a>
+        </article>
+
+        <!-- Clinical Neurology -->
+        <article class="ah-card module-card mod-neuro">
+          <div>
+            <div class="flex-between">
+              <h3 class="mod-title"><span>🧠</span><span>Clinical Neurology</span></h3>
+              <span class="badge badge-blue">Neuro 82% &bull; Year 3 Additions</span>
+            </div>
+            <p class="mod-desc">
+              5 Interactive Atlas SVGs (UL/LL Roots &amp; Peripherals, Whole-Face CN), 18-Drill Blank-Slate Spoken OSCE, Simulators &amp; 15-Min OSCE.
+            </p>
+          </div>
+          <a href="neuro.html" class="btn-3d btn-blue btn-full">Open Neuro Hub &rarr;</a>
+        </article>
+      `;
+
+      // 5. YEAR 3 PLANNER & SCAFFOLDING CARD
+      document.getElementById('planner-card-mount').innerHTML = `
+        <article class="ah-card planner-card">
+          <div class="flex-between">
+            <div>
+              <span class="badge badge-indigo">January 2027 Onboarding &bull; Auto-Saving</span>
+              <h2 style="font-size:18px;font-weight:800;letter-spacing:-0.02em;margin-top:5px;">
+                📅 Year 3 Planner &amp; Scaffolding
+              </h2>
+              <p style="font-size:13px;color:var(--text-muted);margin-top:2px;">
+                Module vaults for all 7 Year 3 subjects, weighted assessment &amp; grade tracker, pre-term bridging checklist &amp; weekly routine.
+              </p>
+            </div>
+            <a href="planner.html" class="btn-3d btn-indigo" style="min-width:210px;">Open Year 3 Planner &rarr;</a>
+          </div>
+
+          <div style="display:flex;flex-wrap:wrap;gap:8px;">
+            <span class="planner-pill">📚 ${plan.vaults} Module Vaults</span>
+            <span class="planner-pill">📅 ${plan.assessTxt}</span>
+            <span class="planner-pill">🚀 ${plan.readinessTxt}</span>
+          </div>
+
+          <div class="progress-track">
+            <div class="progress-fill" style="width:${plan.readinessPct}%;background:linear-gradient(90deg, var(--indigo), var(--emerald));"></div>
+          </div>
+        </article>
+      `;
+
+      // 6. INTERACTIVE VISUAL LESSONS STRIP
+      const badgeEl = document.getElementById('lessons-progress-badge');
+      badgeEl.textContent = `${ls.completedCount} / 3 Completed • ${ls.totalXp} / 380 XP`;
+      badgeEl.className = ls.completedCount === 3 ? 'badge badge-emerald mono' : 'badge badge-blue mono';
 
       const lessonsMeta = [
-        {
-          key: 'ul',
-          done: ls.ulDone,
-          xp: 120,
-          accent: 'accent-blue',
-          btnCls: 'btn-blue',
-          href: 'lesson-ul.html',
-          title: 'Lesson 1: Upper Limb SMR & Peripheral Nerves',
-          desc: 'C5–T1 dermatomes, myotomes, reflexes & UL peripheral nerves • +120 XP',
-        },
-        {
-          key: 'll',
-          done: ls.llDone,
-          xp: 120,
-          accent: 'accent-emerald',
-          btnCls: 'btn-emerald',
-          href: 'lesson-ll.html',
-          title: 'Lesson 2: Lower Limb SMR & Peripheral Nerves',
-          desc: 'L2–S1 sculpted leg, 5-toe foot & LL peripheral nerves • +120 XP',
-        },
-        {
-          key: 'cn',
-          done: ls.cnDone,
-          xp: 140,
-          accent: 'accent-purple',
-          btnCls: 'btn-purple',
-          href: 'lesson-cn.html',
-          title: 'Lesson 3: Cranial Nerves I–XII & Eye/Face Lab',
-          desc: 'CN V map, H-Test moving pupils & CN VII UMN/LMN • +140 XP',
-        },
+        { done: ls.ulDone, xp: 120, accent: 'accent-blue', btnCls: 'btn-blue', href: 'lesson-ul.html', title: 'Lesson 1: Upper Limb SMR', desc: 'C5–T1 dermatomes, exact myotomes, 0–4 reflexes & UL peripheral nerves (+120 XP).' },
+        { done: ls.llDone, xp: 120, accent: 'accent-emerald', btnCls: 'btn-emerald', href: 'lesson-ll.html', title: 'Lesson 2: Lower Limb SMR', desc: 'Sculpted L2–S1 leg, 5-toe foot, 1+–4+ reflexes & LL peripheral nerves (+120 XP).' },
+        { done: ls.cnDone, xp: 140, accent: 'accent-purple', btnCls: 'btn-purple', href: 'lesson-cn.html', title: 'Lesson 3: Cranial Nerves I–XII', desc: 'CN V map, H-Test moving pupils, CN VII UMN/LMN & Bulbar deviations (+140 XP).' },
       ];
 
       document.getElementById('lessons-grid').innerHTML = lessonsMeta.map((l) => `
         <article class="ah-card lesson-card ${l.done ? 'is-done' : l.accent}">
-          <div class="lesson-top">
-            <div style="display:flex;align-items:center;justify-content:space-between;gap:8px;">
+          <div class="stack-sm" style="gap:7px;">
+            <div>
               ${l.done
                 ? `<span class="badge badge-emerald">✓ Completed &bull; +${l.xp} XP</span>`
-                : `<span class="badge badge-blue">Live &bull; 5 min</span>`
-              }
+                : `<span class="badge badge-blue">Guided Lesson &bull; +${l.xp} XP</span>`}
             </div>
-            <h3 class="lesson-title">${l.title}</h3>
-            <p class="lesson-sub">${l.desc}</p>
+            <h3 style="font-size:15.5px;font-weight:800;line-height:1.28;">${l.title}</h3>
+            <p style="font-size:12.5px;color:var(--text-muted);">${l.desc}</p>
           </div>
           <a href="${l.href}" class="btn-3d ${l.done ? 'btn-emerald-soft' : l.btnCls} btn-full">
             ${l.done ? 'Review Lesson &rarr;' : 'Start Lesson &rarr;'}
           </a>
         </article>
       `).join('');
-
-      // 3) Live Countdown to January 25, 2027
-      const y3Date = new Date('2027-01-25T09:00:00Z');
-      const diffDays = Math.ceil((y3Date.getTime() - Date.now()) / 86400000);
-      const cdNum = document.getElementById('days-to-y3');
-      const cdLbl = document.getElementById('days-to-y3-label');
-      if (diffDays <= 0) {
-        cdNum.textContent = 'Year 3 Active!';
-        cdLbl.textContent = '';
-      } else {
-        cdNum.textContent = String(diffDays);
-        cdLbl.textContent = 'days to Jan 25, 2027';
-      }
-
-      // 4) Live Leitner SRS Pulse
-      const srs = getSrsSummary();
-      document.getElementById('srs-due').textContent = String(srs.due);
-      document.getElementById('srs-mastered').textContent = String(srs.mastered);
-      document.getElementById('srs-total').textContent = String(srs.total);
     }
 
     // =========================================================================
-    // 3. GLOBAL INSTANT SEARCH (60 ITEMS ACROSS ALL 8 FILES)
+    // 4. GLOBAL INSTANT SEARCH (66 ITEMS ACROSS ALL 9 FILES)
     // =========================================================================
     const SEARCH_INDEX = [
-      // Planner & Scaffolding (planner.html)
-      { title: 'Year 3 Planner & Scaffolding Hub', mod: 'Planner', cls: 'badge-purple', href: 'planner.html', keys: 'year 3 planner scaffolding timetable onboarding january 2027' },
-      { title: '7 Module Vaults (Handbook Slots, Syllabus & Scratchpads)', mod: 'Planner', cls: 'badge-purple', href: 'planner.html', keys: 'module vaults 7 modules handbook leader syllabus lecture checklist scratchpad' },
-      { title: 'Assessment & Deadline Tracker (Weightings & Countdown)', mod: 'Planner', cls: 'badge-purple', href: 'planner.html', keys: 'assessment tracker deadlines due dates weightings status template' },
-      { title: 'Weighted Year 3 Average Grade Calculator', mod: 'Planner', cls: 'badge-purple', href: 'planner.html', keys: 'weighted average grade calculator actual target percentage' },
-      { title: 'Pre-Term Readiness & Bridging Checklist (Priority 1–3)', mod: 'Planner', cls: 'badge-purple', href: 'planner.html', keys: 'pre term readiness bridging checklist score milestones' },
-      { title: 'Term-Time Weekly Study Routine Builder', mod: 'Planner', cls: 'badge-purple', href: 'planner.html', keys: 'weekly study routine monday sunday morning afternoon evening timetable' },
-      { title: 'Module Reading Lists & JSON/Base64 Backup', mod: 'Planner', cls: 'badge-purple', href: 'planner.html', keys: 'reading list textbooks sources json backup restore sync' },
-
-      // Lesson 1: Upper Limb (lesson-ul.html)
-      { title: 'Lesson 1: Upper Limb SMR & Peripheral Nerves (C5–T1)', mod: 'Lesson 1', cls: 'badge-blue', href: 'lesson-ul.html', keys: 'upper limb smr lesson 1 arm 5 fingers spotlight c5 c6 c7 c8 t1' },
-      { title: 'C5 Dermatome, Myotome (Biceps/Deltoid) & Biceps Reflex', mod: 'Lesson 1', cls: 'badge-blue', href: 'lesson-ul.html', keys: 'c5 lateral upper arm biceps deltoid shoulder abduction elbow flexion reflex' },
-      { title: 'C6 Dermatome (Thumb/Index), Wrist Extensors & Brachioradialis', mod: 'Lesson 1', cls: 'badge-blue', href: 'lesson-ul.html', keys: 'c6 lateral forearm thumb index 1st finger wrist extensors biceps brachioradialis' },
-      { title: 'C7 Dermatome (Middle Finger), Triceps & Wrist Flexors', mod: 'Lesson 1', cls: 'badge-blue', href: 'lesson-ul.html', keys: 'c7 middle finger triceps wrist flexors elbow extension reflex' },
-      { title: 'C8 Dermatome (Ring/Little) & Flexor Digitorum Profundus (DIP)', mod: 'Lesson 1', cls: 'badge-blue', href: 'lesson-ul.html', keys: 'c8 ring 4th little 5th finger flexor digitorum profundus fdp dip joint' },
-      { title: 'T1 Dermatome (Medial Forearm) & Interossei (5th Abduction)', mod: 'Lesson 1', cls: 'badge-blue', href: 'lesson-ul.html', keys: 't1 medial wrist elbow forearm interossei 5th finger abduction' },
-      { title: 'Radial vs. Median Trap (EXTENSORS Wrist Drop vs. FLEXORS)', mod: 'Lesson 1', cls: 'badge-blue', href: 'lesson-ul.html', keys: 'radial median trap extensors flexors wrist drop palmar dorsal lateral 2/3' },
-      { title: 'Axillary ("Military Patch") & Ulnar Nerve (FCU / Intrinsic Hand)', mod: 'Lesson 1', cls: 'badge-blue', href: 'lesson-ul.html', keys: 'axillary military patch deltoid teres minor ulnar fcu medial hand' },
-
-      // Lesson 2: Lower Limb (lesson-ll.html)
-      { title: 'Lesson 2: Lower Limb SMR & Peripheral Nerves (L2–S1)', mod: 'Lesson 2', cls: 'badge-emerald', href: 'lesson-ll.html', keys: 'lower limb smr lesson 2 sculpted leg 5 toes sole spotlight l2 l3 l4 l5 s1' },
-      { title: 'L2 Dermatome & Hip Flexors (Iliopsoas, Sartorius, Pectineus)', mod: 'Lesson 2', cls: 'badge-emerald', href: 'lesson-ll.html', keys: 'l2 anterior upper thigh hip flexion iliopsoas sartorius pectineus no reflex' },
-      { title: 'L3 Dermatome (Ant. Lower Thigh) & Quadriceps', mod: 'Lesson 2', cls: 'badge-emerald', href: 'lesson-ll.html', keys: 'l3 anterior lower thigh knee extension quadriceps patellar' },
-      { title: 'L4 Dermatome (Medial Shin), Tibialis Anterior & Patellar Reflex', mod: 'Lesson 2', cls: 'badge-emerald', href: 'lesson-ll.html', keys: 'l4 medial lower leg ankle tibialis anterior dorsiflexion heel walk patellar 1+ 4+' },
-      { title: 'L5 Dermatome (Dorsum/Hallux), EHL & NO Standard Reflex', mod: 'Lesson 2', cls: 'badge-emerald', href: 'lesson-ll.html', keys: 'l5 lateral lower leg dorsum foot hallux extensor hallucis longus ehl no reflex' },
-      { title: 'S1 Dermatome (Post. Calf/Lat. Foot), Gastroc/Soleus & Achilles', mod: 'Lesson 2', cls: 'badge-emerald', href: 'lesson-ll.html', keys: 's1 lateral foot posterior calf gastrocnemius soleus plantarflexion toe walk achilles 1+ 4+' },
-      { title: 'Fibular (Peroneal) Nerve (Foot Drop) vs. Tibial Nerve (Sole)', mod: 'Lesson 2', cls: 'badge-emerald', href: 'lesson-ll.html', keys: 'fibular peroneal foot drop steppage dorsum tibial sole plantar sciatic' },
-      { title: 'Femoral, Obturator & Lateral Cutaneous Thigh (LFCN Purely Sensory)', mod: 'Lesson 2', cls: 'badge-emerald', href: 'lesson-ll.html', keys: 'femoral saphenous obturator adductors lfcn lateral cutaneous thigh purely sensory' },
-
-      // Lesson 3: Cranial Nerves (lesson-cn.html)
-      { title: 'Lesson 3: Cranial Nerves I–XII & Eye/Face Lab', mod: 'Lesson 3', cls: 'badge-purple', href: 'lesson-cn.html', keys: 'cranial nerves lesson 3 cn i ii iii iv v vi vii viii ix x xi xii eye face lab' },
-      { title: 'CN V Trigeminal Face Map (V1/V2/V3 & Spared Jaw Angle)', mod: 'Lesson 3', cls: 'badge-purple', href: 'lesson-cn.html', keys: 'cn v trigeminal v1 v2 v3 ophthalmic maxillary mandibular jaw jerk c2 c3 spared angle' },
-      { title: 'H-Test Extraocular Eye Lab (LR6 SO4, All the Rest 3 + Pupils)', mod: 'Lesson 3', cls: 'badge-purple', href: 'lesson-cn.html', keys: 'h test extraocular eyes lr6 so4 cn iii iv vi oculomotor trochlear abducens moving pupils' },
-      { title: 'CN VII Facial Nerve: UMN (Forehead Spared) vs. LMN (Bell’s Palsy)', mod: 'Lesson 3', cls: 'badge-purple', href: 'lesson-cn.html', keys: 'cn vii facial nerve umn lmn bells palsy forehead spared frontalis orbicularis taste hyperacusis' },
-      { title: 'Bulbar Deviation Trap: CN X Uvula (AWAY) vs. CN XII Tongue (TOWARD)', mod: 'Lesson 3', cls: 'badge-purple', href: 'lesson-cn.html', keys: 'cn ix x xi xii uvula away scm trapezius hypoglossal tongue toward licks lesion' },
-
-      // Clinical Neurology (neuro.html)
-      { title: 'Interactive Whole-Face Cranial Nerve Map (CN I–XII)', mod: 'Neuro', cls: 'badge-blue', href: 'neuro.html', keys: 'whole face cn map cranial nerves interactive face eyes ears mouth tongue shoulders' },
-      { title: 'SMR Screening Matrix & Grading Scales (MRC 1–5, UL 0–4, LL 1+–4+)', mod: 'Neuro', cls: 'badge-blue', href: 'neuro.html', keys: 'smr screening grading scales mrc reflexes sensation 0 2 paraesthesia allodynia' },
-      { title: 'Weber’s & Rinne’s Hearing Simulator (512 Hz)', mod: 'Neuro', cls: 'badge-blue', href: 'neuro.html', keys: 'weber rinne 512hz conductive sensorineural hearing lateralise ac bc cn viii' },
-      { title: 'Hutchinson Pupil 4-Stage Stepper (Cerebral Compression)', mod: 'Neuro', cls: 'badge-blue', href: 'neuro.html', keys: 'hutchinson pupil raised icp cn iii miosis mydriasis blown uncal herniation' },
-      { title: 'Beighton Scale (Hypermobility 0–9 Calculator)', mod: 'Neuro', cls: 'badge-blue', href: 'neuro.html', keys: 'beighton scale hypermobility 0 9 elbow knee thumb little finger palms' },
-      { title: 'Glasgow Coma Scale (GCS 3–15 Calculator)', mod: 'Neuro', cls: 'badge-blue', href: 'neuro.html', keys: 'gcs glasgow coma scale eye verbal motor trauma consciousness' },
-      { title: 'CAD Screening (5Ds/3Ns), Dix-Hallpike (BPPV) & Fitz-Ritson’s', mod: 'Neuro', cls: 'badge-blue', href: 'neuro.html', keys: 'cad cervical arterial dysfunction 5ds 3ns dix hallpike bppv fitz ritson dizziness' },
-      { title: 'Spinal Cord Cross-Section (DCML, STT, CST & Anterior Horn)', mod: 'Neuro', cls: 'badge-blue', href: 'neuro.html', keys: 'spinal cord lesions tracts dcml dorsal column spinothalamic stt corticospinal cst 128hz' },
-      { title: 'Brain Lesions: Broca’s, Wernicke’s, Arcuate, Neglect & Fusiform', mod: 'Neuro', cls: 'badge-blue', href: 'neuro.html', keys: 'broca wernicke arcuate fasciculus right parietal hemispatial neglect fusiform cerebellum' },
-      { title: '15-Minute Neuro OSCE Timer & 8-Section Testing Overview', mod: 'Neuro', cls: 'badge-blue', href: 'neuro.html', keys: '15 min osce timer cerebellar romberg tandem gait babinski hoffmann clonus checklist' },
-
-      // Musculoskeletal Medicine (msk.html)
-      { title: 'OA vs. RA Joint Pathology, Cytokines (TNF-α/IL-1/IL-6) & DMARDs', mod: 'MSK', cls: 'badge-coral', href: 'msk.html', keys: 'oa vs ra osteoarthritis rheumatoid arthritis cartilage osteophyte pannus synovitis morning stiffness dmards' },
-      { title: 'CKD → Renal Osteodystrophy 5-Step Domino Pathway', mod: 'MSK', cls: 'badge-coral', href: 'msk.html', keys: 'ckd renal osteodystrophy phosphate vitamin d calcitriol hypocalcaemia secondary hyperparathyroidism pth' },
-      { title: 'Metabolic Bone: Osteoporosis, Osteopenia, Osteomalacia & Paget’s', mod: 'MSK', cls: 'badge-coral', href: 'msk.html', keys: 'metabolic bone osteoporosis osteopenia osteomalacia pagets dexa t score alp looser zones' },
-      { title: 'Hot Swollen Joint: Septic Arthritis vs. Acute Gout / Pseudogout', mod: 'MSK', cls: 'badge-coral', href: 'msk.html', keys: 'gout pseudogout septic arthritis hot swollen joint podagra msu crystals fever emergency' },
-      { title: 'Cauda Equina Syndrome (CES) Red Flags & Same-Day MRI', mod: 'MSK', cls: 'badge-coral', href: 'msk.html', keys: 'cauda equina ces red flags saddle anaesthesia bladder bowel bilateral sciatica mri' },
-      { title: 'Cardiovascular Red Flags: ACS (Angina/NSTEMI/STEMI) & HTN Crisis', mod: 'MSK', cls: 'badge-coral', href: 'msk.html', keys: 'acs angina nstemi stemi troponin hypertension 180 120 red flags chest pain' },
-      { title: 'Addisonian Crisis, Tumour Grading vs. Staging (TNM) & IBD', mod: 'MSK', cls: 'badge-coral', href: 'msk.html', keys: 'addisonian adrenal crisis tumour grading staging tnm metastases crohns ulcerative colitis' },
-      { title: 'MSK SAQ / LAQ Point-by-Point Self-Marking Bank', mod: 'MSK', cls: 'badge-coral', href: 'msk.html', keys: 'msk saq laq short long answer exam practice differential tables' },
-
-      // Chiropractic Studies 3 (chiro.html)
-      { title: '54-Step McTimoney Full-Body Check Routine (4-Colour Key)', mod: 'Chiro 3', cls: 'badge-emerald', href: 'chiro.html', keys: 'mctimoney routine full body check 54 steps bench patient practitioner hand placement' },
-      { title: 'Atlas Palpation & Adjustment (Anteriority Side & Elbow Cue)', mod: 'Chiro 3', cls: 'badge-emerald', href: 'chiro.html', keys: 'atlas adjustment anteriority ttr horse stance elbow accuracy mastoid jaw' },
-      { title: 'Cervical Spine Caterpillar Palpation & Strikes (Nail 2)', mod: 'Chiro 3', cls: 'badge-emerald', href: 'chiro.html', keys: 'cervical strikes caterpillar nail 2 outer foot narrow fencing stance' },
-      { title: 'Pelvic Adjustments: Rotation, Tilt (Chin Tuck) & Torsion I / II', mod: 'Chiro 3', cls: 'badge-emerald', href: 'chiro.html', keys: 'pelvic rotation posterior tilt chin tuck sternum torsion 1 2 male female nail 3' },
-      { title: '1st Rib ("Superman" & Crisp Nail Hand) & Posterior Ribs', mod: 'Chiro 3', cls: 'badge-emerald', href: 'chiro.html', keys: '1st rib posterior ribs superman follow through nail hand curled rugby ball' },
-      { title: 'Prone Spine Palpation in Threes, Double Transfers & PSIS / SIJ', mod: 'Chiro 3', cls: 'badge-emerald', href: 'chiro.html', keys: 'prone spine palpation threes double transfer roll on off psis sij clavicle' },
-      { title: '40-Minute Chiropractic Practical Simulator & Year 2 Fixes', mod: 'Chiro 3', cls: 'badge-emerald', href: 'chiro.html', keys: '40 min practical simulator timer year 2 assessor feedback fixes' },
+      // Hub Telemetry (index.html)
+      { title: 'Confidence-Weighted Failure-Mode Radar (mchiro_diag_v1)', mod: 'Hub', cls: 'badge-blue', href: 'index.html', keys: 'telemetry failure mode radar calibration high confidence errors top 3' },
+      { title: 'External Verification Protocol (30-Prompt Audit)', mod: 'Hub', cls: 'badge-emerald', href: 'index.html', keys: 'external verification protocol 30 prompt audit pass gates calibration' },
 
       // Written & Foundation (written.html)
-      { title: 'Pre-Flight Essay Scanner (Word Count ±10%, 1st-Person, Quotes)', mod: 'Written', cls: 'badge-amber', href: 'written.html', keys: 'pre flight essay scanner word count first person voice direct quotes citation density' },
-      { title: 'Harvard Referencing Rules & Strict Rubric Auditor', mod: 'Written', cls: 'badge-amber', href: 'written.html', keys: 'harvard referencing reference list bibliography page numbers rubric auditor strict marking prompt' },
-      { title: 'Clinic Studies 3: Borton’s Framework & 70%+ Critical Evaluation', mod: 'Written', cls: 'badge-amber', href: 'written.html', keys: 'clinic studies 3 borton what so what now what critical evaluation description 70' },
-      { title: 'Research 2: Interactive PICO Builder & Study Design Matrix', mod: 'Written', cls: 'badge-amber', href: 'written.html', keys: 'research 2 pico builder population intervention comparison outcome rct cohort case control bias' },
-      { title: 'Biostatistics & Paradigm Flashcards (SnNout, SpPin, NNT, CI)', mod: 'Written', cls: 'badge-amber', href: 'written.html', keys: 'biostatistics snnout sppin nnt confidence interval p value ontology epistemology positivism' },
-      { title: 'Behavioural Sciences: Biopsychosocial (BPS) Triangle & Yellow Flags', mod: 'Written', cls: 'badge-amber', href: 'written.html', keys: 'behavioural sciences biopsychosocial bps triangle yellow flags abcdefw fear avoidance motivational interviewing' },
-      { title: 'Philosophy 3: Vitalism vs. Materialism, Popper & 4 Pillars of Ethics', mod: 'Written', cls: 'badge-amber', href: 'written.html', keys: 'philosophy 3 vitalism materialism holism reductionism popper falsifiability evidence informed ethics' },
+      { title: 'Calibrated Essay Auditor (Paragraph-Level X-Ray)', mod: 'Written', cls: 'badge-purple', href: 'written.html', keys: 'calibrated essay auditor paragraph x ray citation density evaluative depth first person' },
+      { title: 'Few-Shot Anti-Inflation Strict Marking Prompt', mod: 'Written', cls: 'badge-purple', href: 'written.html', keys: 'strict marking prompt anti inflation 16 19 simon dann rubric' },
+      { title: 'Blind Historical Calibration Tracker (64% / 72% / 78%)', mod: 'Written', cls: 'badge-purple', href: 'written.html', keys: 'blind historical calibration year 2 scripts 64 72 78 mchiro_written_cal_v1' },
+      { title: 'Clinic Studies 3: 64% Descriptive → 70%+ Critical Upgrade Lab', mod: 'Written', cls: 'badge-purple', href: 'written.html', keys: 'clinic studies 3 borton what so what now what critical evaluation 64 70' },
+      { title: 'Harvard Referencing Gate (Quote Page Numbers & Reference List)', mod: 'Written', cls: 'badge-purple', href: 'written.html', keys: 'harvard referencing direct quotes page number p pp reference list bibliography software' },
+      { title: 'Research 2: Interactive PICO / PECO Builder', mod: 'Written', cls: 'badge-purple', href: 'written.html', keys: 'research 2 pico peco builder population intervention comparison outcome timeframe' },
+      { title: 'Study Design & Bias Matrix (SR, RCT, Cohort, Case-Control, Qual)', mod: 'Written', cls: 'badge-purple', href: 'written.html', keys: 'study design bias matrix rct cohort case control cross sectional qualitative casp' },
+      { title: 'Biostatistics Confidence-Weighted SRS (p-value, 95% CI, SnNOut, NNT)', mod: 'Written', cls: 'badge-purple', href: 'written.html', keys: 'biostatistics p value confidence interval snnout sppin nnt type 1 2 error positivism' },
+      { title: 'Interactive Biopsychosocial (BPS) SVG Triangle', mod: 'Written', cls: 'badge-purple', href: 'written.html', keys: 'bps biopsychosocial triangle biological psychological social patient centred svg' },
+      { title: 'Clinical Flags Colour Matrix (Red, Orange, Yellow ABCDEFW, Blue, Black)', mod: 'Written', cls: 'badge-purple', href: 'written.html', keys: 'clinical flags red orange yellow abcdefw blue black fear avoidance motivational interviewing' },
+      { title: 'Philosophy 3 Active-Recall Deck (Vitalism, Holism, Popper, Ethics)', mod: 'Written', cls: 'badge-purple', href: 'written.html', keys: 'philosophy 3 vitalism materialism holism reductionism popper falsifiability subluxation gcc ethics' },
+
+      // MSK Medicine & BMS (msk.html)
+      { title: '12 Context-Blind Clinical Vignettes & Script Concordance (SCT)', mod: 'MSK', cls: 'badge-coral', href: 'msk.html', keys: 'context blind vignettes sct script concordance triage 999 gp differential' },
+      { title: 'Healthy vs. Osteoarthritis (OA) vs. Rheumatoid Arthritis (RA) Joint SVG', mod: 'MSK', cls: 'badge-coral', href: 'msk.html', keys: 'oa vs ra joint svg cartilage osteophyte pannus synovitis tnf il1 il6 dmards morning stiffness' },
+      { title: 'Causal Domino Chain: CKD → Renal Osteodystrophy', mod: 'MSK', cls: 'badge-coral', href: 'msk.html', keys: 'ckd renal osteodystrophy domino chain phosphate calcitriol hypocalcaemia pth hyperparathyroidism' },
+      { title: 'Causal Domino Chain: RA Synovitis & Pannus Erosion', mod: 'MSK', cls: 'badge-coral', href: 'msk.html', keys: 'ra synovitis pannus domino chain cytokines anti ccp osteoclast erosion' },
+      { title: 'Causal Domino Chain: Atherosclerosis → ACS / STEMI', mod: 'MSK', cls: 'badge-coral', href: 'msk.html', keys: 'atherosclerosis acs stemi nstemi angina domino chain plaque rupture troponin nitric oxide' },
+      { title: 'Causal Domino Chain: Asthma IgE Cascade & β₂ Rescue (cAMP)', mod: 'MSK', cls: 'badge-coral', href: 'msk.html', keys: 'asthma ige mast cell beta 2 agonist salbutamol camp steroids montelukast' },
+      { title: 'Causal Domino Chain: Addisonian (Adrenal) Crisis', mod: 'MSK', cls: 'badge-coral', href: 'msk.html', keys: 'addisonian adrenal crisis cortisol aldosterone hyponatraemia hyperkalaemia hyperpigmentation 999' },
+      { title: 'Septic Arthritis vs. Acute Gout (MSU Crystals & 999 Triage)', mod: 'MSK', cls: 'badge-coral', href: 'msk.html', keys: 'septic arthritis acute gout podagra msu crystals hot swollen joint fever' },
+      { title: 'Metabolic Bone: Osteoporosis, Osteomalacia & Paget’s Disease', mod: 'MSK', cls: 'badge-coral', href: 'msk.html', keys: 'osteoporosis osteomalacia pagets looser zones alp dexa t score metabolic bone' },
+      { title: 'Nephrotic vs. Nephritic Syndrome, AKI/ATN & RAAS', mod: 'MSK', cls: 'badge-coral', href: 'msk.html', keys: 'nephrotic nephritic aki ckd atn raas proteinuria haematuria renal' },
+      { title: 'Hypertension Emergency (≥180/120), Crohn’s vs. UC & Tumour TNM', mod: 'MSK', cls: 'badge-coral', href: 'msk.html', keys: 'hypertension 180 120 crohns ulcerative colitis grading staging tnm endotoxin amr' },
+      { title: 'Systematic ABCS X-Ray, 5 Cervical Views & IR(ME)R Safety', mod: 'MSK', cls: 'badge-coral', href: 'msk.html', keys: 'abcs x ray imaging cervical views apom adi 3mm irmer alarp' },
+      { title: 'Year 3 Orthopaedic Special Tests Vault (Spurling’s, SLR, FABER, Lachman)', mod: 'MSK', cls: 'badge-coral', href: 'msk.html', keys: 'ortho special tests vault spurlings slr hawkins faber lachman mcmurray mchiro_msk_vault_v1' },
+
+      // Chiropractic Studies 3 (chiro.html)
+      { title: '22-Mark Spoken Setup Interrupter (14 Charley Y2 Traps)', mod: 'Chiro 3', cls: 'badge-emerald', href: 'chiro.html', keys: '22 mark setup interrupter charley year 2 feedback 15s spoken drill' },
+      { title: 'McTimoney Reading Terminology Trap Table (Posteriority vs. Inferiority)', mod: 'Chiro 3', cls: 'badge-emerald', href: 'chiro.html', keys: 'reading terminology table rotation posteriority tilt inferiority torsion superiority' },
+      { title: '4-Colour McTimoney Full-Body Check Flow (31 Steps, 5 Phases)', mod: 'Chiro 3', cls: 'badge-emerald', href: 'chiro.html', keys: '4 colour full body check flow bench patient practitioner pink action hide' },
+      { title: 'Atlas (Elbows Before Contact) & Cervical C5 Strikes (Outer Foot)', mod: 'Chiro 3', cls: 'badge-emerald', href: 'chiro.html', keys: 'atlas elbows accuracy cervical c5 outer foot nail 2 crisp strike' },
+      { title: 'Pelvic Tilt (Chin Tuck / Sternum) & Torsion I / II (Male/Female)', mod: 'Chiro 3', cls: 'badge-emerald', href: 'chiro.html', keys: 'pelvic tilt chin tuck sternum ischium torsion 1 2 female foot flat elbow low' },
+      { title: 'Prone Spine (Double Transfer Roll On/Off & Fencing Stance)', mod: 'Chiro 3', cls: 'badge-emerald', href: 'chiro.html', keys: 'prone spine double transfer roll on off horse fencing stance lumbar palpation fingers' },
+      { title: 'PSIS (Body Lower / Slack) & 1st Rib (Straight Nail Hand / Superman)', mod: 'Chiro 3', cls: 'badge-emerald', href: 'chiro.html', keys: 'psis sij slack sternum 1st rib posterior ribs straight nail hand superman rugby ball' },
+      { title: '40-Minute Live Mock Grader & Zero-Recurrence Habit Gate', mod: 'Chiro 3', cls: 'badge-emerald', href: 'chiro.html', keys: '40 min live mock grader section 1 2 score history mchiro_chiro_mocks_v1' },
+      { title: 'Year 3 Diversified & Biomechanics Vault + Technique SRS', mod: 'Chiro 3', cls: 'badge-emerald', href: 'chiro.html', keys: 'diversified hvla biomechanics vault contraindications mchiro_chiro_vault_v1' },
+
+      // Clinical Neurology (neuro.html)
+      { title: 'Interactive Neuro Atlas: 5 Sculpted SVGs & Spot-Check Quiz', mod: 'Neuro', cls: 'badge-blue', href: 'neuro.html', keys: 'neuro atlas 5 svgs ul ll roots peripheral nerves whole face cn spot check quiz' },
+      { title: 'Blank-Slate Spoken OSCE Simulator (18 Drills: Y2 Slips + Y3 New)', mod: 'Neuro', cls: 'badge-blue', href: 'neuro.html', keys: 'blank slate spoken osce simulator 15s timer olivia y2 slips year 3 additions' },
+      { title: 'Year 3 Section 1: Mini-Mental State (MMSE/MoCA) & Primitive Reflexes', mod: 'Neuro', cls: 'badge-blue', href: 'neuro.html', keys: 'primitive reflexes pout grasp glabellar frontal release mmse moca cerebral function' },
+      { title: 'Year 3 Section 2: Tremors, Gait Classification & Cerebellar Rebound', mod: 'Neuro', cls: 'badge-blue', href: 'neuro.html', keys: 'tremor resting intention gait antalgic steppage ataxic shuffling cerebellar rebound' },
+      { title: 'Year 3 Section 3: Saccades, VOR, CN VII Hyperacusis & CN X Autonomic', mod: 'Neuro', cls: 'badge-blue', href: 'neuro.html', keys: 'saccades vor vestibulo ocular hyperacusis autonomic cn vii viii ix x' },
+      { title: 'Year 3 Section 4: Tone/Rigidity (Cogwheel/Clasp-Knife/Lead-Pipe) & UMN Signs', mod: 'Neuro', cls: 'badge-blue', href: 'neuro.html', keys: 'tone joint play cogwheel clasp knife lead pipe ankle clonus babinski chaddock hoffmann' },
+      { title: 'Year 3 Section 5: 128 Hz Vibration, Proprioception, Stereognosis & Graphaesthesia', mod: 'Neuro', cls: 'badge-blue', href: 'neuro.html', keys: '128hz vibration proprioception sensory inattention neglect stereognosis graphaesthesia' },
+      { title: 'Simulators: Weber’s & Rinne’s (512 Hz) & 4-Stage Hutchinson Pupil', mod: 'Neuro', cls: 'badge-blue', href: 'neuro.html', keys: 'weber rinne 512hz conductive sensorineural hutchinson pupil raised icp' },
+      { title: 'Calculators: Beighton Hypermobility (0–9) & Glasgow Coma Scale (3–15)', mod: 'Neuro', cls: 'badge-blue', href: 'neuro.html', keys: 'beighton scale hypermobility gcs glasgow coma scale trauma' },
+      { title: '5-Tract Spinal Cord Cross-Section SVG (DCML, STT, CST, DSCT, Ant. Horn)', mod: 'Neuro', cls: 'badge-blue', href: 'neuro.html', keys: 'spinal cord cross section dcml stt cst dsct anterior horn brown sequard central anterior' },
+      { title: 'Cortical Localisation SRS (Prefrontal, Fusiform, Arcuate, Neglect)', mod: 'Neuro', cls: 'badge-blue', href: 'neuro.html', keys: 'prefrontal fusiform prosopagnosia arcuate conduction aphasia right parietal neglect broca wernicke' },
+      { title: '15-Minute Neuro OSCE Timer & 8-Section Year 3 Testing Overview', mod: 'Neuro', cls: 'badge-blue', href: 'neuro.html', keys: '15 min osce timer 8 section testing overview cold peer mock reset' },
+
+      // Year 3 Planner & Scaffolding (planner.html)
+      { title: 'Year 3 Planner: 7 Official Module Vaults (Handbooks, Syllabus, Readings)', mod: 'Planner', cls: 'badge-indigo', href: 'planner.html', keys: '7 module vaults handbook leader syllabus lecture checklist reading list scratchpad' },
+      { title: 'Assessment & Deadline Tracker + Weighted Year 3 Grade Average', mod: 'Planner', cls: 'badge-indigo', href: 'planner.html', keys: 'assessment tracker deadlines weightings weighted average grade calculator' },
+      { title: 'Pre-Term Bridging Checklist & Year 3 Readiness Score', mod: 'Planner', cls: 'badge-indigo', href: 'planner.html', keys: 'pre term bridging checklist readiness score priority 1 2 3 onboarding' },
+      { title: 'Term-Time Weekly Study Routine Builder & JSON Backup', mod: 'Planner', cls: 'badge-indigo', href: 'planner.html', keys: 'weekly study routine monday sunday timetable backup' },
+
+      // Lesson 1: Upper Limb (lesson-ul.html)
+      { title: 'Lesson 1: Upper Limb SMR & Peripheral Nerves (Guided +120 XP)', mod: 'Lesson 1', cls: 'badge-blue', href: 'lesson-ul.html', keys: 'lesson 1 upper limb smr arm 5 fingers spotlight c5 c6 c7 c8 t1' },
+      { title: 'C5 Biceps/Deltoid & C6 Thumb-Index / Brachioradialis (0–4)', mod: 'Lesson 1', cls: 'badge-blue', href: 'lesson-ul.html', keys: 'c5 c6 biceps deltoid wrist extensors brachioradialis thumb index' },
+      { title: 'C7 Middle Finger, C8 FDP (DIP Joint) & T1 Interossei', mod: 'Lesson 1', cls: 'badge-blue', href: 'lesson-ul.html', keys: 'c7 c8 t1 triceps fdp flexor digitorum profundus dip interossei medial forearm' },
+      { title: 'Radial Nerve (EXTENSORS — Wrist Drop) vs. Median (FLEXORS)', mod: 'Lesson 1', cls: 'badge-blue', href: 'lesson-ul.html', keys: 'radial median trap extensors flexors wrist drop axillary military patch ulnar' },
+
+      // Lesson 2: Lower Limb (lesson-ll.html)
+      { title: 'Lesson 2: Lower Limb SMR & Peripheral Nerves (Guided +120 XP)', mod: 'Lesson 2', cls: 'badge-emerald', href: 'lesson-ll.html', keys: 'lesson 2 lower limb smr sculpted leg 5 toes sole spotlight l2 l3 l4 l5 s1' },
+      { title: 'L2 Iliopsoas/Sartorius/Pectineus & L3 Quadriceps', mod: 'Lesson 2', cls: 'badge-emerald', href: 'lesson-ll.html', keys: 'l2 l3 iliopsoas sartorius pectineus quadriceps anterior thigh' },
+      { title: 'L4 Tibialis Anterior (Patellar 1+–4+), L5 EHL (NO Reflex) & S1 Achilles', mod: 'Lesson 2', cls: 'badge-emerald', href: 'lesson-ll.html', keys: 'l4 l5 s1 tibialis anterior patellar ehl extensor hallucis longus gastrocnemius soleus achilles' },
+      { title: 'Fibular (Peroneal) Foot Drop vs. Tibial Sole vs. LFCN Purely Sensory', mod: 'Lesson 2', cls: 'badge-emerald', href: 'lesson-ll.html', keys: 'fibular peroneal foot drop tibial sole sciatic femoral obturator lfcn lateral cutaneous' },
+
+      // Lesson 3: Cranial Nerves (lesson-cn.html)
+      { title: 'Lesson 3: Cranial Nerves I–XII & Eye/Face Lab (Guided +140 XP)', mod: 'Lesson 3', cls: 'badge-purple', href: 'lesson-cn.html', keys: 'lesson 3 cranial nerves cn i ii iii iv v vi vii viii ix x xi xii eye face lab' },
+      { title: 'CN V Trigeminal Face Map (V1/V2/V3 & Spared C2/C3 Jaw Angle)', mod: 'Lesson 3', cls: 'badge-purple', href: 'lesson-cn.html', keys: 'cn v trigeminal v1 v2 v3 ophthalmic maxillary mandibular c2 c3 spared angle jaw' },
+      { title: 'H-Test Extraocular Eye Lab (LR6 SO4, All the Rest 3 + Moving Pupils)', mod: 'Lesson 3', cls: 'badge-purple', href: 'lesson-cn.html', keys: 'h test extraocular eyes lr6 so4 cn iii iv vi moving pupils light reflex' },
+      { title: 'CN VII Facial Nerve: UMN (Forehead Spared) vs. LMN (Bell’s Palsy)', mod: 'Lesson 3', cls: 'badge-purple', href: 'lesson-cn.html', keys: 'cn vii facial nerve umn lmn bells palsy forehead spared frontalis taste salivation' },
+      { title: 'Bulbar Deviation Trap: CN X Uvula (AWAY) vs. CN XII Tongue (TOWARD)', mod: 'Lesson 3', cls: 'badge-purple', href: 'lesson-cn.html', keys: 'cn ix x xi xii uvula away scm opposite tongue toward licks lesion' },
+      { title: 'Year 3 Special Tests: CAD (5Ds/3Ns), Dix-Hallpike, Fitz-Ritson’s & Pronator Drift', mod: 'Neuro', cls: 'badge-blue', href: 'neuro.html', keys: 'cad 5ds 3ns dix hallpike bppv fitz ritsons pronator drift fatiguable myasthenia' },
+      { title: 'Sensory Sequence & Grading Scales (0–2, MRC 1–5, UL 0–4, LL 1+–4+)', mod: 'Neuro', cls: 'badge-blue', href: 'neuro.html', keys: 'sensory sequence soft sharp discriminate 0 2 mrc 1 5 reflexes 0 4 1+ 4+' },
     ];
 
     function handleSearch(raw) {
@@ -1690,10 +1993,9 @@
       box.classList.add('visible');
 
       if (!hits.length) {
-        const safe = q.replace(/</g, '&lt;').replace(/>/g, '&gt;');
         box.innerHTML = `
           <div style="padding:16px;text-align:center;font-size:13px;color:var(--text-muted);">
-            No matches for "<strong>${safe}</strong>". Try <em>Planner</em>, <em>CN VII</em>, <em>L5</em>, <em>OA vs RA</em>, <em>1st Rib</em>, or <em>PICO</em>.
+            No matches for "<strong>${esc(q)}</strong>". Try <em>Vignettes</em>, <em>Domino</em>, <em>Auditor</em>, <em>Interrupter</em>, <em>Primitive</em>, or <em>CN VII</em>.
           </div>
         `;
         return;
@@ -1702,10 +2004,8 @@
       box.innerHTML = hits.map((h) => `
         <a href="${h.href}" class="search-row">
           <div style="min-width:0;">
-            <div class="search-row-title">${h.title}</div>
-            <div class="search-row-meta">
-              <span class="badge ${h.cls}">${h.mod}</span>
-            </div>
+            <div class="search-row-title">${esc(h.title)}</div>
+            <div style="margin-top:3px;"><span class="badge ${h.cls}">${esc(h.mod)}</span></div>
           </div>
           <span class="search-go">Open &rarr;</span>
         </a>
@@ -1714,167 +2014,193 @@
 
     function clearSearch() {
       const inp = document.getElementById('global-search');
-      if (inp) {
-        inp.value = '';
-        inp.focus();
-      }
+      if (inp) { inp.value = ''; inp.focus(); }
       handleSearch('');
     }
 
     // =========================================================================
-    // 4. QUICK 5-MINUTE MIX MODAL (20-QUESTION INTERLEAVED CLINICAL BANK)
+    // 5. CONFIDENCE-WEIGHTED 5-MINUTE MIX MODAL (20 INTERLEAVED QUESTIONS)
     // =========================================================================
     const MIX_BANK = [
-      // Clinical Neurology (SMR, CNs, Red Flags, Assessor Traps)
+      // BMS / MSK (Knowledge Gap)
       {
-        cat: 'Neuro • UL Trap', badge: 'badge-blue',
-        q: 'For the C8 myotome, which specific muscle must you name (not just "grip")?',
-        opts: ['Flexor digitorum profundus (DIP joint)', 'Interossei (5th finger abduction)', 'Brachioradialis', 'Flexor carpi ulnaris'],
+        id: 'mix_msk_rod', module: 'msk', rootCause: 'knowledge_gap', isRedFlag: false,
+        label: 'CKD → Renal Osteodystrophy Mechanism', badge: 'badge-coral', cat: 'MSK • Knowledge Gap',
+        q: 'In Chronic Kidney Disease (CKD), what directly drives Secondary Hyperparathyroidism (↑ PTH) and Renal Osteodystrophy?',
+        opts: ['Phosphate retention + ↓ active Vitamin D (calcitriol) → Hypocalcaemia (↓ Ca²⁺)', 'Excessive renal calcitriol synthesis → Hypercalcaemia', 'Primary parathyroid adenoma with normal eGFR', 'Isolated elevated Alkaline Phosphatase with normal PTH'],
         ans: 0,
-        pearl: 'Always name exact muscles for myotomes: C8 = Flexor digitorum profundus (DIP joint); T1 = Interossei.',
+        pearl: 'CKD → ↑ PO₄ & ↓ 1,25(OH)₂D → ↓ Ca²⁺ → ↑ PTH → osteoclast bone resorption (fragility; avoid forceful HVT!).',
       },
       {
-        cat: 'Neuro • UL Trap', badge: 'badge-coral',
-        q: 'Avoid the "Ext / flexion confusion" trap: What does the Radial nerve supply?',
-        opts: ['Elbow & wrist EXTENSORS (injury = wrist drop)', 'Most wrist FLEXORS & thumb opposition', 'Intrinsic hand muscles & FCU', 'Deltoid & teres minor only'],
+        id: 'mix_msk_oara', module: 'msk', rootCause: 'knowledge_gap', isRedFlag: false,
+        label: 'OA vs. RA Cytokines & Stiffness', badge: 'badge-coral', cat: 'MSK • Knowledge Gap',
+        q: 'Which profile accurately distinguishes Rheumatoid Arthritis (RA) from Osteoarthritis (OA)?',
+        opts: ['Autoimmune synovitis/pannus (TNF-α/IL-1/IL-6), >60 min morning stiffness, symmetric MCP/PIP (spares DIPs)', 'Mechanical cartilage wear, <30 min stiffness, asymmetric DIP Heberden’s nodes', 'Isolated markedly ↑ ALP with bowed tibia and normal Ca²⁺', 'Negatively birefringent MSU crystals at the 1st MTP joint'],
         ans: 0,
-        pearl: 'Radial = posterior arm/forearm & EXTENSORS (wrist drop); Median = palmar lateral 2/3 & most wrist FLEXORS.',
+        pearl: 'RA = autoimmune synovitis/pannus (>60 min morning stiffness, symmetric MCP/PIP, spares DIPs) needing early DMARDs.',
       },
       {
-        cat: 'Neuro • LL Trap', badge: 'badge-coral',
-        q: 'Which nerve root tests Extensor Hallucis Longus (EHL) and has NO standard reflex?',
-        opts: ['L5', 'L4', 'S1', 'L3'],
+        id: 'mix_msk_stemi', module: 'msk', rootCause: 'knowledge_gap', isRedFlag: true,
+        label: 'ACS / STEMI Urgent 999 Triage', badge: 'badge-coral', cat: 'MSK • Red Flag',
+        q: 'A 59yo smoker develops crushing central chest pain radiating to his left jaw with sweating and nausea lasting >20 min at rest. Immediate action?',
+        opts: ['Stop all MSK exam and call 999 immediately (suspected ACS / STEMI)', 'Perform thoracic spine palpation to rule out costochondritis first', 'Advise routine GP review next week for bloods', 'Check blood pressure and apply gentle rib mobilisation'],
         ans: 0,
-        pearl: 'L5 tests Extensor hallucis longus (hallux extension) and has NO standard reflex (Patellar = L4, Achilles = S1).',
+        pearl: 'Acute plaque rupture + coronary thrombosis (STEMI/ACS) is a 999 emergency — never delay transfer for MSK tests.',
       },
       {
-        cat: 'Neuro • SMR Scale', badge: 'badge-blue',
-        q: 'What grading scale is required for Lower Limb reflexes (Patellar L4 & Achilles S1)?',
-        opts: ['1+ to 4+ (with 0 = absent)', '0 to 4', '1 to 5 (MRC)', '0 to 2'],
+        id: 'mix_msk_addison', module: 'msk', rootCause: 'knowledge_gap', isRedFlag: true,
+        label: 'Addisonian (Adrenal) Crisis Red Flag', badge: 'badge-coral', cat: 'MSK • Red Flag',
+        q: 'Post-viral exhaustion, BP 84/52 mmHg, abdominal pain, and palmar crease hyperpigmentation point to which emergency?',
+        opts: ['Addisonian (Adrenal) Crisis — immediate 999 for IV hydrocortisone & fluids', 'Benign postural hypotension — advise hydration', 'Hypothyroidism — routine GP thyroid screen', 'Osteomalacia — Vitamin D supplementation'],
         ans: 0,
-        pearl: 'Upper Limb reflexes use 0–4, whereas Lower Limb reflexes use 1+ to 4+ (Myotomes = 1–5; Sensation = 0–2).',
+        pearl: 'Addisonian crisis = cortisol & aldosterone deficiency (↓ Na⁺, ↑ K⁺, ↓ glucose, refractory shock) → immediate 999!',
       },
       {
-        cat: 'Neuro • CN VII', badge: 'badge-purple',
-        q: 'In an UMN Facial Nerve (CN VII) lesion (e.g., stroke), why is the forehead spared?',
-        opts: ['Frontalis receives bilateral cortical innervation', 'Frontalis is supplied by CN V (Trigeminal)', 'Bell’s palsy always spares the forehead', 'CN VII only innervates the lower face'],
+        id: 'mix_msk_septic', module: 'msk', rootCause: 'knowledge_gap', isRedFlag: true,
+        label: 'Septic Arthritis vs. Acute Gout', badge: 'badge-coral', cat: 'MSK • Red Flag',
+        q: 'An acutely hot, swollen knee with fever (38.6°C) and refusal of even 5° passive flexion requires what action?',
+        opts: ['Immediate same-day A&E referral to rule out Septic Arthritis', 'Ice, NSAIDs, and review in 5 days for suspected gout', 'Gentle knee distraction mobilisations', 'Standing knee X-ray via routine GP referral'],
         ans: 0,
-        pearl: 'UMN CN VII lesions spare the forehead via bilateral cortical input; LMN (Bell’s palsy) paralyses the full ipsilateral hemiface.',
-      },
-      {
-        cat: 'Neuro • CN V', badge: 'badge-purple',
-        q: 'Which Trigeminal (CN V) division carries jaw motor power AND spares the C2/C3 angle of the jaw?',
-        opts: ['V3 (Mandibular) — temporalis, masseter & pterygoids', 'V2 (Maxillary) — cheek & upper lip', 'V1 (Ophthalmic) — forehead & cornea', 'CN VII — facial expression'],
-        ans: 0,
-        pearl: 'V3 (Mandibular) supplies the chin/anterior jaw (sparing the C2/C3 angle of jaw) and carries all mastication muscles.',
-      },
-      {
-        cat: 'Neuro • H-Test', badge: 'badge-purple',
-        q: 'On the H-Test, which gaze direction isolates Superior Oblique (CN IV — SO4)?',
-        opts: ['Down & In (adducted depression)', 'Straight Lateral / Out (abduction)', 'Up & Out (abducted elevation)', 'Up & In (adducted elevation)'],
-        ans: 0,
-        pearl: 'SO4 = Superior Oblique (CN IV) pulls the adducted eye Down & In; LR6 = Lateral Rectus (CN VI) abducts laterally.',
-      },
-      {
-        cat: 'Neuro • Red Flag', badge: 'badge-coral',
-        q: 'What is Stage 2 of the Hutchinson pupil progression in rising intracranial pressure (ICP)?',
-        opts: ['Ipsilateral fixed, dilated pupil ("blown pupil") — 999 emergency', 'Bilateral pinpoint reactive pupils', 'Contralateral fixed dilation first', 'Normal reactive pupils bilaterally'],
-        ans: 0,
-        pearl: 'Hutchinson stages: 1) Ipsi constriction → 2) Ipsi fixed dilation (CN III compression) → 3) Contra constriction → 4) Bilateral fixed dilation.',
-      },
-      {
-        cat: 'Neuro • CN VIII', badge: 'badge-blue',
-        q: 'In Left Conductive hearing loss, where does Weber’s lateralise and what is Left Rinne’s?',
-        opts: ['Weber to LEFT (affected); Left Rinne NEGATIVE (BC > AC)', 'Weber to RIGHT (healthy); Left Rinne POSITIVE (AC > BC)', 'Weber midline; Left Rinne NEGATIVE', 'Weber to LEFT; Left Rinne POSITIVE'],
-        ans: 0,
-        pearl: 'Conductive loss lateralises Weber to the AFFECTED ear with a negative Rinne (BC > AC) on that side.',
+        pearl: 'Hot swollen single joint + fever + blocked passive ROM = Septic Arthritis emergency (joint aspiration & IV antibiotics).',
       },
 
-      // MSK Medicine (OA vs RA, CKD Renal Osteodystrophy, Cauda Equina, Septic Arthritis)
+      // Clinical Neurology (Year 2 Slips & Year 3 Additions)
       {
-        cat: 'MSK • OA vs RA', badge: 'badge-coral',
-        q: 'How does morning stiffness differentiate Osteoarthritis (OA) from Rheumatoid Arthritis (RA)?',
-        opts: ['OA < 30 min (worse end of day) vs. RA > 60 min (improves with movement)', 'OA > 60 min vs. RA < 15 min', 'Both always exceed 2 hours', 'Neither causes morning stiffness'],
+        id: 'mix_neuro_radial', module: 'neuro', rootCause: 'retrieval_slip', isRedFlag: false,
+        label: 'Radial Nerve EXTENSORS (Olivia Y2 Slip)', badge: 'badge-blue', cat: 'Neuro • Retrieval Slip',
+        q: 'Avoid Olivia T.’s Year 2 "Ext / flexion confusion" slip: Which muscles & actions does the RADIAL nerve innervate?',
+        opts: ['Elbow & wrist EXTENSORS (Triceps, Brachioradialis, ECRL/B/ECU — injury = wrist drop)', 'Most wrist FLEXORS & lateral palm (thumb opposition)', 'Flexor carpi ulnaris & intrinsic hand muscles', 'Deltoid & Teres minor only'],
         ans: 0,
-        pearl: 'RA is autoimmune synovitis (TNF-α/IL-1/IL-6 → pannus) with >60 min morning stiffness; OA is degenerative (<30 min).',
+        pearl: 'Radial ALWAYS = posterior arm/forearm & EXTENSORS (wrist drop). Median = palmar lateral 2/3 & most wrist FLEXORS.',
       },
       {
-        cat: 'MSK • Renal Bone', badge: 'badge-coral',
-        q: 'In CKD → Renal Osteodystrophy, what triggers Secondary Hyperparathyroidism (↑ PTH)?',
-        opts: ['Hypocalcaemia from ↓ active Vitamin D (calcitriol) + phosphate retention', 'Excessive dietary calcium intake', 'Excessive calcitriol production by the kidney', 'Isolated elevated alkaline phosphatase (ALP)'],
+        id: 'mix_neuro_c8', module: 'neuro', rootCause: 'retrieval_slip', isRedFlag: false,
+        label: 'C8 Myotome — Exact Muscle Naming', badge: 'badge-blue', cat: 'Neuro • Retrieval Slip',
+        q: 'Remembering Olivia’s note ("name muscles not just actions"), which specific muscle tests the C8 myotome?',
+        opts: ['Flexor digitorum profundus (DIP joint — distal phalanx 3rd finger flexion)', 'Interossei (5th finger abduction)', 'Wrist extensors & Biceps', 'Biceps & Deltoid'],
         ans: 0,
-        pearl: 'CKD → ↑ PO₄ + ↓ calcitriol → ↓ Ca²⁺ → ↑ PTH → osteoclast bone resorption (fragility / HVT contraindication).',
+        pearl: 'C8 = Flexor digitorum profundus (FDP at DIP joint). T1 = Dorsal/palmar Interossei (5th finger abduction).',
       },
       {
-        cat: 'MSK • Red Flag', badge: 'badge-coral',
-        q: 'Which symptom cluster requires immediate same-day A&E referral for Cauda Equina Syndrome (CES)?',
-        opts: ['Saddle anaesthesia (S2–S4), new bladder/bowel dysfunction & bilateral sciatica', 'Unilateral calf cramp relieved by walking', 'Isolated morning lumbar stiffness < 20 min', 'Mild thoracic ache after lifting'],
+        id: 'mix_neuro_cn7', module: 'neuro', rootCause: 'retrieval_slip', isRedFlag: false,
+        label: 'CN VII Non-Motor & Y3 Hyperacusis', badge: 'badge-blue', cat: 'Neuro • Year 3 Addition',
+        q: 'Alongside facial expression muscles (UMN vs. LMN), what must you explain for Year 3 CN VII (Facial)?',
+        opts: ['Taste ant 2/3 tongue (sweet/salty), lacrimation/salivation (dry mouth), postromedial outer ear & Hyperacusis', 'Taste posterior 1/3 tongue, gag reflex & uvula lift', 'Whisper test, Weber’s/Rinne’s & balance', 'Corneal afferent limb & jaw jerk reflex'],
         ans: 0,
-        pearl: 'Cauda Equina Syndrome is a surgical emergency requiring same-day MRI & decompression to prevent permanent nerve damage.',
+        pearl: 'Closes Olivia’s Y2 omissions (ant 2/3 taste & salivation) PLUS Year 3’s new addition: hearing sensitivity (Hyperacusis)!',
       },
       {
-        cat: 'MSK • Red Flag', badge: 'badge-coral',
-        q: 'A patient presents with an acutely hot, swollen knee, fever (38.5°C) & severe pain on any passive ROM. Action?',
-        opts: ['Immediate same-day A&E referral to rule out Septic Arthritis', 'Ice and review in 7 days for suspected gout', 'Gentle knee mobilisation first', 'Treat as routine OA flare'],
+        id: 'mix_neuro_prim', module: 'neuro', rootCause: 'knowledge_gap', isRedFlag: false,
+        label: 'Year 3 Primitive Reflexes (Frontal Release)', badge: 'badge-blue', cat: 'Neuro • Year 3 Addition',
+        q: 'Which three primitive reflexes (frontal release signs for cognitive change) appear in Section 1 of the Year 3 Testing Overview?',
+        opts: ['Pout reflex, Grasp reflex & Glabellar reflex', 'Babinski, Chaddock & Hoffmann’s signs', 'Biceps, Brachioradialis & Triceps reflexes', 'Patellar, Achilles & Jaw jerk reflexes'],
         ans: 0,
-        pearl: 'Hot swollen joint + systemic fever/malaise = Septic Arthritis emergency requiring urgent A&E joint aspiration & IV antibiotics.',
-      },
-
-      // Chiropractic Studies 3 (McTimoney Sequence, 1st Rib, PSIS, Pelvic Tilt)
-      {
-        cat: 'Chiro 3 • Routine', badge: 'badge-emerald',
-        q: 'In the McTimoney Full-Body Check, which shoulder does the patient lie on for the Side-Lying Atlas adjustment?',
-        opts: ['The Anterior Atlas side (set elbows before adjusting)', 'The Posterior Atlas side', 'Always the Left shoulder', 'Always the Right shoulder'],
-        ans: 0,
-        pearl: 'Seated Atlas palpation checks for Anteriority — the patient lies on the Anterior Atlas side; lock elbows before adjusting.',
+        pearl: 'Section 1 Cerebral Function adds Pout, Grasp, and Glabellar reflexes (frontal release signs indicating cognitive change).',
       },
       {
-        cat: 'Chiro 3 • 1st Rib', badge: 'badge-emerald',
-        q: 'What is the Year 2 assessor fix for the Prone 1st Rib adjustment nail hand and follow-through?',
-        opts: ['Keep nail hand crisp (avoid curling) & use "Superman" follow-through to the side', 'Curl the nail hand tightly with zero follow-through', 'Use a Swallow follow-through from the sternum', 'Adjust standing in horse stance at 45°'],
+        id: 'mix_neuro_tone', module: 'neuro', rootCause: 'knowledge_gap', isRedFlag: false,
+        label: 'Year 3 Tone: Clasp-Knife vs. Cogwheel', badge: 'badge-blue', cat: 'Neuro • Year 3 Addition',
+        q: 'During Section 4 Joint Play fluidity testing, how does UMN spasticity differ from Parkinsonian rigidity?',
+        opts: ['UMN = Clasp-knife (velocity-dependent catch & release); Parkinson’s = Cogwheel (rigidity + tremor) or Lead-pipe', 'UMN = Cogwheel ratchet; Parkinson’s = Clasp-knife', 'Both present with flaccidity and fasciculations', 'Both are tested solely by 128 Hz vibration'],
         ans: 0,
-        pearl: 'Prone 1st Rib: Kneel at patient’s head, keep nail hand crisp (don’t curl!), and strike with a "Superman" follow-through.',
-      },
-      {
-        cat: 'Chiro 3 • PSIS', badge: 'badge-emerald',
-        q: 'What Year 2 assessor cue improves the Prone PSIS / SIJ adjustment?',
-        opts: ['Drop body lower, align sternum with the adjustment & take more of the slack', 'Stand taller with sternum superior to the pelvis', 'Use a single transfer with no follow-through', 'Adjust from the same side as the superior PSIS'],
-        ans: 0,
-        pearl: 'For PSIS/SIJ: adjust from the opposite side, drop body lower with sternum in line, and take out more slack before thrusting.',
+        pearl: 'Section 4 Joint Play tests elbow/knee first (then wrist/ankle): Clasp-knife (UMN) vs. Cogwheel / Lead-pipe (extrapyramidal).',
       },
 
-      // Written, Research & Clinic Studies
+      // Chiropractic Studies 3 (Psychomotor / Setup & Terminology)
       {
-        cat: 'Written • Voice', badge: 'badge-amber',
-        q: 'What is the recurring McTimoney tutor rule regarding first-person voice ("I/me/my/we") in essays?',
-        opts: ['Avoid first-person voice completely unless the brief explicitly permits it', 'Use first-person freely throughout all reflections', 'Use first-person in the conclusion only', 'First-person is required for Philosophy 3'],
+        id: 'mix_chiro_rot', module: 'chiro', rootCause: 'retrieval_slip', isRedFlag: false,
+        label: 'Pelvic Rotation Reading (Posteriority Trap)', badge: 'badge-emerald', cat: 'Chiro 3 • Terminology Slip',
+        q: 'Fix Charley’s Rotation note ("Said (L) inferior for reading"): What exact reading word do you call for Pelvic Rotation vs. Tilt?',
+        opts: ['Pelvic Rotation = POSTERIORITY; Pelvic Tilt = INFERIORITY (Torsion/PSIS = Superiority)', 'Pelvic Rotation = INFERIORITY; Pelvic Tilt = POSTERIORITY', 'Both Rotation and Tilt read Superiority', 'Pelvic Rotation = Anteriority; Pelvic Tilt = Posteriority'],
         ans: 0,
-        pearl: 'Both Clinic Studies II and Philosophy feedback stress maintaining third-person academic voice unless explicitly permitted.',
+        pearl: 'Never say "inferior" on Rotation! Rotation = POSTERIORITY (+ relax shoulders for a crisp 3rd rotation). Tilt = INFERIORITY.',
       },
       {
-        cat: 'Written • Harvard', badge: 'badge-amber',
-        q: 'What heading must be used at the end of a McTimoney assignment, and what must every direct quote include?',
-        opts: ['"Reference List" (NOT Bibliography) & page number (p./pp.) in the citation', '"Bibliography" & year only', '"Works Cited" & website URL only', '"Reference List" & no page numbers needed'],
+        id: 'mix_chiro_spine', module: 'chiro', rootCause: 'psychomotor', isRedFlag: false,
+        label: 'Prone Spine Double Transfer & Lumbar Stance', badge: 'badge-emerald', cat: 'Chiro 3 • Psychomotor Habit',
+        q: 'Which two corrections recover the 4 marks lost on Charley’s Prone Spine section (16/20)?',
+        opts: ['Keep palpating fingers even, ROLL on/off double transfer (never lift off) & stay in FENCING stance before (R) Lumbar', 'Lift cleanly off double transfers & switch to horse stance before (R) Lumbar', 'Stand at the head of the bench in deep horse stance', 'Use a Superman follow-through on thoracic TTRs'],
         ans: 0,
-        pearl: 'Always title the section "Reference List" (not Bibliography) and include p./pp. page numbers on every direct quote.',
+        pearl: 'Level palpating fingers on SPs, roll smoothly on/off double transfers, and stay in FENCING stance (never horse stance before R Lumbar).',
       },
       {
-        cat: 'Research 2 • PICO', badge: 'badge-amber',
-        q: 'In Research 2 evidence-based question framing, what does PICO stand for?',
-        opts: ['Population, Intervention, Comparison, Outcome', 'Pathology, Investigation, Care, Observation', 'Patient, Incidence, Cohort, Odds Ratio', 'Paradigm, Induction, Critique, Ontology'],
+        id: 'mix_chiro_psis', module: 'chiro', rootCause: 'psychomotor', isRedFlag: false,
+        label: 'PSIS (SIJ) Body Height, Sternum & Slack', badge: 'badge-emerald', cat: 'Chiro 3 • Psychomotor Habit',
+        q: 'What exact setup fix did Charley note for the Prone PSIS (SIJ) adjustment (8/10)?',
+        opts: ['Drop body LOWER, align sternum in line with the adjustment & take MORE of the slack', 'Stand taller with sternum superior & use minimal slack', 'Adjust from the same side as the superior PSIS', 'Deliver a block thrust with zero follow-through'],
         ans: 0,
-        pearl: 'PICO structures searchable clinical questions: Population/Patient, Intervention, Comparison, Outcome.',
+        pearl: 'PSIS (SIJ): Opposite shoulder -> drop body LOWER, sternum aligned with line of drive, take FULL slack -> block thrust + follow through.',
       },
       {
-        cat: 'Clinic 3 • Borton', badge: 'badge-amber',
-        q: 'What are the three stages of Borton’s reflective framework used to upgrade description into 70%+ critical evaluation?',
-        opts: ['What? → So What? → Now What?', 'Plan → Do → Review', 'Subjective → Objective → Plan', 'History → Exam → Diagnosis'],
+        id: 'mix_chiro_1strib', module: 'chiro', rootCause: 'psychomotor', isRedFlag: false,
+        label: '1st Rib Nail Hand & Follow-Through', badge: 'badge-emerald', cat: 'Chiro 3 • Psychomotor Habit',
+        q: 'Fix Charley’s 1st Rib / Posterior Ribs deduction (3/5): What must you watch on the 1st Rib nail hand and Posterior Rib palpation?',
+        opts: ['Keep 1st Rib nail hand STRAIGHT/flat (don’t curl!) + Superman follow-through; keep Post. Ribs on medial rugby ball (not too lateral)', 'Curve the 1st Rib nail hand tightly with Swallow follow-through', 'Palpate Posterior Ribs laterally near the mid-axillary line', 'Adjust 1st Rib standing in fencing stance'],
         ans: 0,
-        pearl: 'Borton’s What? → So What? → Now What? moves writing from narrative description (~64%) into 70%+ critical evaluation.',
+        pearl: '1st Rib: Kneel at head, STRAIGHT nail hand (elbow to ground, palp elbow to sky), Superman follow-through. Post Ribs: medial rugby ball.',
+      },
+      {
+        id: 'mix_chiro_tilt', module: 'chiro', rootCause: 'psychomotor', isRedFlag: false,
+        label: 'Pelvic Tilt Chin Tuck & Sternum Level', badge: 'badge-emerald', cat: 'Chiro 3 • Psychomotor Habit',
+        q: 'What two physical cues fix Charley’s Pelvic Tilt deduction (8/10)?',
+        opts: ['Cue patient to TUCK CHIN & kneel lower so your STERNUM is level with the ischium', 'Have patient extend chin & keep sternum superior to ischium', 'Keep patient supine in horse stance', 'Deliver a 20–40 block thrust with no follow-through'],
+        ans: 0,
+        pearl: 'Inferior Pelvic Tilt: Large cushion against shoulder, CHIN TUCKED, kneel low with sternum level with ischium -> ischial thrust + follow through.',
+      },
+
+      // Written, Research & Clinic Studies (Academic Genre)
+      {
+        id: 'mix_wr_voice', module: 'written', rootCause: 'academic_genre', isRedFlag: false,
+        label: 'Strict 3rd-Person Academic Voice', badge: 'badge-purple', cat: 'Written • Academic Genre',
+        q: 'Which recurring tutor rule appeared on BOTH Clinic Studies II (64%) and Philosophy II (72%) feedback sheets?',
+        opts: ['Avoid first-person pronouns ("I/me/my/we") unless the brief explicitly permits them', 'Write reflections exclusively in casual first-person narrative', 'Use "Bibliography" instead of "Reference List"', 'Use chiropractic clinic blogs for clinical claims'],
+        ans: 0,
+        pearl: 'Maintain strict 3rd-person academic voice unless explicitly permitted, title the end "Reference List", and use peer-reviewed sources.',
+      },
+      {
+        id: 'mix_wr_quote', module: 'written', rootCause: 'academic_genre', isRedFlag: false,
+        label: 'Harvard Direct Quote Page Numbers', badge: 'badge-purple', cat: 'Written • Academic Genre',
+        q: 'Under McTimoney Harvard referencing rules, what is mandatory for EVERY direct quotation in your text?',
+        opts: ['Author, year AND exact page number (p./pp.) within the in-text citation', 'Author and year only; page numbers are optional', 'Website URL in brackets after the quote', 'Relying blindly on referencing software output'],
+        ans: 0,
+        pearl: 'Always include p./pp. page numbers on every direct quote and manually verify Harvard punctuation ("Don’t trust the software").',
+      },
+      {
+        id: 'mix_wr_eval', module: 'written', rootCause: 'academic_genre', isRedFlag: false,
+        label: 'Crossing 64% Descriptive → 70%+ Evaluative', badge: 'badge-purple', cat: 'Written • Academic Genre',
+        q: 'On Simon Dann’s Clinic Studies rubric, what separates a 64% descriptive reflection from a 70%+ Excellent mark?',
+        opts: ['Novel perspective of self, comprehensive evaluation of context/ideologies/ethics & extensive peer-reviewed literature', 'Longer chronological narration of what happened in the consultation', 'Introducing new references and fresh arguments inside the conclusion', 'Relying on one textbook across all body paragraphs'],
+        ans: 0,
+        pearl: '70%+ requires high in-text citation density (≥2.5/250w), evaluative critique of ethics/ideologies, and zero new content in the conclusion.',
+      },
+      {
+        id: 'mix_wr_snnout', module: 'written', rootCause: 'retrieval_slip', isRedFlag: false,
+        label: 'Sensitivity (SnNOut) vs. Specificity (SpPIn)', badge: 'badge-purple', cat: 'Research 2 • Retrieval Slip',
+        q: 'In diagnostic test accuracy (Research 2), what does a test with very high SPECIFICITY tell you?',
+        opts: ['A POSITIVE result strongly rules IN the condition (SpPIn — confirmatory test)', 'A NEGATIVE result rules OUT the condition (SnNOut — screening test)', 'The p-value is guaranteed to be < 0.01', 'The study has zero recall bias'],
+        ans: 0,
+        pearl: 'SnNOut = high Sensitivity + Negative rules OUT (screening). SpPIn = high Specificity + Positive rules IN (confirmation).',
+      },
+      {
+        id: 'mix_wr_yellow', module: 'written', rootCause: 'knowledge_gap', isRedFlag: false,
+        label: 'Yellow Flags (ABCDEFW) vs. Orange Flags', badge: 'badge-purple', cat: 'Behav Sci • Knowledge Gap',
+        q: 'How do Orange Flags differ from Yellow Flags (ABCDEFW) in Behavioural Sciences?',
+        opts: ['Orange = clinical psychiatric pathology (e.g., major depression/PTSD → GP referral); Yellow = psychosocial risk factors for chronicity', 'Orange = workplace HR policy barriers; Yellow = red-flag fractures', 'Orange = benign muscle soreness; Yellow = acute systemic infection', 'They are identical terms for fear-avoidance'],
+        ans: 0,
+        pearl: 'Orange Flags are the psychiatric equivalent of Red Flags (refer to GP/mental health); Yellow Flags (ABCDEFW) are psychosocial chronicity drivers.',
       },
     ];
 
-    const mix = { deck: [], idx: 0, picked: null, score: 0, done: false };
+    const mix = {
+      deck: [],
+      idx: 0,
+      selectedOpt: null,
+      selectedConf: null, // 'guess' | 'unsure' | 'certain'
+      checked: false,
+      score: 0,
+      hcErrors: 0,
+      done: false,
+    };
 
     function shuffle(arr) {
       const a = arr.slice();
@@ -1889,18 +2215,17 @@
       mix.deck = shuffle(MIX_BANK).slice(0, 5).map((item) => {
         const tagged = item.opts.map((text, idx) => ({ text, ok: idx === item.ans }));
         const mixed = shuffle(tagged);
-        return {
-          cat: item.cat,
-          badge: item.badge,
-          q: item.q,
+        return Object.assign({}, item, {
           opts: mixed.map((o) => o.text),
           ans: mixed.findIndex((o) => o.ok),
-          pearl: item.pearl,
-        };
+        });
       });
       mix.idx = 0;
-      mix.picked = null;
+      mix.selectedOpt = null;
+      mix.selectedConf = null;
+      mix.checked = false;
       mix.score = 0;
+      mix.hcErrors = 0;
       mix.done = false;
       document.getElementById('mix-modal').classList.add('open');
       renderMixModal();
@@ -1908,12 +2233,35 @@
 
     function closeMixModal() {
       document.getElementById('mix-modal').classList.remove('open');
+      // Refresh dashboard immediately so Top 3 High-Risk Failure Modes & metrics update live
+      renderDashboard();
     }
 
-    function pickMixOption(i) {
-      if (mix.picked !== null) return;
-      mix.picked = i;
-      if (i === mix.deck[mix.idx].ans) mix.score++;
+    function checkMixAnswer() {
+      if (mix.selectedOpt === null || !mix.selectedConf || mix.checked) return;
+      const cur = mix.deck[mix.idx];
+      const isRight = mix.selectedOpt === cur.ans;
+
+      mix.checked = true;
+      if (isRight) mix.score++;
+      if (!isRight && mix.selectedConf === 'certain') mix.hcErrors++;
+
+      const now = Date.now();
+      appendDiagEvent({
+        id: cur.id,
+        itemId: cur.id,
+        module: cur.module,
+        source: cur.module,
+        rootCause: cur.rootCause,
+        rootCauseTag: cur.rootCause,
+        label: cur.label,
+        confidence: mix.selectedConf,
+        correct: isRight,
+        isRedFlag: Boolean(cur.isRedFlag),
+        ts: now,
+        timestamp: now,
+      });
+
       renderMixModal();
     }
 
@@ -1922,7 +2270,9 @@
         mix.done = true;
       } else {
         mix.idx++;
-        mix.picked = null;
+        mix.selectedOpt = null;
+        mix.selectedConf = null;
+        mix.checked = false;
       }
       renderMixModal();
     }
@@ -1935,20 +2285,23 @@
         const pct = Math.round((mix.score / mix.deck.length) * 100);
         box.innerHTML = `
           <div class="modal-header">
-            <span class="badge badge-emerald">5-Min Mix Complete</span>
+            <span class="badge badge-emerald">5-Min Mix Logged to Telemetry</span>
             <button type="button" class="modal-close" onclick="closeMixModal()" aria-label="Close">&times;</button>
           </div>
-          <div class="modal-body" style="text-align:center;padding:26px 20px;">
-            <div style="width:60px;height:60px;margin:0 auto;border-radius:18px;background:var(--emerald);color:#FFF;font-size:28px;display:flex;align-items:center;justify-content:center;">⚡</div>
-            <h3 style="font-size:28px;font-weight:800;letter-spacing:-0.02em;">${mix.score} / ${mix.deck.length} (${pct}%)</h3>
-            <p style="font-size:13.5px;color:var(--text-muted);max-width:360px;margin:0 auto;">
-              ${mix.score >= 4
-                ? 'Sharp cross-module recall — your Year 3 clinical instincts are firing fast!'
-                : 'Great warm-up — jump into Lessons 1–3 or the module hubs to lock in any tricky traps.'}
+          <div class="modal-body" style="text-align:center;padding:24px 20px;">
+            <div style="width:58px;height:58px;margin:0 auto;border-radius:18px;background:var(--emerald);color:#FFF;font-size:26px;display:flex;align-items:center;justify-content:center;">⚡</div>
+            <h3 class="mono" style="font-size:28px;font-weight:800;">${mix.score} / ${mix.deck.length} (${pct}%)</h3>
+            <div style="display:flex;justify-content:center;gap:8px;flex-wrap:wrap;">
+              <span class="badge ${mix.hcErrors === 0 ? 'badge-emerald' : 'badge-coral'}">
+                ${mix.hcErrors === 0 ? '✓ 0 High-Confidence Errors' : `⚠ ${mix.hcErrors} High-Conf Error${mix.hcErrors > 1 ? 's' : ''} Queued`}
+              </span>
+            </div>
+            <p style="font-size:13px;color:var(--text-muted);max-width:380px;margin:0 auto;">
+              All 5 prompts have been appended to <span class="mono">mchiro_diag_v1</span>. Closing this modal refreshes your Top 3 High-Risk Failure Modes queue.
             </p>
-            <div style="display:flex;flex-direction:column;gap:10px;margin-top:8px;">
+            <div class="stack-sm" style="margin-top:6px;">
               <button type="button" class="btn-3d btn-amber btn-full" onclick="openMixModal()">Play Another 5 ⚡</button>
-              <button type="button" class="btn-3d btn-neutral btn-full" onclick="closeMixModal()">Back to Dashboard</button>
+              <button type="button" class="btn-3d btn-blue btn-full" onclick="closeMixModal()">View Updated Failure Radar &rarr;</button>
             </div>
           </div>
         `;
@@ -1956,55 +2309,77 @@
       }
 
       const cur = mix.deck[mix.idx];
-      const answered = mix.picked !== null;
-      const isRight = answered && mix.picked === cur.ans;
-      const pct = Math.max(12, Math.round(((mix.idx + (answered ? 1 : 0)) / mix.deck.length) * 100));
+      const isRight = mix.checked && mix.selectedOpt === cur.ans;
+      const isHcError = mix.checked && !isRight && mix.selectedConf === 'certain';
+      const pct = Math.max(12, Math.round(((mix.idx + (mix.checked ? 1 : 0)) / mix.deck.length) * 100));
       const letters = ['A', 'B', 'C', 'D'];
+      const canCheck = mix.selectedOpt !== null && mix.selectedConf !== null && !mix.checked;
 
       box.innerHTML = `
-        <div class="modal-header" style="flex-direction:column;align-items:stretch;gap:10px;">
-          <div style="display:flex;align-items:center;justify-content:space-between;gap:8px;">
-            <div style="display:flex;align-items:center;gap:8px;">
+        <div class="modal-header" style="flex-direction:column;align-items:stretch;gap:9px;">
+          <div class="flex-between">
+            <div style="display:flex;align-items:center;gap:7px;">
               <span class="badge ${cur.badge}">${cur.cat}</span>
               <span class="mono" style="font-size:12px;font-weight:800;color:var(--text-muted);">${mix.idx + 1} / ${mix.deck.length}</span>
             </div>
             <button type="button" class="modal-close" onclick="closeMixModal()" aria-label="Close">&times;</button>
           </div>
-          <div class="duo-bar-track">
-            <div class="duo-bar-fill" style="width:${pct}%"></div>
+          <div class="progress-track">
+            <div class="progress-fill" style="width:${pct}%;background:var(--emerald);"></div>
           </div>
         </div>
 
         <div class="modal-body">
-          <p class="mix-q-text">${cur.q}</p>
-          <div class="choice-list">
+          <p style="font-size:15px;font-weight:800;line-height:1.42;">${esc(cur.q)}</p>
+
+          <div class="stack-sm" style="gap:8px;">
             ${cur.opts.map((txt, i) => {
               let cls = '';
-              if (answered) {
+              if (mix.checked) {
                 if (i === cur.ans) cls = 'is-correct';
-                else if (i === mix.picked && !isRight) cls = 'is-wrong';
+                else if (i === mix.selectedOpt && !isRight) cls = 'is-wrong';
+              } else if (i === mix.selectedOpt) {
+                cls = 'is-selected';
               }
               return `
-                <button type="button" class="choice-btn ${cls}" ${answered ? 'disabled' : ''} onclick="pickMixOption(${i})">
+                <button type="button" class="choice-btn ${cls}" ${mix.checked ? 'disabled' : ''} onclick="mix.selectedOpt=${i}; renderMixModal();">
                   <span class="choice-key">${letters[i]}</span>
-                  <span>${txt}</span>
+                  <span>${esc(txt)}</span>
                 </button>
               `;
             }).join('')}
           </div>
+
+          ${!mix.checked ? `
+            <div class="stack-sm" style="padding-top:6px;border-top:1px solid var(--border-soft);">
+              <span style="font-size:11px;font-weight:800;text-transform:uppercase;letter-spacing:0.04em;color:var(--text-muted);">
+                Mandatory Confidence Gate (Select Answer + Certainty):
+              </span>
+              <div style="display:grid;grid-template-columns:repeat(3,1fr);gap:7px;">
+                <button type="button" class="conf-pill ${mix.selectedConf === 'guess' ? 'sel-coral' : ''}" onclick="mix.selectedConf='guess'; renderMixModal();">🎲 Guess</button>
+                <button type="button" class="conf-pill ${mix.selectedConf === 'unsure' ? 'sel-amber' : ''}" onclick="mix.selectedConf='unsure'; renderMixModal();">🤔 Unsure</button>
+                <button type="button" class="conf-pill ${mix.selectedConf === 'certain' ? 'sel-emerald' : ''}" onclick="mix.selectedConf='certain'; renderMixModal();">🎯 Certain</button>
+              </div>
+              <button type="button" class="btn-3d btn-blue btn-full" ${canCheck ? '' : 'disabled'} onclick="checkMixAnswer()">
+                ${canCheck ? 'Check Answer & Log Telemetry' : 'Select Option & Confidence First'}
+              </button>
+            </div>
+          ` : ''}
         </div>
 
-        ${answered ? `
+        ${mix.checked ? `
           <div class="mix-feedback ${isRight ? 'correct' : 'wrong'}">
-            <div class="fb-head">
-              <span class="fb-dot ${isRight ? 'correct' : 'wrong'}">${isRight ? '✓' : '✕'}</span>
-              <div>
-                <p class="fb-title ${isRight ? 'correct' : 'wrong'}">${isRight ? 'Spot on!' : 'Clinical Pearl'}</p>
-                <p class="fb-pearl">${cur.pearl}</p>
-              </div>
+            <div class="flex-between">
+              <strong style="font-size:14.5px;color:${isRight ? 'var(--emerald-dark)' : 'var(--coral-dark)'};">
+                ${isRight ? '✓ Spot On!' : '✕ Clinical Pearl'}
+              </strong>
+              ${isHcError
+                ? `<span class="badge badge-coral">🚨 High-Confidence Error Logged!</span>`
+                : `<span class="badge badge-muted">Conf: ${mix.selectedConf}</span>`}
             </div>
+            <p style="font-size:13px;line-height:1.44;">${esc(cur.pearl)}</p>
             <button type="button" class="btn-3d ${isRight ? 'btn-emerald' : 'btn-coral'} btn-full" onclick="nextMixStep()">
-              ${mix.idx + 1 >= mix.deck.length ? 'Finish &rarr;' : 'Next &rarr;'}
+              ${mix.idx + 1 >= mix.deck.length ? 'Finish & Update Radar &rarr;' : 'Next Question &rarr;'}
             </button>
           </div>
         ` : ''}
@@ -2012,110 +2387,130 @@
     }
 
     // =========================================================================
-    // 5. PHONE <-> LAPTOP PROGRESS SYNC MODAL (ALL 4 LOCALSTORAGE KEYS)
+    // 6. COMPLETE 9-KEY PHONE <-> LAPTOP SYNC MODAL & SAFE TELEMETRY CLEAR
     // =========================================================================
-    function buildSyncCode() {
-      const payload = {
-        mchiro_srs_v4: safeGet('mchiro_srs_v4'),
-        mchiro_lessons_v1: safeGet('mchiro_lessons_v1'),
-        mchiro_planner_v1: safeGet('mchiro_planner_v1'),
-        mchiro_theme: safeGet('mchiro_theme'),
-      };
-      return encodeBase64Utf8(JSON.stringify(payload));
+    function buildSyncPayload() {
+      const payload = { version: 2, exportedAt: new Date().toISOString(), keys: {} };
+      SYNC_KEYS.forEach((k) => {
+        const v = safeGet(k);
+        if (v !== null) payload.keys[k] = v;
+      });
+      return payload;
+    }
+
+    function renderClearDiagControls() {
+      const mount = document.getElementById('clear-diag-controls');
+      if (!mount) return;
+      if (!uiState.confirmClearDiag) {
+        mount.innerHTML = `<button type="button" class="btn-3d btn-coral sm" onclick="uiState.confirmClearDiag=true; renderClearDiagControls();">Clear Telemetry</button>`;
+      } else {
+        mount.innerHTML = `
+          <div style="display:flex;gap:6px;align-items:center;">
+            <button type="button" class="btn-3d btn-neutral sm" onclick="uiState.confirmClearDiag=false; renderClearDiagControls();">Cancel</button>
+            <button type="button" class="btn-3d btn-coral sm" onclick="confirmClearTelemetry()">Yes, Clear</button>
+          </div>
+        `;
+      }
+    }
+
+    function confirmClearTelemetry() {
+      try { localStorage.removeItem('mchiro_diag_v1'); } catch (e) {}
+      uiState.confirmClearDiag = false;
+      renderClearDiagControls();
+      document.getElementById('sync-export').value = encodeBase64Utf8(JSON.stringify(buildSyncPayload()));
+      renderDashboard();
+      showToast('Diagnostic telemetry cleared for a fresh 30-prompt audit.', 'amber');
     }
 
     function openSyncModal() {
-      document.getElementById('sync-export').value = buildSyncCode();
+      uiState.confirmClearDiag = false;
+      document.getElementById('sync-export').value = encodeBase64Utf8(JSON.stringify(buildSyncPayload()));
       document.getElementById('sync-import').value = '';
+      renderClearDiagControls();
       document.getElementById('sync-modal').classList.add('open');
     }
 
     function closeSyncModal() {
+      uiState.confirmClearDiag = false;
       document.getElementById('sync-modal').classList.remove('open');
     }
 
     function copySyncCode() {
       const code = document.getElementById('sync-export').value;
-      if (!code) {
-        showToast('No progress to export yet.', 'amber');
+      if (!code) { showToast('Nothing to copy yet.', 'amber'); return; }
+      copyTextSafe(code, '✓ 9-key Sync Code copied!');
+    }
+
+    function applyRestoredObject(decoded) {
+      if (!decoded || typeof decoded !== 'object') throw new Error('Invalid object');
+      const sourceMap = (decoded.keys && typeof decoded.keys === 'object') ? decoded.keys : decoded;
+      let restored = 0;
+
+      SYNC_KEYS.forEach((k) => {
+        if (sourceMap[k] !== undefined && sourceMap[k] !== null) {
+          const val = typeof sourceMap[k] === 'string' ? sourceMap[k] : JSON.stringify(sourceMap[k]);
+          safeSet(k, val);
+          restored++;
+        }
+      });
+
+      if (restored === 0) {
+        showToast('Backup contained no recognised hub keys.', 'amber');
         return;
       }
-      try {
-        const ta = document.createElement('textarea');
-        ta.value = code;
-        ta.style.position = 'fixed';
-        ta.style.opacity = '0';
-        document.body.appendChild(ta);
-        ta.focus();
-        ta.select();
-        document.execCommand('copy');
-        document.body.removeChild(ta);
-        showToast('Copied!', 'emerald');
-      } catch (e) {
-        showToast('Select and copy the sync code manually.', 'amber');
-      }
+
+      initTheme();
+      renderDashboard();
+      closeSyncModal();
+      showToast(`✓ Restored ${restored} hub storage keys!`, 'emerald');
     }
 
     function restoreSyncCode() {
       const raw = (document.getElementById('sync-import').value || '').trim();
-      if (!raw) {
-        showToast('Paste a sync code first.', 'amber');
-        return;
-      }
-
+      if (!raw) { showToast('Paste a Base64 sync code first.', 'amber'); return; }
       try {
         const decoded = JSON.parse(decodeBase64Utf8(raw));
-        if (!decoded || typeof decoded !== 'object') throw new Error('Invalid sync object');
-
-        let restored = 0;
-
-        // 1. Leitner SRS (supports current & legacy field names)
-        const srsVal = decoded.mchiro_srs_v4 !== undefined ? decoded.mchiro_srs_v4 : decoded.srs;
-        if (typeof srsVal === 'string') {
-          JSON.parse(srsVal);
-          safeSet('mchiro_srs_v4', srsVal);
-          restored++;
-        }
-
-        // 2. Visual Lessons
-        const lessonsVal = decoded.mchiro_lessons_v1 !== undefined ? decoded.mchiro_lessons_v1 : decoded.lessons;
-        if (typeof lessonsVal === 'string') {
-          JSON.parse(lessonsVal);
-          safeSet('mchiro_lessons_v1', lessonsVal);
-          restored++;
-        }
-
-        // 3. Year 3 Planner
-        const plannerVal = decoded.mchiro_planner_v1 !== undefined ? decoded.mchiro_planner_v1 : decoded.planner;
-        if (typeof plannerVal === 'string') {
-          JSON.parse(plannerVal);
-          safeSet('mchiro_planner_v1', plannerVal);
-          restored++;
-        }
-
-        // 4. Theme
-        const themeVal = decoded.mchiro_theme !== undefined ? decoded.mchiro_theme : decoded.theme;
-        if (themeVal === 'dark' || themeVal === 'light') {
-          safeSet('mchiro_theme', themeVal);
-          restored++;
-        }
-
-        if (restored === 0) {
-          showToast('Sync code contained no restorable data.', 'amber');
-          return;
-        }
-
-        initTheme();
-        renderDashboard();
-        closeSyncModal();
-        showToast('✓ Progress restored & synced!', 'emerald');
+        applyRestoredObject(decoded);
       } catch (e) {
-        showToast('Invalid sync code — check you copied the full text.', 'coral');
+        showToast('Invalid sync code — ensure you copied the full text.', 'coral');
       }
     }
 
+    function downloadJsonBackup() {
+      try {
+        const json = JSON.stringify(buildSyncPayload(), null, 2);
+        const blob = new Blob([json], { type: 'application/json' });
+        const url = URL.createObjectURL(blob);
+        const a = document.createElement('a');
+        a.href = url;
+        a.download = `mchiro-year3-full-backup-${new Date().toISOString().slice(0, 10)}.json`;
+        document.body.appendChild(a);
+        a.click();
+        document.body.removeChild(a);
+        URL.revokeObjectURL(url);
+        showToast('✓ Downloaded full 9-key .json backup!', 'emerald');
+      } catch (e) {
+        showToast('Download blocked — use Copy Sync Code instead.', 'amber');
+      }
+    }
+
+    function importJsonBackup(input) {
+      const file = input && input.files && input.files[0];
+      if (!file) return;
+      const reader = new FileReader();
+      reader.onload = function (ev) {
+        try {
+          const parsed = JSON.parse(ev.target.result);
+          applyRestoredObject(parsed);
+        } catch (err) {
+          showToast('Invalid .json backup file.', 'coral');
+        }
+      };
+      reader.readAsText(file);
+    }
+
     // =========================================================================
-    // 6. MODAL BACKDROP LISTENERS & INITIALISATION
+    // 7. MODAL BACKDROP LISTENERS & INITIALISE
     // =========================================================================
     document.getElementById('mix-modal').addEventListener('click', function (e) {
       if (e.target === this) closeMixModal();
